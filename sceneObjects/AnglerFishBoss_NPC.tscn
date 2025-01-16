@@ -1,0 +1,4556 @@
+[gd_scene load_steps=95 format=2]
+
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
+[ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=2]
+[ext_resource path="res://assets/palettes/NES_base_broom_palette.png" type="Texture" id=3]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=4]
+[ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=5]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=6]
+[ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/angleDangleSheet.png" type="Texture" id=8]
+[ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/anglerFishBoss.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/anglerFishTail.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/babyAnglerFish.png" type="Texture" id=12]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=13]
+[ext_resource path="res://shaders/palette_swapper_glitch.shader" type="Shader" id=14]
+[ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=15]
+[ext_resource path="res://assets/sounds/151RetroMonsters/startEvolve.wav" type="AudioStream" id=16]
+[ext_resource path="res://assets/textures/greyspikes1.png" type="Texture" id=17]
+[ext_resource path="res://assets/textures/greyspikes2.png" type="Texture" id=18]
+[ext_resource path="res://assets/textures/greyspikes3.png" type="Texture" id=19]
+[ext_resource path="res://assets/textures/greyspikes4.png" type="Texture" id=20]
+[ext_resource path="res://assets/sounds/151RetroMonsters/glitchEvolve.wav" type="AudioStream" id=21]
+[ext_resource path="res://scripts/Enemies/Boss/AnglerFishWeakPointContainer.gd" type="Script" id=22]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Brundlefly.wav" type="AudioStream" id=23]
+[ext_resource path="res://assets/sounds/glitchtalk.wav" type="AudioStream" id=24]
+[ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=25]
+[ext_resource path="res://assets/sounds/sfx_sounds_interaction18.wav" type="AudioStream" id=26]
+[ext_resource path="res://assets/sounds/assets_sfx_menu_confirm.wav" type="AudioStream" id=27]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Dragon.wav" type="AudioStream" id=28]
+[ext_resource path="res://assets/sounds/castStart.wav" type="AudioStream" id=29]
+[ext_resource path="res://assets/sounds/croak.wav" type="AudioStream" id=30]
+[ext_resource path="res://assets/sounds/eb_swoosh3.wav" type="AudioStream" id=31]
+[ext_resource path="res://assets/sounds/ghostVoices/vox_Pain5.wav" type="AudioStream" id=32]
+[ext_resource path="res://assets/sounds/eb_impact4.wav" type="AudioStream" id=33]
+[ext_resource path="res://assets/sounds/cicada.wav" type="AudioStream" id=35]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 13 )
+shader_param/albedo = Color( 0, 0, 0, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.9
+shader_param/texture_albedo = ExtResource( 10 )
+shader_param/base_palette = ExtResource( 6 )
+shader_param/target_palette = ExtResource( 5 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 13 )
+shader_param/albedo = Color( 0, 0, 0, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.9
+shader_param/texture_albedo = ExtResource( 11 )
+shader_param/base_palette = ExtResource( 6 )
+shader_param/target_palette = ExtResource( 5 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 13 )
+shader_param/albedo = Color( 0, 0, 0, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.9
+shader_param/texture_albedo = ExtResource( 8 )
+shader_param/base_palette = ExtResource( 6 )
+shader_param/target_palette = ExtResource( 5 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 13 )
+shader_param/albedo = Color( 0, 0, 0, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = false
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.9
+shader_param/texture_albedo = ExtResource( 12 )
+shader_param/base_palette = ExtResource( 6 )
+shader_param/target_palette = ExtResource( 5 )
+
+[sub_resource type="BoxShape" id=24]
+
+[sub_resource type="Animation" id=36]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeakPointContainer/Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("WeakPointContainer/Sprite3D:pixel_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeakPointContainer/Sprite3D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/palette_cycle_speed")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 10.0 ]
+}
+
+[sub_resource type="Animation" id=37]
+resource_name = "chompDown"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeakPointContainer/Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+
+[sub_resource type="Animation" id=38]
+resource_name = "detachSelf"
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeakPointContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 2, 3, 4, 5 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "detachWeakPoint"
+} ]
+}
+
+[sub_resource type="Animation" id=39]
+resource_name = "idle"
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WeakPointContainer/Sprite3D:pixel_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("WeakPointContainer/Sprite3D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=40]
+resource_name = "ouchies"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WeakPointContainer/Sprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 0 ]
+}
+
+[sub_resource type="Animation" id=45]
+resource_name = "retachSelf"
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeakPointContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 4, 3, 2, 3, 2, 0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
+}
+
+[sub_resource type="Animation" id=41]
+resource_name = "stunIdle"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WeakPointContainer/Sprite3D:pixel_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.125, 0.16, 0.125 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("WeakPointContainer/Sprite3D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/palette_cycle_speed")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
+
+[sub_resource type="Animation" id=49]
+resource_name = "stunIdleAttached"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WeakPointContainer/Sprite3D:pixel_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.125, 0.125 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("WeakPointContainer/Sprite3D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 0, 1, 0, 1, 0, 1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/palette_cycle_speed")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "makeWeakPointVulnerable"
+} ]
+}
+
+[sub_resource type="Animation" id=44]
+resource_name = "swim"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WeakPointContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 4, 5 ]
+}
+
+[sub_resource type="Animation" id=42]
+resource_name = "turnLeftToRight"
+length = 0.2
+
+[sub_resource type="Animation" id=43]
+resource_name = "turnRightToLeft"
+length = 0.2
+
+[sub_resource type="ShaderMaterial" id=47]
+shader = ExtResource( 13 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.01
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.117
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 6.0
+shader_param/enable_glitch_3d = true
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 9 )
+shader_param/base_palette = ExtResource( 6 )
+shader_param/target_palette = ExtResource( 3 )
+
+[sub_resource type="AnimatedTexture" id=150]
+flags = 19
+frames = 4
+fps = 3.0
+frame_0/texture = ExtResource( 17 )
+frame_1/texture = ExtResource( 18 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 19 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 20 )
+frame_3/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=155]
+shader = ExtResource( 14 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 3.0
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/texture_albedo = SubResource( 150 )
+shader_param/base_palette = ExtResource( 4 )
+shader_param/real_base_palette = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=151]
+material = SubResource( 155 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="CubeMesh" id=153]
+material = SubResource( 155 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="AnimatedTexture" id=152]
+flags = 19
+frames = 2
+frame_0/texture = ExtResource( 17 )
+frame_1/texture = ExtResource( 18 )
+frame_1/delay_sec = 0.0
+
+[sub_resource type="ShaderMaterial" id=149]
+shader = ExtResource( 14 )
+shader_param/albedo = null
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = true
+shader_param/palette_cycle_speed = 3.0
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/texture_albedo = SubResource( 152 )
+shader_param/base_palette = ExtResource( 4 )
+shader_param/real_base_palette = ExtResource( 7 )
+
+[sub_resource type="CubeMesh" id=154]
+material = SubResource( 149 )
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="Animation" id=157]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 94 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TileSpikes:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TileSpikes/Spikes3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TileSpikes/Spikes4:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TileSpikes/Spikes5:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("TileSpikes/Spikes6:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite3D:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite3D:should_animate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TileSpikes/Spikes4:mesh:material:shader_param/enable_glitch")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TileSpikes/Spikes3:mesh:material:shader_param/enable_glitch")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TileSpikes/Spikes3:mesh:material:shader_param/enable_palette_cycle")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Sprite3D:pixel_size")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.15 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Sounds/DieSound2:playing")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("Sounds/DieSound3:playing")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("Sounds/WakeUpSound:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("Sounds/GoodnightSound:playing")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 3 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch_3d")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=158]
+resource_name = "blinkClose"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 94, 93, 92 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TileSpikes:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TileSpikes/Spikes3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TileSpikes/Spikes4:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TileSpikes/Spikes5:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("TileSpikes/Spikes6:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite3D:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite3D:should_animate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sounds/GoodnightSound:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=164]
+resource_name = "blinkCloseFast"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 94, 93, 92 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TileSpikes:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TileSpikes/Spikes3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TileSpikes/Spikes4:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TileSpikes/Spikes5:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("TileSpikes/Spikes6:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite3D:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite3D:should_animate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sounds/GoodnightSound:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=165]
+resource_name = "blinkIdle"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 1, 1.1, 1.2, 1.3, 3.9, 4, 4.1, 4.2, 4.4, 4.5, 4.6, 4.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 93, 92, 93, 94, 93, 92, 93, 94, 93, 92, 93, 94, 93, 92, 93, 94 ]
+}
+
+[sub_resource type="Animation" id=159]
+resource_name = "blinkOpen"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 92, 93, 94 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TileSpikes:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TileSpikes/Spikes3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TileSpikes/Spikes4:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TileSpikes/Spikes5:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("TileSpikes/Spikes6:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite3D:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite3D:should_animate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, false, true, false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sounds/WakeUpSound:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0.4, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Sprite3D:pixel_size")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0.3, 0.5, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.12, 0.17, 0.15 ]
+}
+tracks/11/type = "method"
+tracks/11/path = NodePath(".")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ true ],
+"method": "reenemize"
+} ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ), ExtResource( 3 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch_3d")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=160]
+resource_name = "getHurt"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.7, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 95, 93, 94, 95, 94, 95, 94, 95, 94 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:pixel_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.17, 0.22, 0.18, 0.15 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TileSpikes/Spikes3:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("TileSpikes/Spikes4:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TileSpikes/Spikes5:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TileSpikes/Spikes6:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sounds/DieSound2:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sounds/DieSound3:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=161]
+resource_name = "hiddenTeleport"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TileSpikes:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "randomTeleport"
+} ]
+}
+
+[sub_resource type="Animation" id=48]
+resource_name = "2secondPause"
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DangleContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TailContainer/TailSprite:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("DangleContainer/DanglerBaseSprite:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath(".:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TailContainer:translation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Sprite3D:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, -2 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Sprite3D:material_override:shader_param/enable_dither")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Sprite3D:material_override:shader_param/enable_remove_skin_tone")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Sprite3D:material_override:shader_param/opacity")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("WeakPointContainer/Sounds/DieSound:playing")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("Sprite3D:material_override:shader_param/normal_offset")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.02 ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("Sprite3D:material_override:shader_param/time_influence")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("Sprite3D:material_override:shader_param/y_div")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.9 ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath(".:scale")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1.5, 1.5, 1.5 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("DangleContainer/DanglerBaseSprite:vframes")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 5 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("Sprite3D:automatically_change_color")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/target_palette")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("DangleContainer/DanglerBaseSprite:automatically_change_color")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("TailContainer/TailSprite:material_override:shader_param/target_palette")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("TailContainer/TailSprite:automatically_change_color")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/enable_glitch")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/y_div")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.9 ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/time_influence")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/normal_offset")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.02 ]
+}
+tracks/31/type = "value"
+tracks/31/path = NodePath("Sprite3D:material_override:shader_param/albedo")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+tracks/32/type = "value"
+tracks/32/path = NodePath("TailContainer/TailSprite:material_override:shader_param/albedo")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+tracks/33/type = "value"
+tracks/33/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/albedo")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+tracks/34/type = "value"
+tracks/34/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/albedo")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+tracks/35/type = "value"
+tracks/35/path = NodePath("Sprite3D:material_override:shader_param/shake_power")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.03 ]
+}
+tracks/36/type = "value"
+tracks/36/path = NodePath("Sounds/ScreamSound:playing")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/37/type = "value"
+tracks/37/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/enable_palette_cycle")
+tracks/37/interp = 1
+tracks/37/loop_wrap = true
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/38/type = "value"
+tracks/38/path = NodePath("TailContainer/TailSprite:material_override:shader_param/enable_palette_cycle")
+tracks/38/interp = 1
+tracks/38/loop_wrap = true
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/39/type = "value"
+tracks/39/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch_3d")
+tracks/39/interp = 1
+tracks/39/loop_wrap = true
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/40/type = "value"
+tracks/40/path = NodePath("TailContainer/TailSprite:material_override:shader_param/enable_glitch")
+tracks/40/interp = 1
+tracks/40/loop_wrap = true
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/41/type = "value"
+tracks/41/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/enable_glitch")
+tracks/41/interp = 1
+tracks/41/loop_wrap = true
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/42/type = "value"
+tracks/42/path = NodePath("Sprite3D:material_override:shader_param/enable_no_transparency")
+tracks/42/interp = 1
+tracks/42/loop_wrap = true
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/43/type = "value"
+tracks/43/path = NodePath("TailContainer/TailSprite:material_override:shader_param/enable_glitch_3d")
+tracks/43/interp = 1
+tracks/43/loop_wrap = true
+tracks/43/imported = false
+tracks/43/enabled = true
+tracks/43/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/44/type = "value"
+tracks/44/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/enable_glitch_3d")
+tracks/44/interp = 1
+tracks/44/loop_wrap = true
+tracks/44/imported = false
+tracks/44/enabled = true
+tracks/44/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=50]
+resource_name = "barfingSnails"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 8, 4, 5, 6, 5, 6, 5, 6, 5, 6, 4, 8, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DangleContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.3, 0.5, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "barfRandomSnail"
+}, {
+"args": [  ],
+"method": "barfRandomSnail"
+}, {
+"args": [  ],
+"method": "barfRandomSnail"
+}, {
+"args": [  ],
+"method": "barfRandomSnail"
+} ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "castRod"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.3, 0.35 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 3, 0, 1, 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DangleContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 0.7, 0 ), Vector3( 0, 1, 0 ), Vector3( 0, 0.7, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.25, 0.3, 0.35, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 0 ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "doLureCast"
+} ]
+}
+
+[sub_resource type="Animation" id=52]
+resource_name = "charging"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 4, 0, 4, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DangleContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch_3d")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TailContainer/TailSprite:material_override:shader_param/enable_glitch")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/enable_glitch")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/8/type = "method"
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ null ],
+"method": "reenemize"
+} ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "chatter"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 5, 6, 4, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DangleContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 1, 0 ), Vector3( 0, 1.3, 0 ), Vector3( 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "cheat"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 5, 6 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DangleContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "chompDown"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.75, 0.95, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 6, 4, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DangleContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.95 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 1.3, 0 ), Vector3( 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.75, 0.95 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, false, true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.95 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.3, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TailContainer/TailSprite:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.3, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("DangleContainer/DanglerBaseSprite:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.3, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, true ]
+}
+tracks/8/type = "method"
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0.6, 0.95 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "teleportToPrey"
+}, {
+"args": [  ],
+"method": "gotcha"
+} ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sprite3D:material_override:shader_param/albedo")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0.1, 0.3, 0.6, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/albedo")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0.1, 0.3, 0.6, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/albedo")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0.1, 0.3, 0.6, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TailContainer/TailSprite:material_override:shader_param/albedo")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0.1, 0.3, 0.6, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=29]
+resource_name = "chompDownQuick"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 0.55, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 6, 4, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DangleContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector3( 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TailContainer/TailSprite:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("DangleContainer/DanglerBaseSprite:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("WeakPointContainer/Sprite3D:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/9/type = "method"
+tracks/9/path = NodePath(".")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "gotcha"
+} ]
+}
+
+[sub_resource type="Animation" id=33]
+resource_name = "defeated"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.5, 1.5, 1.5 ), Vector3( 0, 0, 1 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "okayImDead"
+} ]
+}
+
+[sub_resource type="Animation" id=46]
+resource_name = "fadeFromBlack"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:material_override:shader_param/albedo")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TailContainer/TailSprite:material_override:shader_param/albedo")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/albedo")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/albedo")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=166]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:material_override:shader_param/albedo")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TailContainer/TailSprite:material_override:shader_param/albedo")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/albedo")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/albedo")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D:material_override:shader_param/enable_no_transparency")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite3D:material_override:shader_param/enable_remove_skin_tone")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch_3d")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("TailContainer/TailSprite:material_override:shader_param/enable_glitch")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("TailContainer/TailSprite:material_override:shader_param/enable_glitch_3d")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("TailContainer/TailSprite:material_override:shader_param/enable_palette_cycle")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/enable_glitch")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/enable_glitch_3d")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/enable_palette_cycle")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=53]
+resource_name = "gnashAttack"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 4, 0, 4, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DangleContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch_3d")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TailContainer/TailSprite:material_override:shader_param/enable_glitch")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/enable_glitch")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/8/type = "method"
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ null ],
+"method": "reenemize"
+} ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "idle"
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DangleContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 1, 0 ), Vector3( 0, 0.7, 0 ), Vector3( 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D:material_override:shader_param/enable_dither")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite3D:material_override:shader_param/enable_remove_skin_tone")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite3D:material_override:shader_param/opacity")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("WeakPointContainer/Sprite3D:pixel_size")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("DangleContainer/DanglerBaseSprite:vframes")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/target_palette")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TailContainer/TailSprite:material_override:shader_param/target_palette")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+
+[sub_resource type="Animation" id=51]
+resource_name = "openAndScream"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 8, 4, 5, 6, 5, 6, 5, 6, 5, 6, 4, 8, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DangleContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("Sounds/ScreamSound")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "openIdle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 4, 0, 4, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DangleContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "openUp"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DangleContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 1, 0 ), Vector3( 0, 1.3, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("Sounds/ScreamSound")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="Animation" id=32]
+resource_name = "ouchies"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7, 0.9, 1.1, 1.3, 1.5, 2.7, 2.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 8, 7, 8, 7, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/enable_dither")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:material_override:shader_param/enable_remove_skin_tone")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeakPointContainer/Sounds/DieSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D:material_override:shader_param/normal_offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.02 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite3D:material_override:shader_param/time_influence")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 10.0, 1.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite3D:material_override:shader_param/y_div")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 5.0, 2.9 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("DangleContainer:translation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector3( 0, 0.81207, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("DangleContainer/DanglerBaseSprite:vframes")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ), ExtResource( 5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("TailContainer/TailSprite:material_override:shader_param/target_palette")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ), ExtResource( 5 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/target_palette")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ), ExtResource( 5 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/enable_palette_cycle")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("TailContainer/TailSprite:material_override:shader_param/enable_palette_cycle")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=30]
+resource_name = "stunFall"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/enable_dither")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:material_override:shader_param/enable_remove_skin_tone")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("DangleContainer:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1.22203, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("DangleContainer/DanglerBaseSprite:vframes")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/enable_glitch")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/y_div")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.9 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/time_influence")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("WeakPointContainer/Sprite3D:material_override:shader_param/normal_offset")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.02 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/enable_glitch")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("TailContainer/TailSprite:material_override:shader_param/enable_glitch")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch_3d")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=31]
+resource_name = "stunIdle"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 7, 8, 7 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/enable_dither")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:material_override:shader_param/enable_remove_skin_tone")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("DangleContainer:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 1.25057, 0 ), Vector3( 0, 1.25057, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("DangleContainer/DanglerBaseSprite:vframes")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("DangleContainer/DanglerBaseSprite:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite3D:automatically_change_color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("TailContainer/TailSprite:material_override:shader_param/target_palette")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("DangleContainer/DanglerBaseSprite:material_override:shader_param/target_palette")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Sprite3D:material_override:shader_param/normal_offset")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.02 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Sprite3D:material_override:shader_param/time_influence")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("Sprite3D:material_override:shader_param/y_div")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.9 ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "turnLeftToRight"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 180, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TailContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 6 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DangleContainer:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1, 0 ), Vector3( 0, 1, 6 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, -2 ), Vector3( 0, 0, 2 ) ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "turnRightToLeft"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 180, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TailContainer:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 6 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("DangleContainer:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1, 6 ), Vector3( 0, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 2 ), Vector3( 0, 0, -2 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TailContainer/TailSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TailContainer/TailSprite:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 4.5, -0.2, -3 ) ]
+}
+
+[sub_resource type="Animation" id=34]
+resource_name = "stunFall"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("TailContainer/TailSprite:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 4.5, 0.2, -3 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TailContainer/TailSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+
+[sub_resource type="Animation" id=35]
+resource_name = "stunIdle"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("TailContainer/TailSprite:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 4.5, 0.2, -3 ), Vector3( 4.5, 0, -3 ), Vector3( 4.5, 0.2, -3 ), Vector3( 4.5, 0, -3 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TailContainer/TailSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 2, 3, 2 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "wiggle"
+length = 0.4
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("TailContainer/TailSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TailContainer/TailSprite:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 4.5, -0.2, -3 ), Vector3( 4.5, -0.4, -3 ), Vector3( 4.5, 0, -3 ), Vector3( 4.5, 0.2, -3 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+
+[sub_resource type="BoxShape" id=25]
+extents = Vector3( 4, 2, 1 )
+
+[sub_resource type="BoxShape" id=26]
+extents = Vector3( 4, 2.52322, 1 )
+
+[node name="AnglerFishBossNPC" type="Spatial"]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
+material_override = SubResource( 1 )
+pixel_size = 0.125
+texture = ExtResource( 10 )
+hframes = 3
+vframes = 3
+script = ExtResource( 1 )
+max_frames = 4
+should_animate = false
+automatically_change_color = false
+
+[node name="TailContainer" type="Spatial" parent="."]
+
+[node name="TailSprite" type="Sprite3D" parent="TailContainer" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, -0.2, -3 )
+material_override = SubResource( 4 )
+pixel_size = 0.125
+texture = ExtResource( 11 )
+hframes = 3
+vframes = 2
+script = ExtResource( 1 )
+max_frames = 4
+should_animate = false
+automatically_change_color = false
+
+[node name="DangleContainer" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+
+[node name="DanglerBaseSprite" type="Sprite3D" parent="DangleContainer" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.66968, 2.24577, -3 )
+material_override = SubResource( 2 )
+pixel_size = 0.125
+texture = ExtResource( 8 )
+hframes = 3
+vframes = 2
+script = ExtResource( 1 )
+max_frames = 1
+automatically_change_color = false
+
+[node name="WeakPointContainer" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.52225, 1.85667, 2 )
+script = ExtResource( 22 )
+
+[node name="Sprite3D" type="Sprite3D" parent="WeakPointContainer" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+material_override = SubResource( 3 )
+pixel_size = 0.125
+texture = ExtResource( 12 )
+hframes = 3
+vframes = 3
+script = ExtResource( 1 )
+max_frames = 1
+should_animate = false
+
+[node name="InteractionArea" type="Area" parent="WeakPointContainer" groups=["malware"]]
+transform = Transform( 1, 0, -7.10543e-15, 0, 1, 0, 7.10543e-15, 0, 1, 0, 0.408953, 0 )
+script = ExtResource( 25 )
+
+[node name="CollisionShape" type="CollisionShape" parent="WeakPointContainer/InteractionArea"]
+shape = SubResource( 24 )
+
+[node name="SmallInteractionArea" type="Area" parent="WeakPointContainer" groups=["bug", "corporeal_body", "malware", "no_pushems"]]
+transform = Transform( 1, 0, -7.10543e-15, 0, 1, 0, 7.10543e-15, 0, 1, 0, 0.408953, 0 )
+script = ExtResource( 15 )
+ignore_water = true
+
+[node name="CollisionShape" type="CollisionShape" parent="WeakPointContainer/SmallInteractionArea"]
+shape = SubResource( 24 )
+
+[node name="Sounds" type="Spatial" parent="WeakPointContainer"]
+
+[node name="DieSound" type="AudioStreamPlayer" parent="WeakPointContainer/Sounds"]
+stream = ExtResource( 28 )
+volume_db = -2.0
+pitch_scale = 0.9
+
+[node name="MissSound" type="AudioStreamPlayer" parent="WeakPointContainer/Sounds"]
+stream = ExtResource( 31 )
+volume_db = -2.0
+pitch_scale = 0.9
+
+[node name="NotDieSound" type="AudioStreamPlayer" parent="WeakPointContainer/Sounds"]
+stream = ExtResource( 23 )
+volume_db = -20.0
+pitch_scale = 0.8
+
+[node name="EvolveSound" type="AudioStreamPlayer" parent="WeakPointContainer/Sounds"]
+stream = ExtResource( 21 )
+volume_db = -15.0
+
+[node name="StartEvolveSound" type="AudioStreamPlayer" parent="WeakPointContainer/Sounds"]
+stream = ExtResource( 16 )
+volume_db = -10.0
+pitch_scale = 0.5
+
+[node name="WeakPointAnimationPlayer" type="AnimationPlayer" parent="WeakPointContainer"]
+root_node = NodePath("../..")
+autoplay = "idle"
+anims/RESET = SubResource( 36 )
+anims/chompDown = SubResource( 37 )
+anims/detachSelf = SubResource( 38 )
+anims/idle = SubResource( 39 )
+anims/ouchies = SubResource( 40 )
+anims/retachSelf = SubResource( 45 )
+anims/stunIdle = SubResource( 41 )
+anims/stunIdleAttached = SubResource( 49 )
+anims/swim = SubResource( 44 )
+anims/turnLeftToRight = SubResource( 42 )
+anims/turnRightToLeft = SubResource( 43 )
+
+[node name="WeakEye" type="Spatial" parent="WeakPointContainer"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.993174, 0 )
+
+[node name="Sprite3D" type="Sprite3D" parent="WeakPointContainer/WeakEye"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+visible = false
+material_override = SubResource( 47 )
+pixel_size = 0.15
+texture = ExtResource( 9 )
+hframes = 8
+vframes = 16
+frame = 94
+script = ExtResource( 1 )
+frame_delay = 0.3
+should_animate = false
+
+[node name="Sprite3D2" type="Sprite3D" parent="WeakPointContainer/WeakEye"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.575426 )
+visible = false
+pixel_size = 0.12
+texture = ExtResource( 9 )
+hframes = 8
+vframes = 16
+frame = 127
+script = ExtResource( 1 )
+frame_delay = 0.3
+should_animate = false
+
+[node name="TileSpikes" type="Spatial" parent="WeakPointContainer/WeakEye"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34734, -0.34734, 0 )
+visible = false
+
+[node name="Spikes3" type="MeshInstance" parent="WeakPointContainer/WeakEye/TileSpikes"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -0.611063, 0 )
+mesh = SubResource( 151 )
+
+[node name="Spikes4" type="MeshInstance" parent="WeakPointContainer/WeakEye/TileSpikes"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.384219, 0.61578, 1 )
+mesh = SubResource( 153 )
+
+[node name="Spikes5" type="MeshInstance" parent="WeakPointContainer/WeakEye/TileSpikes"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.09262, 0 )
+mesh = SubResource( 154 )
+
+[node name="Spikes6" type="MeshInstance" parent="WeakPointContainer/WeakEye/TileSpikes"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0231566, 0 )
+mesh = SubResource( 154 )
+
+[node name="SecretAnimationPlayer" type="AnimationPlayer" parent="WeakPointContainer/WeakEye"]
+anims/RESET = SubResource( 157 )
+anims/blinkClose = SubResource( 158 )
+anims/blinkCloseFast = SubResource( 164 )
+anims/blinkIdle = SubResource( 165 )
+anims/blinkOpen = SubResource( 159 )
+anims/getHurt = SubResource( 160 )
+anims/hiddenTeleport = SubResource( 161 )
+
+[node name="Sounds" type="Spatial" parent="WeakPointContainer/WeakEye"]
+
+[node name="DieSound" type="AudioStreamPlayer" parent="WeakPointContainer/WeakEye/Sounds"]
+stream = ExtResource( 28 )
+volume_db = -2.0
+pitch_scale = 0.9
+
+[node name="WakeUpSound" type="AudioStreamPlayer" parent="WeakPointContainer/WeakEye/Sounds"]
+stream = ExtResource( 33 )
+volume_db = -10.0
+pitch_scale = 0.5
+
+[node name="GoodnightSound" type="AudioStreamPlayer" parent="WeakPointContainer/WeakEye/Sounds"]
+stream = ExtResource( 35 )
+volume_db = -15.0
+pitch_scale = 0.75
+
+[node name="DieSound2" type="AudioStreamPlayer" parent="WeakPointContainer/WeakEye/Sounds"]
+stream = ExtResource( 30 )
+volume_db = -5.0
+
+[node name="DieSound3" type="AudioStreamPlayer" parent="WeakPointContainer/WeakEye/Sounds"]
+stream = ExtResource( 33 )
+volume_db = -15.0
+
+[node name="WeakPointTarget" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.522, 1.884, 0 )
+
+[node name="Sounds" type="Spatial" parent="."]
+
+[node name="SpawnSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 32 )
+volume_db = -3.0
+
+[node name="AttackSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 24 )
+volume_db = -8.0
+pitch_scale = 1.2
+
+[node name="ScreamSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 28 )
+volume_db = -8.0
+pitch_scale = 1.2
+
+[node name="AttackStartSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 29 )
+volume_db = -15.0
+pitch_scale = 1.1
+
+[node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 27 )
+volume_db = -13.0
+pitch_scale = 0.5
+
+[node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 24 )
+volume_db = -20.0
+pitch_scale = 0.8
+
+[node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 26 )
+volume_db = -15.0
+
+[node name="StartEvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 16 )
+volume_db = -10.0
+pitch_scale = 0.5
+
+[node name="SecretAnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+anims/2secondPause = SubResource( 48 )
+anims/RESET = SubResource( 5 )
+anims/barfingSnails = SubResource( 50 )
+anims/castRod = SubResource( 16 )
+anims/charging = SubResource( 52 )
+anims/chatter = SubResource( 12 )
+anims/cheat = SubResource( 22 )
+anims/chompDown = SubResource( 13 )
+anims/chompDownQuick = SubResource( 29 )
+anims/defeated = SubResource( 33 )
+anims/fadeFromBlack = SubResource( 46 )
+anims/fadeToBlack = SubResource( 166 )
+anims/gnashAttack = SubResource( 53 )
+anims/idle = SubResource( 6 )
+anims/openAndScream = SubResource( 51 )
+anims/openIdle = SubResource( 14 )
+anims/openUp = SubResource( 15 )
+anims/ouchies = SubResource( 32 )
+anims/stunFall = SubResource( 30 )
+anims/stunIdle = SubResource( 31 )
+anims/turnLeftToRight = SubResource( 20 )
+anims/turnRightToLeft = SubResource( 21 )
+
+[node name="TailAnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "wiggle"
+anims/RESET = SubResource( 7 )
+anims/stunFall = SubResource( 34 )
+anims/stunIdle = SubResource( 35 )
+anims/wiggle = SubResource( 8 )
+
+[node name="DangleAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 9 )
+
+[node name="InteractionArea" type="Area" parent="." groups=["malware"]]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+script = ExtResource( 25 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 25 )
+
+[node name="SmallInteractionArea" type="Area" parent="." groups=["malware"]]
+script = ExtResource( 15 )
+ignore_water = true
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
+transform = Transform( 0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0, 0 )
+shape = SubResource( 26 )

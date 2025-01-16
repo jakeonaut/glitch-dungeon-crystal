@@ -1,0 +1,3133 @@
+[gd_scene load_steps=95 format=2]
+
+[ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=1]
+[ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=2]
+[ext_resource path="res://assets/palettes/kirokaze-gameboy-1x.png" type="Texture" id=3]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=4]
+[ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=5]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=6]
+[ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=7]
+[ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=8]
+[ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=9]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=10]
+[ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=11]
+[ext_resource path="res://sceneObjects/WaterCubes/WaterCube.tscn" type="PackedScene" id=12]
+[ext_resource path="res://levels/EndlessFantasy/gd1BubblegloopSwamp/marshChallengeLevelScript.gd" type="Script" id=13]
+[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=14]
+[ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/palettes/inkpink-1x.png" type="Texture" id=16]
+[ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=17]
+[ext_resource path="res://assets/miniAdventures.png" type="Texture" id=18]
+[ext_resource path="res://assets/palettes/swamp_water_palette.png" type="Texture" id=19]
+[ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=20]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishKey.tscn" type="PackedScene" id=21]
+[ext_resource path="res://sceneObjects/Waterfall.tscn" type="PackedScene" id=22]
+[ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=23]
+[ext_resource path="res://sceneObjects/Enemies/CorruptFisherman.tscn" type="PackedScene" id=24]
+[ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=25]
+[ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=26]
+[ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=27]
+[ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=28]
+[ext_resource path="res://sceneObjects/AnglerFishBoss_NPC.tscn" type="PackedScene" id=29]
+
+[sub_resource type="Animation" id=23]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SparkleSprite3D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SparkleSprite3D2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SparkleSprite3D:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -1, 3, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SparkleSprite3D2:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 3.65941, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite3D:material_override:shader_param/enable_dither")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite3D:material_override:shader_param/offset")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "catLocked"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 17, 18 ]
+}
+
+[sub_resource type="Animation" id=25]
+resource_name = "crystalLocked"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 20, 21 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:material_override:shader_param/enable_dither")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=26]
+resource_name = "crystalZoneLocked"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 20, 21 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:material_override:shader_param/enable_dither")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:material_override:shader_param/offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=27]
+resource_name = "demoLocked"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 17, 18 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:material_override:shader_param/enable_dither")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 16 ) ]
+}
+
+[sub_resource type="Animation" id=28]
+resource_name = "doorBarred"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 6, 5 ]
+}
+
+[sub_resource type="Animation" id=29]
+resource_name = "doorClose"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+
+[sub_resource type="Animation" id=30]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:material_override:shader_param/offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=31]
+resource_name = "doorUnbarred"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 6, 7 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "unpause"
+} ]
+}
+
+[sub_resource type="Animation" id=32]
+resource_name = "fishLocked"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 12, 13 ]
+}
+
+[sub_resource type="Animation" id=33]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 3 ]
+}
+
+[sub_resource type="Animation" id=34]
+resource_name = "pyramidLocked"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 15, 16 ]
+}
+
+[sub_resource type="Animation" id=35]
+resource_name = "shroomLocked"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 10, 11 ]
+}
+
+[sub_resource type="BoxShape" id=12]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=13]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=37]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=14]
+resource_local_to_scene = true
+extents = Vector3( 1, 0.8, 1.3 )
+
+[sub_resource type="BoxShape" id=15]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
+
+[sub_resource type="ShaderMaterial" id=16]
+shader = ExtResource( 6 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.001
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.05
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 18 )
+shader_param/base_palette = ExtResource( 4 )
+shader_param/target_palette = ExtResource( 19 )
+
+[sub_resource type="BoxShape" id=21]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.5, 1 )
+
+[sub_resource type="BoxShape" id=22]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="Animation" id=53]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 61 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/RevealSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sounds/OpenMouthSound:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sounds/ChompSound:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("FishingRod:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sounds/DieSound:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=54]
+resource_name = "closeMouthCoyly"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 63, 65, 61 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/OpenMouthSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=55]
+resource_name = "corrupt"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 60, 62, 60, 62, 63, 60, 63 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("FishingRod:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "getCorruptedAndDie"
+} ]
+}
+
+[sub_resource type="Animation" id=56]
+resource_name = "cry"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 116, 117 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=57]
+resource_name = "digest"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.8, 1, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 63, 65, 66, 67, 66, 67, 61 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "swallowPlayer"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/ChompSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=58]
+resource_name = "hurtMyToof"
+length = 1.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.8, 1, 1.2, 1.3, 1.6, 1.7, 1.8, 2, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 63, 65, 66, 117, 116, 117, 118, 119, 118, 117, 119, 118, 117 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.4, 1.3, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "owie"
+}, {
+"args": [  ],
+"method": "getCorruptedAndDie"
+}, {
+"args": [  ],
+"method": "spitOutAKey"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/ChompSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sounds/DieSound:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.3, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[sub_resource type="Animation" id=59]
+resource_name = "idle"
+length = 2.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 0.7, 1.2, 1.3, 1.4, 1.6, 1.7, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 61, 65, 63, 65, 61, 63, 65, 61, 65 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=60]
+resource_name = "openMouth"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 61, 65, 63 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/OpenMouthSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=61]
+resource_name = "reveal"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 59, 60, 59, 60, 62, 61, 65, 63 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/RevealSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.2, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sounds/OpenMouthSound:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.6, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=62]
+resource_name = "revealQuiet"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 59, 60, 59, 60, 62, 61 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[sub_resource type="Animation" id=63]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("RodSprite:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=64]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
+
+[sub_resource type="Animation" id=65]
+resource_name = "getItem"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RodSprite:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.23, 0 ) ]
+}
+
+[sub_resource type="Animation" id=66]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 61 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/RevealSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sounds/OpenMouthSound:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sounds/ChompSound:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("FishingRod:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sounds/DieSound:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=67]
+resource_name = "closeMouthCoyly"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 63, 65, 61 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/OpenMouthSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=68]
+resource_name = "corrupt"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 60, 62, 60, 62, 63, 60, 63 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("FishingRod:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "getCorruptedAndDie"
+} ]
+}
+
+[sub_resource type="Animation" id=69]
+resource_name = "cry"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 116, 117 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=70]
+resource_name = "digest"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.8, 1, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 63, 65, 66, 67, 66, 67, 61 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "swallowPlayer"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/ChompSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=71]
+resource_name = "hurtMyToof"
+length = 1.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.8, 1, 1.2, 1.3, 1.6, 1.7, 1.8, 2, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 63, 65, 66, 117, 116, 117, 118, 119, 118, 117, 119, 118, 117 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.4, 1.3, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "owie"
+}, {
+"args": [  ],
+"method": "getCorruptedAndDie"
+}, {
+"args": [  ],
+"method": "spitOutAKey"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/ChompSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sounds/DieSound:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.3, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[sub_resource type="Animation" id=72]
+resource_name = "idle"
+length = 2.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 0.7, 1.2, 1.3, 1.4, 1.6, 1.7, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 61, 65, 63, 65, 61, 63, 65, 61, 65 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=73]
+resource_name = "openMouth"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 61, 65, 63 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/OpenMouthSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=74]
+resource_name = "reveal"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 59, 60, 59, 60, 62, 61, 65, 63 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/RevealSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.2, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sounds/OpenMouthSound:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.6, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=75]
+resource_name = "revealQuiet"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 59, 60, 59, 60, 62, 61 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[sub_resource type="Animation" id=76]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("RodSprite:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=77]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
+
+[sub_resource type="Animation" id=78]
+resource_name = "getItem"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RodSprite:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.23, 0 ) ]
+}
+
+[sub_resource type="Animation" id=38]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 59 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/RevealSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sounds/OpenMouthSound:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sounds/ChompSound:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("FishingRod:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 10 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sounds/DieSound:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=39]
+resource_name = "closeMouthCoyly"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 63, 65, 61 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/OpenMouthSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=40]
+resource_name = "corrupt"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 60, 62, 60, 62, 63, 60, 63 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("FishingRod:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "getCorruptedAndDie"
+} ]
+}
+
+[sub_resource type="Animation" id=41]
+resource_name = "cry"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 116, 117 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=42]
+resource_name = "digest"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.8, 1, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 63, 65, 66, 67, 66, 67, 61 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "swallowPlayer"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/ChompSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=43]
+resource_name = "hurtMyToof"
+length = 1.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.8, 1, 1.2, 1.3, 1.7, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 63, 65, 66, 117, 116, 117, 118, 119, 118, 117 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "getCorruptedAndDie"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/ChompSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sounds/DieSound:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.3, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[sub_resource type="Animation" id=44]
+resource_name = "idle"
+length = 2.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 0.7, 1.2, 1.3, 1.4, 1.6, 1.7, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 61, 65, 63, 65, 61, 63, 65, 61, 65 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=45]
+resource_name = "openMouth"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 61, 65, 63 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/OpenMouthSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=46]
+resource_name = "reveal"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 59, 60, 59, 60, 62, 61, 65, 63 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sounds/RevealSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.2, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sounds/OpenMouthSound:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.6, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=47]
+resource_name = "revealQuiet"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 59, 60, 59, 60, 62, 61 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DanglerBase:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FishingRod/RodSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[sub_resource type="BoxShape" id=48]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.5, 1 )
+
+[sub_resource type="Animation" id=49]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("RodSprite:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=50]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
+
+[sub_resource type="Animation" id=51]
+resource_name = "getItem"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RodSprite:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.23, 0 ) ]
+}
+
+[sub_resource type="BoxShape" id=52]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="ViewportTexture" id=9]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = ExtResource( 8 )
+shader_param/palettesize = 16
+shader_param/resolution_scale = 0.15
+shader_param/canvas_width = 1280.0
+shader_param/canvas_height = 1024.0
+shader_param/r_mult = 0.0
+shader_param/g_mult = 1.0
+shader_param/b_mult = -1.0
+shader_param/target_palette = ExtResource( 1 )
+
+[sub_resource type="ViewportTexture" id=11]
+viewport_path = NodePath("Viewport2")
+
+[node name="Game" type="Spatial"]
+
+[node name="Viewport" parent="." instance=ExtResource( 20 )]
+
+[node name="level" type="Node" parent="Viewport"]
+script = ExtResource( 13 )
+show_crt_effect = true
+tileset_type = 5
+
+[node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 27 )]
+
+[node name="BackgroundControl" type="Control" parent="Viewport/level"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TextureRect" type="ColorRect" parent="Viewport/level/BackgroundControl"]
+margin_right = 1020.0
+margin_bottom = 770.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="GameCamera" parent="Viewport/level" instance=ExtResource( 26 )]
+speed = 10.0
+
+[node name="LevelTiles" type="GridMap" parent="Viewport/level"]
+mesh_library = ExtResource( 23 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+data = {
+"cells": PoolIntArray( 524337, 0, 1, 524338, 0, 1, 524339, 0, 1, 589873, 0, 1, 589875, 0, 1, 655409, 0, 1, 655410, 0, 1, 655411, 0, 1, 1245192, 0, 1, 1245193, 0, 1, 1245194, 0, 1, 1245195, 0, 1, 1310728, 0, 1, 1310731, 0, 1, 1376264, 0, 1, 1376267, 0, 1, 1441800, 0, 1, 1441801, 0, 1, 1441802, 0, 1, 1441803, 0, 1, 1507333, 0, 1, 1507334, 0, 1, 1507335, 0, 1, 1572869, 0, 1, 1572871, 0, 1, 1638405, 0, 1, 1638406, 0, 1, 1638407, 0, 1, 1769487, 0, 1, 1769488, 0, 1, 1769489, 0, 1, 1769490, 0, 1, 1835023, 0, 1, 1835026, 0, 1, 1900559, 0, 1, 1900562, 0, 1, 1966095, 0, 1, 1966096, 0, 1, 1966097, 0, 1, 1966098, 0, 1, 2031635, 0, 1, 2031636, 0, 1, 2031637, 0, 1, 2097171, 0, 1, 2097173, 0, 1, 2162707, 0, 1, 2162708, 0, 1, 2162709, 0, 1, -917500, 0, 1, -917499, 0, 1, -917498, 0, 1, -917489, 0, 1, -917488, 0, 1, -917487, 0, 1, -851964, 0, 1, -851962, 0, 1, -851953, 0, 1, -851951, 0, 1, -786428, 0, 1, -786427, 0, 1, -786426, 0, 1, -786417, 0, 1, -786416, 0, 1, -786415, 0, 1, -589828, 0, 1, -589827, 0, 1, -589826, 0, 1, -589800, 0, 1, -589799, 0, 1, -589798, 0, 1, -524292, 0, 1, -524290, 0, 1, -524264, 0, 1, -524262, 0, 1, -458756, 0, 1, -458755, 0, 1, -458754, 0, 1, -458745, 0, 1, -458744, 0, 1, -458743, 0, 1, -458728, 0, 1, -458727, 0, 1, -458726, 0, 1, -393209, 0, 1, -393207, 0, 1, -327673, 0, 1, -327672, 0, 1, -327671, 0, 1 )
+}
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 7, 0 )
+}
+
+[node name="CosmeticLevelTiles" type="GridMap" parent="Viewport/level/LevelTiles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
+mesh_library = ExtResource( 9 )
+cell_size = Vector3( 1, 1, 1 )
+cell_octant_size = 4
+cell_center_z = false
+data = {
+"cells": PoolIntArray( -65529, 0, 2 )
+}
+script = ExtResource( 7 )
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="Player" parent="Viewport/level" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.075, -9.9923, 0 )
+
+[node name="Door" parent="Viewport/level" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -18, 0 )
+path = "res://levels/EndlessFantasy/gd1FishingVillage/_0_0_FishingVillageEntrance.tscn"
+is_passive = true
+is_vertical = true
+num_keys_unlock = 1
+key_type = 6
+
+[node name="landing" parent="Viewport/level/Door" index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 1 )
+
+[node name="AnimationPlayer" parent="Viewport/level/Door" index="6"]
+anims/RESET = SubResource( 23 )
+anims/catLocked = SubResource( 24 )
+anims/crystalLocked = SubResource( 25 )
+anims/crystalZoneLocked = SubResource( 26 )
+anims/demoLocked = SubResource( 27 )
+anims/doorBarred = SubResource( 28 )
+anims/doorClose = SubResource( 29 )
+anims/doorOpen = SubResource( 30 )
+anims/doorUnbarred = SubResource( 31 )
+anims/fishLocked = SubResource( 32 )
+anims/locked = SubResource( 33 )
+anims/pyramidLocked = SubResource( 34 )
+anims/shroomLocked = SubResource( 35 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
+shape = SubResource( 12 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
+shape = SubResource( 13 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea2" index="0"]
+shape = SubResource( 37 )
+
+[node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 14 )
+
+[node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
+shape = SubResource( 15 )
+
+[node name="Waterfall" parent="Viewport/level" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -3, 0 )
+
+[node name="MiniAdventures28" parent="Viewport/level/Waterfall" index="2"]
+visible = false
+
+[node name="MiniAdventures29" parent="Viewport/level/Waterfall" index="3"]
+visible = false
+
+[node name="MiniAdventures30" parent="Viewport/level/Waterfall" index="4"]
+visible = false
+
+[node name="Sprite3D" parent="Viewport/level/Waterfall" index="5"]
+visible = false
+
+[node name="MiniAdventures4" parent="Viewport/level/Waterfall" index="7"]
+material_override = SubResource( 16 )
+frame = 576
+
+[node name="Waterfall2" parent="Viewport/level" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 0 )
+
+[node name="MiniAdventures28" parent="Viewport/level/Waterfall2" index="2"]
+visible = false
+
+[node name="MiniAdventures29" parent="Viewport/level/Waterfall2" index="3"]
+visible = false
+
+[node name="MiniAdventures30" parent="Viewport/level/Waterfall2" index="4"]
+visible = false
+
+[node name="Sprite3D" parent="Viewport/level/Waterfall2" index="5"]
+visible = false
+
+[node name="MiniAdventures4" parent="Viewport/level/Waterfall2" index="7"]
+material_override = SubResource( 16 )
+frame = 576
+
+[node name="Waterfall3" parent="Viewport/level" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 2, 0 )
+
+[node name="MiniAdventures28" parent="Viewport/level/Waterfall3" index="2"]
+visible = false
+
+[node name="MiniAdventures29" parent="Viewport/level/Waterfall3" index="3"]
+visible = false
+
+[node name="MiniAdventures30" parent="Viewport/level/Waterfall3" index="4"]
+visible = false
+
+[node name="Sprite3D" parent="Viewport/level/Waterfall3" index="5"]
+visible = false
+
+[node name="MiniAdventures4" parent="Viewport/level/Waterfall3" index="7"]
+material_override = SubResource( 16 )
+frame = 576
+
+[node name="AnglerFish" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -10, 0 )
+
+[node name="HookInteractionArea" parent="Viewport/level/AnglerFish/FishingRod" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0 )
+
+[node name="CollisionShape" parent="Viewport/level/AnglerFish/FishingRod/HookInteractionArea" index="0"]
+shape = SubResource( 21 )
+
+[node name="RodSprite" parent="Viewport/level/AnglerFish/FishingRod" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+
+[node name="CollisionShape" parent="Viewport/level/AnglerFish/FallthroughSolid" index="0"]
+shape = SubResource( 22 )
+
+[node name="AnglerFish2" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 7, 0 )
+
+[node name="SecretAnimationPlayer" parent="Viewport/level/AnglerFish2" index="7"]
+anims/RESET = SubResource( 53 )
+anims/closeMouthCoyly = SubResource( 54 )
+anims/corrupt = SubResource( 55 )
+anims/cry = SubResource( 56 )
+anims/digest = SubResource( 57 )
+anims/hurtMyToof = SubResource( 58 )
+anims/idle = SubResource( 59 )
+anims/openMouth = SubResource( 60 )
+anims/reveal = SubResource( 61 )
+anims/revealQuiet = SubResource( 62 )
+
+[node name="HookInteractionArea" parent="Viewport/level/AnglerFish2/FishingRod" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0 )
+
+[node name="CollisionShape" parent="Viewport/level/AnglerFish2/FishingRod/HookInteractionArea" index="0"]
+shape = SubResource( 21 )
+
+[node name="RodSprite" parent="Viewport/level/AnglerFish2/FishingRod" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+
+[node name="AnimationPlayer" parent="Viewport/level/AnglerFish2/FishingRod" index="3"]
+anims/default = SubResource( 63 )
+anims/flickerOn = SubResource( 64 )
+anims/getItem = SubResource( 65 )
+
+[node name="CollisionShape" parent="Viewport/level/AnglerFish2/FallthroughSolid" index="0"]
+shape = SubResource( 22 )
+
+[node name="AnglerFish4" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 32, 0 )
+
+[node name="SecretAnimationPlayer" parent="Viewport/level/AnglerFish4" index="7"]
+anims/RESET = SubResource( 66 )
+anims/closeMouthCoyly = SubResource( 67 )
+anims/corrupt = SubResource( 68 )
+anims/cry = SubResource( 69 )
+anims/digest = SubResource( 70 )
+anims/hurtMyToof = SubResource( 71 )
+anims/idle = SubResource( 72 )
+anims/openMouth = SubResource( 73 )
+anims/reveal = SubResource( 74 )
+anims/revealQuiet = SubResource( 75 )
+
+[node name="HookInteractionArea" parent="Viewport/level/AnglerFish4/FishingRod" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15, 0 )
+
+[node name="CollisionShape" parent="Viewport/level/AnglerFish4/FishingRod/HookInteractionArea" index="0"]
+shape = SubResource( 21 )
+
+[node name="RodSprite" parent="Viewport/level/AnglerFish4/FishingRod" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+
+[node name="AnimationPlayer" parent="Viewport/level/AnglerFish4/FishingRod" index="3"]
+anims/default = SubResource( 76 )
+anims/flickerOn = SubResource( 77 )
+anims/getItem = SubResource( 78 )
+
+[node name="CollisionShape" parent="Viewport/level/AnglerFish4/FallthroughSolid" index="0"]
+shape = SubResource( 22 )
+
+[node name="AnglerFish3" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.2, -9.8613, 0 )
+
+[node name="Sprite3D" parent="Viewport/level/AnglerFish3" index="0"]
+flip_h = true
+frame = 59
+
+[node name="DanglerBase" parent="Viewport/level/AnglerFish3" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0207, 0.5, 1 )
+visible = false
+flip_h = true
+
+[node name="SecretAnimationPlayer" parent="Viewport/level/AnglerFish3" index="7"]
+anims/RESET = SubResource( 38 )
+anims/closeMouthCoyly = SubResource( 39 )
+anims/corrupt = SubResource( 40 )
+anims/cry = SubResource( 41 )
+anims/digest = SubResource( 42 )
+anims/hurtMyToof = SubResource( 43 )
+anims/idle = SubResource( 44 )
+anims/openMouth = SubResource( 45 )
+anims/reveal = SubResource( 46 )
+anims/revealQuiet = SubResource( 47 )
+
+[node name="FishingRod" parent="Viewport/level/AnglerFish3" index="8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+
+[node name="HookInteractionArea" parent="Viewport/level/AnglerFish3/FishingRod" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0 )
+
+[node name="CollisionShape" parent="Viewport/level/AnglerFish3/FishingRod/HookInteractionArea" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.672829, -0.577862, 0 )
+shape = SubResource( 48 )
+
+[node name="HookSprite" parent="Viewport/level/AnglerFish3/FishingRod/HookInteractionArea" index="1"]
+flip_h = true
+
+[node name="RodSprite" parent="Viewport/level/AnglerFish3/FishingRod" index="1"]
+visible = true
+flip_h = true
+
+[node name="LineSprite" parent="Viewport/level/AnglerFish3/FishingRod" index="2"]
+flip_h = true
+
+[node name="AnimationPlayer" parent="Viewport/level/AnglerFish3/FishingRod" index="3"]
+anims/default = SubResource( 49 )
+anims/flickerOn = SubResource( 50 )
+anims/getItem = SubResource( 51 )
+
+[node name="CollisionShape" parent="Viewport/level/AnglerFish3/FallthroughSolid" index="0"]
+shape = SubResource( 52 )
+
+[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -3, 0 )
+
+[node name="WaterCube" parent="Viewport/level" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, -4 )
+
+[node name="WaterCube2" parent="Viewport/level" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 12, -4 )
+
+[node name="WaterCube3" parent="Viewport/level" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 23, -4 )
+
+[node name="WaterCube5" parent="Viewport/level" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 23, -4 )
+
+[node name="WaterCube6" parent="Viewport/level" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 19, -4 )
+
+[node name="WaterCube7" parent="Viewport/level" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 19, -4 )
+
+[node name="WaterCube4" parent="Viewport/level" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 23, -4 )
+
+[node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 12, 0 )
+
+[node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 15, 0 )
+glitch_form = 1
+
+[node name="GlitchEnemy4" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 19, 0 )
+glitch_form = 4
+
+[node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 12, 0 )
+
+[node name="FishKey" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 35.0968, 21.2681, 0 )
+grav = 0
+
+[node name="AnglerFishBossNPC" parent="Viewport/level" instance=ExtResource( 29 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 45, 19, 0 )
+
+[node name="Viewport2" parent="." instance=ExtResource( 20 )]
+
+[node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
+margin_right = 1280.0
+margin_bottom = 1024.0
+texture = SubResource( 9 )
+flip_v = true
+
+[node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 25 )]
+
+[node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
+material = SubResource( 10 )
+
+[node name="ViewportTexture" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = SubResource( 11 )
+flip_v = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UILayer" parent="." instance=ExtResource( 28 )]
+
+[node name="ScreenEffects" parent="." instance=ExtResource( 25 )]
+
+[editable path="Viewport/level/Player"]
+[editable path="Viewport/level/Player/TextContainer"]
+[editable path="Viewport/level/Door"]
+[editable path="Viewport/level/Door/NPC/NPC TextBox"]
+[editable path="Viewport/level/Waterfall"]
+[editable path="Viewport/level/Waterfall/AreaSound"]
+[editable path="Viewport/level/Waterfall2"]
+[editable path="Viewport/level/Waterfall2/AreaSound"]
+[editable path="Viewport/level/Waterfall3"]
+[editable path="Viewport/level/Waterfall3/AreaSound"]
+[editable path="Viewport/level/AnglerFish"]
+[editable path="Viewport/level/AnglerFish/FishingRod"]
+[editable path="Viewport/level/AnglerFish2"]
+[editable path="Viewport/level/AnglerFish2/FishingRod"]
+[editable path="Viewport/level/AnglerFish4"]
+[editable path="Viewport/level/AnglerFish4/FishingRod"]
+[editable path="Viewport/level/AnglerFish3"]
+[editable path="Viewport/level/AnglerFish3/FishingRod"]
+[editable path="Viewport2/ScreenEffects"]
+[editable path="ScreenEffects"]

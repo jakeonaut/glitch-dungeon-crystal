@@ -686,8 +686,19 @@ shape = SubResource( 90 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, -1, 0 )
+is_locked = null
+should_lock = null
 path = "res://levels/EndlessFantasy/gd1CrystalTower/MiniRestZone.tscn"
 glitched_path = "res://levels/EndlessFantasy/gd1PrimordialOoze/FishingScene.tscn"
+parter_door_id = null
+dont_recolor_me = null
+is_passive = null
+is_vertical = null
+num_keys_unlock = null
+locked_to_monsters = null
+is_level_door = null
+is_immediate = null
+key_type = null
 
 [node name="BabushkaCat2" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.69351, 8.99416, 0 )

@@ -2109,7 +2109,6 @@ func doBroomAttack(which_broom_attack):
       is_in_broom_cooldown = false
     if smacked_npc != null or (global.activeInteractor != null and is_instance_valid(global.activeInteractor)):
       if smacked_npc == null:
-        print("girl bye") 
         smacked_npc = global.activeInteractor.textboxParent
       summonedBroom.smacked_npc = smacked_npc
     summonedBroom.my_broom_owner = self
