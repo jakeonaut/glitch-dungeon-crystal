@@ -304,7 +304,7 @@ func resetMemory():
 
     memory["demo_mode"] = 0
     # if you've beaten the midpoint boss
-    memory["glitch_world"] = 0
+    memory["glitch_world"] = 1
     memory["clean_crystals"] = 5
     memory["priestess"] = 2
     memory["glitched_grimoire"] = false
@@ -848,9 +848,12 @@ func setButtonIndex(input_action, button_index):
   new_event.set_button_index(button_index)
   InputMap.action_add_event(input_action, new_event)
 
+func isControllerConnected():
+    return Input.get_connected_joypads().size() > 0
+
 func getLargeInputText(input_action, input_display = 0, use_bbtext = true):
     # TODO(jaketrower): Support both key & gamepad here based on which was pressed last ?
-    var is_controller_connected = (Input.get_connected_joypads().size() > 0 or input_display == 1) and not input_display == 2
+    var is_controller_connected = (self.isControllerConnected() or input_display == 1) and not input_display == 2
 
     var inputEvents = InputMap.get_action_list(input_action)
     var glyphType = GlyphType.NINTENDO
@@ -880,7 +883,7 @@ func getLargeInputText(input_action, input_display = 0, use_bbtext = true):
 
 func getInputText(input_action, input_display = 0, use_bbtext = true, showCondensedMenu = false):
     # TODO(jaketrower): Support both key & gamepad here based on which was pressed last ?
-    var is_controller_connected = (Input.get_connected_joypads().size() > 0 or input_display == 1) and not input_display == 2
+    var is_controller_connected = (self.isControllerConnected() or input_display == 1) and not input_display == 2
 
     var inputEvents = InputMap.get_action_list(input_action)
     var glyphType = GlyphType.NINTENDO

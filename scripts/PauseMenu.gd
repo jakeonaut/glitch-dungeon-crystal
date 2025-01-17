@@ -974,7 +974,7 @@ func tryDrawMap():
       if mapGrid[i][j].hide_me_from_map:
         sprite.frame = 0
         var haveIBeenToThisLevel = global.haveIBeenToThisLevelPath(mapRoom.path)
-        if haveIBeenToThisLevel or global.memory["glitch_world"]:
+        if haveIBeenToThisLevel or global.memory["glitch_world"] > 0:
           sprite.texture = glitchSheetTex
           sprite.hframes = 12
           sprite.vframes = 8

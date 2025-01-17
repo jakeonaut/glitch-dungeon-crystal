@@ -154,7 +154,7 @@ onready var meshInstance2 = get_node("MeshInstance2")
 func _process(delta):
   tryProcessGlitchedPath()
 
-  if key_type == global.KeyItem.CRYSTAL or key_type == global.KeyItem.ZONE_CRYSTAL or key_type == global.KeyItem.DEMO:
+  if not is_passive and (key_type == global.KeyItem.CRYSTAL or key_type == global.KeyItem.ZONE_CRYSTAL or key_type == global.KeyItem.DEMO):
     meshInstance2.visible = true
     meshInstance2.rotation_degrees.y += delta*22
   else:
