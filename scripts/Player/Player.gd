@@ -51,7 +51,7 @@ onready var textBox = get_node("TextContainer/TextBox")
 var sprite_reset_timer = 0
 var sprite_reset_limit = 3
 var cameraRotationCounter = 0
-var should_turn_on_glitch_screen_effects = false
+var should_turn_on_glitch_screen_effects = true
 var glitch_tickle_time_limit = 10
 var can_cast_spell_timer = 0
 var can_cast_spell_time_limit = 10
@@ -970,12 +970,12 @@ func processGlitchHurtRecovery(delta):
     if glitch_death_timer != 0:
       glitch_death_timer += (delta*22)
       applyGlitchDeathEffects(abs(glitch_death_timer))
-      if glitch_death_timer >= 20 and should_turn_on_glitch_screen_effects:
-        level.glitchScreenEffect.visible = global.userSettings["canGlitchScreen"]
-        should_turn_on_glitch_screen_effects = false
+      if glitch_death_timer >= 10:
+        level.glitchScreenEffect.visible = global.userSettings["canGlitchScreen"] and should_turn_on_glitch_screen_effects
       if glitch_death_timer >= 40:
         musicPlayer.changeSongPitch(musicPlayer.default_song_pitch)
         level.glitchScreenEffect.visible = false
+        should_turn_on_glitch_screen_effects = false
         glitch_death_timer = 0
         if physics_state == PhysicsState.GLITCH_RECOVERY:
           self.physics_state = PhysicsState.NORMAL

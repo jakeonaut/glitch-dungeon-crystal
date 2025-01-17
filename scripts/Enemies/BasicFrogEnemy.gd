@@ -328,6 +328,7 @@ func unsmack():
     .unsmack()
 
 export var can_jump = true
+export var can_licker_be_flipped = true
 # @override
 func getSmacked(broom_origin = null, silently = false):
   if is_smacked or am_i_dying:
@@ -341,7 +342,8 @@ func getSmacked(broom_origin = null, silently = false):
     notDieSound.play()
   # stop the lick
   if is_licker and tongueAniPlayer != null:
-    mySprite.flip_h = not mySprite.flip_h
+    if can_licker_be_flipped:
+      mySprite.flip_h = not mySprite.flip_h
     tongueAniPlayer.stop()
     tongueAniPlayer.clear_queue()
     if gulpin:
@@ -358,8 +360,7 @@ func getSmacked(broom_origin = null, silently = false):
   jump_timer = 0
   walk_direction.x = 1
   if level.player.mySprite.flip_h:
-    walk_direction.x = -1
-    
+    walk_direction.x = -1  
   # is_static = false
   pauseSelf = true
   on_ground = true

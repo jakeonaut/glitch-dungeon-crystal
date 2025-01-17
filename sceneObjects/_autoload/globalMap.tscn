@@ -985,6 +985,7 @@ frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/EasyFling.tscn"
 can_nav_left = false
 can_nav_right = false
+can_nav_up = false
 can_nav_down = false
 
 [node name="GlitchFishersHard" parent="FishingVillage" instance=ExtResource( 3 )]

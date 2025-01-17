@@ -130,6 +130,7 @@ func yaBeatMe():
     secretAniPlayer.queue("defeatedIdle")
     boss_phase = BossPhase.DEFEATED
     global.memory["priestess"] = 2
+    global.memory["glitch_world"] = 1
     yield(get_tree().create_timer(2.0), "timeout")
     global.shouldRenderAsCinematic = true
     level.triggerCroneDefeatedDialog()
