@@ -43,7 +43,7 @@ func _ready():
     meshInstance2.mesh = meshInstance2.mesh.duplicate()
     meshInstance2.set_material_override(meshInstance2.get_material_override().duplicate())
     meshInstance2.material_override.set_shader_param("alpha2", 0.5)
-    if getMyStaticLevelZoneVar():
+    if getMyStaticLevelZoneVar() or global.memory["clean_crystals"] >= 4:
         is_purified = true
         visible = false
         # lightAniPlayer.play("lightUpQuiet")

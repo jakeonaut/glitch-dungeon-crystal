@@ -56,7 +56,6 @@ func _process(_delta):
     if global.isPauseMenuOpen:
       pressCText.visible = false
       optionsMenuPrompt.visible = false
-    var is_controller_connected = Input.get_connected_joypads().size() > 0
     # TODO(jaketrower): I don't super love this but...
     pressCText.visible = (global.activeInteractor == null and not global.isPauseMenuOpen)
     optionsMenuPrompt.visible = pressCText.visible

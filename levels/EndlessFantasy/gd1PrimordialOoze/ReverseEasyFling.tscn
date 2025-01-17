@@ -2250,7 +2250,6 @@ material = SubResource( 136 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 34, 0 )
-glitched_path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
 
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/RESET = SubResource( 76 )
@@ -2282,7 +2281,6 @@ shape = SubResource( 61 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -8, 0 )
-glitched_path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
 
 [node name="AnimationPlayer" parent="Viewport/level/Door3" index="6"]
 anims/RESET = SubResource( 183 )

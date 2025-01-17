@@ -103,7 +103,6 @@ func _on_TweenOut_tween_completed(object, _key):
     object.pitch_scale = 1.0
 
 func stopAll():
-    print("stop all OH!")
     fade_out(longAdventureThemePlayer)
     fade_out(windPlayer)
     fade_out(restZonePlayer)

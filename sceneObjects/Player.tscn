@@ -3719,10 +3719,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 1.125, 0, 0.7 ) ]
+"values": [ Vector3( 1.125, 0, 0.7 ), Vector3( 1.125, 0, 0.7 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:material_override:shader_param/opacity")

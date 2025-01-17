@@ -285,7 +285,6 @@ func _process(delta):
                     mainMenuUi.remove_child(optionsMenuPrompt)
                     uiLayer.add_child(optionsMenuPrompt)
                     optionsMenuPrompt.rect_position.y = 16
-                var is_controller_connected = Input.get_connected_joypads().size() > 0
                 pressCText.bbcode_text = global.getInputText("sub_action_button") + " to Sweep. " + global.getInputText("jump_button") + " to Jump. " + global.getInputText("ui_left")  + global.getInputText("ui_right") + " to walk"
                 pressCText.visible = (global.activeInteractor == null and not global.isPauseMenuOpen)
                 optionsMenuPrompt.bbcode_text = "Press " + global.getInputText("ui_start") + " for OPTIONS"
