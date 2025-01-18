@@ -92,7 +92,8 @@ func _ready_impl():
   global.activeInteractor = null # somewhat of a failsafe
   set_process(true)
 
-  uiLayer.offset = Vector2(320, 28)
+  if self.has_node("../../UILayer"):
+    uiLayer.offset = Vector2(320, 28)
   screenEffectsContainer.offset = Vector2(320, 28)
   if not get_tree().get_root().has_node("Game/GameFrameBackground"):
     viewportTexture.rect_position = Vector2(320, 28)

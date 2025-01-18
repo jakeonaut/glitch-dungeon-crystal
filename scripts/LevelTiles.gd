@@ -521,9 +521,9 @@ func infectSpikes(coords, play_sound = true):
     infected_spikes.append(coords)
     
     # TODO(jaketrower): If you want to only TEMPORARILY clear spikes, use this
-    # self.set_cell_item(coords.x, coords.y, coords.z, GridMap.INVALID_CELL_ITEM)
+    self.set_cell_item(coords.x, coords.y, coords.z, GridMap.INVALID_CELL_ITEM)
     # TODO(jaketrower): Otherwise, use this
-    removeTile(coords)
+    # removeTile(coords)
 
     var tile_pos = self.map_to_world(coords.x, coords.y, coords.z)
     level.summonSmokeClouds(tile_pos, 2, play_sound, true)

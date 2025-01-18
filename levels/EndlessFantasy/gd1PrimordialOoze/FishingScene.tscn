@@ -659,10 +659,15 @@ vframes = 2
 shape = SubResource( 6 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 14, 0 )
-glitched_path = "res://levels/EndlessFantasy/gd1CrystalTower/PastoralTowerHub.tscn"
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 20, 0 )
+path = "res://levels/EndlessFantasy/gd1CrystalTower/PastoralTowerHub.tscn"
+is_passive = true
+is_vertical = true
 num_keys_unlock = 1
 key_type = 6
+
+[node name="landing" parent="Viewport/level/Door2" index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 1 )
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
 shape = SubResource( 12 )
@@ -731,6 +736,25 @@ visible = false
 visible = false
 
 [node name="MiniAdventures4" parent="Viewport/level/Waterfall" index="7"]
+material_override = SubResource( 16 )
+frame = 576
+
+[node name="Waterfall2" parent="Viewport/level" instance=ExtResource( 24 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 27, 0 )
+
+[node name="MiniAdventures28" parent="Viewport/level/Waterfall2" index="2"]
+visible = false
+
+[node name="MiniAdventures29" parent="Viewport/level/Waterfall2" index="3"]
+visible = false
+
+[node name="MiniAdventures30" parent="Viewport/level/Waterfall2" index="4"]
+visible = false
+
+[node name="Sprite3D" parent="Viewport/level/Waterfall2" index="5"]
+visible = false
+
+[node name="MiniAdventures4" parent="Viewport/level/Waterfall2" index="7"]
 material_override = SubResource( 16 )
 frame = 576
 
@@ -805,6 +829,8 @@ __meta__ = {
 [editable path="Viewport/level/Door3/NPC/NPC TextBox"]
 [editable path="Viewport/level/Waterfall"]
 [editable path="Viewport/level/Waterfall/AreaSound"]
+[editable path="Viewport/level/Waterfall2"]
+[editable path="Viewport/level/Waterfall2/AreaSound"]
 [editable path="Viewport/level/AnglerFish"]
 [editable path="Viewport/level/AnglerFish/FishingRod"]
 [editable path="Viewport/level/WaterCube"]

@@ -967,14 +967,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 4, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0 )
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/_0_0_FishingVillageEntrance.tscn"
-can_nav_up = false
 can_nav_down = false
 
 [node name="FishingVillageIntro" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 0 )
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn"
-can_nav_up = false
 can_nav_down = false
 
 [node name="FishHooksMinimum" parent="FishingVillage" instance=ExtResource( 3 )]
@@ -995,14 +993,13 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="GrubAmbush" parent="FishingVillage" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 0 )
 material_override = SubResource( 5 )
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/GrubAmbush.tscn"
 can_nav_left = false
 can_nav_right = false
 can_nav_up = false
-can_nav_down = false
 has_fish_memory = true
 
 [node name="RightsideTunnel" parent="FishingVillage" instance=ExtResource( 3 )]

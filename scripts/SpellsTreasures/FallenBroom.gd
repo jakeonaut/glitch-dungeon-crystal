@@ -207,7 +207,7 @@ func die():
     lv.y = 0
     is_dying = true
     self.remove_from_group("fallen_broom_group")
-    if not global.memory["broom"]:
+    if not global.memory["broom"] and returning:
         global.memory["broom"] = true
     
 func tryReturnIfTooFarFromPlayer():

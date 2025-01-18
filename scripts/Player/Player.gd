@@ -22,7 +22,6 @@ onready var sandFootstepSound = get_node("Sounds/SandFootstepSound")
 onready var tileFootstepSound = get_node("Sounds/TileFootstepSound")
 onready var hookSound = get_node("Sounds/HookSound")
 onready var reelSound = get_node("Sounds/ReelSound")
-onready var digSound = get_node("Sounds/DigSound")
 onready var saveSound = get_node("Sounds/SaveSound")
 onready var miniCubeCrystal = get_node("miniCubeCrystal")
 onready var mpNumSprite = get_node("MPNumSprite")
@@ -1400,15 +1399,6 @@ func checkSolidTilesOnMe():
   global_transform.origin.y -= 2
   return is_true
 
-
-onready var digSound2 = get_node("Sounds/DigSound2")
-var dig_timer = 0
-var dig_time_limit = 8
-var dig_below_timer = 0
-var dig_below_time_limit = 5
-var can_dig_up = false
-var dig_smoke_timer = 0
-var dig_smoke_time_limit = 3
 func processMoleLogic(delta):
   if transformation == TransformationState.MOLE_DIGGING:
     if not moleSprite.visible and not aniPlayer.assigned_animation == "transformToMole":
@@ -1433,35 +1423,40 @@ func processMoleLogic(delta):
     fastStepSound.volume_db = -8
     if not fastStepSound.is_playing():
       fastStepSound.play()
-    var solidTilesAbove = getTilesAbove(getLevelTiles())
-    var areAnyTilesAboveMeGlitched = false
-    for i in range(solidTilesAbove.size()):
-      var coords = solidTilesAbove[i]
+    var solidTilesToCheck = getTilesAbove(getLevelTiles())
+    if dig_direction.x > 0:
+      solidTilesToCheck = getTilesRightOf(getLevelTiles())
+    elif dig_direction.x < 0:
+      solidTilesToCheck = getTilesLeftOf(getLevelTiles())
+    var areAnyTilesToCheckGlitched = false
+    for i in range(solidTilesToCheck.size()):
+      var coords = solidTilesToCheck[i]
       if coords == null: continue
       var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
       if getLevelTiles().isTileFragileSolid(tile_type):
-        areAnyTilesAboveMeGlitched = true
+        areAnyTilesToCheckGlitched = true
         break
-    if areAnyTilesAboveMeGlitched:
+    if areAnyTilesToCheckGlitched:
       bumpSound.play()
       fastStepSound.stop()
       getSmacked()
       smack_timer = -8
       transformation = TransformationState.UNDERGROUND
-      global_transform.origin.y -= 1
+      global_transform.origin -= dig_direction / 2.0
     elif checkSolidTilesOnMe():
-      global_transform.origin.y += (2 * delta*11)
+      global_transform.origin += (dig_direction * delta*11.0)
     else:
-      should_magic_jump = true
-      self.vv = 5
-      self.camera_target_y_pos = self.global_transform.origin.y
-      self.global_transform.origin.y += 0.5
-      self.on_ground = false
-      self.truly_on_ground = false
-      self.was_on_ground = false
-      self.lv.y = self.vv
-      self.linear_velocity.y = self.vv
-      self.was_fallthrough_area_collision_triggered = false
+      self.global_transform.origin += dig_direction * 0.5
+      if dig_direction.y > 0:
+        should_magic_jump = true
+        self.vv = 5
+        self.camera_target_y_pos = self.global_transform.origin.y
+        self.on_ground = false
+        self.truly_on_ground = false
+        self.was_on_ground = false
+        self.lv.y = self.vv
+        self.linear_velocity.y = self.vv
+        self.was_fallthrough_area_collision_triggered = false
       getMoleCured()
   elif transformation == TransformationState.UNDERGROUND:
     override_camera_y = global_transform.origin.y
@@ -1474,22 +1469,27 @@ func processMoleLogic(delta):
     if not fastStepSound.is_playing():
       fastStepSound.play()
     if checkSolidTilesOnMe():
-      global_transform.origin.y -= (2 * delta*11)
+      global_transform.origin -= (dig_direction * delta*11.0)
     else:
-      should_magic_jump = true
-      self.vv = -2
-      self.camera_target_y_pos = self.global_transform.origin.y
-      self.global_transform.origin.y += 0.5
-      self.on_ground = false
-      self.truly_on_ground = false
-      self.was_on_ground = false
-      self.lv.y = self.vv
-      self.linear_velocity.y = self.vv
-      self.was_fallthrough_area_collision_triggered = false
+      self.global_transform.origin += dig_direction * 0.5
+      if dig_direction.y > 0:
+        should_magic_jump = true
+        self.vv = -2
+        self.camera_target_y_pos = self.global_transform.origin.y
+        self.on_ground = false
+        self.truly_on_ground = false
+        self.was_on_ground = false
+        self.lv.y = self.vv
+        self.linear_velocity.y = self.vv
+        self.was_fallthrough_area_collision_triggered = false
       getMoleCured()
   else:
     dig_smoke_timer = 0
-    if on_ceiling and not was_on_ceiling and (pressingJump() or (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall())) and dig_timer > 0 and transformation != TransformationState.MOLE_DIGGING:
+    # TODO(jaketrower): TODO(jaketrower): TODO(jaketrower): TODO(jaketrower):
+    if dig_timer > 0 and transformation != TransformationState.MOLE_DIGGING and (
+      (glitch_form == global.GlitchForm.FEATHER and pressingJump() and dig_direction.y >= 0 and on_ceiling and not was_on_ceiling) or
+      (glitch_form == global.GlitchForm.FLOOR and (pressingMoveLeft() or pressingMoveRight()) and on_ground)
+    ):
       transformation = TransformationState.MOLE_DIGGING
       aniPlayer.stop()
       aniPlayer.clear_queue()
@@ -1499,6 +1499,8 @@ func processMoleLogic(delta):
         broomStop()
         summonFallenBroom(true, false, false)
       global.memory["broom"] = false
+    else:
+      dig_timer = 0
     if not pressingJump() and on_ground:
       can_dig_up = true
     if moleSprite.visible and not aniPlayer.assigned_animation == "revertFromMole":
@@ -1517,7 +1519,8 @@ func applyGravity(delta):
   #   on_ground = true
   #   was_on_ground = true
   #   feather_jump_timer = 0
-  dig_timer = 0
+  if glitch_form == global.GlitchForm.FEATHER:
+    dig_timer = 0
   .applyGravity(delta)
 
 func collideWithCeiling(local_lv):
@@ -1539,39 +1542,25 @@ func collideWithCeiling(local_lv):
     if getLevelTiles().isTileFragileSolid(tile_type):
       areAnyTilesAboveMeGlitched = true
       if pressingJump():
-        if not noBroomSound.is_playing() and global.memory["mole_cricket"] > 0:
+        if not noBroomSound.is_playing() and global.memory["mole_cricket"] > 0 and glitch_form == global.GlitchForm.FEATHER:
           noBroomSound.play()
           glitchTilesAroundMe()
         glitchTickle()
       break
   if (
-    local_lv.y < 0 or not can_dig_up or not global.memory["mole_cricket"] or nesting_doll_state == global.NestingDoll.MATRIARCH or
+    local_lv.y < 0 or not can_dig_up or global.memory["mole_cricket"] == 0 or nesting_doll_state == global.NestingDoll.MATRIARCH or
     nesting_doll_state == global.NestingDoll.BABY or
-    (not pressingJump() and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall())) or
+    not pressingJump() or
     # (dig_timer == 0 and (pressingMoveLeft() or pressingMoveRight())) or 
     areAnyTilesAboveMeGlitched or
     (transformation != TransformationState.NORMAL and transformation != TransformationState.MOLE_DIGGING)
+    or glitch_form != global.GlitchForm.FEATHER
   ):
     local_lv.y = 0
     getMoleCured()
     return local_lv
   local_lv.y = 0
-  dig_timer += (secret_delta*11)
-    
-    # on_ground = true
-  # mySprite.flip_h = not mySprite.flip_h
-  if dig_timer > dig_time_limit:
-    can_dig_up = false
-    tryClearFallthroughCollisionSolid(self.global_transform.origin)
-    transformation = TransformationState.UNDERGROUND_RETURNING
-    moleSprite.visible = false
-    summonSmokeClouds(3, true, true, 0)
-    global_transform.origin.y += 2
-    digSound.play()
-    physics_vars.should_apply_gravity = false
-    should_collide_floor = false
-    should_collide_ceil = false
-    should_collide_horizontally = false
+  processMoleDigTimer(Vector3(0, 2, 0))
   return local_lv
 
 func getMoleCured():
@@ -1607,6 +1596,7 @@ func getMoleCured():
   should_collide_floor = true
   should_collide_ceil = true
   should_collide_horizontally = true
+  print('mole cured')
   dig_timer = 0
   dig_below_timer = 0
   aniPlayer.stop()
@@ -2384,6 +2374,7 @@ func processPoisonWaterLogic(_delta):
 var has_landed_since_recovering = true
 # @override
 func landed():
+  print('landed')
   dig_timer = 0
   .landed()
   if not (is_mushroom_infected or is_mushroom_prefected):
