@@ -16,6 +16,9 @@ func _ready():
   mimicNPC.can_activate = false
   treasureSpellCollectable.is_active = false
 
+  if global.memory["glitch_world"] > 0:
+    num_gems_needed *= 2.5
+
 func _process(_delta):
   if treasureSpellCollectable.okay_im_done and not mimicNPC.is_active:
     mimicNPC.mySprite.trySetFrame(1)

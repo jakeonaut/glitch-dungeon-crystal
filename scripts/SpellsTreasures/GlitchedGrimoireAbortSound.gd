@@ -31,6 +31,7 @@ func activateScript():
 func preActivateScript():
   global.memory["forget_me_not"] = true
   global.memory["glitch_world"] = 1
+  transition.tryUpdateMapManagerToGlitchedMap()
   if not global.memory["glitched_grimoire"]:
     global.memory["glitched_grimoire"] = true
     global.memory["glitched_grimoire2"] = true
@@ -39,3 +40,16 @@ func preActivateScript():
         global.memory["spellbookPage"] = [level.player.glitch_form]
       else:
         global.memory["spellbookPage"] = []
+    if level.has_node("LadderSpell") and level.has_node("InvisibleSpell") and level.has_node("SavePoint"):
+      yield(get_tree().create_timer(0.5), "timeout")
+      var ladderSpell = level.ladderSpell
+      level.summonSmokeClouds(ladderSpell.global_transform.origin, 3, true, true)
+      ladderSpell.visible = true
+      yield(get_tree().create_timer(0.5), "timeout")
+      var invisibleSpell = level.invisibleSpell
+      level.summonSmokeClouds(invisibleSpell.global_transform.origin, 3, true, true)
+      invisibleSpell.visible = true
+      yield(get_tree().create_timer(0.5), "timeout")
+      var savePoint = level.savePoint
+      level.summonSmokeClouds(savePoint.global_transform.origin, 2, true, true)
+      savePoint.visible = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=95 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://assets/backgrounds/forest_layer_0.png" type="Texture" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://sceneObjects/AngelStatue.tscn" type="PackedScene" id=10]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=11]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/LadderSpell.tscn" type="PackedScene" id=12]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/GlitchedGrimoire.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sceneObjects/WaterCubes/BogWaterCube.tscn" type="PackedScene" id=15]
 [ext_resource path="res://sceneObjects/GramdmaMemory.tscn" type="PackedScene" id=16]
@@ -42,6 +41,9 @@
 [ext_resource path="res://scripts/ElderTadpoleAbortSound.gd" type="Script" id=40]
 [ext_resource path="res://levels/EndlessFantasy/gd1GrandmaVillage/GrimoireInventoryAdviceDialogStartSound.gd" type="Script" id=41]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=42]
+[ext_resource path="res://assets/palettes/inkpink-1x.png" type="Texture" id=43]
+[ext_resource path="res://assets/palettes/kirokaze-gameboy-1x.png" type="Texture" id=44]
+[ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=45]
 
 [sub_resource type="ShaderMaterial" id=78]
 shader = ExtResource( 29 )
@@ -156,9 +158,6 @@ extents = Vector3( 2, 1.3, 1.3 )
 [sub_resource type="BoxShape" id=115]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
-
-[sub_resource type="BoxShape" id=105]
-resource_local_to_scene = true
 
 [sub_resource type="BoxShape" id=91]
 resource_local_to_scene = true
@@ -483,6 +482,492 @@ tracks/2/keys = {
 [sub_resource type="ShaderMaterial" id=112]
 shader = ExtResource( 27 )
 
+[sub_resource type="Animation" id=116]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 45 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SparkleSprite3D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SparkleSprite3D2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SparkleSprite3D:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -1, 3, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SparkleSprite3D2:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 3.65941, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite3D:material_override:shader_param/enable_dither")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite3D:material_override:shader_param/offset")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=117]
+resource_name = "catLocked"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 17, 18 ]
+}
+
+[sub_resource type="Animation" id=118]
+resource_name = "crystalLocked"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 20, 21 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:material_override:shader_param/enable_dither")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=119]
+resource_name = "crystalZoneLocked"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 20, 21 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:material_override:shader_param/enable_dither")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 44 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:material_override:shader_param/offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=120]
+resource_name = "demoLocked"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 17, 18 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:material_override:shader_param/enable_dither")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 43 ) ]
+}
+
+[sub_resource type="Animation" id=121]
+resource_name = "doorBarred"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 6, 5 ]
+}
+
+[sub_resource type="Animation" id=122]
+resource_name = "doorClose"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 45 ) ]
+}
+
+[sub_resource type="Animation" id=123]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 45 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:material_override:shader_param/offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=124]
+resource_name = "doorUnbarred"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 6, 7 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "unpause"
+} ]
+}
+
+[sub_resource type="Animation" id=125]
+resource_name = "fishLocked"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 12, 13 ]
+}
+
+[sub_resource type="Animation" id=126]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 3 ]
+}
+
+[sub_resource type="Animation" id=127]
+resource_name = "pyramidLocked"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 15, 16 ]
+}
+
+[sub_resource type="Animation" id=128]
+resource_name = "shroomLocked"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 10, 11 ]
+}
+
+[sub_resource type="BoxShape" id=129]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=130]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=131]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=132]
+resource_local_to_scene = true
+extents = Vector3( 1, 0.8, 1.3 )
+
+[sub_resource type="BoxShape" id=133]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 0.24, 1 )
+
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
 
@@ -497,7 +982,7 @@ viewport_path = NodePath("Viewport2")
 script = ExtResource( 1 )
 show_crt_effect = true
 starting_glitch_type = 1
-tileset_type = 5
+tileset_type = 10
 has_spellbook_page = true
 spellbook_spells = [ 2, 1 ]
 display_title = "village of elders"
@@ -548,7 +1033,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 11, 0, 1, 12, 0, 1, 13, 0, 1, 16, 0, 1, 17, 0, 1, 18, 0, 1, 30, 0, 1, 32, 0, 1, 65549, 0, 1, 65550, 0, 1, 65551, 0, 1, 65552, 0, 1, 65566, 0, 1, 65567, 0, 1, 65568, 0, 1, 262168, 0, 1, 262169, 0, 1, 262170, 0, 1, 327685, 0, 1, 327686, 0, 1, 327687, 0, 1, 327704, 0, 1, 327706, 0, 1, 393218, 0, 1, 393219, 0, 1, 393220, 0, 1, 393221, 0, 1, 393223, 0, 1, 393240, 0, 1, 393241, 0, 1, 393242, 0, 1, 393243, 0, 1, 458754, 0, 1, 458756, 0, 1, 458757, 0, 1, 458758, 0, 1, 458759, 0, 1, 458776, 0, 1, 458779, 0, 1, 524290, 0, 1, 524291, 0, 1, 524292, 0, 1, 524312, 0, 1, 524315, 0, 1, 589848, 0, 1, 589849, 0, 1, 589850, 0, 1, 589851, 0, 1, 589852, 0, 1, 589853, 0, 1, 655342, 0, 1, 655343, 0, 1, 655344, 0, 1, 655345, 0, 1, 655387, 0, 1, 655389, 0, 1, 720878, 0, 1, 720881, 0, 1, 720923, 0, 1, 720924, 0, 1, 720925, 0, 1, 786414, 0, 1, 786417, 0, 1, 786462, 0, 1, 786463, 0, 1, 786464, 0, 1, 851950, 0, 1, 851951, 0, 1, 851952, 0, 1, 851953, 0, 1, 851998, 0, 1, 852000, 0, 1, 917534, 0, 1, 917535, 0, 1, 917536, 0, 1, 1048581, 0, 1, 1048582, 0, 1, 1048583, 0, 1, 1114117, 0, 1, 1114119, 0, 1, 1179653, 0, 1, 1179654, 0, 1, 1179655, 0, 1, 1245192, 0, 1, 1245193, 0, 1, 1245194, 0, 1, 1245195, 0, 1, 1310728, 0, 1, 1310731, 0, 1, 1376264, 0, 1, 1376267, 0, 1, 1441800, 0, 1, 1441801, 0, 1, 1441802, 0, 1, 1441803, 0, 1, 1769472, 0, 1, 1769473, 0, 1, 1769483, 0, 1, 1769484, 0, 1, 1769485, 0, 1, 1769486, 0, 1, 1835006, 0, 1, 1835007, 0, 1, 1835009, 0, 1, 1835019, 0, 1, 1835022, 0, 1, 1900542, 0, 1, 1900545, 0, 1, 1900546, 0, 1, 1900547, 0, 1, 1900548, 0, 1, 1900549, 0, 1, 1900550, 0, 1, 1900551, 0, 1, 1900552, 0, 1, 1900553, 0, 1, 1900554, 0, 1, 1900555, 0, 1, 1900558, 0, 1, 1966078, 0, 1, 1966080, 0, 1, 1966081, 0, 1, 1966082, 0, 1, 1966083, 0, 1, 1966084, 0, 1, 1966085, 0, 1, 1966086, 0, 1, 1966087, 0, 1, 1966088, 0, 1, 1966089, 0, 1, 1966090, 0, 1, 1966091, 0, 1, 1966092, 0, 1, 1966093, 0, 1, 1966094, 0, 1, 2031615, 0, 1, 2818037, 0, 37, 2818038, 0, 37, 2818039, 0, 37, 2818040, 0, 37, 2883572, 0, 37, 2883573, 0, 37, 2883574, 0, 37, 2883575, 0, 37, 2883576, 0, 37, 2883577, 0, 37, 2949108, 0, 37, 2949109, 0, 37, 2949110, 0, 37, 2949111, 0, 37, 2949112, 0, 37, 2949113, 0, 37, -458752, 0, 1, -458751, 0, 1, -458750, 0, 1, -458749, 0, 1, -458748, 0, 1, -458747, 0, 1, -458746, 0, 1, -458745, 0, 1, -458744, 0, 1, -458743, 0, 1, -458742, 0, 1, -458741, 0, 1, -458740, 0, 1, -458739, 0, 1, -393234, 0, 1, -393233, 0, 1, -393232, 0, 1, -393231, 0, 1, -393230, 0, 1, -393229, 0, 1, -393228, 0, 1, -393227, 0, 1, -393226, 0, 1, -393225, 0, 1, -393224, 0, 1, -393223, 0, 1, -393222, 0, 1, -393221, 0, 1, -393220, 0, 1, -393219, 0, 1, -393218, 0, 1, -393217, 0, 1, -393216, 0, 1, -393215, 0, 1, -393214, 0, 1, -393213, 0, 1, -393212, 0, 1, -393211, 0, 1, -393210, 0, 1, -393209, 0, 1, -393208, 0, 1, -393207, 0, 1, -393206, 0, 1, -393205, 0, 1, -393204, 0, 1, -393203, 0, 1, -393202, 0, 1, -393192, 0, 1, -393191, 0, 1, -393190, 0, 1, -393189, 0, 1, -393188, 0, 1, -393187, 0, 1, -327698, 0, 1, -327697, 0, 1, -327696, 0, 1, -327695, 0, 1, -327694, 0, 1, -327693, 0, 1, -327692, 0, 1, -327691, 0, 1, -327690, 0, 1, -327689, 0, 1, -327688, 0, 1, -327687, 0, 1, -327686, 0, 1, -327685, 0, 1, -327684, 0, 1, -327683, 0, 1, -327682, 0, 1, -327681, 0, 1, -327680, 0, 1, -327679, 0, 1, -327678, 0, 1, -327677, 0, 1, -327676, 0, 1, -327675, 0, 1, -327674, 0, 1, -327673, 0, 1, -327672, 0, 1, -327671, 0, 1, -327670, 0, 1, -327669, 0, 1, -327668, 0, 1, -327667, 0, 1, -327666, 0, 1, -327665, 0, 1, -327664, 0, 1, -327656, 0, 1, -327654, 0, 1, -327653, 0, 1, -327651, 0, 1, -262162, 0, 1, -262161, 0, 1, -262160, 0, 1, -262159, 0, 1, -262158, 0, 1, -262157, 0, 1, -262156, 0, 1, -262155, 0, 1, -262154, 0, 1, -262153, 0, 1, -262152, 0, 1, -262151, 0, 1, -262150, 0, 1, -262149, 0, 1, -262148, 0, 1, -262147, 0, 1, -262146, 0, 1, -262145, 0, 1, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -262138, 0, 1, -262137, 0, 1, -262136, 0, 1, -262135, 0, 1, -262134, 0, 1, -262133, 0, 1, -262132, 0, 1, -262131, 0, 1, -262130, 0, 1, -262129, 0, 1, -262128, 0, 1, -262123, 0, 1, -262122, 0, 1, -262121, 0, 1, -262120, 0, 1, -262119, 0, 1, -262118, 0, 1, -262117, 0, 1, -262116, 0, 1, -262115, 0, 1, -196626, 0, 1, -196625, 0, 1, -196624, 0, 1, -196623, 0, 1, -196622, 0, 1, -196621, 0, 1, -196620, 0, 1, -196619, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196602, 0, 1, -196601, 0, 1, -196600, 0, 1, -196599, 0, 1, -196598, 0, 1, -196597, 0, 1, -196596, 0, 1, -196595, 0, 1, -196594, 0, 1, -196593, 0, 1, -196592, 0, 1, -196591, 0, 1, -196590, 0, 1, -196589, 0, 1, -196588, 0, 1, -196587, 0, 1, -196585, 0, 1, -196584, 0, 1, -196583, 0, 1, -196582, 0, 1, -196579, 0, 1, -131090, 0, 1, -131089, 0, 1, -131088, 0, 1, -131087, 0, 1, -131086, 0, 1, -131085, 0, 1, -131084, 0, 1, -131083, 0, 1, -131082, 0, 1, -131081, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131061, 0, 1, -131060, 0, 1, -131059, 0, 1, -131058, 0, 1, -131057, 0, 1, -131056, 0, 1, -131055, 0, 1, -131054, 0, 1, -131052, 0, 1, -131051, 0, 1, -131050, 0, 1, -131049, 0, 1, -131048, 0, 1, -131047, 0, 1, -131046, 0, 1, -131045, 0, 1, -131044, 0, 1, -131043, 0, 1, -65554, 0, 1, -65553, 0, 1, -65552, 0, 1, -65551, 0, 1, -65550, 0, 1, -65549, 0, 1, -65548, 0, 1, -65547, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65527, 0, 1, -65526, 0, 1, -65525, 0, 1, -65523, 0, 1, -65520, 0, 1, -65518, 0, 1, -65517, 0, 1, -65516, 0, 1, -65506, 0, 1, -65505, 0, 1, -65504, 0, 1 )
+"cells": PoolIntArray( 11, 0, 1, 12, 0, 1, 13, 0, 1, 16, 0, 1, 17, 0, 1, 18, 0, 1, 30, 0, 1, 32, 0, 1, 65549, 0, 1, 65550, 0, 1, 65551, 0, 1, 65552, 0, 1, 65566, 0, 1, 65567, 0, 1, 65568, 0, 1, 262168, 0, 1, 262169, 0, 1, 262170, 0, 1, 327685, 0, 1, 327686, 0, 1, 327687, 0, 1, 327704, 0, 1, 327706, 0, 1, 393218, 0, 1, 393219, 0, 1, 393220, 0, 1, 393221, 0, 1, 393223, 0, 1, 393240, 0, 1, 393241, 0, 1, 393242, 0, 1, 393243, 0, 1, 458754, 0, 1, 458756, 0, 1, 458757, 0, 1, 458758, 0, 1, 458759, 0, 1, 458776, 0, 1, 458779, 0, 1, 524290, 0, 1, 524291, 0, 1, 524292, 0, 1, 524312, 0, 1, 524315, 0, 1, 589848, 0, 1, 589849, 0, 1, 589850, 0, 1, 589851, 0, 1, 589852, 0, 1, 589853, 0, 1, 655342, 0, 1, 655343, 0, 1, 655344, 0, 1, 655345, 0, 1, 655387, 0, 1, 655389, 0, 1, 720878, 0, 1, 720881, 0, 1, 720923, 0, 1, 720924, 0, 1, 720925, 0, 1, 786414, 0, 1, 786417, 0, 1, 786462, 0, 1, 786463, 0, 1, 786464, 0, 1, 851950, 0, 1, 851951, 0, 1, 851952, 0, 1, 851953, 0, 1, 851998, 0, 1, 852000, 0, 1, 917534, 0, 1, 917535, 0, 1, 917536, 0, 1, 1048581, 0, 1, 1048582, 0, 1, 1048583, 0, 1, 1114117, 0, 1, 1114119, 0, 1, 1179653, 0, 1, 1179654, 0, 1, 1179655, 0, 1, 1245192, 0, 1, 1245193, 0, 1, 1245194, 0, 1, 1245195, 0, 1, 1310728, 0, 1, 1310731, 0, 1, 1376264, 0, 1, 1376267, 0, 1, 1441800, 0, 1, 1441801, 0, 1, 1441802, 0, 1, 1441803, 0, 1, 1769472, 0, 1, 1769473, 0, 1, 1769483, 0, 1, 1769484, 0, 1, 1769485, 0, 1, 1769486, 0, 1, 1835006, 0, 1, 1835007, 0, 1, 1835009, 0, 1, 1835019, 0, 1, 1835022, 0, 1, 1900542, 0, 1, 1900545, 0, 1, 1900546, 0, 1, 1900547, 0, 1, 1900548, 0, 1, 1900549, 0, 1, 1900550, 0, 1, 1900551, 0, 1, 1900552, 0, 1, 1900553, 0, 1, 1900554, 0, 1, 1900555, 0, 1, 1900558, 0, 1, 1966078, 0, 1, 1966080, 0, 1, 1966081, 0, 1, 1966082, 0, 1, 1966083, 0, 1, 1966084, 0, 1, 1966085, 0, 1, 1966086, 0, 1, 1966087, 0, 1, 1966088, 0, 1, 1966089, 0, 1, 1966090, 0, 1, 1966091, 0, 1, 1966092, 0, 1, 1966093, 0, 1, 1966094, 0, 1, 2031615, 0, 1, 2818037, 0, 37, 2818038, 0, 37, 2818039, 0, 37, 2818040, 0, 37, 2883572, 0, 37, 2883573, 0, 37, 2883574, 0, 37, 2883575, 0, 37, 2883576, 0, 37, 2883577, 0, 37, 2949108, 0, 37, 2949109, 0, 37, 2949110, 0, 37, 2949111, 0, 37, 2949112, 0, 37, 2949113, 0, 37, -458752, 0, 1, -458751, 0, 1, -458750, 0, 1, -458749, 0, 1, -458748, 0, 1, -458747, 0, 1, -458746, 0, 1, -458745, 0, 1, -458744, 0, 1, -458743, 0, 1, -458742, 0, 1, -458741, 0, 1, -458740, 0, 1, -458739, 0, 1, -458738, 0, 1, -458726, 0, 1, -458725, 0, 1, -458724, 0, 1, -393234, 0, 1, -393233, 0, 1, -393232, 0, 1, -393231, 0, 1, -393230, 0, 1, -393229, 0, 1, -393228, 0, 1, -393227, 0, 1, -393226, 0, 1, -393225, 0, 1, -393224, 0, 1, -393223, 0, 1, -393222, 0, 1, -393221, 0, 1, -393220, 0, 1, -393219, 0, 1, -393218, 0, 1, -393217, 0, 1, -393216, 0, 1, -393215, 0, 1, -393214, 0, 1, -393213, 0, 1, -393212, 0, 1, -393211, 0, 1, -393210, 0, 1, -393209, 0, 1, -393208, 0, 1, -393207, 0, 1, -393206, 0, 1, -393205, 0, 1, -393204, 0, 1, -393202, 0, 1, -393192, 0, 1, -393191, 0, 1, -393190, 0, 1, -393188, 0, 1, -327698, 0, 1, -327697, 0, 1, -327696, 0, 1, -327695, 0, 1, -327694, 0, 1, -327693, 0, 1, -327692, 0, 1, -327691, 0, 1, -327690, 0, 1, -327689, 0, 1, -327688, 0, 1, -327687, 0, 1, -327686, 0, 1, -327685, 0, 1, -327684, 0, 1, -327683, 0, 1, -327682, 0, 1, -327681, 0, 1, -327680, 0, 1, -327679, 0, 1, -327678, 0, 1, -327677, 0, 1, -327676, 0, 1, -327675, 0, 1, -327674, 0, 1, -327673, 0, 1, -327672, 0, 1, -327671, 0, 1, -327670, 0, 1, -327669, 0, 1, -327668, 0, 1, -327667, 0, 1, -327666, 0, 1, -327665, 0, 1, -327664, 0, 1, -327656, 0, 1, -327654, 0, 1, -327653, 0, 1, -327652, 0, 1, -327651, 0, 1, -262162, 0, 1, -262161, 0, 1, -262160, 0, 1, -262159, 0, 1, -262158, 0, 1, -262157, 0, 1, -262156, 0, 1, -262155, 0, 1, -262154, 0, 1, -262153, 0, 1, -262152, 0, 1, -262151, 0, 1, -262150, 0, 1, -262149, 0, 1, -262148, 0, 1, -262147, 0, 1, -262146, 0, 1, -262145, 0, 1, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -262138, 0, 1, -262137, 0, 1, -262136, 0, 1, -262135, 0, 1, -262134, 0, 1, -262133, 0, 1, -262132, 0, 1, -262131, 0, 1, -262130, 0, 1, -262128, 0, 1, -262120, 0, 1, -262119, 0, 1, -262118, 0, 1, -262115, 0, 1, -196626, 0, 1, -196625, 0, 1, -196624, 0, 1, -196623, 0, 1, -196622, 0, 1, -196621, 0, 1, -196620, 0, 1, -196619, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196613, 0, 1, -196612, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196602, 0, 1, -196601, 0, 1, -196600, 0, 1, -196599, 0, 1, -196598, 0, 1, -196597, 0, 1, -196596, 0, 1, -196595, 0, 1, -196594, 0, 1, -196593, 0, 1, -196592, 0, 1, -196591, 0, 1, -196590, 0, 1, -196589, 0, 1, -196588, 0, 1, -196582, 0, 1, -196579, 0, 1, -131090, 0, 1, -131089, 0, 1, -131088, 0, 1, -131087, 0, 1, -131086, 0, 1, -131085, 0, 1, -131084, 0, 1, -131083, 0, 1, -131082, 0, 1, -131081, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131077, 0, 1, -131076, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131061, 0, 1, -131060, 0, 1, -131059, 0, 1, -131058, 0, 1, -131057, 0, 1, -131056, 0, 1, -131055, 0, 1, -131054, 0, 1, -131052, 0, 1, -131046, 0, 1, -131045, 0, 1, -131044, 0, 1, -131043, 0, 1, -65554, 0, 1, -65553, 0, 1, -65552, 0, 1, -65551, 0, 1, -65550, 0, 1, -65549, 0, 1, -65548, 0, 1, -65547, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65527, 0, 1, -65526, 0, 1, -65525, 0, 1, -65523, 0, 1, -65520, 0, 1, -65518, 0, 1, -65517, 0, 1, -65516, 0, 1, -65506, 0, 1, -65505, 0, 1, -65504, 0, 1 )
 }
 script = ExtResource( 37 )
 __meta__ = {
@@ -689,7 +1174,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, -1, 0 )
 is_locked = null
 should_lock = null
 path = "res://levels/EndlessFantasy/gd1CrystalTower/MiniRestZone.tscn"
-glitched_path = "res://levels/EndlessFantasy/gd1PrimordialOoze/FishingScene.tscn"
 parter_door_id = null
 dont_recolor_me = null
 is_passive = null
@@ -773,15 +1257,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 18, 0 )
 [node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 35 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 27, 0 )
 
-[node name="GlitchedGrimoire" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0447, 3, 0 )
-bbText = "•Grimoire Memory
-Now you can use 3 spells.
-Try [font=res://DarkInputFont.tres]1[/font][font=res://DarkInputFont.tres]2[/font][font=res://DarkInputFont.tres]3[/font]"
-
-[node name="CollisionShape" parent="Viewport/level/GlitchedGrimoire/SmallInteractionArea" index="0"]
-shape = SubResource( 105 )
-
 [node name="ElderTadpoleNPC3" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.6009, 13, 0 )
 bbText = "ah, seems that
@@ -842,6 +1317,95 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 32, 0 )
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 42 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0 )
 
+[node name="Door2" parent="Viewport/level" instance=ExtResource( 36 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -10, 0 )
+path = "res://levels/EndlessFantasy/gd1PrimordialOoze/FishingScene.tscn"
+is_passive = true
+is_vertical = true
+num_keys_unlock = 1
+key_type = 6
+
+[node name="landing" parent="Viewport/level/Door2" index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 8, 1 )
+
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
+anims/RESET = SubResource( 116 )
+anims/catLocked = SubResource( 117 )
+anims/crystalLocked = SubResource( 118 )
+anims/crystalZoneLocked = SubResource( 119 )
+anims/demoLocked = SubResource( 120 )
+anims/doorBarred = SubResource( 121 )
+anims/doorClose = SubResource( 122 )
+anims/doorOpen = SubResource( 123 )
+anims/doorUnbarred = SubResource( 124 )
+anims/fishLocked = SubResource( 125 )
+anims/locked = SubResource( 126 )
+anims/pyramidLocked = SubResource( 127 )
+anims/shroomLocked = SubResource( 128 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
+shape = SubResource( 129 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
+shape = SubResource( 130 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea2" index="0"]
+shape = SubResource( 131 )
+
+[node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 132 )
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door2/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door2/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door2/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door2/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door2/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door2/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door2/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door2/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
+shape = SubResource( 133 )
+
 [node name="Viewport2" parent="." instance=ExtResource( 18 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -882,11 +1446,11 @@ flip_v = true
 [editable path="Viewport/level/AngelStatue2/NPC"]
 [editable path="Viewport/level/AngelStatue2/NPC/NPC TextBox"]
 [editable path="Viewport/level/AngelStatue2/SavePoint"]
-[editable path="Viewport/level/GlitchedGrimoire"]
-[editable path="Viewport/level/GlitchedGrimoire/NPC TextBox"]
 [editable path="Viewport/level/ElderTadpoleNPC4"]
 [editable path="Viewport/level/ElderTadpoleNPC4/NPC TextBox"]
 [editable path="Viewport/level/Waterfall"]
 [editable path="Viewport/level/Waterfall/AreaSound"]
+[editable path="Viewport/level/Door2"]
+[editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

@@ -304,12 +304,12 @@ func resetMemory():
 
     memory["demo_mode"] = 0
     # if you've beaten the midpoint boss
-    memory["glitch_world"] = 1
-    memory["clean_crystals"] = 5
+    memory["clean_crystals"] = 4
     memory["priestess"] = 2
-    memory["glitched_grimoire"] = false
-    memory["forget_me_not"] = false
-    memory["glitched_grimoire2"] = false
+    memory["glitch_world"] = 1
+    memory["glitched_grimoire"] = true
+    memory["forget_me_not"] = true
+    memory["glitched_grimoire2"] = true
     
 
     # crystal elder bosses
@@ -324,7 +324,7 @@ func resetMemory():
     memory["broomerang"] = 1
     memory["broom_double_jump"] = 1
     memory["zora_flippers"] = 1
-    memory["mole_cricket"] = 0
+    memory["mole_cricket"] = 1
     memory["mushroom_soul"] = 0
     memory["glitched_broom"] = false
     memory["max_hp"] = 1
@@ -333,7 +333,7 @@ func resetMemory():
     memory["has_marked_bosses_on_map"] = true
 
     # STORY OR LEVEL STATE
-    memory["babushka_cat_story_hook"] = 0
+    memory["babushka_cat_story_hook"] = 3
     memory["fishing_rod_shortcut"] = 0
 
     # DEFUNCT POWERUPS

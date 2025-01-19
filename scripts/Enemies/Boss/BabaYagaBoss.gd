@@ -17,7 +17,7 @@ var noteRefArray = []
 var singing_counter = 0
 var singing_count_max = 1
 var crystalGeodeRes = preload("res://sceneObjects/CrystalGeode2.tscn")
-onready var cubeCrystal = get_node("CubeCrystal")
+onready var cubeCrystal = weakref(get_node("CubeCrystal"))
 
 var num_hits = 0
 var MAX_NUM_HITS = 3
@@ -112,8 +112,8 @@ func getSmacked(_broom_origin = null):
 func _process(delta):
     # need to be before global.pauseGame check so we can unpause
     if boss_phase == BossPhase.ASLEEP:
-        if cubeCrystal.meshInstance1.visible:
-            cubeCrystal.meshInstance1.visible = false
+        if cubeCrystal.get_ref() != null and cubeCrystal.get_ref().meshInstance1.visible:
+            cubeCrystal.get_ref().meshInstance1.visible = false
             wakeMeUp()
         if level.player.transformation == level.player.TransformationState.CHICKEN or global.memory["baba_yaga_boss"] == 1:
             wakeMeUp()
@@ -150,7 +150,8 @@ func _process(delta):
         if not secretAniPlayer.is_playing():
             okayImDead()
 
-    cubeCrystal.meshInstance1.visible = false
+    if cubeCrystal.get_ref() != null:
+        cubeCrystal.get_ref().meshInstance1.visible = false
     if global.pauseGame:
         return
 
@@ -304,7 +305,8 @@ func _process(delta):
             crow_swoop_timer = 0
             for crow in crowContainer.get_children():
                 crowArray.push_back(weakref(crow))
-    cubeCrystal.meshInstance1.visible = false
+    if cubeCrystal.get_ref() != null:
+        cubeCrystal.get_ref().meshInstance1.visible = false
 
 func getMushroomInfected(_shroom_pos, _ignore_ancestor = false):
     pass

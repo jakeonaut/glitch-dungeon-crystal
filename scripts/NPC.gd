@@ -5,6 +5,7 @@ extends "GameMover.gd"
 export(NodePath) var nextTextBoxPath = NodePath("")
 export(String, MULTILINE) var bbText = ""
 export(String, MULTILINE) var smackedBbText = ""
+export(String, MULTILINE) var glitchedBbText = ""
 export(Texture) var portrait
 export var is_important = false # when dialogue is started, can't walk away until finished.
 export var is_really_important = false # touching it will start the dialogue
@@ -61,6 +62,8 @@ func _ready():
 
   if bbText != "" and textBoxContainer.bbText == "":
     textBoxContainer.bbText = bbText
+  if glitchedBbText != "" and global.memory["glitch_world"] > 0:
+    textBoxContainer.bbText = glitchedBbText
   if smackedBbText != "":
     textBoxContainer.smackedBbText = smackedBbText
   if portrait and not textBoxContainer.portrait:

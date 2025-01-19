@@ -390,6 +390,15 @@ func tryingToWakeUp():
 
 var malware_infected = false
 var PLAYER_GRAV = 28
+onready var digSound2 = get_node("Sounds/DigSound2")
+var dig_timer = 0
+var dig_time_limit = 8
+var dig_below_timer = 0
+var dig_below_time_limit = 5
+var can_dig_up = false
+var dig_smoke_timer = 0
+var dig_smoke_time_limit = 3
+var dig_direction = null
 # @override
 func collideWithWall(local_lv):
   .collideWithWall(local_lv)
@@ -403,20 +412,53 @@ func collideWithWall(local_lv):
     grav = PLAYER_GRAV
   if pressingMoveLeft():
     var leftTiles = getTilesLeftOf(getLevelTiles(), 0.1)
+    var touching_fragile_solid = false
     for i in range(leftTiles.size()):
       var coords = leftTiles[i]
       if coords == null: continue
       var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
       if getLevelTiles().isTileFragileSolid(tile_type):
         glitchTickle()
+        touching_fragile_solid = true
+        break
+      if on_ground and glitch_form == global.GlitchForm.FLOOR and not touching_fragile_solid:
+        processMoleDigTimer(Vector3(-2, 0, 0))
   if pressingMoveRight():
     var rightTiles = getTilesRightOf(getLevelTiles(), 0.1)
+    var touching_fragile_solid = false
     for i in range(rightTiles.size()):
       var coords = rightTiles[i]
       if coords == null: continue
       var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
       if getLevelTiles().isTileFragileSolid(tile_type):
         glitchTickle()
+        touching_fragile_solid = true
+        break
+    if on_ground and glitch_form == global.GlitchForm.FLOOR and not touching_fragile_solid:
+      processMoleDigTimer(Vector3(2, 0, 0))
+
+onready var digSound = get_node("Sounds/DigSound")
+func processMoleDigTimer(digDirection):
+  if global.memory["mole_cricket"] == 0:
+    dig_timer = 0
+    return
+
+  dig_timer += (secret_delta*11)
+  # on_ground = true
+  # mySprite.flip_h = not mySprite.flip_h
+  if dig_timer > dig_time_limit:
+    can_dig_up = false
+    tryClearFallthroughCollisionSolid(self.global_transform.origin)
+    transformation = TransformationState.UNDERGROUND_RETURNING
+    moleSprite.visible = false
+    summonSmokeClouds(3, true, true, 0)
+    dig_direction = digDirection
+    global_transform.origin += digDirection
+    digSound.play()
+    physics_vars.should_apply_gravity = false
+    should_collide_floor = false
+    should_collide_ceil = false
+    should_collide_horizontally = false
 
 var glitch_death_timer = 0
 func bigBump():

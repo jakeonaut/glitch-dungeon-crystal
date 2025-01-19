@@ -27,11 +27,12 @@ func _ready():
   mySprite2.material_override = mySprite2.material_override.duplicate()
 
 func _process(delta):
-  if global.memory["glitch_world"] > 0:
+  if global.memory["glitch_world"] > 0 or path == "" or path == null:
     var newBrothPotNPC = brothPotNPCRes.instance()
     level.add_child(newBrothPotNPC)
     newBrothPotNPC.global_transform.origin = self.global_transform.origin
     queue_free()
+    return
 
   is_active = global.haveIBeenToThisLevelPath(path)
 

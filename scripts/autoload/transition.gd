@@ -6,6 +6,7 @@ extends CanvasLayer
 var path = ""
 var was_i_interrupted = false
 var mapManagerRes = preload("res://sceneObjects/_autoload/globalMap.tscn")
+var glitchedMapManagerRes = preload("res://sceneObjects/_autoload/globalMap_glitched.tscn")
 var mapManager = null
 onready var colorRect = get_node("ColorRect")
 
@@ -25,9 +26,14 @@ onready var aniPlayer = get_node("AnimationPlayer")
 func _ready():
   set_process(false) # no need to process when not background loading adjacent scenes...
   
-  mapManager = mapManagerRes.instance()
+  if global.memory["glitch_world"] > 0:
+    mapManager = glitchedMapManagerRes.instance()
+    is_using_glitched_map = true
+  else:
+    mapManager = mapManagerRes.instance()
   mapManager.visible = false
   self.add_child(mapManager)
+  # self.add_child(secretGlitchedMapManager)
   adjacent_level_loaders = [
     null, # RoomMap.EAST
     null, # RoomMap.WEST
@@ -46,7 +52,19 @@ func _ready():
   self.path = current_scene.get_node("Viewport/level").getLevelName()
   startAdjacentLevelLoading()
 
+func tryUpdateMapManagerToGlitchedMap():
+  if global.memory["glitch_world"] > 0 and not is_using_glitched_map:
+    self.remove_child(mapManager)
+    mapManager.queue_free()
+    mapManager = glitchedMapManagerRes.instance()
+    mapManager.visible = false
+    self.add_child(mapManager)
+    is_using_glitched_map = true
+
+var is_using_glitched_map = false
 func _process(_delta):
+  tryUpdateMapManagerToGlitchedMap()
+
   # aniPlayer.playback_speed = global.time_dilation_multiplier
   var currentLoadingAdjacentLevelLoader = null
   var currentLoadingAdjacentLevelLoader_idx = null

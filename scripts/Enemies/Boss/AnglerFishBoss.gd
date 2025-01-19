@@ -3,7 +3,7 @@ extends "../GlitchEnemy.gd"
 
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 
-onready var cubeCrystal = get_node("CubeCrystal")
+onready var cubeCrystal = weakref(get_node("CubeCrystal"))
 onready var fakeCrystalContainer = get_node("FakeCrystals")
 onready var weakPointContainer = get_node("WeakPointContainer")
 onready var weakPointAniPlayer = get_node("WeakPointContainer/WeakPointAnimationPlayer")
@@ -90,8 +90,8 @@ func _process(delta):
     # need to be before global.pauseGame check so we can unpause
     if boss_phase == BossPhase.LYING_IN_WAIT:
         unenemize()
-        if cubeCrystal.meshInstance1.visible:
-            cubeCrystal.meshInstance1.visible = false
+        if cubeCrystal.get_ref() != null and cubeCrystal.get_ref().meshInstance1.visible:
+            cubeCrystal.get_ref().meshInstance1.visible = false
             startBossFight()
         if global.memory["angler_seaman_boss"] == 1:
             startBossFight()
@@ -107,7 +107,7 @@ func _process(delta):
             weakPointAniPlayer.stop()
             weakPointAniPlayer.clear_queue()
             weakPointAniPlayer.play("idle")
-            # cubeCrystal.applyGlitchMaterial(5)
+            # cubeCrystal.get_ref().applyGlitchMaterial(5)
             if global.memory["angler_seaman_boss"] == 0:
                 global.memory["angler_seaman_boss"] = 1
                 level.restartMusic()
@@ -230,8 +230,8 @@ func _process(delta):
                     fakeCrystalContainer.add_child(newFakeCrystal)
                     newFakeCrystal.global_transform.origin = crystalLanding.global_transform.origin
 
-        if cubeCrystal.meshInstance1.visible:
-            cubeCrystal.meshInstance1.visible = false
+        if cubeCrystal.get_ref() != null and cubeCrystal.get_ref().meshInstance1.visible:
+            cubeCrystal.get_ref().meshInstance1.visible = false
             boss_phase = BossPhase.IDLE
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
@@ -347,7 +347,8 @@ func _process(delta):
                 weakPointAniPlayer.clear_queue()
                 weakPointAniPlayer.play("idle")
     
-    cubeCrystal.meshInstance1.visible = false
+    if cubeCrystal.get_ref() != null:
+        cubeCrystal.get_ref().meshInstance1.visible = false
 
 func startBossFight():
     if boss_phase != BossPhase.LYING_IN_WAIT:

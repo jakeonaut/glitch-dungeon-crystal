@@ -22,6 +22,7 @@ func getPlayer():
 
 var tile_dict = {}
 var infected_spikes = []
+var reappearing_spikes = []
 var infected_soft_sand = []
 var dissolving_stones = []
 var transient_tiles = []
@@ -30,6 +31,8 @@ var soft_sand_infection_timer = 0
 var soft_sand_infection_time_limit = 10
 var spike_infection_timer = 0
 var spike_infection_time_limit = 5
+var reappear_spike_infection_timer = 0
+var reappear_spike_infection_time_limit = 5
 var stone_corrosion_timer = 0
 var stone_corrosion_time_limit = 5
 var my_tileset_type = global.TilesetType.DUNGEON
@@ -253,8 +256,8 @@ var DISSOLVING_STONE2 = 326
 var DISSOLVING_STONE3 = 327
 
 func getRandomGlitchType():
-  if my_tileset_type == global.TilesetType.GLITCH_WORLD:
-    return global.GlitchForm.WALK_THROUGH_WALLS
+  if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE:
+    return level.player.glitch_form if level.player.glitch_form != global.GlitchForm.FLOOR else global.GlitchForm.NORMAL
   var rand_int = randi() % 4
   if rand_int == 0:
     return global.GlitchForm.NORMAL
@@ -382,26 +385,40 @@ func _process(delta):
     spike_infection_timer += (delta*22)
     if spike_infection_timer >= spike_infection_time_limit: 
       spike_infection_timer = 0
-      global.incrementLevelZoneGlitchTiles(num_infected_spikes)
-      tryToSayTidy()
+      global.incrementLevelZoneGlitchTiles(num_infected_spikes) # hm...
+      if global.memory["glitch_world"] == 0:
+        tryToSayTidy()
       for _i in range(num_infected_spikes):
         var coords = infected_spikes.pop_front()
-        var top_neighbor_coords = Vector3(coords.x, coords.y + 1, coords.z)
-        var bottom_neighbor_coords = Vector3(coords.x, coords.y - 1, coords.z)
-        var left_neighbor_coords = Vector3(coords.x - 1, coords.y, coords.z)
-        var right_neighbor_coords = Vector3(coords.x + 1, coords.y, coords.z)
-        infectSpikes(top_neighbor_coords)
-        infectSpikes(bottom_neighbor_coords)
-        infectSpikes(left_neighbor_coords)
-        infectSpikes(right_neighbor_coords)
-        var top_left_neighbor_coords = Vector3(coords.x - 1, coords.y + 1, coords.z)
-        var bottom_right_neighbor_coords = Vector3(coords.x + 1, coords.y - 1, coords.z)
-        var bottom_left_neighbor_coords = Vector3(coords.x - 1, coords.y - 1, coords.z)
-        var top_right_neighbor_coords = Vector3(coords.x + 1, coords.y + 1, coords.z)
-        infectSpikes(top_left_neighbor_coords)
-        infectSpikes(bottom_right_neighbor_coords)
-        infectSpikes(bottom_left_neighbor_coords)
-        infectSpikes(top_right_neighbor_coords)
+        if global.memory["glitch_world"] > 0:
+          reappearing_spikes.push_back(coords)
+        else:
+          var top_neighbor_coords = Vector3(coords.x, coords.y + 1, coords.z)
+          var bottom_neighbor_coords = Vector3(coords.x, coords.y - 1, coords.z)
+          var left_neighbor_coords = Vector3(coords.x - 1, coords.y, coords.z)
+          var right_neighbor_coords = Vector3(coords.x + 1, coords.y, coords.z)
+          infectSpikes(top_neighbor_coords)
+          infectSpikes(bottom_neighbor_coords)
+          infectSpikes(left_neighbor_coords)
+          infectSpikes(right_neighbor_coords)
+          var top_left_neighbor_coords = Vector3(coords.x - 1, coords.y + 1, coords.z)
+          var bottom_right_neighbor_coords = Vector3(coords.x + 1, coords.y - 1, coords.z)
+          var bottom_left_neighbor_coords = Vector3(coords.x - 1, coords.y - 1, coords.z)
+          var top_right_neighbor_coords = Vector3(coords.x + 1, coords.y + 1, coords.z)
+          infectSpikes(top_left_neighbor_coords)
+          infectSpikes(bottom_right_neighbor_coords)
+          infectSpikes(bottom_left_neighbor_coords)
+          infectSpikes(top_right_neighbor_coords)
+
+  var num_reappearing_spikes = len(reappearing_spikes)
+  if num_reappearing_spikes > 0:
+    reappear_spike_infection_timer += (delta*22)
+    if reappear_spike_infection_timer >= reappear_spike_infection_time_limit:
+      reappear_spike_infection_timer = 0
+      for _i in range(num_reappearing_spikes):
+        var coords = reappearing_spikes.pop_front()
+        reappearSpikes(coords)
+
   
   var num_infected_soft_sand = len(infected_soft_sand)
   if num_infected_soft_sand > 0:
@@ -521,15 +538,21 @@ func infectSpikes(coords, play_sound = true):
     infected_spikes.append(coords)
     
     # TODO(jaketrower): If you want to only TEMPORARILY clear spikes, use this
-    # self.set_cell_item(coords.x, coords.y, coords.z, GridMap.INVALID_CELL_ITEM)
+    self.set_cell_item(coords.x, coords.y, coords.z, GridMap.INVALID_CELL_ITEM)
     # TODO(jaketrower): Otherwise, use this
-    removeTile(coords)
+    # removeTile(coords)
 
     var tile_pos = self.map_to_world(coords.x, coords.y, coords.z)
     level.summonSmokeClouds(tile_pos, 2, play_sound, true)
     did_infect_spikes = true
   spike_infection_timer = 0
   return did_infect_spikes
+
+func reappearSpikes(coords, play_sound = true):
+  setRandomTileNameOfType("Spikes", 5, coords, 0)
+  var tile_pos = self.map_to_world(coords.x, coords.y, coords.z)
+  level.summonSmokeClouds(tile_pos, 1, play_sound, true)
+
 
 func infectSoftSand(coords, play_sound = true):
   var tile_type = self.get_cell_item(coords.x, coords.y, coords.z)
@@ -784,7 +807,7 @@ func setTileset(tileset_type, properly_set_tiles = true):
     yellow_palette = global.yellow_dungeon_palette
     black_palette = global.black_dungeon_palette
   elif tileset_type == global.TilesetType.PRIMORDIAL_OOZE:
-    my_tileset_glitch_type = global.GlitchForm.FEATHER
+    my_tileset_glitch_type = level.player.glitch_form
   elif tileset_type == global.TilesetType.HOUSE:
     # TODO(jaketrower): BE WARNED, this is a bit confusing, we are using glitch_type here to set the tileset type
     # and we named them "_green", etc. but it's more like "_forest" etc. 
@@ -835,30 +858,36 @@ func setTileset(tileset_type, properly_set_tiles = true):
 func normalGlitch(_palette = null):
   # set_mesh_library(grey_tiles)
   changeColorPalette(grey_palette, grey_palette)
-  # properlySetTiles()
+  if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
+    properlySetTiles()
   if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(global.dark_grey_palette)
 
 func floorGlitch(_palette = null):
   changeColorPalette(red_palette, red_palette)
-  # properlySetTiles()
+  if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
+    properlySetTiles()
   if cosmeticLevelTiles: cosmeticLevelTiles.floorGlitch(global.dark_red_palette)
 
 func featherGlitch(_palette = null):
   changeColorPalette(green_palette, green_palette)
-  # properlySetTiles()
+  if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
+    properlySetTiles()
   if cosmeticLevelTiles: cosmeticLevelTiles.featherGlitch(global.dark_green_palette)
 
 func invisibleGlitch(_palette = null):
   changeColorPalette(black_palette, black_palette)
-  # properlySetTiles()
+  if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
+    properlySetTiles()
   if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(global.dark_black_palette)
   
 func ladderGlitch(_palette = null):
   changeColorPalette(yellow_palette, yellow_palette)
-  # properlySetTiles()
+  if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
+    properlySetTiles()
   if cosmeticLevelTiles: cosmeticLevelTiles.ladderGlitch(global.dark_yellow_palette)
 
 func walkThroughWallsGlitch(_palette = null):
   changeColorPalette(white_palette, white_palette)
-  # properlySetTiles()
+  if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
+    properlySetTiles()
   if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(global.dark_white_palette)
