@@ -172,7 +172,7 @@ func shouldIDoCollisions():
     should_collide_ceil = (not on_ground or (behavior_walking and walk_direction.y == 1) or behavior_jumping or behavior_was_thrown) and not behavior_phase_through_walls
     should_collide_horizontally = behavior_walking and walk_direction.x != 0 and not behavior_phase_through_walls
 
-var my_up_vector = Vector2(0, 1)
+export var my_up_vector = Vector2(0, 1)
 func collideWithWall(local_lv):
     if behavior_stick_to_walls:
         if my_up_vector.y > 0:
@@ -335,7 +335,7 @@ func processGlitchFormGlitchiness():
             smallInteractionArea.remove_from_group("enemies")
             if spellbookGlitchSprite != null:
                 spellbookGlitchSprite.global_transform.origin.z = 0.1
-                # spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y
+                spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y
                 spellbookGlitchSprite.material_override.set_shader_param("enable_palette_cycle", true)
 
 func updateFallthroughSolids():

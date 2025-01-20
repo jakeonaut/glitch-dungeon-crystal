@@ -1408,7 +1408,9 @@ func processMoleLogic(delta):
       dig_smoke_timer = 0
       summonSmokeClouds(1)
     moleSprite.flip_h = mySprite.flip_h
-    if not on_ceiling and was_on_ceiling:
+    if dig_direction == null or (dig_direction.y > 0 and not on_ceiling and was_on_ceiling) or \
+       (dig_direction.x > 0 and not pressingMoveRight()) or (dig_direction.x < 0 and not pressingMoveLeft()) or \
+       (dig_direction.y < 0 and not pressingMoveDown()):
       getMoleCured()
       was_just_on_ground_timer = 0
       jump_squat_jump_input_timer = 0
@@ -1424,9 +1426,9 @@ func processMoleLogic(delta):
     if not fastStepSound.is_playing():
       fastStepSound.play()
     var solidTilesToCheck = getTilesAbove(getLevelTiles())
-    if dig_direction.x > 0:
+    if dig_direction != null and dig_direction.x > 0:
       solidTilesToCheck = getTilesRightOf(getLevelTiles())
-    elif dig_direction.x < 0:
+    elif dig_direction != null and dig_direction.x < 0:
       solidTilesToCheck = getTilesLeftOf(getLevelTiles())
     var areAnyTilesToCheckGlitched = false
     for i in range(solidTilesToCheck.size()):
@@ -1447,7 +1449,7 @@ func processMoleLogic(delta):
       global_transform.origin += (dig_direction * delta*11.0)
     else:
       self.global_transform.origin += dig_direction * 0.5
-      if dig_direction.y > 0:
+      if dig_direction != null and dig_direction.y > 0:
         should_magic_jump = true
         self.vv = 5
         self.camera_target_y_pos = self.global_transform.origin.y
@@ -1472,7 +1474,7 @@ func processMoleLogic(delta):
       global_transform.origin -= (dig_direction * delta*11.0)
     else:
       self.global_transform.origin += dig_direction * 0.5
-      if dig_direction.y > 0:
+      if dig_direction != null and dig_direction.y > 0:
         should_magic_jump = true
         self.vv = -2
         self.camera_target_y_pos = self.global_transform.origin.y
@@ -1486,7 +1488,7 @@ func processMoleLogic(delta):
   else:
     dig_smoke_timer = 0
     # TODO(jaketrower): TODO(jaketrower): TODO(jaketrower): TODO(jaketrower):
-    if dig_timer > 0 and transformation != TransformationState.MOLE_DIGGING and (
+    if dig_direction != null and dig_timer > 0 and transformation != TransformationState.MOLE_DIGGING and (
       (glitch_form == global.GlitchForm.FEATHER and pressingJump() and dig_direction.y >= 0 and on_ceiling and not was_on_ceiling) or
       (glitch_form == global.GlitchForm.FLOOR and (pressingMoveLeft() or pressingMoveRight()) and on_ground)
     ):
@@ -2171,7 +2173,7 @@ var should_flip = false
 # @override
 func processHorizontalInputs(delta):
   .processHorizontalInputs(delta)
-  if transformation == TransformationState.MOLE_DIGGING:
+  if transformation == TransformationState.MOLE_DIGGING and glitch_form != global.GlitchForm.FLOOR:
     hv = Vector3(0, 0, 0)
   # if is_mushroom_infected:
   #   should_flip = not should_flip
@@ -2374,7 +2376,6 @@ func processPoisonWaterLogic(_delta):
 var has_landed_since_recovering = true
 # @override
 func landed():
-  print('landed')
   dig_timer = 0
   .landed()
   if not (is_mushroom_infected or is_mushroom_prefected):

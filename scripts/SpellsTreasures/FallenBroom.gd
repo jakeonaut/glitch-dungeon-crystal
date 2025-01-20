@@ -46,6 +46,10 @@ var can_return_via_input = false
 var can_return_via_input_timer = 0
 var can_return_via_input_time_limit = 3
 func _process(delta):
+    if global.shouldRenderAsCinematic:
+        global.memory["broom"] = true
+        queue_free()
+        return
     if global.pauseGame:
         returning = true
         was_projectile = false
@@ -166,7 +170,7 @@ func _process(delta):
                 returning = true
                 on_ground = false
                 was_projectile = true
-    else:
+    elif self.is_in_group("fallen_broom_group"):
         self.remove_from_group("fallen_broom_group")
 
     if global.activeInteractor and global.activeInteractor.is_important:
@@ -206,7 +210,8 @@ func die():
     linear_velocity.y = 0
     lv.y = 0
     is_dying = true
-    self.remove_from_group("fallen_broom_group")
+    if self.is_in_group("fallen_broom_group"):
+        self.remove_from_group("fallen_broom_group")
     if not global.memory["broom"] and returning:
         global.memory["broom"] = true
     

@@ -3,7 +3,6 @@ extends AudioStreamPlayer
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var textBox = get_node("..")
 onready var NPC = get_node("../../..")
-var petBabushkaCatFollowerRes = preload("res://sceneObjects/BabushkaCatFollower.tscn")
 
 func _ready():
   pass

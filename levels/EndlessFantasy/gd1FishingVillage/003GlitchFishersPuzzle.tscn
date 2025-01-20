@@ -1098,8 +1098,7 @@ anims/getItem = SubResource( 142 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 71.7818, 16.0596, 0 )
 grav = 0
 bbText = "•sometimes you just
-gotta relax
-•there's no place like home"
+gotta relax"
 can_move = false
 can_camera_zoom = false
 

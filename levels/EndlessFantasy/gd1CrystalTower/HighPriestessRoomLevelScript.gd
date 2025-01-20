@@ -4,6 +4,10 @@ onready var altarSprite = get_node("AltarSprite")
 onready var highPriestessBoss = get_node("HighPriestessBoss")
 onready var croneNPC = get_node("CroneNPC")
 onready var croneNPCDefeated = get_node("CroneNPCDefeated")
+onready var glitchedGrimoire = get_node("GlitchedGrimoire")
+onready var savePoint = get_node("SavePoint")
+onready var ladderSpell = get_node("LadderSpell")
+onready var invisibleSpell = get_node("InvisibleSpell")
 onready var crystalGeode = weakref(get_node("CubeCrystal"))
 onready var crystalGeode2 = weakref(get_node("CubeCrystal2"))
 onready var crystalGeode3 = weakref(get_node("CubeCrystal3"))
@@ -48,6 +52,13 @@ func setUpRoomInitializationOverride():
       if crystalGeode.get_ref() != null:
         crystalGeode.get_ref().visible = false
       pacman_wrapping = false
+      # glitchedGrimoire.grav = 20
+      glitchedGrimoire.visible = true
+      glitchedGrimoire.global_transform.origin.y = -4
+      if global.memory["glitched_grimoire"]:
+        ladderSpell.visible = true
+        invisibleSpell.visible = true
+        savePoint.visible = true
 
 # @override
 func playMenuMusic():
@@ -134,9 +145,14 @@ func enterMemoryZone():
   player.pauseSelf = false
   # player.nullify()
   global.shouldRenderAsCinematic = false
-  croneNPC.grav = 20
-  croneNPC.mySprite.updateBaseFrame(6, 7)
-  croneNPC.is_active = true
+  highPriestessBoss.queue_free()
+  self.summonSmokeClouds(glitchedGrimoire.global_transform.origin, 5, true, true)
+  glitchedGrimoire.grav = 20
+  glitchedGrimoire.visible = true
+  # croneNPC.grav = 20
+  # croneNPC.mySprite.updateBaseFrame(6, 7)
+  # croneNPC.is_active = true
+  self.pacman_wrapping = false
 
 func glitchTickle(glitch_death_timer):
   if glitch_death_timer > 1:

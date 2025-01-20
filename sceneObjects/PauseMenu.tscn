@@ -485,7 +485,7 @@ vframes = 5
 
 [node name="FlowerSprite" type="Sprite" parent="InventoryRect"]
 visible = false
-position = Vector2( 347, 38 )
+position = Vector2( 83, 7 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6

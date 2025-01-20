@@ -6,7 +6,7 @@ onready var noseSprite = get_node("SpriteContainer/InnerSpriteContainer/NoseSpri
 onready var spriteContainer = get_node("SpriteContainer")
 onready var thudSound = get_node("Sounds/ThudSound")
 onready var digSound = get_node("Sounds/DigSound")
-onready var cubeCrystal = get_node("CubeCrystal")
+onready var cubeCrystal = weakref(get_node("CubeCrystal"))
 
 var num_hits = 0
 var MAX_NUM_HITS = 3
@@ -70,8 +70,8 @@ func _process(delta):
     # need to be before global.pauseGame check so we can unpause
     if boss_phase == BossPhase.ASLEEP:
         unenemize()
-        if cubeCrystal.meshInstance1.visible:
-            cubeCrystal.meshInstance1.visible = false
+        if cubeCrystal.get_ref() != null and cubeCrystal.get_ref().meshInstance1.visible:
+            cubeCrystal.get_ref().meshInstance1.visible = false
             global.memory["dogu_matryoshka_boss"] = -2
             miniShakeScreen()
             musicPlayer.stopAll()
@@ -113,7 +113,8 @@ func _process(delta):
                 level.gameCamera.zoomed_size = 35
             return
 
-    cubeCrystal.meshInstance1.visible = false
+    if cubeCrystal.get_ref() != null:
+        cubeCrystal.meshInstance1.visible = false
     if global.pauseGame:
         return
 
@@ -266,7 +267,8 @@ func _process(delta):
             boss_phase = BossPhase.IDLE
 
     noseSprite.flip_h = mySprite.flip_h
-    cubeCrystal.meshInstance1.visible = false
+    if cubeCrystal.get_ref() != null:
+        cubeCrystal.meshInstance1.visible = false
 
 func queueUpAJump():
     secretAniPlayer.stop()

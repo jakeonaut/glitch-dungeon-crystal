@@ -826,6 +826,7 @@ func normalizeInventoryOptionIndex(y, x):
 
 
 onready var grimoireSprite = get_node("InventoryRect/GrimoireSprite")
+onready var forgetMeNotSprite = get_node("InventoryRect/FlowerSprite")
 onready var bagSprite = get_node("InventoryRect/BagSprite")
 onready var petSprite = get_node("InventoryRect/PetSprite")
 # onready var bagLabel = get_node("InventoryRect/BagLabel")
@@ -878,6 +879,7 @@ func processInventoryRender(_delta):
     grimoireSprite.visible = true
     # should dedupe with UILayer...
     if global.memory["glitched_grimoire"]:
+      forgetMeNotSprite.visible = true
       grimoireSprite.frame = 3
       glitchRect1.visible = true
       glitchRect2.visible = true
@@ -990,7 +992,7 @@ func tryDrawMap():
             sprite.material.set_shader_param("offset", 11)
         continue
       setProperMapFrame(sprite, mapGrid, i, j)
-      if "Haven" in mapRoom.path or mapRoom.has_angel_statue:
+      if mapRoom.has_angel_statue:
         print(mapRoom.path + ": " + str(getBabushkaCatSniffedVar(mapRoom.path)))
         if getBabushkaCatSniffedVar(mapRoom.path) > 0 or "0_1Haven" in mapRoom.path:
           sprite.frame = 61
@@ -1069,7 +1071,7 @@ func setProperMapFrame(sprite, mapGrid, i, j):
   var mapRoom = mapGrid[i][j] # guaranteed to already have this room at least by the time that we get here.
   var mapPath = mapRoom.path
   var levelZoneName = global.getLevelZoneName(mapPath)
-  var haveIBeenToThisLevel = global.haveIBeenToThisLevelPath(mapPath) # TODO(jaketrower): debug remove
+  var haveIBeenToThisLevel = global.haveIBeenToThisLevelPath(mapPath) or global.memory["glitch_world"] > 0
   sprite.frame = 0
   sprite.material = sprite.material.duplicate()
   sprite.z_index = 1

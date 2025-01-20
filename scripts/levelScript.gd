@@ -192,7 +192,7 @@ func tryInitializeFromDebug():
       player.applyGlitch(starting_glitch_type)
     if has_glitched_grimoire or global.memory["glitched_grimoire"]:
       global.memory["glitched_grimoire"] = true
-      global.memory["spellbookPage"] = [global.GlitchForm.FEATHER, global.GlitchForm.LADDER, global.GlitchForm.FLOOR]
+      global.memory["spellbookPage"] = [global.GlitchForm.FEATHER, global.GlitchForm.LADDER, global.GlitchForm.FLOOR, global.GlitchForm.INVISIBLE]
 
       # debug "hack" to set angel_statues on debug_initialization
       var tempLevelZone = global.currLevelZone
@@ -203,21 +203,19 @@ func tryInitializeFromDebug():
       # set for tadpole bog
       global.tryInitializeLevelZone("gd1FishingVillage")
       global.setLevelZoneThing("angel_statue", 
-        ["tadpole bog", "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"])
+        ["tadpole bog", "res://levels/EndlessFantasy/gd1FishingVillage/AnglerFishBossRoom.tscn"])
       # set for mushroom forest
       global.tryInitializeLevelZone("gd1ToxicJungle")
       global.setLevelZoneThing("angel_statue", 
-        ["moldy dogwoods", "res://levels/EndlessFantasy/gd1ToxicJungle/007CrystalHaven.tscn"])
+        ["moldy dogwoods", "res://levels/EndlessFantasy/gd1ToxicJungle/BabaYagaBossRoom.tscn"])
       # set for cricket caves
       global.tryInitializeLevelZone("gd1ShiftingSandLand")
       global.setLevelZoneThing("angel_statue", 
-        ["cricket caves", "res://levels/EndlessFantasy/gd1ShiftingSandLand/006CrystalHaven.tscn"])
+        ["cricket caves", "res://levels/EndlessFantasy/gd1ShiftingSandLand/ClaydolBossRoom.tscn"])
       # set for dream temple
-      # global.tryInitializeLevelZone("gd1CrystalTower")
-      # set for elder village
-      global.tryInitializeLevelZone("gd1GrandmaVillage")
+      global.tryInitializeLevelZone("gd1CrystalTower")
       global.setLevelZoneThing("angel_statue", 
-        ["elder village", "res://levels/EndlessFantasy/gd1GrandmaVillage/PastoralTowerHub.tscn"])
+        ["elder temple", "res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom.tscn"])
       # reset levelZone
       global.currLevelZone = tempLevelZone
 
