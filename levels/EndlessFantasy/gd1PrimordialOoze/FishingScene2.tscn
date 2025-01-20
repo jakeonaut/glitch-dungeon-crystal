@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=2]
+[gd_scene load_steps=96 format=2]
 
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=27]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=28]
 [ext_resource path="res://sceneObjects/AnglerFishBoss_NPC.tscn" type="PackedScene" id=29]
+[ext_resource path="res://sceneObjects/BigNPC.tscn" type="PackedScene" id=30]
 
 [sub_resource type="Animation" id=23]
 length = 0.001
@@ -3084,6 +3085,9 @@ grav = 0
 
 [node name="AnglerFishBossNPC" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 45, 19, 0 )
+
+[node name="NPC3" parent="Viewport/level" instance=ExtResource( 30 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, -4.14977, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 20 )]
 

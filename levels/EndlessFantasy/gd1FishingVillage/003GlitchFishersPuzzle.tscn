@@ -702,7 +702,7 @@ spellbook_spells = [ 1, 2 ]
 mesh = SubResource( 174 )
 
 [node name="MeshInstance2" parent="Viewport/level/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 26 )]
 
