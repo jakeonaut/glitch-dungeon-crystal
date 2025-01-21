@@ -162,6 +162,15 @@ enum GrandmaBag {
     PURSE,
 }
 
+enum Locale {
+    ENGLISH,
+    CHINESE_SIMPLIFIED,
+    JAPANESE,
+    SPANISH,
+    PORTUGUESE,
+}
+var currLocale = Locale.ENGLISH
+
 func getColorSuffixFromTilesetType(type):
     if type == TilesetType.DUNGEON:
         return ""
@@ -316,26 +325,42 @@ func resetMemory():
     memory["baba_yaga_boss"] = 0
     memory["angler_seaman_boss"] = 0
     memory["dogu_matryoshka_boss"] = 0
+<<<<<<< HEAD
+=======
+
+    # STORY OR LEVEL STATE
+    memory["babushka_cat_story_hook"] = 0
+    memory["fishing_rod_shortcut"] = 0
+>>>>>>> 7ac3255b974788e255e91f8d9636e60c7cbb153f
 
     # POWERUPS
     # memory["spellbookPage"] = [] # we check if the key exists to see if we have it... -_-
-    memory["can_force_respawn"] = 1
-    memory["has_map_item"] = true
-    memory["broomerang"] = 1
+    memory["can_force_respawn"] = 0
+    memory["has_map_item"] = false
+    memory["broomerang"] = 0
     memory["broom_double_jump"] = 1
+<<<<<<< HEAD
     memory["zora_flippers"] = 1
     memory["mole_cricket"] = 1
     memory["mushroom_soul"] = 1
+=======
+    memory["zora_flippers"] = 0
+    memory["mole_cricket"] = 0
+    memory["mushroom_soul"] = 0
+>>>>>>> 7ac3255b974788e255e91f8d9636e60c7cbb153f
     memory["glitched_broom"] = false
     memory["max_hp"] = 2
     memory["hp"] = memory["max_hp"]
     memory["angel_flute"] = false
     memory["has_marked_bosses_on_map"] = true
 
+<<<<<<< HEAD
     # STORY OR LEVEL STATE
     memory["babushka_cat_story_hook"] = 2
     memory["fishing_rod_shortcut"] = 0
 
+=======
+>>>>>>> 7ac3255b974788e255e91f8d9636e60c7cbb153f
     # DEFUNCT POWERUPS
     memory["multi_broom"] = false
     memory["debug_broom"] = 0 # this didn't turn out that fun
