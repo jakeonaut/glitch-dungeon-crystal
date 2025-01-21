@@ -162,6 +162,15 @@ enum GrandmaBag {
     PURSE,
 }
 
+enum Locale {
+    ENGLISH,
+    CHINESE_SIMPLIFIED,
+    JAPANESE,
+    SPANISH,
+    PORTUGUESE,
+}
+var currLocale = Locale.ENGLISH
+
 func getColorSuffixFromTilesetType(type):
     if type == TilesetType.DUNGEON:
         return ""
@@ -304,37 +313,37 @@ func resetMemory():
 
     memory["demo_mode"] = 0
     # if you've beaten the midpoint boss
-    memory["clean_crystals"] = 4
-    memory["priestess"] = 2
-    memory["glitch_world"] = 1
-    memory["glitched_grimoire"] = true
-    memory["forget_me_not"] = true
-    memory["glitched_grimoire2"] = true
+    memory["clean_crystals"] = 0
+    memory["priestess"] = 0
+    memory["glitch_world"] = 0
+    memory["glitched_grimoire"] = false
+    memory["forget_me_not"] = false
+    memory["glitched_grimoire2"] = false
     
 
     # crystal elder bosses
-    memory["baba_yaga_boss"] = 2
-    memory["angler_seaman_boss"] = 2
-    memory["dogu_matryoshka_boss"] = 2
+    memory["baba_yaga_boss"] = 0
+    memory["angler_seaman_boss"] = 0
+    memory["dogu_matryoshka_boss"] = 0
+
+    # STORY OR LEVEL STATE
+    memory["babushka_cat_story_hook"] = 0
+    memory["fishing_rod_shortcut"] = 0
 
     # POWERUPS
     # memory["spellbookPage"] = [] # we check if the key exists to see if we have it... -_-
-    memory["can_force_respawn"] = 1
-    memory["has_map_item"] = true
-    memory["broomerang"] = 1
+    memory["can_force_respawn"] = 0
+    memory["has_map_item"] = false
+    memory["broomerang"] = 0
     memory["broom_double_jump"] = 1
-    memory["zora_flippers"] = 1
-    memory["mole_cricket"] = 1
+    memory["zora_flippers"] = 0
+    memory["mole_cricket"] = 0
     memory["mushroom_soul"] = 0
     memory["glitched_broom"] = false
     memory["max_hp"] = 1
     memory["hp"] = memory["max_hp"]
     memory["angel_flute"] = false
     memory["has_marked_bosses_on_map"] = true
-
-    # STORY OR LEVEL STATE
-    memory["babushka_cat_story_hook"] = 3
-    memory["fishing_rod_shortcut"] = 0
 
     # DEFUNCT POWERUPS
     memory["multi_broom"] = false
