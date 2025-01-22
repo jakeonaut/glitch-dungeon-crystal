@@ -1,0 +1,205 @@
+keys,en,zh_CN
+NPC.Tutorial.1,Feather Fall: jump high by holding jump button,一飞冲天：长按跳跃键高跳
+NPC.Tutorial.4,Air Walk spell: walk without falling down,空中漫步：在空中漂浮移动
+TITLE,Babushka's Glitch Dungeon Crystal,"1. 老奶的故障地牢扫除日
+2. 老奶的故障地牢大冒险
+3. 老奶勇闯故障地牢
+4. 老奶与故障地牢的水晶"
+STEAM.ShortDescription,"Hi so much! You are a little old lady who needs to clean up a big magical cellar. Learn colorful mind-bending spells, or just hit stuff with your broom.",你好哇！扮演一位老奶奶，清理一个巨大的魔法地窖吧！你可以选择学习复杂多样的咒语，也可以直接抡起扫帚！
+STEAM.LongDescription,"WARNING: This game includes flashing that may potentially trigger seizures for people with photosensitive epilepsy. 
+
+“gather round little chickadees, and let me spin you a yarn…” 
+
+Oh hello, dearie. You are a little old lady who needs to clean your big magical cellar. 
+
+Learn colorful spells that change the way you move and interact. Solve mind-bending puzzles, or just hit stuff with your broom.  
+
+The only way to stop the decay of the world is by tidying up. 
+
+- Tidy up! Sweep away dust, monsters, frogs and more with your trusty broom.
+- Wield colorful hag magic to navigate the glitch dungeon.
+- Free the elders trapped in the crystals. Stop the decay of the world
+- Be a Babushka!!!","警告：本游戏包含闪光，可能会引发光敏性癫痫患者的癫痫发作。
+
+“小朋友们，快过来，我来给你们讲个故事......” 
+
+哦，你好哇。你是一位老太太，今天要来打扫你的魔法大地窖。
+
+你可以学习不同的咒语获得新技能，也可以直接抡起扫帚。 
+
+清理打扫是能阻止世界衰败的唯一方法。
+
+- 整理！用你的老朋友扫帚扫走灰尘、怪物、青蛙...
+- 施展多种巫婆魔法，在故障地牢中穿梭。
+- 释放被困在水晶中的长老。阻止世界的衰败。
+- 做一个疯狂老奶！"
+STEAM.DemoName,Babushka's Glitch Dungeon Crystal Demo ,
+UI.GlitchSpell.1,Feather Fall,一飞冲天
+UI.GlitchSpell.2,Air Walk,空中漫步
+UI.GlitchSpell.3,Ladder,拾级而上
+UI.GlitchSpell.4,Ghost,隐身术
+UI.MainMenu.0,Choose language,
+UI.MainMenu.1,Press [BUTTON] for Options.,
+UI.MainMenu.2,"File 1, File 2, File 3",
+UI.MainMenu.3,press [BUTTON] to start,
+UI.MainMenu.4,[BUTTON]: delete file,
+UI.MainMenu.5,"Really Delete ""File 1""?",
+,,
+UI.PauseMenu.0,"[BUTTON] to select, [BUTTON] to resume",
+UI.PauseMenu.1,resume,
+UI.PauseMenu.2,Input,
+UI.InputMenu.1,Keyboard,
+UI.InputMenu.2,Controller,
+UI.InputMenu.Action.1,move left,
+UI.InputMenu.Action.2,move right,
+UI.InputMenu.Action.3,down,
+UI.InputMenu.Action.4,up,
+UI.InputMenu.Action.5,jump,
+UI.InputMenu.Action.6,sweep broom,
+UI.InputMenu.Action.7,Return to save.,
+UI.InputMenu.Action.8,next spell,
+UI.InputMenu.Action.9,prev spell,
+UI.InputMenu.Action.10,open map,
+UI.InputMenu.13,"press [BUTTON] to select, [BUTTON] to go back.
+hold [BUTTON]: reset bindings",
+UI.InputMenu.14,"press key to set ""[UI.InputMenu.Action.x]""",
+UI.InputMenu.15,"reset bindings
+...3 ...2 ...1!",
+UI.PauseMenu.3,Graphics,
+UI.GraphicsMenu.1,CRT Filter: [ON/OFF],
+UI.GraphicsMenu.2,Glitch Screen: [ON/OFF],
+UI.GraphicsMenu.3,Color Blind: [ON/OFF],
+UI.GraphicsMenu.4,Fullscreen: [ON/OFF],
+UI.PauseMenu.4,Sound,
+UI.SoundMenu.1,"Music Volume: [1-10, or ""Mute""]",
+UI.SoundMenu.2,"SFX Volume: [1-10, or ""Mute""]",
+UI.SoundMenu.3,Music Glitches: [ON/OFF],
+UI.PauseMenu.5,Quit to Main Menu,
+UI.QuitMenu.1,unsaved progress will be lost,
+UI.Confirmation,Confirm,
+UI.Cancel,cancel,
+UI.Yes,Yes,
+UI.No,No,
+Dialog.Player.1,now where's that cat run off to now?,
+Dialog.Player.2,i don't remember having a basement... but what a mess! let's sweep up that dust,
+NPC.Cow.1,moo!! (cut that out),
+NPC.Door.1,"Locked, needs 2 keys",
+NPC.Crone.1,"ah! a fellow crone! you saved me from near-death. this ""glitch"" corruption.. I seek the crystal elders to stop the spread... Could you help me out?",
+NPC.Crone.2,don't test me hag,
+NPC.Tutorial.0,touch magic pillar to learn:,
+NPC.Tutorial.2,you can also hold jump button to float gracefully,
+NPC.Tutorial.3,are you stuck? press [BUTTON] to Return,
+NPC.Tutorial.5,some glitches are unsweepable. i know this.,
+NPC.Tutorial.6,"sometimes, you must go backwards to progress. Glitches can help you",
+UI.Alert.0,got small key!,
+UI.Alert.1,angel egg!,
+UI.Alert.2,all tidy!,
+NPC.Treasure.1,???? press [BUTTON] to Return,
+NPC.BabushkaCat.1,*meow* *prrrr*,
+Dialog.Player.3,oh hello dearie,
+NPC.Treasure.2,"You got ""Grimoire"" ..but it's missing a few pages",
+NPC.Tutorial.7,"with the ""Grimoire"": press [BUTTON] to switch between spells",
+NPC.Tutorial.8,try swapping and jumping at the same time!,
+NPC.Tutorial.9,hi... because you're old: you'll only remember 2 spells at a time,
+Dialog.Player.4,harumph!!,
+NPC.Tutorial.10,did you notice? the spell you forget is the one you had active. i thought that was interesting.,
+NPC.Tutorial.11,"you were here once before, weren't you?",
+NPC.Tutorial.12,holy aura makes you forget...,
+NPC.GhostGirl.1,don't forget about me. don't forget who you were.,
+NPC.Crone.3,you awoke a crystal elder! you seem to have some hag magic... I can enchant your broom with shards,
+NPC.Crone.4,trade 25 shards for BROOMERANG?,
+NPC.Crone.5,need [X] more shards. this is strong magic y'know.,
+NPC.Crone.6,BROOMERANG GET! sweep twice to THROW,
+NPC.Crone.7,this tower will unlock when you've awoken 4 crystal elders. it holds some strong magic.,
+NPC.Door.2,"magically sealed, needs 4 more Crystals to be purified",
+NPC.Crystal.1,"you awoke a crystal elder
+
+deaths: 12
+angel eggs: 0
+broom sweeps: 84
+jumps: 65
+love: Null",
+NPC.Crystal.2,press [BUTTON] to continue,
+NPC.Elder.1,"zzz (well, she's still asleep... can you wake her?)",
+NPC.Elder.2,quiet down whippersnapper!,
+NPC.Elder.3,"ok I'm up.! *cough* where am I? I still feel weak. oh, you're trying to tidy up this place? well, awaken my 3 other sisters. we can pray to the Goddess and clean up this world.",
+NPC.Treasure.3,"got ""map"", view from inventory or press [BUTTON]",
+UI.Inventory.1,inventory,
+UI.Inventory.2,spells,
+UI.Inventory.3,"change spell order, [BUTTON] to swap",
+UI.Inventory.4,equip,
+UI.Inventory.5,your trust broom... great for sweeping dust,
+UI.Inventory.6,babushka head scarf. keeps ya warm,
+UI.Inventory.7,press [BUTTON] to teleport,
+UI.Inventory.8,memory of fish: swim in water,
+UI.Inventory.9,mole cricket memory: dig through walls,
+UI.Inventory.10,spore memory: use broom to teleport,
+,,
+LevelName.1,Haven,
+LevelName.2,tadpole bog,
+LevelName.3,moldy spore forest,
+LevelName.4,cricket caves,
+LevelName.5,elder tower,
+LevelName.6,primordial ooze,
+NPC.Fisherman.1,howdy ma'am. welcome to our humble swamp.,
+NPC.Fisherman.2,I've lost my fishing rod. now I'll surely go hungry.,
+NPC.BabushkaCat.2,"*meow* (for some weird reason, you can hear me? i smell a sleeping Crystal in this zone. I'll mark it on your map)",
+NPC.Fisherman.3,i'm practicing catch and release fishing,
+NPC.Fisherman.4,why did you wake me up?,
+NPC.Fisherman.5,sometimes you just gotta relax,
+NPC.Fisherman.6,i'm fly fishin',
+NPC.Fisherman.7,"when in doubt, fish!",
+NPC.Fisherman.8,"It's been a salty dry year on average, but I don't know why mudfish numbers are so low.",
+NPC.Fisherman.9,you lookin' for the crystal? go up.,
+NPC.Fisherman.10,i don't want this.,
+NPC.Fisherman.11,"these ""glitch"" things freak me out",
+NPC.Fisherman.12,we're trying out new technique,
+NPC.BabushkaCat.3,*mrow* (you're not a tasty fish..),
+NPC.BabushkaCat.4,*mrow*! (is that any way to treat a friend?!),
+NPC.Fisherman.13,thanks for cleaning up the riff raff.,
+NPC.TreasureMimic.1,"pssst, i'll trade you [ITEM] for 20 shards. whaddayasay..?",
+NPC.TreasureMimic.2,"sorry old-timer, i got nothin else",
+UI.BossName.1,the Warty seadevil,
+UI.BossName.2,the Vessel of souls,
+UI.BossName.3,Baba Yaga's house,
+UI.BossName.4,the High priestess,
+NPC.BrothKappa.1,hm.. sorry. occupied.,
+NPC.ClayWorker.1,ERROR: NPC: GET text not found.. just kidding.,
+NPC.ClayWorker.2,sacred Wall Ladder spell: the essence of the bodies of locusts,
+NPC.ClayWorker.3,a little gramdma guidance: try smacking everything,
+NPC.ClayWorker.4,"um, not me though.. please",
+NPC.ClayWorker.5,mole crickets carved these ruins. we evolved from them.,
+NPC.ClayWorker.6,i love eating dirt. it is a sacred act,
+NPC.ClayWorker.7,how wonderful it is to work hard and not think of anything at all,
+NPC.SporeCreature.1,now don't you go getting lost in these woods,
+NPC.SporeCreature.2,doors & edges of the forest behave in strange ways,
+NPC.TowerGuard.1,"part of the soul,
+exists in the stone.",
+NPC.TowerGuard.2,"pssst, hey, let me
+tell you a secret.
+if you smack a glitch,
+you can jump again midair..
+it's easy being green.",
+NPC.BabushkaCat.5,"*meow*
+(there's still an unpurified 
+CRYSTAL in this area)
+*meow...* but 
+something seems wrong..",
+NPC.HighPriestess.1,"•keeheehee •oh, my dear hag,
+you've made an old crone
+very happy!
+•the purified crystals
+give me strong magic!!
+•now, I will take yours too!        ",
+NPC.HighPrietess.2,"•AGH! Aagast. this
+Corruption. i cannot
+•controle . . . . ",
+NPC.BabushkaCat.6,"*meow*, (seems like this place is falling apart. let's get out!! check your map?)",
+NPC.ClayWorker.8,"*cough*
+•don't tell anyone
+i'm slacking off..",
+NPC.Fisherman.14,"wait what?
+why is the swamp here?
+I think something's wrong.",
+,,
+NPC.Cow.2,*moo* (nice of you to stop by. i'm taking care of the farm while you're gone),

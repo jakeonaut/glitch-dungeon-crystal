@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=2]
+[gd_scene load_steps=102 format=2]
 
 [ext_resource path="res://assets/palettes/grey_player_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
@@ -57,7 +57,6 @@
 [ext_resource path="res://assets/miniAdventures.png" type="Texture" id=55]
 [ext_resource path="res://assets/sounds/smack.wav" type="AudioStream" id=56]
 [ext_resource path="res://Paint Tiles Update 3 Sample Project.png" type="Texture" id=57]
-[ext_resource path="res://assets/fonts/ark-pixel-16px-monospaced-zh_cn.ttf" type="DynamicFontData" id=58]
 
 [sub_resource type="ShaderMaterial" id=51]
 shader = ExtResource( 4 )
@@ -165,13 +164,6 @@ shader = ExtResource( 40 )
 shader_param/palette_size = 16
 shader_param/base_palette = ExtResource( 45 )
 shader_param/target_palette = ExtResource( 51 )
-
-[sub_resource type="DynamicFont" id=81]
-size = 64
-font_data = ExtResource( 58 )
-
-[sub_resource type="Theme" id=82]
-default_font = SubResource( 81 )
 
 [sub_resource type="CanvasItemMaterial" id=7]
 
@@ -1069,12 +1061,10 @@ margin_right = 1183.0
 margin_bottom = 202.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme = SubResource( 82 )
+theme = ExtResource( 33 )
 custom_colors/default_color = Color( 0.933594, 0.915867, 0.915867, 1 )
 bbcode_enabled = true
-bbcode_text = "[color=#00ff00]一飞冲天[/color]：长按跳跃键高跳"
 tab_size = 2
-text = "一飞冲天：长按跳跃键高跳"
 scroll_active = false
 
 [node name="TextSprite" type="Sprite" parent="Viewport/level/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer"]

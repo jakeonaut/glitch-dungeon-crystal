@@ -47,8 +47,8 @@ void light() {
 
 [resource]
 shader = SubResource( 78 )
-shader_param/HowShiny = 2.0
+shader_param/HowShiny = 0.0
 shader_param/Roughness = 0.2
 shader_param/alpha2 = 0.5
-shader_param/should_use_vertex_color = false
+shader_param/should_use_vertex_color = true
 shader_param/texture_albedo = ExtResource( 1 )

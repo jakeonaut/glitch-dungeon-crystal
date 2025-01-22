@@ -43,6 +43,7 @@ config/icon="res://icon.png"
 config/windows_native_icon="res://favicon.ico"
 name="glitch dungeon 2: lovely sweet dreams crystal"
 main_scene="res://MainMenu.tscn"
+config/name_zh_CN="老奶的故障地牢大冒险"
 
 [autoload]
 
@@ -327,6 +328,10 @@ open_map={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":6,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
+
+[locale]
+
+translations=PoolStringArray( "res://dialogUiLocalization.en.translation", "res://dialogUiLocalization.zh_CN.translation" )
 
 [physics]
 
