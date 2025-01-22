@@ -14,6 +14,7 @@ var should_wiggle = false
 var wiggle_timer = 0
 var wiggle_time_limit = 2
 var spore_origin = Vector3(0, 0, 0)
+export var is_mini = false
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var player = null
@@ -37,7 +38,9 @@ func fallthroughCollisionActivate(possible_game_mover):
         if possible_game_mover != null and possible_game_mover == level.player and not level.player.pressingDown():
             getPlayer().camera_target_y_pos = getPlayer().global_transform.origin.y
             var jump_val = 14
-            if getPlayer().nesting_doll_state == global.NestingDoll.MATRIARCH:
+            if is_mini:
+                jump_val = 7
+            elif getPlayer().nesting_doll_state == global.NestingDoll.MATRIARCH:
                 jump_val = 18
             possible_game_mover.magicJump()
             getPlayer().linear_velocity.y = jump_val
@@ -45,7 +48,10 @@ func fallthroughCollisionActivate(possible_game_mover):
             getPlayer().vv = jump_val
             # getPlayer().physics_vars.applyHalfGrav = true
             # getPlayer().physics_vars.applyHalfGravTimer = 3
-            bounceSound.pitch_scale = rand_range(0.8, 1.5)
+            if is_mini:
+                bounceSound.pitch_scale = rand_range(1.5, 2.0)
+            else:
+                bounceSound.pitch_scale = rand_range(0.8, 1.5)
             bounceSound.play()
             getPlayer().camera_target_y_pos = getPlayer().global_transform.origin.y
 

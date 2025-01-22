@@ -2,6 +2,7 @@ extends Spatial
 
 export var how_many_tiles = 4
 export var my_up_vector = Vector2(0, 1)
+export var should_erase = false
 onready var sprite = get_node("Sprite")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
@@ -10,80 +11,83 @@ var dig_time_limit = 5
 var dig_counter = 0
 
 func _ready():
-    sprite.visible = false
+  sprite.visible = false
 
 func _process(delta):
-    dig_timer += (delta*22)
-    if dig_timer >= dig_time_limit:
-        dig_timer = 0
+  if not visible:
+    return
 
-        if my_up_vector.y == 1:
-            digTiles(getTilesBelow(level.levelTiles, true), true)
-        elif my_up_vector.y == -1:
-            digTiles(getTilesAbove(level.levelTiles, true), true)
-        elif my_up_vector.x == 1:
-            digTiles(getTilesLeftOf(level.levelTiles, 0.5, true), true)
-        elif my_up_vector.x == -1:
-            digTiles(getTilesRightOf(level.levelTiles, 0.1, true), true)
+  dig_timer += (delta*22)
+  if dig_timer >= dig_time_limit:
+    dig_timer = 0
 
-        if dig_counter >= how_many_tiles:
-            queue_free()
+    if my_up_vector.y == 1:
+      digTiles(getTilesBelow(level.levelTiles, true), true)
+    elif my_up_vector.y == -1:
+      digTiles(getTilesAbove(level.levelTiles, true), true)
+    elif my_up_vector.x == 1:
+      digTiles(getTilesLeftOf(level.levelTiles, 0.5, true), true)
+    elif my_up_vector.x == -1:
+      digTiles(getTilesRightOf(level.levelTiles, 0.1, true), true)
+
+    if dig_counter >= how_many_tiles:
+      queue_free()
 
 var permanently_alter_tiles = false
 func digTiles(solidTiles, should_summon_clouds):
-    var x_add = 0
-    var y_add = 1
-    if my_up_vector.y == -1:
-        y_add = -1
+  var x_add = 0
+  var y_add = 1
+  if my_up_vector.y == -1:
+    y_add = -1
+  elif my_up_vector.x == 1:
+    x_add = 1
+    y_add = 0
+  elif my_up_vector.x == -1:
+    x_add = -1
+    y_add = 0
+  var tiles_dug = 0
+  if solidTiles[0] != null:
+    var coords_a = solidTiles[0]
+    var tile_type = level.levelTiles.get_cell_item(coords_a.x, coords_a.y, coords_a.z)
+    level.levelTiles.addTile(tile_type, Vector3(coords_a.x + x_add, coords_a.y + y_add, coords_a.z), permanently_alter_tiles, false)
+    tiles_dug += 1
+  if solidTiles[1] != null:
+    var coords_mid = solidTiles[1]
+    var tile_type = level.levelTiles.get_cell_item(coords_mid.x, coords_mid.y, coords_mid.z)
+    level.levelTiles.addTile(tile_type, Vector3(coords_mid.x + x_add, coords_mid.y + y_add, coords_mid.z), permanently_alter_tiles, false)
+    tiles_dug += 1
+  if solidTiles[2] != null:
+    var coords_b = solidTiles[2]
+    var tile_type = level.levelTiles.get_cell_item(coords_b.x, coords_b.y, coords_b.z)
+    level.levelTiles.addTile(tile_type, Vector3(coords_b.x + x_add, coords_b.y + y_add, coords_b.z), permanently_alter_tiles, false)
+    tiles_dug += 1
+
+  var tileSize = 8*.125
+  if level.player.checkSolidTilesOnMe():
+    if my_up_vector.y == 1:
+      level.player.global_transform.origin.y += tileSize
+    elif my_up_vector.y == -1:
+      level.player.global_transform.origin.y -= tileSize
     elif my_up_vector.x == 1:
-        x_add = 1
-        y_add = 0
+      level.player.global_transform.origin.x += tileSize
     elif my_up_vector.x == -1:
-        x_add = -1
-        y_add = 0
-    var tiles_dug = 0
-    if solidTiles[0] != null:
-        var coords_a = solidTiles[0]
-        var tile_type = level.levelTiles.get_cell_item(coords_a.x, coords_a.y, coords_a.z)
-        level.levelTiles.addTile(tile_type, Vector3(coords_a.x + x_add, coords_a.y + y_add, coords_a.z), permanently_alter_tiles, false)
-        tiles_dug += 1
-    if solidTiles[1] != null:
-        var coords_mid = solidTiles[1]
-        var tile_type = level.levelTiles.get_cell_item(coords_mid.x, coords_mid.y, coords_mid.z)
-        level.levelTiles.addTile(tile_type, Vector3(coords_mid.x + x_add, coords_mid.y + y_add, coords_mid.z), permanently_alter_tiles, false)
-        tiles_dug += 1
-    if solidTiles[2] != null:
-        var coords_b = solidTiles[2]
-        var tile_type = level.levelTiles.get_cell_item(coords_b.x, coords_b.y, coords_b.z)
-        level.levelTiles.addTile(tile_type, Vector3(coords_b.x + x_add, coords_b.y + y_add, coords_b.z), permanently_alter_tiles, false)
-        tiles_dug += 1
+      level.player.global_transform.origin.x -= tileSize
 
-    var tileSize = 8*.125
-    if level.player.checkSolidTilesOnMe():
-        if my_up_vector.y == 1:
-            level.player.global_transform.origin.y += tileSize
-        elif my_up_vector.y == -1:
-            level.player.global_transform.origin.y -= tileSize
-        elif my_up_vector.x == 1:
-            level.player.global_transform.origin.x += tileSize
-        elif my_up_vector.x == -1:
-            level.player.global_transform.origin.x -= tileSize
+  if should_summon_clouds and tiles_dug > 0:
+    level.summonSmokeClouds(global_transform.origin, 2)
 
-    if should_summon_clouds and tiles_dug > 0:
-        level.summonSmokeClouds(global_transform.origin, 2)
-
-    if tiles_dug > 0:
-        dig_counter += 1
-        if my_up_vector.y == 1:
-            global_transform.origin.y += tileSize
-        elif my_up_vector.y == -1:
-            global_transform.origin.y -= tileSize
-        elif my_up_vector.x == 1:
-            global_transform.origin.x += tileSize
-        elif my_up_vector.x == -1:
-            global_transform.origin.x -= tileSize
-                
-    return tiles_dug > 0
+  if tiles_dug > 0:
+    dig_counter += 1
+    if my_up_vector.y == 1:
+      global_transform.origin.y += tileSize
+    elif my_up_vector.y == -1:
+      global_transform.origin.y -= tileSize
+    elif my_up_vector.x == 1:
+      global_transform.origin.x += tileSize
+    elif my_up_vector.x == -1:
+      global_transform.origin.x -= tileSize
+              
+  return tiles_dug > 0
 
 export var lb = -0.72
 export var rb = .72

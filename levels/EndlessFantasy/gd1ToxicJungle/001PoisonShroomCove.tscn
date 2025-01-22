@@ -356,7 +356,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 29, 0 )
 [node name="Vileplume2" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.9209, 12.9471, 0 )
 
-[node name="NPC" parent="Viewport/level/Vileplume2" index="1"]
+[node name="NPC" parent="Viewport/level/Vileplume2" index="0"]
 grav = 0
 bbText = "•now don't you go
 getting lost in these

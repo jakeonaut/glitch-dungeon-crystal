@@ -340,7 +340,7 @@ func resetMemory():
     memory["mole_cricket"] = 1
     memory["mushroom_soul"] = 1
     memory["glitched_broom"] = false
-    memory["max_hp"] = 2
+    memory["max_hp"] = 1
     memory["hp"] = memory["max_hp"]
     memory["angel_flute"] = false
     memory["has_marked_bosses_on_map"] = true

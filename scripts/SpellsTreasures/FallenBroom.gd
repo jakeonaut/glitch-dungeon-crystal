@@ -10,7 +10,7 @@ var projectile = false
 var was_projectile = false
 var return_timer = 0
 var return_time_limit = 5
-var loop_return_time_limit = 10
+var loop_return_time_limit = 25
 var returning = false
 var returning_timer = 0
 var returning_time_limit = 5
@@ -220,7 +220,7 @@ func tryReturnIfTooFarFromPlayer():
         return
         
     var distance = global_transform.origin.distance_to(level.player.global_transform.origin)
-    if distance >= 20:
+    if distance >= 22.5:
         returning = true
 
     # if level.player.physics_state == level.player.PhysicsState.GLITCH_RECOVERY:

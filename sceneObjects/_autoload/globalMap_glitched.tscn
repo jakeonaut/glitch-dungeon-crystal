@@ -486,11 +486,11 @@ max_frames = 1
 overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
 overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
 
-[node name="PoisonShroomCove" parent="ToxicJungle" instance=ExtResource( 1 )]
+[node name="TeleportDoorMaze" parent="ToxicJungle" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 0 )
 material_override = SubResource( 13 )
 frame = 50
-path = "res://levels/EndlessFantasy/gd1ToxicJungle/001PoisonShroomCove.tscn"
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/TeleportDoorMaze.tscn"
 can_nav_left = false
 can_nav_right = false
 can_nav_up = false

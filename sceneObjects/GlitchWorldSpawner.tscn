@@ -3,13 +3,13 @@
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=1]
 [ext_resource path="res://assets/sounds/glitchspawneffect.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/sounds/pop.wav" type="AudioStream" id=3]
-[ext_resource path="res://scripts/PriestessSpawner.gd" type="Script" id=4]
+[ext_resource path="res://scripts/GlitchWorldSpawner.gd" type="Script" id=4]
 [ext_resource path="res://assets/pinkbug.png" type="Texture" id=5]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 12, 8, 1 )
 
-[node name="PriestessSpawner" type="Spatial"]
+[node name="GlitchWorldSpawner" type="Spatial"]
 script = ExtResource( 4 )
 spawned_object_path = "res://sceneObjects/Enemies/GlitchEnemy.tscn"
 x_range = Vector2( 0, 0 )
