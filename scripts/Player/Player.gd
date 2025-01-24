@@ -754,7 +754,8 @@ func tryDieToOffscreenCamera(_delta):
   if getGameCamera().rightmost_x <= -999 or global.isEnteringRoom or global.pauseGame or physics_state == PhysicsState.GLITCH_DYING:
     return
 
-  var curr_coords = level.getLevelManagerCoords() if not level.pacman_wrapping else null
+  var passive_door = self.smallInteractionArea.is_touching_passive_door
+  var curr_coords = level.getLevelManagerCoords() if (not level.pacman_wrapping and not passive_door) else null
 
   var repositioned_player = global_transform.origin
   var try_to_recover = false
@@ -814,7 +815,8 @@ func tryDieToOffscreenCamera(_delta):
       global.memory.erase("prevYDiff")
 
     next_room = transition.mapManager.getRelativeRoomPath(curr_coords, global.roomEdgeVector) if curr_coords != null else null
-    if next_room != null and not level.pacman_wrapping:
+    print(str(passive_door) + ", " + str(curr_coords) + ", " + str(global.roomEdgeVector) + "," + str(next_room))
+    if next_room != null and (not level.pacman_wrapping or passive_door):
       try_to_recover = false
       transition.edge_fade_to(next_room)
       global.isEnteringRoom = true
@@ -829,7 +831,7 @@ func tryDieToOffscreenCamera(_delta):
       global.memory.erase("prevYDiff")
       global.memory.erase("player_x_offset")
       global.memory.erase("prevXDiff")
-      if level.pacman_wrapping:
+      if level.pacman_wrapping and not passive_door:
         DEATH_MARGIN = -1
         if global.roomEdgeVector == Vector3(1, 0, 0):
           global_transform.origin.x = getGameCamera().leftmost_x - DEATH_MARGIN

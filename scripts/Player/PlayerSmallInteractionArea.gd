@@ -7,6 +7,7 @@ var is_touching_enemy = false
 var is_touching_water = false
 var is_touching_waterfall = false
 var is_touching_door = false
+var is_touching_passive_door = false
 var is_touching_npc = false
 var touched_water_area = null
 var is_touching_ladder = false
@@ -30,6 +31,7 @@ func _process(delta):
     is_touching_water = false
     is_touching_waterfall = false
     is_touching_door = false
+    is_touching_passive_door = false
     is_touching_npc = false
     touched_water_area = null
     is_touching_ladder = false
@@ -68,15 +70,23 @@ func _process(delta):
         if area.is_in_group("ladder"):
             is_touching_ladder = true
         if area.is_in_group("door"):
-            is_touching_door = true
+            var temp = true
             var door = area.get_node("..")
             if door.is_unlocking or door.is_passive or not door.visible or not door.isActive(true):
-                is_touching_door = false
+                temp = false
+
+            if temp:
+                is_touching_door = true
+            if door.is_passive:
+                is_touching_passive_door = true
         if area.is_in_group("true_small_door"):
-            is_touching_door = true
+            var temp = true
             var door = area.get_node("..")
             if door.is_unlocking or door.is_passive or not door.visible or not door.isActive():
-                is_touching_door = false
+                temp = false
+                
+            if temp:
+                is_touching_door = true
         if area.is_in_group("carcass"):
             is_touching_carcass = true
         if area.is_in_group("return_recover"):
