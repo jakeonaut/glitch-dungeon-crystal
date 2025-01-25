@@ -193,7 +193,7 @@ volume_db = -30.0
 pitch_scale = 0.7
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22482, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22482, 0 )
 material_override = SubResource( 25 )
 offset = Vector2( 0, 32 )
 pixel_size = 0.0625

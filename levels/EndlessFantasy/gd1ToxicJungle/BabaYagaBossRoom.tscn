@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=1]
 [ext_resource path="res://levels/EndlessFantasy/gd1ToxicJungle/BabaYagaLevelScript.gd" type="Script" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=24]
 [ext_resource path="res://assets/palettes/inkpink-1x.png" type="Texture" id=25]
 [ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=26]
+[ext_resource path="res://sceneObjects/BiggestNPC.tscn" type="PackedScene" id=27]
 
 [sub_resource type="Animation" id=89]
 length = 0.001
@@ -1081,56 +1082,11 @@ shape = SubResource( 248 )
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 249 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
 shape = SubResource( 250 )
+
+[node name="EldestMonkeyNPC" parent="Viewport/level" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -7, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 17 )]
 

@@ -1,29 +1,30 @@
 extends AudioStreamPlayer
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+onready var treasureChest = get_node("../../..")
 
 func _ready():
-    pass
+  pass
 
-onready var fishingRod = get_node("../../..")
 func activateScript():
-    fishingRod.visible = false
-    fishingRod.is_active = false
-    fishingRod.being_collected = false
-    
-    global.pauseGame = false
-    global.pauseMoveInput = false
-    level.player.aniPlayer.clear_queue()
-    level.player.aniPlayer.queue("walkStop")
-    level.player.aniPlayer.queue("stand")
-    
-    if not global.memory.has("fishingRod"):
-        global.memory["fishingRod"] = true
-
-    # IFNDEF SpriteTownLevelScript.gd
-    # level.get_node("NPC").textBox.text_final = "•oh cool! now we can\nfish together... well i\ndon't have a fishing rod\n•anyway, to fish, just stand\nin front of some water and\npress [DOWN]\n•you can find different fish\nin different areas.... \nso i've heard"
-        
-    level.saveTheGame()
+  treasureChest.mySprite.visible = false
+  treasureChest.okay_im_done = true
+  
+  global.pauseGame = false
+  global.pauseMoveInput = false
+  level.player.vv = 0
+  level.player.linear_velocity.y = 0
+  level.player.lv.y = 0
+  level.player.aniPlayer = level.player.get_node("AnimationPlayer")
+  level.player.aniPlayer.clear_queue()
+  level.player.aniPlayer.queue("walkStop")
+  level.player.aniPlayer.queue("stand")
+  level.player.pauseInput = false
+  
+  if not global.memory.has("fishingRod") or not global.memory["fishingRod"]:
+    global.memory["fishingRod"] = true
+      
+  level.saveTheGame()
 
 func isActive(_debug=false):
-    return true
+  return true

@@ -5,6 +5,13 @@ onready var doguMatryoshkaBoss = get_node("ClaydolBoss")
 # onready var dreamOfDeath = get_node("DreamOfDeath")
 
 # @override
+func purifyAllWeakEnemies(summon_smoke_clouds = true):
+    # kind of a weird little hacky thing, because we know the crystal will call this when purified...
+    # that's why we love it :) 
+    global.memory["dogu_matryoshka_boss"] = 3
+    .purifyAllWeakEnemies(summon_smoke_clouds)
+
+# @override
 func setUpRoomInitializationOverride():
     if global.memory["dogu_matryoshka_boss"] >= 2:
         doguMatryoshkaBoss.okayImDead()

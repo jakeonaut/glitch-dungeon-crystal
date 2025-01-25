@@ -322,9 +322,9 @@ func resetMemory():
     
 
     # crystal elder bosses
-    memory["baba_yaga_boss"] = 2
-    memory["angler_seaman_boss"] = 2
-    memory["dogu_matryoshka_boss"] = 2
+    memory["baba_yaga_boss"] = 3
+    memory["angler_seaman_boss"] = 3
+    memory["dogu_matryoshka_boss"] = 3
 
     # STORY OR LEVEL STATE
     memory["babushka_cat_story_hook"] = 2

@@ -755,7 +755,7 @@ func tryDieToOffscreenCamera(_delta):
     return
 
   var passive_door = self.smallInteractionArea.is_touching_passive_door
-  var curr_coords = level.getLevelManagerCoords() if (not level.pacman_wrapping and not passive_door) else null
+  var curr_coords = level.getLevelManagerCoords() if (not level.pacman_wrapping or passive_door) else null
 
   var repositioned_player = global_transform.origin
   var try_to_recover = false

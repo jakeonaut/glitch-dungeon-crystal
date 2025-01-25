@@ -13,13 +13,13 @@ func activateScript():
 
   if global.memory["priestess"] == 0 and not global.getLevelZoneThing("crystal_geode"):
     global.setLevelZoneThing("babushkaCatSniffed", 1)
-    var allCrystalGeodes = global.getThingFromAllLevelZonez("crystal_geode")
     if global.getLevelZoneThing("crystal_geode"):
-      var newText = "*mewmew*\n(...you've already purified the\n[color=#0798bf]Crystal[/color] in this zone!)"
+      var newText = "*mewmew*\n(...you've already awoken the\n[color=#0798bf]Crystal[/color] in this zone!)"
       if global.memory["demo_mode"] >= 2:
         pass
       else:
-        newText += "\nthere are only " + str(NUM_CRYSTAL_GEODES_TO_BOSS - allCrystalGeodes) + " left"
+        newText += "\n*sniff* (but is someone else in that place?)"
+        
       
       textBox.text_final = newText
       textBox.textNode.bbcode_text = newText
