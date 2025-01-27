@@ -950,9 +950,6 @@ grav = 0
 bbText = "howdy ma'am. 
 welcome to our
 humble swamp"
-glitchedBbText = "wait what?
-why is the swamp here?
-I think something's wrong."
 can_move = false
 can_camera_zoom = false
 is_a_body = false
