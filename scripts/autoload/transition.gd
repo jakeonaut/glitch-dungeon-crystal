@@ -26,11 +26,11 @@ onready var aniPlayer = get_node("AnimationPlayer")
 func _ready():
   set_process(false) # no need to process when not background loading adjacent scenes...
   
-  if global.memory["glitch_world"] > 0:
-    mapManager = glitchedMapManagerRes.instance()
-    is_using_glitched_map = true
-  else:
-    mapManager = mapManagerRes.instance()
+  # if global.memory["glitch_world"] > 0:
+  #   mapManager = glitchedMapManagerRes.instance()
+  #   is_using_glitched_map = true
+  # else:
+  mapManager = mapManagerRes.instance()
   mapManager.visible = false
   self.add_child(mapManager)
   # self.add_child(secretGlitchedMapManager)
@@ -63,7 +63,7 @@ func tryUpdateMapManagerToGlitchedMap():
 
 var is_using_glitched_map = false
 func _process(_delta):
-  tryUpdateMapManagerToGlitchedMap()
+  # tryUpdateMapManagerToGlitchedMap()
 
   # aniPlayer.playback_speed = global.time_dilation_multiplier
   var currentLoadingAdjacentLevelLoader = null

@@ -638,6 +638,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2, 2.2, 0 )
 [node name="Door" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1, 1.1, 0 )
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/002InvisRoom.tscn"
+glitched_path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods3.tscn"
 
 [node name="Sprite3D" parent="Viewport/level/Door" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )

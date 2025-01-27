@@ -702,7 +702,7 @@ spellbook_spells = [ 1, 2 ]
 mesh = SubResource( 174 )
 
 [node name="MeshInstance2" parent="Viewport/level/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 26 )]
 
@@ -1170,7 +1170,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 78, 7, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 15, 0 )
 is_locked = true
 path = "res://levels/EndlessFantasy/gd1FishingVillage/004RightsideTunnel.tscn"
-glitched_path = "res://levels/EndlessFantasy/gd1FishingVillage/003pt5GlitchFishersHard.tscn"
+glitched_path = "res://levels/EndlessFantasy/gd1FishingVillage/AnglerFishBossRoom.tscn"
 num_keys_unlock = 1
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]

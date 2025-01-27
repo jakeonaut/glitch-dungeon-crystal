@@ -784,9 +784,9 @@ tracks/1/keys = {
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.75, 1 )
 
-[sub_resource type="BoxShape" id=75]
+[sub_resource type="BoxShape" id=120]
 resource_local_to_scene = true
-extents = Vector3( 1.5, 1.5, 1 )
+extents = Vector3( 1.5, 5, 1 )
 
 [sub_resource type="BoxShape" id=89]
 resource_local_to_scene = true
@@ -1251,6 +1251,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2, 0 )
 [node name="Door" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, -10, 0 )
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000DustyCricketIntro_old.tscn"
+glitched_path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
 is_passive = true
 
 [node name="landing" parent="Viewport/level/Door" index="5"]
@@ -1260,7 +1261,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 1 )
 shape = SubResource( 74 )
 
 [node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
-shape = SubResource( 75 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0647554, 0 )
+shape = SubResource( 120 )
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea2" index="0"]
 shape = SubResource( 89 )

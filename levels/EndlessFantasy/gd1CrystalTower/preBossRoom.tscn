@@ -326,6 +326,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.2435, 7.04994, 0 )
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 6, 0 )
 path = "res://levels/EndlessFantasy/gd1CrystalTower/002TowerToSacredDoors.tscn"
+glitched_path = "res://levels/EndlessFantasy/gd1TutorialDungeon/entrance_to_tower.tscn"
 
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/RESET = SubResource( 86 )

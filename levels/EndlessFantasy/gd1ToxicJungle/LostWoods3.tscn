@@ -478,6 +478,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3, -2.9, 0 )
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -4, 0 )
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/001PoisonShroomCove.tscn"
+glitched_path = "res://levels/EndlessFantasy/gd1ToxicJungle/InvisIntro.tscn"
 
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/RESET = SubResource( 50 )
