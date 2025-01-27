@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/sounds/eba_darkness2.wav" type="AudioStream" id=13]
 [ext_resource path="res://assets/sounds/eb_bell.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/sounds/OOT_Pot_Shatter.wav" type="AudioStream" id=15]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=16]
 [ext_resource path="res://assets/sounds/sfx010_weirdmetalchord.wav" type="AudioStream" id=17]
 [ext_resource path="res://assets/meshes/crystal.tres" type="ArrayMesh" id=18]
 [ext_resource path="res://scripts/GlitchAuraColorRect.gd" type="Script" id=20]
@@ -1527,6 +1528,7 @@ texture = ExtResource( 10 )
 hframes = 8
 vframes = 10
 frame = 8
+script = ExtResource( 16 )
 
 [node name="LightAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 44 )

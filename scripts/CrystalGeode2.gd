@@ -75,6 +75,17 @@ func _ready():
     #     yield(TempTimer.idle_frame(self), "timeout")
     #     stopAnimation()
 
+    var levelZoneName = global.currLevelZone
+    if levelZoneName == "gd1GrandmaVillage" or levelZoneName == "gd1PrimordialOoze":
+        return
+    match levelZoneName:
+        "gd1FishingVillage":
+            npcSprite.updateBaseFrame(2, 8)
+        "gd1ToxicJungle":
+            npcSprite.updateBaseFrame(0, 8)
+        "gd1ShiftingSandLand":
+            npcSprite.updateBaseFrame(4, 8)
+
 var tadpole_spin_start_timer = 0
 var tadpole_spin_start_time_limit = 10
 var tadpoles = []
@@ -258,6 +269,7 @@ func freeUpPlayer():
         return
 
     level.player.physics_state = level.player.PhysicsState.NORMAL
+    level.player.pauseInput = false
     var elderNPC = npcRes.instance()
     level.add_child(elderNPC)
     level.summonSmokeClouds(global_transform.origin, 3, true, true)
@@ -267,19 +279,20 @@ func freeUpPlayer():
     elderNPC.secretAniPlayer.stop()
     elderNPC.secretAniPlayer.clear_queue()
     elderNPC.secretAniPlayer.play("glitchTickle")
-    if global.memory["priestess"] > 0:
-        elderNPC.textBox.dialogStartSound.script = ritualDialogStartSoundScriptRes
-        elderNPC.am_i_sleepy = false
-    else:
-        elderNPC.am_i_sleepy = true
-        elderNPC.mySprite.updateBaseFrame(0, 1)
-        elderNPC.can_move = false
-        var finalText = "•zzz\n(well, she's still asleep...\ncan you wake her?)"
-        elderNPC.textBox.is_really_important = false
-        elderNPC.textBox.text_final = finalText
-        elderNPC.textBox.textNode.bbcode_text = finalText
-        elderNPC.textBox.dialogStartSound.volume_db = -15
-        elderNPC.textBox.dialogStartSound.stream = npcSleepSfxRes
+    # if global.memory["priestess"] > 0:
+    #     elderNPC.textBox.dialogStartSound.script = ritualDialogStartSoundScriptRes
+    #     elderNPC.am_i_sleepy = false
+    # else:
+    elderNPC.am_i_sleepy = true
+    elderNPC.mySprite.updateBaseFrame(0, 1)
+    elderNPC.processLevelZone()
+    elderNPC.can_move = false
+    var finalText = "•zzz\n(well, she's still asleep...\ncan you wake her?)"
+    elderNPC.textBox.is_really_important = false
+    elderNPC.textBox.text_final = finalText
+    elderNPC.textBox.textNode.bbcode_text = finalText
+    elderNPC.textBox.dialogStartSound.volume_db = -15
+    elderNPC.textBox.dialogStartSound.stream = npcSleepSfxRes
 
 func trySweepUpGlitchTiles(collisionShape):
     if not collisionShape.visible:

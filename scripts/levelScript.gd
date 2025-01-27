@@ -143,7 +143,7 @@ func _ready_impl():
 
   tryToRespawn()
   global.tryInitializeLevelZone(self.getLevelZoneName())
-  if global.memory["currLevelZone"] != global.currLevelZone:
+  if global.memory["currLevelZone"] != global.currLevelZone and not global.memory["glitch_world"]:
     uiLayer.setDisplayTitle(global.getDisplayTitle(self.getLevelZoneName()))
   tryShowUIElements()
   trySpawnFollowers()

@@ -10,17 +10,57 @@ onready var caneSprite = get_node("CaneSprite")
 var am_i_sleepy = false
 var am_i_glitchy = false
 
+var can_smack_back = true
+
 func _ready():
   set_process(true)
+  processLevelZone()
+
+var have_i_processed = false
+func processLevelZone():
+  var levelZoneName = global.currLevelZone
+  if levelZoneName == "gd1GrandmaVillage" or levelZoneName == "gd1PrimordialOoze":
+    return
+  
+  var memoryVarName = null
+  match levelZoneName:
+    "gd1TutorialDungeon":
+      can_smack_back = true
+    "gd1FishingVillage":
+      memoryVarName = "angler_seaman_boss"
+      can_smack_back = false
+      am_i_sleepy = false
+      mySprite.updateBaseFrame(2, 8)
+    "gd1ToxicJungle":
+      memoryVarName = "baba_yaga_boss"
+      can_smack_back = false
+      am_i_sleepy = false
+      mySprite.updateBaseFrame(0, 8)
+    "gd1ShiftingSandLand":
+      memoryVarName = "dogu_matryoshka_boss"
+      can_smack_back = false
+      am_i_sleepy = false
+      mySprite.updateBaseFrame(4, 8)
+      
+  if memoryVarName != null and not have_i_processed:
+    if global.memory[memoryVarName] >= 4:
+      queue_free()
+      return
+    elif global.memory[memoryVarName] == 3:
+      global.memory[memoryVarName] = 4
+  have_i_processed = true
 
 func _process(delta):
-  processBroomRenderLogic(delta)
-  if mySprite.flip_h:
-    caneSprite.flip_h = true
-    caneSprite.global_transform.origin.x = self.global_transform.origin.x + 1.814
+  if can_smack_back:
+    processBroomRenderLogic(delta)
+    if mySprite.flip_h:
+      caneSprite.flip_h = true
+      caneSprite.global_transform.origin.x = self.global_transform.origin.x + 1.814
+    else:
+      caneSprite.flip_h = false
+      caneSprite.global_transform.origin.x = self.global_transform.origin.x - 1.814
   else:
-    caneSprite.flip_h = false
-    caneSprite.global_transform.origin.x = self.global_transform.origin.x - 1.814
+    caneSprite.visible = false
 
 
 func processBroomRenderLogic(_delta):
@@ -105,6 +145,10 @@ func getSmacked(_broom_origin = null, _silently = false):
   # well... if you threw it at me.. i'm going to ignore that..
   if not global.memory["broom"]:
     return false
+
+  if not can_smack_back:
+      am_i_sleepy = false
+      return true
 
   secretAniPlayer.stop()
   secretAniPlayer.clear_queue()

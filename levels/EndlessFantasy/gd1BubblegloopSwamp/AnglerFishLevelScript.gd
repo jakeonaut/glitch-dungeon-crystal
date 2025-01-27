@@ -7,19 +7,24 @@ onready var basicTadpoleEnemy1 = get_node("BasicTadpoleEnemy")
 onready var basicTadpoleEnemy2 = get_node("BasicTadpoleEnemy2")
 onready var basicTadpoleEnemy3 = get_node("BasicTadpoleEnemy3")
 onready var basicTadpoleEnemy4 = get_node("BasicTadpoleEnemy4")
+
+onready var fishies = get_node("Fishies")
+onready var floodedWaterCubes = get_node("FloodedWaterCubes")
 # onready var dreamOfDeceit = get_node("DreamOfDeceit")
 
 # @override
 func purifyAllWeakEnemies(summon_smoke_clouds = true):
     # kind of a weird little hacky thing, because we know the crystal will call this when purified...
     # that's why we love it :) 
-    global.memory["angler_seaman_boss"] = 3
+    if global.memory["angler_seaman_boss"] <= 3
+        global.memory["angler_seaman_boss"] = 3
     .purifyAllWeakEnemies(summon_smoke_clouds)
 
 # @override
 func setUpRoomInitializationOverride():
     if global.memory["angler_seaman_boss"] >= 3:
         anglerFishBoss.queue_free()
+        fishies.queue_free()
     else:
         bigFishNPC.queue_free()
         basicTadpoleEnemy1.queue_free()

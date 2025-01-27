@@ -19,11 +19,11 @@ func activateScript():
     "gd1TutorialDungeon":
         text = "•ok I'm up.! [wave]*cough*[/wave] \nwhere am i? i still feel weak.\noh, you're trying to tidy up?\nwell, awaken my 3 other sisters\nwe can pray to Goddess\nand clean up this world"
     "gd1FishingVillage":
-        text = "[wave]*cough*[/wave] where am i?"
+        text = "hi! *bloop*\ni'll go meet my other sisters.\nbye bye"
     "gd1ToxicJungle":
-        text = "[wave]*cough*[/wave] where am i?"
+        text = "hey! *kiki*\ni'll go meet my other sisters.\nbye bye"
     "gd1ShiftingSandLand":
-        text = "[wave]*cough*[/wave] where am i?"
+        text = "hello! *squirm*\ni'll go meet my other sisters.\nbye bye"
   
   textBox.text_final = text
   textBox.textNode.bbcode_text = text

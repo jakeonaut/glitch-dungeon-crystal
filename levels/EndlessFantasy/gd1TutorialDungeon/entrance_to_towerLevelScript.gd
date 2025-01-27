@@ -10,9 +10,13 @@ func setUpRoomInitializationOverride():
     door2.num_keys_unlock = 2
     door2.path = "res://levels/EndlessFantasy/gd1/00000EndOfDemo.tscn"
 
-  if global.memory["priestess"] > 0:
+  if global.memory["clean_crystals"] >= 4:
     broomUpgradeCrone.queue_free()
-    broomUpgradeElder.visible = true
+    door2.is_locked = false
+    door2.animationPlayer.play("doorOpen")
+  # if global.memory["priestess"] > 0:
+  #   broomUpgradeCrone.queue_free()
+  #   broomUpgradeElder.visible = true
 
 func _process(delta):
   if global.memory["clean_crystals"] >= 1:

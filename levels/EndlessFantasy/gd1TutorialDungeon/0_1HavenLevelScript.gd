@@ -20,3 +20,10 @@ func setUpRoomInitializationOverride():
     door5.animationPlayer.stop()
     door5.animationPlayer.clear_queue()
     door5.queueLockAnimation()
+
+  if global.memory["angler_seaman_boss"] < 4:
+    get_node("FishElderNPC").queue_free()
+  if global.memory["baba_yaga_boss"] < 4:
+    get_node("SporeElderNPC").queue_free()
+  if global.memory["dogu_matryoshka_boss"] < 4:
+    get_node("WormElderNPC").queue_free()

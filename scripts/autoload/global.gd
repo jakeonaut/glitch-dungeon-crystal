@@ -315,16 +315,16 @@ func resetMemory():
     # if you've beaten the midpoint boss
     memory["clean_crystals"] = 4
     memory["priestess"] = 2
-    memory["glitch_world"] = 0
+    memory["glitch_world"] = 1
     memory["glitched_grimoire"] = true
     memory["forget_me_not"] = true
     memory["glitched_grimoire2"] = true
     
 
     # crystal elder bosses
-    memory["baba_yaga_boss"] = 3
-    memory["angler_seaman_boss"] = 3
-    memory["dogu_matryoshka_boss"] = 3
+    memory["baba_yaga_boss"] = 4
+    memory["angler_seaman_boss"] = 4
+    memory["dogu_matryoshka_boss"] = 4
 
     # STORY OR LEVEL STATE
     memory["babushka_cat_story_hook"] = 2
