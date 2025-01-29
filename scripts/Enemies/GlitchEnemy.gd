@@ -183,47 +183,101 @@ func collideWithCeiling(local_lv):
 
 # this is all very confusing.... it would be better if we could fetch the sole tile we're next to, and "snap" to that, rather than trying
 # to adjust the transformation position arbitrarily based on which way we were going (see collideWall where we do this sin)
-func processStickyWallWalking(delta):
+var last_sticky_wall_tile = null
+func processStickyWallWalking(_delta):
     if not behavior_stick_to_walls or (my_up_vector.x == 0 and my_up_vector.y == 0):
         return
     var buffer = 0.5
+    var TILE_WIDTH = getLevelTiles().cell_size.x
+    var TILE_HEIGHT = getLevelTiles().cell_size.y
     if my_up_vector.y == 0:
-        if my_up_vector.x < 0 and areAllTilesNull(getTilesRightOf(getLevelTiles(), buffer, true)):
-            if walk_direction.y > 0:
-                print("rotate right (rightside up) (absence)")
-                alignStickyWallWalker(Vector2(0, 1), Vector2(1, 0))
-                mySprite.rotation_degrees.y = fmod(mySprite.rotation_degrees.y + 180.0, 360.0)
-                mySprite.rotation_degrees.z = 0
-            elif walk_direction.y < 0:
-                print("rotate right (upside down) (absence)")
-                alignStickyWallWalker(Vector2(0, -1), Vector2(1, 0))
-        elif my_up_vector.x > 0 and areAllTilesNull(getTilesLeftOf(getLevelTiles(), buffer, true)):
-            if walk_direction.y > 0:
-                print("rotate left (rightside up) (absence)")
-                alignStickyWallWalker(Vector2(0, 1), Vector2(-1, 0))
-                mySprite.rotation_degrees.y = fmod(mySprite.rotation_degrees.y + 180.0, 360.0)
-                mySprite.rotation_degrees.z = 0
-            elif walk_direction.y < 0:
-                print("rotate left (upside down) (absence)")
-                alignStickyWallWalker(Vector2(0, -1), Vector2(-1, 0))
-    elif my_up_vector.y > 0 and areAllTilesNull(getTilesBelow(getLevelTiles(), buffer, true)):
-        if walk_direction.x > 0:
-            print("rotate down (back facing right) (absence)")
-            alignStickyWallWalker(Vector2(1, 0), Vector2(0, -1))
-            mySprite.rotation_degrees.z = 90
-        elif walk_direction.x < 0:
-            print("rotate down (back facing left) (absence)")
-            alignStickyWallWalker(Vector2(-1, 0), Vector2(0, -1))
-            mySprite.rotation_degrees.z = 270
-    elif my_up_vector.y < 0 and areAllTilesNull(getTilesAbove(getLevelTiles(), buffer, true)):
-        if walk_direction.x > 0:
-            print("rotate up (back facing right) (absence)")
-            alignStickyWallWalker(Vector2(1, 0), Vector2(0, 1))
-            mySprite.rotation_degrees.z = 90
-        elif walk_direction.x < 0:
-            print("rotate up (back facing left) (absence)")
-            alignStickyWallWalker(Vector2(-1, 0), Vector2(0, 1))
-            mySprite.rotation_degrees.z = 270
+        if my_up_vector.x < 0:
+            var relevantTiles = getTilesRightOf(getLevelTiles(), buffer, true)
+            var tempLastStickyWallTile = getSoloNonnullTile(relevantTiles)
+            if tempLastStickyWallTile != null:
+                last_sticky_wall_tile = tempLastStickyWallTile
+            if areAllTilesNull(relevantTiles) and last_sticky_wall_tile != null:
+                var tile_coord = last_sticky_wall_tile
+                last_sticky_wall_tile = null
+                var tile_pos = getLevelTiles().map_to_world(tile_coord.x, tile_coord.y, tile_coord.z)
+                if walk_direction.y > 0:
+                    global_transform.origin.x = tile_pos.x
+                    global_transform.origin.y = tile_pos.y + TILE_HEIGHT / 2
+                    print("rotate right (rightside up) (absence)")
+                    alignStickyWallWalker(Vector2(0, 1), Vector2(1, 0))
+                    mySprite.rotation_degrees.y = fmod(mySprite.rotation_degrees.y + 180.0, 360.0)
+                    mySprite.rotation_degrees.z = 0
+                elif walk_direction.y < 0:
+                    global_transform.origin.x = tile_pos.x
+                    global_transform.origin.y = tile_pos.y - TILE_HEIGHT / 2 - TILE_HEIGHT
+                    print("rotate right (upside down) (absence)")
+                    alignStickyWallWalker(Vector2(0, -1), Vector2(1, 0))
+        elif my_up_vector.x > 0:
+            var relevantTiles = getTilesLeftOf(getLevelTiles(), buffer, true)
+            var tempLastStickyWallTile = getSoloNonnullTile(relevantTiles)
+            if tempLastStickyWallTile != null:
+                last_sticky_wall_tile = tempLastStickyWallTile
+            if areAllTilesNull(relevantTiles) and last_sticky_wall_tile != null:
+                var tile_coord = last_sticky_wall_tile
+                last_sticky_wall_tile = null
+                var tile_pos = getLevelTiles().map_to_world(tile_coord.x, tile_coord.y, tile_coord.z)
+                if walk_direction.y > 0:
+                    global_transform.origin.x = tile_pos.x + TILE_WIDTH
+                    global_transform.origin.y = tile_pos.y + TILE_HEIGHT / 2
+                    print("rotate left (rightside up) (absence)")
+                    alignStickyWallWalker(Vector2(0, 1), Vector2(-1, 0))
+                    mySprite.rotation_degrees.y = fmod(mySprite.rotation_degrees.y + 180.0, 360.0)
+                    mySprite.rotation_degrees.z = 0
+                elif walk_direction.y < 0:
+                    global_transform.origin.x = tile_pos.x + TILE_WIDTH
+                    global_transform.origin.y = tile_pos.y - TILE_HEIGHT / 2 - TILE_HEIGHT
+                    print("rotate left (upside down) (absence)")
+                    alignStickyWallWalker(Vector2(0, -1), Vector2(-1, 0))
+    elif my_up_vector.y > 0:
+        var relevantTiles = getTilesBelow(getLevelTiles(), buffer, true)
+        var tempLastStickyWallTile = getSoloNonnullTile(relevantTiles)
+        if tempLastStickyWallTile != null:
+            last_sticky_wall_tile = tempLastStickyWallTile
+        if areAllTilesNull(relevantTiles) and last_sticky_wall_tile != null:
+            var tile_coord = last_sticky_wall_tile
+            last_sticky_wall_tile = null
+            var tile_pos = getLevelTiles().map_to_world(tile_coord.x, tile_coord.y, tile_coord.z)
+            if walk_direction.x > 0:
+                global_transform.origin.x = tile_pos.x + TILE_WIDTH / 2 + TILE_WIDTH
+                global_transform.origin.y = tile_pos.y
+                print("rotate down (back facing right) (absence)")
+                alignStickyWallWalker(Vector2(1, 0), Vector2(0, -1))
+                mySprite.rotation_degrees.z = 90
+            elif walk_direction.x < 0:
+                global_transform.origin.x = tile_pos.x - TILE_WIDTH / 2
+                global_transform.origin.y = tile_pos.y + TILE_HEIGHT
+                print("rotate down (back facing left) (absence)")
+                alignStickyWallWalker(Vector2(-1, 0), Vector2(0, -1))
+                mySprite.rotation_degrees.z = 270
+    elif my_up_vector.y < 0:
+        var relevantTiles = getTilesAbove(getLevelTiles(), buffer, true)
+        var tempLastStickyWallTile = getSoloNonnullTile(relevantTiles)
+        if tempLastStickyWallTile != null:
+            last_sticky_wall_tile = tempLastStickyWallTile
+        if areAllTilesNull(relevantTiles) and last_sticky_wall_tile != null:
+            var tile_coord = last_sticky_wall_tile
+            last_sticky_wall_tile = null
+            var tile_pos = getLevelTiles().map_to_world(tile_coord.x, tile_coord.y, tile_coord.z)
+            if walk_direction.x > 0:
+                global_transform.origin.x = tile_pos.x + TILE_WIDTH / 2 + TILE_WIDTH
+                global_transform.origin.y = tile_pos.y - TILE_HEIGHT / 2 - TILE_HEIGHT
+                print("rotate up (back facing right) (absence)")
+                alignStickyWallWalker(Vector2(1, 0), Vector2(0, 1))
+                mySprite.rotation_degrees.z = 90
+            elif walk_direction.x < 0:
+                global_transform.origin.x = tile_pos.x - TILE_WIDTH / 2 - TILE_WIDTH
+                global_transform.origin.y = tile_pos.y - TILE_HEIGHT / 2
+                print(tile_coord)
+                print(tile_pos)
+                print(global_transform.origin)
+                print("rotate up (back facing left) (absence)")
+                alignStickyWallWalker(Vector2(-1, 0), Vector2(0, 1))
+                mySprite.rotation_degrees.z = 270
 
 func alignStickyWallWalker(new_up_vector, new_walk_direction):
     grav = 0

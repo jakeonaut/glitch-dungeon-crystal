@@ -617,9 +617,14 @@ func areAllTilesNull(solidTilesXOf):
   # assumes an array of 3, either null or a coord
   return solidTilesXOf[0] == null and solidTilesXOf[1] == null and solidTilesXOf[2] == null
 
-func areAnyTilesNull(solidTilesXOf):
-  # assumes an array of 3, either null or a coord
-  return solidTilesXOf[0] != null or solidTilesXOf[1] != null or solidTilesXOf[2] != null
+func getSoloNonnullTile(solidTilesXOf):
+  if solidTilesXOf[0] != null and solidTilesXOf[1] == null and solidTilesXOf[2] == null:
+    return solidTilesXOf[0]
+  if solidTilesXOf[1] != null and solidTilesXOf[0] == null and solidTilesXOf[2] == null:
+    return solidTilesXOf[1]
+  if solidTilesXOf[2] != null and solidTilesXOf[0] == null and solidTilesXOf[1] == null:
+    return solidTilesXOf[2]
+  return null
 
 func iJustPressedDown():
   on_ground = false
