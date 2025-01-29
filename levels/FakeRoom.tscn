@@ -1,4 +1,4 @@
-[gd_scene load_steps=276 format=2]
+[gd_scene load_steps=309 format=2]
 
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=1]
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=2]
@@ -95,6 +95,8 @@
 [ext_resource path="res://sceneObjects/DustFarmer.tscn" type="PackedScene" id=93]
 [ext_resource path="res://sceneObjects/KizzyCat.tscn" type="PackedScene" id=94]
 [ext_resource path="res://assets/palettes/sweetie-16-1x.png" type="Texture" id=95]
+[ext_resource path="res://assets/palettes/tidepool_palette.png" type="Texture" id=96]
+[ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=97]
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 38 )
@@ -3188,7 +3190,7 @@ shader_param/texture_albedo = ExtResource( 75 )
 shader_param/base_palette = ExtResource( 25 )
 shader_param/target_palette = ExtResource( 24 )
 
-[sub_resource type="ArrayMesh" id=46]
+[sub_resource type="ArrayMesh" id=264]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -3201,7 +3203,7 @@ surfaces/0 = {
 "vertex_count": 8
 }
 
-[sub_resource type="ArrayMesh" id=47]
+[sub_resource type="ArrayMesh" id=265]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -8595,7 +8597,7 @@ extents = Vector3( 4, 2, 1 )
 [sub_resource type="BoxShape" id=185]
 extents = Vector3( 4, 2.52322, 1 )
 
-[sub_resource type="ArrayMesh" id=186]
+[sub_resource type="ArrayMesh" id=266]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -8608,7 +8610,7 @@ surfaces/0 = {
 "vertex_count": 8
 }
 
-[sub_resource type="ArrayMesh" id=187]
+[sub_resource type="ArrayMesh" id=267]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -14083,6 +14085,42 @@ extents = Vector3( 0.5, 0.24, 1 )
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
+[sub_resource type="ShaderMaterial" id=268]
+shader = ExtResource( 38 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 97 )
+shader_param/base_palette = ExtResource( 25 )
+shader_param/target_palette = ExtResource( 96 )
+
 [sub_resource type="BoxShape" id=263]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
@@ -14242,6 +14280,189 @@ extents = Vector3( 2, 1.3, 1.3 )
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
+[sub_resource type="BoxShape" id=269]
+resource_local_to_scene = true
+extents = Vector3( 3, 2, 1.3 )
+
+[sub_resource type="Animation" id=270]
+resource_name = "default"
+length = 0.1
+
+[sub_resource type="Animation" id=271]
+resource_name = "fall"
+length = 0.1
+
+[sub_resource type="Animation" id=272]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=273]
+resource_name = "jump"
+length = 0.001
+
+[sub_resource type="Animation" id=274]
+resource_name = "land"
+length = 0.1
+
+[sub_resource type="Animation" id=275]
+resource_name = "stand"
+length = 0.1
+
+[sub_resource type="Animation" id=276]
+resource_name = "walk"
+
+[sub_resource type="Animation" id=277]
+resource_name = "walkStart"
+
+[sub_resource type="BoxShape" id=278]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=279]
+resource_local_to_scene = true
+extents = Vector3( 3, 2, 1.3 )
+
+[sub_resource type="Animation" id=280]
+resource_name = "default"
+length = 0.1
+
+[sub_resource type="Animation" id=281]
+resource_name = "fall"
+length = 0.1
+
+[sub_resource type="Animation" id=282]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=283]
+resource_name = "jump"
+length = 0.001
+
+[sub_resource type="Animation" id=284]
+resource_name = "land"
+length = 0.1
+
+[sub_resource type="Animation" id=285]
+resource_name = "stand"
+length = 0.1
+
+[sub_resource type="Animation" id=286]
+resource_name = "walk"
+
+[sub_resource type="Animation" id=287]
+resource_name = "walkStart"
+
+[sub_resource type="BoxShape" id=288]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=289]
+resource_local_to_scene = true
+extents = Vector3( 3, 2, 1.3 )
+
+[sub_resource type="Animation" id=290]
+resource_name = "default"
+length = 0.1
+
+[sub_resource type="Animation" id=291]
+resource_name = "fall"
+length = 0.1
+
+[sub_resource type="Animation" id=292]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=293]
+resource_name = "jump"
+length = 0.001
+
+[sub_resource type="Animation" id=294]
+resource_name = "land"
+length = 0.1
+
+[sub_resource type="Animation" id=295]
+resource_name = "stand"
+length = 0.1
+
+[sub_resource type="Animation" id=296]
+resource_name = "walk"
+
+[sub_resource type="Animation" id=297]
+resource_name = "walkStart"
+
+[sub_resource type="BoxShape" id=298]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
 [sub_resource type="ViewportTexture" id=240]
 viewport_path = NodePath("Viewport")
 
@@ -14365,15 +14586,15 @@ texture = ExtResource( 91 )
 [node name="AnimationPlayer" parent="Viewport/level/Player" index="6"]
 autoplay = "sweepFloor"
 
-[node name="ClaydolBoss" type="Spatial" parent="Viewport/level"]
+[node name="Dog5" type="Spatial" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7214, -4.40279, 0 )
 
-[node name="SpriteContainer" type="Spatial" parent="Viewport/level/ClaydolBoss"]
+[node name="SpriteContainer" type="Spatial" parent="Viewport/level/Dog5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, 0 )
 
-[node name="InnerSpriteContainer" type="Spatial" parent="Viewport/level/ClaydolBoss/SpriteContainer"]
+[node name="InnerSpriteContainer" type="Spatial" parent="Viewport/level/Dog5/SpriteContainer"]
 
-[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/ClaydolBoss/SpriteContainer/InnerSpriteContainer" groups=["sprite"]]
+[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/Dog5/SpriteContainer/InnerSpriteContainer" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
 material_override = SubResource( 5 )
 pixel_size = 0.0938
@@ -14384,7 +14605,7 @@ script = ExtResource( 13 )
 max_frames = 4
 should_animate = false
 
-[node name="NoseSprite" type="Sprite3D" parent="Viewport/level/ClaydolBoss/SpriteContainer/InnerSpriteContainer" groups=["sprite"]]
+[node name="NoseSprite" type="Sprite3D" parent="Viewport/level/Dog5/SpriteContainer/InnerSpriteContainer" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
 visible = false
 material_override = SubResource( 17 )
@@ -14397,48 +14618,48 @@ script = ExtResource( 13 )
 max_frames = 4
 should_animate = false
 
-[node name="Sounds" type="Spatial" parent="Viewport/level/ClaydolBoss"]
+[node name="Sounds" type="Spatial" parent="Viewport/level/Dog5"]
 
-[node name="SpawnSound" type="AudioStreamPlayer" parent="Viewport/level/ClaydolBoss/Sounds"]
+[node name="SpawnSound" type="AudioStreamPlayer" parent="Viewport/level/Dog5/Sounds"]
 stream = ExtResource( 45 )
 volume_db = -3.0
 
-[node name="BlinkSound" type="AudioStreamPlayer" parent="Viewport/level/ClaydolBoss/Sounds"]
+[node name="BlinkSound" type="AudioStreamPlayer" parent="Viewport/level/Dog5/Sounds"]
 stream = ExtResource( 62 )
 volume_db = -20.0
 pitch_scale = 2.0
 
-[node name="BlinkSound2" type="AudioStreamPlayer" parent="Viewport/level/ClaydolBoss/Sounds"]
+[node name="BlinkSound2" type="AudioStreamPlayer" parent="Viewport/level/Dog5/Sounds"]
 stream = ExtResource( 62 )
 volume_db = -20.0
 pitch_scale = 2.0
 
-[node name="AttackSound" type="AudioStreamPlayer" parent="Viewport/level/ClaydolBoss/Sounds"]
+[node name="AttackSound" type="AudioStreamPlayer" parent="Viewport/level/Dog5/Sounds"]
 stream = ExtResource( 70 )
 volume_db = -8.0
 pitch_scale = 1.2
 
-[node name="AttackStartSound" type="AudioStreamPlayer" parent="Viewport/level/ClaydolBoss/Sounds"]
+[node name="AttackStartSound" type="AudioStreamPlayer" parent="Viewport/level/Dog5/Sounds"]
 stream = ExtResource( 77 )
 volume_db = -15.0
 pitch_scale = 1.1
 
-[node name="DigSound" type="AudioStreamPlayer" parent="Viewport/level/ClaydolBoss/Sounds"]
+[node name="DigSound" type="AudioStreamPlayer" parent="Viewport/level/Dog5/Sounds"]
 stream = ExtResource( 80 )
 volume_db = -24.0
 pitch_scale = 1.4
 
-[node name="ThudSound" type="AudioStreamPlayer" parent="Viewport/level/ClaydolBoss/Sounds"]
+[node name="ThudSound" type="AudioStreamPlayer" parent="Viewport/level/Dog5/Sounds"]
 stream = ExtResource( 76 )
 volume_db = -25.0
 pitch_scale = 0.7
 
-[node name="DieSound" type="AudioStreamPlayer" parent="Viewport/level/ClaydolBoss/Sounds"]
+[node name="DieSound" type="AudioStreamPlayer" parent="Viewport/level/Dog5/Sounds"]
 stream = ExtResource( 67 )
 volume_db = -2.0
 pitch_scale = 0.9
 
-[node name="SecretAnimationPlayer" type="AnimationPlayer" parent="Viewport/level/ClaydolBoss"]
+[node name="SecretAnimationPlayer" type="AnimationPlayer" parent="Viewport/level/Dog5"]
 autoplay = "idleStomp"
 anims/RESET = SubResource( 7 )
 anims/asleep = SubResource( 14 )
@@ -14462,56 +14683,56 @@ anims/waddle = SubResource( 8 )
 anims/waddleLeft = SubResource( 89 )
 anims/wakeup = SubResource( 15 )
 
-[node name="WallStunArea" type="Area" parent="Viewport/level/ClaydolBoss" groups=["bug"]]
+[node name="WallStunArea" type="Area" parent="Viewport/level/Dog5" groups=["bug"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0 )
 visible = false
 
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/ClaydolBoss/WallStunArea"]
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Dog5/WallStunArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.334242, 0.332879, 0 )
 shape = SubResource( 16 )
 
-[node name="HurtYouInteractionArea" type="Area" parent="Viewport/level/ClaydolBoss" groups=["enemies"]]
+[node name="HurtYouInteractionArea" type="Area" parent="Viewport/level/Dog5" groups=["enemies"]]
 script = ExtResource( 34 )
 
-[node name="BodyCollisionShape" type="CollisionShape" parent="Viewport/level/ClaydolBoss/HurtYouInteractionArea"]
+[node name="BodyCollisionShape" type="CollisionShape" parent="Viewport/level/Dog5/HurtYouInteractionArea"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 92 )
 disabled = true
 
-[node name="HeadCollisionShape" type="CollisionShape" parent="Viewport/level/ClaydolBoss/HurtYouInteractionArea"]
+[node name="HeadCollisionShape" type="CollisionShape" parent="Viewport/level/Dog5/HurtYouInteractionArea"]
 transform = Transform( 0.9, 0, 0, 0, 0.9, 0, 0, 0, 1, 0, 6, 0 )
 shape = SubResource( 93 )
 disabled = true
 
-[node name="LeftArmCollisionShape" type="CollisionShape" parent="Viewport/level/ClaydolBoss/HurtYouInteractionArea"]
+[node name="LeftArmCollisionShape" type="CollisionShape" parent="Viewport/level/Dog5/HurtYouInteractionArea"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -6.61014, 1.6894, 0 )
 shape = SubResource( 94 )
 disabled = true
 
-[node name="RightArmCollisionShape" type="CollisionShape" parent="Viewport/level/ClaydolBoss/HurtYouInteractionArea"]
+[node name="RightArmCollisionShape" type="CollisionShape" parent="Viewport/level/Dog5/HurtYouInteractionArea"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 6.82305, 3.38618, 0 )
 shape = SubResource( 95 )
 disabled = true
 
-[node name="SecretBounceAnimationPlayer" type="AnimationPlayer" parent="Viewport/level/ClaydolBoss"]
+[node name="SecretBounceAnimationPlayer" type="AnimationPlayer" parent="Viewport/level/Dog5"]
 anims/RESET = SubResource( 18 )
 anims/jump = SubResource( 19 )
 anims/jumpSquat = SubResource( 20 )
 anims/land = SubResource( 21 )
 
-[node name="WindGust" parent="Viewport/level/ClaydolBoss" instance=ExtResource( 48 )]
+[node name="WindGust" parent="Viewport/level/Dog5" instance=ExtResource( 48 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.17431, 14.9924, 1 )
 visible = false
 frame = 0
 is_active = false
 
-[node name="WindGust2" parent="Viewport/level/ClaydolBoss" instance=ExtResource( 48 )]
+[node name="WindGust2" parent="Viewport/level/Dog5" instance=ExtResource( 48 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.825688, 14.9924, 1 )
 visible = false
 frame = 0
 is_active = false
 
-[node name="InteractPrompt" type="Sprite3D" parent="Viewport/level/ClaydolBoss" groups=["sprite"]]
+[node name="InteractPrompt" type="Sprite3D" parent="Viewport/level/Dog5" groups=["sprite"]]
 transform = Transform( 0.996453, -0.0841474, 0, 0.0841474, 0.996453, 0, 0, 0, 1, 0.526223, 15.5525, 7 )
 visible = false
 material_override = SubResource( 31 )
@@ -14525,24 +14746,24 @@ script = ExtResource( 13 )
 frame_delay = 0.5
 automatically_change_color = false
 
-[node name="CubeCrystal" parent="Viewport/level/ClaydolBoss" instance=ExtResource( 43 )]
+[node name="CubeCrystal" parent="Viewport/level/Dog5" instance=ExtResource( 43 )]
 transform = Transform( 0.6, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 12.601, 0 )
 
-[node name="CubeContainer" parent="Viewport/level/ClaydolBoss/CubeCrystal" index="0"]
+[node name="CubeContainer" parent="Viewport/level/Dog5/CubeCrystal" index="0"]
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
-[node name="MeshInstance" parent="Viewport/level/ClaydolBoss/CubeCrystal/CubeContainer" index="0"]
+[node name="MeshInstance" parent="Viewport/level/Dog5/CubeCrystal/CubeContainer" index="0"]
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
-mesh = SubResource( 46 )
+mesh = SubResource( 264 )
 
-[node name="MeshInstance3" parent="Viewport/level/ClaydolBoss/CubeCrystal/CubeContainer" index="1"]
+[node name="MeshInstance3" parent="Viewport/level/Dog5/CubeCrystal/CubeContainer" index="1"]
 transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
-mesh = SubResource( 47 )
+mesh = SubResource( 265 )
 
-[node name="MeshInstance2" parent="Viewport/level/ClaydolBoss/CubeCrystal/CubeContainer" index="2"]
+[node name="MeshInstance2" parent="Viewport/level/Dog5/CubeCrystal/CubeContainer" index="2"]
 transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )
 
-[node name="LightAnimationPlayer" parent="Viewport/level/ClaydolBoss/CubeCrystal" index="13"]
+[node name="LightAnimationPlayer" parent="Viewport/level/Dog5/CubeCrystal" index="13"]
 anims/RESET = SubResource( 81 )
 anims/fadeIn = SubResource( 82 )
 anims/fakeBreak = SubResource( 83 )
@@ -14550,10 +14771,10 @@ anims/lightUp = SubResource( 84 )
 anims/lightUpQuiet = SubResource( 85 )
 anims/omen = SubResource( 86 )
 
-[node name="AnglerFishBoss" type="Spatial" parent="Viewport/level"]
+[node name="Dog" type="Spatial" parent="Viewport/level"]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 15, 33, 0 )
 
-[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/AnglerFishBoss" groups=["sprite"]]
+[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/Dog" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
 material_override = SubResource( 1 )
 pixel_size = 0.125
@@ -14565,9 +14786,9 @@ max_frames = 4
 should_animate = false
 automatically_change_color = false
 
-[node name="TailContainer" type="Spatial" parent="Viewport/level/AnglerFishBoss"]
+[node name="TailContainer" type="Spatial" parent="Viewport/level/Dog"]
 
-[node name="TailSprite" type="Sprite3D" parent="Viewport/level/AnglerFishBoss/TailContainer" groups=["sprite"]]
+[node name="TailSprite" type="Sprite3D" parent="Viewport/level/Dog/TailContainer" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, -0.2, -3 )
 material_override = SubResource( 4 )
 pixel_size = 0.125
@@ -14579,10 +14800,10 @@ max_frames = 4
 should_animate = false
 automatically_change_color = false
 
-[node name="DangleContainer" type="Spatial" parent="Viewport/level/AnglerFishBoss"]
+[node name="DangleContainer" type="Spatial" parent="Viewport/level/Dog"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 
-[node name="DanglerBaseSprite" type="Sprite3D" parent="Viewport/level/AnglerFishBoss/DangleContainer" groups=["sprite"]]
+[node name="DanglerBaseSprite" type="Sprite3D" parent="Viewport/level/Dog/DangleContainer" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.66968, 2.24577, -3 )
 material_override = SubResource( 2 )
 pixel_size = 0.125
@@ -14593,11 +14814,11 @@ script = ExtResource( 13 )
 max_frames = 1
 automatically_change_color = false
 
-[node name="WeakPointContainer" type="Spatial" parent="Viewport/level/AnglerFishBoss"]
+[node name="WeakPointContainer" type="Spatial" parent="Viewport/level/Dog"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.52225, 1.85667, 2 )
 script = ExtResource( 84 )
 
-[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/AnglerFishBoss/WeakPointContainer" groups=["sprite"]]
+[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/Dog/WeakPointContainer" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
 material_override = SubResource( 3 )
 pixel_size = 0.125
@@ -14608,48 +14829,48 @@ script = ExtResource( 13 )
 max_frames = 1
 should_animate = false
 
-[node name="InteractionArea" type="Area" parent="Viewport/level/AnglerFishBoss/WeakPointContainer" groups=["malware"]]
+[node name="InteractionArea" type="Area" parent="Viewport/level/Dog/WeakPointContainer" groups=["malware"]]
 transform = Transform( 1, 0, -7.10543e-15, 0, 1, 0, 7.10543e-15, 0, 1, 0, 0.408953, 0 )
 script = ExtResource( 63 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/InteractionArea"]
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Dog/WeakPointContainer/InteractionArea"]
 shape = SubResource( 167 )
 
-[node name="SmallInteractionArea" type="Area" parent="Viewport/level/AnglerFishBoss/WeakPointContainer" groups=["bug", "corporeal_body", "malware", "no_pushems"]]
+[node name="SmallInteractionArea" type="Area" parent="Viewport/level/Dog/WeakPointContainer" groups=["bug", "corporeal_body", "malware", "no_pushems"]]
 transform = Transform( 1, 0, -7.10543e-15, 0, 1, 0, 7.10543e-15, 0, 1, 0, 0.408953, 0 )
 script = ExtResource( 34 )
 ignore_water = true
 
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/SmallInteractionArea"]
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Dog/WeakPointContainer/SmallInteractionArea"]
 shape = SubResource( 167 )
 
-[node name="Sounds" type="Spatial" parent="Viewport/level/AnglerFishBoss/WeakPointContainer"]
+[node name="Sounds" type="Spatial" parent="Viewport/level/Dog/WeakPointContainer"]
 
-[node name="DieSound" type="AudioStreamPlayer" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/Sounds"]
+[node name="DieSound" type="AudioStreamPlayer" parent="Viewport/level/Dog/WeakPointContainer/Sounds"]
 stream = ExtResource( 67 )
 volume_db = -2.0
 pitch_scale = 0.9
 
-[node name="MissSound" type="AudioStreamPlayer" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/Sounds"]
+[node name="MissSound" type="AudioStreamPlayer" parent="Viewport/level/Dog/WeakPointContainer/Sounds"]
 stream = ExtResource( 82 )
 volume_db = -2.0
 pitch_scale = 0.9
 
-[node name="NotDieSound" type="AudioStreamPlayer" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/Sounds"]
+[node name="NotDieSound" type="AudioStreamPlayer" parent="Viewport/level/Dog/WeakPointContainer/Sounds"]
 stream = ExtResource( 72 )
 volume_db = -20.0
 pitch_scale = 0.8
 
-[node name="EvolveSound" type="AudioStreamPlayer" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/Sounds"]
+[node name="EvolveSound" type="AudioStreamPlayer" parent="Viewport/level/Dog/WeakPointContainer/Sounds"]
 stream = ExtResource( 60 )
 volume_db = -15.0
 
-[node name="StartEvolveSound" type="AudioStreamPlayer" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/Sounds"]
+[node name="StartEvolveSound" type="AudioStreamPlayer" parent="Viewport/level/Dog/WeakPointContainer/Sounds"]
 stream = ExtResource( 59 )
 volume_db = -10.0
 pitch_scale = 0.5
 
-[node name="WeakPointAnimationPlayer" type="AnimationPlayer" parent="Viewport/level/AnglerFishBoss/WeakPointContainer"]
+[node name="WeakPointAnimationPlayer" type="AnimationPlayer" parent="Viewport/level/Dog/WeakPointContainer"]
 root_node = NodePath("../..")
 autoplay = "idle"
 anims/RESET = SubResource( 36 )
@@ -14664,10 +14885,10 @@ anims/swim = SubResource( 44 )
 anims/turnLeftToRight = SubResource( 42 )
 anims/turnRightToLeft = SubResource( 43 )
 
-[node name="WeakEye" type="Spatial" parent="Viewport/level/AnglerFishBoss/WeakPointContainer"]
+[node name="WeakEye" type="Spatial" parent="Viewport/level/Dog/WeakPointContainer"]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.993174, 0 )
 
-[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/WeakEye"]
+[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/Dog/WeakPointContainer/WeakEye"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
 visible = false
 material_override = SubResource( 168 )
@@ -14680,7 +14901,7 @@ script = ExtResource( 13 )
 frame_delay = 0.3
 should_animate = false
 
-[node name="Sprite3D2" type="Sprite3D" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/WeakEye"]
+[node name="Sprite3D2" type="Sprite3D" parent="Viewport/level/Dog/WeakPointContainer/WeakEye"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.575426 )
 visible = false
 pixel_size = 0.12
@@ -14692,27 +14913,27 @@ script = ExtResource( 13 )
 frame_delay = 0.3
 should_animate = false
 
-[node name="TileSpikes" type="Spatial" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/WeakEye"]
+[node name="TileSpikes" type="Spatial" parent="Viewport/level/Dog/WeakPointContainer/WeakEye"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34734, -0.34734, 0 )
 visible = false
 
-[node name="Spikes3" type="MeshInstance" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/WeakEye/TileSpikes"]
+[node name="Spikes3" type="MeshInstance" parent="Viewport/level/Dog/WeakPointContainer/WeakEye/TileSpikes"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -0.611063, 0 )
 mesh = SubResource( 151 )
 
-[node name="Spikes4" type="MeshInstance" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/WeakEye/TileSpikes"]
+[node name="Spikes4" type="MeshInstance" parent="Viewport/level/Dog/WeakPointContainer/WeakEye/TileSpikes"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.384219, 0.61578, 1 )
 mesh = SubResource( 153 )
 
-[node name="Spikes5" type="MeshInstance" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/WeakEye/TileSpikes"]
+[node name="Spikes5" type="MeshInstance" parent="Viewport/level/Dog/WeakPointContainer/WeakEye/TileSpikes"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.09262, 0 )
 mesh = SubResource( 154 )
 
-[node name="Spikes6" type="MeshInstance" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/WeakEye/TileSpikes"]
+[node name="Spikes6" type="MeshInstance" parent="Viewport/level/Dog/WeakPointContainer/WeakEye/TileSpikes"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0231566, 0 )
 mesh = SubResource( 154 )
 
-[node name="SecretAnimationPlayer" type="AnimationPlayer" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/WeakEye"]
+[node name="SecretAnimationPlayer" type="AnimationPlayer" parent="Viewport/level/Dog/WeakPointContainer/WeakEye"]
 anims/RESET = SubResource( 157 )
 anims/blinkClose = SubResource( 158 )
 anims/blinkCloseFast = SubResource( 164 )
@@ -14721,78 +14942,78 @@ anims/blinkOpen = SubResource( 159 )
 anims/getHurt = SubResource( 160 )
 anims/hiddenTeleport = SubResource( 161 )
 
-[node name="Sounds" type="Spatial" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/WeakEye"]
+[node name="Sounds" type="Spatial" parent="Viewport/level/Dog/WeakPointContainer/WeakEye"]
 
-[node name="DieSound" type="AudioStreamPlayer" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/WeakEye/Sounds"]
+[node name="DieSound" type="AudioStreamPlayer" parent="Viewport/level/Dog/WeakPointContainer/WeakEye/Sounds"]
 stream = ExtResource( 67 )
 volume_db = -2.0
 pitch_scale = 0.9
 
-[node name="WakeUpSound" type="AudioStreamPlayer" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/WeakEye/Sounds"]
+[node name="WakeUpSound" type="AudioStreamPlayer" parent="Viewport/level/Dog/WeakPointContainer/WeakEye/Sounds"]
 stream = ExtResource( 86 )
 volume_db = -10.0
 pitch_scale = 0.5
 
-[node name="GoodnightSound" type="AudioStreamPlayer" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/WeakEye/Sounds"]
+[node name="GoodnightSound" type="AudioStreamPlayer" parent="Viewport/level/Dog/WeakPointContainer/WeakEye/Sounds"]
 stream = ExtResource( 85 )
 volume_db = -15.0
 pitch_scale = 0.75
 
-[node name="DieSound2" type="AudioStreamPlayer" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/WeakEye/Sounds"]
+[node name="DieSound2" type="AudioStreamPlayer" parent="Viewport/level/Dog/WeakPointContainer/WeakEye/Sounds"]
 stream = ExtResource( 79 )
 volume_db = -5.0
 
-[node name="DieSound3" type="AudioStreamPlayer" parent="Viewport/level/AnglerFishBoss/WeakPointContainer/WeakEye/Sounds"]
+[node name="DieSound3" type="AudioStreamPlayer" parent="Viewport/level/Dog/WeakPointContainer/WeakEye/Sounds"]
 stream = ExtResource( 86 )
 volume_db = -15.0
 
-[node name="WeakPointTarget" type="Spatial" parent="Viewport/level/AnglerFishBoss"]
+[node name="WeakPointTarget" type="Spatial" parent="Viewport/level/Dog"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.522, 1.884, 0 )
 
-[node name="Sounds" type="Spatial" parent="Viewport/level/AnglerFishBoss"]
+[node name="Sounds" type="Spatial" parent="Viewport/level/Dog"]
 
-[node name="SpawnSound" type="AudioStreamPlayer" parent="Viewport/level/AnglerFishBoss/Sounds"]
+[node name="SpawnSound" type="AudioStreamPlayer" parent="Viewport/level/Dog/Sounds"]
 stream = ExtResource( 45 )
 volume_db = -3.0
 
-[node name="AttackSound" type="AudioStreamPlayer" parent="Viewport/level/AnglerFishBoss/Sounds"]
+[node name="AttackSound" type="AudioStreamPlayer" parent="Viewport/level/Dog/Sounds"]
 stream = ExtResource( 70 )
 volume_db = -8.0
 pitch_scale = 1.2
 
-[node name="ScreamSound" type="AudioStreamPlayer" parent="Viewport/level/AnglerFishBoss/Sounds"]
+[node name="ScreamSound" type="AudioStreamPlayer" parent="Viewport/level/Dog/Sounds"]
 stream = ExtResource( 67 )
 volume_db = -8.0
 pitch_scale = 1.2
 
-[node name="AttackStartSound" type="AudioStreamPlayer" parent="Viewport/level/AnglerFishBoss/Sounds"]
+[node name="AttackStartSound" type="AudioStreamPlayer" parent="Viewport/level/Dog/Sounds"]
 stream = ExtResource( 77 )
 volume_db = -15.0
 pitch_scale = 1.1
 
-[node name="DieSound" type="AudioStreamPlayer" parent="Viewport/level/AnglerFishBoss/Sounds"]
+[node name="DieSound" type="AudioStreamPlayer" parent="Viewport/level/Dog/Sounds"]
 stream = ExtResource( 69 )
 volume_db = -13.0
 pitch_scale = 0.5
 
-[node name="NotDieSound" type="AudioStreamPlayer" parent="Viewport/level/AnglerFishBoss/Sounds"]
+[node name="NotDieSound" type="AudioStreamPlayer" parent="Viewport/level/Dog/Sounds"]
 stream = ExtResource( 70 )
 volume_db = -20.0
 pitch_scale = 0.8
 
-[node name="EvolveSound" type="AudioStreamPlayer" parent="Viewport/level/AnglerFishBoss/Sounds"]
+[node name="EvolveSound" type="AudioStreamPlayer" parent="Viewport/level/Dog/Sounds"]
 stream = ExtResource( 46 )
 volume_db = -15.0
 
-[node name="StartEvolveSound" type="AudioStreamPlayer" parent="Viewport/level/AnglerFishBoss/Sounds"]
+[node name="StartEvolveSound" type="AudioStreamPlayer" parent="Viewport/level/Dog/Sounds"]
 stream = ExtResource( 59 )
 volume_db = -10.0
 pitch_scale = 0.5
 
-[node name="Crystals" type="Spatial" parent="Viewport/level/AnglerFishBoss"]
+[node name="Crystals" type="Spatial" parent="Viewport/level/Dog"]
 transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -2, 5.07366, -2.13 )
 
-[node name="SecretAnimationPlayer" type="AnimationPlayer" parent="Viewport/level/AnglerFishBoss"]
+[node name="SecretAnimationPlayer" type="AnimationPlayer" parent="Viewport/level/Dog"]
 autoplay = "barfingSnails"
 anims/2secondPause = SubResource( 48 )
 anims/RESET = SubResource( 169 )
@@ -14817,108 +15038,108 @@ anims/stunIdle = SubResource( 178 )
 anims/turnLeftToRight = SubResource( 179 )
 anims/turnRightToLeft = SubResource( 180 )
 
-[node name="TailAnimationPlayer" type="AnimationPlayer" parent="Viewport/level/AnglerFishBoss"]
+[node name="TailAnimationPlayer" type="AnimationPlayer" parent="Viewport/level/Dog"]
 autoplay = "wiggle"
 anims/RESET = SubResource( 181 )
 anims/stunFall = SubResource( 34 )
 anims/stunIdle = SubResource( 35 )
 anims/wiggle = SubResource( 182 )
 
-[node name="DangleAnimationPlayer" type="AnimationPlayer" parent="Viewport/level/AnglerFishBoss"]
+[node name="DangleAnimationPlayer" type="AnimationPlayer" parent="Viewport/level/Dog"]
 anims/RESET = SubResource( 183 )
 
-[node name="InteractionArea" type="Area" parent="Viewport/level/AnglerFishBoss" groups=["malware"]]
+[node name="InteractionArea" type="Area" parent="Viewport/level/Dog" groups=["malware"]]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 script = ExtResource( 63 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/AnglerFishBoss/InteractionArea"]
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Dog/InteractionArea"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 184 )
 
-[node name="SmallInteractionArea" type="Area" parent="Viewport/level/AnglerFishBoss" groups=["malware"]]
+[node name="SmallInteractionArea" type="Area" parent="Viewport/level/Dog" groups=["malware"]]
 script = ExtResource( 34 )
 ignore_water = true
 
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/AnglerFishBoss/SmallInteractionArea"]
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Dog/SmallInteractionArea"]
 transform = Transform( 0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0, 0 )
 shape = SubResource( 185 )
 
-[node name="CubeCrystal" parent="Viewport/level/AnglerFishBoss" instance=ExtResource( 43 )]
+[node name="CubeCrystal" parent="Viewport/level/Dog" instance=ExtResource( 43 )]
 transform = Transform( 0.4, 0, 0, 0, 0.5, 0, 0, 0, 0.75, -6.80184, 2.6416, 0 )
 
-[node name="FakeCrystals" type="Spatial" parent="Viewport/level/AnglerFishBoss"]
+[node name="FakeCrystals" type="Spatial" parent="Viewport/level/Dog"]
 
-[node name="BabaYagaBoss" type="Spatial" parent="Viewport/level"]
+[node name="Dog2" type="Spatial" parent="Viewport/level"]
 transform = Transform( -1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, 19, 24, 0 )
 
-[node name="Sounds" type="Spatial" parent="Viewport/level/BabaYagaBoss"]
+[node name="Sounds" type="Spatial" parent="Viewport/level/Dog2"]
 
-[node name="SpawnSound" type="AudioStreamPlayer" parent="Viewport/level/BabaYagaBoss/Sounds"]
+[node name="SpawnSound" type="AudioStreamPlayer" parent="Viewport/level/Dog2/Sounds"]
 stream = ExtResource( 45 )
 volume_db = -3.0
 
-[node name="ShatterSound" type="AudioStreamPlayer" parent="Viewport/level/BabaYagaBoss/Sounds"]
+[node name="ShatterSound" type="AudioStreamPlayer" parent="Viewport/level/Dog2/Sounds"]
 stream = ExtResource( 74 )
 volume_db = -15.0
 pitch_scale = 0.7
 
-[node name="AttackSound" type="AudioStreamPlayer" parent="Viewport/level/BabaYagaBoss/Sounds"]
+[node name="AttackSound" type="AudioStreamPlayer" parent="Viewport/level/Dog2/Sounds"]
 stream = ExtResource( 70 )
 volume_db = -8.0
 pitch_scale = 1.2
 
-[node name="AttackStartSound" type="AudioStreamPlayer" parent="Viewport/level/BabaYagaBoss/Sounds"]
+[node name="AttackStartSound" type="AudioStreamPlayer" parent="Viewport/level/Dog2/Sounds"]
 stream = ExtResource( 77 )
 volume_db = -15.0
 pitch_scale = 1.1
 
-[node name="TweetSound" type="AudioStreamPlayer" parent="Viewport/level/BabaYagaBoss/Sounds"]
+[node name="TweetSound" type="AudioStreamPlayer" parent="Viewport/level/Dog2/Sounds"]
 stream = ExtResource( 53 )
 volume_db = -25.0
 pitch_scale = 0.3
 
-[node name="WakeUpSound" type="AudioStreamPlayer" parent="Viewport/level/BabaYagaBoss/Sounds"]
+[node name="WakeUpSound" type="AudioStreamPlayer" parent="Viewport/level/Dog2/Sounds"]
 stream = ExtResource( 64 )
 volume_db = -15.0
 pitch_scale = 0.9
 
-[node name="RunBawkSound" type="AudioStreamPlayer" parent="Viewport/level/BabaYagaBoss/Sounds"]
+[node name="RunBawkSound" type="AudioStreamPlayer" parent="Viewport/level/Dog2/Sounds"]
 stream = ExtResource( 51 )
 volume_db = -10.0
 
-[node name="EyeBlinkSound" type="AudioStreamPlayer" parent="Viewport/level/BabaYagaBoss/Sounds"]
+[node name="EyeBlinkSound" type="AudioStreamPlayer" parent="Viewport/level/Dog2/Sounds"]
 stream = ExtResource( 62 )
 volume_db = -15.0
 pitch_scale = 2.0
 
-[node name="FootstepSound" type="AudioStreamPlayer" parent="Viewport/level/BabaYagaBoss/Sounds"]
+[node name="FootstepSound" type="AudioStreamPlayer" parent="Viewport/level/Dog2/Sounds"]
 stream = ExtResource( 78 )
 volume_db = -16.0
 pitch_scale = 2.0
 
-[node name="SkidSound" type="AudioStreamPlayer" parent="Viewport/level/BabaYagaBoss/Sounds"]
+[node name="SkidSound" type="AudioStreamPlayer" parent="Viewport/level/Dog2/Sounds"]
 stream = ExtResource( 50 )
 volume_db = -22.0
 pitch_scale = 0.9
 
-[node name="CubeCrystal" parent="Viewport/level/BabaYagaBoss" instance=ExtResource( 43 )]
+[node name="CubeCrystal" parent="Viewport/level/Dog2" instance=ExtResource( 43 )]
 transform = Transform( 0.48, -7.10543e-15, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 11.9434, -2.13 )
 
-[node name="CubeContainer" parent="Viewport/level/BabaYagaBoss/CubeCrystal" index="0"]
+[node name="CubeContainer" parent="Viewport/level/Dog2/CubeCrystal" index="0"]
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
-[node name="MeshInstance" parent="Viewport/level/BabaYagaBoss/CubeCrystal/CubeContainer" index="0"]
+[node name="MeshInstance" parent="Viewport/level/Dog2/CubeCrystal/CubeContainer" index="0"]
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
-mesh = SubResource( 186 )
+mesh = SubResource( 266 )
 
-[node name="MeshInstance3" parent="Viewport/level/BabaYagaBoss/CubeCrystal/CubeContainer" index="1"]
+[node name="MeshInstance3" parent="Viewport/level/Dog2/CubeCrystal/CubeContainer" index="1"]
 transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
-mesh = SubResource( 187 )
+mesh = SubResource( 267 )
 
-[node name="MeshInstance2" parent="Viewport/level/BabaYagaBoss/CubeCrystal/CubeContainer" index="2"]
+[node name="MeshInstance2" parent="Viewport/level/Dog2/CubeCrystal/CubeContainer" index="2"]
 transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )
 
-[node name="LightAnimationPlayer" parent="Viewport/level/BabaYagaBoss/CubeCrystal" index="13"]
+[node name="LightAnimationPlayer" parent="Viewport/level/Dog2/CubeCrystal" index="13"]
 anims/RESET = SubResource( 189 )
 anims/fadeIn = SubResource( 190 )
 anims/fakeBreak = SubResource( 191 )
@@ -14926,9 +15147,9 @@ anims/lightUp = SubResource( 192 )
 anims/lightUpQuiet = SubResource( 193 )
 anims/omen = SubResource( 194 )
 
-[node name="SpriteContainer" type="Spatial" parent="Viewport/level/BabaYagaBoss"]
+[node name="SpriteContainer" type="Spatial" parent="Viewport/level/Dog2"]
 
-[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/BabaYagaBoss/SpriteContainer"]
+[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/Dog2/SpriteContainer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.79911, -4 )
 material_override = SubResource( 195 )
 pixel_size = 0.12
@@ -14940,10 +15161,10 @@ max_frames = 1
 overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
 overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
 
-[node name="NoteSpawner" type="Spatial" parent="Viewport/level/BabaYagaBoss/SpriteContainer/Sprite3D"]
+[node name="NoteSpawner" type="Spatial" parent="Viewport/level/Dog2/SpriteContainer/Sprite3D"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.35757, -1.44472, 0 )
 
-[node name="EyeSprite3D" type="Sprite3D" parent="Viewport/level/BabaYagaBoss/SpriteContainer"]
+[node name="EyeSprite3D" type="Sprite3D" parent="Viewport/level/Dog2/SpriteContainer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.79911, -4 )
 material_override = SubResource( 196 )
 pixel_size = 0.12
@@ -14955,10 +15176,10 @@ max_frames = 1
 overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
 overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
 
-[node name="EyeSpawner" type="Spatial" parent="Viewport/level/BabaYagaBoss/SpriteContainer/EyeSprite3D"]
+[node name="EyeSpawner" type="Spatial" parent="Viewport/level/Dog2/SpriteContainer/EyeSprite3D"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.39798, 1.46491, 0 )
 
-[node name="LegsSprite3D" type="Sprite3D" parent="Viewport/level/BabaYagaBoss/SpriteContainer"]
+[node name="LegsSprite3D" type="Sprite3D" parent="Viewport/level/Dog2/SpriteContainer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.79911, -4 )
 material_override = SubResource( 197 )
 pixel_size = 0.12
@@ -14970,7 +15191,7 @@ max_frames = 1
 overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
 overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
 
-[node name="HouseSprite" type="Sprite3D" parent="Viewport/level/BabaYagaBoss/SpriteContainer"]
+[node name="HouseSprite" type="Sprite3D" parent="Viewport/level/Dog2/SpriteContainer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.79911, -4.45667 )
 material_override = SubResource( 198 )
 pixel_size = 0.12
@@ -14980,14 +15201,14 @@ max_frames = 1
 overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
 overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
 
-[node name="FallthroughSolid" type="Area" parent="Viewport/level/BabaYagaBoss/SpriteContainer/HouseSprite" groups=["fallthrough"]]
+[node name="FallthroughSolid" type="Area" parent="Viewport/level/Dog2/SpriteContainer/HouseSprite" groups=["fallthrough"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.05951, 3 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/BabaYagaBoss/SpriteContainer/HouseSprite/FallthroughSolid"]
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Dog2/SpriteContainer/HouseSprite/FallthroughSolid"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.121865, 2.98436, 2 )
 shape = SubResource( 199 )
 
-[node name="BodySprite" type="Sprite3D" parent="Viewport/level/BabaYagaBoss/SpriteContainer"]
+[node name="BodySprite" type="Sprite3D" parent="Viewport/level/Dog2/SpriteContainer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6.197, -4.457 )
 visible = false
 material_override = SubResource( 200 )
@@ -15000,7 +15221,7 @@ max_frames = 1
 overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
 overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
 
-[node name="SecretAnimationPlayer" type="AnimationPlayer" parent="Viewport/level/BabaYagaBoss"]
+[node name="SecretAnimationPlayer" type="AnimationPlayer" parent="Viewport/level/Dog2"]
 autoplay = "run"
 anims/RESET = SubResource( 201 )
 anims/dieMove = SubResource( 202 )
@@ -15015,32 +15236,32 @@ anims/shellExplode = SubResource( 210 )
 anims/suddenlyBrake = SubResource( 211 )
 anims/wakeup = SubResource( 212 )
 
-[node name="CrowPerch" type="Spatial" parent="Viewport/level/BabaYagaBoss"]
+[node name="CrowPerch" type="Spatial" parent="Viewport/level/Dog2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 8.02163, 0 )
 
-[node name="PassiveInteractionArea" type="Area" parent="Viewport/level/BabaYagaBoss" groups=["enemies"]]
+[node name="PassiveInteractionArea" type="Area" parent="Viewport/level/Dog2" groups=["enemies"]]
 script = ExtResource( 34 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/BabaYagaBoss/PassiveInteractionArea"]
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Dog2/PassiveInteractionArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.528, 1, -11 )
 shape = SubResource( 213 )
 
-[node name="WeakEyeInteractionArea" type="Area" parent="Viewport/level/BabaYagaBoss" groups=["bug"]]
+[node name="WeakEyeInteractionArea" type="Area" parent="Viewport/level/Dog2" groups=["bug"]]
 script = ExtResource( 34 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/BabaYagaBoss/WeakEyeInteractionArea"]
+[node name="CollisionShape" type="CollisionShape" parent="Viewport/level/Dog2/WeakEyeInteractionArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.527673, 3, 0 )
 shape = SubResource( 214 )
 disabled = true
 
-[node name="CrowContainer" type="Spatial" parent="Viewport/level/BabaYagaBoss"]
+[node name="CrowContainer" type="Spatial" parent="Viewport/level/Dog2"]
 
-[node name="Door" parent="Viewport/level/BabaYagaBoss" instance=ExtResource( 71 )]
+[node name="Door" parent="Viewport/level/Dog2" instance=ExtResource( 71 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.30329, 0, 0 )
 visible = false
 script = ExtResource( 83 )
 
-[node name="AnimationPlayer" parent="Viewport/level/BabaYagaBoss/Door" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/Dog2/Door" index="6"]
 anims/RESET = SubResource( 215 )
 anims/catLocked = SubResource( 216 )
 anims/crystalLocked = SubResource( 217 )
@@ -15055,97 +15276,97 @@ anims/locked = SubResource( 225 )
 anims/pyramidLocked = SubResource( 226 )
 anims/shroomLocked = SubResource( 227 )
 
-[node name="ActiveCollisionShape" parent="Viewport/level/BabaYagaBoss/Door/InteractionArea" index="0"]
+[node name="ActiveCollisionShape" parent="Viewport/level/Dog2/Door/InteractionArea" index="0"]
 shape = SubResource( 228 )
 
-[node name="PassiveCollisionShape" parent="Viewport/level/BabaYagaBoss/Door/InteractionArea" index="1"]
+[node name="PassiveCollisionShape" parent="Viewport/level/Dog2/Door/InteractionArea" index="1"]
 shape = SubResource( 229 )
 
-[node name="ActiveCollisionShape" parent="Viewport/level/BabaYagaBoss/Door/InteractionArea2" index="0"]
+[node name="ActiveCollisionShape" parent="Viewport/level/Dog2/Door/InteractionArea2" index="0"]
 shape = SubResource( 230 )
 
-[node name="CollisionShape" parent="Viewport/level/BabaYagaBoss/Door/NPC/SmallInteractionArea" index="0"]
+[node name="CollisionShape" parent="Viewport/level/Dog2/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 231 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/BabaYagaBoss/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="0"]
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Dog2/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="0"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/BabaYagaBoss/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="1"]
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Dog2/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="1"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/BabaYagaBoss/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="2"]
+[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/Dog2/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="2"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/BabaYagaBoss/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="0"]
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Dog2/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="0"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/BabaYagaBoss/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="1"]
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Dog2/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="1"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/BabaYagaBoss/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="2"]
+[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/Dog2/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="2"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/BabaYagaBoss/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="0"]
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Dog2/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="0"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/BabaYagaBoss/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="1"]
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Dog2/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="1"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/BabaYagaBoss/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="2"]
+[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/Dog2/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="2"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/BabaYagaBoss/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="0"]
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Dog2/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="0"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/BabaYagaBoss/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="1"]
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Dog2/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="1"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/BabaYagaBoss/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="2"]
+[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/Dog2/Door/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="2"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="CollisionShape" parent="Viewport/level/BabaYagaBoss/Door/FallthroughSolid" index="0"]
+[node name="CollisionShape" parent="Viewport/level/Dog2/Door/FallthroughSolid" index="0"]
 shape = SubResource( 232 )
 
-[node name="HighPriestessBoss" type="Spatial" parent="Viewport/level"]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -8, 21, -9 )
+[node name="Dog3" type="Spatial" parent="Viewport/level"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -6.63808, 24.2863, -9 )
 
-[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/HighPriestessBoss" groups=["sprite"]]
+[node name="Sprite3D" type="Sprite3D" parent="Viewport/level/Dog3" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
 material_override = SubResource( 233 )
 pixel_size = 0.125
@@ -15154,171 +15375,171 @@ hframes = 4
 script = ExtResource( 13 )
 max_frames = 4
 
-[node name="SpriteBreakUpExperiment" type="Spatial" parent="Viewport/level/HighPriestessBoss"]
+[node name="SpriteBreakUpExperiment" type="Spatial" parent="Viewport/level/Dog3"]
 visible = false
 
-[node name="MrMoTex" parent="Viewport/level/HighPriestessBoss/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
+[node name="MrMoTex" parent="Viewport/level/Dog3/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 2.5, -1 )
 material_override = SubResource( 234 )
 frame = 291
 
-[node name="MrMoTex2" parent="Viewport/level/HighPriestessBoss/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
+[node name="MrMoTex2" parent="Viewport/level/Dog3/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 2.5, -1 )
 material_override = SubResource( 234 )
 frame = 291
 
-[node name="MrMoTex3" parent="Viewport/level/HighPriestessBoss/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
+[node name="MrMoTex3" parent="Viewport/level/Dog3/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 3.5, -1 )
 material_override = SubResource( 234 )
 frame = 291
 
-[node name="MrMoTex16" parent="Viewport/level/HighPriestessBoss/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
+[node name="MrMoTex16" parent="Viewport/level/Dog3/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 7.5, -1 )
 material_override = SubResource( 234 )
 frame = 734
 
-[node name="MrMoTex17" parent="Viewport/level/HighPriestessBoss/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
+[node name="MrMoTex17" parent="Viewport/level/Dog3/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 7.5, -1 )
 material_override = SubResource( 234 )
 frame = 735
 
-[node name="MrMoTex18" parent="Viewport/level/HighPriestessBoss/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
+[node name="MrMoTex18" parent="Viewport/level/Dog3/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 6.5, -1 )
 material_override = SubResource( 234 )
 flip_v = true
 frame = 734
 
-[node name="MrMoTex19" parent="Viewport/level/HighPriestessBoss/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
+[node name="MrMoTex19" parent="Viewport/level/Dog3/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 6.5, -1 )
 material_override = SubResource( 234 )
 flip_v = true
 frame = 735
 
-[node name="MrMoTex4" parent="Viewport/level/HighPriestessBoss/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
+[node name="MrMoTex4" parent="Viewport/level/Dog3/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 3.5, -1 )
 material_override = SubResource( 234 )
 frame = 603
 
-[node name="MrMoTex8" parent="Viewport/level/HighPriestessBoss/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
+[node name="MrMoTex8" parent="Viewport/level/Dog3/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
 transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 13.5, 4.5, -1 )
 material_override = SubResource( 234 )
 flip_v = true
 frame = 429
 
-[node name="MrMoTex7" parent="Viewport/level/HighPriestessBoss/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
+[node name="MrMoTex7" parent="Viewport/level/Dog3/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 3.5, -1 )
 material_override = SubResource( 234 )
 frame = 260
 
-[node name="MrMoTex5" parent="Viewport/level/HighPriestessBoss/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
+[node name="MrMoTex5" parent="Viewport/level/Dog3/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 2.5, -1 )
 material_override = SubResource( 234 )
 frame = 699
 
-[node name="MrMoTex9" parent="Viewport/level/HighPriestessBoss/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
+[node name="MrMoTex9" parent="Viewport/level/Dog3/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 1.5, -1 )
 material_override = SubResource( 234 )
 frame = 272
 
-[node name="MrMoTex10" parent="Viewport/level/HighPriestessBoss/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
+[node name="MrMoTex10" parent="Viewport/level/Dog3/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0.5, -1 )
 material_override = SubResource( 234 )
 frame = 272
 
-[node name="MrMoTex11" parent="Viewport/level/HighPriestessBoss/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
+[node name="MrMoTex11" parent="Viewport/level/Dog3/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0.5, -1 )
 material_override = SubResource( 234 )
 frame = 272
 
-[node name="MrMoTex15" parent="Viewport/level/HighPriestessBoss/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
+[node name="MrMoTex15" parent="Viewport/level/Dog3/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0.5, -1 )
 material_override = SubResource( 234 )
 frame = 139
 
-[node name="MrMoTex12" parent="Viewport/level/HighPriestessBoss/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
+[node name="MrMoTex12" parent="Viewport/level/Dog3/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, -0.5, -1 )
 material_override = SubResource( 234 )
 frame = 272
 
-[node name="MrMoTex13" parent="Viewport/level/HighPriestessBoss/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
+[node name="MrMoTex13" parent="Viewport/level/Dog3/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, -0.5, -1 )
 material_override = SubResource( 234 )
 frame = 272
 
-[node name="MrMoTex14" parent="Viewport/level/HighPriestessBoss/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
+[node name="MrMoTex14" parent="Viewport/level/Dog3/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, -0.5, -1 )
 material_override = SubResource( 234 )
 frame = 272
 
-[node name="MrMoTex6" parent="Viewport/level/HighPriestessBoss/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
+[node name="MrMoTex6" parent="Viewport/level/Dog3/SpriteBreakUpExperiment" instance=ExtResource( 44 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 1.5, -1 )
 material_override = SubResource( 234 )
 frame = 639
 
-[node name="SecretAnimationPlayer" type="AnimationPlayer" parent="Viewport/level/HighPriestessBoss"]
+[node name="SecretAnimationPlayer" type="AnimationPlayer" parent="Viewport/level/Dog3"]
 anims/RESET = SubResource( 235 )
 anims/defeatedIdle = SubResource( 236 )
 anims/defeatedStart = SubResource( 237 )
 anims/gotHurt = SubResource( 238 )
 anims/windUpCast = SubResource( 239 )
 
-[node name="Sounds" type="Spatial" parent="Viewport/level/HighPriestessBoss"]
+[node name="Sounds" type="Spatial" parent="Viewport/level/Dog3"]
 
-[node name="LaughSound" type="AudioStreamPlayer" parent="Viewport/level/HighPriestessBoss/Sounds"]
+[node name="LaughSound" type="AudioStreamPlayer" parent="Viewport/level/Dog3/Sounds"]
 stream = ExtResource( 81 )
 volume_db = -10.0
 
-[node name="SpawnSound" type="AudioStreamPlayer" parent="Viewport/level/HighPriestessBoss/Sounds"]
+[node name="SpawnSound" type="AudioStreamPlayer" parent="Viewport/level/Dog3/Sounds"]
 stream = ExtResource( 45 )
 volume_db = -3.0
 
-[node name="AttackSound" type="AudioStreamPlayer" parent="Viewport/level/HighPriestessBoss/Sounds"]
+[node name="AttackSound" type="AudioStreamPlayer" parent="Viewport/level/Dog3/Sounds"]
 stream = ExtResource( 70 )
 volume_db = -8.0
 pitch_scale = 1.2
 
-[node name="AttackStartSound" type="AudioStreamPlayer" parent="Viewport/level/HighPriestessBoss/Sounds"]
+[node name="AttackStartSound" type="AudioStreamPlayer" parent="Viewport/level/Dog3/Sounds"]
 stream = ExtResource( 77 )
 volume_db = -15.0
 pitch_scale = 1.1
 
-[node name="SpawnSavePointSound" type="AudioStreamPlayer" parent="Viewport/level/HighPriestessBoss/Sounds"]
+[node name="SpawnSavePointSound" type="AudioStreamPlayer" parent="Viewport/level/Dog3/Sounds"]
 stream = ExtResource( 41 )
 volume_db = -20.0
 pitch_scale = 0.9
 
-[node name="DirectionalLight" type="DirectionalLight" parent="Viewport/level/HighPriestessBoss"]
+[node name="DirectionalLight" type="DirectionalLight" parent="Viewport/level/Dog3"]
 transform = Transform( 1, 0, 0, 0, 0.589523, 0.807752, 0, -0.807752, 0.589523, 0, 12.528, 4.47 )
 light_energy = 7.0
 light_indirect_energy = 0.0
 
-[node name="Crystals" type="Spatial" parent="Viewport/level/HighPriestessBoss"]
+[node name="Crystals" type="Spatial" parent="Viewport/level/Dog3"]
 transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 1, 3.07366, -2.13 )
 
-[node name="HighpriestessCrystal" parent="Viewport/level/HighPriestessBoss/Crystals" instance=ExtResource( 42 )]
+[node name="HighpriestessCrystal" parent="Viewport/level/Dog3/Crystals" instance=ExtResource( 42 )]
 transform = Transform( 0.979341, -0.0281433, -0.20025, 0, 0.990268, -0.139173, 0.202218, 0.136298, 0.96981, -3.71514, 7, -1.78821 )
 visible = true
 
-[node name="MeshInstance2" parent="Viewport/level/HighPriestessBoss/Crystals/HighpriestessCrystal/CubeContainer" index="0"]
+[node name="MeshInstance2" parent="Viewport/level/Dog3/Crystals/HighpriestessCrystal/CubeContainer" index="0"]
 transform = Transform( 1, -1.86265e-09, -1.49012e-08, -3.72529e-09, 0.7, 0, 0, 0, 1, -1.19209e-07, 0.241481, -0.0808809 )
 
-[node name="HighpriestessCrystal2" parent="Viewport/level/HighPriestessBoss/Crystals" instance=ExtResource( 42 )]
+[node name="HighpriestessCrystal2" parent="Viewport/level/Dog3/Crystals" instance=ExtResource( 42 )]
 transform = Transform( 1, 0, 0, 0, 0.990268, -0.139173, 0, 0.139173, 0.990268, 4, 7, -1 )
 visible = true
 
-[node name="HighpriestessCrystal3" parent="Viewport/level/HighPriestessBoss/Crystals" instance=ExtResource( 42 )]
+[node name="HighpriestessCrystal3" parent="Viewport/level/Dog3/Crystals" instance=ExtResource( 42 )]
 transform = Transform( 1, 0, 0, 0, 0.990268, -0.139173, 0, 0.139173, 0.990268, 0, 7.911, -4 )
 visible = true
 
-[node name="HighpriestessCrystal4" parent="Viewport/level/HighPriestessBoss/Crystals" instance=ExtResource( 42 )]
+[node name="HighpriestessCrystal4" parent="Viewport/level/Dog3/Crystals" instance=ExtResource( 42 )]
 transform = Transform( 1, 0, 0, 0, 0.990268, -0.139173, 0, 0.139173, 0.990268, -2, 5.967, 3.33 )
 visible = true
 
-[node name="HighpriestessCrystal5" parent="Viewport/level/HighPriestessBoss/Crystals" instance=ExtResource( 42 )]
+[node name="HighpriestessCrystal5" parent="Viewport/level/Dog3/Crystals" instance=ExtResource( 42 )]
 transform = Transform( 1, 0, 0, 0, 0.990268, -0.139173, 0, 0.139173, 0.990268, 2, 5.967, 3.33 )
 visible = true
 
-[node name="StaffSpawnPoint" type="Sprite3D" parent="Viewport/level/HighPriestessBoss" groups=["priestess_landing"]]
+[node name="StaffSpawnPoint" type="Sprite3D" parent="Viewport/level/Dog3" groups=["priestess_landing"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.04, 2.62, 1 )
 visible = false
 pixel_size = 0.12
@@ -15334,14 +15555,13 @@ grav = 0
 shape = SubResource( 244 )
 
 [node name="Sprite3D" parent="Viewport/level/BabushkaCat" index="3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345, 0 )
 frame = 16
 
 [node name="CollisionShape" parent="Viewport/level/BabushkaCat/FallthroughSolid" index="0"]
 shape = SubResource( 245 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 89 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 3, 7, 0 )
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 3, 32, 0 )
 grav = 0
 
 [node name="ElderTadpoleNPC" parent="Viewport/level" instance=ExtResource( 88 )]
@@ -15349,10 +15569,13 @@ transform = Transform( -2, 0, -8.74228e-08, 0, 2, 0, 1.74846e-07, 0, -1, -15, 4.
 grav = 0
 
 [node name="BroomUpgradeCrone" parent="Viewport/level" instance=ExtResource( 90 )]
-transform = Transform( -2, 0, -8.74228e-08, 0, 2, 0, 1.74846e-07, 0, -1, -21.6351, 8.67571, 0 )
+transform = Transform( -3, 0, -1.50996e-07, 0, 3, 0, 4.52987e-07, 0, -1, -21.6351, 8.67571, 0 )
 
 [node name="CollisionShape" parent="Viewport/level/BroomUpgradeCrone/SmallInteractionArea" index="0"]
 shape = SubResource( 262 )
+
+[node name="Sprite3D" parent="Viewport/level/BroomUpgradeCrone" index="3"]
+material_override = SubResource( 268 )
 
 [node name="CollisionShape" parent="Viewport/level/BroomUpgradeCrone/FallthroughSolid" index="0"]
 shape = SubResource( 263 )
@@ -15476,6 +15699,228 @@ visible = false
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 31.577, 15.5512, 0 )
 grav = 0
 
+[node name="SporeElderNPC" parent="Viewport/level" instance=ExtResource( 89 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -9.62169, 1, 0 )
+grav = 0
+bbText = "just [X] more Crystals to awaken! 
+our prayers are stronger
+together."
+
+[node name="CollisionShape" parent="Viewport/level/SporeElderNPC/SmallInteractionArea" index="0"]
+shape = SubResource( 269 )
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/SporeElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/SporeElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/SporeElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/SporeElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/SporeElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/SporeElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/SporeElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/SporeElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Sprite3D" parent="Viewport/level/SporeElderNPC" index="3"]
+frame = 64
+
+[node name="AnimationPlayer" parent="Viewport/level/SporeElderNPC" index="4"]
+anims/default = SubResource( 270 )
+anims/fall = SubResource( 271 )
+anims/flickerOn = SubResource( 272 )
+anims/jump = SubResource( 273 )
+anims/land = SubResource( 274 )
+anims/stand = SubResource( 275 )
+anims/walk = SubResource( 276 )
+anims/walkStart = SubResource( 277 )
+
+[node name="CollisionShape" parent="Viewport/level/SporeElderNPC/FallthroughSolid" index="0"]
+shape = SubResource( 278 )
+
+[node name="FishElderNPC" parent="Viewport/level" instance=ExtResource( 89 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -6, 5.10242, 0 )
+grav = 0
+bbText = "just [X] more Crystals to awaken! 
+our prayers are stronger
+together."
+
+[node name="CollisionShape" parent="Viewport/level/FishElderNPC/SmallInteractionArea" index="0"]
+shape = SubResource( 279 )
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/FishElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/FishElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/FishElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/FishElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/FishElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/FishElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/FishElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/FishElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Sprite3D" parent="Viewport/level/FishElderNPC" index="3"]
+frame = 66
+
+[node name="AnimationPlayer" parent="Viewport/level/FishElderNPC" index="4"]
+anims/default = SubResource( 280 )
+anims/fall = SubResource( 281 )
+anims/flickerOn = SubResource( 282 )
+anims/jump = SubResource( 283 )
+anims/land = SubResource( 284 )
+anims/stand = SubResource( 285 )
+anims/walk = SubResource( 286 )
+anims/walkStart = SubResource( 287 )
+
+[node name="CollisionShape" parent="Viewport/level/FishElderNPC/FallthroughSolid" index="0"]
+shape = SubResource( 288 )
+
+[node name="WormElderNPC" parent="Viewport/level" instance=ExtResource( 89 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -11, 9.68176, 0 )
+grav = 0
+bbText = "just [X] more Crystals to awaken! 
+our prayers are stronger
+together."
+
+[node name="CollisionShape" parent="Viewport/level/WormElderNPC/SmallInteractionArea" index="0"]
+shape = SubResource( 289 )
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/WormElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/WormElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/WormElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/WormElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/WormElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/WormElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/WormElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="0"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/WormElderNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Sprite3D" parent="Viewport/level/WormElderNPC" index="3"]
+frame = 68
+
+[node name="AnimationPlayer" parent="Viewport/level/WormElderNPC" index="4"]
+anims/default = SubResource( 290 )
+anims/fall = SubResource( 291 )
+anims/flickerOn = SubResource( 292 )
+anims/jump = SubResource( 293 )
+anims/land = SubResource( 294 )
+anims/stand = SubResource( 295 )
+anims/walk = SubResource( 296 )
+anims/walkStart = SubResource( 297 )
+
+[node name="CollisionShape" parent="Viewport/level/WormElderNPC/FallthroughSolid" index="0"]
+shape = SubResource( 298 )
+
 [node name="Viewport2" parent="." instance=ExtResource( 11 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -15508,13 +15953,13 @@ material = SubResource( 243 )
 
 [editable path="Viewport/level/Player"]
 [editable path="Viewport/level/Player/TextContainer"]
-[editable path="Viewport/level/ClaydolBoss/CubeCrystal"]
-[editable path="Viewport/level/ClaydolBoss/CubeCrystal/GlitchAura"]
-[editable path="Viewport/level/BabaYagaBoss/CubeCrystal"]
-[editable path="Viewport/level/BabaYagaBoss/CubeCrystal/GlitchAura"]
-[editable path="Viewport/level/BabaYagaBoss/Door"]
-[editable path="Viewport/level/BabaYagaBoss/Door/NPC/NPC TextBox"]
-[editable path="Viewport/level/HighPriestessBoss/Crystals/HighpriestessCrystal"]
+[editable path="Viewport/level/Dog5/CubeCrystal"]
+[editable path="Viewport/level/Dog5/CubeCrystal/GlitchAura"]
+[editable path="Viewport/level/Dog2/CubeCrystal"]
+[editable path="Viewport/level/Dog2/CubeCrystal/GlitchAura"]
+[editable path="Viewport/level/Dog2/Door"]
+[editable path="Viewport/level/Dog2/Door/NPC/NPC TextBox"]
+[editable path="Viewport/level/Dog3/Crystals/HighpriestessCrystal"]
 [editable path="Viewport/level/BabushkaCat"]
 [editable path="Viewport/level/BabushkaCat/NPC TextBox"]
 [editable path="Viewport/level/BroomUpgradeCrone"]
@@ -15525,5 +15970,11 @@ material = SubResource( 243 )
 [editable path="Viewport/level/DustFarmer"]
 [editable path="Viewport/level/DustFarmer/NPC"]
 [editable path="Viewport/level/DustFarmer/NPC/NPC TextBox"]
+[editable path="Viewport/level/SporeElderNPC"]
+[editable path="Viewport/level/SporeElderNPC/NPC TextBox"]
+[editable path="Viewport/level/FishElderNPC"]
+[editable path="Viewport/level/FishElderNPC/NPC TextBox"]
+[editable path="Viewport/level/WormElderNPC"]
+[editable path="Viewport/level/WormElderNPC/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

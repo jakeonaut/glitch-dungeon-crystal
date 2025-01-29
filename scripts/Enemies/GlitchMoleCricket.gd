@@ -152,11 +152,11 @@ func _process(delta):
                         digTiles(getTilesLeftOf(getLevelTiles(), 0.5, is_builder), true)
                         digTiles(getTilesLeftOf(getFakeLevelTiles()), false)
                     elif my_up_vector.y == 1:
-                        digTiles(getTilesBelow(getLevelTiles(), is_builder), true)
+                        digTiles(getTilesBelow(getLevelTiles(), 0.1, is_builder), true)
                         digTiles(getTilesBelow(getFakeLevelTiles()), false)
                     else:
                         if my_up_vector.y == -1:
-                            digTiles(getTilesAbove(getLevelTiles(), is_builder), true)
+                            digTiles(getTilesAbove(getLevelTiles(), 0.1, is_builder), true)
                             digTiles(getTilesAbove(getFakeLevelTiles()), false)
                         elif my_up_vector.x == 1:
                             digTiles(getTilesLeftOf(getLevelTiles(), 0.5, is_builder), true)

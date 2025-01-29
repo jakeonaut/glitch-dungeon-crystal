@@ -22,9 +22,9 @@ func _process(delta):
     dig_timer = 0
 
     if my_up_vector.y == 1:
-      digTiles(getTilesBelow(level.levelTiles, true), true)
+      digTiles(getTilesBelow(level.levelTiles, 0.1, true), true)
     elif my_up_vector.y == -1:
-      digTiles(getTilesAbove(level.levelTiles, true), true)
+      digTiles(getTilesAbove(level.levelTiles, 0.1, true), true)
     elif my_up_vector.x == 1:
       digTiles(getTilesLeftOf(level.levelTiles, 0.5, true), true)
     elif my_up_vector.x == -1:
@@ -93,20 +93,20 @@ export var lb = -0.72
 export var rb = .72
 export var tb = 1.0
 export var bb = -1.0
-func getTilesBelow(currLevelTiles, ignore_just_give_me_coords = false):
+func getTilesBelow(currLevelTiles, buffer = 0.1, ignore_just_give_me_coords = false):
   var solidTilesBelow = [null, null, null]
   var x = global_transform.origin.x
   var y = global_transform.origin.y
   var z = global_transform.origin.z
   
   if currLevelTiles != null and lb != null and bb != null and rb != null and tb != null:
-    var coords_a = currLevelTiles.world_to_map(Vector3(x + lb, y + bb - 0.1, z))
+    var coords_a = currLevelTiles.world_to_map(Vector3(x + lb, y + bb - buffer, z))
     var tile_type_a = currLevelTiles.get_cell_item(coords_a.x, coords_a.y, coords_a.z)
 
-    var coords_b = currLevelTiles.world_to_map(Vector3(x + rb, y + bb - 0.1, z))
+    var coords_b = currLevelTiles.world_to_map(Vector3(x + rb, y + bb - buffer, z))
     var tile_type_b = currLevelTiles.get_cell_item(coords_b.x, coords_b.y, coords_b.z)
 
-    var coords_mid = currLevelTiles.world_to_map(Vector3(x, y + bb - 0.1, z))
+    var coords_mid = currLevelTiles.world_to_map(Vector3(x, y + bb - buffer, z))
     var tile_type_mid = currLevelTiles.get_cell_item(coords_mid.x, coords_mid.y, coords_mid.z)
 
     if level.levelTiles.isTileSolid(tile_type_a) or ignore_just_give_me_coords:
@@ -118,20 +118,20 @@ func getTilesBelow(currLevelTiles, ignore_just_give_me_coords = false):
 
   return solidTilesBelow
 
-func getTilesAbove(currLevelTiles, ignore_just_give_me_coords = false):
+func getTilesAbove(currLevelTiles, buffer = 0.1, ignore_just_give_me_coords = false):
   var solidTilesAbove = [null, null, null]
   var x = global_transform.origin.x
   var y = global_transform.origin.y
   var z = global_transform.origin.z
   
   if currLevelTiles != null and lb != null and bb != null and rb != null and tb != null:
-    var coords_a = currLevelTiles.world_to_map(Vector3(x + lb, y + tb + 0.1, z))
+    var coords_a = currLevelTiles.world_to_map(Vector3(x + lb, y + tb + buffer, z))
     var tile_type_a = currLevelTiles.get_cell_item(coords_a.x, coords_a.y, coords_a.z)
 
-    var coords_b = currLevelTiles.world_to_map(Vector3(x + rb, y + tb + 0.1, z))
+    var coords_b = currLevelTiles.world_to_map(Vector3(x + rb, y + tb + buffer, z))
     var tile_type_b = currLevelTiles.get_cell_item(coords_b.x, coords_b.y, coords_b.z)
 
-    var coords_mid = currLevelTiles.world_to_map(Vector3(x, y + tb + 0.1, z))
+    var coords_mid = currLevelTiles.world_to_map(Vector3(x, y + tb + buffer, z))
     var tile_type_mid = currLevelTiles.get_cell_item(coords_mid.x, coords_mid.y, coords_mid.z)
 
     if level.levelTiles.isTileSolid(tile_type_a) or ignore_just_give_me_coords:
