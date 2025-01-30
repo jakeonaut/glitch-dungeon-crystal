@@ -409,6 +409,9 @@ func _process(delta):
   processBroomRenderLogic(delta)
   processBagRenderLogic(delta)
   if global.isEnteringRoom:
+    if "nterDoor" in aniPlayer.assigned_animation:
+      spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x
+      spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y + 1.685 if aniPlayer.assigned_animation == "preEnterDoor" else self.global_transform.origin.y + 1.3
     return
   if level.pacman_wrapping:
     camera_target_y_pos = global_transform.origin.y
@@ -442,10 +445,15 @@ func _process(delta):
     spriteOpacity = newSpriteOpacity
     mySprite.get_material_override().set_shader_param("opacity", spriteOpacity)
     broomSpriteVisible.get_material_override().set_shader_param("opacity", spriteOpacity)
-  if mySprite.flip_h:
-    spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x - 0.25
+  if "nterDoor" in aniPlayer.assigned_animation:
+    spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x
+    spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y + 1.685 if aniPlayer.assigned_animation == "preEnterDoor" else self.global_transform.origin.y + 1.5
   else:
-    spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x + 0.25
+    spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y + 1.935
+    if mySprite.flip_h:
+      spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x - 0.25
+    else:
+      spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x + 0.25
   spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.userSettings["colorblindMode"] and transformation == TransformationState.NORMAL
 
   if global.isPauseMenuOpen:

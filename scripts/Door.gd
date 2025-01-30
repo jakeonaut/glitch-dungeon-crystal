@@ -473,7 +473,8 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
         getPlayer().tryDieToEnemy(0, true, true, true)
       getPlayer().aniPlayer.stop()
       getPlayer().aniPlayer.clear_queue()
-      getPlayer().aniPlayer.play("enterDoor")
+      getPlayer().aniPlayer.play("preEnterDoor")
+      getPlayer().aniPlayer.queue("enterDoor")
       getPlayer().playBounce("land")
     getPlayer().pauseAnimation = true
     getPlayer().pauseInput = true

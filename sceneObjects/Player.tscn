@@ -1,4 +1,4 @@
-[gd_scene load_steps=188 format=2]
+[gd_scene load_steps=189 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -2032,7 +2032,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=49]
 resource_name = "enterDoor"
-length = 2.0
+length = 1.8
 step = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
@@ -2041,10 +2041,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 56, 59, 58, 59, 58, 59, 58, 59 ]
+"values": [ 59, 58, 59, 58, 59, 58, 59 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
@@ -2053,10 +2053,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 59, 58, 59, 58, 59, 58, 59 ]
+"values": [ 59, 58, 59, 58, 59, 58, 59 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
@@ -2077,7 +2077,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ Vector3( -0.515185, -0.0372463, 1.6 ), Vector3( 0.484815, -0.0372463, 1.6 ), Vector3( -0.515185, -0.0372463, 1.6 ), Vector3( 0.484815, -0.0372463, 1.6 ), Vector3( -0.515185, -0.0372463, 1.6 ), Vector3( 0.484815, -0.0372463, 1.6 ), Vector3( -0.515185, -0.0372463, 1.6 ), Vector3( 0.484815, -0.0372463, 1.6 ) ]
@@ -2089,10 +2089,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0, 58 ]
+"values": [ 58 ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("SpriteContainer/Sprite3DMushroomAnimated:translation")
@@ -2101,10 +2101,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector3( 0, 1.8413, 1 ), Vector3( 0, 1.51632, 1 ) ]
+"values": [ Vector3( 0, 1.51632, 1 ) ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:rotation_degrees")
@@ -3105,6 +3105,95 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ Vector3( 0, 1.7, 1 ) ]
+}
+
+[sub_resource type="Animation" id=124]
+resource_name = "preEnterDoor"
+length = 0.2
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 56, 59, 58, 59, 58, 59, 58, 59 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 59, 58, 59, 58, 59, 58, 59 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0.875, 0, 0.2 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/Sprite3DBagAnimated:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( -0.515185, -0.0372463, 1.6 ), Vector3( 0.484815, -0.0372463, 1.6 ), Vector3( -0.515185, -0.0372463, 1.6 ), Vector3( 0.484815, -0.0372463, 1.6 ), Vector3( -0.515185, -0.0372463, 1.6 ), Vector3( 0.484815, -0.0372463, 1.6 ), Vector3( -0.515185, -0.0372463, 1.6 ), Vector3( 0.484815, -0.0372463, 1.6 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SpriteContainer/Sprite3DBagAnimated:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 58 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/Sprite3DMushroomAnimated:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 1.8413, 1 ), Vector3( 0, 1.51632, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=51]
@@ -7362,6 +7451,7 @@ anims/jumpSquat = SubResource( 17 )
 anims/jumpStart = SubResource( 18 )
 anims/land = SubResource( 19 )
 anims/leaveDoor = SubResource( 60 )
+anims/preEnterDoor = SubResource( 124 )
 anims/preGetItem = SubResource( 51 )
 anims/returning = SubResource( 65 )
 anims/revertFromChicken = SubResource( 118 )

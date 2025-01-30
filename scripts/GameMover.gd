@@ -501,7 +501,7 @@ func applyTerminalVelocity(_delta):
   if (glitch_form == global.GlitchForm.FLOOR or not should_collide_floor) and on_ground:
     vv = 0
     
-func getTilesBelow(currLevelTiles, buffer = 0.1, ignore_just_give_me_coords = false):
+func getTilesBelow(currLevelTiles, buffer = 0.1, ignore_just_give_me_coords = false, allow_negative = false):
   var solidTilesBelow = [null, null, null]
   var x = global_transform.origin.x
   var y = global_transform.origin.y
@@ -520,16 +520,16 @@ func getTilesBelow(currLevelTiles, buffer = 0.1, ignore_just_give_me_coords = fa
     var tile_pos_mid = currLevelTiles.map_to_world(coords_mid.x, coords_mid.y, coords_mid.z)
     var tile_type_mid = currLevelTiles.get_cell_item(coords_mid.x, coords_mid.y, coords_mid.z)
 
-    if isTileSolid(tile_type_a, true, 1, tile_pos_a) or (tile_type_a != -1 and ignore_just_give_me_coords):
+    if isTileSolid(tile_type_a, true, 1, tile_pos_a) or (tile_type_a != -1 and ignore_just_give_me_coords) or allow_negative:
       solidTilesBelow[0] = coords_a
-    if isTileSolid(tile_type_mid, true, 1, tile_pos_mid) or (tile_type_mid != -1 and ignore_just_give_me_coords):
+    if isTileSolid(tile_type_mid, true, 1, tile_pos_mid) or (tile_type_mid != -1 and ignore_just_give_me_coords) or allow_negative:
       solidTilesBelow[1] = coords_mid
-    if isTileSolid(tile_type_b, true, 1, tile_pos_b) or (tile_type_b != -1 and ignore_just_give_me_coords):
+    if isTileSolid(tile_type_b, true, 1, tile_pos_b) or (tile_type_b != -1 and ignore_just_give_me_coords) or allow_negative:
       solidTilesBelow[2] = coords_b
 
   return solidTilesBelow
 
-func getTilesAbove(currLevelTiles, buffer = 0.1, ignore_just_give_me_coords = false):
+func getTilesAbove(currLevelTiles, buffer = 0.1, ignore_just_give_me_coords = false, allow_negative = false):
   var solidTilesAbove = [null, null, null]
   var x = global_transform.origin.x
   var y = global_transform.origin.y
@@ -548,16 +548,16 @@ func getTilesAbove(currLevelTiles, buffer = 0.1, ignore_just_give_me_coords = fa
     var tile_pos_mid = currLevelTiles.map_to_world(coords_mid.x, coords_mid.y, coords_mid.z)
     var tile_type_mid = currLevelTiles.get_cell_item(coords_mid.x, coords_mid.y, coords_mid.z)
 
-    if isTileSolid(tile_type_a, true, 1, tile_pos_a) or (tile_type_a != -1 and ignore_just_give_me_coords):
+    if isTileSolid(tile_type_a, true, 1, tile_pos_a) or (tile_type_a != -1 and ignore_just_give_me_coords) or allow_negative:
       solidTilesAbove[0] = coords_a
-    if isTileSolid(tile_type_mid, true, 1, tile_pos_mid) or (tile_type_mid != -1 and ignore_just_give_me_coords):
+    if isTileSolid(tile_type_mid, true, 1, tile_pos_mid) or (tile_type_mid != -1 and ignore_just_give_me_coords) or allow_negative:
       solidTilesAbove[1] = coords_mid
-    if isTileSolid(tile_type_b, true, 1, tile_pos_b) or (tile_type_b != -1 and ignore_just_give_me_coords):
+    if isTileSolid(tile_type_b, true, 1, tile_pos_b) or (tile_type_b != -1 and ignore_just_give_me_coords) or allow_negative:
       solidTilesAbove[2] = coords_b
 
   return solidTilesAbove
 
-func getTilesLeftOf(currLevelTiles, buffer = 0.5, ignore_just_give_me_coords = false):
+func getTilesLeftOf(currLevelTiles, buffer = 0.5, ignore_just_give_me_coords = false, allow_negative = false):
   var x = global_transform.origin.x
   var y = global_transform.origin.y
   var z = global_transform.origin.z
@@ -576,16 +576,16 @@ func getTilesLeftOf(currLevelTiles, buffer = 0.5, ignore_just_give_me_coords = f
   var tile_type_mid = currLevelTiles.get_cell_item(coords_mid.x, coords_mid.y, coords_mid.z)
 
   var solidTilesLeftOf = [null, null, null]
-  if isTileSolid(tile_type_a, true, 1, tile_pos_a) or (tile_type_a != -1 and ignore_just_give_me_coords):
+  if isTileSolid(tile_type_a, true, 1, tile_pos_a) or (tile_type_a != -1 and ignore_just_give_me_coords) or allow_negative:
     solidTilesLeftOf[0] = coords_a
-  if isTileSolid(tile_type_mid, true, 1, tile_pos_mid) or (tile_type_mid != -1 and ignore_just_give_me_coords):
+  if isTileSolid(tile_type_mid, true, 1, tile_pos_mid) or (tile_type_mid != -1 and ignore_just_give_me_coords) or allow_negative:
     solidTilesLeftOf[1] = coords_mid
-  if isTileSolid(tile_type_b, true, 1, tile_pos_b) or (tile_type_b != -1 and ignore_just_give_me_coords):
+  if isTileSolid(tile_type_b, true, 1, tile_pos_b) or (tile_type_b != -1 and ignore_just_give_me_coords) or allow_negative:
     solidTilesLeftOf[2] = coords_b
 
   return solidTilesLeftOf
 
-func getTilesRightOf(currLevelTiles, buffer = 0.1, ignore_just_give_me_coords = false):
+func getTilesRightOf(currLevelTiles, buffer = 0.1, ignore_just_give_me_coords = false, allow_negative = false):
   var x = global_transform.origin.x
   var y = global_transform.origin.y
   var z = global_transform.origin.z
@@ -604,11 +604,11 @@ func getTilesRightOf(currLevelTiles, buffer = 0.1, ignore_just_give_me_coords = 
   var tile_type_mid = currLevelTiles.get_cell_item(coords_mid.x, coords_mid.y, coords_mid.z)
 
   var solidTilesRightOf = [null, null, null]
-  if isTileSolid(tile_type_a, true, 1, tile_pos_a) or (tile_type_a != -1 and ignore_just_give_me_coords):
+  if isTileSolid(tile_type_a, true, 1, tile_pos_a) or (tile_type_a != -1 and ignore_just_give_me_coords) or allow_negative:
     solidTilesRightOf[0] = coords_a
-  if isTileSolid(tile_type_mid, true, 1, tile_pos_mid) or (tile_type_mid != -1 and ignore_just_give_me_coords):
+  if isTileSolid(tile_type_mid, true, 1, tile_pos_mid) or (tile_type_mid != -1 and ignore_just_give_me_coords) or allow_negative:
     solidTilesRightOf[1] = coords_mid
-  if isTileSolid(tile_type_b, true, 1, tile_pos_b) or (tile_type_b != -1 and ignore_just_give_me_coords):
+  if isTileSolid(tile_type_b, true, 1, tile_pos_b) or (tile_type_b != -1 and ignore_just_give_me_coords) or allow_negative:
     solidTilesRightOf[2] = coords_b
 
   return solidTilesRightOf
