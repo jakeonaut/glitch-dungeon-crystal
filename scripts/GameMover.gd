@@ -626,6 +626,15 @@ func getSoloNonnullTile(solidTilesXOf):
     return solidTilesXOf[2]
   return null
 
+func getAnyNonnullTile(solidTilesXOf):
+  if solidTilesXOf[0] != null:
+    return solidTilesXOf[0]
+  if solidTilesXOf[1] != null:
+    return solidTilesXOf[1]
+  if solidTilesXOf[2] != null:
+    return solidTilesXOf[2]
+  return null
+
 func iJustPressedDown():
   on_ground = false
   was_fallthrough_area_collision_triggered = false
@@ -657,6 +666,7 @@ func processInputs(delta):
     # getSmacked(null)
   was_walking_into_wall = isWalkingIntoWall()
   if was_walking_into_wall and glitch_form == global.GlitchForm.LADDER and not global.pauseMoveInput:
+    on_ground = true
     processWallLadderWalking(delta)
     was_just_walking_on_wall = true
   else:
