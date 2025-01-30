@@ -313,8 +313,8 @@ func resetMemory():
 
     memory["demo_mode"] = 0
     # if you've beaten the midpoint boss
-    memory["clean_crystals"] = 4
-    memory["priestess"] = 2
+    memory["clean_crystals"] = 0
+    memory["priestess"] = 0
     memory["glitch_world"] = 0
     memory["glitched_grimoire"] = false
     memory["forget_me_not"] = false
@@ -322,23 +322,23 @@ func resetMemory():
     
 
     # crystal elder bosses
-    memory["baba_yaga_boss"] = 4
-    memory["angler_seaman_boss"] = 4
-    memory["dogu_matryoshka_boss"] = 4
+    memory["baba_yaga_boss"] = 0
+    memory["angler_seaman_boss"] = 0
+    memory["dogu_matryoshka_boss"] = 0
 
     # STORY OR LEVEL STATE
-    memory["babushka_cat_story_hook"] = 2
+    memory["babushka_cat_story_hook"] = 0
     memory["fishing_rod_shortcut"] = 0
 
     # POWERUPS
     # memory["spellbookPage"] = [] # we check if the key exists to see if we have it... -_-
-    memory["can_force_respawn"] = 1
-    memory["has_map_item"] = true
-    memory["broomerang"] = 1
+    memory["can_force_respawn"] = 0
+    memory["has_map_item"] = false
+    memory["broomerang"] = 0
     memory["broom_double_jump"] = 1
-    memory["zora_flippers"] = 1
-    memory["mole_cricket"] = 1
-    memory["mushroom_soul"] = 1
+    memory["zora_flippers"] = 0
+    memory["mole_cricket"] = 0
+    memory["mushroom_soul"] = 0
     memory["glitched_broom"] = false
     memory["max_hp"] = 1
     memory["hp"] = memory["max_hp"]

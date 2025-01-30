@@ -1,0 +1,1543 @@
+[gd_scene load_steps=45 format=2]
+
+[ext_resource path="res://scripts/CubeCrystalMesh.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=2]
+[ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=3]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=4]
+[ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=5]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=6]
+[ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=7]
+[ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=8]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=9]
+[ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=10]
+[ext_resource path="res://assets/frogblocks.png" type="Texture" id=11]
+[ext_resource path="res://assets/meshes/crystal.tres" type="ArrayMesh" id=12]
+[ext_resource path="res://assets/water_normal_4.png" type="Texture" id=13]
+[ext_resource path="res://assets/sounds/OOT_Pot_Shatter.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/sounds/sfx004_meteors.wav" type="AudioStream" id=15]
+[ext_resource path="res://assets/sounds/eba_darkness2.wav" type="AudioStream" id=16]
+[ext_resource path="res://assets/sounds/eb_bell.wav" type="AudioStream" id=17]
+[ext_resource path="res://scripts/StreetlightGlitchAuraControl.gd" type="Script" id=18]
+[ext_resource path="res://assets/sounds/sfx010_weirdmetalchord.wav" type="AudioStream" id=19]
+[ext_resource path="res://scripts/CrystalGeode2.gd" type="Script" id=20]
+[ext_resource path="res://materials/CrystalGeode2.tres" type="Material" id=21]
+[ext_resource path="res://sceneObjects/GlitchAura.tscn" type="PackedScene" id=22]
+[ext_resource path="res://assets/palettes/white_glitch_palette.png" type="Texture" id=23]
+[ext_resource path="res://scripts/GlitchAuraColorRect.gd" type="Script" id=24]
+[ext_resource path="res://assets/lightAnimatedTexture.tres" type="Texture" id=25]
+[ext_resource path="res://assets/palettes/dream-haze-mini.png" type="Texture" id=26]
+
+[sub_resource type="ArrayMesh" id=86]
+surfaces/0 = {
+"aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
+"array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0 ),
+"blend_shape_data": [  ],
+"format": 2194689,
+"index_count": 24,
+"primitive": 1,
+"skeleton_aabb": [  ],
+"vertex_count": 8
+}
+
+[sub_resource type="SpatialMaterial" id=48]
+flags_transparent = true
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="ArrayMesh" id=87]
+surfaces/0 = {
+"aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
+"array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0 ),
+"blend_shape_data": [  ],
+"format": 2194689,
+"index_count": 24,
+"primitive": 1,
+"skeleton_aabb": [  ],
+"vertex_count": 8
+}
+
+[sub_resource type="CylinderMesh" id=88]
+flip_faces = true
+top_radius = 0.0
+bottom_radius = 1.2
+radial_segments = 4
+rings = 2
+
+[sub_resource type="BoxShape" id=22]
+extents = Vector3( 2, 2.5, 2 )
+
+[sub_resource type="BoxShape" id=39]
+extents = Vector3( 2.5, 2, 2 )
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = ExtResource( 9 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = true
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = false
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 11 )
+shader_param/base_palette = ExtResource( 6 )
+shader_param/target_palette = ExtResource( 5 )
+
+[sub_resource type="ShaderMaterial" id=81]
+shader = ExtResource( 9 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 0.3
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.005
+shader_param/shake_block_size = 10.0
+shader_param/shake_color_rate = 0.0
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = true
+shader_param/palette_cycle_speed = 3.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 8 )
+shader_param/base_palette = ExtResource( 6 )
+shader_param/target_palette = ExtResource( 3 )
+
+[sub_resource type="Shader" id=78]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx;
+
+uniform float HowShiny = 2;
+uniform float Roughness = 0.2;
+uniform float alpha2 = 0.5;
+uniform bool should_use_vertex_color = true;
+uniform sampler2D texture_albedo : hint_albedo;
+
+varying smooth vec3 our_color;
+
+void vertex() {
+// Output:0
+  our_color = VERTEX;
+}
+
+void fragment() {
+// ColorUniform:4;
+	vec3 n_out4p0 = our_color;
+
+// ScalarUniform:2
+	float n_out2p0 = HowShiny;
+
+// ScalarUniform:3
+	float n_out3p0 = Roughness;
+
+  if (should_use_vertex_color) {
+	 ALBEDO = our_color;
+  } else {
+    ALBEDO = texture(texture_albedo, UV).rgb;
+  }
+	METALLIC = n_out2p0;
+	ROUGHNESS = n_out3p0;
+  ALPHA = alpha2;
+
+}
+
+void light() {
+// Output:0
+
+}"
+
+[sub_resource type="Animation" id=44]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("DirectionalLight2:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DirectionalLight:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("NPC/Sprite3D:material_override:shader_param/target_palette")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 3 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("NPC/Sprite3D:material_override:shader_param/opacity")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.3 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("DirectionalLight2:light_negative")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("DirectionalLight2:light_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("NPC/Sprite3D:material_override:shader_param/enable_glitch")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("NPC/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("CubeContainer/MeshInstance:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("CubeContainer/MeshInstance:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("CubeContainer/MeshInstance:material/0:albedo_color")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("cubeSound:playing")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("cubeSound2:playing")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("cubeSound3:playing")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("CubeContainer:translation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("CubeContainer:scale")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 4, 4, 4 ) ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("CubeContainer:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("CubeContainer/MeshInstance2:material_override:shader_param/HowShiny")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("CubeContainer/MeshInstance2:material_override:shader")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ SubResource( 78 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("CubeContainer/MeshInstance2:material_override")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 21 ) ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("CubeContainer/MeshInstance2:material_override:shader_param/should_use_vertex_color")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("CubeContainer/MeshInstance2:material_override:shader_param/texture_albedo")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 13 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("CubeContainer/MeshInstance3:visible")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("CubeContainer/MeshInstance3:scale")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("shatterSound:playing")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("CubeContainer/MeshInstance2:material_override:shader_param/alpha2")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.5 ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("CubeContainer/MeshInstance2:scale")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 0.7, 1 ) ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("CubeContainer/MeshInstance2:translation")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.241481, -0.0808809 ) ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("NPC:visible")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=85]
+resource_name = "fadeIn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("CubeContainer/MeshInstance2:material_override:shader_param/alpha2")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CubeContainer/MeshInstance2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 0.7, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CubeContainer/MeshInstance2:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.241481, -0.0808809 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("NPC:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=84]
+resource_name = "fakeBreak"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("shatterSound:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.4, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CubeContainer/MeshInstance2:material_override:shader_param/alpha2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.5, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CubeContainer/MeshInstance2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 0.7, 1 ), Vector3( 4, 2.8, 4 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CubeContainer/MeshInstance2:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.241481, -0.0808809 ), Vector3( 0, 1.24148, -0.0808809 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("NPC:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "resmack"
+}, {
+"args": [  ],
+"method": "resmack"
+}, {
+"args": [  ],
+"method": "resmack"
+}, {
+"args": [  ],
+"method": "resmack"
+} ]
+}
+
+[sub_resource type="Animation" id=45]
+resource_name = "lightUp"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("DirectionalLight2:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 7.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DirectionalLight:light_energy")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 4.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("NPC/Sprite3D:material_override:shader_param/target_palette")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("NPC/Sprite3D:material_override:shader_param/opacity")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.5 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("DirectionalLight2:light_negative")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("DirectionalLight2:light_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("NPC/Sprite3D:material_override:shader_param/enable_glitch")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("NPC/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("CubeContainer/MeshInstance:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("CubeContainer/MeshInstance:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 2, 2, 2 ), Vector3( 4, 4, 4 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("CubeContainer/MeshInstance:material/0:albedo_color")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("cubeSound:playing")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("cubeSound2:playing")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/13/type = "method"
+tracks/13/path = NodePath(".")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 1.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "speakToMe"
+} ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("CubeContainer:translation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("CubeContainer:scale")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = false
+tracks/15/keys = {
+"times": PoolRealArray( 0, 1.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 4, 4, 4 ), Vector3( 1, 1.5, 1 ) ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("CubeContainer:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = false
+tracks/16/keys = {
+"times": PoolRealArray( 0, 2.4, 2.5, 2.7, 3, 3.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true, false ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("CubeContainer/MeshInstance2:material_override:shader_param/HowShiny")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("CubeContainer/MeshInstance2:material_override:shader")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 78 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("CubeContainer/MeshInstance2:material_override")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 21 ) ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("CubeContainer/MeshInstance2:material_override:shader_param/texture_albedo")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 13 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("CubeContainer/MeshInstance2:material_override:shader_param/should_use_vertex_color")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("CubeContainer/MeshInstance3:visible")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("CubeContainer/MeshInstance3:scale")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 2, 2, 2 ), Vector3( 4, 4, 4 ) ]
+}
+
+[sub_resource type="Animation" id=50]
+resource_name = "lightUpQuiet"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("DirectionalLight2:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 7.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DirectionalLight:light_energy")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 4.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("NPC/Sprite3D:material_override:shader_param/target_palette")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("NPC/Sprite3D:material_override:shader_param/opacity")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.5 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("DirectionalLight2:light_negative")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("NPC/Sprite3D:material_override:shader_param/enable_glitch")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("NPC/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("CubeContainer/MeshInstance:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("CubeContainer/MeshInstance:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 4, 4, 4 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("CubeContainer/MeshInstance:material/0:albedo_color")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("CubeContainer:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = false
+tracks/10/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("CubeContainer/MeshInstance2:material_override:shader_param/HowShiny")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("CubeContainer/MeshInstance2:material_override:shader_param/should_use_vertex_color")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("CubeContainer/MeshInstance2:material_override:shader_param/texture_albedo")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 13 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("DirectionalLight2:light_color")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=51]
+resource_name = "omen"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("cubeSound3:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "freeUpPlayer"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("shatterSound:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CubeContainer/MeshInstance2:material_override:shader_param/alpha2")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.5, 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CubeContainer/MeshInstance2:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 0.7, 1 ), Vector3( 4, 2.8, 4 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("CubeContainer/MeshInstance2:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.241481, -0.0808809 ), Vector3( 0, 1.24148, -0.0808809 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("NPC:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Shader" id=12]
+code = "shader_type canvas_item;
+
+uniform sampler2D target_palette : hint_albedo;
+uniform int palettesize = 16;
+uniform float resolution_scale = 4;
+uniform float canvas_width = 1280.0;
+uniform float canvas_height = 1024.0;
+uniform float r_mult = 0.0;
+uniform float g_mult = 1.0;
+uniform float b_mult = -1.0;
+// uniform int color_depth : hint_range(1, 8) = 8;
+
+// const int bayer[] = {
+//  0,32, 8,40, 2,34,10,42,
+// 48,16,56,24,50,18,58,26, 
+// 12,44, 4,36,14,46, 6,38, 
+// 60,28,52,20,62,30,54,22, 
+//  3,35,11,43, 1,33, 9,41, 
+// 51,19,59,27,49,17,57,25,
+// 15,47, 7,39,13,45, 5,37,
+// 63,31,55,23,61,29,53,21
+// }; 
+// const float bayerSize = 8.0;
+// const float bayerDivider = bayerSize * bayerSize;
+
+float myDistance(ivec3 A, ivec3 B) {
+    return sqrt(
+        pow(float(A.r - B.r), 2.0) +
+        pow(float(A.g - B.g), 2.0) +
+        pow(float(A.b - B.b), 2.0)
+    );
+}
+
+vec3 getClosestMatchingFromPalette(ivec3 color) {
+    float closest_distance = 9990.0;
+    vec3 closest_color = vec3(0, 1.0, 0);
+    for (int x=0; x<palettesize; x++) {
+        ivec2 coord = ivec2(x,0);
+        vec3 pixelcolor = texelFetch(target_palette, coord, 0).rgb;
+        ivec3 ipixelcolor = ivec3(round(pixelcolor * 255.0));
+        float dist = myDistance(color, ipixelcolor);
+        if (dist < closest_distance) {
+            closest_distance = dist;
+            closest_color = pixelcolor;
+        }
+    }
+    return closest_color;
+}
+
+// https://unlimited3d.wordpress.com/2020/01/08/srgb-color-space-in-opengl/
+float Convert_sRGB_FromLinear (float theLinearValue) {
+  return theLinearValue <= 0.0031308
+       ? theLinearValue * 12.92
+       : pow (theLinearValue, 1.0/2.4) * 1.055 - 0.055;
+}
+
+float Convert_sRGB_ToLinear (float thesRGBValue) {
+  return thesRGBValue <= 0.04045f
+       ? thesRGBValue / 12.92f
+       : pow ((thesRGBValue + 0.055) / 1.055, 2.4);
+}
+
+const float matrixSize = 8.0;
+const float tile_size = 32.0;
+void fragment() {
+    int m[] = {
+        0,32, 8,40, 2,34,10,42,
+        48,16,56,24,50,18,58,26, 
+        12,44, 4,36,14,46, 6,38, 
+        60,28,52,20,62,30,54,22, 
+        3,35,11,43, 1,33, 9,41, 
+        51,19,59,27,49,17,57,25,
+        15,47, 7,39,13,45, 5,37,
+        63,31,55,23,61,29,53,21
+    };
+
+    float incolor_r = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*r_mult)).r;
+    float incolor_g = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*g_mult)).g;
+    float incolor_b = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*b_mult)).b;
+	float alpha = texture(TEXTURE, UV).a;
+    vec3 incolor = vec3(incolor_r, incolor_g, incolor_b);
+    vec2 uv = SCREEN_UV * vec2(canvas_width, canvas_height) / vec2(float(resolution_scale));
+
+    float x = uv.x;
+    float y = uv.y;
+    int tile_x = int(floor(x / tile_size));
+    int tile_y = int(floor(y / tile_size));
+
+    ////////////////////////////////////////////////
+    // TODO(jaketrower): Select sub-palette is more work...
+    ////////////////////////////////////////////////
+
+    int m_x = int(mod(x, matrixSize));
+    int m_y = int(mod(y, matrixSize));
+    int ratio = m[m_x + (m_y*int(matrixSize))];
+
+    // Convert from [0.0, 1.0] range to [0, 255] range
+    ivec3 pixel_color = ivec3(round(incolor * 255.0));
+    int r = pixel_color.r + ratio;
+    int g = pixel_color.g + ratio;
+    int b = pixel_color.b + ratio;
+    // Note: don't have to convert back to [0.0, 1.0] range because
+    // getClosestMatchingFromPalette uses [0.0, 1.0] value of the palette
+    vec3 closest_color = getClosestMatchingFromPalette(ivec3(r, g, b));
+    
+    COLOR.rgb = vec3(
+        Convert_sRGB_FromLinear(closest_color.r),
+        Convert_sRGB_FromLinear(closest_color.g),
+        Convert_sRGB_FromLinear(closest_color.b)
+    );
+	COLOR.a = alpha;
+    // COLOR.rgb = incolor;
+    // COLOR.rgb = vec3(float(r) / 255.0, float(g) / 255.0, float(b) / 255.0);
+}"
+
+[sub_resource type="ShaderMaterial" id=54]
+shader = SubResource( 12 )
+shader_param/palettesize = 6
+shader_param/resolution_scale = 1.0
+shader_param/canvas_width = 1280.0
+shader_param/canvas_height = 1024.0
+shader_param/r_mult = 0.0
+shader_param/g_mult = 1.0
+shader_param/b_mult = -1.0
+shader_param/target_palette = ExtResource( 26 )
+
+[sub_resource type="ShaderMaterial" id=61]
+shader = ExtResource( 10 )
+shader_param/palettesize = 8
+shader_param/resolution_scale = 4
+shader_param/canvas_width = 1280.0
+shader_param/canvas_height = 1024.0
+shader_param/r_mult = 0.0
+shader_param/g_mult = 1.0
+shader_param/b_mult = -1.0
+shader_param/target_palette = ExtResource( 23 )
+
+[node name="CubeCrystal" type="Spatial"]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 0, 0, 0 )
+script = ExtResource( 20 )
+path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
+
+[node name="CubeContainer" type="Spatial" parent="."]
+transform = Transform( 2.23517e-07, -5, -1.49011e-07, 3.2, -1.78814e-07, -5.32907e-15, 0, -1.19209e-07, 4, 0, 0, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="CubeContainer"]
+transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
+visible = false
+extra_cull_margin = 16384.0
+mesh = SubResource( 86 )
+material/0 = SubResource( 48 )
+script = ExtResource( 1 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="CubeContainer"]
+transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
+visible = false
+extra_cull_margin = 16384.0
+mesh = SubResource( 87 )
+material/0 = SubResource( 48 )
+script = ExtResource( 1 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="CubeContainer"]
+transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )
+material_override = ExtResource( 21 )
+mesh = ExtResource( 12 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="CubeContainer/MeshInstance2"]
+transform = Transform( 0.6, -3.55271e-15, 1.55794e-21, 1.06581e-14, 0.428571, 3.55271e-15, -8.25849e-22, -1.77636e-15, 0.6, -7.46368e-08, -1.90811, -6.70552e-08 )
+material_override = ExtResource( 21 )
+mesh = SubResource( 88 )
+skeleton = NodePath("../..")
+
+[node name="InteractionArea" type="Area" parent="." groups=["corporeal_body"]]
+transform = Transform( 1, 0, 0, 0, 1.01867, 0, 0, 0, 0.987869, 0, 0, 0 )
+script = ExtResource( 7 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
+shape = SubResource( 22 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="InteractionArea"]
+shape = SubResource( 39 )
+
+[node name="shatterSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -20.0
+pitch_scale = 0.7
+
+[node name="cubeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+volume_db = -10.0
+
+[node name="cubeSound2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+volume_db = -10.0
+pitch_scale = 0.63
+
+[node name="cubeSound3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+volume_db = -15.0
+
+[node name="GetHitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+volume_db = -18.0
+pitch_scale = 2.0
+
+[node name="GetHitSound2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+volume_db = -15.0
+pitch_scale = 1.5
+
+[node name="GetHitSound3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+volume_db = -13.0
+pitch_scale = 1.2
+
+[node name="PlusSpriteContainer" type="Spatial" parent="."]
+visible = false
+
+[node name="PlusSprite" type="Sprite3D" parent="PlusSpriteContainer" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.317175, 0, -1 )
+material_override = SubResource( 13 )
+cast_shadow = 0
+pixel_size = 0.08
+texture = ExtResource( 11 )
+hframes = 16
+vframes = 16
+frame = 43
+
+[node name="PlusSprite2" type="Sprite3D" parent="PlusSpriteContainer" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, -1 )
+material_override = SubResource( 13 )
+cast_shadow = 0
+pixel_size = 0.08
+texture = ExtResource( 11 )
+hframes = 16
+vframes = 16
+frame = 49
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1.25, 0, 0, 0, -0.484146, 0.874987, 0, -1.09373, -0.605183, 0, 8, 7.33333 )
+light_indirect_energy = 0.0
+
+[node name="DirectionalLight2" type="DirectionalLight" parent="."]
+transform = Transform( 1.25, 0, 0, 0, 0.999896, 0.0144483, 0, -0.0180608, 1.24987, 0, 4.77646, 10.9556 )
+light_indirect_energy = 0.0
+light_negative = true
+
+[node name="NPC" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.332667, 0 )
+
+[node name="Sprite3D" type="Sprite3D" parent="NPC"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
+material_override = SubResource( 81 )
+pixel_size = 0.125
+transparent = false
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 8 )
+hframes = 8
+vframes = 10
+frame = 66
+script = ExtResource( 2 )
+
+[node name="LightAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 44 )
+anims/fadeIn = SubResource( 85 )
+anims/fakeBreak = SubResource( 84 )
+anims/lightUp = SubResource( 45 )
+anims/lightUpQuiet = SubResource( 50 )
+anims/omen = SubResource( 51 )
+
+[node name="StreetlightGlitchAura" type="Control" parent="."]
+visible = false
+script = ExtResource( 18 )
+
+[node name="TextureRect" type="TextureRect" parent="StreetlightGlitchAura"]
+visible = false
+material = SubResource( 54 )
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 25 )
+expand = true
+script = ExtResource( 24 )
+minSize = 150
+maxSize = 250
+
+[node name="GlitchAura" parent="." instance=ExtResource( 22 )]
+visible = false
+target_path = NodePath("..")
+
+[node name="ColorRect" parent="GlitchAura" index="0"]
+visible = false
+material = SubResource( 61 )
+
+[editable path="GlitchAura"]

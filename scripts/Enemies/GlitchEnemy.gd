@@ -187,6 +187,8 @@ var last_sticky_wall_tile = null
 func processStickyWallWalking(_delta):
     if not behavior_stick_to_walls or (my_up_vector.x == 0 and my_up_vector.y == 0):
         return
+    alignStickyWallWalkerSprite() # should be able to tell based on up_vector and walk_direction combo
+
     var buffer = 0.5
     var TILE_WIDTH = getLevelTiles().cell_size.x
     var TILE_HEIGHT = getLevelTiles().cell_size.y
@@ -202,15 +204,11 @@ func processStickyWallWalking(_delta):
                 var tile_pos = getLevelTiles().map_to_world(tile_coord.x, tile_coord.y, tile_coord.z)
                 if walk_direction.y > 0:
                     global_transform.origin.x = tile_pos.x
-                    global_transform.origin.y = tile_pos.y + TILE_HEIGHT / 2
-                    print("rotate right (rightside up) (absence)")
+                    global_transform.origin.y = tile_pos.y + TILE_HEIGHT / 2 + 0.1
                     alignStickyWallWalker(Vector2(0, 1), Vector2(1, 0))
-                    mySprite.rotation_degrees.y = fmod(mySprite.rotation_degrees.y + 180.0, 360.0)
-                    mySprite.rotation_degrees.z = 0
                 elif walk_direction.y < 0:
                     global_transform.origin.x = tile_pos.x
-                    global_transform.origin.y = tile_pos.y - TILE_HEIGHT / 2 - TILE_HEIGHT
-                    print("rotate right (upside down) (absence)")
+                    global_transform.origin.y = tile_pos.y - TILE_HEIGHT / 2 - TILE_HEIGHT - 0.1
                     alignStickyWallWalker(Vector2(0, -1), Vector2(1, 0))
         elif my_up_vector.x > 0:
             var relevantTiles = getTilesLeftOf(getLevelTiles(), buffer, true)
@@ -223,15 +221,11 @@ func processStickyWallWalking(_delta):
                 var tile_pos = getLevelTiles().map_to_world(tile_coord.x, tile_coord.y, tile_coord.z)
                 if walk_direction.y > 0:
                     global_transform.origin.x = tile_pos.x + TILE_WIDTH
-                    global_transform.origin.y = tile_pos.y + TILE_HEIGHT / 2
-                    print("rotate left (rightside up) (absence)")
+                    global_transform.origin.y = tile_pos.y + TILE_HEIGHT / 2 + 0.1
                     alignStickyWallWalker(Vector2(0, 1), Vector2(-1, 0))
-                    mySprite.rotation_degrees.y = fmod(mySprite.rotation_degrees.y + 180.0, 360.0)
-                    mySprite.rotation_degrees.z = 0
                 elif walk_direction.y < 0:
                     global_transform.origin.x = tile_pos.x + TILE_WIDTH
-                    global_transform.origin.y = tile_pos.y - TILE_HEIGHT / 2 - TILE_HEIGHT
-                    print("rotate left (upside down) (absence)")
+                    global_transform.origin.y = tile_pos.y - TILE_HEIGHT / 2 - TILE_HEIGHT - 0.1
                     alignStickyWallWalker(Vector2(0, -1), Vector2(-1, 0))
     elif my_up_vector.y > 0:
         var relevantTiles = getTilesBelow(getLevelTiles(), buffer, true)
@@ -243,17 +237,13 @@ func processStickyWallWalking(_delta):
             last_sticky_wall_tile = null
             var tile_pos = getLevelTiles().map_to_world(tile_coord.x, tile_coord.y, tile_coord.z)
             if walk_direction.x > 0:
-                global_transform.origin.x = tile_pos.x + TILE_WIDTH / 2 + TILE_WIDTH
+                global_transform.origin.x = tile_pos.x + TILE_WIDTH / 2 + TILE_WIDTH + 0.1
                 global_transform.origin.y = tile_pos.y
-                print("rotate down (back facing right) (absence)")
                 alignStickyWallWalker(Vector2(1, 0), Vector2(0, -1))
-                mySprite.rotation_degrees.z = 90
             elif walk_direction.x < 0:
-                global_transform.origin.x = tile_pos.x - TILE_WIDTH / 2
+                global_transform.origin.x = tile_pos.x - TILE_WIDTH / 2 - TILE_WIDTH - 0.1
                 global_transform.origin.y = tile_pos.y + TILE_HEIGHT
-                print("rotate down (back facing left) (absence)")
                 alignStickyWallWalker(Vector2(-1, 0), Vector2(0, -1))
-                mySprite.rotation_degrees.z = 270
     elif my_up_vector.y < 0:
         var relevantTiles = getTilesAbove(getLevelTiles(), buffer, true)
         var tempLastStickyWallTile = getSoloNonnullTile(relevantTiles)
@@ -264,57 +254,59 @@ func processStickyWallWalking(_delta):
             last_sticky_wall_tile = null
             var tile_pos = getLevelTiles().map_to_world(tile_coord.x, tile_coord.y, tile_coord.z)
             if walk_direction.x > 0:
-                global_transform.origin.x = tile_pos.x + TILE_WIDTH / 2 + TILE_WIDTH
+                global_transform.origin.x = tile_pos.x + TILE_WIDTH / 2 + TILE_WIDTH + 0.1
                 global_transform.origin.y = tile_pos.y - TILE_HEIGHT / 2 - TILE_HEIGHT
-                print("rotate up (back facing right) (absence)")
                 alignStickyWallWalker(Vector2(1, 0), Vector2(0, 1))
-                mySprite.rotation_degrees.z = 90
             elif walk_direction.x < 0:
-                global_transform.origin.x = tile_pos.x - TILE_WIDTH / 2 - TILE_WIDTH
+                global_transform.origin.x = tile_pos.x - TILE_WIDTH / 2 - TILE_WIDTH - 0.1
                 global_transform.origin.y = tile_pos.y - TILE_HEIGHT / 2
-                print(tile_coord)
-                print(tile_pos)
-                print(global_transform.origin)
-                print("rotate up (back facing left) (absence)")
                 alignStickyWallWalker(Vector2(-1, 0), Vector2(0, 1))
-                mySprite.rotation_degrees.z = 270
+
+func alignStickyWallWalkerSprite():
+    if my_up_vector == Vector2(0, 0) or walk_direction == Vector2(0, 0):
+        return
+
+    if my_up_vector.y > 0:
+        mySprite.rotation_degrees = Vector3(0, 0, 0)
+        if walk_direction.x > 0:
+            mySprite.rotation_degrees.y = 180
+    elif my_up_vector.y < 0:
+        mySprite.rotation_degrees = Vector3(0, 180, 180)
+        if walk_direction.x > 0:
+            mySprite.rotation_degrees.y = 0
+    elif my_up_vector.x > 0:
+        mySprite.rotation_degrees = Vector3(0, 0, 270)
+        # we can do this for vertical walking cuz GameMover isn't engaging the mySprite.flip_h from processHorizontalInputs
+        mySprite.flip_h = walk_direction.y < 0
+    elif my_up_vector.x < 0:
+        mySprite.rotation_degrees = Vector3(0, 0, 90)
+        mySprite.flip_h = walk_direction.y > 0
 
 func alignStickyWallWalker(new_up_vector, new_walk_direction):
     grav = 0
     resetVelocity()
     my_up_vector = new_up_vector
     walk_direction = new_walk_direction
-    mySprite.rotation_degrees.y = fmod(mySprite.rotation_degrees.y + 180.0, 360.0)
-    mySprite.rotation_degrees.z = 180
 
 func handleStickyWallWalkingWall():
     if not behavior_stick_to_walls:
         return
     if my_up_vector.y > 0:
         if walk_direction.x > 0:
-            print("rotate up (back facing left) (wall collision)")
             alignStickyWallWalker(Vector2(-1, 0), Vector2(0, 1))
-            mySprite.rotation_degrees.z = 270
         elif walk_direction.x < 0:
-            print("rotate up (back facing right) (wall collision)")
             alignStickyWallWalker(Vector2(1, 0), Vector2(0, 1))
-            mySprite.rotation_degrees.z = 90
     elif my_up_vector.y < 0:
         if walk_direction.x > 0:
-            print("rotate down (back facing left) (wall collision)")
             alignStickyWallWalker(Vector2(-1, 0), Vector2(0, -1))
-            mySprite.rotation_degrees.z = 90
-            global_transform.origin.x -= 0.2
+            global_transform.origin.x -= 0.2 # TODO(jaketrower):
         elif walk_direction.x < 0:
-            print("rotate down (back facing right) (wall collision)")
             alignStickyWallWalker(Vector2(1, 0), Vector2(0, -1))
-            mySprite.rotation_degrees.z = 270
 
 func handleStickyWallWalkingCeiling():
     if not behavior_stick_to_walls:
         return
     if walk_direction.y > 0 and my_up_vector.y == 0:
-        print("sticky wall ceiling")
         if my_up_vector.x < 0:
             alignStickyWallWalker(Vector2(0, -1), Vector2(-1, 0))
         elif my_up_vector.x > 0:
@@ -324,15 +316,10 @@ func handleStickyWallWalkingLanded():
     if not behavior_stick_to_walls:
         return
     if walk_direction.y < 0 and my_up_vector.y == 0:
-        print("sticky wall land")
         if my_up_vector.x < 0:
             alignStickyWallWalker(Vector2(0, 1), Vector2(-1, 0))
-            mySprite.rotation_degrees.y = fmod(mySprite.rotation_degrees.y + 180.0, 360.0)
-            mySprite.rotation_degrees.z = 0
         elif my_up_vector.x > 0:
             alignStickyWallWalker(Vector2(0, 1), Vector2(1, 0))
-            mySprite.rotation_degrees.y = fmod(mySprite.rotation_degrees.y + 180.0, 360.0)
-            mySprite.rotation_degrees.z = 0
 
 onready var glitchSecretAniPlayer = get_node("GlitchSecretAnimationPlayer") if has_node("GlitchSecretAnimationPlayer") else null
 func glitchOut():
