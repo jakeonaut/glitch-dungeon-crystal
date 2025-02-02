@@ -1,8 +1,6 @@
 extends "../../../scripts/levelScript.gd"
 
 onready var door2 = get_node("Door2")
-onready var broomUpgradeCrone = get_node("BroomUpgradeCrone")
-onready var broomUpgradeElder = get_node("BroomUpgradeElder")
 
 # @override
 func setUpRoomInitializationOverride():
@@ -11,7 +9,6 @@ func setUpRoomInitializationOverride():
     door2.path = "res://levels/EndlessFantasy/gd1/00000EndOfDemo.tscn"
 
   if global.memory["clean_crystals"] >= 4:
-    broomUpgradeCrone.queue_free()
     door2.is_locked = false
     door2.animationPlayer.play("doorOpen")
   # if global.memory["priestess"] > 0:

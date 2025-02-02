@@ -78,7 +78,13 @@ func _ready():
     mySprite.visible = false
     mySprite2.visible = false
     if activeCollisionShape != null: activeCollisionShape.disabled = true
-    if passiveCollisionShape != null: passiveCollisionShape.disabled = false
+    if passiveCollisionShape != null:
+      passiveCollisionShape.disabled = false
+      if passiveCollisionShape.shape.extents.x <= 1.5:
+        passiveCollisionShape.shape.extents.x = 2
+      if passiveCollisionShape.shape.extents.y <= 1.5:
+        passiveCollisionShape.shape.extents.y = 2
+
   else:
     mySprite.material_override = mySprite.material_override.duplicate()
     mySprite2.material_override = mySprite.material_override

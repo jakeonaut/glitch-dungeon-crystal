@@ -53,13 +53,14 @@ func _ready():
   startAdjacentLevelLoading()
 
 func tryUpdateMapManagerToGlitchedMap():
-  if global.memory["glitch_world"] > 0 and not is_using_glitched_map:
-    self.remove_child(mapManager)
-    mapManager.queue_free()
-    mapManager = glitchedMapManagerRes.instance()
-    mapManager.visible = false
-    self.add_child(mapManager)
-    is_using_glitched_map = true
+  return 
+  # if global.memory["glitch_world"] > 0 and not is_using_glitched_map:
+  #   self.remove_child(mapManager)
+  #   mapManager.queue_free()
+  #   mapManager = glitchedMapManagerRes.instance()
+  #   mapManager.visible = false
+  #   self.add_child(mapManager)
+  #   is_using_glitched_map = true
 
 var is_using_glitched_map = false
 func _process(_delta):
@@ -227,6 +228,8 @@ func change_scene():
     was_i_interrupted = false
     return
 
+  var root = get_tree().get_root()
+  var level = root.get_node("Game/Viewport/level")
   if should_reset:
     global.has_started_game = false
     global.has_really_started_game = false
@@ -235,12 +238,12 @@ func change_scene():
     global.isPauseMenuOpen = false
   should_reset = false
   global.spellCastPauseIndex = current_scene.get_node("Viewport/level/Player").spellCastPauseIndex
+  global.memory["transformation"] = level.player.transformation
   global.memory["currLevelZone"] = global.currLevelZone
   global.set_camera_position_on_respawn = true
   global.malware_infected = current_scene.get_node("Viewport/level").player.malware_infected
 
   if self.path != "":
-    var root = get_tree().get_root()
     root.remove_child(current_scene)
     current_scene.queue_free()
     var loadedRoomResource = load(self.path)

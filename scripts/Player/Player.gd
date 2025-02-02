@@ -623,11 +623,25 @@ func unsmack():
     teleport_timer = 0
     has_teleported = false
 
-func processBubbleLogic(_delta):
+# occurs upon respawn or level entry...
+func properlyApplyTransformation():
+  var transformationToApply = transformation
+  transformation = TransformationState.NORMAL
+  if transformationToApply == TransformationState.FISHY:
+    getFishyInfected()
+  elif transformationToApply == TransformationState.BUBBLE:
+    getBubbleInfected()
+  elif transformationToApply == TransformationState.CURSED:
+    getCurseInfected()
+
+var bubblePopResistanceTimer = 0
+var bubblePopResistanceTimeLimit = 5
+func processBubbleLogic(delta):
   bubbleSprite.visible = transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE
   if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
+    bubblePopResistanceTimer += (delta*11)
     var just_pressed_jump = false # justPressedJump()
-    if (horizontal_collision or on_ground or just_pressed_jump) and physics_state != PhysicsState.GLITCH_DYING:
+    if (horizontal_collision or on_ground or just_pressed_jump) and physics_state != PhysicsState.GLITCH_DYING and bubblePopResistanceTimer >= bubblePopResistanceTimeLimit:
       getBubbleCured()
     else:
       if glitch_form == global.GlitchForm.LADDER:
@@ -823,11 +837,14 @@ func tryDieToOffscreenCamera(_delta):
       global.memory.erase("prevYDiff")
 
     next_room = transition.mapManager.getRelativeRoomPath(curr_coords, global.roomEdgeVector) if curr_coords != null else null
-    print(str(passive_door) + ", " + str(curr_coords) + ", " + str(global.roomEdgeVector) + "," + str(next_room))
+    if next_room != null and passive_door and self.smallInteractionArea.touched_passive_door != null:
+      next_room = self.smallInteractionArea.touched_passive_door.path
+
     if next_room != null and (not level.pacman_wrapping or passive_door):
       try_to_recover = false
       transition.edge_fade_to(next_room)
       global.isEnteringRoom = true
+      global.memory["transformation"] = self.transformation
       global.memory["player_flip_h"] = mySprite.flip_h
       global.memory["feather_jump_timer"] = feather_jump_timer
       global.memory["linear_velocity"] = linear_velocity
@@ -1090,7 +1107,7 @@ func processFishyLogic(_delta):
   if touched_water_area != null and touched_water_area.get_node("..").is_cleansing:
     malwareCured()
     
-  if transformation != TransformationState.FISHY and has_been_in_water and not truly_on_ground and not was_truly_on_ground and not recentlyJustPressedJump() and physics_state != PhysicsState.BEING_TOSSED:
+  if transformation != TransformationState.FISHY and has_been_in_water and not truly_on_ground and not was_truly_on_ground and not recentlyJustPressedJump() and physics_state != PhysicsState.BEING_TOSSED and transformation != TransformationState.BUBBLE:
     getFishyInfected()
     fishFormSound.pitch_scale = rand_range(0.8, 1.2)
     fishFormSound.play()
@@ -1128,7 +1145,12 @@ var bubble_temp_grav = 60
 var bubble_temp_true_terminal_vel = 14
 func getBubbleInfected(applyViaGlitchForm = false):
   if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
+    if not "tumble" in aniPlayer.assigned_animation:
+      aniPlayer.stop()
+      aniPlayer.clear_queue()
+      aniPlayer.play("tumbleRight", -1, 0.5)
     return
+  bubblePopResistanceTimer = 0
   pauseAnimation = true
   aniPlayer.stop()
   aniPlayer.clear_queue()
@@ -1137,8 +1159,8 @@ func getBubbleInfected(applyViaGlitchForm = false):
   miniUpwardGust(false)
   if summonedBroom:
     broomStop()
-    summonFallenBroom(true, false, false)
-  global.memory["broom"] = false
+    # summonFallenBroom(true, false, false)
+  # global.memory["broom"] = false
   transformation = TransformationState.BUBBLE
   if applyViaGlitchForm:
     glitch_form = global.GlitchForm.BUBBLE
@@ -1179,6 +1201,24 @@ func getBubbleCured():
 
 func restartMusic(): # maybe an animation uses this idk, dont delete it
   level.restartMusic()
+
+func normalizePlayerTransformation():
+  if transformation == TransformationState.FISHY:
+    getFishyCured()
+  if transformation == TransformationState.MOLE_DIGGING or \
+     transformation == TransformationState.UNDERGROUND_RETURNING or \
+     transformation == TransformationState.UNDERGROUND:
+    getMoleCured()
+  if transformation == TransformationState.BUBBLE:
+    getBubbleCured()
+  if transformation == TransformationState.CHICKEN:
+    getChickenCured()
+  if transformation == TransformationState.CURSED:
+    getCurseCured()
+  if is_mushroom_infected:
+    getMushroomCured()
+  if malware_infected:
+    malwareCured()
 
 # var temp_cleansed_fish_glitch = null
 func getFishyInfected():
@@ -2074,6 +2114,10 @@ func doBroomAttack(which_broom_attack):
   #   aniPlayer.play("sweepFloor")
   #   which_broom_attack = 0
   #   summonSporeShroom()
+
+  if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
+    getBubbleCured()
+
   var is_turn_around_attack = false # (is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1)))
   if not force_a_sweep and is_turn_around_attack: #is_in_broom_cooldown or is_turn_around_attack:
     mySprite.flip_h = pressingMoveLeft() and not pressingMoveRight()
@@ -2296,7 +2340,7 @@ func processBroomRenderLogic(_delta):
       mySprite.material_override.set_shader_param("black_offset", 0)
   elif summonedBroom != null:
     adjustSummonedBroomSpritePosition()
-  elif global.memory["broom"] and not isHoldingMultiBroom():
+  elif global.memory["broom"] and not isHoldingMultiBroom() and not (transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE):
     broomSpriteVisible.visible = true
     if nesting_doll_state == global.NestingDoll.GRANDMA:
       mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)

@@ -66,3 +66,8 @@ func _process(_delta):
   else:
     pressCText.visible = false
     optionsMenuPrompt.visible = false
+
+# # @override
+# func restartMusic():
+#     musicPlayer.changeSongPitch(1.0)
+#     musicPlayer.tryToPlay(musicPlayer.croneThemePlayer)

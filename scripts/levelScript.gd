@@ -169,6 +169,8 @@ func _ready_impl():
     player.sayThis(player_message)
   if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
     flipGravity(-1)
+  player.transformation = global.memory["transformation"] if global.memory.has("transformation") else player.TransformationState.NORMAL
+  player.properlyApplyTransformation()
   has_room_initialized = true
   global.setHaveIBeenToLevel(self)
 
@@ -313,6 +315,7 @@ func getLevelManagerCoords():
 
 func saveTheGame(message = "saving!!"):
   uiLayer.displaySavingText(message)
+  global.memory["transformation"] = self.player.transformation
   global.memory["roomPath"] = self.getLevelName()
   global.saveGame()
 
@@ -411,11 +414,13 @@ func tryToRespawn():
       yield(TempTimer.idle_frame(self), "timeout") # idk why i gotta do this
       if savePoint != null:
         player.global_transform.origin = savePoint.global_transform.origin
+        player.properlyApplyTransformation()
     elif global.memory.has("active_save_point_x") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():
       player.global_transform.origin = Vector3(
         global.memory["active_save_point_x"], 
         global.memory["active_save_point_y"], 
         global.memory["active_save_point_z"])
+      player.properlyApplyTransformation()
       if global.isEnteringRoom:
         player.global_transform.origin.y += 1
       gameCamera.rotation_degrees.y = global.cameraRotation
@@ -776,21 +781,29 @@ func spawnAngelEggFollower(starting_position):
 
 var petChickenFollowerRes = preload("res://sceneObjects/PetChickenFollower.tscn")
 var petBabushkaCatFollowerRes = preload("res://sceneObjects/BabushkaCatFollower.tscn")
+var petSnakeFollowerRes = preload("res://sceneObjects/PetSnakeFollower.tscn")
 func spawnPetFollower(starting_position):
   if global.memory["currPet"] == null:
     return
+
   var currPet = global.memory["currPet"]
+  var petFollowerRes = null
+  var how_many = 1
+        
   
-  if currPet == global.PetFollower.CHICKEN or currPet == global.PetFollower.THREE_CHICKENS:
-    for _i in range(0, 1 if currPet == global.PetFollower.CHICKEN else 3):
-      var petFollower = petChickenFollowerRes.instance()
-      self.add_child(petFollower)
-      petFollower.global_transform.origin = starting_position
-      var target = followers[-1] if followers.size() > 0 else player
-      petFollower.gameMoverTarget = weakref(target) if target != null else weakref(player)
-      followers.push_back(weakref(petFollower))
-  elif currPet == global.PetFollower.CAT_BABUSHKA:
-    var petFollower = petBabushkaCatFollowerRes.instance()
+  match currPet:
+    global.PetFollower.CHICKEN:
+      petFollowerRes = petChickenFollowerRes
+    global.PetFollower.THREE_CHICKENS:
+      how_many = 3
+      petFollowerRes = petChickenFollowerRes
+    global.PetFollower.CAT_BABUSHKA:
+      petFollowerRes = petBabushkaCatFollowerRes
+    global.PetFollower.RED_SNAKE:
+      petFollowerRes = petSnakeFollowerRes
+
+  for _i in range(0, how_many):
+    var petFollower = petFollowerRes.instance()
     self.add_child(petFollower)
     petFollower.global_transform.origin = starting_position
     var target = followers[-1] if followers.size() > 0 else player

@@ -187,11 +187,13 @@ func startGulp():
     gulpin = true
     var lickedGameMover = tongueController.hookTarget.get_ref() if tongueController and tongueController.hookTarget else null
     if lickedGameMover != null:
-      if lickedGameMover.physics_state == -1:
+      if lickedGameMover.physics_state == -1: # weird malware_infected issue???
         if lickedGameMover.has_method("corruptMyself"):
           lickedGameMover.corruptMyself()
         corruptMyself()
       else:
+        if lickedGameMover.has_method("normalizePlayerTransformation"):
+          lickedGameMover.normalizePlayerTransformation()
         lickedGameMover.physics_state = lickedGameMover.PhysicsState.IGNORE_PHYSICS
       
     notDieSound.play()
@@ -269,12 +271,16 @@ func tryDieToOffscreenCamera(_delta):
 # @override
 func justPressedJump():
   if tongueAniPlayer != null and tongueAniPlayer.is_playing():
+    if gulpin:
+      return Input.is_action_just_pressed("jump_button")
     return false
   return .justPressedJump()
 
 # @override
 func pressingJump():
   if tongueAniPlayer != null and tongueAniPlayer.is_playing():
+    if gulpin:
+      return Input.is_action_pressed("jump_button")
     return false
   return .pressingJump()
 

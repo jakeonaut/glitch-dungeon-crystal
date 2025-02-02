@@ -2,6 +2,7 @@ extends "../../../scripts/levelScript.gd"
 
 onready var door3 = get_node("Door3")
 onready var door5 = get_node("Door5")
+onready var broomUpgradeCrone = get_node("BroomUpgradeCrone")
 
 # @override
 func setUpRoomInitializationOverride():
@@ -21,6 +22,8 @@ func setUpRoomInitializationOverride():
     door5.animationPlayer.clear_queue()
     door5.queueLockAnimation()
 
+  if global.memory["clean_crystals"] >= 4:
+    broomUpgradeCrone.queue_free()
   if global.memory["angler_seaman_boss"] < 4:
     get_node("FishElderNPC").queue_free()
   if global.memory["baba_yaga_boss"] < 4:

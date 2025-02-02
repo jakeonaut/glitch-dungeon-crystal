@@ -27,7 +27,7 @@
 [ext_resource path="res://assets/lightAnimatedTexture.tres" type="Texture" id=25]
 [ext_resource path="res://assets/palettes/dream-haze-mini.png" type="Texture" id=26]
 
-[sub_resource type="ArrayMesh" id=86]
+[sub_resource type="ArrayMesh" id=89]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -44,7 +44,7 @@ surfaces/0 = {
 flags_transparent = true
 albedo_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="ArrayMesh" id=87]
+[sub_resource type="ArrayMesh" id=90]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -1381,19 +1381,19 @@ shader_param/g_mult = 1.0
 shader_param/b_mult = -1.0
 shader_param/target_palette = ExtResource( 23 )
 
-[node name="CubeCrystal" type="Spatial"]
+[node name="FishCrystal" type="Spatial"]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 0, 0, 0 )
 script = ExtResource( 20 )
 path = "res://levels/EndlessFantasy/gd1/005DebugTown.tscn"
 
 [node name="CubeContainer" type="Spatial" parent="."]
-transform = Transform( 2.23517e-07, -5, -1.49011e-07, 3.2, -1.78814e-07, -5.32907e-15, 0, -1.19209e-07, 4, 0, 0, 0 )
+transform = Transform( 3.01992e-07, -4, -9.53672e-08, 4, 3.01992e-07, 6.66131e-15, 5.38714e-16, -9.53672e-08, 4, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="CubeContainer"]
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
 visible = false
 extra_cull_margin = 16384.0
-mesh = SubResource( 86 )
+mesh = SubResource( 89 )
 material/0 = SubResource( 48 )
 script = ExtResource( 1 )
 
@@ -1401,7 +1401,7 @@ script = ExtResource( 1 )
 transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
 visible = false
 extra_cull_margin = 16384.0
-mesh = SubResource( 87 )
+mesh = SubResource( 90 )
 material/0 = SubResource( 48 )
 script = ExtResource( 1 )
 

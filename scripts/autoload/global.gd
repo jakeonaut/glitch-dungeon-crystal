@@ -128,6 +128,7 @@ enum PetFollower {
     FROG,
     GLITCH_SLIME,
     FISHY,
+    RED_SNAKE,
 }
 
 enum GrandmaOutfit {
@@ -304,6 +305,7 @@ func resetMemory():
     memory["broom"] = true
     memory["has_gotten_broom"] = 0
     memory["nesting_doll"] = NestingDoll.GRANDMA
+    memory["transformation"] = 0 # Player.TransformationState.NORMAL
     
     memory["crone"] = 0
     memory["hearts_recovering"] = false
@@ -313,7 +315,7 @@ func resetMemory():
 
     memory["demo_mode"] = 0
     # if you've beaten the midpoint boss
-    memory["clean_crystals"] = 4
+    memory["clean_crystals"] = 5
     memory["priestess"] = 2
     memory["glitch_world"] = 1
     memory["glitched_grimoire"] = false
@@ -419,6 +421,7 @@ func processEasterEggs():
     #     anna_key_helper = false
 
 func prepareForTransition(level, enteredDoor = null):
+    global.memory["transformation"] = level.player.transformation
     global.activeInteractor = null
     global.memory["cameraSize"] = level.gameCamera.initial_size
     # global.memory["lastDoor"] = id

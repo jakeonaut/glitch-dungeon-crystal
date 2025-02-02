@@ -22,7 +22,7 @@ func setUpRoomInitializationOverride():
 func purifyAllWeakEnemies(summon_smoke_clouds = true):
     # kind of a weird little hacky thing, because we know the crystal will call this when purified...
     # that's why we love it :) 
-    if global.memory["dogu_matryoshka_boss"] <= 3
+    if global.memory["dogu_matryoshka_boss"] <= 3:
         global.memory["dogu_matryoshka_boss"] = 3
     .purifyAllWeakEnemies(summon_smoke_clouds)
 

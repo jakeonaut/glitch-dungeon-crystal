@@ -9,6 +9,7 @@ onready var restZonePlayer = get_node("RestZonePlayer")
 onready var titleThemePlayer = get_node("TitleThemePlayer")
 onready var wakeupPlayer = get_node("WakeupPlayer")
 onready var grannyPlayer = get_node("GrannyPlayer")
+onready var croneThemePlayer = get_node("CroneThemePlayer")
 onready var mainMenuPlayer = get_node("MainMenuPlayer")
 onready var longAdventureThemePlayer = get_node("LongAdventureThemePlayer")
 onready var priestessPlayer = get_node("PriestessThemePlayer")
@@ -107,6 +108,7 @@ func stopAll():
     fade_out(windPlayer)
     fade_out(restZonePlayer)
     fade_out(grannyPlayer)
+    fade_out(croneThemePlayer)
     fade_out(mainMenuPlayer)
     fade_out(priestessPlayer)
     fade_out(wakeupPlayer)
@@ -158,7 +160,7 @@ func conductFromScenePath(path):
        (path.find("HighPriestessRoom") > 0 and global.memory["priestess"] >= 2) or \
        path.find("MiniRestZone") > 0 or \
        path.find("LongGlitchyHallway") > 0 or \
-       (path.find("0_0") > 0 and not global.okay_really_really_started_game):
+       (path.find("0_0") > 0 and not global.okay_really_really_started_game and not path.find("Nullify") > 0):
         tryToPlay(windPlayer)
     elif path.find("HighPriestessRoom") > 0 and global.memory["priestess"] == 0:
         tryToPlay(crystalThemePlayer)
@@ -175,11 +177,11 @@ func conductFromScenePath(path):
             default_song_pitch = 1.0
             return
     elif path.find("StoryHook") > 0 or path.find("NullificationPurgatory") > 0 or path.find("NullifyIntro") > 0 or path.find("LadderIntro") > 0 or path.find("GhostIntro") > 0:
-        tryToPlay(townThemePlayer)
+        tryToPlay(debugThemePlayer)
         changeSongPitch(1.0)
         default_song_pitch = 1.0
-    elif path.find("Haven") > 0:
-        tryToPlay(crystalThemePlayer)
+    elif path.find("0_1Haven") > 0:
+        tryToPlay(croneThemePlayer)
     elif path.find("gd1ToxicJungle") > 0:
         tryToPlay(poisonThemePlayer)
     elif path.find("gd1ShiftingSandLand") > 0:
@@ -226,15 +228,15 @@ func conductFromScenePath(path):
     elif path.find("005DebugTown") > 0:
         tryToPlay(dungeonThemePlayer)
     elif path.find("001Your") > 0  or path.find("gd1"):
-        tryToPlay(dungeonThemePlayer)
+        tryToPlay(croneThemePlayer)
     else:
         self.stopAll()
-    if global.memory["priestess"] >= 2:
-        changeSongPitch(0.4)
-        default_song_pitch = 0.4
-    else:
-        changeSongPitch(1.0)
-        default_song_pitch = 1.0
+    # if global.memory["priestess"] >= 2:
+    #     changeSongPitch(0.4)
+    #     default_song_pitch = 0.4
+    # else:
+    changeSongPitch(1.0)
+    default_song_pitch = 1.0
 
     if path.find("__introCutscene") > 0:
         changeSongPitch(2.0)

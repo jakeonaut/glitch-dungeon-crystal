@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/A1-21-0202-chill.mp3-dabb112463970454f19f26da57eb1527.mp3str"
+
+[deps]
+
+source_file="res://assets/music/A1-21-0202-chill.mp3"
+dest_files=[ "res://.import/A1-21-0202-chill.mp3-dabb112463970454f19f26da57eb1527.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -8,6 +8,7 @@ var is_touching_water = false
 var is_touching_waterfall = false
 var is_touching_door = false
 var is_touching_passive_door = false
+var touched_passive_door = null
 var is_touching_npc = false
 var touched_water_area = null
 var is_touching_ladder = false
@@ -32,6 +33,7 @@ func _process(delta):
     is_touching_waterfall = false
     is_touching_door = false
     is_touching_passive_door = false
+    touched_passive_door = null
     is_touching_npc = false
     touched_water_area = null
     is_touching_ladder = false
@@ -79,6 +81,7 @@ func _process(delta):
                 is_touching_door = true
             if door.is_passive:
                 is_touching_passive_door = true
+                touched_passive_door = door
         if area.is_in_group("true_small_door"):
             var temp = true
             var door = area.get_node("..")
