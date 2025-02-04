@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://assets/infected_enemy_sheet0000.png" type="Texture" id=21]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=22]
 [ext_resource path="res://assets/palettes/pokemon-sgb-1x.png" type="Texture" id=23]
+[ext_resource path="res://sceneObjects/Enemies/HungryWorm.tscn" type="PackedScene" id=24]
 
 [sub_resource type="Animation" id=24]
 length = 0.001
@@ -488,6 +489,8 @@ anims/bounce = SubResource( 31 )
 
 [node name="CubeCrystal" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 0, 20, 0 )
+
+[node name="HungryWorm" parent="Viewport/level" instance=ExtResource( 24 )]
 
 [node name="Viewport2" parent="." instance=ExtResource( 1 )]
 

@@ -15,6 +15,7 @@ onready var crystalGeode4 = weakref(get_node("CubeCrystal4"))
 onready var crystalGeode5 = weakref(get_node("CubeCrystal5"))
 onready var aniPlayer = get_node("AnimationPlayer")
 onready var door = get_node("Door")
+onready var grandmaStatues = get_node("GrandmaStatues")
 
 var has_boss_started = false
 var debug_start_boss_immediately = false
@@ -42,6 +43,7 @@ func setUpRoomInitializationOverride():
     highPriestessBoss.am_i_hidden = true
     highPriestessBoss.mySprite.visible = false
     if global.memory["priestess"] >= 2:
+      grandmaStatues.queue_free()
       highPriestessBoss.queue_free()
       croneNPC.queue_free()
       croneNPCDefeated.queue_free()
@@ -137,6 +139,10 @@ func enterMemoryZone():
   # global.isEnteringRoom = true
   # global.memory["roomPath"] = self.getLevelName()
   is_really_defeated = true
+  var grandmaStatueArr = grandmaStatues.get_children()
+  for grandmaStatue in grandmaStatueArr:
+    summonSmokeClouds(grandmaStatue.global_transform.origin, 1)
+  grandmaStatues.queue_free()
   aniPlayer.play("glitchTransitionEnd")
   aniPlayer.queue("croneTwitch")
   glitchTickle(1)

@@ -10,7 +10,7 @@ var spawn_timer = 0
 var spawn_time_limit = 15
 
 export var is_static = false
-export var is_infected = false
+export var is_hungry = false
 
 var who_is_standing_on_me = {}
 var move_my_friends_time_limit = 10
@@ -62,7 +62,7 @@ func handleSlimeWalking(delta):
   if behavior_intermittent_walking:
     slime_state_timer += (delta*22)
     if slime_state == SlimeState.WALK:
-      mySprite.trySetFrame(20)
+      mySprite.trySetFrame(20 if not is_hungry else 18)
       behavior_walking = true
       if slime_state_timer >= slime_walk_time_limit:
         slime_state_timer = 0
@@ -124,7 +124,7 @@ var moleCricketRes = preload("res://sceneObjects/Enemies/GlitchMoleCricket.tscn"
 func unsmack():
   .unsmack()
   var evolvedSelf = moleCricketRes.instance()
-  evolvedSelf.is_builder = true
+  evolvedSelf.is_builder = not is_hungry
   evolvedSelf.do_i_care_about_time_limit = true
   evolvedSelf.grav = 0
   evolvedSelf.on_ground = true

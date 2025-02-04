@@ -2,10 +2,10 @@ Used:
 =================
 TH9PZ-3L37G-VI8TW (Portuguese Localization)
 0JFBF-V8EAJ-K78D3 (Russian Localization)
+QNDX5-N783E-VH6RQ (Chinese music guy)
 
 Unused:
 =================
-QNDX5-N783E-VH6RQ
 9RK2B-EHDIL-HPQ06
 0QNWT-66J95-MI268
 5ADB5-NV600-PQMRQ

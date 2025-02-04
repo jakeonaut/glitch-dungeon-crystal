@@ -67,7 +67,7 @@ func spawn(with_flare = true):
         if is_static_in_level and not global.getStaticLevelZoneLevelVar(level, self):
             global.setStaticLevelZoneLevelVar(level, self, 1)
 
-    if spawned_object_instance.has_method("evilSetAsParent"):
+    if spawned_object_instance != null and spawned_object_instance.has_method("evilSetAsParent"):
         spawned_object_instance.evilSetAsParent(self)
 
 # @override
