@@ -15,7 +15,7 @@
 [ext_resource path="res://assets/infected_enemy_sheet0000.png" type="Texture" id=13]
 [ext_resource path="res://assets/sounds/assets_sfx_jumpcartoon.wav" type="AudioStream" id=14]
 
-[sub_resource type="ShaderMaterial" id=36]
+[sub_resource type="ShaderMaterial" id=43]
 shader = ExtResource( 6 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
@@ -429,7 +429,7 @@ behavior_stick_to_walls = true
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345, 0 )
-material_override = SubResource( 36 )
+material_override = SubResource( 43 )
 pixel_size = 0.125
 transparent = false
 double_sided = false

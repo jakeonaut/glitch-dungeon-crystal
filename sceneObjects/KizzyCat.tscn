@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=2]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=3]
-[ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=4]
+[ext_resource path="res://scripts/GameMoverSmallInteractionArea.gd" type="Script" id=4]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=5]
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=6]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=7]
@@ -18,7 +18,7 @@
 [ext_resource path="res://assets/sounds/drown.wav" type="AudioStream" id=16]
 [ext_resource path="res://sceneObjects/BounceAnimationPlayer.tscn" type="PackedScene" id=17]
 
-[sub_resource type="ShaderMaterial" id=9]
+[sub_resource type="ShaderMaterial" id=11]
 shader = ExtResource( 3 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
@@ -35,7 +35,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
-shader_param/black_offset = 14
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
@@ -103,8 +103,8 @@ extents = Vector3( 0.5, 0.24, 1 )
 
 [node name="Furbo" type="Spatial"]
 script = ExtResource( 12 )
-true_terminal_vel = 14
-grav = 28
+true_terminal_vel = 4
+grav = 7
 run_speed = 7
 feather_glitch_walk_speed = 7
 invisible_glitch_walk_speed = 5
@@ -122,12 +122,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.5 )
 
 [node name="Sprite3D" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.8 )
-material_override = SubResource( 9 )
+material_override = SubResource( 11 )
 pixel_size = 0.125
 texture = ExtResource( 13 )
 hframes = 8
 vframes = 16
-frame = 82
+frame = 24
 script = ExtResource( 1 )
 automatically_change_color = false
 

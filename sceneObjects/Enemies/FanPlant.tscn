@@ -1,0 +1,208 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
+[ext_resource path="res://assets/palettes/tidepool_palette.png" type="Texture" id=2]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
+[ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=4]
+[ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=5]
+[ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=6]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=7]
+[ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=8]
+[ext_resource path="res://assets/sounds/assets_sfx_jumpcartoon.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Dog Yelp.wav" type="AudioStream" id=10]
+[ext_resource path="res://sceneObjects/WindGust.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/sounds/chomp.wav" type="AudioStream" id=14]
+
+[sub_resource type="ShaderMaterial" id=36]
+shader = ExtResource( 7 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 0.125
+shader_param/shake_power = 0.01
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 6 )
+shader_param/base_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 2 )
+
+[sub_resource type="CylinderShape" id=28]
+height = 1.6
+radius = 0.8
+
+[sub_resource type="CylinderShape" id=42]
+height = 1.6
+radius = 2.0
+
+[sub_resource type="BoxShape" id=29]
+extents = Vector3( 18, 13, 1 )
+
+[sub_resource type="Animation" id=43]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 120 ]
+}
+
+[sub_resource type="Animation" id=44]
+resource_name = "idle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 104, 105 ]
+}
+
+[sub_resource type="Animation" id=45]
+resource_name = "slowDown"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 121, 123, 104, 105 ]
+}
+
+[sub_resource type="Animation" id=46]
+resource_name = "spinny"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 120, 122, 120, 121, 123, 124, 123, 125 ]
+}
+
+[sub_resource type="Animation" id=47]
+resource_name = "startUp"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 104, 105, 104, 125 ]
+}
+
+[node name="FanPlant" type="Spatial"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345, 0 )
+material_override = SubResource( 36 )
+pixel_size = 0.125
+transparent = false
+double_sided = false
+texture = ExtResource( 6 )
+hframes = 8
+vframes = 16
+frame = 120
+region_rect = Rect2( 0, 0, 62, 0 )
+script = ExtResource( 1 )
+frame_delay = 0.1
+should_animate = false
+
+[node name="Sounds" type="Spatial" parent="."]
+
+[node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 10 )
+volume_db = -18.0
+pitch_scale = 0.9
+
+[node name="ChompSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 14 )
+volume_db = -10.0
+
+[node name="BounceSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 9 )
+volume_db = -30.0
+
+[node name="InteractionArea" type="Area" parent="." groups=["no_pushems"]]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+script = ExtResource( 8 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.20636e-10, 0.0164853 )
+shape = SubResource( 28 )
+
+[node name="SmallInteractionArea" type="Area" parent="." groups=["corporeal_body"]]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+script = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 42 )
+
+[node name="PlayerActivationArea" type="Area" parent="." groups=["playerActivation"]]
+script = ExtResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerActivationArea"]
+shape = SubResource( 29 )
+
+[node name="FanAnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "spinny"
+anims/RESET = SubResource( 43 )
+anims/idle = SubResource( 44 )
+anims/slowDown = SubResource( 45 )
+anims/spinny = SubResource( 46 )
+anims/startUp = SubResource( 47 )
+
+[node name="WindGust" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1 )
+visible = false

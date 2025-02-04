@@ -125,6 +125,7 @@ func unsmack():
   .unsmack()
   var evolvedSelf = moleCricketRes.instance()
   evolvedSelf.is_builder = not is_hungry
+  evolvedSelf.behavior_stick_to_walls = true
   evolvedSelf.do_i_care_about_time_limit = true
   evolvedSelf.grav = 0
   evolvedSelf.on_ground = true

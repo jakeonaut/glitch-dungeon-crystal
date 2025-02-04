@@ -24,6 +24,11 @@ var teleport_timer = 0
 var teleport_time_limit = 15
 var teleport_time_limit2 = 30
 func _process(delta):
+
+  if linear_velocity.y > 0:
+    mySprite.frame_delay = 0.2
+  else:
+    mySprite.frame_delay = 0.4
   # if pauseSelf and not is_smacked:
   #   pauseSelf = false
   #   on_ground = true
@@ -38,12 +43,12 @@ func _process(delta):
       if not has_teleported:
         # TODO
         reassembleSound.play()
-        self.global_transform.origin = landing_position
-        landing.global_transform.origin = lastPosition
-        var temp_rotation_degrees = mySprite.rotation_degrees.z
-        mySprite.rotation_degrees.z = landing.rotation_degrees.z
-        landing.rotation_degrees.z = temp_rotation_degrees
-        landing_position = lastPosition
+        # self.global_transform.origin = landing_position
+        # landing.global_transform.origin = lastPosition
+        # var temp_rotation_degrees = mySprite.rotation_degrees.z
+        # mySprite.rotation_degrees.z = landing.rotation_degrees.z
+        # landing.rotation_degrees.z = temp_rotation_degrees
+        # landing_position = lastPosition
         has_teleported = true
         for _i in range(1):
           spawnASpore(self.global_transform.origin, true)
@@ -85,7 +90,7 @@ func getSmacked(broom_origin = null, silently = false):
   # if getPlayer().glitch_form == global.GlitchForm.INVISIBLE:
   #   behavior_jumping = true
   pauseSelf = true
-  on_ground = true
+  # on_ground = true
   notDieSound.play()
 
   # if my_shroom != null and my_shroom.get_ref() != null:

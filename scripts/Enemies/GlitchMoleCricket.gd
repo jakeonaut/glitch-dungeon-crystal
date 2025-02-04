@@ -148,7 +148,7 @@ func _process(delta):
                 if mole_state == MoleState.DIG_IDLE:
                     mole_state = MoleState.IDLE
                 else:
-                    if is_digging_left:
+                    if is_digging_left or my_up_vector.x == 1:
                         digTiles(getTilesLeftOf(getLevelTiles(), 0.5, is_builder, is_builder), true)
                         if not is_builder: digTiles(getTilesLeftOf(getFakeLevelTiles(), 0.5, is_builder, is_builder), false)
                     elif my_up_vector.y == 1:
@@ -158,9 +158,6 @@ func _process(delta):
                         if my_up_vector.y == -1:
                             digTiles(getTilesAbove(getLevelTiles(), 0.1, is_builder, is_builder), true)
                             if not is_builder: digTiles(getTilesAbove(getFakeLevelTiles(), 0.1, is_builder, is_builder), false)
-                        elif my_up_vector.x == 1:
-                            digTiles(getTilesLeftOf(getLevelTiles(), 0.5, is_builder, is_builder), true)
-                            if not is_builder: digTiles(getTilesLeftOf(getFakeLevelTiles(), 0.5, is_builder, is_builder), false)
                         elif my_up_vector.x == -1:
                             digTiles(getTilesRightOf(getLevelTiles(), 0.1, is_builder, is_builder), true)
                             if not is_builder: digTiles(getTilesRightOf(getFakeLevelTiles(), 0.4, is_builder, is_builder), false)
@@ -418,7 +415,7 @@ func digTiles(solidTiles, should_summon_clouds):
 
     var TILE_WIDTH = getLevelTiles().cell_size.x
     var TILE_HEIGHT = getLevelTiles().cell_size.y
-    if level.player.checkSolidTilesOnMe():
+    if is_builder and level.player.checkSolidTilesOnMe():
         if my_up_vector.y == 1:
             level.player.global_transform.origin.y += TILE_HEIGHT
         elif my_up_vector.y == -1:
@@ -443,8 +440,13 @@ func digTiles(solidTiles, should_summon_clouds):
             elif my_up_vector.x == -1:
                 global_transform.origin.x -= TILE_WIDTH
         else:
-            if is_digging_left: global_transform.origin.x -= TILE_WIDTH
-            else: global_transform.origin.y -= TILE_HEIGHT
+            if is_digging_left or my_up_vector.x == 1: global_transform.origin.x -= TILE_WIDTH
+            elif my_up_vector.y == 1:
+                global_transform.origin.y -= TILE_HEIGHT
+            elif my_up_vector.y == -1:
+                global_transform.origin.y += TILE_HEIGHT
+            elif my_up_vector.x == -1:
+                global_transform.origin.x += TILE_WIDTH
                 
     return tiles_dug > 0
 

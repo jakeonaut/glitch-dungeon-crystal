@@ -90,6 +90,8 @@ func _ready():
         can_spawn_mini_crystal = false
 
     
+    if my_up_vector.y <= 0:
+        grav = 0
 
     if walk_speed == 8:
         walk_speed = 3 # ????????????????????? TODO(jaketrower): Why?
@@ -282,7 +284,7 @@ func processStickyWallWalking(_delta):
                 alignStickyWallWalker(Vector2(-1, 0), Vector2(0, 1), false)
 
 func alignStickyWallWalkerSprite():
-    if my_up_vector == Vector2(0, 0) or walk_direction == Vector2(0, 0):
+    if my_up_vector == Vector2(0, 0): # or walk_direction == Vector2(0, 0):
         return
 
     if my_up_vector.y > 0:
@@ -312,6 +314,10 @@ func alignStickyWallWalkerSprite():
         should_collide_ceil = walk_direction.y > 0
         should_collide_horizontally = false
         should_collide_floor = walk_direction.y < 0
+
+    if myOtherSprite:
+        myOtherSprite.rotation_degrees = mySprite.rotation_degrees
+        myOtherSprite.flip_h = mySprite.flip_h
 
 var last_sticky_wall_walk_alignment_pos = null
 func alignStickyWallWalker(new_up_vector, new_walk_direction, should_snap_to_last = true):
