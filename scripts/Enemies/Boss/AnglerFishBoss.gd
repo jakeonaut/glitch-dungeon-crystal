@@ -11,7 +11,7 @@ onready var weakEyeAniPlayer = get_node("WeakPointContainer/WeakEye/SecretAnimat
 onready var weakPointTarget = get_node("WeakPointTarget")
 var glitchHermitCrabManagerRes = preload("res://sceneObjects/Enemies/GlitchHermitCrabManager.tscn")
 var spawnedHermitCrabManagers = []
-var crystalGeodeRes = preload("res://sceneObjects/CrystalGeode2.tscn")
+var crystalGeodeRes = preload("res://sceneObjects/Crystals/FishCrystal.tscn")
 
 var num_hits = 0
 var MAX_NUM_HITS = 3

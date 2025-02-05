@@ -183,6 +183,15 @@ func collideWithCeiling(local_lv):
     handleStickyWallWalkingCeiling()
     return .collideWithCeiling(local_lv)
 
+# @override
+func setSpriteFlipH(flip_h):
+    if behavior_stick_to_walls and not (my_up_vector.x == 0 and my_up_vector.y == 0):
+        return
+    else:
+        mySprite.flip_h = flip_h
+        is_sprite_flipped = flip_h
+    
+
 # this is all very confusing.... it would be better if we could fetch the sole tile we're next to, and "snap" to that, rather than trying
 # to adjust the transformation position arbitrarily based on which way we were going (see collideWall where we do this sin)
 var last_sticky_wall_tile = null
@@ -205,12 +214,12 @@ func processStickyWallWalking(_delta):
                 last_sticky_wall_tile = null
                 var tile_pos = getLevelTiles().map_to_world(tile_coord.x, tile_coord.y, tile_coord.z)
                 if walk_direction.y > 0:
-                    print("absent wall while walking upward, rotate right")
+                    # print("absent wall while walking upward, rotate right")
                     global_transform.origin.x = tile_pos.x
                     global_transform.origin.y = tile_pos.y + TILE_HEIGHT + TILE_HEIGHT / 2
                     alignStickyWallWalker(Vector2(0, 1), Vector2(1, 0), false)
                 elif walk_direction.y < 0:
-                    print("absent wall while walking downward, rotate right")
+                    # print("absent wall while walking downward, rotate right")
                     global_transform.origin.x = tile_pos.x
                     global_transform.origin.y = tile_pos.y - TILE_HEIGHT / 2 - TILE_HEIGHT - 0.1
                     alignStickyWallWalker(Vector2(0, -1), Vector2(1, 0), false)
@@ -224,12 +233,12 @@ func processStickyWallWalking(_delta):
                 last_sticky_wall_tile = null
                 var tile_pos = getLevelTiles().map_to_world(tile_coord.x, tile_coord.y, tile_coord.z)
                 if walk_direction.y > 0:
-                    print("absent wall while walking upward, rotate left" + str(walk_direction))
+                    # print("absent wall while walking upward, rotate left" + str(walk_direction) + ", " + str(tile_pos))
                     global_transform.origin.x = tile_pos.x + TILE_WIDTH
-                    global_transform.origin.y = tile_pos.y + TILE_HEIGHT / 2 + 0.1
+                    global_transform.origin.y = tile_pos.y + TILE_HEIGHT + TILE_HEIGHT / 2
                     alignStickyWallWalker(Vector2(0, 1), Vector2(-1, 0), false)
                 elif walk_direction.y < 0:
-                    print("absent wall while walking downward, rotate left")
+                    # print("absent wall while walking downward, rotate left")
                     global_transform.origin.x = tile_pos.x + TILE_WIDTH
                     global_transform.origin.y = tile_pos.y - TILE_HEIGHT / 2 - TILE_HEIGHT - 0.1
                     alignStickyWallWalker(Vector2(0, -1), Vector2(-1, 0), false)
@@ -243,14 +252,14 @@ func processStickyWallWalking(_delta):
             last_sticky_wall_tile = null
             var tile_pos = getLevelTiles().map_to_world(tile_coord.x, tile_coord.y, tile_coord.z)
             if walk_direction.x > 0:
-                print("absent floor while walking right, rotate down")
+                # print("absent floor while walking right, rotate down")
                 global_transform.origin.x = tile_pos.x + TILE_WIDTH / 2 + TILE_WIDTH + 0.1
                 global_transform.origin.y = tile_pos.y
                 alignStickyWallWalker(Vector2(1, 0), Vector2(0, -1), false)
             elif walk_direction.x < 0:
                 global_transform.origin.x = tile_pos.x - TILE_WIDTH / 2 - TILE_WIDTH - 0.1
                 global_transform.origin.y = tile_pos.y + TILE_HEIGHT
-                print("absent floor while walking left, rotate down")
+                # print("absent floor while walking left, rotate down")
                 alignStickyWallWalker(Vector2(-1, 0), Vector2(0, -1), false)
     elif my_up_vector.y < 0:
         var relevantTiles = getTilesAbove(getLevelTiles(), buffer, true)
@@ -264,12 +273,12 @@ func processStickyWallWalking(_delta):
             if walk_direction.x > 0:
                 global_transform.origin.x = tile_pos.x + TILE_WIDTH / 2 + TILE_WIDTH + 0.1
                 global_transform.origin.y = tile_pos.y - TILE_HEIGHT / 2 - TILE_HEIGHT
-                print("absent ceil while walking right, rotate up")
+                # print("absent ceil while walking right, rotate up")
                 alignStickyWallWalker(Vector2(1, 0), Vector2(0, 1), false)
             elif walk_direction.x < 0:
                 global_transform.origin.x = tile_pos.x - TILE_WIDTH / 2 - TILE_WIDTH - 0.1
                 global_transform.origin.y = tile_pos.y - TILE_HEIGHT / 2
-                print("absent ceil while walking left, rotate up")
+                # print("absent ceil while walking left, rotate up")
                 alignStickyWallWalker(Vector2(-1, 0), Vector2(0, 1), false)
 
 func alignStickyWallWalkerSprite():
@@ -280,23 +289,43 @@ func alignStickyWallWalkerSprite():
         mySprite.rotation_degrees = Vector3(0, 0, 0)
         if walk_direction.x > 0:
             mySprite.rotation_degrees.y = 180
+        should_collide_ceil = false
+        should_collide_horizontally = true
+        should_collide_floor = false
     elif my_up_vector.y < 0:
         mySprite.rotation_degrees = Vector3(0, 0, 180)
+        should_collide_ceil = false
+        should_collide_horizontally = true
+        should_collide_floor = false
     elif my_up_vector.x > 0:
         mySprite.rotation_degrees = Vector3(0, 0, 270)
         # we can do this for vertical walking cuz GameMover isn't engaging the mySprite.flip_h from processHorizontalInputs
         mySprite.flip_h = walk_direction.y < 0
+        is_sprite_flipped = mySprite.flip_h
+        should_collide_ceil = walk_direction.y > 0
+        should_collide_horizontally = false
+        should_collide_floor = walk_direction.y < 0
     elif my_up_vector.x < 0:
         mySprite.rotation_degrees = Vector3(0, 0, 90)
         mySprite.flip_h = walk_direction.y > 0
+        is_sprite_flipped = mySprite.flip_h
+        should_collide_ceil = walk_direction.y > 0
+        should_collide_horizontally = false
+        should_collide_floor = walk_direction.y < 0
 
 var last_sticky_wall_walk_alignment_pos = null
 func alignStickyWallWalker(new_up_vector, new_walk_direction, should_snap_to_last = true):
     grav = 0
     resetVelocity()
     my_up_vector = new_up_vector
-    print("alignStickyWallWalker, B&A: " + str(walk_direction) + ", " + str(new_walk_direction) + ", " + str(global_transform.origin) + ", " + str(last_sticky_wall_walk_alignment_pos))
+    # print("alignStickyWallWalker, B&A: " + str(walk_direction) + ", " + str(new_walk_direction) + ", " + str(global_transform.origin) + ", " + str(last_sticky_wall_walk_alignment_pos))
     walk_direction = new_walk_direction
+    if my_up_vector.y > 0:
+        mySprite.flip_h = new_walk_direction.x > 0
+        is_sprite_flipped = mySprite.flip_h
+    elif my_up_vector.y < 0:
+        mySprite.flip_h = new_walk_direction.x < 0
+        is_sprite_flipped = mySprite.flip_h
     # this is trying to deal with sudden accidental "pinching" caused by clipping into solids during wall collision?
     if last_sticky_wall_walk_alignment_pos != null and should_snap_to_last:
         if new_up_vector.y == 0: # moving to vertical movement
@@ -313,7 +342,7 @@ func handleStickyWallWalkingWall():
     var TILE_WIDTH = getLevelTiles().cell_size.x
     if my_up_vector.y > 0:
         if walk_direction.x > 0:
-            print("collide wall while walking upright-right, rotate up")
+            # print("collide wall while walking upright-right, rotate up")
             alignStickyWallWalker(Vector2(-1, 0), Vector2(0, 1))
             var relevantTiles = getTilesRightOf(getLevelTiles(), buffer, true)
             var tile_coord = getAnyNonnullTile(relevantTiles)
@@ -321,7 +350,7 @@ func handleStickyWallWalkingWall():
                 var tile_pos = getLevelTiles().map_to_world(tile_coord.x, tile_coord.y, tile_coord.z)
                 global_transform.origin.x = tile_pos.x - TILE_WIDTH - TILE_WIDTH/2 - 0.1
         elif walk_direction.x < 0:
-            print("collide wall while walking upright-left, rotate up")
+            # print("collide wall while walking upright-left, rotate up")
             alignStickyWallWalker(Vector2(1, 0), Vector2(0, 1))
             var relevantTiles = getTilesLeftOf(getLevelTiles(), buffer, true)
             var tile_coord = getAnyNonnullTile(relevantTiles)
@@ -330,7 +359,7 @@ func handleStickyWallWalkingWall():
                 global_transform.origin.x = tile_pos.x + TILE_WIDTH + TILE_WIDTH/2 + 0.1
     elif my_up_vector.y < 0:
         if walk_direction.x > 0:
-            print("collide wall while walking upsidedown-right, rotate down")
+            # print("collide wall while walking upsidedown-right, rotate down")
             alignStickyWallWalker(Vector2(-1, 0), Vector2(0, -1))
             var relevantTiles = getTilesRightOf(getLevelTiles(), buffer, true)
             var tile_coord = getAnyNonnullTile(relevantTiles)
@@ -338,25 +367,25 @@ func handleStickyWallWalkingWall():
                 var tile_pos = getLevelTiles().map_to_world(tile_coord.x, tile_coord.y, tile_coord.z)
                 global_transform.origin.x = tile_pos.x - TILE_WIDTH - TILE_WIDTH/2 - 0.1
         elif walk_direction.x < 0:
-            print("collide wall while walking upsidedown-left, rotate down")
+            # print("collide wall while walking upsidedown-left, rotate down")
             alignStickyWallWalker(Vector2(1, 0), Vector2(0, -1))
             var relevantTiles = getTilesLeftOf(getLevelTiles(), buffer, true)
             var tile_coord = getAnyNonnullTile(relevantTiles)
-            print(global_transform.origin)
+            # print(global_transform.origin)
             if tile_coord != null:
                 var tile_pos = getLevelTiles().map_to_world(tile_coord.x, tile_coord.y, tile_coord.z)
                 global_transform.origin.x = tile_pos.x + TILE_WIDTH + TILE_WIDTH/2 + 0.1
-                print(global_transform.origin)
+                # print(global_transform.origin)
 
 func handleStickyWallWalkingCeiling():
     if not behavior_stick_to_walls:
         return
     if walk_direction.y > 0 and my_up_vector.y == 0:
         if my_up_vector.x < 0:
-            print("collide ceiling with back facing left, rotate left")
+            # print("collide ceiling with back facing left, rotate left")
             alignStickyWallWalker(Vector2(0, -1), Vector2(-1, 0))
         elif my_up_vector.x > 0:
-            print("collide ceiling with back facing right, rotate right")
+            # print("collide ceiling with back facing right, rotate right")
             alignStickyWallWalker(Vector2(0, -1), Vector2(1, 0))
 
 func handleStickyWallWalkingLanded():
@@ -364,10 +393,10 @@ func handleStickyWallWalkingLanded():
         return
     if walk_direction.y < 0 and my_up_vector.y == 0:
         if my_up_vector.x < 0:
-            print("collide floor with back facing left, rotate left")
+            # print("collide floor with back facing left, rotate left")
             alignStickyWallWalker(Vector2(0, 1), Vector2(-1, 0))
         elif my_up_vector.x > 0:
-            print("collide floor with back facing right, rotate right")
+            # print("collide floor with back facing right, rotate right")
             alignStickyWallWalker(Vector2(0, 1), Vector2(1, 0))
 
 onready var glitchSecretAniPlayer = get_node("GlitchSecretAnimationPlayer") if has_node("GlitchSecretAnimationPlayer") else null
@@ -476,6 +505,7 @@ func handleSlimeWalking(delta):
 func processGlitchFormGlitchiness():
     if glitch_form != global.GlitchForm.NORMAL and mySprite.material_override != null:
         mySprite.flip_h = level.player.global_transform.origin.x < self.global_transform.origin.x
+        is_sprite_flipped = mySprite.flip_h
         if level.player.glitch_form == glitch_form and smallInteractionArea != null and not smallInteractionArea.is_in_group("enemies"):
             mySprite.material_override.set_shader_param("opacity", 1.0)
             mySprite.material_override.set_shader_param("enable_glitch", true)

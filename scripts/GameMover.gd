@@ -989,6 +989,7 @@ func processHorizontalInputs(delta):
   is_pressing_horizontal_input = pressingMoveLeft() or pressingMoveRight()
 
   var is_pressing_opposite_horizontal_input = (pressingMoveLeft() and (dir.x > 0 or (flip_h == is_sprite_flipped))) or (pressingMoveRight() and (dir.x < 0 or (flip_h != is_sprite_flipped)))
+  print(is_pressing_horizontal_input)
   if is_pressing_opposite_horizontal_input:
     num_horizontal_input_presses = 1
   elif is_pressing_horizontal_input and not was_pressing_horizontal_input and on_ground:
@@ -1078,21 +1079,21 @@ func processHorizontalInputs(delta):
               aniPlayer.stop()
               aniPlayer.clear_queue()
               aniPlayer.queue("walkStart")
-            mySprite.flip_h = flip_h
+            setSpriteFlipH(flip_h)
             doWalkAnimation()
             if on_ground and should_always_do_jump_smoke_cloud:
               addJumpSmokeCloud(true)
         # if there's no animation player, there's no animation. just flip
         else:
           dir += right*(delta*DNUMHORZ)*multiplier
-          mySprite.flip_h = flip_h
+          setSpriteFlipH(flip_h)
   
   # TODO(jaketrower): Maybe this? seems complicated
   if not pauseAnimation and not pressingMoveLeft() and not pressingMoveRight() and on_ground and aniPlayer != null and \
      (aniPlayer.assigned_animation == "walk" or aniPlayer.assigned_animation == "stand" or \
      (aniPlayer.assigned_animation == "turnAround" and not aniPlayer.is_playing()) or aniPlayer.assigned_animation == "teeter"):
     if aniPlayer.assigned_animation == "turnAround" or (aniPlayer.assigned_animation == "teeter" and should_teeter_turn_around):
-      mySprite.flip_h = not mySprite.flip_h
+      setSpriteFlipH(not mySprite.flip_h)
       should_teeter_turn_around = false
     aniPlayer.clear_queue()
     if aniPlayer.assigned_animation != "teeter":
@@ -1106,7 +1107,7 @@ func processHorizontalInputs(delta):
         if aniPlayer.assigned_animation == "walk":
           aniPlayer.queue("walkStop")
         aniPlayer.queue("stand")
-  mySprite.flip_h = flip_h
+  setSpriteFlipH(flip_h)
 
   var DNUMSKID = DNUMSKID_BASE
   if is_turn_based:
@@ -1171,7 +1172,10 @@ func processHorizontalInputs(delta):
     updateFacing(dir)
 
   if aniPlayer != null and aniPlayer.assigned_animation == "sweepFloor":
-    mySprite.flip_h = prevFlipH
+    setSpriteFlipH(prevFlipH)
+
+func setSpriteFlipH(flip_h):
+  mySprite.flip_h = flip_h
 
 func shouldAirHaveFriction():
   return true
@@ -1427,6 +1431,7 @@ func reactToPotentialCollisions(_tile_type, tile_distance, is_vertical, local_lv
       if not is_vertical: get_tree().paused = true
     # push player out of the tile! # TODO(jaketrower): TopsyTurvy
     if is_vertical:
+      # print("1INCREMENT Y POS BY: " + str(tile_distance * sensor_direction))
       global_transform.origin.y += tile_distance * sensor_direction
       if should_collide_with_floor:
         local_lv = collideWithFloor(local_lv) # TODO(jaketrower): TopsyTurvy
@@ -1435,11 +1440,13 @@ func reactToPotentialCollisions(_tile_type, tile_distance, is_vertical, local_lv
         if feather_jump_timer < feather_jump_partial_time_limit:
           feather_jump_timer = feather_jump_partial_time_limit
     else:
+      # print("1INCREMENT X POS BY: " + str(tile_distance * sensor_direction))
       global_transform.origin.x += tile_distance * sensor_direction
       collideWithWall(local_lv)
       local_lv.x = 0
   elif is_vertical and tile_distance < local_lv.y * sensor_direction: # TODO(jaketrower): TopsyTurvy
     global_transform.origin.y += tile_distance * sensor_direction
+    # print("2INCREMENT Y POS BY: " + str(tile_distance * sensor_direction))
     if should_collide_with_floor:
       local_lv = collideWithFloor(local_lv) # TODO(jaketrower): TopsyTurvy
     else:
@@ -1448,6 +1455,7 @@ func reactToPotentialCollisions(_tile_type, tile_distance, is_vertical, local_lv
         feather_jump_timer = feather_jump_partial_time_limit
   elif not is_vertical and tile_distance < local_lv.x * sensor_direction: # TODO(jaketrower): TopsyTurvy
     global_transform.origin.x += tile_distance * sensor_direction
+    # print("2INCREMENT X POS BY: " + str(tile_distance * sensor_direction))
     collideWithWall(local_lv) # TODO(jaketrower): TopsyTurvy
     local_lv.x = 0
   return local_lv
