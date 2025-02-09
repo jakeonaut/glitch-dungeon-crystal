@@ -75,6 +75,7 @@ func reindexGrandmaStatueCatalogue(is_start_of_level = false):
     else:
       grandmaStatueCatalogue[grandmaStatue.glitch_form] = weakref(grandmaStatue)
 
+var should_offset_ui = false 
 func _ready_impl():
   if not "0_1Haven" in self.getLevelName() and not global.memory["glitch_world"]:
     self.purifyAllFragileBrickSolids(false)
@@ -92,13 +93,20 @@ func _ready_impl():
   global.activeInteractor = null # somewhat of a failsafe
   set_process(true)
 
+  yield(TempTimer.idle_frame(self), "timeout")
+  yield(TempTimer.idle_frame(self), "timeout")
   if self.has_node("../../UILayer"):
+    should_offset_ui = true
     uiLayer.offset = Vector2(320, 28)
+    uiLayer.edgeDistortion.offset = Vector2(320, 28)
+    uiLayer.textBoxes.offset = Vector2(320, 28)
+  else:
+    uiLayer.offset = Vector2(0, 0)
+    uiLayer.edgeDistortion.offset = Vector2(0, 0)
+    uiLayer.textBoxes.offset = Vector2(0, 0)
   screenEffectsContainer.offset = Vector2(320, 28)
   if not get_tree().get_root().has_node("Game/GameFrameBackground"):
     viewportTexture.rect_position = Vector2(320, 28)
-  yield(TempTimer.idle_frame(self), "timeout")
-  yield(TempTimer.idle_frame(self), "timeout")
   tryToAddGameFrameBackground()
 
   viewportTexture.texture = viewport2or3.get_texture()
@@ -197,29 +205,28 @@ func tryInitializeFromDebug():
       global.memory["spellbookPage"] = [global.GlitchForm.FEATHER, global.GlitchForm.LADDER, global.GlitchForm.FLOOR, global.GlitchForm.INVISIBLE]
 
       # debug "hack" to set angel_statues on debug_initialization
-      var tempLevelZone = global.currLevelZone
-      # set for tutorial dungeon
-      global.tryInitializeLevelZone("gd1TutorialDungeon")
-      global.setLevelZoneThing("angel_statue", 
-        ["tutorial dungeon", "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"])
-      # set for tadpole bog
-      global.tryInitializeLevelZone("gd1FishingVillage")
-      global.setLevelZoneThing("angel_statue", 
-        ["tadpole bog", "res://levels/EndlessFantasy/gd1FishingVillage/AnglerFishBossRoom.tscn"])
-      # set for mushroom forest
-      global.tryInitializeLevelZone("gd1ToxicJungle")
-      global.setLevelZoneThing("angel_statue", 
-        ["moldy dogwoods", "res://levels/EndlessFantasy/gd1ToxicJungle/BabaYagaBossRoom.tscn"])
-      # set for cricket caves
-      global.tryInitializeLevelZone("gd1ShiftingSandLand")
-      global.setLevelZoneThing("angel_statue", 
-        ["cricket caves", "res://levels/EndlessFantasy/gd1ShiftingSandLand/ClaydolBossRoom.tscn"])
-      # set for dream temple
-      global.tryInitializeLevelZone("gd1CrystalTower")
-      global.setLevelZoneThing("angel_statue", 
-        ["elder temple", "res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom.tscn"])
-      # reset levelZone
-      global.currLevelZone = tempLevelZone
+      # # set for tutorial dungeon
+      # global.tryInitializeLevelZone("gd1TutorialDungeon")
+      # global.setLevelZoneThing("angel_statue", 
+      #   ["tutorial dungeon", "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"])
+      # # set for tadpole bog
+      # global.tryInitializeLevelZone("gd1FishingVillage")
+      # global.setLevelZoneThing("angel_statue", 
+      #   ["tadpole bog", "res://levels/EndlessFantasy/gd1FishingVillage/AnglerFishBossRoom.tscn"])
+      # # set for mushroom forest
+      # global.tryInitializeLevelZone("gd1ToxicJungle")
+      # global.setLevelZoneThing("angel_statue", 
+      #   ["moldy dogwoods", "res://levels/EndlessFantasy/gd1ToxicJungle/BabaYagaBossRoom.tscn"])
+      # # set for cricket caves
+      # global.tryInitializeLevelZone("gd1ShiftingSandLand")
+      # global.setLevelZoneThing("angel_statue", 
+      #   ["cricket caves", "res://levels/EndlessFantasy/gd1ShiftingSandLand/ClaydolBossRoom.tscn"])
+      # # set for dream temple
+      # global.tryInitializeLevelZone("gd1CrystalTower")
+      # global.setLevelZoneThing("angel_statue", 
+      #   ["elder temple", "res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom.tscn"])
+      # # reset levelZone
+      # global.currLevelZone = self.getLevelZoneName()
 
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
@@ -783,10 +790,11 @@ var petChickenFollowerRes = preload("res://sceneObjects/PetChickenFollower.tscn"
 var petBabushkaCatFollowerRes = preload("res://sceneObjects/BabushkaCatFollower.tscn")
 var petSnakeFollowerRes = preload("res://sceneObjects/PetSnakeFollower.tscn")
 func spawnPetFollower(starting_position):
-  if global.memory["currPet"] == null:
+  var currPet = global.memory["currPet"]
+  if currPet == null or currPet == global.PetFollower.NONE:
     return
 
-  var currPet = global.memory["currPet"]
+  
   var petFollowerRes = null
   var how_many = 1
         
@@ -873,6 +881,7 @@ func getBoss():
 
 var animate_life_timer = 0
 var animate_life_time_limit = 5
+var num_visible_boss_lives = 0
 func processBossHealth(delta):
   var whichBoss = getBoss()
   if whichBoss == null or whichBoss.getMyVariable() == 0:
@@ -883,22 +892,42 @@ func processBossHealth(delta):
   uiLayer.livesRect.visible = true
   # a bit esoteric logic given that we're hard coding it
 
+  if animate_life_timer >= animate_life_time_limit*1 and animate_life_timer < animate_life_time_limit*4 and not uiLayer.grannyLifeSprite1.visible:
+    global.lifeUISound.play()
   uiLayer.grannyLifeSprite1.visible = whichBoss.num_granny_hits < whichBoss.MAX_GRANNY_HITS and (animate_life_timer >= animate_life_time_limit*1)
+  if animate_life_timer >= animate_life_time_limit*2 and animate_life_timer < animate_life_time_limit*4 and not uiLayer.grannyLifeSprite2.visible:
+    global.lifeUISound.play()
   uiLayer.grannyLifeSprite2.visible = whichBoss.num_granny_hits <= 1 and (animate_life_timer >= animate_life_time_limit*2)
+  if animate_life_timer >= animate_life_time_limit*3 and animate_life_timer < animate_life_time_limit*4 and not uiLayer.grannyLifeSprite3.visible:
+    global.lifeUISound.play()
   uiLayer.grannyLifeSprite3.visible = whichBoss.num_granny_hits == 0 and (animate_life_timer >= animate_life_time_limit*3)
   # a bit esoteric logic given that we're hard coding it
-  if whichBoss.MAX_NUM_HITS == 5:
+  if whichBoss.MAX_NUM_HITS == 6:
+    if animate_life_timer >= animate_life_time_limit*4 and animate_life_timer < animate_life_time_limit*20 and not uiLayer.bossLifeSprite1.visible:
+      global.lifeUISound.play()
     uiLayer.bossLifeSprite1.visible = whichBoss.num_hits < whichBoss.MAX_NUM_HITS and (animate_life_timer >= animate_life_time_limit*4)
-    uiLayer.bossLifeSprite2.visible = whichBoss.num_hits <= 3 and (animate_life_timer >= animate_life_time_limit*5)
-    uiLayer.bossLifeSprite3.visible = whichBoss.num_hits <= 2 and (animate_life_timer >= animate_life_time_limit*6)
-    uiLayer.bossLifeSprite4.visible = whichBoss.num_hits <= 1 and (animate_life_timer >= animate_life_time_limit*8)
-    uiLayer.bossLifeSprite5.visible = whichBoss.num_hits == 0 and (animate_life_timer >= animate_life_time_limit*10)
+    if animate_life_timer >= animate_life_time_limit*5 and animate_life_timer < animate_life_time_limit*20 and not uiLayer.bossLifeSprite2.visible:
+      global.lifeUISound.play()
+    uiLayer.bossLifeSprite2.visible = whichBoss.num_hits <= 4 and (animate_life_timer >= animate_life_time_limit*5)
+    if animate_life_timer >= animate_life_time_limit*6 and animate_life_timer < animate_life_time_limit*20 and not uiLayer.bossLifeSprite3.visible:
+      global.lifeUISound.play()
+    uiLayer.bossLifeSprite3.visible = whichBoss.num_hits <= 3 and (animate_life_timer >= animate_life_time_limit*6)
+    if animate_life_timer >= animate_life_time_limit*8 and animate_life_timer < animate_life_time_limit*20 and not uiLayer.bossLifeSprite4.visible:
+      global.lifeUISound.play()
+    uiLayer.bossLifeSprite4.visible = whichBoss.num_hits <= 2 and (animate_life_timer >= animate_life_time_limit*8)
+    if animate_life_timer >= animate_life_time_limit*10 and animate_life_timer < animate_life_time_limit*20 and not uiLayer.bossLifeSprite5.visible:
+      global.lifeUISound.play()
+    uiLayer.bossLifeSprite5.visible = whichBoss.num_hits <= 1 and (animate_life_timer >= animate_life_time_limit*10)
+    if animate_life_timer >= animate_life_time_limit*12 and animate_life_timer < animate_life_time_limit*20 and not uiLayer.bossLifeSprite6.visible:
+      global.lifeUISound.play()
+    uiLayer.bossLifeSprite6.visible = whichBoss.num_hits == 0 and (animate_life_timer >= animate_life_time_limit*12)
   elif whichBoss.MAX_NUM_HITS == 3:
     uiLayer.bossLifeSprite1.visible = whichBoss.num_hits < whichBoss.MAX_NUM_HITS and (animate_life_timer >= animate_life_time_limit*4)
     uiLayer.bossLifeSprite2.visible = whichBoss.num_hits <= 1 and (animate_life_timer >= animate_life_time_limit*5)
     uiLayer.bossLifeSprite3.visible = whichBoss.num_hits == 0 and (animate_life_timer >= animate_life_time_limit*6)
     uiLayer.bossLifeSprite4.visible = false
     uiLayer.bossLifeSprite5.visible = false
+    uiLayer.bossLifeSprite6.visible = false
 
   # Text!
   uiLayer.deadTextLabel.visible = whichBoss.num_granny_hits == whichBoss.MAX_GRANNY_HITS

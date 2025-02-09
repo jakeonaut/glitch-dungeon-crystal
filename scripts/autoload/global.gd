@@ -58,6 +58,7 @@ var rgb_palette = preload("res://assets/palettes/3bitrgb_palette.png")
 var NES_palette = preload("res://assets/palettes/NES_base_palette.png")
 var NES_broom_palette = preload("res://assets/palettes/NES_base_broom_palette.png")
 
+onready var lifeUISound = get_node("LifeUISound")
 onready var doorSound = get_node("DoorSound")
 onready var glitchedDoorSound = get_node("GlitchedDoorSound")
 var DELETE_ME = 2
@@ -283,11 +284,12 @@ func _ready():
     resetUserSettings()
     loadUserSettings()
 
+var MAX_CRYSTALS_FOR_TOWER = 4
 func resetMemory():
     memory = {}
 
     # customization upgrades
-    memory["currPet"] = null
+    memory["currPet"] = PetFollower.NONE
     memory["allMyPets"] = [PetFollower.NONE]
     memory["currOutfit"] = GrandmaOutfit.BABUSHKA
     memory["allMyOutfits"] = [GrandmaOutfit.BABUSHKA]
@@ -315,9 +317,9 @@ func resetMemory():
 
     memory["demo_mode"] = 0
     # if you've beaten the midpoint boss
-    memory["clean_crystals"] = 5
-    memory["priestess"] = 2
-    memory["glitch_world"] = 1
+    memory["clean_crystals"] = 4
+    memory["priestess"] = 0
+    memory["glitch_world"] = 0
     memory["glitched_grimoire"] = false
     memory["forget_me_not"] = false
     memory["glitched_grimoire2"] = false

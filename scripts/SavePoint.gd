@@ -27,7 +27,7 @@ var was_on_save_point = false
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
     aniPlayer.playback_speed = global.time_dilation_multiplier * animation_speed_multiplier
-    if global.pauseGame:
+    if global.pauseGame or not visible:
         return
     
     if isOnSavePoint():
@@ -106,6 +106,8 @@ func generateId():
 
 var is_currently_on_save_point = false
 func passiveActivate(_delta, is_player):
+    if not visible: return false
+
     if is_player and level.player.malware_infected:
         level.player.malwareCured()
     global.memory["hp"] = global.memory["max_hp"]
@@ -126,4 +128,4 @@ func justStopPassiveActivate():
     is_currently_on_save_point = false
 
 func isActive(_debug=false):
-    return true
+    return visible

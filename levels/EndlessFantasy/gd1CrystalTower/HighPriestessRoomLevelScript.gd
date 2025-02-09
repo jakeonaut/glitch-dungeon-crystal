@@ -5,6 +5,7 @@ onready var highPriestessBoss = get_node("HighPriestessBoss")
 onready var croneNPC = get_node("CroneNPC")
 onready var croneNPCDefeated = get_node("CroneNPCDefeated")
 onready var glitchedGrimoire = get_node("GlitchedGrimoire")
+onready var theGoddess = get_node("TheGoddess")
 onready var savePoint = get_node("SavePoint")
 onready var ladderSpell = get_node("LadderSpell")
 onready var invisibleSpell = get_node("InvisibleSpell")
@@ -16,15 +17,22 @@ onready var crystalGeode5 = weakref(get_node("CubeCrystal5"))
 onready var aniPlayer = get_node("AnimationPlayer")
 onready var door = get_node("Door")
 onready var grandmaStatues = get_node("GrandmaStatues")
+onready var elderTadpoleNPC = weakref(get_node("ElderTadpoleNPC"))
+onready var fishElderNPC = weakref(get_node("FishElderNPC"))
+onready var sporeElderNPC = weakref(get_node("SporeElderNPC"))
+onready var wormElderNPC = weakref(get_node("WormElderNPC"))
+onready var secretGoddessNPC = get_node("SecretGoddessNPC")
+
+onready var angelEgg = get_node("AngelEgg")
 
 var has_boss_started = false
 var debug_start_boss_immediately = false
 export var camera_size = 30
 # @override
 func setUpRoomInitializationOverride():
-  if not global.memory.has("roomPath"):
-    debug_start_boss_immediately = true
-  if (crystalGeode.get_ref() == null or crystalGeode.get_ref().getMyStaticLevelZoneVar()) and global.memory["priestess"] < 2:
+  # if not global.memory.has("roomPath"):
+  #   debug_start_boss_immediately = true
+  if global.memory["priestess"] == 1:
     debug_start_boss_immediately = true
 
   var croneAbortSound = croneNPC.textBox.get_node("AbortSound")
@@ -38,6 +46,11 @@ func setUpRoomInitializationOverride():
     croneAbortSound.which_one = -1
     croneAbortSound.activateScript()
     global.setStaticLevelZoneLevelVar(self, crystalGeode.get_ref(), true)
+    angelEgg.queue_free()
+    elderTadpoleNPC.get_ref().visible = false
+    fishElderNPC.get_ref().visible = false
+    sporeElderNPC.get_ref().visible = false
+    wormElderNPC.get_ref().visible = false
   else:
     highPriestessBoss.visible = false
     highPriestessBoss.am_i_hidden = true
@@ -57,10 +70,13 @@ func setUpRoomInitializationOverride():
       # glitchedGrimoire.grav = 20
       glitchedGrimoire.visible = true
       glitchedGrimoire.global_transform.origin.y = -4
+      # theGoddess.get_node("AnimationPlayer").play("bubbleUp")
       if global.memory["glitched_grimoire"]:
         ladderSpell.visible = true
         invisibleSpell.visible = true
         savePoint.visible = true
+    else:
+      angelEgg.queue_free()
 
 # @override
 func playMenuMusic():
@@ -82,13 +98,56 @@ func overrideLevelRespawnEvent():
 
 var random_tiles_timer = 0
 var random_tiles_time_limit = 10
+var goddess_cutscene_counter = -1
 func _process(_delta):
   # i hate this but _process is not guaranteed to occur AFTER setUpRoomInitializationOverride
   if not has_room_initialized:
     return
 
-  if not has_boss_started:
-    if crystalGeode.get_ref() == null or crystalGeode.get_ref().getMyStaticLevelZoneVar():
+  if not has_boss_started and global.memory["priestess"] == 0:
+    if goddess_cutscene_counter == -1 and player.glitch_form == global.GlitchForm.NORMAL:
+      global.pauseGame = true
+      global.shouldRenderAsCinematic = true
+      goddess_cutscene_counter = -99
+      yield(get_tree().create_timer(1.0), "timeout")
+      theGoddess.get_node("AnimationPlayer").play("bubbleUp", -1, 0.7)
+      goddess_cutscene_counter = 0
+    elif goddess_cutscene_counter == 0:
+      if not theGoddess.get_node("AnimationPlayer").is_playing():
+        secretGoddessNPC.activate(true)
+        goddess_cutscene_counter += 1
+    elif goddess_cutscene_counter == 1:
+      if global.activeInteractor == null:
+        global.memory["glitch_world"] = 1
+        goddess_cutscene_counter = 2
+        player.glitch_death_timer = 8
+        player.glitchTickle()
+        glitchScreenEffect.visible = global.userSettings["canGlitchScreen"]
+        levelTiles.purifyAllSpikes()
+        yield(get_tree().create_timer(0.5), "timeout")
+        fishElderNPC.get_ref().glitchOut()
+        yield(get_tree().create_timer(0.5), "timeout")
+        wormElderNPC.get_ref().glitchOut()
+        yield(get_tree().create_timer(0.5), "timeout")
+        sporeElderNPC.get_ref().glitchOut()
+        yield(get_tree().create_timer(0.5), "timeout")
+        elderTadpoleNPC.get_ref().glitchOut()
+    elif goddess_cutscene_counter == 2:
+      if fishElderNPC.get_ref() == null and wormElderNPC.get_ref() == null and sporeElderNPC.get_ref() == null and elderTadpoleNPC.get_ref() == null:
+        goddess_cutscene_counter = -99
+        yield(get_tree().create_timer(1.0), "timeout")
+        player.glitch_death_timer = 8
+        player.glitchTickle()
+        glitchScreenEffect.visible = global.userSettings["canGlitchScreen"]
+        theGoddess.get_node("AnimationPlayer").play("disintegrate", -1, 0.8)
+        goddess_cutscene_counter = 3
+    elif goddess_cutscene_counter == 3:
+      if not theGoddess.get_node("AnimationPlayer").is_playing():
+        crystalGeode.get_ref().visible = true
+        crystalGeode.get_ref().applyGlitchMaterial(0)
+        goddess_cutscene_counter = 5
+    elif goddess_cutscene_counter == 5:
+      highPriestessBoss.laughSound.play()
       has_boss_started = true
       levelTiles.randomize_num = 1
       aniPlayer.play("appear")
@@ -99,7 +158,20 @@ func _process(_delta):
       global.pauseMoveInput = true
       global.pauseGame = true
       global.shouldRenderAsCinematic = true
-      musicPlayer.stopAll()
+      # musicPlayer.stopAll()
+
+    # if crystalGeode.get_ref() == null or crystalGeode.get_ref().getMyStaticLevelZoneVar():
+    #   has_boss_started = true
+    #   levelTiles.randomize_num = 1
+    #   aniPlayer.play("appear")
+    #   gameCamera.initial_size = camera_size
+    #   gameCamera.zoomed_size = camera_size
+    #   player.pauseInput = true
+    #   player.pauseSelf = true
+    #   global.pauseMoveInput = true
+    #   global.pauseGame = true
+    #   global.shouldRenderAsCinematic = true
+    #   musicPlayer.stopAll()
 
   if is_defeated and not is_really_defeated:
     player.pauseSelf = true
@@ -108,6 +180,9 @@ func _process(_delta):
         player.aniPlayer.stop()
         player.aniPlayer.clear_queue()
         player.aniPlayer.play("fall")
+
+  if is_really_defeated:
+    pass  
 
   # if highPriestessBoss.visible:
   #   random_tiles_timer += (delta*11)
@@ -150,11 +225,13 @@ func enterMemoryZone():
   player.grav = player.PLAYER_GRAV
   player.pauseSelf = false
   # player.nullify()
-  global.shouldRenderAsCinematic = false
+  # global.shouldRenderAsCinematic = false
   highPriestessBoss.queue_free()
   self.summonSmokeClouds(glitchedGrimoire.global_transform.origin, 5, true, true)
   glitchedGrimoire.grav = 20
   glitchedGrimoire.visible = true
+  global.pauseGame = false
+  global.shouldRenderAsCinematic = false
   # croneNPC.grav = 20
   # croneNPC.mySprite.updateBaseFrame(6, 7)
   # croneNPC.is_active = true
@@ -187,8 +264,8 @@ func unhideHighPriestess():
     crystalGeode5.get_ref().queue_free()
   musicPlayer.stopAll()
   musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
-  levelTiles.randomize_num = 1
   global.memory["priestess"] = 1
+  levelTiles.randomize_num = 1
   # global.memory.erase("spellbookPage")
   # player.nullify()
   # global.memory["broom"] = false

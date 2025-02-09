@@ -2,7 +2,7 @@ extends "../../../scripts/levelScript.gd"
 
 
 onready var door2 = get_node("Door2")
-onready var babushkaCat = get_node("BabushkaCat")
+onready var babushkaCat = weakref(get_node("BabushkaCat"))
 
 # @override
 func setUpRoomInitializationOverride():
@@ -18,6 +18,6 @@ func setUpRoomInitializationOverride():
   #     door2.animationPlayer.stop()
   #     door2.animationPlayer.play("locked")
   #     door2.is_locked = true
-  if global.memory["glitch_world"] > 0:
-    babushkaCat.global_transform.origin.x = -1.035
-    babushkaCat.global_transform.origin.y = 7.041
+  if global.memory["glitch_world"] > 0 and babushkaCat.get_ref() != null:
+    babushkaCat.get_ref().global_transform.origin.x = -1.035
+    babushkaCat.get_ref().global_transform.origin.y = 7.041

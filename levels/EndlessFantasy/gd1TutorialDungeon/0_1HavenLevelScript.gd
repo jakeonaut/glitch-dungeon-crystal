@@ -3,6 +3,9 @@ extends "../../../scripts/levelScript.gd"
 onready var door3 = get_node("Door3")
 onready var door5 = get_node("Door5")
 onready var broomUpgradeCrone = get_node("BroomUpgradeCrone")
+onready var fishElderNPC = get_node("FishElderNPC")
+onready var sporeElderNPC = get_node("SporeElderNPC")
+onready var wormElderNPC = get_node("WormElderNPC")
 
 # @override
 func setUpRoomInitializationOverride():
@@ -24,9 +27,10 @@ func setUpRoomInitializationOverride():
 
   if global.memory["clean_crystals"] >= 4:
     broomUpgradeCrone.queue_free()
-  if global.memory["angler_seaman_boss"] < 4:
-    get_node("FishElderNPC").queue_free()
-  if global.memory["baba_yaga_boss"] < 4:
-    get_node("SporeElderNPC").queue_free()
-  if global.memory["dogu_matryoshka_boss"] < 4:
-    get_node("WormElderNPC").queue_free()
+  var hasEnteredTower = global.memory.has("gd1CrystalTower")
+  if global.memory["angler_seaman_boss"] < 3 or hasEnteredTower:
+    fishElderNPC.queue_free()
+  if global.memory["baba_yaga_boss"] < 3 or hasEnteredTower:
+    sporeElderNPC.queue_free()
+  if global.memory["dogu_matryoshka_boss"] < 3 or hasEnteredTower:
+    wormElderNPC.queue_free()

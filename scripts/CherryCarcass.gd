@@ -139,7 +139,6 @@ func _process(delta):
             global_transform.origin.y += delta*11*2
         else:
             should_i_move_up = false
-            print("WHY")
             
 # @override
 func landed():

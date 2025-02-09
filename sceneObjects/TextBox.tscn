@@ -136,8 +136,6 @@ __meta__ = {
 [node name="TextCanvasLayer" type="CanvasLayer" parent="TextBox"]
 layer = 2
 visible = false
-offset = Vector2( 320, 28 )
-transform = Transform2D( 1, 0, 0, 1, 320, 28 )
 
 [node name="Container" type="TextureRect" parent="TextBox/TextCanvasLayer"]
 margin_left = 50.0
@@ -237,17 +235,17 @@ text = "no"
 scroll_active = false
 
 [node name="TextPrompt" type="RichTextLabel" parent="TextBox/TextCanvasLayer/Container"]
-margin_left = 775.0
-margin_top = 250.0
-margin_right = 1135.0
-margin_bottom = 306.0
+margin_left = 883.0
+margin_top = 254.0
+margin_right = 1164.0
+margin_bottom = 310.0
 rect_pivot_offset = Vector2( -511, -189 )
 rect_clip_content = false
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource( 20 )
 bbcode_enabled = true
-bbcode_text = "[center]c[/center]"
+bbcode_text = "[right]c[/right]"
 tab_size = 2
 text = "c"
 scroll_active = false

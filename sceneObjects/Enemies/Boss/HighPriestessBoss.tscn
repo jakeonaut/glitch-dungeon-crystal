@@ -494,6 +494,7 @@ material_override = SubResource( 4 )
 pixel_size = 0.125
 texture = ExtResource( 2 )
 hframes = 4
+vframes = 2
 script = ExtResource( 1 )
 max_frames = 4
 
@@ -613,21 +614,21 @@ volume_db = -10.0
 
 [node name="SpawnSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 10 )
-volume_db = -3.0
+volume_db = -10.0
 
 [node name="AttackSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 14 )
-volume_db = -8.0
+volume_db = -20.0
 pitch_scale = 1.2
 
 [node name="AttackStartSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 15 )
-volume_db = -15.0
+volume_db = -25.0
 pitch_scale = 1.1
 
 [node name="SpawnSavePointSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 11 )
-volume_db = -20.0
+volume_db = -30.0
 pitch_scale = 0.9
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]

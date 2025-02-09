@@ -2,6 +2,7 @@ extends AudioStreamPlayer
 
 onready var textBox = get_node("..")
 onready var elderTadpoleNPC = get_node("../../..")
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
 func _ready():
   pass
@@ -17,13 +18,22 @@ func activateScript():
   var text = "•ok I'm up.!"
   match levelZoneName:
     "gd1TutorialDungeon":
-        text = "•ok I'm up.! [wave]*cough*[/wave] \nwhere am i? i still feel weak.\noh, you're trying to tidy up?\nwell, awaken my 3 other sisters\nwe can pray to Goddess\nand clean up this world"
+      var how_many_more = global.MAX_CRYSTALS_FOR_TOWER - global.memory["clean_crystals"]
+      if not global.getStaticLevelZoneLevelVar(level, elderTadpoleNPC):
+        if how_many_more > 0:
+          text = "•ok I'm up.! [wave]*cough*[/wave] \nwhere am i? i still feel weak.\noh, you're trying to tidy up?\nwell, awaken my 3 other sisters\nwe can pray to Goddess\nand clean up this world"
+        elif how_many_more <= 0:
+          text = "•ok I'm up.! [wave]*cough*[/wave] \nwhere am i? i still feel weak.\noh, you already woke up my sisters?\nwell, we will meet\nat the holy site at top of tower.\nmake haste!"
+      elif how_many_more <= 0:
+        text = "thank you young one! we will meet\nat the holy site at top of tower.\nmake haste!"
+      elif global.getStaticLevelZoneLevelVar(level, elderTadpoleNPC):
+        text = "•awaken my 3 other sisters\nwe can pray to Goddess\nand clean up this world"
     "gd1FishingVillage":
-        text = "hi! *bloop*\ni'll go meet my other sisters.\nbye bye"
+      text = "hi! thanks *bloop*\ni'll go meet my other sisters.\nbye bye"
     "gd1ToxicJungle":
-        text = "hey! *kiki*\ni'll go meet my other sisters.\nbye bye"
+      text = "hey! thanks *kiki*\ni'll go meet my other sisters.\nbye bye"
     "gd1ShiftingSandLand":
-        text = "hello! *squirm*\ni'll go meet my other sisters.\nbye bye"
+      text = "hello! thanks *squirm*\ni'll go meet my other sisters.\nbye bye"
   
   textBox.text_final = text
   textBox.textNode.bbcode_text = text

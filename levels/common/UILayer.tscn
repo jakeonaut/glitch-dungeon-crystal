@@ -176,7 +176,7 @@ default_font = SubResource( 23 )
 flags_unshaded = true
 albedo_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="ArrayMesh" id=17221]
+[sub_resource type="ArrayMesh" id=17224]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -1117,11 +1117,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -603 )
 [node name="MeshInstance" type="MeshInstance" parent="GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer"]
 transform = Transform( 0.534633, -0.525684, 0.0180076, 0.385063, 0.373667, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 material_override = SubResource( 17199 )
-mesh = SubResource( 17221 )
+mesh = SubResource( 17224 )
 script = ExtResource( 30 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 material_override = SubResource( 17211 )
 mesh = SubResource( 17 )
 
@@ -1964,7 +1964,6 @@ vframes = 16
 frame = 217
 
 [node name="BossLifeSprite3" type="Sprite" parent="LivesRect"]
-visible = false
 material = SubResource( 17218 )
 position = Vector2( 78, 48.5 )
 scale = Vector2( 3, 3 )
@@ -1974,7 +1973,6 @@ vframes = 16
 frame = 217
 
 [node name="BossLifeSprite4" type="Sprite" parent="LivesRect"]
-visible = false
 material = SubResource( 17218 )
 position = Vector2( 106, 48.5 )
 scale = Vector2( 3, 3 )
@@ -1984,9 +1982,17 @@ vframes = 16
 frame = 217
 
 [node name="BossLifeSprite5" type="Sprite" parent="LivesRect"]
-visible = false
 material = SubResource( 17218 )
 position = Vector2( 134, 48.5 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 35 )
+hframes = 16
+vframes = 16
+frame = 217
+
+[node name="BossLifeSprite6" type="Sprite" parent="LivesRect"]
+material = SubResource( 17218 )
+position = Vector2( 162, 48.5 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 35 )
 hframes = 16

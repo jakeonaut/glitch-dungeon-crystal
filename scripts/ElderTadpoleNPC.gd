@@ -7,10 +7,12 @@ onready var broomSpriteVisible = get_node("Sprite3DBroomVisible")
 onready var broomSpriteAnimated = get_node("Sprite3DBroomAnimated")
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 onready var caneSprite = get_node("CaneSprite")
+var npcSleepSfxRes = preload("res://assets/sounds/Sleeping.wav")
 var am_i_sleepy = false
 var am_i_glitchy = false
 
 var can_smack_back = true
+var render_cane = false
 
 func _ready():
   set_process(true)
@@ -26,6 +28,17 @@ func processLevelZone():
   match levelZoneName:
     "gd1TutorialDungeon":
       can_smack_back = true
+      render_cane = true
+      if not global.getStaticLevelZoneLevelVar(level, self):
+        am_i_sleepy = true
+        mySprite.updateBaseFrame(0, 1)
+        self.can_move = false
+        var finalText = "•zzz\n(well, she's still asleep...\ncan you wake her?)"
+        self.textBox.is_really_important = false
+        self.textBox.text_final = finalText
+        self.textBox.textNode.bbcode_text = finalText
+        self.textBox.dialogStartSound.volume_db = -15
+        self.textBox.dialogStartSound.stream = npcSleepSfxRes
     "gd1FishingVillage":
       memoryVarName = "angler_seaman_boss"
       can_smack_back = false
@@ -51,7 +64,7 @@ func processLevelZone():
   have_i_processed = true
 
 func _process(delta):
-  if can_smack_back:
+  if render_cane:
     processBroomRenderLogic(delta)
     if mySprite.flip_h:
       caneSprite.flip_h = true
@@ -123,7 +136,7 @@ func chickenifyPlayer():
     textBox.interact(true) # was_smacked
 
 # @override
-func getSmacked(_broom_origin = null, _silently = false):
+func getSmacked(broom_origin = null, silently = false):
   # if not can_be_smacked:
   #   return false
   if is_smacked:
@@ -147,8 +160,8 @@ func getSmacked(_broom_origin = null, _silently = false):
     return false
 
   if not can_smack_back:
-      am_i_sleepy = false
-      return true
+    .getSmacked(broom_origin, silently)
+    return true
 
   secretAniPlayer.stop()
   secretAniPlayer.clear_queue()
@@ -162,3 +175,13 @@ func getSmacked(_broom_origin = null, _silently = false):
   mySprite.flip_h = which_side_is_player_on
   global.pauseGame = true
   level.player.pauseInput = true
+
+# @override
+func setGlobalMemoryOfHasSpoken(set_vars = false):
+  print("am i sleepy, was_smacked, can_smack_back" + str(am_i_sleepy) + ", " + str(textBox.was_smacked) + ", " + str(can_smack_back))
+  if am_i_sleepy:
+    return
+  if textBox.was_smacked and can_smack_back:
+    can_smack_back = false
+    return
+  .setGlobalMemoryOfHasSpoken(set_vars)

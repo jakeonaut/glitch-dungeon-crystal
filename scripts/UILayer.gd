@@ -112,6 +112,7 @@ onready var bossLifeSprite2 = get_node("LivesRect/BossLifeSprite2")
 onready var bossLifeSprite3 = get_node("LivesRect/BossLifeSprite3")
 onready var bossLifeSprite4 = get_node("LivesRect/BossLifeSprite4")
 onready var bossLifeSprite5 = get_node("LivesRect/BossLifeSprite5")
+onready var bossLifeSprite6 = get_node("LivesRect/BossLifeSprite6")
 onready var bossTextLabel = get_node("LivesRect/BossTextLabel")
 
 func _process(delta):

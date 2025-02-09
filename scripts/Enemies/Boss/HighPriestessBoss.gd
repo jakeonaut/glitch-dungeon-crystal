@@ -31,7 +31,7 @@ var BULLET_SPEED = 15
 var has_animated_attack = false
 
 var num_hits = 0
-var MAX_NUM_HITS = 5
+var MAX_NUM_HITS = 6
 var num_granny_hits = 0
 var MAX_GRANNY_HITS = 3
 
@@ -132,6 +132,7 @@ func yaBeatMe():
     global.memory["priestess"] = 2
     yield(get_tree().create_timer(2.0), "timeout")
     global.shouldRenderAsCinematic = true
+    global.pauseGame = true
     level.triggerCroneDefeatedDialog()
 
 func randomExplosion():
@@ -254,6 +255,7 @@ func _process(delta):
                 if num_spawns >= num_spawn_limit or level.player.physics_state == level.player.PhysicsState.GLITCH_HURT:
                     if level.player.physics_state == level.player.PhysicsState.GLITCH_HURT:
                         killTheBullets()
+                    spawnAttack(0, true)
                     num_spawns = 0
                     big_spawn_timer = 0
                     has_animated_attack = false
@@ -264,6 +266,7 @@ func _process(delta):
 
                     can_spawn_save_points = true
                     yield(get_tree().create_timer(1.0), "timeout")
+                    spawnAttack(num_spawns, false)
                     spawnWeakEye()
         else:
             spawn_timer = -spawn_time_limit

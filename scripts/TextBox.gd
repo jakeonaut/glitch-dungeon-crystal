@@ -100,7 +100,23 @@ func _ready():
   nextPrompt.visible = false
   endPrompt.visible = false
   if textSprite: textSprite.visible = false
-  textNodeCanvasLayer.offset = Vector2(320, 28)
+  yield(TempTimer.idle_frame(self), "timeout")
+  yield(TempTimer.idle_frame(self), "timeout")
+  if level.should_offset_ui:
+    textNodeCanvasLayer.offset = Vector2(320, 28)
+  else:
+    textNodeCanvasLayer.offset = Vector2(0, 0)
+  tryMoveToUiLayer()
+
+func tryMoveToUiLayer():
+  if not floating_text and not am_i_in_ui_layer and level.uiLayer != null:
+    textContainer.remove_child(self)
+    level.uiLayer.textBoxes.add_child(self)
+    if level.should_offset_ui:
+      textContainer.offset = Vector2(320, 28)
+    else:
+      textContainer.offset = Vector2(0, 0)
+    am_i_in_ui_layer = true
 
 var bg_texture = null
 func tinify():
@@ -222,8 +238,9 @@ func _process(delta):
         yesButton.visible = false
         noButton.visible = false
 
-      if textboxParent.get_ref() and not is_interact_prompt:
-        textboxParent.get_ref().setGlobalMemoryOfHasSpoken()
+      # its set when hiding the textbox, which is more reliable
+      # if textboxParent.get_ref() and not is_interact_prompt:
+      #   textboxParent.get_ref().setGlobalMemoryOfHasSpoken()
       if abortSound.has_method("preActivateScript") and not has_preactivated and not is_interact_prompt:
         abortSound.preActivateScript()
         has_preactivated = true
@@ -374,11 +391,7 @@ func showTextbox(wasSmacked = false):
   tindex = -1
   stripped_text = global.strip_bbcode(textNode.bbcode_text)
 
-  if not floating_text and not am_i_in_ui_layer and level.uiLayer != null:
-    textContainer.remove_child(self)
-    level.uiLayer.textBoxes.add_child(self)
-    textContainer.offset = Vector2(320, 28)
-    am_i_in_ui_layer = true
+  tryMoveToUiLayer()
 
   num_newlines = 0
   stupid_newline_difference_variable = 0

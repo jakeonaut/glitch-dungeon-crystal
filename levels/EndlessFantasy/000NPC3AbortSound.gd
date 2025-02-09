@@ -37,6 +37,7 @@ func doActivateScriptStuff():
     global.setStaticLevelZoneLevelVar(level, self, true)
     NPC3.can_camera_zoom = false
     NPC3.textBox.can_camera_zoom = false
+    NPC3.textBox.smackedBbText = "•don't test me hag"
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
     # OVERRIDE ME

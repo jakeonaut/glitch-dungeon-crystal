@@ -24,7 +24,6 @@ onready var meshInstance3 = get_node("CubeContainer/MeshInstance3")
 
 onready var meshInstance2 = get_node("CubeContainer/MeshInstance2")
 var npcRes = preload("res://sceneObjects/ElderTadpoleNPC.tscn")
-var npcSleepSfxRes = preload("res://assets/sounds/Sleeping.wav")
 var ritualDialogStartSoundScriptRes = preload("res://levels/EndlessFantasy/gd1GrandmaVillage/AngelStatueRitualNPCDialogStartSound.gd")
 
 export var num_gems_needed = 20
@@ -205,6 +204,9 @@ func getPurified():
         if child.is_in_group("event") and child.isActive():
             child.passiveActivate(0, true)
 
+    if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
+        global.activeInteractor.stopInteract()
+
     global.setStaticLevelZoneLevelVar(level, self, true)
     lightAniPlayer.play("lightUp")
     level.player.physics_state = level.player.PhysicsState.OCCUPIED
@@ -243,6 +245,8 @@ func getPurified():
     musicPlayer.playTreasureJingle(-80)
     global.memory["clean_crystals"] += 1
     global.setLevelZoneThing("crystal_geode", true)
+    if "HighPriestessRoom" in level.getShortLevelName():
+        level.restartMusic()
 
     if global.memory["babushka_cat_story_hook"] == 1:
         global.memory["babushka_cat_story_hook"] = 2
@@ -283,16 +287,7 @@ func freeUpPlayer():
     #     elderNPC.textBox.dialogStartSound.script = ritualDialogStartSoundScriptRes
     #     elderNPC.am_i_sleepy = false
     # else:
-    elderNPC.am_i_sleepy = true
-    elderNPC.mySprite.updateBaseFrame(0, 1)
     elderNPC.processLevelZone()
-    elderNPC.can_move = false
-    var finalText = "•zzz\n(well, she's still asleep...\ncan you wake her?)"
-    elderNPC.textBox.is_really_important = false
-    elderNPC.textBox.text_final = finalText
-    elderNPC.textBox.textNode.bbcode_text = finalText
-    elderNPC.textBox.dialogStartSound.volume_db = -15
-    elderNPC.textBox.dialogStartSound.stream = npcSleepSfxRes
 
 func trySweepUpGlitchTiles(collisionShape):
     if not collisionShape.visible:
@@ -322,3 +317,17 @@ func getMyStaticLevelZoneVar(refresh_if_null = false):
     if staticLevelZoneVar == null or refresh_if_null:
         staticLevelZoneVar = global.getStaticLevelZoneLevelVar(level, self)
     return staticLevelZoneVar
+
+var glitchedMaterial = preload("res://materials/PriestessCrystalGlitch.tres")
+var is_glitched = false
+func applyGlitchMaterial(influence):
+  if is_glitched:
+    return
+  is_glitched = true
+  var new_glitched_material = glitchedMaterial.duplicate()
+  new_glitched_material.set_shader_param("corruption_amount", 0.1 + influence*0.1)
+  new_glitched_material.set_shader_param("uv_scrolling_velocity", Vector2(influence*0.1, influence*0.1))
+  new_glitched_material.set_shader_param("normal_offset", influence*0.125 + 0.25)
+  new_glitched_material.set_shader_param("time_influence", influence + 2)
+  new_glitched_material.set_shader_param("y_div", influence * 0.5 + 3)
+  meshInstance2.set_material_override(new_glitched_material)

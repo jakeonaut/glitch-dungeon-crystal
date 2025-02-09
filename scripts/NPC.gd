@@ -189,6 +189,9 @@ func getSmacked(_broom_origin = null, _silently = false):
   # don't get smacked if we're on the wrong side of a wind up
   if level.player.mySprite.flip_h != which_side_is_player_on and global.memory["broom"]:
     return false
+
+  if global.pauseGame or global.shouldRenderAsCinematic:
+    return false
     
   if smackSound: smackSound.play()
   var material = mySprite.material_override

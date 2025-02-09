@@ -385,11 +385,11 @@ pitch_scale = 0.8
 
 [node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 10 )
-volume_db = -15.0
+volume_db = -25.0
 
 [node name="StartEvolveSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 11 )
-volume_db = -10.0
+volume_db = -18.0
 pitch_scale = 0.5
 
 [node name="PlayerActivationArea" type="Area" parent="." groups=["playerActivation"]]
