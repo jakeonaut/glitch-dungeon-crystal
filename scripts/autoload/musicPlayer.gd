@@ -164,7 +164,7 @@ func conductFromScenePath(path):
         tryToPlay(windPlayer)
     elif path.find("HighPriestessRoom") > 0 and global.memory["priestess"] <= 2:
         if global.memory["priestess"] == 0:
-            tryToPlay(croneThemePlayer)
+            tryToPlay(crystalThemePlayer)
         elif global.memory["priestess"] == 1:
             tryToPlay(bossThemePlayer)
         elif global.memory["priestess"] == 2:

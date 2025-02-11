@@ -191,7 +191,6 @@ func setSpriteFlipH(flip_h):
         return
     else:
         mySprite.flip_h = flip_h
-        is_sprite_flipped = flip_h
     
 
 # this is all very confusing.... it would be better if we could fetch the sole tile we're next to, and "snap" to that, rather than trying
@@ -303,14 +302,12 @@ func alignStickyWallWalkerSprite():
         mySprite.rotation_degrees = Vector3(0, 0, 270)
         # we can do this for vertical walking cuz GameMover isn't engaging the mySprite.flip_h from processHorizontalInputs
         mySprite.flip_h = walk_direction.y < 0
-        is_sprite_flipped = mySprite.flip_h
         should_collide_ceil = walk_direction.y > 0
         should_collide_horizontally = false
         should_collide_floor = walk_direction.y < 0
     elif my_up_vector.x < 0:
         mySprite.rotation_degrees = Vector3(0, 0, 90)
         mySprite.flip_h = walk_direction.y > 0
-        is_sprite_flipped = mySprite.flip_h
         should_collide_ceil = walk_direction.y > 0
         should_collide_horizontally = false
         should_collide_floor = walk_direction.y < 0
@@ -420,6 +417,10 @@ func _process(delta):
         spellbookGlitchSprite.visible = true
         updateSpellbookGlitchSprite()
 
+    if am_i_dying:
+        processDeath()
+        return
+
     if global.pauseGame and not can_i_personally_ignore_game_pause:
         return
     processGlitchFormGlitchiness()
@@ -437,11 +438,6 @@ func _process(delta):
     else:
         shouldIDoCollisions()
     updateFallthroughSolids()
-        
-    
-    if am_i_dying:
-        processDeath()
-        return
         
     am_i_in_range_of_player = am_i_really_in_range_of_player
     am_i_really_in_range_of_player = false
@@ -511,7 +507,6 @@ func handleSlimeWalking(delta):
 func processGlitchFormGlitchiness():
     if glitch_form != global.GlitchForm.NORMAL and mySprite.material_override != null:
         mySprite.flip_h = level.player.global_transform.origin.x < self.global_transform.origin.x
-        is_sprite_flipped = mySprite.flip_h
         if level.player.glitch_form == glitch_form and smallInteractionArea != null and not smallInteractionArea.is_in_group("enemies"):
             mySprite.material_override.set_shader_param("opacity", 1.0)
             mySprite.material_override.set_shader_param("enable_glitch", true)

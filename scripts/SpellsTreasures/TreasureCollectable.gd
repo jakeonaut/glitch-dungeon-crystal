@@ -142,7 +142,8 @@ func isActive(_debug=false):
   return is_active and visible and not okay_im_done and global.activeInteractor == null and \
          level.player.physics_state != PhysicsState.OCCUPIED and \
          level.player.physics_state != PhysicsState.COLLAPSED and \
-         level.player.physics_state != PhysicsState.IGNORE_PHYSICS
+         level.player.physics_state != PhysicsState.IGNORE_PHYSICS and \
+         (on_ground or grav == 0)
 
 # @override
 func passiveActivate(_delta, is_player):

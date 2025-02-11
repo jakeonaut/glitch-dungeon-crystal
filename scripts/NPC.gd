@@ -203,7 +203,7 @@ func getSmacked(_broom_origin = null, _silently = false):
   smack_timer = 0
   is_smacked = true
 
-  if textBox.text_final == "" and textBox.smackedBbText == "":
+  if (textBox.text_final == "" or textBox.text_final == null) and (textBox.smackedBbText == "" or textBox.smackedBbText == null):
     return false
   if floating_text or not is_active: 
     return false

@@ -383,8 +383,8 @@ grav = 0
 bbText = "*meow*
 (there's still an unpurified 
 [color=red]CRYSTAL[/color] in this area)
-*meow...* but 
-something seems wrong.."
+*meow...* (but 
+something seems wrong..)"
 
 [node name="CollisionShape" parent="Viewport/level/BabushkaCat/SmallInteractionArea" index="0"]
 shape = SubResource( 92 )
@@ -420,7 +420,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 5, 0 )
 grav = 0
 
 [node name="NPC7" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.683, -2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.683, -2, 0 )
 grav = 0
 bbText = "pssst, hey, let me
 tell you a secret.

@@ -56,6 +56,9 @@ func restart():
     animation_counter = 0
     set_frame(start_frame)
 
+func totallyRandomizeFrame():
+    self.frame = randi() % ((self.hframes * self.vframes) - max_frames)
+
 func randomizeFrameDelay():
     frame_delay = rand_range(0.1, 1.0)
 

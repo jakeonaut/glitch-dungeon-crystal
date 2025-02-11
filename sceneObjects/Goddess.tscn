@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/sprites/goddess3x.png" type="Texture" id=8]
 [ext_resource path="res://assets/palettes/black_palette.png" type="Texture" id=9]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=10]
+[ext_resource path="res://assets/sounds/eb_bell.wav" type="AudioStream" id=11]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
@@ -514,7 +515,7 @@ tracks/8/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "bubbleUp"
-length = 4.0
+length = 6.0
 step = 0.15
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:frame")
@@ -523,10 +524,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35, 1.5, 1.65, 1.8, 1.95, 2.1, 2.25 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35, 1.5, 1.65, 1.8, 1.95, 2.1, 2.25, 2.4, 2.55, 2.7, 2.85, 3, 3.15, 3.3, 3.45, 3.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 1, 2, 3, 0, 1, 4, 5, 6, 7, 6, 7, 6 ]
+"values": [ 0, 1, 2, 3, 1, 2, 3, 0, 1, 4, 8, 4, 8, 4, 5, 9, 5, 9, 5, 9, 6, 7, 6, 7, 6 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Goop2:translation")
@@ -535,7 +536,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1.5, 1.8 ),
+"times": PoolRealArray( 0, 1.5, 3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 8, -9, -1.04 ), Vector3( 8, -9, -1.04 ), Vector3( 8, -1, -1.04 ) ]
@@ -547,7 +548,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1.5, 1.8 ),
+"times": PoolRealArray( 0, 1.5, 3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 1, 0, 1 ), Vector3( 1, 0, 1 ), Vector3( 1, 1, 1 ) ]
@@ -559,7 +560,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 1.5, 1.8 ),
+"times": PoolRealArray( 0, 1.5, 3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( -8.5, -9, -1.08 ), Vector3( -8.5, -9, -1.08 ), Vector3( -8.5, -1, -1.08 ) ]
@@ -571,7 +572,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 1.5, 1.8 ),
+"times": PoolRealArray( 0, 1.5, 3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 1, 0, 1 ), Vector3( 1, 0, 1 ), Vector3( 1, 1, 1 ) ]
@@ -583,10 +584,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.3, 1.2, 1.35, 1.5, 1.65, 1.8, 2.25, 2.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.3, 1.2, 1.35, 1.5, 2.25, 2.85, 3, 3.3, 3.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 4, -8, -2 ), Vector3( 4, 0, -2 ), Vector3( 4, 0, -2 ), Vector3( 4, -3, -2 ), Vector3( 4, 1, -2 ), Vector3( 4, 3, -2 ), Vector3( 4, 0, -2 ), Vector3( 4, 0, -2 ), Vector3( 6, 4, -2 ) ]
+"values": [ Vector3( 4, -8, -2 ), Vector3( 4, 0, -2 ), Vector3( 4, 0, -2 ), Vector3( 4, -3, -2 ), Vector3( 4, 1, -2 ), Vector3( 4, 4.5, -2 ), Vector3( 4, 1, -2 ), Vector3( 4, 4.5, -2 ), Vector3( 4, 1, -2 ), Vector3( 6, 5, -2 ) ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Sprite3D:scale")
@@ -595,10 +596,10 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 0.3, 1.2, 1.35, 1.5, 1.65, 1.8, 2.25, 2.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.3, 1.2, 1.35, 1.5, 2.25, 2.85, 3, 3.3, 3.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 1, 0, 1 ), Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1, 0.5, 1 ), Vector3( 1, 1, 1 ), Vector3( 1, 1.5, 1 ), Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.5, 1.5, 1 ) ]
+"values": [ Vector3( 1, 0, 1 ), Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1, 0.5, 1 ), Vector3( 1, 1, 1 ), Vector3( 1, 1.5, 1 ), Vector3( 1, 1, 1 ), Vector3( 1, 1.5, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.5, 1.5, 1 ) ]
 }
 tracks/7/type = "value"
 tracks/7/path = NodePath("Sprite3D:should_animate")
@@ -607,7 +608,7 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0, 2.25 ),
+"times": PoolRealArray( 0, 3.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, false ]
@@ -619,7 +620,7 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 2.25 ),
+"times": PoolRealArray( 3.6 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ 2, 1 ],
@@ -633,7 +634,7 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( 0, 0.45, 1.05, 1.35, 1.8 ),
+"times": PoolRealArray( 0, 0.45, 1.05, 1.35, 3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "values": [ {
 "args": [ 0.0 ],
@@ -659,7 +660,7 @@ tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 1.65, 2.4 ),
+"times": PoolRealArray( 2.25, 3.75 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [ 0.0 ],
@@ -676,7 +677,7 @@ tracks/11/loop_wrap = true
 tracks/11/imported = false
 tracks/11/enabled = true
 tracks/11/keys = {
-"times": PoolRealArray( 0, 2.4 ),
+"times": PoolRealArray( 0, 3.75 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -688,7 +689,7 @@ tracks/12/loop_wrap = true
 tracks/12/imported = false
 tracks/12/enabled = true
 tracks/12/keys = {
-"times": PoolRealArray( 0, 2.4 ),
+"times": PoolRealArray( 0, 3.75 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
@@ -700,10 +701,10 @@ tracks/13/loop_wrap = true
 tracks/13/imported = false
 tracks/13/enabled = true
 tracks/13/keys = {
-"times": PoolRealArray( 2.4, 2.55, 2.7 ),
+"times": PoolRealArray( 3.75, 4.05, 4.35 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 3, 6, -2 ), Vector3( 2, 2, -2 ), Vector3( 2, 4, -2 ) ]
+"values": [ Vector3( 3, 7, -2 ), Vector3( 2, 3, -2 ), Vector3( 2, 5, -2 ) ]
 }
 tracks/14/type = "value"
 tracks/14/path = NodePath("BigSprite3D:scale")
@@ -712,7 +713,7 @@ tracks/14/loop_wrap = true
 tracks/14/imported = false
 tracks/14/enabled = true
 tracks/14/keys = {
-"times": PoolRealArray( 2.4, 2.55, 2.7 ),
+"times": PoolRealArray( 3.75, 4.05, 4.35 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 1.2, 1.2, 1 ), Vector3( 0.8, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
@@ -874,7 +875,7 @@ material_override = SubResource( 1 )
 pixel_size = 0.125
 texture = ExtResource( 5 )
 hframes = 4
-vframes = 2
+vframes = 4
 frame = 4
 script = ExtResource( 1 )
 frame_delay = 0.3
@@ -897,7 +898,7 @@ material_override = SubResource( 1 )
 pixel_size = 0.0001
 texture = ExtResource( 5 )
 hframes = 4
-vframes = 2
+vframes = 4
 script = ExtResource( 1 )
 frame_delay = 0.15
 max_frames = 4
@@ -909,7 +910,7 @@ flip_h = true
 pixel_size = 0.0001
 texture = ExtResource( 5 )
 hframes = 4
-vframes = 2
+vframes = 4
 script = ExtResource( 1 )
 max_frames = 4
 
@@ -922,6 +923,11 @@ anims/disintegrate = SubResource( 6 )
 [node name="BubbleSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -20.0
+pitch_scale = 0.8
+
+[node name="CrystalSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -18.0
 pitch_scale = 0.8
 
 [node name="DieSound" type="AudioStreamPlayer" parent="."]

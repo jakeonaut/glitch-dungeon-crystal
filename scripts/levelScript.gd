@@ -188,6 +188,13 @@ func tryToAddGameFrameBackground():
     var newGameBackground = gameFrameBackgroundRes.instance()
     gameTree.add_child_below_node(viewport2or3, newGameBackground)
 
+func randomizeARandomGameFrameBgSprite():
+  var gameTree = get_tree().get_root().get_node("Game")
+  if gameTree.has_node("GameFrameBackground"):
+    var randomSpriteNum = (randi() % 120) + 1
+    var bgSprite = gameTree.get_node("GameFrameBackground/Sprites/BgSprite" + str(randomSpriteNum))
+    bgSprite.totallyRandomizeFrame()
+
 func tryInitializeFromDebug():
   if global.memory["initialized_from_debug"]:
     pass
