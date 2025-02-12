@@ -2,6 +2,7 @@
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=2]
+[ext_resource path="res://sceneObjects/Enemies/FanPlant.tscn" type="PackedScene" id=3]
 [ext_resource path="res://sceneObjects/ParallaxBackground_MushroomCave.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=5]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=6]
@@ -21,7 +22,6 @@
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=25]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=26]
 [ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=27]
-[ext_resource path="res://sceneObjects/Enemies/BasicShroomEnemy.tscn" type="PackedScene" id=28]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=29]
 
 [sub_resource type="BoxShape" id=62]
@@ -594,14 +594,14 @@ frame = 50
 [node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
 shape = SubResource( 69 )
 
-[node name="BasicShroomEnemy" parent="Viewport/level" instance=ExtResource( 28 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -3, 0 )
-
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 0 )
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -3, 0 )
+
+[node name="FanPlant" parent="Viewport/level" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -3, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 22 )]
 

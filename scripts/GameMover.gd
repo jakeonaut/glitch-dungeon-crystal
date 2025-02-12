@@ -1634,6 +1634,7 @@ func playBounce(aniName, aniNameQueue = []):
 onready var miniSplashSound = get_node("Sounds/MiniSplashSound") if has_node("Sounds/MiniSplashSound") else null
 func playLandSound():
   if is_touching_water and miniSplashSound:
+    if not canSwim():
       miniSplashSound.play()
   elif landSound:
     landSound.play()

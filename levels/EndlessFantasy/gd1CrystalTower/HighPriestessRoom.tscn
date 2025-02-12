@@ -2266,6 +2266,7 @@ tileset_type = 6
 has_spellbook_page = true
 spellbook_spells = [ 2, 4 ]
 pacman_wrapping = true
+memory_zone_path = "res://levels/EndlessFantasy/gd1PrimordialOoze/ReverseEasyFling.tscn"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Viewport/level"]
 anims/RESET = SubResource( 89 )
@@ -2936,6 +2937,7 @@ max_frames = 4
 
 [node name="Goop3" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.56156, 1.38546, -2.08 )
+visible = false
 material_override = SubResource( 318 )
 pixel_size = 0.125
 texture = ExtResource( 54 )

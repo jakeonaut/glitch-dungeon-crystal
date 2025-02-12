@@ -532,3 +532,23 @@ func walkThroughWallsGlitch():
 
 func changeCastSpritePalette():
   pauseMenu.changeCastSpritePalette()
+
+onready var glitchedSkullSprite = get_node("LivesRect/GlitchedSkullSprite")
+var curr_glitched_skull_sprite_x = 0
+var curr_glitched_skull_sprite_y = 0
+func cloneGlitchedSkullSprite():
+  # global.lifeUISound.play()
+  if not glitchedSkullSprite.visible:
+    glitchedSkullSprite.visible = true
+    curr_glitched_skull_sprite_x = glitchedSkullSprite.position.x
+    curr_glitched_skull_sprite_y = glitchedSkullSprite.position.y
+  else:
+    var newSkullSprite = glitchedSkullSprite.duplicate()
+    newSkullSprite.visible = true
+    livesRect.add_child(newSkullSprite)
+    curr_glitched_skull_sprite_x += 28
+    if curr_glitched_skull_sprite_x >= 320:
+      curr_glitched_skull_sprite_x = -320
+      curr_glitched_skull_sprite_y += 28
+    newSkullSprite.position.x = curr_glitched_skull_sprite_x
+    newSkullSprite.position.y = curr_glitched_skull_sprite_y

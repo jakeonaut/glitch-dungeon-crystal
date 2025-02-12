@@ -130,7 +130,7 @@ func processGlitchFormTeleportation():
   if not level.has_room_initialized:
     return
 
-  if level.player.glitch_form == glitch_form:
+  if glitch_form != global.GlitchForm.NORMAL and level.player.glitch_form == glitch_form:
     if not has_swapped:
       # var last_on_ground = level.player.was_on_ground or level.player.isKindOfOnGround()
       has_swapped = true
@@ -195,7 +195,7 @@ func unsmack():
     mySprite.material_override = material
 
 func isFallthroughCollisionActive():
-  return is_extra_life or level.player.glitch_form != self.glitch_form
+  return self.glitch_form == global.GlitchForm.NORMAL or level.player.glitch_form != self.glitch_form
 
 func fallthroughCollisionActivate(_friend):
   # don't allow text interaction

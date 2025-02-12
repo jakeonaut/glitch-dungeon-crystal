@@ -701,10 +701,10 @@ tracks/13/loop_wrap = true
 tracks/13/imported = false
 tracks/13/enabled = true
 tracks/13/keys = {
-"times": PoolRealArray( 3.75, 4.05, 4.35 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 3.75, 4.05, 4.35, 4.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 3, 7, -2 ), Vector3( 2, 3, -2 ), Vector3( 2, 5, -2 ) ]
+"values": [ Vector3( 2, 7, -2 ), Vector3( 2, 3, -2 ), Vector3( 2, 5, -2 ), Vector3( 2, 7, -2 ) ]
 }
 tracks/14/type = "value"
 tracks/14/path = NodePath("BigSprite3D:scale")
@@ -713,10 +713,10 @@ tracks/14/loop_wrap = true
 tracks/14/imported = false
 tracks/14/enabled = true
 tracks/14/keys = {
-"times": PoolRealArray( 3.75, 4.05, 4.35 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 3.75, 4.05, 4.35, 4.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 1.2, 1.2, 1 ), Vector3( 0.8, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
+"values": [ Vector3( 1.2, 1.2, 1 ), Vector3( 0.8, 0.8, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 1.2, 1 ) ]
 }
 
 [sub_resource type="Animation" id=6]

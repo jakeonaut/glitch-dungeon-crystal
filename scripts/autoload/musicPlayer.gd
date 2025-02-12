@@ -232,6 +232,8 @@ func conductFromScenePath(path):
         tryToPlay(titleThemePlayer)
     elif path.find("005DebugTown") > 0:
         tryToPlay(dungeonThemePlayer)
+    elif path.find("PrimordialOoze") > 0:
+        tryToPlay(debugThemePlayer)
     elif path.find("001Your") > 0  or path.find("gd1"):
         tryToPlay(croneThemePlayer)
     else:

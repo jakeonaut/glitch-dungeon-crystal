@@ -1,5 +1,8 @@
 extends "../../../scripts/levelScript.gd"
 
+# String is a path to a file.
+export(String, FILE) var memory_zone_path
+
 onready var altarSprite = get_node("AltarSprite")
 onready var highPriestessBoss = weakref(get_node("HighPriestessBoss"))
 onready var croneNPC = get_node("CroneNPC")
@@ -23,6 +26,7 @@ onready var highpriestessCrystal2 = get_node("CrystalsContainer/HighpriestessCry
 onready var highpriestessCrystal3 = get_node("CrystalsContainer/HighpriestessCrystal3")
 onready var highpriestessCrystal4 = get_node("CrystalsContainer/HighpriestessCrystal4")
 onready var highpriestessCrystal5 = get_node("CrystalsContainer/HighpriestessCrystal5")
+onready var goop3 = get_node("Goop3")
 
 onready var angelEgg = get_node("AngelEgg")
 
@@ -38,6 +42,7 @@ func setUpRoomInitializationOverride():
 
   var croneAbortSound = croneNPC.textBox.get_node("AbortSound")
   if debug_start_boss_immediately and global.memory["priestess"] < 2:
+    goop3.visible = true
     global.memory["glitch_world"] = 1
     crystalsContainer.queue_free()
     gameCamera.initial_size = camera_size
@@ -63,6 +68,7 @@ func setUpRoomInitializationOverride():
     highPriestessBoss.get_ref().am_i_hidden = true
     highPriestessBoss.get_ref().mySprite.visible = false
     if global.memory["priestess"] >= 2:
+      goop3.visible = true
       crystalsContainer.queue_free()
       grandmaStatues.queue_free()
       highPriestessBoss.get_ref().queue_free()
@@ -76,8 +82,8 @@ func setUpRoomInitializationOverride():
       #   crystalGeode.get_ref().visible = false
       pacman_wrapping = false
       # glitchedGrimoire.grav = 20
-      glitchedGrimoire.visible = true
-      glitchedGrimoire.global_transform.origin.y = -4
+      # glitchedGrimoire.visible = true
+      # glitchedGrimoire.global_transform.origin.y = -4
       # theGoddess.get_node("AnimationPlayer").play("bubbleUp")
       if global.memory["glitched_grimoire"]:
         ladderSpell.visible = true
@@ -151,6 +157,7 @@ func _process(delta):
       tryLerpUpCrystal(highpriestessCrystal4, delta)
 
       if crystalSpinAmount > 1:
+        goop3.visible = true
         global.memory["glitch_world"] = 1
         goddess_cutscene_counter = -99
         yield(get_tree().create_timer(1.0), "timeout")
@@ -161,7 +168,16 @@ func _process(delta):
         # summonSmokeClouds(highpriestessCrystal5, 3)
         # highpriestessCrystal5.visible = true
         goddess_cutscene_counter = 3
+    elif goddess_cutscene_counter == -99:
+      tryLerpUpCrystal(highpriestessCrystal, delta)
+      tryLerpUpCrystal(highpriestessCrystal2, delta)
+      tryLerpUpCrystal(highpriestessCrystal3, delta)
+      tryLerpUpCrystal(highpriestessCrystal4, delta)
     elif goddess_cutscene_counter == 3:
+      tryLerpUpCrystal(highpriestessCrystal, delta)
+      tryLerpUpCrystal(highpriestessCrystal2, delta)
+      tryLerpUpCrystal(highpriestessCrystal3, delta)
+      tryLerpUpCrystal(highpriestessCrystal4, delta)
       if not theGoddess.get_node("AnimationPlayer").is_playing():
         # crystalGeode.get_ref().visible = true
         # crystalGeode.get_ref().applyGlitchMaterial(0)
@@ -222,6 +238,8 @@ func _process(delta):
       random_tiles_timer = 0
       randomizeARandomGameFrameBgSprite()
       # generateRandomTiles()
+      if global.memory["priestess"] == 2:
+        uiLayer.cloneGlitchedSkullSprite()
 
 func addNPCToCrystal(npcRef, crystal):
   if npcRef.get_ref() == null: return
@@ -260,8 +278,6 @@ func playGlitchTransitionAnimation():
   aniPlayer.play("glitchTransition")
 
 func enterMemoryZone():
-  # global.isEnteringRoom = true
-  # global.memory["roomPath"] = self.getLevelName()
   is_really_defeated = true
   var grandmaStatueArr = grandmaStatues.get_children()
   for grandmaStatue in grandmaStatueArr:
@@ -271,20 +287,24 @@ func enterMemoryZone():
   aniPlayer.queue("croneTwitch")
   glitchTickle(1)
   # generateEyeTiles()
-  player.grav = player.PLAYER_GRAV
-  player.pauseSelf = false
+  # player.grav = player.PLAYER_GRAV
+  # player.pauseSelf = false
   # player.nullify()
   # global.shouldRenderAsCinematic = false
   highPriestessBoss.get_ref().queue_free()
-  self.summonSmokeClouds(glitchedGrimoire.global_transform.origin, 5, true, true)
-  glitchedGrimoire.grav = 20
-  glitchedGrimoire.visible = true
+  # self.summonSmokeClouds(glitchedGrimoire.global_transform.origin, 5, true, true)
+  # glitchedGrimoire.grav = 20
+  # glitchedGrimoire.visible = true
   global.pauseGame = false
   global.shouldRenderAsCinematic = false
   # croneNPC.grav = 20
   # croneNPC.mySprite.updateBaseFrame(6, 7)
   # croneNPC.is_active = true
-  self.pacman_wrapping = false
+  # self.pacman_wrapping = false
+  global.grannyEnteringRoom = true
+  global.isEnteringRoom = true
+  global.memory["roomPath"] = self.getLevelName()
+  transition.granny_teleport_to(memory_zone_path)
 
 func glitchTickle(glitch_death_timer):
   if glitch_death_timer > 1:

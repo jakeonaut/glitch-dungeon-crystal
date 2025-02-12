@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=2]
+[gd_scene load_steps=90 format=2]
 
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=2]
@@ -44,17 +44,25 @@
 [ext_resource path="res://assets/sprites/tall_house0000.png" type="Texture" id=43]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/SpellbookPage.tscn" type="PackedScene" id=44]
 
-[sub_resource type="BoxShape" id=15]
+[sub_resource type="BoxShape" id=66]
 resource_local_to_scene = true
-extents = Vector3( 2, 8, 1 )
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=67]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=68]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="BoxShape" id=48]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
-[sub_resource type="BoxShape" id=59]
+[sub_resource type="BoxShape" id=69]
 resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
+extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="Animation" id=16]
 resource_name = "doorClose"
@@ -103,17 +111,25 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="BoxShape" id=19]
+[sub_resource type="BoxShape" id=70]
 resource_local_to_scene = true
-extents = Vector3( 2, 16, 1 )
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=71]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=72]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="BoxShape" id=49]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
-[sub_resource type="BoxShape" id=60]
+[sub_resource type="BoxShape" id=73]
 resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
+extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="BoxShape" id=24]
 resource_local_to_scene = true
@@ -156,72 +172,144 @@ extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="ShaderMaterial" id=27]
 shader = ExtResource( 34 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
-shader_param/enable_outline = true
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
 shader_param/texture_albedo = ExtResource( 38 )
 shader_param/base_palette = ExtResource( 13 )
 shader_param/target_palette = ExtResource( 31 )
 
 [sub_resource type="ShaderMaterial" id=35]
 shader = ExtResource( 34 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
-shader_param/enable_outline = true
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
 shader_param/texture_albedo = ExtResource( 15 )
 shader_param/base_palette = ExtResource( 13 )
 shader_param/target_palette = ExtResource( 30 )
 
 [sub_resource type="ShaderMaterial" id=36]
 shader = ExtResource( 34 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
-shader_param/enable_outline = true
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
 shader_param/texture_albedo = ExtResource( 15 )
 shader_param/base_palette = ExtResource( 13 )
 shader_param/target_palette = ExtResource( 30 )
 
 [sub_resource type="ShaderMaterial" id=29]
 shader = ExtResource( 34 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
-shader_param/enable_outline = true
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
 shader_param/texture_albedo = ExtResource( 15 )
 shader_param/base_palette = ExtResource( 13 )
 shader_param/target_palette = ExtResource( 37 )
@@ -232,54 +320,108 @@ load_path = "res://.import/MRMOTEXTEX.png-74a14690814d122bb6461eeb85a4f200.stex"
 
 [sub_resource type="ShaderMaterial" id=31]
 shader = ExtResource( 34 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
-shader_param/enable_outline = true
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
 shader_param/texture_albedo = ExtResource( 15 )
 shader_param/base_palette = ExtResource( 13 )
 shader_param/target_palette = ExtResource( 37 )
 
 [sub_resource type="ShaderMaterial" id=32]
 shader = ExtResource( 34 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
-shader_param/enable_outline = true
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
 shader_param/texture_albedo = ExtResource( 15 )
 shader_param/base_palette = ExtResource( 13 )
 shader_param/target_palette = ExtResource( 37 )
 
 [sub_resource type="ShaderMaterial" id=33]
 shader = ExtResource( 34 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.001
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.05
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
-shader_param/enable_outline = true
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
 shader_param/texture_albedo = ExtResource( 15 )
 shader_param/base_palette = ExtResource( 13 )
 shader_param/target_palette = ExtResource( 37 )
@@ -288,17 +430,25 @@ shader_param/target_palette = ExtResource( 37 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[sub_resource type="BoxShape" id=43]
+[sub_resource type="BoxShape" id=74]
 resource_local_to_scene = true
-extents = Vector3( 10, 1, 1 )
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=75]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=76]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="BoxShape" id=50]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
-[sub_resource type="BoxShape" id=63]
+[sub_resource type="BoxShape" id=77]
 resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
+extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="BoxShape" id=44]
 resource_local_to_scene = true
@@ -345,18 +495,36 @@ extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="ShaderMaterial" id=51]
 shader = ExtResource( 34 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
-shader_param/enable_outline = true
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
 shader_param/texture_albedo = ExtResource( 42 )
 shader_param/base_palette = ExtResource( 13 )
 shader_param/target_palette = ExtResource( 31 )
@@ -367,36 +535,72 @@ extents = Vector3( 3.24, 0.24, 1 )
 
 [sub_resource type="ShaderMaterial" id=53]
 shader = ExtResource( 34 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
-shader_param/enable_outline = true
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
 shader_param/texture_albedo = ExtResource( 43 )
 shader_param/base_palette = ExtResource( 13 )
 shader_param/target_palette = ExtResource( 31 )
 
 [sub_resource type="ShaderMaterial" id=54]
 shader = ExtResource( 34 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
-shader_param/enable_outline = true
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
 shader_param/texture_albedo = ExtResource( 41 )
 shader_param/base_palette = ExtResource( 13 )
 shader_param/target_palette = ExtResource( 31 )
@@ -473,6 +677,48 @@ viewport_path = NodePath("Viewport")
 
 [node name="Game" type="Spatial"]
 
+[node name="Viewport@level@NPC3@NPC TextBox@TextBox@Text@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 108.0
+step = 1.0
+page = 122.0
+
+[node name="Viewport@level@NPC3@NPC TextBox@TextBox@Text@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@NPC4@NPC TextBox@TextBox@Text@VScrollBar2" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 108.0
+step = 1.0
+page = 122.0
+
+[node name="Viewport@level@NPC4@NPC TextBox@TextBox@Text@VScrollBar3" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
+[node name="Viewport@level@NPC4@NPC TextBox@TextBox@Text@VScrollBar4" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 108.0
+step = 1.0
+page = 122.0
+
+[node name="Viewport@level@NPC4@NPC TextBox@TextBox@Text@VScrollBar5" type="VScrollBar" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+step = 1.0
+
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 640, 512 )
 
@@ -522,9 +768,6 @@ cell_octant_size = 4
 cell_center_z = false
 collision_layer = 0
 collision_mask = 0
-data = {
-"cells": PoolIntArray(  )
-}
 script = ExtResource( 12 )
 __meta__ = {
 "_editor_clip_": 0
@@ -572,18 +815,23 @@ is_passive = true
 [node name="Sprite3D" parent="Viewport/level/Door" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )
 
-[node name="landing" parent="Viewport/level/Door" index="3"]
+[node name="landing" parent="Viewport/level/Door" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 1 )
 
-[node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
-shape = SubResource( 15 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
+shape = SubResource( 66 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
+shape = SubResource( 67 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea2" index="0"]
+shape = SubResource( 68 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 48 )
 
-[node name="CollisionShape" parent="Viewport/level/Door/NPC/FallthroughSolid" index="0"]
-shape = SubResource( 59 )
+[node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
+shape = SubResource( 69 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 90, -1, 0 )
@@ -593,23 +841,28 @@ is_passive = true
 [node name="Sprite3D" parent="Viewport/level/Door2" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )
 
-[node name="landing" parent="Viewport/level/Door2" index="3"]
+[node name="landing" parent="Viewport/level/Door2" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/doorClose = SubResource( 16 )
 anims/doorOpen = SubResource( 17 )
 anims/locked = SubResource( 18 )
 
-[node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0 )
-shape = SubResource( 19 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
+shape = SubResource( 70 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
+shape = SubResource( 71 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea2" index="0"]
+shape = SubResource( 72 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 49 )
 
-[node name="CollisionShape" parent="Viewport/level/Door2/NPC/FallthroughSolid" index="0"]
-shape = SubResource( 60 )
+[node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
+shape = SubResource( 73 )
 
 [node name="Torch2" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 9, 0 )
@@ -825,23 +1078,23 @@ bbText = "•See SpriteTown\\BugCollectorDialogStartSound.gd"
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 24 )
 
-[node name="DialogStartSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="7"]
+[node name="DialogStartSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="10"]
 volume_db = -8.0
 pitch_scale = 0.2
 script = ExtResource( 36 )
 
-[node name="DialogSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="8"]
+[node name="DialogSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="11"]
 pitch_scale = 0.5
 
-[node name="AbortSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="10"]
+[node name="AbortSound" parent="Viewport/level/NPC2/NPC TextBox/TextBox" index="13"]
 volume_db = -9.0
 pitch_scale = 0.15
 script = ExtResource( 35 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC2" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC2" index="3"]
 frame = 68
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC2" index="4"]
 anims/default = SubResource( 25 )
 anims/flickerOn = SubResource( 26 )
 
@@ -2579,15 +2832,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 1, -1 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.4, 20.8, 0 )
-grav = 0
 
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50.7, 6.9, 0 )
-grav = 0
 
 [node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.6, 14.1, 0 )
-grav = 0
 
 [node name="GlitchFlyingBug" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 28, 0 )
@@ -2599,17 +2849,23 @@ path = "res://levels/PoisonForest/PoisonForest.tscn"
 is_passive = true
 is_vertical = true
 
-[node name="landing" parent="Viewport/level/Door3" index="3"]
+[node name="landing" parent="Viewport/level/Door3" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -3, 1 )
 
-[node name="CollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
-shape = SubResource( 43 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
+shape = SubResource( 74 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="1"]
+shape = SubResource( 75 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door3/InteractionArea2" index="0"]
+shape = SubResource( 76 )
 
 [node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 50 )
 
-[node name="CollisionShape" parent="Viewport/level/Door3/NPC/FallthroughSolid" index="0"]
-shape = SubResource( 63 )
+[node name="CollisionShape" parent="Viewport/level/Door3/FallthroughSolid" index="0"]
+shape = SubResource( 77 )
 
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 33 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 79.2, 27.2, 0 )
@@ -2622,38 +2878,10 @@ tiny_textbox = true
 [node name="CollisionShape" parent="Viewport/level/NPC4/SmallInteractionArea" index="0"]
 shape = SubResource( 44 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 108.0
-step = 1.0
-page = 122.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 108.0
-step = 1.0
-page = 122.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC4/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="Sprite3D" parent="Viewport/level/NPC4" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC4" index="3"]
 frame = 64
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC4" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC4" index="4"]
 anims/default = SubResource( 45 )
 anims/flickerOn = SubResource( 46 )
 anims/jump = SubResource( 47 )
@@ -2913,24 +3141,10 @@ is_really_important = true
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 55 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 108.0
-step = 1.0
-page = 122.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC3/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="Sprite3D" parent="Viewport/level/NPC3" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC3" index="3"]
 frame = 66
 
-[node name="AnimationPlayer" parent="Viewport/level/NPC3" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/NPC3" index="4"]
 anims/default = SubResource( 56 )
 anims/flickerOn = SubResource( 57 )
 anims/jump = SubResource( 58 )
@@ -2950,15 +3164,12 @@ __meta__ = {
 [node name="ScreenEffects" parent="." instance=ExtResource( 2 )]
 
 [editable path="Viewport/level/Door"]
-[editable path="Viewport/level/Door/NPC"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door2"]
-[editable path="Viewport/level/Door2/NPC"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC2"]
 [editable path="Viewport/level/NPC2/NPC TextBox"]
 [editable path="Viewport/level/Door3"]
-[editable path="Viewport/level/Door3/NPC"]
 [editable path="Viewport/level/Door3/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC4"]
 [editable path="Viewport/level/NPC4/NPC TextBox"]

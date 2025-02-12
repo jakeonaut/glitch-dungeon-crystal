@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
@@ -28,7 +28,6 @@
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=31]
 [ext_resource path="res://sceneObjects/KizzyCat.tscn" type="PackedScene" id=32]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=33]
-[ext_resource path="res://sceneObjects/Enemies/BasicFrogEnemy.tscn" type="PackedScene" id=34]
 
 [sub_resource type="ShaderMaterial" id=25]
 shader = ExtResource( 10 )
@@ -862,9 +861,6 @@ anims/jumpStart = SubResource( 60 )
 anims/land = SubResource( 61 )
 anims/landSoft = SubResource( 62 )
 anims/wakeup = SubResource( 63 )
-
-[node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 34 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3.84705, 0 )
 
 [node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 33 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 23, 0 )
