@@ -3205,7 +3205,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0351, -7.92412, 0 )
 visible = false
 grav = 0
-bbText = "•"
 is_really_important = true
 can_activate = false
 dont_recolor_me = true

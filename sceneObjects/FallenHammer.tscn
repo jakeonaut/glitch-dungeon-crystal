@@ -1234,9 +1234,7 @@ size_flags_vertical = 0
 theme = ExtResource( 27 )
 custom_colors/default_color = Color( 0.796078, 0.835294, 0.917647, 1 )
 bbcode_enabled = true
-bbcode_text = "[center]yes[/center]"
 tab_size = 2
-text = "yes"
 scroll_active = false
 
 [node name="NoButton" type="ColorRect" parent="NPC TextBox/TextBox"]
@@ -1269,9 +1267,7 @@ size_flags_vertical = 0
 theme = ExtResource( 27 )
 custom_colors/default_color = Color( 0.796078, 0.835294, 0.917647, 1 )
 bbcode_enabled = true
-bbcode_text = "[center]no.[/center]"
 tab_size = 2
-text = "no."
 scroll_active = false
 
 [node name="NextPrompt" type="Sprite" parent="NPC TextBox/TextBox"]
@@ -1298,9 +1294,7 @@ size_flags_vertical = 0
 theme = ExtResource( 27 )
 custom_colors/default_color = Color( 0.796078, 0.835294, 0.917647, 1 )
 bbcode_enabled = true
-bbcode_text = "[center][lb]C[rb][/center]"
 tab_size = 2
-text = "[C]"
 scroll_active = false
 
 [node name="DialogStartSound" type="AudioStreamPlayer" parent="NPC TextBox/TextBox"]

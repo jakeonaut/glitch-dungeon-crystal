@@ -1073,7 +1073,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 7, 0 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 33 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 71, 0, 0 )
 grav = 0
-bbText = "•See SpriteTown\\BugCollectorDialogStartSound.gd"
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 24 )
@@ -2870,9 +2869,6 @@ shape = SubResource( 77 )
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 33 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 79.2, 27.2, 0 )
 grav = 0
-bbText = "•instead of jumping,
-press UP to
-climb vines"
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC4/SmallInteractionArea" index="0"]
@@ -3124,16 +3120,10 @@ shape = SubResource( 52 )
 
 [node name="SpellbookPage" parent="Viewport/level" instance=ExtResource( 44 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44.5, 21, 0 )
-bbText = "•\"GRIMOIRE\" get!!!
-press [Z] to cast a collected
-\"COLOR SPELL\" from obelisk"
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 33 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41.1727, 19.6558, 0 )
 grav = 0
-bbText = "•ya ho ho! ya hah hower!
-•do you wish for great power?
-•take this here \"GRIMOIRE\"!"
 portrait = ExtResource( 40 )
 is_important = true
 is_really_important = true

@@ -331,7 +331,14 @@ open_map={
 
 [locale]
 
-translations=PoolStringArray( "res://dialogUiLocalization.en.translation", "res://dialogUiLocalization.zh_CN.translation" )
+test="zh_CN"
+translations=PoolStringArray( "res://dialogUiLocalization.en.translation", "res://dialogUiLocalization.pt_BR.translation", "res://dialogUiLocalization.ru.translation", "res://dialogUiLocalization.zh_CN.translation" )
+translation_remaps={
+"res://dialogBodyFontTheme.tres": PoolStringArray( "res://dialogBodyFontTheme_zh_CN.tres:zh_CN" ),
+"res://levels/common/UITheme_small.tres": PoolStringArray( "res://levels/common/UITheme_small_zh_CN.tres:zh_CN" ),
+"res://pauseMenuTheme.tres": PoolStringArray( "res://pauseMenuTheme_zh_CN.tres:zh_CN" ),
+"res://uiTutorialFont.tres": PoolStringArray( "res://uiTutorialFont_zh_CN.tres:zh_CN" )
+}
 
 [physics]
 

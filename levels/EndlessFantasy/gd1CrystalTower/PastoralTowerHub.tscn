@@ -1154,11 +1154,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5936, 50.1, 0 )
 [node name="ElderTadpoleNPC" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0 )
 grav = 0
-bbText = "•TBH.. still working on 
-the ending of game.
-But I'm close to being done!"
-smackedBbText = "that's no way to
-treat your elders!"
 
 [node name="CollisionShape" parent="Viewport/level/ElderTadpoleNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 89 )
@@ -1259,14 +1254,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 27, 0 )
 
 [node name="ElderTadpoleNPC3" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.6009, 13, 0 )
-bbText = "ah, seems that
-you're not as forgetful..
-"
 
 [node name="ElderTadpoleNPC4" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.6009, 0, 0 )
 bbText = "See GrimoireInventoryAdviceDialogStartSound.gd"
-smackedBbText = "respect your elders!"
 
 [node name="CollisionShape" parent="Viewport/level/ElderTadpoleNPC4/SmallInteractionArea" index="0"]
 shape = SubResource( 91 )

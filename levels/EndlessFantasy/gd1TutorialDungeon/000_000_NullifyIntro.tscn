@@ -178,8 +178,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2457, 7.43824, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0 )
 grav = 0
-bbText = "[color=blue]holy aura[/color]
-makes you forget..."
+bbText = "NPC.Tutorial.12"
 can_camera_zoom = false
 
 [node name="CubeCrystal" parent="Viewport/level" instance=ExtResource( 20 )]

@@ -196,10 +196,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.58321, 2, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 12, 0 )
 grav = 0
-bbText = "did you notice?
-the spell you forget
-is the one you had active. i
-thought that was interesting."
+bbText = "NPC.Tutorial.10"
 
 [node name="Viewport2" parent="." instance=ExtResource( 12 )]
 

@@ -144,15 +144,6 @@ __meta__ = {
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 9, 0 )
 grav = 0
-bbText = "•oh! hello there!
-you're human too..
-welcome to town.
-you must have lots of 
-questions..........i'm pretty
-confused too honestly...
-go take that
-SPELLBOOK PAGE
-it might help you out.."
 portrait = ExtResource( 21 )
 is_important = true
 
@@ -165,10 +156,6 @@ frame = 4
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 12, 0 )
 grav = 0
-bbText = "•how are
-you?
-
-bye!"
 tiny_textbox = true
 
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 6 )]
@@ -181,24 +168,15 @@ tiny_textbox = true
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -4, 0 )
-bbText = "•hi!"
 
 [node name="NPC8" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 17, 0 )
 grav = 0
-bbText = "•yeah!!!
-CRYSTAL ELDERS
-know all secrets!
-hey how did you
-get here?"
 tiny_textbox = true
 
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41, 11, 0 )
 grav = 0
-bbText = "•go LEFT to find
-spellbook page..
-get power!!"
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC5/SmallInteractionArea" index="0"]
@@ -208,20 +186,11 @@ shape = SubResource( 7 )
 [node name="NPC7" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 18, 0 )
 grav = 0
-bbText = "•she's my friend"
 tiny_textbox = true
 
 [node name="NPC9" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72, 15, 0 )
 grav = 0
-bbText = "•oh! you're looking for
-CRYSTAL ELDERS?
-they know the rules
-of this place... they're
-deeper in dungeon...
-you will need your
-wits about you to
-find them...!!!!"
 
 [node name="FloorSpell2" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9266, 12.3539, 0 )

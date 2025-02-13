@@ -383,13 +383,14 @@ func showTextbox(wasSmacked = false):
   textNode.scroll_to_line(0)
   if wasSmacked and smackedBbText != null and smackedBbText != "":
     if textSprite: textSprite.visible = false
-    textNode.bbcode_text = smackedBbText
+    textNode.bbcode_text = tr(smackedBbText)
     showYesNoOptions = false
   else:
+    print(text_final + ", " + tr(text_final))
     if textSprite: textSprite.visible = true
-    textNode.bbcode_text = text_final
+    textNode.bbcode_text = tr(text_final)
   tindex = -1
-  stripped_text = global.strip_bbcode(textNode.bbcode_text)
+  stripped_text = global.strip_bbcode(tr(textNode.bbcode_text))
 
   tryMoveToUiLayer()
 

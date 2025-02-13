@@ -777,15 +777,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.7486, -14.871, -0.3 )
 [node name="NPC" parent="Viewport/level/AngelStatue" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16.5, -1 )
 visible = false
-bbText = "* Statue ANGEL of the GODDESS. 
-* Please offer your prayers.
-         > Deposit cubes?"
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42, -17, 0 )
 grav = 0
-bbText = "whaddya want from me?
-i'm on smoko"
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 37 )
@@ -800,8 +795,6 @@ shape = SubResource( 38 )
 [node name="FungusNPC" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8352, -5.63366, 0 )
 grav = 0
-bbText = "•you fool!!!
-did that frog send u?"
 is_important = true
 is_really_important = true
 can_activate = false
@@ -838,10 +831,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.54265, -1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.47699, -5.55142, 0 )
 visible = false
 grav = 0
-bbText = "•MAGICK    
-    is corruption. •this place is
-rotting...
-•it is best left shunned and uninhabited"
 can_activate = false
 can_move = false
 dont_recolor_me = true
@@ -881,12 +870,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.61558, -1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8539, -8.52389, 0 )
 visible = false
 grav = 0
-bbText = "•what's that? you wish to 
-  cure this blight? 
-.... hrm....
-•i will allow you entry to this tower.
-•perhaps you can cleanse these grounds
-•before they take their toll on you"
 can_activate = false
 can_move = false
 dont_recolor_me = true

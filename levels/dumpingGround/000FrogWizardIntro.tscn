@@ -298,8 +298,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.2, 46, 0 )
 stream = null
 
 [node name="TextContainer" parent="Viewport/level/Player" index="12"]
-bbText = "•don't remember
-having a basement.."
 
 [node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="10"]
 pitch_scale = 0.8
@@ -308,17 +306,12 @@ pitch_scale = 0.8
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 1, 0 )
 visible = false
 grav = 0
-bbText = "•hi so much!
-... um... •press arrow keys to walk"
 can_camera_zoom = false
 tiny_textbox = true
 
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0 )
 grav = 0
-bbText = "•um, hi!
-•press UP or
-X to jump"
 can_camera_zoom = false
 is_a_body = false
 tiny_textbox = true
@@ -326,10 +319,6 @@ tiny_textbox = true
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 15, 0 )
 grav = 0
-bbText = "•welcome to DUNGEON
-•press SPACE to talk↓•thank u!!!
-•if someone says \". . .\"
-you can talk to them!"
 is_really_important = true
 can_camera_zoom = false
 
@@ -346,9 +335,6 @@ shape = SubResource( 24 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 23, 0 )
 grav = 0
 walk_speed = 6
-bbText = "•...what are you doing here?
-•this place is a danger for
-those without magick................................  "
 portrait = ExtResource( 16 )
 is_important = true
 is_really_important = true
@@ -383,11 +369,6 @@ shape = SubResource( 20 )
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 14, 0 )
 grav = 0
-bbText = "•Another daye passes by...
-•Oh! Helloe there! do you seek the power of GODDESS?
-•....
-•if so... followe me!
-•...."
 portrait = ExtResource( 16 )
 is_important = true
 is_really_important = true

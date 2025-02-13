@@ -184,6 +184,7 @@ margin_bottom = 473.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( -745, -223 )
+rect_clip_content = false
 theme = ExtResource( 12 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
@@ -2250,22 +2251,22 @@ margin_bottom = 40.0
 
 [node name="PlayerHatRed" type="Sprite" parent="ColorblindPlayers/ColorblindHats"]
 material = SubResource( 62 )
-position = Vector2( 106, 254 )
+position = Vector2( 106, 250 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 18 )
 hframes = 4
-vframes = 4
+vframes = 6
 frame = 1
 script = ExtResource( 13 )
 max_frames = 1
 
 [node name="PlayerHatGreen" type="Sprite" parent="ColorblindPlayers/ColorblindHats"]
 material = SubResource( 62 )
-position = Vector2( 34, 260 )
+position = Vector2( 34, 252 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 18 )
 hframes = 4
-vframes = 4
+vframes = 6
 script = ExtResource( 13 )
 max_frames = 1
 

@@ -419,14 +419,6 @@ margin_top = 311.231
 margin_right = 756.54
 margin_bottom = 534.231
 custom_fonts/normal_font = SubResource( 9 )
-bbcode_text = "lv = handleHorizontalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.3)
-    global_transform.origin.x += lv.x
-    lv = handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.1)
-    global_transform.origin.y += lv.y "
-text = "lv = handleHorizontalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.3)
-    global_transform.origin.x += lv.x
-    lv = handleVerticalCollisions(lv, left_tile_x, right_tile_x, top_tile_y, bottom_tile_y, 0.1)
-    global_transform.origin.y += lv.y "
 script = ExtResource( 20 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -561,8 +553,6 @@ glitch_form = 4
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -3.98224, 0 )
-bbText = "•you're not supposed
-to be down here"
 
 [node name="GlitchSlime" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 0 )
@@ -699,13 +689,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 5, -1 )
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 4, 0 )
 grav = 0
-bbText = "welcome to the domain\\n of the Goddess"
 
 [node name="NPC6" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 21, 0 )
 grav = 0
-bbText = "we are all offspring
-of Goddess"
 
 [node name="Viewport2" parent="." instance=ExtResource( 18 )]
 

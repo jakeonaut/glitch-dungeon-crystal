@@ -209,9 +209,6 @@ num_keys_unlock = 1
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 1.6, 0 )
 
 [node name="NPC" parent="Viewport/level/WindGustCorpse" index="0"]
-bbText = "i'm forgetting… 
-i can't [wave]remember..[/wave]
-[wave]*cough*[/wave]"
 
 [node name="CollisionShape" parent="Viewport/level/WindGustCorpse/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 27 )

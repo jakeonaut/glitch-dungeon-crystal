@@ -929,11 +929,6 @@ transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 6, 4.14181, 8.3 )
 [node name="SmithingNPC" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 10.0696, 0 )
 grav = 0
-bbText = "•I lost my smithing hammer...
-•I can't work without it!
-•oh... this? this is my
-recreational hammer...
-•howe shameful..."
 dont_recolor_me = true
 showYesNoOptions = true
 

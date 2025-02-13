@@ -10,5 +10,4 @@ var hasUpdatedGrammaText = false
 func _process(_delta):
   pass
   # if not hasUpdatedGrammaText and not has_node("ChickenNPC"):
-  #   grammaNPC.textBox.text_final = "•oh.. our chickens\nare gone."
   #   hasUpdatedGrammaText = true

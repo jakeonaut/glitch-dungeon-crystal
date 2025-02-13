@@ -247,17 +247,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1, 0 )
 grav = 0
-bbText = "•? who are you ?
-.....
-"
 tiny_textbox = true
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 11, 0 )
 visible = false
 grav = 0
-bbText = "•you've entered our realm
-..now you cannot leave.."
 tiny_textbox = true
 
 [node name="Viewport2" parent="." instance=ExtResource( 15 )]

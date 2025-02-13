@@ -215,12 +215,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8, 0.957091, 0 )
 grav = 0
-bbText = "•some glitches are
-un-sweepable.
-i know this"
-smackedBbText = "•i am also
-un-sweepable.
-i know this."
+bbText = "NPC.Tutorial.5"
+smackedBbText = "NPC.Tutorial.5_2"
 can_camera_zoom = false
 is_a_body = false
 
@@ -242,7 +238,7 @@ un-sweepable.
 i know this"
 
 [node name="TextSprite" type="Sprite" parent="Viewport/level/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer" index="1"]
-position = Vector2( 700, 96 )
+position = Vector2( 1000, 96 )
 texture = ExtResource( 13 )
 
 [node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]

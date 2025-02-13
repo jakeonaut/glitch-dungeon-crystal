@@ -1018,12 +1018,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 54.6102, -20.0278, 0 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -17, 0 )
-bbText = "•I lost my smithing hammer...
-•I can't return to my village
-until I have found it...
-•oh... this? this is my
-recreational hammer...
-•howe shameful..."
 
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 19 )

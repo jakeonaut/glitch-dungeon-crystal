@@ -1186,9 +1186,7 @@ shape = SubResource( 63 )
 [node name="NPCTutorial2" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9223, 11.6829, 0 )
 grav = 0
-bbText = "hi..
-•because you're [color=red]old[/color]: you'll only
-remember 2 spells at a time"
+bbText = "NPC.Tutorial.9"
 can_camera_zoom = false
 
 [node name="CollisionShape" parent="Viewport/level/NPCTutorial2/SmallInteractionArea" index="0"]
@@ -1266,8 +1264,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.54171, 14, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.4174, 5.10442, 0 )
 visible = false
 grav = 0
-bbText = "try swapping and jumping
-at the same time!"
+bbText = "NPC.Tutorial.8"
 can_be_activated_invisibly = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]

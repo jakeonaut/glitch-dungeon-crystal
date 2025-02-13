@@ -341,9 +341,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 10, 0 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 7, 0 )
-bbText = "•are you up for challenge?
-if so, enter my mind and
-claim elusive \"ANGEL FLUTE\"!!"
 is_important = true
 is_really_important = true
 

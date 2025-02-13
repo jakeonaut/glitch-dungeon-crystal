@@ -63,7 +63,7 @@ func _process(_delta):
     if player.physics_state == player.PhysicsState.WAKING_UP or player.physics_state == player.PhysicsState.WAKING_UP:
       showInstructions = false
     optionsMenuPrompt.bbcode_text = "" # "Press " + global.getInputText("ui_start") + " for OPTIONS"
-    pressCText.bbcode_text = global.getInputText("sub_action_button") + " to Sweep. " + global.getInputText("jump_button") + " to Jump. " + global.getInputText("ui_left")  + global.getInputText("ui_right") + " to walk"
+    pressCText.bbcode_text = tr("UI.Tutorial.InputPrompt.1") % [global.getInputText("sub_action_button"), global.getInputText("jump_button"), global.getInputText("ui_left"), global.getInputText("ui_right")]
   else:
     pressCText.visible = false
     optionsMenuPrompt.visible = false

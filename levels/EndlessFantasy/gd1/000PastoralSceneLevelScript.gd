@@ -67,16 +67,6 @@ func setUpRoomInitializationOverride():
   eventSound1.play()
   yield(get_tree().create_timer(0.33), "timeout")
   eventSound1.play()
-  # var sweep_button_text = global.getInputText("sub_action_button")
-  # pastoralGrannyNPC.textBox.text_final = "•some glitch dust appeared!\nhow odd... dearie, could you\nsweep up with " + sweep_button_text + "?"
-  # pastoralGrannyNPC.textBoxContainer.bbText = pastoralGrannyNPC.textBox.text_final
-
-  # NPC7.floating_text = true
-  # NPC7.mySprite.pixel_size = 0.0001
-  # NPC7.textBox.floating_text = true
-  # var right_button_text = global.getInputText("ui_right")
-  # NPC7.textBox.text_final = "*meow!\n•up here dearie!\npress " + right_button_text + " to walk"
-  # NPC7.textBox.showTextbox()
   
 
 # @override

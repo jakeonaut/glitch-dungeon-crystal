@@ -608,16 +608,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 10.6, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 2.1, 0 )
 grav = 0
-bbText = "•welcome to
-our realm"
 can_camera_zoom = false
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 14.3, 0 )
 grav = 0
-bbText = "•we are but
-echoes of goddess's
-memory"
 can_camera_zoom = false
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]

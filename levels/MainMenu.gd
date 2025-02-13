@@ -285,9 +285,9 @@ func _process(delta):
                     mainMenuUi.remove_child(optionsMenuPrompt)
                     uiLayer.add_child(optionsMenuPrompt)
                     optionsMenuPrompt.rect_position.y = 16
-                pressCText.bbcode_text = global.getInputText("sub_action_button") + " to Sweep. " + global.getInputText("jump_button") + " to Jump. " + global.getInputText("ui_left")  + global.getInputText("ui_right") + " to walk"
+                pressCText.bbcode_text = tr("UI.Tutorial.InputPrompt.1") % [global.getInputText("sub_action_button"), global.getInputText("jump_button"), global.getInputText("ui_left"), global.getInputText("ui_right")]
                 pressCText.visible = (global.activeInteractor == null and not global.isPauseMenuOpen)
-                optionsMenuPrompt.bbcode_text = "Press " + global.getInputText("ui_start") + " for OPTIONS"
+                optionsMenuPrompt.bbcode_text = tr("UI.MainMenu.1") % global.getInputText("ui_start")
                 optionsMenuPrompt.visible = pressCText.visible
             return
 
@@ -305,10 +305,10 @@ func _process(delta):
         if mainMenuState == MainMenuState.MAIN_MENU_TRY_QUIT_GAME:
             pressCText.bbcode_text = "[right]press " + global.getInputText("menu_cancel") + " to cancel, " + global.getInputText("menu_confirm") + " to start[/right]"
         else:
-            var secondPartTemp = global.getInputText("menu_delete") + ": delete file  "
+            var secondPartTemp = tr("UI.MainMenu.4") % global.getInputText("menu_delete")
             var second_part = secondPartTemp if global.doesSaveGameExist(mainMenuPromptIndex) else ("[s][color=gray]" + secondPartTemp + "[/color][/s]")
-            pressCText.bbcode_text = "[right]press " + global.getInputText("menu_confirm") + " to start    " + second_part + "[/right]"
-        optionsMenuPrompt.bbcode_text = "Press " + global.getInputText("ui_start") + " for OPTIONS"
+            pressCText.bbcode_text = "[right]" + (tr("UI.MainMenu.3") % global.getInputText("menu_confirm")) + "    " + second_part + "[/right]"
+        optionsMenuPrompt.bbcode_text = tr("UI.MainMenu.1") % global.getInputText("ui_start")
         selectTextPrompt.bbcode_text = global.getInputText("menu_confirm")
 
         if Input.is_action_just_pressed("menu_down"):

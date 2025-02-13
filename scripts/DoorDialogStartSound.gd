@@ -23,15 +23,17 @@ func activateScript():
       var num_keys = global.memory["key"] if global.memory.has("key") else null
       if door.prev_keys != num_keys and door.is_locked:
         door.prev_keys = num_keys
-        if num_keys == null or num_keys == 0:
-          if door.num_keys_unlock == 1:
-            npc.textBoxContainer.bbText = "•locked,\nneeds a key"
-          else:
-            npc.textBoxContainer.bbText = "•locked,\nneeds " + str(door.num_keys_unlock) + " keys"
-        elif num_keys != null and num_keys < door.num_keys_unlock:
-          npc.textBoxContainer.bbText = "•locked,\nneeds " + str(door.num_keys_unlock - num_keys) + " [wave]more[/wave] keys\n(" + str(door.num_keys_unlock) +" total)"
-        else:
-          npc.textBoxContainer.bbText = "•"
+        npc.textBoxContainer.bbText = tr("NPC.Door.1") % str(door.num_keys_unlock)
+        # if num_keys == null or num_keys == 0:
+          
+        #   if door.num_keys_unlock == 1:
+        #     npc.textBoxContainer.bbText = "•locked,\nneeds a key"
+        #   else:
+        #     npc.textBoxContainer.bbText = "•locked,\nneeds " + str(door.num_keys_unlock) + " keys"
+        # elif num_keys != null and num_keys < door.num_keys_unlock:
+        #   npc.textBoxContainer.bbText = "•locked,\nneeds " + str(door.num_keys_unlock - num_keys) + " [wave]more[/wave] keys\n(" + str(door.num_keys_unlock) +" total)"
+        # else:
+        #   npc.textBoxContainer.bbText = "•"
     else:
       var x_more_crystals = door.num_keys_unlock - global.memory["clean_crystals"]
       var key_name = door.getKeyName(x_more_crystals)

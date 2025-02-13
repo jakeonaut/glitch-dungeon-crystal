@@ -331,10 +331,6 @@ shape = SubResource( 22 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1, 19.7, 0 )
 grav = 0
-bbText = "•Thou hast done well in
-getting this far..
-
-"
 is_really_important = true
 can_camera_zoom = false
 is_a_body = false

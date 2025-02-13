@@ -170,9 +170,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3.15086, 0 )
 visible = false
 script = ExtResource( 19 )
 grav = 0
-bbText = "•what is your weakness?
-what do you desire..?
-..................."
 is_important = true
 
 [node name="InteractionArea" type="Area" parent="Viewport/level/NPC"]
@@ -212,9 +209,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 18.1509, 0 )
 visible = false
 script = ExtResource( 19 )
 grav = 0
-bbText = "•self esteem, ego, fear?
-jealousy? guilt?
-bad mood?.............."
 
 [node name="InteractionArea" type="Area" parent="Viewport/level/NPC2"]
 script = ExtResource( 18 )

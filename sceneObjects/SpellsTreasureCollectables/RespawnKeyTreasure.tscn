@@ -42,6 +42,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 3
+shader_param/black_offset = 0
 shader_param/enable_glitch = true
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
@@ -77,6 +78,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
@@ -379,6 +381,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
@@ -397,12 +400,10 @@ shader_param/texture_albedo = ExtResource( 5 )
 shader_param/base_palette = ExtResource( 2 )
 shader_param/target_palette = ExtResource( 2 )
 
-[node name="SpellbookPage" type="Spatial"]
+[node name="RespawnKeyTreasure" type="Spatial"]
 script = ExtResource( 10 )
 grav = 0
-bbText = "•You got \"Grimoire\"
-..but it's missing a
-few pages"
+bbText = "See RespawnKeyTreasureDialogStartSound.gd"
 portrait = ExtResource( 14 )
 is_important = true
 can_activate = false

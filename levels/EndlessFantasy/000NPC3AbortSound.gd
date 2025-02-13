@@ -30,14 +30,14 @@ func doActivateScriptStuff():
     var door = level.get_node("Door")
 
     if door.is_locked:
-        NPC3.textBoxContainer.bbText = "•I think the crystals are ahead\nbut I can't get past this door.."
+        NPC3.textBoxContainer.bbText = "NPC.Crone.1_2"
     else:
-        NPC3.textBoxContainer.bbText ="•Ah! great work.\nI'll meet you on ahead"
+        NPC3.textBoxContainer.bbText ="NPC.Crone.1_3"
     NPC3.textBoxContainer.setVars()
     global.setStaticLevelZoneLevelVar(level, self, true)
     NPC3.can_camera_zoom = false
     NPC3.textBox.can_camera_zoom = false
-    NPC3.textBox.smackedBbText = "•don't test me hag"
+    NPC3.textBox.smackedBbText = "NPC.Crone.2"
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
     # OVERRIDE ME

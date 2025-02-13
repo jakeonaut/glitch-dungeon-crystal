@@ -5,7 +5,7 @@ func _ready():
 
 
 func activateScript():
-    var text = "•You got \"Grimoire\"\n..but it's missing a\nfew pages"
+    var text = tr("NPC.Treasure.2")
     var textBox = get_node("..")
     textBox.text_final = text
     textBox.textNode.bbcode_text = text

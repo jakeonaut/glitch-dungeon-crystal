@@ -306,8 +306,6 @@ num_keys_unlock = 1
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 52, 0.0999994, 0 )
 grav = 0
-bbText = "•the spores made
-it immortal..."
 is_really_important = true
 can_move = false
 can_camera_zoom = false
@@ -332,8 +330,6 @@ shape = SubResource( 28 )
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60.9, 1.6, 0 )
 grav = 0
-bbText = "•i want to 
-be stronger too"
 is_really_important = true
 can_move = false
 can_camera_zoom = false

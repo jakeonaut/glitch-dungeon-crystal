@@ -381,7 +381,7 @@ shader_param/target_palette = ExtResource( 1 )
 [node name="SmallKeyTreasure" type="Spatial"]
 script = ExtResource( 11 )
 grav = 0
-bbText = "got small key"
+bbText = "UI.Alert.0"
 portrait = ExtResource( 17 )
 is_important = true
 can_activate = false

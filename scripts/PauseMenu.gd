@@ -241,13 +241,13 @@ func _process(delta):
   pauseTitleRect.rect_position = Vector2(164, 400)
 
 
-var normalMenuOptions = ["resume", "Input", "Graphics", "Sound", "Quit to Main"]
-var normalMenuOptionsOnMainMenu = ["resume", "Input", "Graphics", "Sound", "Quit Game"]
+var normalMenuOptions = [tr("UI.PauseMenu.1"), tr("UI.PauseMenu.2"), tr("UI.PauseMenu.3"), tr("UI.PauseMenu.4"), tr("UI.PauseMenu.5")]
+var normalMenuOptionsOnMainMenu = [tr("UI.PauseMenu.1"), tr("UI.PauseMenu.2"), tr("UI.PauseMenu.3"), tr("UI.PauseMenu.4"), "Quit Game"]
 var normalOptionIndex = 0
 func processNormalLogic(_delta):
   if global.isOnMainMenu:
     normalMenuOptions = normalMenuOptionsOnMainMenu
-  pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to resume\n" + global.getInputText("menu_up") + " " + global.getInputText("menu_down")
+  pauseTitleText.bbcode_text = (tr("UI.PauseMenu.0") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]) + global.getInputText("menu_up") + " " + global.getInputText("menu_down")
 
   if shouldUpdateMenuText:
     var text = ""
@@ -316,7 +316,7 @@ func processNormalLogic(_delta):
 
 onready var colorblindPlayers = get_node("ColorblindPlayers")
 onready var colorblindHats = get_node("ColorblindPlayers/ColorblindHats")
-var graphicsOptions = ["CRT Filter", "Glitch Screen", "Color Blind", "Fullscreen"]
+var graphicsOptions = [tr("UI.GraphicsMenu.1"), tr("UI.GraphicsMenu.2"), tr("UI.GraphicsMenu.3"), tr("UI.GraphicsMenu.4")]
 var graphicsOptionIndex = 0
 func processGraphicsLogic(_delta):
   pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to go back"
@@ -325,10 +325,10 @@ func processGraphicsLogic(_delta):
     var text = ""
     for i in range(len(graphicsOptions)):
       var option = graphicsOptions[i] + ": "
-      if i == 0: option += ("ON" if global.userSettings["show_crt_effect"] else "OFF")
-      if i == 1: option += ("ON" if global.userSettings["canGlitchScreen"] else "OFF")
-      if i == 2: option += ("ON" if global.userSettings["colorblindMode"] else "OFF")
-      if i == 3: option += ("ON" if OS.window_fullscreen else "OFF")
+      if i == 0: option += (tr("UI.GraphicsMenu.ON") if global.userSettings["show_crt_effect"] else tr("UI.GraphicsMenu.OFF"))
+      if i == 1: option += (tr("UI.GraphicsMenu.ON") if global.userSettings["canGlitchScreen"] else tr("UI.GraphicsMenu.OFF"))
+      if i == 2: option += (tr("UI.GraphicsMenu.ON") if global.userSettings["colorblindMode"] else tr("UI.GraphicsMenu.OFF"))
+      if i == 3: option += (tr("UI.GraphicsMenu.ON") if OS.window_fullscreen else tr("UI.GraphicsMenu.OFF"))
 
       if i == graphicsOptionIndex:
         text += "[wave]" + str(option) + "[/wave]\n" 
@@ -378,7 +378,7 @@ func processGlitchScreen(delta):
       level.glitchScreenEffect.visible = false
       glitch_death_timer = 0
 
-var soundOptions = ["Play Music", "Music Glitches"]
+var soundOptions = ["Play Music", tr("UI.SoundMenu.3")]
 var soundOptionIndex = 0
 func processSoundLogic(_delta):
   pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to go back"
@@ -387,8 +387,8 @@ func processSoundLogic(_delta):
     var text = ""
     for i in range(len(soundOptions)):
       var option = soundOptions[i] + ": "
-      if i == 0: option += ("OFF" if global.userSettings["stopAllMusic"] else "ON")
-      if i == 1: option += ("ON" if global.userSettings["canChangeSongPitch"] else "OFF")
+      if i == 0: option += (tr("UI.GraphicsMenu.OFF") if global.userSettings["stopAllMusic"] else tr("UI.GraphicsMenu.ON"))
+      if i == 1: option += (tr("UI.GraphicsMenu.ON") if global.userSettings["canChangeSongPitch"] else tr("UI.GraphicsMenu.OFF"))
 
       if i == soundOptionIndex:
         text += "[wave]" + str(option) + "[/wave]\n" 

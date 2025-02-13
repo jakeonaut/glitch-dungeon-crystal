@@ -2470,7 +2470,6 @@ anims/wiggle = SubResource( 27 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 39, 0 )
 grav = 0
-bbText = "•my snail farm..."
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
@@ -2502,7 +2501,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 119, 35.6, 0 )
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 94, -1, 0 )
-bbText = "•gribbit"
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]

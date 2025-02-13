@@ -974,8 +974,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.6, 9.1, 0 )
 shape = SubResource( 67 )
 
 [node name="NPC" parent="Viewport/level/AngelStatue" index="7"]
-bbText = "•
-[wave amp=50 freq=2]* you offer a prayer *[/wave]"
 can_camera_zoom = false
 is_immediate = true
 tiny_textbox = true
@@ -1010,9 +1008,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6, 6.4, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.4, 0.5, 0 )
 grav = 0
-bbText = "•welcome to REST ZONE
-  ••how much GLITCH can you sweep?
-•pray at the ANGEL STATUE to travel to different levels"
 
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 78 )
@@ -1053,8 +1048,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 12, 0 )
 [node name="NPC3" parent="Viewport/level/QuestionBlock2" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0 )
 grav = 0
-bbText = "•pray at the ANGEL STATUE
-•to select a level"
 
 [node name="QuestionBlock3" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 3, 0 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -16,7 +16,7 @@
 [ext_resource path="res://levels/EndlessFantasy/gd1TutorialDungeon/PlayerTutorialAbortSound.gd" type="Script" id=14]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=15]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=16]
-[ext_resource path="res://assets/fonts/dragon-warrior-nes.ttf" type="DynamicFontData" id=17]
+[ext_resource path="res://uiTutorialFont.tres" type="Theme" id=17]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=19]
 [ext_resource path="res://sceneObjects/FreeChicken.tscn" type="PackedScene" id=20]
@@ -513,7 +513,7 @@ viewport_path = NodePath("Viewport")
 [sub_resource type="ViewportTexture" id=19]
 viewport_path = NodePath("Viewport2")
 
-[sub_resource type="ArrayMesh" id=233]
+[sub_resource type="ArrayMesh" id=211]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -525,17 +525,6 @@ surfaces/0 = {
 "skeleton_aabb": [  ],
 "vertex_count": 8
 }
-
-[sub_resource type="DynamicFont" id=231]
-outline_size = 2
-outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-use_mipmaps = true
-extra_spacing_top = 2
-extra_spacing_bottom = 2
-font_data = ExtResource( 17 )
-
-[sub_resource type="Theme" id=232]
-default_font = SubResource( 231 )
 
 [node name="Game" type="Spatial"]
 
@@ -620,9 +609,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8006, 15.0639, 0 )
 normal_offset = 0.0
 
 [node name="TextContainer" parent="Viewport/level/Player" index="12"]
-bbText = "•i don't remember having a
-basement.. but what a mess!
-let's sweep up that dust"
+bbText = "Dialog.Player.2"
 
 [node name="AbortSound" parent="Viewport/level/Player/TextContainer/TextBox" index="13"]
 script = ExtResource( 14 )
@@ -727,6 +714,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9, 1, 0 )
 
 [node name="FreeChicken" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 12.4347, 0 )
+visible = false
 jump_force = 2
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 21 )]
@@ -801,12 +789,7 @@ spawned_object_path = ""
 [node name="NPC3" parent="Viewport/level/GlitchTileSpawner" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300001, -0.985172, 0 )
 grav = 0
-bbText = "•ah! a fellow crone! you 
-saved me from near-death.
-this \"glitch\" corruption.. I
-seek the crystal elders
-to stop the spread...
-Could you help me out?  "
+bbText = "NPC.Crone.1"
 dont_recolor_me = true
 can_move_player = true
 
@@ -858,10 +841,7 @@ flip_v = true
 [node name="UILayer" parent="." instance=ExtResource( 13 )]
 
 [node name="MeshInstance" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 233 )
-
-[node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+mesh = SubResource( 211 )
 
 [node name="PressC" type="RichTextLabel" parent="UILayer"]
 visible = false
@@ -871,7 +851,7 @@ margin_right = 714.5
 margin_bottom = 570.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource( 232 )
+theme = ExtResource( 17 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "[font=res://DarkInputFont_small.tres]x[/font] to Sweep. [font=res://DarkInputFont_small.tres]z[/font] to Jump. Arrow keys to walk.."
@@ -886,7 +866,7 @@ margin_right = 454.5
 margin_bottom = 124.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource( 232 )
+theme = ExtResource( 17 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "Press [font=res://DarkInputFont_small.tres]R[/font] for OPTIONS"

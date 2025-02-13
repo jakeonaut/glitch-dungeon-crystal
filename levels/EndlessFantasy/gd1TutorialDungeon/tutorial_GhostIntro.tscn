@@ -240,9 +240,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -1, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 12, 0 )
 grav = 0
-bbText = "you were here once
-before, weren't you?"
-smackedBbText = "don't you remember?"
+bbText = "NPC.Tutorial.11"
+smackedBbText = "NPC.GhostGirl.1"
 
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 25 )

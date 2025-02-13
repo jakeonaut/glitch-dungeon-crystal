@@ -1173,9 +1173,6 @@ material = SubResource( 44 )
 
 [node name="FrogCroneNPC" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0351, -2.9241, 0 )
-bbText = "•you seems to have
-some [color=red]hag magic[/color]... maybe,
-•you could purify the CRYSTALs"
 is_really_important = true
 dont_recolor_me = true
 
@@ -1204,9 +1201,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="BabushkaCat" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9649, -2.9241, 0 )
-bbText = "*meow*
-(i don't know if
-i trust this crone)"
 is_really_important = true
 dont_recolor_me = true
 

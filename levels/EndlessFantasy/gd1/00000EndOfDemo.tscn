@@ -705,9 +705,6 @@ shape = SubResource( 21 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9, 0.63472, 0 )
 grav = 0
-bbText = "•congrats and thank
-smooch for playing!
-tell me what u thought!"
 can_move = false
 can_camera_zoom = false
 dont_recolor_me = true
@@ -743,10 +740,6 @@ material_override = SubResource( 46 )
 [node name="NPC7" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.7, 3.93472, 0 )
 grav = 0
-bbText = "•leave any feedback in
-Steam Discussion hub,
-or email me:
-jakeonaut@gmail.com"
 can_move = false
 can_camera_zoom = false
 dont_recolor_me = true
@@ -782,9 +775,6 @@ material_override = SubResource( 46 )
 [node name="NPC8" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.3, 10.9347, 0 )
 grav = 0
-bbText = "•find lots more 
-secrets in the full
-release! wow!!"
 can_move = false
 can_camera_zoom = false
 dont_recolor_me = true
@@ -878,9 +868,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 6.8347, 0 )
 grav = 0
-bbText = "•bye so much
-•please wishlist if
-you liked it!"
 is_really_important = true
 can_activate = false
 can_camera_zoom = false

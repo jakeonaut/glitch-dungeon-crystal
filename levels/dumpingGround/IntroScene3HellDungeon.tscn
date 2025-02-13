@@ -298,15 +298,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.9663, 4, 0 )
 transform = Transform( 1, -1.49012e-08, 0, 1.49012e-08, 1, 0, 0, 0, 1, 7.69632, 4.98347, 0 )
 script = ExtResource( 26 )
 grav = 0
-bbText = "•WHEN YOU ARE []red 
- YOU CAN WALK OFF
- & NOT FALL...........
-•did you know that already?... 
- sorry... GLITCH in this
- room make my head [rainbow freq=0.2 sat=10 val=20]hu̵rt a little[/rainbow] . . . . . 
-•recently i haven't
- haven't been able 
-                              i can'tmove"
 is_important = true
 is_really_important = true
 can_move = false
@@ -397,13 +388,7 @@ size_flags_vertical = 0
 theme = ExtResource( 46 )
 custom_colors/default_color = Color( 0.792157, 0.854902, 0.988235, 1 )
 bbcode_enabled = true
-bbcode_text = "yo what up
-hey mu dude
-???????? so why???"
 tab_size = 2
-text = "yo what up
-hey mu dude
-???????? so why???"
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -465,15 +450,6 @@ anims/flickerOn = SubResource( 13 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 15, 0 )
 visible = false
 grav = 0
-bbText = "•the glowing triangles
- are the bodies of our
-fallen sisters................
-they let outsiders
-like you survive
-glitch exposure
-there are more
-outsiders deeper
-in the dungeon."
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 17 )
@@ -501,9 +477,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 1, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 0 )
 visible = false
 grav = 0
-bbText = "•obeslisks hold MAGIC
-CRYSTAL shards.. that's
-why they change colors"
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]

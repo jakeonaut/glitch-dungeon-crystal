@@ -804,9 +804,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.46347, 11, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 9, 0 )
 visible = false
 grav = 0
-bbText = "•i'm tired of my home
-life. i want to meet
-new people and journey."
 portrait = ExtResource( 16 )
 is_important = true
 is_really_important = true

@@ -2302,8 +2302,6 @@ shape = SubResource( 112 )
 shape = SubResource( 113 )
 
 [node name="TreasureSpellCollectable" parent="Viewport/level/MimicEnchantedBag" index="3"]
-bbText = "•BAG OF GOODIES
-HP is +1"
 
 [node name="CollisionShape" parent="Viewport/level/MimicEnchantedBag/TreasureSpellCollectable/SmallInteractionArea" index="0"]
 shape = SubResource( 114 )

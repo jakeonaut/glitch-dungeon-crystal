@@ -22,8 +22,6 @@ func activateScript():
         global.activeInteractor = null
         level.gameCamera.actual_target = level.gameCamera.initial_target
         npc.queue_free()
-    else:
-        npc.textBox.text_final = "•maybe I could teach you\nsome time... if you find a\nBROOM or FISHING ROD"
 
 func isActive(_debug=false):
     return true
