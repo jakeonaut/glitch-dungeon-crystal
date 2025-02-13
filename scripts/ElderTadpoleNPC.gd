@@ -33,7 +33,7 @@ func processLevelZone():
         am_i_sleepy = true
         mySprite.updateBaseFrame(0, 1)
         self.can_move = false
-        var finalText = "•zzz\n(well, she's still asleep...\ncan you wake her?)"
+        var finalText = tr("NPC.Elder.1")
         self.textBox.is_really_important = false
         self.textBox.text_final = finalText
         self.textBox.textNode.bbcode_text = finalText
@@ -178,7 +178,6 @@ func getSmacked(broom_origin = null, silently = false):
 
 # @override
 func setGlobalMemoryOfHasSpoken(set_vars = false):
-  print("am i sleepy, was_smacked, can_smack_back" + str(am_i_sleepy) + ", " + str(textBox.was_smacked) + ", " + str(can_smack_back))
   if am_i_sleepy:
     return
   if textBox.was_smacked and can_smack_back:

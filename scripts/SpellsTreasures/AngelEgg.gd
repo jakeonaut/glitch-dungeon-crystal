@@ -81,4 +81,4 @@ func collectMe():
     getGameCamera().initial_target = level.player.get_node("CameraTarget")
     getGameCamera().actual_target = weakref(getGameCamera().initial_target)
     collectSound.play()
-    level.displayMessageText("angel egg!")
+    level.displayMessageText(tr("UI.Alert.1"))

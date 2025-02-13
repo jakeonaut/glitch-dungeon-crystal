@@ -261,7 +261,7 @@ func applyGlitch(glitch, notPlaySound = false):
 
 func floorGlitch():
   spellbookGlitchSprite.frame = 1
-  level.displaySpellMessageText("air walk")
+  level.displaySpellMessageText(tr("UI.GlitchSpell.2"))
   glitch_form = global.GlitchForm.FLOOR
   level.floorGlitch()
   changeSpriteColorPalette(global.player_red_palette)
@@ -291,7 +291,7 @@ func featherGlitch():
      (not ui.spellMessageTextLabel.visible or ui.spell_message_text_timer > 20) and transformation != TransformationState.FISHY and \
      physics_state == PhysicsState.NORMAL:
     miniUpwardGust()
-  level.displaySpellMessageText("feather fall")
+  level.displaySpellMessageText(tr("UI.GlitchSpell.1"))
   glitch_form = global.GlitchForm.FEATHER
   level.featherGlitch()
   # TODO(jaketrower):
@@ -302,7 +302,7 @@ func featherGlitch():
 
 func ladderGlitch():
   spellbookGlitchSprite.frame = 2
-  level.displaySpellMessageText("ladder")
+  level.displaySpellMessageText(tr("UI.GlitchSpell.3"))
   glitch_form = global.GlitchForm.LADDER
   level.ladderGlitch()
   # TODO(jaketrower):
@@ -313,7 +313,7 @@ func ladderGlitch():
 func invisibleGlitch():
   loseBroom()
   spellbookGlitchSprite.frame = 3
-  level.displaySpellMessageText("ghost")
+  level.displaySpellMessageText(tr("UI.GlitchSpell.4"))
   glitch_form = global.GlitchForm.INVISIBLE
   level.invisibleGlitch()
   changeSpriteColorPalette(global.black_player_palette)
@@ -321,7 +321,7 @@ func invisibleGlitch():
   # mySprite.setClericCostume()
 
 func walkThroughWallsGlitch():
-  level.displaySpellMessageText("undefined")
+  level.displaySpellMessageText(tr("NPC.Crystal.NULL"))
   glitch_form = global.GlitchForm.WALK_THROUGH_WALLS
   level.walkThroughWallsGlitch()
   changeSpriteColorPalette(global.white_player_palette)

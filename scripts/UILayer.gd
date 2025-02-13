@@ -66,7 +66,6 @@ func _ready():
   angelHiscoreLabel.visible = false
   deathsHiscoreLabel.visible = false
   jumpsHiscoreLabel.visible = false
-  totalHiscoreLabel.visible = false
   pressEnterLabel.visible = false
 
 # func recreateHeartSprites():
@@ -357,7 +356,6 @@ onready var angelHiscoreLabel = get_node("EndOfLevel/AngelHiscoreLabel")
 onready var jumpsHiscoreLabel = get_node("EndOfLevel/JumpsHiscoreLabel")
 onready var loveHiscoreLabel = get_node("EndOfLevel/LoveHiscoreLabel")
 
-onready var totalHiscoreLabel = get_node("EndOfLevel/TotalHiscoreLabel")
 onready var pressEnterLabel = get_node("EndOfLevel/PressEnterLabel")
 var hiscoreDisplayIndex = 0
 var hiscoreCounter = 0
@@ -375,7 +373,6 @@ func processHiscoreRenderLogic(delta):
     deathsHiscoreLabel.visible = false
     jumpsHiscoreLabel.visible = false
     loveHiscoreLabel.visible = false
-    totalHiscoreLabel.visible = false
     pressEnterLabel.visible = false
 
     glitchStatusText1.visible = true
@@ -384,7 +381,7 @@ func processHiscoreRenderLogic(delta):
   endOfLevel.visible = true
   hiscoreRect.visible = true
   congratsHiscoreLabel.visible = true
-  # congratsHiscoreLabel.text = "you purified a CRYSTAL"
+  congratsHiscoreLabel.bbcode_text = tr("NPC.Crystal.1")
 
   hiscoreTimer += (delta*11)
   if hiscoreTimer >= hiscoreTimeLimit:
@@ -393,7 +390,7 @@ func processHiscoreRenderLogic(delta):
     # TODO(jaketrower): can consolidate this but i'm lazy rn
     if hiscoreDisplayIndex == 0:
       crystalCubeHiscoreLabel.visible = false # true
-      crystalCubeHiscoreLabel.text = "shards: " + str(hiscoreCounter)
+      crystalCubeHiscoreLabel.text = tr("NPC.Crystal.7") + str(hiscoreCounter)
       var hiscoreSource = global.getLevelZoneThing("num_mini_crystal_cubes")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter = hiscoreSource
@@ -403,7 +400,7 @@ func processHiscoreRenderLogic(delta):
         hiscoreCounter = 0
     elif hiscoreDisplayIndex == 1:
       deathsHiscoreLabel.visible = true
-      deathsHiscoreLabel.text = "deaths: " + str(hiscoreCounter)
+      deathsHiscoreLabel.text = tr("NPC.Crystal.2") + str(hiscoreCounter)
       var hiscoreSource = global.getLevelZoneThing("num_deaths")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter = hiscoreSource
@@ -413,7 +410,7 @@ func processHiscoreRenderLogic(delta):
         hiscoreCounter = 0
     elif hiscoreDisplayIndex == 2:
       angelHiscoreLabel.visible = true
-      angelHiscoreLabel.text = "angel eggs: " + str(hiscoreCounter)
+      angelHiscoreLabel.text = tr("NPC.Crystal.3") + str(hiscoreCounter)
       var hiscoreSource = global.getLevelZoneThing("angelTadpole")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter += 1
@@ -424,25 +421,21 @@ func processHiscoreRenderLogic(delta):
         hiscoreTimeLimit = 5
     elif hiscoreDisplayIndex == 3:
       glitchTilesHiscoreLabel.visible = true
-      glitchTilesHiscoreLabel.text = "broom sweeps: " + str(global.getLevelZoneThing("num_broom_sweeps"))
+      glitchTilesHiscoreLabel.text = tr("NPC.Crystal.4") + str(global.getLevelZoneThing("num_broom_sweeps"))
       hiscoreDisplayIndex += 1
     elif hiscoreDisplayIndex == 4:
       jumpsHiscoreLabel.visible = true
-      jumpsHiscoreLabel.text = "jumps: " + str(global.getLevelZoneThing("num_jumps"))
+      jumpsHiscoreLabel.text = tr("NPC.Crystal.5") + str(global.getLevelZoneThing("num_jumps"))
       hiscoreDisplayIndex += 1
     elif hiscoreDisplayIndex == 5:
       loveHiscoreLabel.visible = true
-      loveHiscoreLabel.text = "love: " + str(global.getLevelZoneThing("love"))
+      loveHiscoreLabel.text = tr("NPC.Crystal.6") + str(global.getLevelZoneThing("love"))
       hiscoreDisplayIndex += 1
       hiscoreTimeLimit = 15
     elif hiscoreDisplayIndex == 6:
       pressEnterLabel.visible = not pressEnterLabel.visible
       var sweep_button_text = global.getInputText("sub_action_button")
-      pressEnterLabel.bbcode_text = "press " + sweep_button_text + "​ to continue"
-    # totalHiscoreLabel.visible = true
-    # totalHiscoreLabel.text = "= total score: " + str(totalHiscoreCounter)
-    # if level.has_node("CubeCrystal"):
-    #   global.setLevelZoneThing("hiscore", totalHiscoreCounter)
+      pressEnterLabel.bbcode_text = tr("NPC.Crystal.Final") % sweep_button_text
   
   if hiscoreDisplayIndex >= 5 and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("sub_action_button") or Input.is_action_just_pressed("jump_button") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))):
     # global.isEnteringRoom = true

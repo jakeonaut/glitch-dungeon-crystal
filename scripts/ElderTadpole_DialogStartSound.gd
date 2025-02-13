@@ -15,25 +15,25 @@ func activateScript():
   var levelZoneName = global.currLevelZone
   if levelZoneName == "gd1GrandmaVillage" or levelZoneName == "gd1PrimordialOoze":
     return
-  var text = "•ok I'm up.!"
+  var text = ""
   match levelZoneName:
     "gd1TutorialDungeon":
       var how_many_more = global.MAX_CRYSTALS_FOR_TOWER - global.memory["clean_crystals"]
       if not global.getStaticLevelZoneLevelVar(level, elderTadpoleNPC):
         if how_many_more > 0:
-          text = "•ok I'm up.! [wave]*cough*[/wave] \nwhere am i? i still feel weak.\noh, you're trying to tidy up?\nwell, awaken my 3 other sisters\nwe can pray to Goddess\nand clean up this world"
+          text = tr("NPC.Elder.3")
         elif how_many_more <= 0:
-          text = "•ok I'm up.! [wave]*cough*[/wave] \nwhere am i? i still feel weak.\noh, you already woke up my sisters?\nwell, we will meet\nat the holy site at top of tower.\nmake haste!"
+          text = tr("NPC.Elder.3_2")
       elif how_many_more <= 0:
-        text = "thank you young one! we will meet\nat the holy site at top of tower.\nmake haste!"
+        text = tr("NPC.Elder.6")
       elif global.getStaticLevelZoneLevelVar(level, elderTadpoleNPC):
-        text = "•awaken my 3 other sisters\nwe can pray to Goddess\nand clean up this world"
+        text = tr("NPC.Elder.5") % "3"
     "gd1FishingVillage":
-      text = "hi! thanks *bloop*\ni'll go meet my other sisters.\nbye bye"
+      text = tr("NPC.Elder.4")
     "gd1ToxicJungle":
-      text = "hey! thanks *kiki*\ni'll go meet my other sisters.\nbye bye"
+      text = tr("NPC.Elder.4")
     "gd1ShiftingSandLand":
-      text = "hello! thanks *squirm*\ni'll go meet my other sisters.\nbye bye"
+      text = tr("NPC.Elder.4")
   
   textBox.text_final = text
   textBox.textNode.bbcode_text = text

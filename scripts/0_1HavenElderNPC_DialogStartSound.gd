@@ -9,9 +9,9 @@ func _ready():
 
 func activateScript():
   var how_many_more = global.MAX_CRYSTALS_FOR_TOWER - global.memory["clean_crystals"]
-  var text = "just " + str(how_many_more) + " more Crystals to awaken!\nour prayers are stronger together."
+  var text = tr("NPC.Elder.5") % str(how_many_more)
   if how_many_more <= 0:
-    text = "thank you young one! we will meet\nat the holy site at top of tower.\nmake haste!"
+    text = tr("NPC.Elder.6")
   
   textBox.text_final = text
   textBox.textNode.bbcode_text = text

@@ -158,11 +158,8 @@ shader_param/target_palette = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3649, 10.1759, 0 )
 script = ExtResource( 10 )
 grav = 0
-bbText = "•you awoke a crystal elder!
-•you seem to have
-some [color=red]hag magic[/color]... I can 
-enchant your broom with shards"
-smackedBbText = "•don't test me, hag."
+bbText = "NPC.Crone.3"
+smackedBbText = "NPC.Crone.2"
 showYesNoOptions = true
 
 [node name="SmallInteractionArea" type="Area" parent="." groups=["npc"]]

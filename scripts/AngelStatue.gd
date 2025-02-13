@@ -48,7 +48,7 @@ func passiveActivate(_delta, _is_player):
     pass
     # if not is_angel_activated:
     #     global.setLevelZoneThing("angel_statue", [
-    #         global.getDisplayTitle(level.getLevelZoneName(), "haven"),
+    #         global.getDisplayTitle(level.getLevelZoneName(), tr("LevelName.1")),
     #         level.getLevelName()
     #     ])
     #     is_angel_activated = true

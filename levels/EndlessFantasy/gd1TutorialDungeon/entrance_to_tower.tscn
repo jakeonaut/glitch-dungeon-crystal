@@ -1516,7 +1516,7 @@ mesh = ExtResource( 24 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.20448, 0 )
 
 [node name="FreeChicken" parent="Viewport/level" instance=ExtResource( 23 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 3.33878, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 3.33878, 0 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -25, 6, 0 )

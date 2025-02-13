@@ -60,7 +60,7 @@ func setUpRoomInitializationOverride():
         show_dither_effect = false
         show_crt_effect = true
         babushkaCat.visible = false
-        var finalText = "*moo* (nice of you to stop by.\ni'm taking care of the\nfarm while you're gone)"
+        var finalText = tr("NPC.Cow.2")
         cowNPC.textBox.text_final = finalText
         cowNPC.textBox.textNode.bbcode_text = finalText
     if global.pauseGame:
@@ -188,7 +188,7 @@ func startGame(saveGameIndex):
   player.pauseInput = false
   global.has_really_started_game = true
   player.textBox.override_target_origin = dialogPosition.global_transform.origin
-  player.sayThis("now where's that cat\nrun off to now!", 4.0)
+  player.sayThis(tr("Dialog.Player.1"), 4.0)
 
 func loadGame(saveGameIndex):
     mainMenuState = MainMenuState.NORMAL_GAMEPLAY

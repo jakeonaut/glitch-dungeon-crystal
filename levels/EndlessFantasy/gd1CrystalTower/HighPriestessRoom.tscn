@@ -2735,9 +2735,7 @@ visible = false
 
 [node name="ElderTadpoleNPC" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.596461, -3, 0 )
-bbText = "Goddess! Awaken! 
-Cure this place of sin! 
-Mother!! Please help this place."
+bbText = "NPC.Elder.7"
 can_move = false
 
 [node name="CollisionShape" parent="Viewport/level/ElderTadpoleNPC/SmallInteractionArea" index="0"]
@@ -2765,9 +2763,7 @@ shape = SubResource( 241 )
 
 [node name="FishElderNPC" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6877, -5, 0 )
-bbText = "Goddess! Awaken! 
-Cure this place of sin! 
-Mother!! Please help this place."
+bbText = "NPC.Elder.7"
 can_move = false
 
 [node name="CollisionShape" parent="Viewport/level/FishElderNPC/SmallInteractionArea" index="0"]
@@ -2794,9 +2790,7 @@ shape = SubResource( 241 )
 
 [node name="SporeElderNPC" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -3, 0 )
-bbText = "Goddess! Awaken! 
-Cure this place of sin! 
-Mother!! Please help this place."
+bbText = "NPC.Elder.7"
 can_move = false
 
 [node name="CollisionShape" parent="Viewport/level/SporeElderNPC/SmallInteractionArea" index="0"]
@@ -2823,9 +2817,7 @@ shape = SubResource( 241 )
 
 [node name="WormElderNPC" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -5, 0 )
-bbText = "Goddess! Awaken! 
-Cure this place of sin! 
-Mother!! Please help this place."
+bbText = "NPC.Elder.7"
 can_move = false
 
 [node name="CollisionShape" parent="Viewport/level/WormElderNPC/SmallInteractionArea" index="0"]

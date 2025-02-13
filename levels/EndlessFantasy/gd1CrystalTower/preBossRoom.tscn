@@ -380,11 +380,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -1, 0 )
 [node name="BabushkaCat" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0351, -2.95862, 0 )
 grav = 0
-bbText = "*meow*
-(there's still an unpurified 
-[color=red]CRYSTAL[/color] in this area)
-*meow...* (but 
-something seems wrong..)"
+bbText = "NPC.BabushkaCat.5"
+smackedBbText = "NPC.BabushkaCat.4"
 
 [node name="CollisionShape" parent="Viewport/level/BabushkaCat/SmallInteractionArea" index="0"]
 shape = SubResource( 92 )
@@ -422,11 +419,7 @@ grav = 0
 [node name="NPC7" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.683, -2, 0 )
 grav = 0
-bbText = "pssst, hey, let me
-tell you a secret.
-if you smack a glitch,
-you can jump again midair..
-it's easy being green."
+bbText = "NPC.TowerGuard.2"
 
 [node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -1.22704, 0 )

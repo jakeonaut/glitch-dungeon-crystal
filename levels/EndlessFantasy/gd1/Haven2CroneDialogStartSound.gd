@@ -7,10 +7,7 @@ onready var crystalGeode2 = get_node("../../../..")
 func _ready():
   pass
 
-
 func activateScript():
-  var isElderTadpole = global.memory["priestess"] > 0
-
   if global.memory["crone"] == 0:
     return
   # elif global.memory["crone"] == 2:
@@ -19,14 +16,14 @@ func activateScript():
   #   textBox.textNode.bbcode_text = text
   #   textBox.showYesNoOptions = true
   elif global.memory["broomerang"] < 1:
-    var text = "•trade " + str(global.NUM_GEMS_FOR_BROOMERANG) + " shards for\n[color=red]BROOMERANG[/color]?"
+    var text = tr("NPC.Crone.4") % str(global.NUM_GEMS_FOR_BROOMERANG)
     # if global.memory["broomerang"] == 1:
     #   text = "•trade " + str(global.NUM_GEMS_FOR_BROOMERANG_WARP) + " shards for\n[color=red]BROOMERANG WARP[/color]?"
     textBox.text_final = text
     textBox.textNode.bbcode_text = text
     textBox.showYesNoOptions = true
   else:
-    var text = "•the tower will unlock when\nyou've awoken all 4 elders\nit holds some strong magic." if not isElderTadpole else "•your broom is very mighty!\nplease wake my other sisters.\nso that we may pray to Her."
+    var text = tr("NPC.Crone.7")
     textBox.text_final = text
     textBox.textNode.bbcode_text = text
     textBox.showYesNoOptions = false

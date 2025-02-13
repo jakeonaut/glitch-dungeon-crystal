@@ -488,13 +488,13 @@ func getDisplayTitle(levelZoneName, gd1TutorialName = "???"):
         "gd1TutorialDungeon":
             return gd1TutorialName
         "gd1FishingVillage":
-            return "tadpole bog"
+            return tr("LevelName.2")
         "gd1ToxicJungle":
-            return "moldy dogwoods"
+            return tr("LevelName.3")
         "gd1ShiftingSandLand":
-            return "cricket caves" # could amp up the insect-ness more
+            return tr("LevelName.4") # could amp up the insect-ness more
         "gd1CrystalTower":
-            return "elder temple"
+            return tr("LevelName.5")
         "gd1BubblegloopSwamp":
             return "sea of corruption" # malware swamp
         "gd1TombSouls":
@@ -502,9 +502,9 @@ func getDisplayTitle(levelZoneName, gd1TutorialName = "???"):
         "gd1AbstractSuburbs":
             return "yaga village"
         "gd1GrandmaVillage":
-            return "primordial ooze"
+            return tr("LevelName.6")
         "gd1PrimordialOoze":
-            return "primordial ooze"
+            return tr("LevelName.6")
         _:
             return "???"
     

@@ -229,7 +229,7 @@ func getPurified():
     level.purifyAllFragileBrickSolids()
     if global.getLevelZoneThing("angel_statue") == null:
         global.setLevelZoneThing("angel_statue", [
-            global.getDisplayTitle(level.getLevelZoneName(), "haven"),
+            global.getDisplayTitle(level.getLevelZoneName(), tr("LevelName.1")),
             level.getLevelName()
         ])
     # if level.has_node("SavePoint"):

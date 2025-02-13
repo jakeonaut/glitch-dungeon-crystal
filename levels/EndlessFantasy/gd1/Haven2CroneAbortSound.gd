@@ -11,9 +11,6 @@ func activateScript():
   if textBox.was_smacked:
     return
 
-  var isElderTadpole = "PastoralTowerHub" in level.getLevelName()
-  var suffix = "this is strong magic y'know" if not isElderTadpole else "can't give ya this for free!"
-
   var num_cubes = global.getThingFromAllLevelZonez("num_mini_crystal_cubes")
 
   if global.memory["crone"] == 0:
@@ -27,11 +24,11 @@ func activateScript():
       if num_cubes >= global.NUM_GEMS_FOR_BROOMERANG:
         global.incrementLevelZoneThing("num_mini_crystal_cubes", -global.NUM_GEMS_FOR_BROOMERANG)
         global.memory["broomerang"] = 1
-        level.player.sayThis("BROOMERANG GET!\nsweep twice to THROW")
+        level.player.sayThis(tr("NPC.Crone.6"))
         global.memory["crone"] = 3 # not two... skip the bag for now... 
       else:
         level.player.errorSound.play()
-        level.player.sayThis("need " + str(global.NUM_GEMS_FOR_BROOMERANG - num_cubes) + " more shards.\n" + suffix)
+        level.player.sayThis(tr("NPC.Crone.5") % str(global.NUM_GEMS_FOR_BROOMERANG - num_cubes))
   # elif global.memory["crone"] == 2 or (global.memory["broomerang"] == 1 and global.memory["max_hp"] < 2):
   #   if global.memory["max_hp"] < 2 and textBox.selectedYesNoOption: 
   #     if num_cubes >= global.NUM_GEMS_FOR_ENCHANTED_BAG:

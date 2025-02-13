@@ -1227,8 +1227,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -13, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -13, 0 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 21 )]
-bbText = "•find angel eggs
-to cleanse the world"
 can_camera_zoom = false
 tiny_textbox = true
 

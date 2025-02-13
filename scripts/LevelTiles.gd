@@ -483,7 +483,7 @@ func tryToSayTidy():
   if level.get_tree().get_nodes_in_group("enemies").size() > 0:
     return
   
-  level.displayMessageText("all tidy!")
+  level.displayMessageText(tr("UI.Alert.2"))
 
 func isTileSolid(tile_type):
   if tile_type == GridMap.INVALID_CELL_ITEM:
