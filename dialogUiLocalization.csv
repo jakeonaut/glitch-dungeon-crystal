@@ -7,11 +7,12 @@ UI.GlitchSpell.3,Ladder,拾级而上,Лестница,Trilha Impossível
 UI.GlitchSpell.4,Ghost,隐身术,Призрак,Forma Fantasma
 UI.MainMenu.0,Choose language,选择语言,Выберите язык,Escolha o idioma
 UI.MainMenu.1,Press %s for Options.,"按 %s 打开选项","Нажмите %s, чтобы открыть настройки",Aperte %s para Opções
-UI.MainMenu.2,"File 1, File 2, File 3",文件1，文件2，文件3,"Файл 1, Файл 2, Файл 3","Jogo 1, Jogo 2, Jogo 3"
+UI.MainMenu.2,"File ",文件,"Файл ","Jogo "
+UI.MainMenu.2_2,"File ",文件,"Файл ","Jogo "
 UI.MainMenu.3,press %s to start,按 %s 开始,"Нажмите %s, чтобы начать",Aperte %s para iniciar
 UI.MainMenu.4,%s: delete file,%s：删除文件,%s: удалить файл,%s: apagar jogo
-UI.MainMenu.5,"Really Delete ""File 1""?",确认删除 “文件 1 ”吗？,Точно удалить «Файл 1»?,"Tem certeza que quer apagar ""Jogo 1""?"
-UI.PauseMenu.0,"%s to select, %s to resume ",按%s选择，按%s继续, "%s для выбора, %s для отмены ",%s para selecionar e %s para continuar 
+UI.MainMenu.5,"Really Delete [wave]""File %s""[/wave]?\n                      %s Confirm\n                      %s Cancel","确认删除 “文件 %s ”吗？\n                  %s 确认\n                  %s 取消","Точно удалить «Файл %s»?\n              %s Подтвердить\n              %s Отмена","Tem certeza que quer apagar ""Jogo %s""?\n                %s Confirmar\n                %s Cancelar"
+UI.PauseMenu.0,"%s to select, %s to resume ","按%s选择，按%s继续","%s для выбора, %s для отмены ",%s para selecionar e %s para continuar 
 UI.PauseMenu.1,resume,继续,Вернуться,continuar
 UI.PauseMenu.2,Input,操作方法,Управление,Tipo de controle
 UI.InputMenu.1,Keyboard,键盘,Клавиатура,Teclado
@@ -51,7 +52,7 @@ Dialog.Player.1,"now, now,\nwhere did that cat go?","唉,那只猫又跑哪里�
 Dialog.Player.2,"•i don't remember having a\nbasement.. but what a mess!\nlet's sweep up that dust",我怎么不记得家里有个地窖…\n不过这也太乱了！\n还是先把这里打扫干净再说！,"Не помню, чтобы у меня был подвал... Какой бардак! Надо бы тут подмести.","ué, desde quando tem um porão aqui? que bagunça..."
 NPC.Cow.1,moo!!\n(cut that out),哞！！\n（闹够了没有）,Му-у!\n(Хватит.),muuu!\n(para com isso).
 NPC.Door.1,"locked, needs %s keys",这里是锁着的。还需要%s把钥匙。,Заперто. Нужно ключей: %s.,trancada. precisa de %s chaves.
-NPC.Crone.1,"•ah! a fellow crone! you \nsaved me from near-death.\nthis "glitch" corruption.. I\nseek the crystal elders\nto stop the spread...\nCould you help me out?  ",哎呀！老姐妹！\n要不是你救了我，\n我差点就死了！\n这个 “故障 ”引起的腐败啊...\n我想找水晶长老阻止它的蔓延，\n你能帮帮我吗？,"О, карга-сестрица!\nСпасибо, что спасла меня.\nЯ ищу старух, которые бы избавили\nнас от напасти с этими\nглитчами-разглитчами... Подсобишь?","ah! uma velhaca como eu!\nvocê salvou a minha vida, minha amiga.\nessa tal corrupção, “glitch”... preciso encontrar\nas anciãs de cristal para impedir\nque se espalhe... sabe onde elas estão? "
+NPC.Crone.1,"•ah! a fellow crone! you \nsaved me from near-death.\nthis ""glitch"" corruption.. I\nseek the crystal elders\nto stop the spread...\nCould you help me out?  ",哎呀！老姐妹！\n要不是你救了我，\n我差点就死了！\n这个 “故障 ”引起的腐败啊...\n我想找水晶长老阻止它的蔓延，\n你能帮帮我吗？,"О, карга-сестрица!\nСпасибо, что спасла меня.\nЯ ищу старух, которые бы избавили\nнас от напасти с этими\nглитчами-разглитчами... Подсобишь?","ah! uma velhaca como eu!\nvocê salvou a minha vida, minha amiga.\nessa tal corrupção, “glitch”... preciso encontrar\nas anciãs de cristal para impedir\nque se espalhe... sabe onde elas estão? "
 NPC.Crone.1_2,"•I think the crystals are ahead\nbut I can't get past this door..","我认为水晶在前面\n但我无法跨过这扇门..","Я думаю кристаллы впереди\nно я не могу пройти через эту дверь..","Eu acho que os cristais estão à frente\nmas não consigo passar por essa porta."
 NPC.Crone.1_3,"•Ah! great work.\nI'll meet you on ahead","啊!很棒的工作\n我会在前面遇见你","Ах! отличная работа.\nЯ встречу тебя впереди","Ah! ótimo trabalho.\nTe encontro na frente"
 NPC.Crone.2,don't test me hag,老太婆！你再抽我试试？,"Не испытывай меня, старая ты мымра.","não teste minha paciência, velha coroca."
@@ -68,7 +69,7 @@ UI.Alert.1,angel egg!,天使的卵！,Ангельское яйцо!,ovo celesti
 UI.Alert.2,all tidy!,打扫干净了！,Всё чисто!,tudo arrumadinho!
 NPC.Treasure.1,????\npress %s to Return,？？？？\n按 %s返回上一存档点,"????\nНажмите %s, чтобы «вернуться».",????\naperte %s para retornar
 NPC.Treasure.2,"•You got ""Grimoire""\n..but it's missing a\nfew pages",你拿到了“魔法书”\n…就是缺了几页,У вас есть «Гримуар»...\nно в нём не хватает\nпары страниц.,você encontrou o “GRIMÓRIO”...\nmas faltam algumas páginas
-NPC.Treasure.3,"•You found a ""map""\nview it from inventory\nor press %s","-发现了 地图！\n在物品栏打开\n或按%s查看","– Вы нашли «карту».\nПосмотрите её в инвентаре\nили нажмите %s.","-você encontrou um “MAPA""\nveja no inventário ou aperte %s"
+NPC.Treasure.3,"got ""map"",\nview from inventory\nor press ""%s"".","-发现了 地图！\n在物品栏打开\n或按%s查看","– Вы нашли «карту».\nПосмотрите её в инвентаре\nили нажмите %s.","-você encontrou um “MAPA""\nveja no inventário ou aperte %s"
 NPC.Treasure.4,"•FISHING ROD GET\nbut you don't know\nhow to fish...","-拿到了 鱼竿\n但你不会钓鱼……","– Вы нашли удочку.\nНо вы же не знаете,\nкак надо рыбачить...","-você encontrou uma “VARA DE PESCA”\nmas saber pescar que é bom, nada..."
 NPC.Treasure.5,"•FLOWER POT GET\nwell, maybe it will be useful..","-拿到了 花盆\n行吧。万一以后用得着呢…","– Вы нашли горшок.\nМожет, он и пригодится...","-você encontrou um ""VASINHO DE FLORES”\nvai que serve para alguma coisa..."
 NPC.Treasure.6,"•CUTE PET GET\nalthough you're not sure that\nit's really that cute..","-拿到了 可爱的宠物\n虽然但是，这真的算可爱吗…","– Вы нашли милашку.\nПравда, так назвать его\nможно только с большой натяжкой...","-você encontrou um “BICHINHO FOFINHO”\nfofinho? tenho lá minhas dúvidas..."
@@ -78,7 +79,7 @@ NPC.Treasure.9,"SPORE MEMORY\nsweep three times\nto teleport to your broomerang"
 NPC.BabushkaCat.1,*meow* *prrrr*,喵~咕噜咕噜~,*мяу* *мур-р*,*miau* *prrrr*
 NPC.BabushkaCat.1_2,*me-OW!*,喵！！,*мяу!!*,*miau!!*
 Dialog.Player.3,oh hello dearie,哎呀~咪咪,"О, здравствуй!","oi, fofura."
-NPC.Tutorial.7,"with the ""Grimoire"":\npress %s to switch\nbetween spells",使用“魔法书”：\n按%s切换咒语,"С «Гримуаром»:\nнажмите %s, чтобы\nсменить заклинание.","com o ""Grimório"":\naperte %s para\ntrocar de feitiço"
+NPC.Tutorial.7,"with the ""Grimoire"":\npress %s to switch\nbetween spells","使用“魔法书”：\n按%s切换咒语","С «Гримуаром»:\nнажмите %s, чтобы\nсменить заклинание.","com o ""Grimório"":\naperte %s para\ntrocar de feitiço"
 NPC.Tutorial.8,try swapping and jumping\nat the same time!,尝试同时交换和跳跃！,Попробуй сменить заклинание\nи прыгнуть одновременно!,tente trocar feitiços\nenquanto pula!
 NPC.Tutorial.9,hi..\n•because you're [color=red]old[/color]: you'll only\nremember 2 spells at a time,那个…年纪大了，\n你一次只能记住两个咒语咯,Вряд ли вы запомните\nбольше двух заклинаний.\nВозраст сказывается.,"oi..como a senhora está bem velhinha,\nsó consegue se lembrar de\n2 feitiços de cada vez"
 Dialog.Player.4,harumph!!,什么玩意儿！！,Ой-ой-ой!,hunf!!
@@ -103,7 +104,7 @@ NPC.Crystal.7,"shards: ","个碎片： ","осколков: ","fragmentos: "
 NPC.Crystal.NULL,NULL,NULL,НЕТ,NULL
 NPC.Crystal.Final,press %s to continue,按%s继续,"Нажмите %s, чтобы продолжить.",aperte %s para continuar.
 NPC.Elder.1,"•zzz\n(well, she's still asleep...\ncan you wake her?)",呼呼\n（啊，她还在睡着呢…\n你能把她叫醒吗？）,"Хр-р...\n(Она ещё спит...\nМожет, разбудить?)",zzz\n(ela ainda está dormindo...\nvocê pode acordar ela?).
-NPC.Elder.2,quiet down whippersnapper!,小点声！你个愣头青！,"Да уймись ты, свиристелка.","sossega o facho, capetinha!"
+NPC.Elder.2,quiet down\nwhippersnapper!,小点声！\n你个愣头青！,"Да уймись ты,\nсвиристелка.","sossega o facho,\ncapetinha!"
 NPC.Elder.3,"•ok I'm up.! [wave]*cough*[/wave] \nwhere am i? i still feel weak.\noh, you're trying to tidy up?\nwell, awaken my 3 other sisters\nwe can pray to Goddess\nand clean up this world",好了我起来了！咳咳，这是哪？\n我还是觉得有点虚弱。\n啊，你是要打扫这个地方吗？\n那你得把我其他三个妹妹叫醒。\n我们可以向女神祈祷然后把这个世界打扫干净。,"Встаю я, встаю! *кхе-кхе*\nОй, где это я?\nСлабенькая я стала.\nЧто, хочешь прибраться?\nТогда разбуди 3 моих сестриц.\nМы вместе помолимся Богине\nи очистим этот мир.","pronto, acordei! *cof cof*\nonde é que eu estou?\nainda me sinto fraca...\nah, você quer arrumar essa bagunça?\nentão desperte minhas 3 irmãs.\npodemos rezar para a Deusa\ne limpar este mundo todinho."
 NPC.Elder.3_2,"•ok I'm up.! [wave]*cough*[/wave] \nwhere am i? i still feel weak.\noh, you already woke up my sisters?\nwell, we will meet\nat the holy site at top of tower.\nmake haste!",好了我起来了！咳咳，这是哪？\n我们会在塔顶的圣地与你会合。\n务必速来！,"Встаю я, встаю! *кхе-кхе*\nВстречаемся в священном\nместе на вершине башни.\nПоторопись!","pronto, acordei! *cof cof*\nnos encontraremos no local\nsagrado no topo desta torre.\napresse-se!"
 NPC.Elder.4,"hi! thanks *cough*\ni'll go meet my other sisters.\nbye bye",好了我起来了！咳咳，\n我要去见我的其他姐妹了。\n再见。,"Встаю я, встаю! *кхе-кхе*\nПойду-ка я к другим своим\nсестрицам. Увидимся!","pronto, acordei! *cof cof*\nvou encontrar minhas irmãs.\ntchauzinho!"

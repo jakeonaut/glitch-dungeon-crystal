@@ -567,8 +567,7 @@ script = ExtResource( 7 )
 bbText = "oh hello dearie...
 we've been waiting for you.
 i'll be taking that!"
-smackedBbText = "quiet down
-whippersnapper!"
+smackedBbText = "NPC.Elder.2"
 
 [node name="SmallInteractionArea" type="Area" parent="." groups=["npc"]]
 script = ExtResource( 9 )

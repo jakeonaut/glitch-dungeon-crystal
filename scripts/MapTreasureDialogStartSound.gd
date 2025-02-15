@@ -11,7 +11,7 @@ func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SO
     pass
     
 func activateScript():
-  var finalText = "got \"map\",\nview from inventory\nor press \"" + global.getLargeInputText("open_map") + "\"." # \ntravel between angel statues"
+  var finalText = tr("NPC.Treasure.3") % global.getLargeInputText("open_map")
   textBox.text_final = finalText
   textBox.textNode.bbcode_text = finalText
         

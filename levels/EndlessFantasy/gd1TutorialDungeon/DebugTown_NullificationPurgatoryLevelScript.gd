@@ -16,6 +16,9 @@ func activateNPC():
   npcTutorial.can_activate = true
   npcTutorial.is_active = true
 
-  var finalText = tr("NPC.Tutorial.7") % global.getLargeInputText("alt_action_button")
+  print(global.getLargeInputText("alt_action_button"))
+  print(tr("NPC.Tutorial.7"))
+  print(tr("NPC.Tutorial.7") % "hi")
+  var finalText = tr("NPC.Tutorial.7") % str(global.getLargeInputText("alt_action_button"))
   npcTutorial.textBox.text_final = finalText
   npcTutorial.textBox.textNode.bbcode_text = finalText

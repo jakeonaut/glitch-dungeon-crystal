@@ -451,9 +451,7 @@ shader_param/target_palette = ExtResource( 12 )
 [node name="MapTreasure" type="Spatial"]
 script = ExtResource( 5 )
 grav = 0
-bbText = "•You found a \"map\"
-view it from inventory
-or press \"C\""
+bbText = "NPC.Treasure.3"
 portrait = ExtResource( 14 )
 is_important = true
 can_activate = false

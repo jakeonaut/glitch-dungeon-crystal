@@ -226,7 +226,7 @@ func _process(delta):
         epilepsyWarning.visible = false
         deleteConfirmationLayer.visible = true
         if deleteConfirmationLayerText.bbcode_text == "":
-            deleteConfirmationLayerText.bbcode_text = "Really Delete [wave]\"File " + str(mainMenuPromptIndex + 1) + "\"[/wave]?\n                      " + global.getInputText("menu_confirm") + " Confirm\n                      " + global.getInputText("menu_cancel") + " Cancel"
+            deleteConfirmationLayerText.bbcode_text = tr("UI.MainMenu.5") % [str(mainMenuPromptIndex + 1), global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
         if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
             if global.doesSaveGameExist(mainMenuPromptIndex):
                 global.tryDeleteGame(mainMenuPromptIndex)
@@ -326,7 +326,7 @@ func _process(delta):
             for i in range(global.save_game_files.size()):
                 if i != 0: menuText.bbcode_text += "\n"
 
-                var fileText = ("File " + str(i+1)) if global.doesSaveGameExist(i) else "[color=gray]Empty[/color]"
+                var fileText = (tr("UI.MainMenu.2") + str(i+1)) if global.doesSaveGameExist(i) else ("[color=gray]" + tr("UI.MainMenu.2_2") + str(i+1) + "[/color]")
                 if mainMenuPromptIndex == i:
                     menuText.bbcode_text += "[wave]" + fileText + "[/wave]"
                 else:
