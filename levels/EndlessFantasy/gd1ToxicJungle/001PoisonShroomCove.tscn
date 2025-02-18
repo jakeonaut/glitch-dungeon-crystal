@@ -235,7 +235,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.1, -2.6, 0 )
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 0 )
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods2.tscn"
-glitched_path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/SECRET_005_CricketCaveHub1.tscn"
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="0"]
 shape = SubResource( 77 )
@@ -316,9 +315,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 14, 0 )
 [node name="EldestMonkeyNPC" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 16, 0 )
 grav = 0
-bbText = "Some foul presence spreads
-throughout our ancient forest..
-Please help.."
+bbText = "NPC.SporeCreature.3"
 
 [node name="Viewport2" parent="." instance=ExtResource( 29 )]
 

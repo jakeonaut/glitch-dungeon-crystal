@@ -926,9 +926,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20.9, 0 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4, 0, 0 )
 grav = 0
-bbText = "howdy ma'am. 
-welcome to our
-humble swamp"
+bbText = "NPC.Fisherman.1"
 can_move = false
 can_camera_zoom = false
 is_a_body = false
@@ -1050,7 +1048,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, -5, 0 )
 [node name="Door" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, -1, 0 )
 path = "res://levels/EndlessFantasy/gd1FishingVillage/_0_0_FishingVillageEntrance.tscn"
-glitched_path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/SECRET_005_CricketCaveHub1.tscn"
 is_passive = true
 
 [node name="landing" parent="Viewport/level/Door" index="5"]
@@ -1133,7 +1130,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 0 )
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 54, 0, 0 )
 path = "res://levels/EndlessFantasy/gd1FishingVillage/002FishingHooksMinimum.tscn"
-glitched_path = "res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom.tscn"
 is_passive = true
 
 [node name="landing" parent="Viewport/level/Door2" index="5"]
@@ -1157,9 +1153,7 @@ shape = SubResource( 108 )
 [node name="BigFishNPC" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 11, 0 )
 grav = 0
-bbText = "HelP! some foul beast is
-living in our ancestral
-spawning grounds"
+bbText = "NPC.Fisherman.2"
 
 [node name="Viewport2" parent="." instance=ExtResource( 14 )]
 

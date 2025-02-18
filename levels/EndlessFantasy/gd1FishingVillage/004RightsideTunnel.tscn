@@ -4096,6 +4096,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = true
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = true
@@ -10435,7 +10436,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 9, 0 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.9182, 12.061, 0 )
 grav = 0
-bbText = "•when in doubt, fish!"
+bbText = "NPC.Fisherman.7"
 can_move = false
 can_camera_zoom = false
 is_a_body = false

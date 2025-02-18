@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://sceneObjects/_autoload/globalMap.gd" type="Script" id=1]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=2]
@@ -767,8 +767,44 @@ shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = true
+shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 2.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 2 )
+shader_param/base_palette = ExtResource( 6 )
+shader_param/target_palette = ExtResource( 24 )
+
+[sub_resource type="ShaderMaterial" id=36]
+shader = ExtResource( 7 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
 shader_param/enable_glitch_3d = false
 shader_param/shake_power_3d = 0.5
 shader_param/shake_rate = 0.5
@@ -1322,8 +1358,25 @@ path = "res://levels/EndlessFantasy/gd1CrystalTower/LockedRoom1.tscn"
 can_nav_right = false
 can_nav_up = false
 
+[node name="PastoralTowerHub" parent="CrystalTower" instance=ExtResource( 3 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 6, 9, 0 )
+frame = 26
+path = "res://levels/EndlessFantasy/gd1CrystalTower/PastoralTowerHub.tscn"
+can_nav_left = false
+can_nav_right = false
+can_nav_up = false
+
+[node name="ReverseEasyFling" parent="CrystalTower" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 0 )
+frame = 26
+path = "res://levels/EndlessFantasy/gd1CrystalTower/ReverseEasyFling.tscn"
+can_nav_left = false
+can_nav_right = false
+can_nav_down = false
+hide_me_from_map = true
+
 [node name="TowerToSacredDoors" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 5, 9, 0 )
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 6, 10, 0 )
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/002TowerToSacredDoors.tscn"
 can_nav_left = false
@@ -1332,12 +1385,12 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="preBossRoom" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 10, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 11, 0 )
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/preBossRoom.tscn"
 
 [node name="BossLevel" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 10, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 11, -1 )
 material_override = SubResource( 26 )
 offset = Vector2( 0, 30 )
 pixel_size = 0.03
@@ -1345,15 +1398,7 @@ texture = ExtResource( 16 )
 hframes = 4
 vframes = 2
 path = "res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom.tscn"
-can_nav_up = false
-can_nav_down = false
-has_angel_statue = true
-
-[node name="MiniRestZone" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 10, 0 )
-frame = 26
-path = "res://levels/EndlessFantasy/gd1CrystalTower/MiniRestZone.tscn"
-can_nav_right = false
+can_nav_left = false
 can_nav_up = false
 can_nav_down = false
 has_angel_statue = true
@@ -1371,10 +1416,19 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 
 [node name="005DebugTown" parent="PrimordialOoze" instance=ExtResource( 3 )]
-transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 1, 9, 0 )
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 2, 10, 0 )
 material_override = SubResource( 35 )
-frame = 55
+frame = 46
 path = "res://levels/EndlessFantasy/gd1PrimordialOoze/005DebugTown.tscn"
 can_nav_right = false
+can_nav_up = false
+can_nav_down = false
+
+[node name="ReverseEasyFling" parent="PrimordialOoze" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 12, 0 )
+material_override = SubResource( 36 )
+frame = 46
+path = "res://levels/EndlessFantasy/gd1PrimordialOoze/ReverseEasyFling.tscn"
+can_nav_left = false
 can_nav_up = false
 can_nav_down = false

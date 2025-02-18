@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://assets/sprites/objects_2d.png" type="Texture" id=1]
 [ext_resource path="res://assets/sounds/eb_menu6.wav" type="AudioStream" id=2]
@@ -19,7 +19,6 @@
 [ext_resource path="res://assets/sprites2D/obelisk_sheet_sans.png" type="Texture" id=18]
 [ext_resource path="res://assets/sprites2D/jpetscii.png" type="Texture" id=19]
 [ext_resource path="res://dialogBodyFontTheme.tres" type="Theme" id=20]
-[ext_resource path="res://assets/fonts/Pixeletter.ttf" type="DynamicFontData" id=21]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=22]
 [ext_resource path="res://shaders/Sprite2DPaletteShader.shader" type="Shader" id=23]
 [ext_resource path="res://assets/palettes2D/white_palette.png" type="Texture" id=24]
@@ -117,19 +116,6 @@ shader_param/palette_in = ExtResource( 7 )
 shader_param/palette_out = ExtResource( 24 )
 
 [sub_resource type="CanvasItemMaterial" id=62]
-
-[sub_resource type="DynamicFont" id=69]
-size = 18
-outline_size = 1
-outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-extra_spacing_top = 2
-extra_spacing_bottom = 8
-extra_spacing_char = 1
-extra_spacing_space = 1
-font_data = ExtResource( 21 )
-
-[sub_resource type="Theme" id=70]
-default_font = SubResource( 69 )
 
 [node name="PauseMenu" type="Control"]
 margin_left = -86.0
@@ -476,6 +462,7 @@ theme = ExtResource( 8 )
 bbcode_enabled = true
 bbcode_text = "--spells--"
 text = "--spells--"
+scroll_active = false
 
 [node name="GrimoireSprite" type="Sprite" parent="InventoryRect"]
 position = Vector2( 96, 52 )
@@ -502,6 +489,7 @@ theme = ExtResource( 8 )
 bbcode_enabled = true
 bbcode_text = "--equip--"
 text = "--equip--"
+scroll_active = false
 
 [node name="BroomSprite" type="Sprite" parent="InventoryRect"]
 position = Vector2( 159, 123 )
@@ -546,6 +534,7 @@ theme = ExtResource( 8 )
 bbcode_enabled = true
 bbcode_text = "--memories--"
 text = "--memories--"
+scroll_active = false
 
 [node name="SoulSprite1" type="Sprite" parent="InventoryRect"]
 position = Vector2( 137, 202 )
@@ -580,6 +569,7 @@ theme = ExtResource( 8 )
 bbcode_enabled = true
 bbcode_text = "--key items--"
 text = "--key items--"
+scroll_active = false
 
 [node name="AngelEggSprite" type="Sprite" parent="InventoryRect"]
 position = Vector2( 109, 286 )
@@ -2272,14 +2262,15 @@ max_frames = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 3
+visible = false
+offset = Vector2( 160, 14 )
 scale = Vector2( 1.5, 1.5 )
-transform = Transform2D( 1.5, 0, 0, 1.5, 0, 0 )
+transform = Transform2D( 1.5, 0, 0, 1.5, 160, 14 )
 
 [node name="PopupRect" type="ColorRect" parent="CanvasLayer"]
-visible = false
 margin_left = 70.0
 margin_top = 213.0
-margin_right = 367.0
+margin_right = 430.0
 margin_bottom = 324.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -2288,7 +2279,7 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/PopupRect"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 292.0
+margin_right = 356.0
 margin_bottom = 106.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -2300,7 +2291,7 @@ __meta__ = {
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/PopupRect/ColorRect"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 284.0
+margin_right = 348.0
 margin_bottom = 98.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -2309,11 +2300,11 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/PopupRect/ColorRect/ColorRect"]
 margin_left = 11.0
 margin_top = 3.0
-margin_right = 280.0
+margin_right = 343.0
 margin_bottom = 103.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource( 70 )
+theme = ExtResource( 26 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
 bbcode_text = "the dungeon"

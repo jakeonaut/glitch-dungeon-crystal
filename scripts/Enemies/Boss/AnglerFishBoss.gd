@@ -111,7 +111,7 @@ func _process(delta):
             if global.memory["angler_seaman_boss"] == 0:
                 global.memory["angler_seaman_boss"] = 1
                 level.restartMusic()
-                level.uiLayer.setDisplayTitle("the Warty sea devil")
+                level.uiLayer.setDisplayTitle(tr("UI.BossName.1"))
         return
     elif boss_phase == BossPhase.DEFEATED:
         moveToSpecificPosition(delta, Vector3(52.134, -19.847, 0), 1, false)

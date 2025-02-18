@@ -1145,9 +1145,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5371, 15.9376, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1.6, 0 )
 
 [node name="NPC" parent="Viewport/level/DustFarmer3" index="0"]
-bbText = "•mole crickets carved
-these ruins. we
-evolved from them"
+bbText = "NPC.ClayWorker.5"
 tiny_textbox = false
 
 [node name="CollisionShape" parent="Viewport/level/DustFarmer3/NPC/SmallInteractionArea" index="0"]
@@ -1174,8 +1172,7 @@ anims/windDown = SubResource( 50 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 7.6, 0 )
 
 [node name="NPC" parent="Viewport/level/DustFarmer4" index="0"]
-bbText = "•i love eating dirt.
-•it is a sacred act."
+bbText = "NPC.ClayWorker.6"
 tiny_textbox = false
 
 [node name="CollisionShape" parent="Viewport/level/DustFarmer4/NPC/SmallInteractionArea" index="0"]
@@ -1203,9 +1200,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 18.6, 0 )
 is_wind_gust_active = true
 
 [node name="NPC" parent="Viewport/level/DustFarmer5" index="0"]
-bbText = "•how wonderful it is 
-to work hard and 
-not think of anything at all"
+bbText = "NPC.ClayWorker.7"
 tiny_textbox = false
 
 [node name="CollisionShape" parent="Viewport/level/DustFarmer5/NPC/SmallInteractionArea" index="0"]
@@ -1251,7 +1246,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2, 0 )
 [node name="Door" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, -10, 0 )
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000DustyCricketIntro_old.tscn"
-glitched_path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
 is_passive = true
 
 [node name="landing" parent="Viewport/level/Door" index="5"]

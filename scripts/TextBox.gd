@@ -386,7 +386,6 @@ func showTextbox(wasSmacked = false):
     textNode.bbcode_text = tr(smackedBbText)
     showYesNoOptions = false
   else:
-    print(text_final + ", " + tr(text_final))
     if textSprite: textSprite.visible = true
     textNode.bbcode_text = tr(text_final)
   tindex = -1

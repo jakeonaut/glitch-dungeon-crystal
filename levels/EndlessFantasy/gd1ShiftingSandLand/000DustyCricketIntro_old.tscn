@@ -1579,10 +1579,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -3, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60.9, 1.5914, 0 )
 
 [node name="NPC" parent="Viewport/level/DustFarmer" index="0"]
-bbText = "a little gramdma guidance:
-try smacking everything"
-smackedBbText = "um, not me though..
-please"
+bbText = "NPC.ClayWorker.3"
+smackedBbText = "NPC.ClayWorker.4"
 
 [node name="CollisionShape" parent="Viewport/level/DustFarmer/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 83 )

@@ -702,7 +702,7 @@ spellbook_spells = [ 1, 2 ]
 mesh = SubResource( 174 )
 
 [node name="MeshInstance2" parent="Viewport/level/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 26 )]
 
@@ -863,7 +863,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 6, 0 )
 [node name="NPC2" parent="Viewport/level/QuestionBlock" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1182, 2.14345, 0 )
 grav = 0
-bbText = "•why did you wake me up?"
+bbText = "NPC.Fisherman.4"
 can_move = false
 can_camera_zoom = false
 is_a_body = false
@@ -1097,8 +1097,7 @@ anims/getItem = SubResource( 142 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 71.7818, 16.0596, 0 )
 grav = 0
-bbText = "•sometimes you just
-gotta relax"
+bbText = "NPC.Fisherman.5"
 can_move = false
 can_camera_zoom = false
 
@@ -1126,7 +1125,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.21877, -1 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 64.7818, 27.1513, 0 )
 grav = 0
-bbText = "•i'm fly fishin'"
+bbText = "NPC.Fisherman.6"
 can_move = false
 can_camera_zoom = false
 

@@ -678,7 +678,6 @@ shape = SubResource( 57 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5474, 31, 0 )
-glitched_path = "res://levels/EndlessFantasy/gd1PrimordialOoze/FishingScene.tscn"
 
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/RESET = SubResource( 76 )
@@ -783,8 +782,7 @@ anims/getItem = SubResource( 85 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.10378, 0, 0 )
-bbText = "*mrow* (you're not
-a tasty fish..)"
+bbText = "NPC.BabushkaCat.3"
 can_move = false
 dont_recolor_me = true
 

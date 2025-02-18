@@ -108,7 +108,7 @@ func _process(delta):
             if global.memory["dogu_matryoshka_boss"] == -1:
                 global.memory["dogu_matryoshka_boss"] = 1
                 level.restartMusic()
-                level.uiLayer.setDisplayTitle("the Vessel of souls")
+                level.uiLayer.setDisplayTitle(tr("UI.BossName.2"))
                 level.gameCamera.initial_size = 35
                 level.gameCamera.zoomed_size = 35
             return

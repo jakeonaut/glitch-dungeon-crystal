@@ -72,6 +72,7 @@ enabled=PoolStringArray( "res://addons/sprite_mesh/plugin.cfg" )
 [global]
 
 "always on top"=false
+name_ru=""
 
 [importer_defaults]
 
@@ -331,17 +332,16 @@ open_map={
 
 [locale]
 
-test="zh_CN"
 translations=PoolStringArray( "res://dialogUiLocalization.en.translation", "res://dialogUiLocalization.pt_BR.translation", "res://dialogUiLocalization.ru.translation", "res://dialogUiLocalization.zh_CN.translation" )
 translation_remaps={
-"res://YosterFontBig.tres": PoolStringArray( "res://dialogBodyFontTheme_zh_CN.tres:zh_CN" ),
-"res://dialogBodyFontTheme.tres": PoolStringArray( "res://dialogBodyFontTheme_zh_CN.tres:zh_CN" ),
-"res://levels/common/FancyText.tres": PoolStringArray( "res://levels/common/FancyText_zh_CN.tres:zh_CN" ),
-"res://levels/common/UITheme_real.tres": PoolStringArray( "res://levels/common/UITheme_real_zh_CN.tres:zh_CN" ),
-"res://levels/common/UITheme_real_spaced.tres": PoolStringArray( "res://levels/common/UITheme_real_spaced_zh_CN.tres:zh_CN" ),
+"res://YosterFontBig.tres": PoolStringArray( "res://dialogBodyFontTheme_zh_CN.tres:zh_CN", "res://YosterFontBig_ru.tres:ru", "res://YosterFontBig_ru.tres:pt_BR" ),
+"res://dialogBodyFontTheme.tres": PoolStringArray( "res://dialogBodyFontTheme_zh_CN.tres:zh_CN", "res://dialogBodyFontTheme_ru.tres:ru", "res://dialogBodyFontTheme_ru.tres:pt_BR" ),
+"res://levels/common/FancyText.tres": PoolStringArray( "res://levels/common/FancyText_zh_CN.tres:zh_CN", "res://levels/common/FancyText_ru.tres:ru", "res://levels/common/FancyText_ru.tres:pt_BR" ),
+"res://levels/common/UITheme_real.tres": PoolStringArray( "res://levels/common/UITheme_real_zh_CN.tres:zh_CN", "res://levels/common/UITheme_real_ru.tres:ru", "res://levels/common/UITheme_real_ru.tres:pt_BR" ),
+"res://levels/common/UITheme_real_spaced.tres": PoolStringArray( "res://levels/common/UITheme_real_spaced_zh_CN.tres:zh_CN", "res://levels/common/UITheme_real_spaced_ru.tres:ru", "res://levels/common/UITheme_real_spaced_ru.tres:pt_BR" ),
 "res://levels/common/UITheme_small.tres": PoolStringArray( "res://levels/common/UITheme_small_zh_CN.tres:zh_CN" ),
-"res://pauseMenuTheme.tres": PoolStringArray( "res://pauseMenuTheme_zh_CN.tres:zh_CN" ),
-"res://uiTutorialFont.tres": PoolStringArray( "res://uiTutorialFont_zh_CN.tres:zh_CN" )
+"res://pauseMenuTheme.tres": PoolStringArray( "res://pauseMenuTheme_zh_CN.tres:zh_CN", "res://pauseMenuTheme_ru.tres:ru", "res://pauseMenuTheme_ru.tres:pt_BR" ),
+"res://uiTutorialFont.tres": PoolStringArray( "res://uiTutorialFont_zh_CN.tres:zh_CN", "res://uiTutorialFont_ru.tres:ru", "res://uiTutorialFont_ru.tres:pt_BR" )
 }
 locale_filter=[ 0, [ "en", "es", "pt_BR", "ru", "zh_CN" ] ]
 

@@ -144,7 +144,7 @@ func _process(delta):
             if global.memory["baba_yaga_boss"] == 0:
                 global.memory["baba_yaga_boss"] = 1
                 level.restartMusic()
-                level.uiLayer.setDisplayTitle("house of Yaga")
+                level.uiLayer.setDisplayTitle(tr("UI.BossName.3"))
         return
     elif boss_phase == BossPhase.DEFEATED:
         if not secretAniPlayer.is_playing():

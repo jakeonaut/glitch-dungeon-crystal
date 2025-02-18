@@ -49,7 +49,7 @@ UI.Cancel,cancel,取消,Отмена,Cancelar
 UI.Yes,Yes,Yes,Да,Sim
 UI.No,No,No,Нет,Não
 Dialog.Player.1,"now, now,\nwhere did that cat go?","唉,那只猫又跑哪里去啦？",Куда эта кошка\nзапропастилась?,"ô meu deus,\ncadê aquele gato danado?"
-Dialog.Player.2,"•i don't remember having a\nbasement.. but what a mess!\nlet's sweep up that dust",我怎么不记得家里有个地窖…\n不过这也太乱了！\n还是先把这里打扫干净再说！,"Не помню, чтобы у меня был подвал... Какой бардак! Надо бы тут подмести.","ué, desde quando tem um porão aqui? que bagunça..."
+Dialog.Player.2,"•i don't remember having a\nbasement.. but what a mess!\nlet's sweep up that dust",我怎么不记得家里有个地窖…\n不过这也太乱了！\n还是先把这里打扫干净再说！,"Не помню, чтобы у меня\nбыл подвал... Какой бардак!\nНадо бы тут подмести.","ué, desde quando tem um\nporão aqui? que bagunça..."
 NPC.Cow.1,moo!!\n(cut that out),哞！！\n（闹够了没有）,Му-у!\n(Хватит.),muuu!\n(para com isso).
 NPC.Door.1,"locked, needs %s keys",这里是锁着的。还需要%s把钥匙。,Заперто. Нужно ключей: %s.,trancada. precisa de %s chaves.
 NPC.Crone.1,"•ah! a fellow crone! you \nsaved me from near-death.\nthis ""glitch"" corruption.. I\nseek the crystal elders\nto stop the spread...\nCould you help me out?  ",哎呀！老姐妹！\n要不是你救了我，\n我差点就死了！\n这个 “故障 ”引起的腐败啊...\n我想找水晶长老阻止它的蔓延，\n你能帮帮我吗？,"О, карга-сестрица!\nСпасибо, что спасла меня.\nЯ ищу старух, которые бы избавили\nнас от напасти с этими\nглитчами-разглитчами... Подсобишь?","ah! uma velhaca como eu!\nvocê salvou a minha vida, minha amiga.\nessa tal corrupção, “glitch”... preciso encontrar\nas anciãs de cristal para impedir\nque se espalhe... sabe onde elas estão? "
@@ -57,10 +57,10 @@ NPC.Crone.1_2,"•I think the crystals are ahead\nbut I can't get past this door
 NPC.Crone.1_3,"•Ah! great work.\nI'll meet you on ahead","啊!很棒的工作\n我会在前面遇见你","Ах! отличная работа.\nЯ встречу тебя впереди","Ah! ótimo trabalho.\nTe encontro na frente"
 NPC.Crone.2,don't test me hag,老太婆！你再抽我试试？,"Не испытывай меня, старая ты мымра.","não teste minha paciência, velha coroca."
 NPC.Tutorial.0,touch magic pillar to learn:,触摸魔法柱习得：,"Коснитесь волшебной колонны, чтобы изучить:",toque no pilar mágico para aprender:
-NPC.Tutorial.1,"touch magic pillar to learn\n[color=#00ff00]Feather Fall[/color] spell: jump high\nby holding jump button",[color=#00ff00]一飞冲天[/color]：长按跳跃键高跳,"[color=#00ff00]Пёрышко[/color] – удерживайте кнопку прыжка, чтобы прыгнуть выше.",[color=#00ff00]Sopro de Pena[/color]: pule mais alto segurando o botão de pulo.
+NPC.Tutorial.1,"touch magic pillar to learn\n[color=#00ff00]Feather Fall[/color] spell: jump high\nby holding jump button",[color=#00ff00]一飞冲天[/color]：长按跳跃键高跳,"[color=#00ff00]Пёрышко[/color] – удерживайте кнопку прыжка, чтобы прыгнуть выше.",[color=#00ff00]Sopro de Pena[/color]: pule mais alto\nsegurando o botão de pulo.
 NPC.Tutorial.2,"you can also hold\n[color=#00ff00]jump[/color]\nbutton\nto float gracefully",长按跳跃键优雅漂浮。\n实在太优雅了！,"Ещё, если удерживать\nкнопку прыжка, вы можете\nпарить в воздухе.",você também pode segurar\no botão de pulo no ar\npara planar graciosamente.
 NPC.Tutorial.3,are you stuck?\npress %s to Return,卡住了吗？\n按%s返回,"Не знаете, куда идти?\nНажмите %s, чтобы «вернуться».",está presa?\naperte %s para retornar.
-NPC.Tutorial.4,"•touch magic pillar to learn\nthe [color=#ff0000]Air Walk[/color] spell:\nwalk without falling down",[color=#ff0000]空中漫步[/color]：在空中漂浮移动,"[color]Лёгкость[/color] – ходите по воздуху, не падая вниз.",[color]Passeio Etéreo[/color]: ande pelo ar sem cair.
+NPC.Tutorial.4,"•touch magic pillar to learn\nthe [color=#ff0000]Air Walk[/color] spell:\nwalk without falling down",[color=#ff0000]空中漫步[/color]：在空中漂浮移动,"[color=#ff0000]Лёгкость[/color] – ходите по\nвоздуху, не падая вниз.",[color=#ff0000]Passeio Etéreo[/color]: ande pelo\nar sem cair.
 NPC.Tutorial.5,"•some glitches are\nun-sweepable.\ni know this",有些故障就是没法打扫干净。\n我知道的。,Некоторые глитчи\nнельзя убрать.\nПоверьте на слово.,alguns glitches não\npodem ser varridos.\ndisso eu sei.
 NPC.Tutorial.5_2,"•i am also\nun-sweepable.\ni know this.",我也无法被清除。\n我知道。,Я также удалить невозможно.\nПоверьте на слово.,Eu também não\nposso ser varrido.\ndisso eu sei.
 NPC.Tutorial.6,"sometimes, you must go\nbackwards to progress.\nGlitches can help you.",有时以退为进也是良策。\n故障也会有用处的。,"Иногда нужно пойти назад,\nчтобы продвинуться вперёд.\nГлитчи в этом помогут.",às vezes você precisa voltar\npara poder seguir em frente.\nglitches podem te ajudar.
@@ -73,9 +73,9 @@ NPC.Treasure.3,"got ""map"",\nview from inventory\nor press ""%s"".","-发现了
 NPC.Treasure.4,"•FISHING ROD GET\nbut you don't know\nhow to fish...","-拿到了 鱼竿\n但你不会钓鱼……","– Вы нашли удочку.\nНо вы же не знаете,\nкак надо рыбачить...","-você encontrou uma “VARA DE PESCA”\nmas saber pescar que é bom, nada..."
 NPC.Treasure.5,"•FLOWER POT GET\nwell, maybe it will be useful..","-拿到了 花盆\n行吧。万一以后用得着呢…","– Вы нашли горшок.\nМожет, он и пригодится...","-você encontrou um ""VASINHO DE FLORES”\nvai que serve para alguma coisa..."
 NPC.Treasure.6,"•CUTE PET GET\nalthough you're not sure that\nit's really that cute..","-拿到了 可爱的宠物\n虽然但是，这真的算可爱吗…","– Вы нашли милашку.\nПравда, так назвать его\nможно только с большой натяжкой...","-você encontrou um “BICHINHO FOFINHO”\nfofinho? tenho lá minhas dúvidas..."
-NPC.Treasure.7,"FISH MEMORY\ntry jumping in water","化鱼\n在水中跳跃","ДУША РЫБЫ\nПопробуйте прыгнуть в воду.","MEMÓRIA DE PEIXE\nque tal dar um mergulhinho?"
-NPC.Treasure.8,"CRICKET MEMORY\ntry digging through walls","化蟋蟀\n挖穿墙壁","ДУША МЕДВЕДКИ\nПопробуйте покопаться в стенах.","MEMÓRIA DE GRILO\nexperimente cavar as paredes"
-NPC.Treasure.9,"SPORE MEMORY\nsweep three times\nto teleport to your broomerang","化孢子\n横扫三次\n瞬移到回旋镖上","ДУША СПОР\nВзмахните метлой три раза,\nчтобы переместиться к метлорангу.","MEMÓRIA DE FUNGO\nvarra três vezes para se teleportar até sua vassourangue"
+NPC.Treasure.7,"FISH MEMORY\ntry jumping in water","化鱼在水中跳跃","ДУША РЫБЫ\nПопробуйте прыгнуть\nв воду.","MEMÓRIA DE PEIXE\nque tal dar um mergulhinho?"
+NPC.Treasure.8,"CRICKET MEMORY\ntry digging through walls","化蟋蟀挖穿墙壁","ДУША МЕДВЕДКИ\nПопробуйте покопаться в стенах.","MEMÓRIA DE GRILO\nexperimente cavar as paredes"
+NPC.Treasure.9,"SPORE MEMORY\nsweep three times\nto teleport to your broomerang","化孢子横扫三次\n瞬移到回旋镖上","ДУША СПОР\nВзмахните метлой три раза,\nчтобы переместиться к метлорангу.","MEMÓRIA DE FUNGO\nvarra três vezes para se teleportar até sua vassourangue"
 NPC.BabushkaCat.1,*meow* *prrrr*,喵~咕噜咕噜~,*мяу* *мур-р*,*miau* *prrrr*
 NPC.BabushkaCat.1_2,*me-OW!*,喵！！,*мяу!!*,*miau!!*
 Dialog.Player.3,oh hello dearie,哎呀~咪咪,"О, здравствуй!","oi, fofura."
@@ -112,32 +112,36 @@ NPC.Elder.5,"•awaken my %s other sisters\nwe can pray to Goddess\nand clean up
 NPC.Elder.6,"thank you young one! we will meet\nat the holy site at top of tower.\nmake haste!",谢谢你啊小姑娘。\n我们会在塔顶的圣地与你会合。\n务必速来！,"Спасибо тебе, девочка!\nВстречаемся в священном\nместе на вершине башни.\nПоторопись!","muito obrigada, minha jovem!\nnos encontraremos no local\nsagrado no topo desta torre.\napresse-se!"
 NPC.Elder.7,Goddess! Awaken!\nCure this place of sin!\nMother!! Please help this place.,女神啊！觉醒吧\n治愈这个罪恶之地吧！\n母亲啊！请救救这片土地吧！,"Богиня, пробудись!\nОчисти этот мир от греха!\nМатушка, помоги нам.","Deusa! Desperte!\nVarra este lugar do pecado!\nMãe! Purifique este\nlugar, por favor."
 UI.Inventory.1,inventory,物品栏,Инвентарь,inventário
-UI.Inventory.2,spells,咒语,Заклинания,feitiços
+UI.Inventory.2,--spells--,--咒语--,-Заклинания-,--feitiços--
 UI.Inventory.3,"change spell order, %s to swap",改变咒语顺序，按%s调换,"Измените порядок заклинаний, %s, чтобы поменять местами","mudar ordem dos feitiços, %s para trocar"
-UI.Inventory.4,equip,装备,Применить,equipar
-UI.Inventory.5,your trust broom... great for sweeping dust,你的宝藏扫帚…打扫灰尘必备神器,Ваша верная метла... хорошо метёт.,sua fiel vassoura... perfeita para varrer sujeira
-UI.Inventory.6,babushka head scarf. keeps ya warm,老奶牌头巾，包你暖暖的,Платок. Держит голову в тепле.,lenço da babushka. quentinho e confortável
+UI.Inventory.4,--equip--,--装备--,-Применить-,--equipar--
+UI.Inventory.5,your trusty broom...\ngreat for sweeping dust,你的宝藏扫帚…\n打扫灰尘必备神器,Ваша верная метла...\nхорошо метёт.,sua fiel vassoura...\nperfeita para varrer\nsujeira
+UI.Inventory.6,babushka head scarf.\nkeeps ya warm,老奶牌头巾，\n包你暖暖的,Платок. Держит\nголову в тепле.,lenço da babushka.\nquentinho e confortável
 UI.Inventory.7,spawn of the goddess,女神的后代,Порождение Богини.,crias da deusa
+UI.Inventory.8,--memories--,"--存储--","-ДУША-","--MEMÓRIA--"
+UI.Inventory.9,--key items--,"--钥匙--","-Ключик-","--chave--"
+UI.Inventory.10,keys,"钥匙","Ключик","chave"
 LevelName.1,Haven,天堂,Безопасное убежище,Refúgio
 LevelName.2,tadpole bog,蝌蚪沼泽,Болото головастиков,Brejo dos Sapinhos
 LevelName.3,moldy spore forest,霉菌孢子森林,Плесневелый лес,Floresta Bolorenta
 LevelName.4,cricket caves,蟋蟀洞穴,Медведковые пещеры,Cavernas Cricrilantes
 LevelName.5,elder tower,长老之塔,Старушечья башня,Torre Ancestral
 LevelName.6,primordial ooze,远古淤泥,Первичная слизь,Sopa Primordial
-NPC.Fisherman.1,howdy ma'am. welcome to our humble swamp.,您好啊大姐！欢迎来到我的沼泽。,Здравствуйте! Приветствуем на нашем болоте.,"olá, dona. seja bem-vinda ao nosso humilde brejo, viu?"
-NPC.Fisherman.2,Help! some foul beast is living in our ancestral spawning grounds!,救命啊！我们祖先的产卵场里出现了邪恶的凶兽！,Помогите! Какой-то зверь забрёл в мои нерестилища!,socorro! tem um bicho feio lá no meu criadouro!
-NPC.BabushkaCat.2,"*meow* (for some weird reason, you can hear me? i smell a sleeping Crystal in this zone. I'll mark it on your map)",喵~（人，你怎么能听懂我在说什么？我闻到这片区域里有一颗沉睡的水晶。我已经标记在你的地图上了。）,*мяу* (Слышишь? Здесь есть спящий кристалл. Я отмечу его на карте.),"*miau* (que estranho, você consegue me escutar? sinto cheiro de Cristal dormente por aqui. vou marcar no seu mapa)."
-NPC.Fisherman.3,i'm practicing catch and release fishing,我钓着玩呢！,Я рыбачу чисто из спортивного интереса.,"tô praticano pesca e solta, sabe?"
-NPC.Fisherman.4,why did you wake me up?,你把我叫醒干嘛？,Зачем вы меня разбудили?,pra que me acordá?
-NPC.Fisherman.5,sometimes you just gotta relax,有时候你就得休息，休息一下,Иногда просто нужно расслабиться.,relaxá de vez em quando faz bem.
-NPC.Fisherman.6,i'm fly fishin',我这儿正荡饵呢,"Высоко сижу, далеко гляжу.","tô pescano mosca. nunca viu, não?"
-NPC.Fisherman.7,"when in doubt, fish!",没有什么是钓鱼解决不了的！,"Когда нечем заняться, я рыбачу!","na dúvida, vai pescá!"
-NPC.Fisherman.8,"It's been a salty dry year on average, but I don't know why mudfish numbers are so low.",我知道今年河都快干了，但是泥鳅的数量也太少了吧。,"Хотя этот год и выдался засушливым, численность ильной рыбы сократилась.","esse ano tá mais seco que língua de papagaio, mas não era pra tá dano tão poco pexe assim."
-NPC.Fisherman.9,you lookin' for the crystal? go up.,你在找水晶吗？往上走。,Ищете кристалл? Он наверху.,procurano o cristal? é só subí.
-NPC.Fisherman.10,i don't want this.,不要啊！,Мне это не надо.,que isso aqui?
-NPC.Fisherman.11,"these ""glitch"" things freak me out",这些故障真是让我浑身不舒服,Не нравятся мне эти глитчи.,essa coisa me dá medo.
-NPC.Fisherman.12,we're trying out new technique,我们要尝试些新的技巧,Опробуем новый метод.,tamo testano coisa nova.
-NPC.BabushkaCat.3,*mrow* (you're not a tasty fish..),喵呜~（你不是小鱼干）,*мур* (Ты не рыбка.),*miau* (você não tem gosto de peixe...).
+NPC.Fisherman.1,howdy ma'am.\nwelcome to our\nhumble swamp.,您好啊大姐！\n欢迎来到我的沼泽。,Здравствуйте!\nПриветствуем на\nнашем болоте.,"olá, dona.\nseja bem-vinda ao nosso\nhumilde brejo, viu?"
+NPC.Fisherman.2,HelP! some foul beast is\nliving in our ancestral\nspawning grounds!,救命啊！\n我们祖先的产卵场\n里出现了邪恶的凶兽！,Помогите! Какой-то зверь\nзабрёл в мои\nнерестилища!,socorro! tem um bicho\nfeio lá no meu\ncriadouro!
+NPC.BabushkaCat.2,"*meow* (for some weird reason,\nyou can hear me? i smell a\nsleeping [color=red]Crystal[/color] in this zone.",喵~（人，\n你怎么能听懂我在说什么？\n我闻到这片区域里有一\n颗沉睡的水晶。）,*мяу* (Слышишь?\nЗдесь есть\nспящий кристалл.),"*miau* (que estranho,\nvocê consegue me escutar? sinto\ncheiro de [color=red]Cristal[/color] dormente por aqui)."
+NPC.BabushkaCat.2_2,"\n(•i'll mark it on your map)","\n（我已经标记在你的地图上了。）","\n(Я отмечу его на карте.)","\n(vou marcar no seu mapa)."
+NPC.Fisherman.3,"•i'm practicing\ncatch and release fishing",我钓着玩呢！,Я рыбачу чисто из\nспортивного интереса.,"tô praticano pesca\ne solta, sabe?"
+NPC.Fisherman.4,•why did you wake me up?,你把我叫醒干嘛？,Зачем вы меня\nразбудили?,pra que me acordá?
+NPC.Fisherman.5,"•sometimes you just\ngotta relax",有时候你就得休息，\n休息一下,Иногда просто\nнужно расслабиться.,relaxá de vez em\nquando faz bem.
+NPC.Fisherman.6,•i'm fly fishin',我这儿正荡饵呢,"Высоко сижу,\nдалеко гляжу.","tô pescano mosca.\nnunca viu, não?"
+NPC.Fisherman.7,"•when in doubt, fish!",没有什么是钓鱼解决不了的！,"Когда нечем\nзаняться, я рыбачу!","na dúvida, vai pescá!"
+NPC.Fisherman.8,"•It’s been a salty dry year on average,\nbut I don't know why mudfish\nnumbers are so low.",我知道今年河都快干了，\n但是泥鳅的数量也太少了吧。,"Хотя этот год и выдался\nзасушливым, численность\nильной рыбы сократилась.","esse ano tá mais seco que\nlíngua de papagaio, mas\nnão era pra tá dano tão\npoco pexe assim."
+NPC.Fisherman.9,•you lookin' for\nthe crystal?\ngo up.,你在找水晶吗？\n往上走。,Ищете кристалл?\nОн наверху.,procurano o cristal?\né só subí.
+NPC.Fisherman.10,•i don't want this.,不要啊！,Мне это не надо.,que isso aqui?
+NPC.Fisherman.11,"•these ""glitch"" things\nfreak me out",这些故障真是让我浑身不舒服,Не нравятся мне\nэти глитчи.,essa coisa\nme dá medo.
+NPC.Fisherman.12,"•we're trying out\nnew technique",我们要尝试些新的技巧,Опробуем новый\nметод.,tamo testano\ncoisa nova.
+NPC.BabushkaCat.3,"*mrow* (you're not\na tasty fish..)",喵呜~\n（你不是小鱼干）,*мур*\n(Ты не рыбка.),*miau* (você não\ntem gosto de peixe...).
 NPC.BabushkaCat.4,*mrow*!\n(is that any way\nto treat a friend?!),喵呜~\n（有你这么对待朋友的吗！？）,"*мур*\n(Значит,\nтак ты с друзьями?!)",*miau!*\n(é assim que você\ntrata os amigos?!).
 NPC.Fisherman.13,thanks for cleaning up the riff raff.,谢谢你赶走了那群小混混！,"Спасибо, что разобрались с этим сбродом.",obrigado por ter limpado a baderna.
 NPC.TreasureMimic.1,"pssst, i'll trade you [ITEM] for 20 shards. whaddayasay..?",嘘…20个碎片换我这个[ITEM] ，怎么说？,У меня есть [ITEM] за 20 осколков. Как вам?..,"ei, psiu, troco [ITEM] por 20 fragmentos. quequeceacha...?"
@@ -145,21 +149,21 @@ NPC.TreasureMimic.2,"sorry old-timer, i got nothin else",不好意思啊老家�
 UI.BossName.1,the Warty seadevil,恶魔角鮟鱇,Глубоководный удильщик,o Diabo Abissal
 UI.BossName.2,the Vessel of souls,灵魂容器,Сосуд душ,o Receptáculo das Almas
 UI.BossName.3,Baba Yaga's house,芭芭雅嘎的小屋,Избушка Бабы-яги,a Casa da Baba Yaga
-UI.BossName.4,the High priestess,女祭司,Верховная жрица,a Grã-Sacerdotisa
-NPC.BrothKappa.1,hm.. sorry. occupied.,咳，有人了。,Простите... занято.,ei... tem gente!
+UI.BossName.4,the High priestess (crone),女祭司,Верховная жрица,a Grã-Sacerdotisa
+NPC.BrothKappa.1,hm.. sorry.\noccupied.,咳，有人了。,Простите...\nзанято.,ei...\ntem gente!
 NPC.ClayWorker.1,ERROR: NPC: GET text not found.. just kidding.,错误：NPC：无法获取…开玩笑的啦,ОШИБКА! НЕИГРОВОЙ ПЕРСОНАЖ: ТЕКСТ НЕ НАЙДЕН... Да шучу я.,ERRO: NPC: texto não encontrado... brincadeira...
-NPC.ClayWorker.2,sacred Wall Ladder spell: the essence of the bodies of locusts,神圣墙梯咒语：蝗虫尸体的精华,Священное заклинание лестницы – сие суть тело саранчи.,Trilha Impossível: feitiço sagrado feito da essência dos gafanhotos.
-NPC.ClayWorker.3,a little gramdma guidance: try smacking everything,来自奶奶的忠告：抽就完了,Подсказка для бабули: попробуйте всё крушить.,dica de vovó: experimente bater em tudo.
-NPC.ClayWorker.4,"um, not me though.. please",喂，别抽我啊…拜托,Но меня не надо... пожалуйста.,"epa, menos em mim, por favor..."
-NPC.ClayWorker.5,mole crickets carved these ruins. we evolved from them.,蝼蛄雕刻了这些废墟。它们是我的祖先。,Эти руины высекли медведки. А мы произошли от них.,paquinhas cavaram essas ruínas. somos descendentes delas.
-NPC.ClayWorker.6,i love eating dirt. it is a sacred act,我喜欢吃泥土，这是一种神圣的行为。,Я люблю есть землю. Это священный обряд.,eu amo comer terra. é como um ritual sagrado.
-NPC.ClayWorker.7,how wonderful it is to work hard and not think of anything at all,努力工作，什么都不去想，真是开心啊,Как же чудесно работать на износ и совсем ни о чём не думать.,que maravilha é trabalhar duro e não precisar pensar em mais nada.
-NPC.ClayWorker.8,I'll put forth my best effort!! *cough*,我会竭尽全力的！咳咳！,Я постараюсь изо всех сил! *кхе-кхе*,vou dar tudo de mim! *cof*
+NPC.ClayWorker.2,sacred [color=#ffff00]Wall Ladder[/color] spell:\nthe essence of the\nbodies of locusts,神圣墙梯咒语：\n蝗虫尸体的精华,Священное заклинание\nлестницы – сие суть\nтело саранчи.,Trilha Impossível:\nfeitiço sagrado feito da\nessência dos gafanhotos.
+NPC.ClayWorker.3,a little gramdma guidance:\ntry smacking everything,来自奶奶的忠告：\n抽就完了,Подсказка для бабули:\nпопробуйте всё крушить.,dica de vovó:\nexperimente bater em tudo.
+NPC.ClayWorker.4,"um, not me though..\nplease",喂，别抽我啊…\n拜托,Но меня не надо...\nпожалуйста.,"epa, menos em mim,\npor favor..."
+NPC.ClayWorker.5,"•mole crickets carved\nthese ruins. we\nevolved from them",蝼蛄雕刻了这些废墟。\n它们是我的祖先。,Эти руины высекли\nмедведки. А мы\nпроизошли от них.,paquinhas cavaram essas\nruínas. somos descendentes\ndelas.
+NPC.ClayWorker.6,"•i love eating dirt.\n•it is a sacred act.",我喜欢吃泥土，\n这是一种神圣的行为。,Я люблю есть землю.\nЭто священный обряд.,eu amo comer terra.\né como um ritual sagrado.
+NPC.ClayWorker.7,"•how wonderful it is\nto work hard and\nnot think of anything at all","努力工作，\n什么都不去想，\n真是开心啊",Как же чудесно работать\nна износ и совсем\nни о чём не думать.,que maravilha é trabalhar\nduro e não precisar\npensar em mais nada.
+NPC.ClayWorker.8,I'll put forth my\nbest effort!! *cough*,我会竭尽全力的！\n咳咳！,Я постараюсь изо\nвсех сил! *кхе-кхе*,vou dar tudo de mim!\n*cof*
 NPC.ClayWorker.9,I'm never going to die. Did you know this?,我是不会死的。你知道的吧？,Я никогда не умру. Вы это знали?,"eu nunca vou morrer, sabia?"
 NPC.ClayWorker.10,It seems some restless souls are causing trouble in our burial grounds.. How foul..,看来一些不安分的灵魂正在我们的墓地制造麻烦 ,Какие-то неприкаянные души наводят смуту у нас на кладбищах. Скверно всё это.,parece que estão profanando nosso cemitério... quanta maldade...
 NPC.SporeCreature.1,now don't you go getting lost in these woods,你可别在这片森林里迷路了,Вы только не заблудитесь в этом лесу.,cuidado para não se perder na mata.
-NPC.SporeCreature.2,doors & edges of the forest behave in strange ways,森林的门和边缘看上去有点奇怪,"Если войти в дверь или выйти за край леса, произойдёт кое-что странное.",as portas e os limites da floresta se comportam de um jeito bem estranho.
-NPC.SporeCreature.3,Some foul presence spreads throughout our ancient forest.. Please help..,有什么邪恶的东西正在我们古老的森林里四处蔓延…请帮帮我,"В пристанище наших предков поселилась какая-то нечисть. Пожалуйста, помогите...","uma presença maligna ronda nosso refúgio sagrado... ajude, por favor..."
+NPC.SporeCreature.2,doors & edges of the forest\nbehave in strange ways,森林的门和边缘看上去有点奇怪,"Если войти в дверь\nили выйти за край леса,\nпроизойдёт кое-что странное.",as portas e os limites da\nfloresta se comportam de um\njeito bem estranho.
+NPC.SporeCreature.3,Some foul presence spreads\nthroughout our ancient forest..\nPlease help..,有什么邪恶的东\n西正在我们古老\n的森林里四处蔓延…\n请帮帮我,"В пристанище наших предков\nпоселилась какая-то нечисть.\nПожалуйста, помогите...","uma presença maligna ronda\nnosso refúgio sagrado...\najude, por favor..."
 NPC.SporeCreature.5,The proper order of things is often a mystery to me,对我来说，事物的正常秩序往往是个谜。,"Даже мне бывает непросто понять, куда надо идти.",a verdadeira ordem das coisas sempre foi um mistério para mim.
 NPC.SporeCreature.6,Welcome to forbidden lands. You will die soon,欢迎来到禁地， 您马上就会死于非命。,Добро пожаловать в запретные земли. Вы скоро умрёте.,bem-vinda às terras proibidas. seus dias estão contados...
 NPC.SporeCreature.7,"If I were you, I wouldn't breathe in those spores too deeply",如果我是你，就不会吸入那些孢子太深,На вашем месте я бы постарался не вдыхать эти споры.,"se eu fosse você, não respirava esses esporos."
@@ -168,7 +172,7 @@ NPC.SporeCreature.9,who's there? I can't see,谁在那？我什么都看不见�
 NPC.TowerGuard.1,"part of the soul,\nexists in the stone.","灵魂的碎片\n就在石头之中","Часть души.\nОбитает в камне.","uma parte da alma\nexiste na pedra."
 NPC.TowerGuard.2,"pssst, hey, let me\ntell you a secret.\nif you smack a glitch,\nyou can jump again midair..\nit's easy being green.","嘘，过来\n我来告诉你个秘密\n打中一个故障之后\n你可以在半空中再跳一次\n这边建议绿色出行哦","Хотите, я расскажу\nвам секрет?\nЕсли ударить по глитчу,\nто можно прыгнуть в воздухе ещё раз.\nЛишь зелёным покоряются моря.","deixa eu te contar\num segredo...\nse você bater num glitch,\npode pular de novo no ar..."
 NPC.BabushkaCat.5,"*meow*\n(there's still an unpurified\n[color=red]CRYSTAL[/color] in this area)\n*meow...* (but\nsomething seems wrong..)","喵~\n（ 这里还有一块\n未净化的水晶）\n喵喵~\n（ 但好像有什么不对劲…）","*мяу*\n(Здесь ещё есть\nнеочищенный КРИСТАЛЛ.)\n*мяу...*\n(Но что-то всё равно не так.)","*miau*\n(ainda resta um CRISTAL impuro por aqui).\n*miau*\n(mas tem algo errado......)."
-NPC.HighPriestess.1,"•keeheehee •oh, my dear hag,\nyou've made an old crone\nvery happy!\n•these crystals give me strong magic!!\n•now, I can become the new GODDESS","嘻嘻…亲爱的女巫，\n你让我这个老妪\n非常开心！\n这些水晶给了我强大的魔力！！\n现在，我可以成为新的女神了","• Ки-хи-хи • Моя старая мымра.\nТы так меня осчастливила.\nЯ так рада!\n• Кристаллы моих сестёр\nдаруют мне силу!\n• Теперь я стану БОГИНЕЙ!","•hihihi •ah, minha querida, você fez esta velha bruxa muito feliz!\n•os cristais das minhas irmãs me dão uma força poderosa!\n•agora, posso me tornar a DEUSA!"
+NPC.HighPriestess.1,"•keeheehee •oh, my dear hag,\nyou've made an old crone\nvery happy! •these crystals\ngive strong magic!! •now, I can\nbecome the new GODDESS","嘻嘻…亲爱的女巫，\n你让我这个老妪\n非常开心！\n这些水晶给了我强大的魔力！！\n现在，我可以成为新的女神了","• Ки-хи-хи • Моя старая мымра.\nТы так меня осчастливила.\nЯ так рада!\n• Кристаллы моих сестёр\nдаруют мне силу!\n• Теперь я стану БОГИНЕЙ!","•hihihi •ah, minha querida, você fez esta velha bruxa muito feliz!\n•os cristais das minhas irmãs me dão uma força poderosa!\n•agora, posso me tornar a DEUSA!"
 NPC.HighPrietess.2,"•AGH! Aagast. this\nCorruption. i cannot\n•controle . . . . ","啊！啊啊！\n故障…我…\n控制不了…","• А-А! Какой ужас.\nЯ не могу сдерживать\nэту порчу...","•AH! aaah. toda essa corrupção. não consigo\n•controlar . . ."
 NPC.Goddess.1,"WHO. HAS. AWOKEN. ME?\nAH. MY CHILDREN. THEY WISH FOR A CLEAN SLATE?\nIT. SHALL BE MY WILL.","是谁！唤醒了我？\n啊，我的孩子。他们想要\n一片洁净的土地吗？\n那便如此。","КТО ПРОБУДИЛ МЕНЯ?\nА, ЧАДА МОИ. ХОТИТЕ НАЧАТЬ С ЧИСТОГО ЛИСТА?\nДА БУДЕТ ИСПОЛНЕНА ВАША ВОЛЯ.","QUEM OUSA ME DESPERTAR? AH. MINHAS FILHAS DESEJAM UM NOVO COMEÇO? ENTÃO, ASSIM SERÁ FEITO."
 NPC.BabushkaCat.6,"*meow*, (seems like this place is falling apart. let's get out!!)",喵（这里要崩坏了。快跑啊！！！）,"*мяу* (Кажется, здесь всё рушится. Надо выбираться!)",*miau* (este lugar vai desmoronar. vamos sair daqui!!!).

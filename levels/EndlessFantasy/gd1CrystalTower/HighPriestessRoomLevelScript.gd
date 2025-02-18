@@ -325,7 +325,7 @@ func unhideHighPriestess():
   player.pauseInput = false
   player.pauseSelf = false
   global.shouldRenderAsCinematic = false
-  uiLayer.setDisplayTitle("High priestess (crone)")
+  uiLayer.setDisplayTitle(tr("UI.BossName.4"))
   # if crystalGeode.get_ref() != null:
   #   crystalGeode.get_ref().queue_free()
   #   crystalGeode2.get_ref().queue_free()

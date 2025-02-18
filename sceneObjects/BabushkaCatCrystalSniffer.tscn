@@ -152,9 +152,7 @@ shader_param/target_palette = ExtResource( 9 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9649, 0.0413837, 0 )
 script = ExtResource( 3 )
 bbText = "See BabushkaCatCrystalSnifferDialogStartSound."
-smackedBbText = "*meOW!*
-(is that any way
-to treat a friend?)"
+smackedBbText = "NPC.BabushkaCat.4"
 dont_recolor_me = true
 
 [node name="SmallInteractionArea" type="Area" parent="." groups=["malware", "npc"]]

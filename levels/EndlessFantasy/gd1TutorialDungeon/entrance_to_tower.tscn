@@ -1475,7 +1475,6 @@ path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000_000_NullifyIntro.tscn
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, -12.6945, -1, 0 )
 is_locked = true
 path = "res://levels/EndlessFantasy/gd1CrystalTower/000_Start.tscn"
-glitched_path = "res://levels/EndlessFantasy/gd1CrystalTower/preBossRoom.tscn"
 num_keys_unlock = 4
 key_type = 5
 

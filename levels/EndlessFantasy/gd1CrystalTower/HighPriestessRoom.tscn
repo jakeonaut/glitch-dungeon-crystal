@@ -2589,11 +2589,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6087, 4, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.11999, 5.0454, 0 )
 visible = false
 grav = 0
-bbText = "•keeheehee •oh, my dear hag,
-you've made an old crone
-very happy! •these crystals
-give strong magic!! •now, I can
-become the new GODDESS"
+bbText = "NPC.HighPriestess.1"
 smackedBbText = "•agh!!
 what do you care?
 leave this place!"
@@ -2631,9 +2627,7 @@ shape = SubResource( 58 )
 [node name="CroneNPCDefeated" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.11999, 37.0454, 0 )
 grav = 0
-bbText = "•AGH! Aagast. this
-Corruption. i cannot
-•controle . . . . "
+bbText = "NPC.HighPrietess.2"
 is_really_important = true
 can_activate = false
 can_move = false
@@ -2879,10 +2873,7 @@ should_randomize_frame_delay = true
 [node name="SecretGoddessNPC" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 25, 0 )
 grav = 0
-bbText = "WHO. HAS. AWOKEN. ME?
-AH. MY CHILDREN. THEY 
-WISH FOR A CLEAN SLATE?
-IT. SHALL BE MY WILL."
+bbText = "NPC.Goddess.1"
 can_move = false
 can_camera_zoom = false
 

@@ -1225,7 +1225,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18768, -3, 0 )
 [node name="Door" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0904, 13, 0 )
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/LadderIntro.tscn"
-glitched_path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000_000_NullifyIntro.tscn"
 is_vertical = true
 
 [node name="AnimationPlayer" parent="Viewport/level/Door" index="6"]

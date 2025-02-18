@@ -40,15 +40,15 @@ func preActivateScript():
         global.memory["spellbookPage"] = [level.player.glitch_form]
       else:
         global.memory["spellbookPage"] = []
-    if level.has_node("LadderSpell") and level.has_node("InvisibleSpell") and level.has_node("SavePoint") and level.has_node("FloorSpell") and level.has_node("FeatherSpell"):
+    if level.has_node("LadderSpell") and level.has_node("SavePoint") and level.has_node("FloorSpell") and level.has_node("FeatherSpell"): # and level.has_node("InvisibleSpell"):
       yield(get_tree().create_timer(0.5), "timeout")
       var ladderSpell = level.get_node("LadderSpell")
       level.summonSmokeClouds(ladderSpell.global_transform.origin, 3, true, true)
       ladderSpell.visible = true
       yield(get_tree().create_timer(0.5), "timeout")
-      var invisibleSpell = level.get_node("InvisibleSpell")
-      level.summonSmokeClouds(invisibleSpell.global_transform.origin, 3, true, true)
-      invisibleSpell.visible = true
+      # var invisibleSpell = level.get_node("InvisibleSpell")
+      # level.summonSmokeClouds(invisibleSpell.global_transform.origin, 3, true, true)
+      # invisibleSpell.visible = true
       var floorSpell = level.get_node("FloorSpell")
       level.summonSmokeClouds(floorSpell.global_transform.origin, 3)
       floorSpell.visible = true

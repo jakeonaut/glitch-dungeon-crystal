@@ -410,7 +410,6 @@ automatically_change_color = false
 [node name="Door" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, -1, 0 )
 path = "res://levels/EndlessFantasy/gd1FishingVillage/003GlitchFishersPuzzle.tscn"
-glitched_path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/SECRET_005_CricketCaveHub1.tscn"
 
 [node name="Viewport2" parent="." instance=ExtResource( 11 )]
 

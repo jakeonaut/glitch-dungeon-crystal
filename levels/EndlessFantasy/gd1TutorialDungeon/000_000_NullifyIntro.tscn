@@ -200,7 +200,6 @@ texture = ExtResource( 26 )
 [node name="Door" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -1, 0 )
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/tutorial_GhostIntro.tscn"
-glitched_path = "res://levels/EndlessFantasy/gd1TutorialDungeon/DebugTown_NullificationPurgatory.tscn"
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 11, 0 )

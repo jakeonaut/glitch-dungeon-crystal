@@ -2896,8 +2896,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 58, -3.5, -4 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.7818, 15.8596, 0 )
 grav = 0
-bbText = "•these \"glitch\" things
-freak me out"
+bbText = "NPC.Fisherman.11"
 can_move = false
 can_camera_zoom = false
 is_a_body = false
@@ -2949,9 +2948,7 @@ anims/getItem = SubResource( 46 )
 [node name="NPC10" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53.3844, 2.95704, 0 )
 grav = 0
-bbText = "•you lookin' for
-the crystal?
-go up."
+bbText = "NPC.Fisherman.9"
 can_move = false
 can_camera_zoom = false
 is_a_body = false
@@ -3077,8 +3074,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.21877, -1 )
 [node name="NPC6" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46.1818, 34.1596, 0 )
 grav = 0
-bbText = "•we're trying out
-new technique"
+bbText = "NPC.Fisherman.12"
 can_move = false
 can_camera_zoom = false
 is_a_body = false
@@ -3105,7 +3101,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.21877, -1 )
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.3818, 10.957, 0 )
 grav = 0
-bbText = "•i don't want this"
+bbText = "NPC.Fisherman.10"
 can_move = false
 can_camera_zoom = false
 is_a_body = false

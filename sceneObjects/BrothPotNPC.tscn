@@ -155,10 +155,7 @@ shader_param/target_palette = ExtResource( 3 )
 [node name="BrothPotNPC" type="Spatial" groups=["npc"]]
 script = ExtResource( 11 )
 grav = 0
-bbText = "hmm.. sorry.
-occupied."
-smackedBbText = "hmm.. sorry.
-occupied."
+bbText = "NPC.BrothKappa.1"
 
 [node name="SmallInteractionArea" type="Area" parent="." groups=["malware", "npc"]]
 script = ExtResource( 8 )

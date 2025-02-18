@@ -358,7 +358,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 4.32757, 0 )
 [node name="Door" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, 0 )
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/TeleportDoorMaze.tscn"
-glitched_path = "res://levels/EndlessFantasy/gd1ToxicJungle/TeleportDoorMaze.tscn"
 is_passive = true
 
 [node name="landing" parent="Viewport/level/Door" index="5"]
@@ -381,7 +380,6 @@ shape = SubResource( 15 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.6365, 21, 0 )
-glitched_path = "res://levels/EndlessFantasy/gd1PrimordialOoze/FishingScene.tscn"
 
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/RESET = SubResource( 16 )

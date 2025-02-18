@@ -5131,9 +5131,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, -3, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.8818, 6.14345, 0 )
 grav = 0
-bbText = "•It’s been a salty dry year on average,
-but I don't know why mudfish
-numbers are so low."
+bbText = "NPC.Fisherman.8"
 can_move = false
 can_camera_zoom = false
 is_a_body = false

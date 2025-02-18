@@ -1071,7 +1071,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1, 14.1, 0 )
 [node name="Door" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 16, 0 )
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/SECRET_005_CricketCaveHub1.tscn"
-glitched_path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/SECRET_005_CricketCaveHub1.tscn"
 is_passive = true
 is_vertical = true
 

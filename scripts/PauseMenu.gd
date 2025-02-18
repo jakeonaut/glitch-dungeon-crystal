@@ -10,6 +10,14 @@ var canResetBindings = true
 onready var pauseTitleRect = get_node("PauseTitleRect")
 onready var pauseTitleText = get_node("PauseTitleRect/PauseTitleText")
 
+onready var inventoryPauseTitleText = get_node("InventoryRect/TitleRect/PauseTitleText")
+onready var spellsLabelText = get_node("InventoryRect/SpellsLabel")
+onready var equipLabelText = get_node("InventoryRect/EquipLabel")
+onready var soulLabelText = get_node("InventoryRect/SoulLabel")
+onready var keyLabelText = get_node("InventoryRect/KeyLabel")
+onready var keysText = get_node("InventoryRect/KeysRect/ColorRect/KeysText")
+onready var shardsText = get_node("InventoryRect/ShardsRect/ColorRect/ShardsText")
+
 onready var cursorSprite = get_node("CursorSprite")
 # NORMAL MENU
 onready var normalMenu = get_node("NormalMenu")
@@ -211,6 +219,13 @@ func _process(delta):
     last_control_index = -1
 
   if pauseMenuState == PauseMenuState.INVENTORY:
+    inventoryPauseTitleText.bbcode_text = tr("UI.Inventory.1")
+    spellsLabelText.bbcode_text = tr("UI.Inventory.2")
+    equipLabelText.bbcode_text = tr("UI.Inventory.4")
+    soulLabelText.bbcode_text = tr("UI.Inventory.8")
+    keyLabelText.bbcode_text = tr("UI.Inventory.9")
+    keysText.bbcode_text = tr("UI.Inventory.10")
+    shardsText.bbcode_text = tr("NPC.Crystal.7")
     largerPopup.visible = true
     normalMenu.visible = false
     cursorSprite.visible = false
@@ -494,14 +509,15 @@ func processInventoryLogic(delta):
   if (inventoryOptionIndex == 4 or angelStatueToTeleportTo != null) and angelStatueArrValue != null:
     pauseTitleText.bbcode_text = str(angelStatueArrValue[0]) + "\n" + global.getInputText("menu_confirm") + " to teleport, " + global.getInputText("menu_cancel") + " to cancel"
   else:
-    pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to resume\n" + global.getInputText("menu_left") + " " + global.getInputText("menu_right") + " " + global.getInputText("menu_up") + " " + global.getInputText("menu_down")
+    pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " " + tr("UI.Confirmation") + ", " + global.getInputText("menu_cancel") + " " + tr("UI.PauseMenu.1") + ",\n" + global.getInputText("menu_left") + " " + global.getInputText("menu_right") + " " + global.getInputText("menu_up") + " " + global.getInputText("menu_down")
+    # pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to resume\n" + global.getInputText("menu_left") + " " + global.getInputText("menu_right") + " " + global.getInputText("menu_up") + " " + global.getInputText("menu_down")
   var spellbook = global.memory["spellbookPage"] if global.memory.has("spellbookPage") else []
   var spellbookSize = spellbook.size()
   if selectedGlitchSprite >= 0:
     if spellbookSize == 0:
-      pauseTitleText.bbcode_text = "you've forgotten your spells"
+      pauseTitleText.bbcode_text = tr("NPC.Tutorial.12") # "you've forgotten your spells"
     else:
-      pauseTitleText.bbcode_text = "change spell order, " + global.getInputText("menu_left") + global.getInputText("menu_right") + "\n" + global.getInputText("menu_confirm") + " to swap"
+      pauseTitleText.bbcode_text = tr("UI.Inventory.3") % global.getInputText("menu_confirm") # "change spell order, " + global.getInputText("menu_left") + global.getInputText("menu_right") + "\n" + global.getInputText("menu_confirm") + " to swap"
   processInventoryRender(delta)
   tryDrawMap()
   
@@ -535,15 +551,15 @@ func processInventoryLogic(delta):
     if spellbookSize > 0:
       var which_glitch = spellbook[inventoryOptionIndexX] if global.memory["glitched_grimoire"] or level.player.spellCastPauseIndex == 0 else spellbook[1-inventoryOptionIndexX]
       if which_glitch == global.GlitchForm.FLOOR:
-        popupText.text = "air walk:\n  walk off platforms\n  without falling"
+        popupText.text = tr("UI.GlitchSpell.2") # "air walk:\n  walk off platforms\n  without falling"
       if which_glitch == global.GlitchForm.FEATHER:
-        popupText.text = "feather fall:\n  hold jump to\n  float or jump high"
+        popupText.text = tr("UI.GlitchSpell.1") # "feather fall:\n  hold jump to\n  float or jump high"
       if which_glitch == global.GlitchForm.LADDER:
-        popupText.text = "ladder:\n  walk into walls\n  climb upwards"
+        popupText.text = tr("UI.GlitchSpell.3") # "ladder:\n  walk into walls\n  climb upwards"
       if which_glitch == global.GlitchForm.INVISIBLE:
-        popupText.text = "ghost:\n  glitches can't get u"
+        popupText.text = tr("UI.GlitchSpell.4") # "ghost:\n  glitches can't get u"
       if which_glitch == global.GlitchForm.WALK_THROUGH_WALLS:
-        popupText.text = "undefined:\n ???"
+        popupText.text = tr("NPC.Crystal.NULL") # "undefined:\n ???"
   else:
     glitchRect1.color = inactiveColor
     glitchRect2.color = inactiveColor
@@ -611,15 +627,15 @@ func processInventoryLogic(delta):
     elif inventoryOptionIndex == 1:
       popupRect.visible = not popupRect.visible
       if inventoryOptionIndexX == 0:
-        popupText.text = "your trusty broom.." if not global.memory["glitched_broom"] else "uyro utsryt oomr;b"
-        if global.memory["broomerang"] > 1:
-          popupText.text += "\nsweep twice to throw it!"
-        else:
-          popupText.text += "\ngreat for sweeping dust"
-        if global.memory["broomerang"] >= 2:
-          popupText.text += "\nno limits!"
+        popupText.text = tr("UI.Inventory.5") # "your trusty broom.." if not global.memory["glitched_broom"] else "uyro utsryt oomr;b"
+        # if global.memory["broomerang"] > 1:
+        #   popupText.text += "\nsweep twice to throw it!"
+        # else:
+        #   popupText.text += "\ngreat for sweeping dust"
+        # if global.memory["broomerang"] >= 2:
+        #   popupText.text += "\nno limits!"
       elif inventoryOptionIndexX == 1:
-        popupText.text = "babushka scarf\nkeeps ya warm"
+        popupText.text = tr("UI.Inventory.6")
       elif inventoryOptionIndexX == 2:
         popupText.text = "pet follower\nin progress..."
       elif inventoryOptionIndexX == 3:
@@ -627,16 +643,16 @@ func processInventoryLogic(delta):
     elif inventoryOptionIndex == 2:
       popupRect.visible = not popupRect.visible
       if inventoryOptionIndexX == 0:
-        popupText.text = "memory of fish:\n  swim in water\n"
+        popupText.text = tr("NPC.Treasure.7") # "memory of fish:\n  swim in water\n"
       elif inventoryOptionIndexX == 1:
-        popupText.text = "mole cricket memory:\n  jump and hold to dig\n  up through ceilings"
+        popupText.text = tr("NPC.Treasure.8") # "mole cricket memory:\n  jump and hold to dig\n  up through ceilings"
       elif inventoryOptionIndexX == 2:
-        popupText.text = "spore memory:\n  hold sweep button to\n  teleport when smacking  \n  works with broomerang"
+        popupText.text = tr("NPC.Treasure.9") # "spore memory:\n  hold sweep button to\n  teleport when smacking  \n  works with broomerang"
     elif inventoryOptionIndex == 3:
       popupRect.visible = not popupRect.visible
       if inventoryOptionIndexX == 0:
         var numEggs = global.getThingFromAllLevelZonez("angelEgg")
-        popupText.text = "angel eggs:\n  spawn of goddess\n  got " + str(numEggs)
+        popupText.text = tr("UI.Inventory.7") + ": " + str(numEggs) # "angel eggs:\n  spawn of goddess\n  got " 
       elif inventoryOptionIndexX == 1:
         if global.memory["angler_seaman_boss"] == 3:
           popupText.text = "goddess dream of deceit"

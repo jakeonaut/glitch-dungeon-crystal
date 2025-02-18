@@ -2129,7 +2129,7 @@ audio_listener_enable_3d = true
 script = ExtResource( 8 )
 show_crt_effect = true
 starting_glitch_type = 2
-tileset_type = 6
+tileset_type = 10
 has_spellbook_page = true
 spellbook_spells = [ 3, 2 ]
 
@@ -2382,7 +2382,7 @@ shape = SubResource( 77 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.65998, -18, 0 )
-path = "res://levels/EndlessFantasy/gd1CrystalTower/LockedRoom1.tscn"
+path = "res://levels/EndlessFantasy/gd1CrystalTower/PastoralTowerHub.tscn"
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 shape = SubResource( 117 )
