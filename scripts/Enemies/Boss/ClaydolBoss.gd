@@ -114,7 +114,7 @@ func _process(delta):
             return
 
     if cubeCrystal.get_ref() != null:
-        cubeCrystal.meshInstance1.visible = false
+        cubeCrystal.get_ref().meshInstance1.visible = false
     if global.pauseGame:
         return
 
@@ -268,7 +268,7 @@ func _process(delta):
 
     noseSprite.flip_h = mySprite.flip_h
     if cubeCrystal.get_ref() != null:
-        cubeCrystal.meshInstance1.visible = false
+        cubeCrystal.get_ref().meshInstance1.visible = false
 
 func queueUpAJump():
     secretAniPlayer.stop()

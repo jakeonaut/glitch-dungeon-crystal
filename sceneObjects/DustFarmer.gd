@@ -16,7 +16,7 @@ var idle_time_limit = 30
 var gusting_time_limit = 20
 export var is_wind_gust_active = false
 var is_smacked = false
-func _process(delta):
+func _process(_delta):
   windGust.is_active = false # is_wind_gust_active
   windGust.global_transform.origin.y = npc.global_transform.origin.y + 2.0
 
@@ -25,11 +25,11 @@ func _process(delta):
   elif not npc.should_i_respond_to_smacks and npc.smackedBbText != "":
     npc.should_i_respond_to_smacks = true
 
-  if npc.is_smacked and not is_smacked:
-    # NPC just got smacked...
-    is_wind_gust_active = not is_wind_gust_active
-    if is_wind_gust_active:
-      gustSound.play()
-    else:
-      chargeSound.play()
+  # if npc.is_smacked and not is_smacked:
+  #   # NPC just got smacked...
+  #   is_wind_gust_active = not is_wind_gust_active
+  #   if is_wind_gust_active:
+  #     gustSound.play()
+  #   else:
+  #     chargeSound.play()
   is_smacked = npc.is_smacked

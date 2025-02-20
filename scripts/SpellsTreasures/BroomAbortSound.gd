@@ -19,7 +19,7 @@ func activateScript():
     if level.player.truly_on_ground:
         level.player.can_broomerang_warp = true
     level.player.textBox.hideTextbox()
-    if not global.memory.has("spellbookPage") and level.getLevelName().find("000PastoralScene") > 0 and level.has_node("PastoralGrannyNPC"):
+    if not global.memory.has("spellbookPage") and level.getLevelName().find("MainMenu") > 0 and level.has_node("PastoralGrannyNPC"):
         level.player.pauseInput = true
         yield(TempTimer.idle_frame(self), "timeout")
         # level.player.textBox.dialogStartSound.play()

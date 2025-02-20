@@ -828,7 +828,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 5, 0 )
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2, 0 )
 pixel_size = 0.07
 frame = 18
-path = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
+path = "res://levels/EndlessFantasy/gd1/MainMenu.tscn"
 can_nav_left = false
 
 [node name="PastoralScene3" parent="PastoralScene" instance=ExtResource( 3 )]
@@ -1375,6 +1375,15 @@ can_nav_right = false
 can_nav_down = false
 hide_me_from_map = true
 
+[node name="LongGlitchyHallway" parent="CrystalTower" instance=ExtResource( 3 )]
+transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1, 7, 9, 0 )
+frame = 26
+path = "res://levels/EndlessFantasy/gd1CrystalTower/LongGlitchyHallway.tscn"
+can_nav_left = false
+can_nav_right = false
+can_nav_up = false
+can_nav_down = false
+
 [node name="TowerToSacredDoors" parent="CrystalTower" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 6, 10, 0 )
 frame = 26
@@ -1416,7 +1425,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 
 [node name="005DebugTown" parent="PrimordialOoze" instance=ExtResource( 3 )]
-transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 2, 10, 0 )
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 4, 10, 0 )
 material_override = SubResource( 35 )
 frame = 46
 path = "res://levels/EndlessFantasy/gd1PrimordialOoze/005DebugTown.tscn"

@@ -829,12 +829,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 10.5008, 0 )
 
 [node name="LadderSpell" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 21.399, 4.45338, 0 )
+visible = false
 
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.52152, 1.45338, 0 )
+visible = false
 
 [node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 10.2823, 7.48888, 0 )
+visible = false
 
 [node name="AngelStatue" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 10.0919, 0 )

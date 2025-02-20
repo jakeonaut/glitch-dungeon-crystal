@@ -1,17 +1,21 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/tidepool_palette.png" type="Texture" id=2]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=4]
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=5]
-[ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=6]
+[ext_resource path="res://assets/enemy_sheet20000.png" type="Texture" id=6]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=7]
 [ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=8]
 [ext_resource path="res://assets/sounds/assets_sfx_jumpcartoon.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Dog Yelp.wav" type="AudioStream" id=10]
+[ext_resource path="res://scripts/AreaSound.gd" type="Script" id=11]
 [ext_resource path="res://sceneObjects/WindGust.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/sounds/OOT_Steps_Dirt1.wav" type="AudioStream" id=13]
 [ext_resource path="res://assets/sounds/chomp.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/sounds/gust.wav" type="AudioStream" id=15]
+[ext_resource path="res://scripts/Enemies/FanPlant.gd" type="Script" id=16]
 
 [sub_resource type="ShaderMaterial" id=36]
 shader = ExtResource( 7 )
@@ -72,7 +76,41 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 120 ]
+"values": [ 104 ]
+}
+
+[sub_resource type="Animation" id=48]
+resource_name = "fall"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 104, 106 ]
+}
+
+[sub_resource type="Animation" id=49]
+resource_name = "fallSpinny"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 120, 121, 122 ]
 }
 
 [sub_resource type="Animation" id=44]
@@ -90,6 +128,40 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 104, 105 ]
+}
+
+[sub_resource type="Animation" id=50]
+resource_name = "jump"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 105, 107 ]
+}
+
+[sub_resource type="Animation" id=51]
+resource_name = "jumpSpinny"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 123, 124, 125 ]
 }
 
 [sub_resource type="Animation" id=45]
@@ -142,6 +214,8 @@ tracks/0/keys = {
 }
 
 [node name="FanPlant" type="Spatial"]
+script = ExtResource( 16 )
+sprite_offset_y = 0.25
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345, 0 )
@@ -152,7 +226,7 @@ double_sided = false
 texture = ExtResource( 6 )
 hframes = 8
 vframes = 16
-frame = 120
+frame = 104
 region_rect = Rect2( 0, 0, 62, 0 )
 script = ExtResource( 1 )
 frame_delay = 0.1
@@ -196,9 +270,13 @@ script = ExtResource( 5 )
 shape = SubResource( 29 )
 
 [node name="FanAnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "spinny"
+autoplay = "idle"
 anims/RESET = SubResource( 43 )
+anims/fall = SubResource( 48 )
+anims/fallSpinny = SubResource( 49 )
 anims/idle = SubResource( 44 )
+anims/jump = SubResource( 50 )
+anims/jumpSpinny = SubResource( 51 )
 anims/slowDown = SubResource( 45 )
 anims/spinny = SubResource( 46 )
 anims/startUp = SubResource( 47 )
@@ -206,3 +284,17 @@ anims/startUp = SubResource( 47 )
 [node name="WindGust" parent="." instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1 )
 visible = false
+
+[node name="GustSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+volume_db = -12.0
+pitch_scale = 1.2
+script = ExtResource( 11 )
+repeat = false
+
+[node name="ChargeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = 1.0
+pitch_scale = 0.5
+script = ExtResource( 11 )
+repeat = false

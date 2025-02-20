@@ -646,7 +646,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 5, 0 )
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2, 0 )
 pixel_size = 0.07
 frame = 18
-path = "res://levels/EndlessFantasy/gd1/000PastoralScene.tscn"
+path = "res://levels/EndlessFantasy/gd1/MainMenu.tscn"
 can_nav_left = false
 
 [node name="TutorialDungeon" type="Spatial" parent="."]

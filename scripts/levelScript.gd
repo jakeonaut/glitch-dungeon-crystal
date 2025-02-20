@@ -27,7 +27,7 @@ export var null_glitch = false
 # TODO(jaketrower): need to make this work with grimoire
 
 # IFNDEF FakeLevelTiles.gd (if we get much more scripts doing this, put it in global)
-export(int, "DUNGEON", "HOUSE", "FOREST", "ALIEN", "DESERT", "GLITCH_WORLD", "BEACH", "POISON_FOREST", "POISON_HOUSE", "AUTUMN_FOREST", "PRIMORDIAL_OOZE", "TOMB") var tileset_type 
+export(int, "DUNGEON", "HOUSE", "FOREST", "ALIEN", "DESERT", "GLITCH_WORLD", "BEACH", "POISON_FOREST", "POISON_HOUSE", "AUTUMN_FOREST", "PRIMORDIAL_OOZE", "TOMB", "FARM_HOUSE") var tileset_type 
 
 export var spellbook_forbidden = false
 # TODO(jaketrower): Make a debug global section???
@@ -77,10 +77,10 @@ func reindexGrandmaStatueCatalogue(is_start_of_level = false):
 
 var should_offset_ui = false 
 func _ready_impl():
-  if not "0_1Haven" in self.getLevelName() and not global.memory["glitch_world"]:
-    self.purifyAllFragileBrickSolids(false)
+  # if not "0_1Haven" in self.getLevelName() and not global.memory["glitch_world"]:
+  #   self.purifyAllFragileBrickSolids(false)
 
-  if not global.memory.has("roomPath") and not "000PastoralScene" in self.getLevelName():
+  if not global.memory.has("roomPath") and not "MainMenu" in self.getLevelName():
     global.has_started_game = true
     global.has_really_started_game = true
     if not "0_0" in self.getLevelName() or "Fish" in self.getLevelName():

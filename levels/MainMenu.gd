@@ -117,16 +117,16 @@ func startGame(saveGameIndex):
   mainMenuUi.visible = false
   player.aniPlayer.stop()
   player.aniPlayer.clear_queue()
-  gameCamera.initial_size = 25
-  gameCamera.zoomed_size = 25
+#   gameCamera.initial_size = 25
+#   gameCamera.zoomed_size = 25
   # gameCamera.can_i_move = false
 
   yield(get_tree().create_timer(1.5), "timeout")
   if was_intro_cutscene_skipped == 2: return
   gameCamera.can_i_move = false
-  player.override_press_move_right = true
+  player.override_press_move_left = true
   yield(get_tree().create_timer(0.2), "timeout")
-  player.override_press_move_right = false
+  player.override_press_move_left = false
   # player.pauseAnimation = true
   yield(get_tree().create_timer(0.5), "timeout")
   if was_intro_cutscene_skipped == 2: return
@@ -134,10 +134,10 @@ func startGame(saveGameIndex):
   player.aniPlayer.queue("stand")
   yield(get_tree().create_timer(1.0), "timeout")
   if was_intro_cutscene_skipped == 2: return
-  player.override_press_move_left = true
-  yield(get_tree().create_timer(0.1), "timeout")
+  player.override_press_move_right = true
+  yield(get_tree().create_timer(0.2), "timeout")
   if was_intro_cutscene_skipped == 2: return
-  player.override_press_move_left = false
+  player.override_press_move_right = false
   yield(get_tree().create_timer(0.5), "timeout")
   if was_intro_cutscene_skipped == 2: return
   player.aniPlayer.queue("sweepFloor")
@@ -149,6 +149,18 @@ func startGame(saveGameIndex):
   player.aniPlayer.play("happyStand")
   yield(get_tree().create_timer(2.0), "timeout")
   if was_intro_cutscene_skipped == 2: return
+
+  summonSmokeClouds(Vector3(28, 2, 0), 3)
+  var cell_index = Vector3(27, 1, 0)
+  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
+  cell_index = Vector3(29, 1, 0)
+  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
+  cell_index = Vector3(28, 2, 0)
+  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
+  cell_index = Vector3(29, 2, 0)
+  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
+
+  player.exclamationAniPlayer.play("exclaim")
   player.aniPlayer.play("fall")
   eventSound1.play()
   eventSound2.play()
@@ -157,9 +169,30 @@ func startGame(saveGameIndex):
   secretGlitchyNPC.glitchOut()
   yield(get_tree().create_timer(1.0), "timeout")
   if was_intro_cutscene_skipped == 2: return
+
+  summonSmokeClouds(Vector3(21.5, 3.5, 0), 3)
+  cell_index = Vector3(20, 2, 0)
+  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
+  cell_index = Vector3(21, 2, 0)
+  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
+  cell_index = Vector3(22, 2, 0)
+  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
+  cell_index = Vector3(20, 3, 0)
+  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
+  cell_index = Vector3(22, 3, 0)
+  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
+  cell_index = Vector3(20, 4, 0)
+  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
+  cell_index = Vector3(21, 4, 0)
+  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
+  cell_index = Vector3(22, 4, 0)
+  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
+
+
   secretGlitchyNPC2.glitchOut()
   babushkaCat.mySprite.updateBaseFrame(2, 2)
-  babushkaCat.tryShowInteractPrompt(true, true)
+  # babushkaCat.tryShowInteractPrompt(true, true)
+  babushkaCat.exclamationAniPlayer.play("exclaim")
   gameCamera.can_i_move = true
   if cameraTarget != null:
     cameraTarget.queue_free()
@@ -182,13 +215,40 @@ func startGame(saveGameIndex):
   yield(get_tree().create_timer(0.2), "timeout")
   secretGlitchyNPC5.glitchOut()
   yield(get_tree().create_timer(0.2), "timeout")
+  player.mySprite.flip_h = not player.mySprite.flip_h
   secretGlitchyNPC6.glitchOut()
+  summonSmokeClouds(Vector3(24, 7, 0), 3)
+  cell_index = Vector3(24, 6, 0)
+  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
+  cell_index = Vector3(25, 6, 0)
+  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
+  cell_index = Vector3(24, 7, 0)
+  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
+  cell_index = Vector3(25, 7, 0)
+  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
+
   yield(get_tree().create_timer(1.6), "timeout")
+  player.global_transform.origin = Vector3(26.135, 0, 0)
+  player.doBroomAttack(1)
+  yield(get_tree().create_timer(0.5), "timeout")
+  player.mySprite.flip_h = not player.mySprite.flip_h
+  player.grav = 0
+  player.global_transform.origin = Vector3(24.635, 2, 0)
+  player.doBroomAttack(1)
+  yield(get_tree().create_timer(0.5), "timeout")
+  player.mySprite.flip_h = not player.mySprite.flip_h
+  player.grav = 0
+  player.global_transform.origin = Vector3(23.135, 4, 0)
+  player.doBroomAttack(1)
+  yield(get_tree().create_timer(0.5), "timeout")
+  player.grav = 28
+
+  yield(get_tree().create_timer(1.1), "timeout")
   global.shouldRenderAsCinematic = false
   player.pauseInput = false
   global.has_really_started_game = true
   player.textBox.override_target_origin = dialogPosition.global_transform.origin
-  player.sayThis(tr("Dialog.Player.1"), 4.0)
+  player.sayThis(tr("Dialog.Player.1"))
 
 func loadGame(saveGameIndex):
     mainMenuState = MainMenuState.NORMAL_GAMEPLAY
@@ -275,6 +335,8 @@ func _process(delta):
         if global.has_started_game and not global.isRespawning:
             player.camera_y_offset = 5
             if global.has_really_started_game:
+                gameCamera.initial_size = gameCamera.initial_size + (25 - gameCamera.initial_size) * (delta * 2)
+                gameCamera.zoomed_size = gameCamera.initial_size
                 # pressCText.rect_position.x = 214
                 # pressCText.rect_position.y = 515
                 if pressCText.get_parent() == mainMenuUi and not global.memory.has("roomPath"):
@@ -289,6 +351,9 @@ func _process(delta):
                 pressCText.visible = (global.activeInteractor == null and not global.isPauseMenuOpen)
                 optionsMenuPrompt.bbcode_text = tr("UI.MainMenu.1") % global.getInputText("ui_start")
                 optionsMenuPrompt.visible = pressCText.visible
+            else:
+                gameCamera.initial_size = gameCamera.initial_size + (15 - gameCamera.initial_size) * (delta * 2)
+                gameCamera.zoomed_size = gameCamera.initial_size
             return
 
     if global.isPauseMenuOpen or global.has_started_game:

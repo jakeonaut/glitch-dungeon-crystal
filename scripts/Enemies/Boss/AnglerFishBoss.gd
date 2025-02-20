@@ -69,7 +69,7 @@ func _ready():
     crystalLandings = level.get_tree().get_nodes_in_group("crystal_landing")
 
     behavior_phase_through_walls = true
-    walk_speed = 16
+    walk_speed = 24
 
     self.remove_child(fakeCrystalContainer)
     level.add_child(fakeCrystalContainer)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=2]
+[gd_scene load_steps=99 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -4303,6 +4303,32 @@ extents = Vector3( 4, 2, 1 )
 [sub_resource type="BoxShape" id=26]
 extents = Vector3( 4, 2.52322, 1 )
 
+[sub_resource type="ArrayMesh" id=167]
+surfaces/0 = {
+"aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
+"array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0 ),
+"blend_shape_data": [  ],
+"format": 2194689,
+"index_count": 24,
+"primitive": 1,
+"skeleton_aabb": [  ],
+"vertex_count": 8
+}
+
+[sub_resource type="ArrayMesh" id=168]
+surfaces/0 = {
+"aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
+"array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0 ),
+"blend_shape_data": [  ],
+"format": 2194689,
+"index_count": 24,
+"primitive": 1,
+"skeleton_aabb": [  ],
+"vertex_count": 8
+}
+
 [node name="AnglerFishBoss" type="Spatial"]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0 )
 script = ExtResource( 5 )
@@ -4603,4 +4629,21 @@ shape = SubResource( 26 )
 [node name="CubeCrystal" parent="." instance=ExtResource( 10 )]
 transform = Transform( 0.6, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -6.13517, 1.51816, 0 )
 
+[node name="CubeContainer" parent="CubeCrystal" index="0"]
+transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
+
+[node name="MeshInstance" parent="CubeCrystal/CubeContainer" index="0"]
+transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
+mesh = SubResource( 167 )
+
+[node name="MeshInstance3" parent="CubeCrystal/CubeContainer" index="1"]
+transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
+mesh = SubResource( 168 )
+
+[node name="MeshInstance2" parent="CubeCrystal/CubeContainer" index="2"]
+transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )
+
 [node name="FakeCrystals" type="Spatial" parent="."]
+
+[editable path="CubeCrystal"]
+[editable path="CubeCrystal/GlitchAura"]

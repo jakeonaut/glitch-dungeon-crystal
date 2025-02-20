@@ -175,7 +175,7 @@ func conductFromScenePath(path):
             changeSongPitch(1.0)
             default_song_pitch = 1.0
             return
-    elif path.find("MainMenu") > 0 or path.find("000PastoralScene") > 0:
+    elif path.find("MainMenu") > 0:
         tryToPlay(grannyPlayer)
         if global.memory["priestess"] >= 2:
             changeSongPitch(1.0)

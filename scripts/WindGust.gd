@@ -44,6 +44,9 @@ func isActive(_debug=false):
 func passiveActivate(delta, is_player):
   if not is_player:
     return
+  if not global.gustSound.is_playing():
+    global.gustSound.pitch_scale = rand_range(0.8, 1.1)
+    global.gustSound.play()
   otherPassiveActivate(delta, level.player)
 
 func otherPassiveActivate(delta, gameMover):

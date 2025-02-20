@@ -481,7 +481,7 @@ func processQuitToMainLogic(_delta):
       else:
         # dedupe (ish) with "dev_demo_reset" above
         global.pauseGame = true
-        transition.reset_game("res://levels/EndlessFantasy/gd1/000PastoralScene.tscn")
+        transition.reset_game("res://levels/EndlessFantasy/gd1/MainMenu.tscn")
     elif quitToMainOptionIndex == 1:
       pauseMenuState = PauseMenuState.NORMAL
       shouldUpdateMenuText = true

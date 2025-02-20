@@ -29,6 +29,8 @@ onready var mpNumSprite2 = get_node("MPNumSprite/MPNumSprite2")
 onready var mushroomSpriteAnimated = get_node("SpriteContainer/Sprite3DMushroomAnimated")
 onready var mushroomSpriteVisible = get_node("SpriteContainer/Sprite3DMushroomVisible")
 onready var mushroomSpriteAniPlayer = get_node("SpriteContainer/Sprite3DMushroomAnimated/AnimationPlayer")
+onready var exclamationSprite = get_node("ExclamationSprite")
+onready var exclamationAniPlayer = get_node("ExclamationSprite/AnimationPlayer")
 var malwareBugSpriteRes = preload("res://sceneObjects/Buggies/MalwareBugSprite.tscn")
 
 var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
@@ -2344,7 +2346,7 @@ func processBroomRenderLogic(_delta):
     broomSpriteVisible.visible = true
     if nesting_doll_state == global.NestingDoll.GRANDMA:
       mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
-      mySprite.material_override.set_shader_param("black_offset", 0 if (level.getLevelName().find("000PastoralScene") > 0 and global.has_started_game) else 1)
+      mySprite.material_override.set_shader_param("black_offset", 0 if (level.getLevelName().find("MainMenu") > 0 and global.has_started_game) else 1)
   else:
     broomSpriteVisible.visible = false
     if nesting_doll_state == global.NestingDoll.GRANDMA and not isHoldingMultiBroom():

@@ -30,7 +30,7 @@ func activateScript():
 
 func preActivateScript():
   global.memory["forget_me_not"] = true
-  global.memory["glitch_world"] = 1
+  # global.memory["glitch_world"] = 1
   transition.tryUpdateMapManagerToGlitchedMap()
   if not global.memory["glitched_grimoire"]:
     global.memory["glitched_grimoire"] = true

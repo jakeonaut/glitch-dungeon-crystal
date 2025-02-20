@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=1]
 [ext_resource path="res://levels/EndlessFantasy/gd1ToxicJungle/BabaYagaLevelScript.gd" type="Script" id=2]
@@ -27,7 +27,6 @@
 [ext_resource path="res://assets/palettes/inkpink-1x.png" type="Texture" id=25]
 [ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=26]
 [ext_resource path="res://sceneObjects/BiggestNPC.tscn" type="PackedScene" id=27]
-[ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=28]
 
 [sub_resource type="Animation" id=89]
 length = 0.001
@@ -1092,9 +1091,6 @@ shape = SubResource( 250 )
 [node name="EldestMonkeyNPC" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -4, 0 )
 grav = 0
-
-[node name="SavePoint" parent="Viewport/level" instance=ExtResource( 28 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -7, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 17 )]
 

@@ -753,7 +753,7 @@ func changeColorPalette(palette, _palette_alt = null):
       curr_palette = override_palette
   elif my_tileset_type == global.TilesetType.FOREST:
     curr_palette = global.green_tidepool_palette
-  elif my_tileset_type == global.TilesetType.AUTUMN_FOREST:
+  elif my_tileset_type == global.TilesetType.AUTUMN_FOREST or my_tileset_type == global.TilesetType.FARM_HOUSE:
     curr_palette = global.red_palette
   elif my_tileset_type == global.TilesetType.DESERT:
     curr_palette = global.yellow_palette
@@ -817,6 +817,14 @@ func setTileset(tileset_type, properly_set_tiles = true):
     green_palette = global.green_tidepool_palette
     # black_palette = global.black_palette_town
     black_palette = global.black_tidepool_palette
+  elif tileset_type == global.TilesetType.FARM_HOUSE:
+    my_tileset_glitch_type = global.GlitchForm.FLOOR
+    grey_palette = global.red_palette
+    green_palette = global.red_palette
+    red_palette = global.red_palette
+    # black_palette = global.black_palette_town
+    yellow_palette = global.red_palette
+    black_palette = global.red_palette
   elif tileset_type == global.TilesetType.POISON_HOUSE:
     my_tileset_glitch_type = global.GlitchForm.FLOOR
     grey_palette = global.grey_black_palette

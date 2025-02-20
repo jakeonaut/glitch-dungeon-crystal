@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/sounds/LA_Stairs.wav" type="AudioStream" id=1]
 [ext_resource path="res://scripts/autoload/global.gd" type="Script" id=2]
 [ext_resource path="res://assets/sounds/openDoorGlitch.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/sounds/eb_menu4.wav" type="AudioStream" id=4]
+[ext_resource path="res://scripts/AreaSound.gd" type="Script" id=5]
+[ext_resource path="res://assets/sounds/gust.wav" type="AudioStream" id=6]
 
 [node name="global" type="Spatial"]
 script = ExtResource( 2 )
@@ -22,3 +24,10 @@ pitch_scale = 1.1
 stream = ExtResource( 3 )
 volume_db = -15.0
 pitch_scale = 0.5
+
+[node name="GustSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -12.0
+pitch_scale = 1.2
+script = ExtResource( 5 )
+repeat = false

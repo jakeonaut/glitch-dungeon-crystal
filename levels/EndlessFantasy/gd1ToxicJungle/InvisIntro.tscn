@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -11,7 +11,7 @@
 [ext_resource path="res://sceneObjects/Enemies/GlitchSlime.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/sprites/endTextboxPrompt.png" type="Texture" id=10]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=11]
-[ext_resource path="res://sceneObjects/KizzyCat.tscn" type="PackedScene" id=12]
+[ext_resource path="res://sceneObjects/Enemies/FanPlant.tscn" type="PackedScene" id=12]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=13]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=14]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=15]
@@ -78,10 +78,6 @@ albedo_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 [sub_resource type="BoxShape" id=28]
 resource_local_to_scene = true
 extents = Vector3( 2, 0.24, 1 )
-
-[sub_resource type="BoxShape" id=37]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="BoxShape" id=40]
 resource_local_to_scene = true
@@ -758,7 +754,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0.295455 )
 shape = SubResource( 28 )
 
 [node name="Mushroom3" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.1858, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4.1858, -1 )
 
 [node name="Mushroom2" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 1.1, -1 )
@@ -783,15 +779,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1, 28.3, 0 )
 
 [node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.8, 16.2, 0 )
-
-[node name="Furbo" parent="Viewport/level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 0 )
-
-[node name="CollisionShape" parent="Viewport/level/Furbo/FallthroughSolid" index="0"]
-shape = SubResource( 37 )
-
-[node name="landing" parent="Viewport/level/Furbo" index="7"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5, 0 )
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 0 )
@@ -846,6 +833,9 @@ anims/idle = SubResource( 55 )
 anims/isOpen = SubResource( 56 )
 anims/openUp = SubResource( 57 )
 
+[node name="FanPlant" parent="Viewport/level" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+
 [node name="Viewport2" parent="." instance=ExtResource( 23 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -877,7 +867,6 @@ __meta__ = {
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/Mushroom9"]
-[editable path="Viewport/level/Furbo"]
 [editable path="Viewport/level/Mimic"]
 [editable path="Viewport/level/Mimic/MimicNPC"]
 [editable path="Viewport/level/Mimic/MimicNPC/NPC TextBox"]

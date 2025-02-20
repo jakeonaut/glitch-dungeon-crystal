@@ -61,6 +61,7 @@ var NES_broom_palette = preload("res://assets/palettes/NES_base_broom_palette.pn
 onready var lifeUISound = get_node("LifeUISound")
 onready var doorSound = get_node("DoorSound")
 onready var glitchedDoorSound = get_node("GlitchedDoorSound")
+onready var gustSound = get_node("GustSound")
 var DELETE_ME = 2
 
 # GlitchForm variables
@@ -86,6 +87,7 @@ enum TilesetType {
     AUTUMN_FOREST,
     PRIMORDIAL_OOZE,
     TOMB,
+    FARM_HOUSE,
 }
 
 enum ItemState {
@@ -317,18 +319,18 @@ func resetMemory():
 
     memory["demo_mode"] = 0
     # if you've beaten the midpoint boss
-    memory["clean_crystals"] = 4
-    memory["priestess"] = 2
-    memory["glitch_world"] = 1
+    memory["clean_crystals"] = 0
+    memory["priestess"] = 0
+    memory["glitch_world"] = 0
     memory["glitched_grimoire"] = false
     memory["forget_me_not"] = false
     memory["glitched_grimoire2"] = false
     
 
     # crystal elder bosses
-    memory["baba_yaga_boss"] = 3
-    memory["angler_seaman_boss"] = 3
-    memory["dogu_matryoshka_boss"] = 3
+    memory["baba_yaga_boss"] = 0
+    memory["angler_seaman_boss"] = 0
+    memory["dogu_matryoshka_boss"] = 0
 
     # STORY OR LEVEL STATE
     memory["babushka_cat_story_hook"] = 2
