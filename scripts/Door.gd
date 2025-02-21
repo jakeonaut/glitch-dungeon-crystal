@@ -66,7 +66,6 @@ func getPlayer():
     player = level.player
   return player
 
-var prev_keys = 0
 func _ready():
   set_process(true)
   landing.visible = false

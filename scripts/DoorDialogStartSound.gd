@@ -17,12 +17,12 @@ func activateScript():
     door.key_type = global.KeyItem.NORMAL
 
   if door.is_locked:
+    print("i'm locked")
     if door.locked_to_monsters:
       npc.textBoxContainer.bbText = "•it won't open"
     elif door.key_type == global.KeyItem.NORMAL:
       var num_keys = global.memory["key"] if global.memory.has("key") else null
-      if door.prev_keys != num_keys and door.is_locked:
-        door.prev_keys = num_keys
+      if door.is_locked:
         npc.textBoxContainer.bbText = tr("NPC.Door.1") % str(door.num_keys_unlock)
         # if num_keys == null or num_keys == 0:
           
@@ -41,9 +41,10 @@ func activateScript():
         npc.textBoxContainer.bbText = "•magically sealed,\nneeds [wave]" + key_name + "[/wave]"
       else:
         npc.textBoxContainer.bbText = "•locked,\nneeds [wave]" + key_name + "[/wave]"
-      npc.textBoxContainer.setVars()
       npc.textBox.can_camera_zoom = false
     npc.textBoxContainer.setVars()
+  else:
+    print("i'm NOT locked")
         
 func isActive(_debug=false):
   # OVERRIDE ME... if you dare

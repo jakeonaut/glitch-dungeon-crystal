@@ -263,7 +263,7 @@ viewport_path = NodePath("Viewport2")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 12 )
 show_crt_effect = true
-tileset_type = 6
+tileset_type = 10
 has_spellbook_page = true
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 15 )]

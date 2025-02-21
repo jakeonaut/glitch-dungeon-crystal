@@ -150,17 +150,17 @@ func _process(delta):
                 else:
                     if is_digging_left or my_up_vector.x == 1:
                         digTiles(getTilesLeftOf(getLevelTiles(), 0.5, is_builder, is_builder), true)
-                        if not is_builder: digTiles(getTilesLeftOf(getFakeLevelTiles(), 0.5, is_builder, is_builder), false)
+                        if not is_builder: digTiles(getTilesLeftOf(getFakeLevelTiles(), 0.5, is_builder, is_builder), false, true)
                     elif my_up_vector.y == 1:
                         digTiles(getTilesBelow(getLevelTiles(), 0.1, is_builder, is_builder), true)
-                        if not is_builder: digTiles(getTilesBelow(getFakeLevelTiles(), 0.1, is_builder, is_builder), false)
+                        if not is_builder: digTiles(getTilesBelow(getFakeLevelTiles(), 0.1, is_builder, is_builder), false, true)
                     else:
                         if my_up_vector.y == -1:
                             digTiles(getTilesAbove(getLevelTiles(), 0.1, is_builder, is_builder), true)
-                            if not is_builder: digTiles(getTilesAbove(getFakeLevelTiles(), 0.1, is_builder, is_builder), false)
+                            if not is_builder: digTiles(getTilesAbove(getFakeLevelTiles(), 0.1, is_builder, is_builder), false, true)
                         elif my_up_vector.x == -1:
                             digTiles(getTilesRightOf(getLevelTiles(), 0.1, is_builder, is_builder), true)
-                            if not is_builder: digTiles(getTilesRightOf(getFakeLevelTiles(), 0.4, is_builder, is_builder), false)
+                            if not is_builder: digTiles(getTilesRightOf(getFakeLevelTiles(), 0.4, is_builder, is_builder), false, true)
                     has_dug = true
                     digSound.play()
                 mole_state_timer = 0
@@ -367,7 +367,7 @@ func unsmack():
     
 
 var SOFT_SAND_TOP_TILE = 275
-func digTiles(solidTiles, should_summon_clouds):
+func digTiles(solidTiles, should_summon_clouds, is_fake_tiles = false):
     if not is_builder:
         for i in range(solidTiles.size()):
             var coords = solidTiles[i]
@@ -413,6 +413,9 @@ func digTiles(solidTiles, should_summon_clouds):
             levelTiles.removeTile(Vector3(coords_b.x, coords_b.y, coords_b.z), permanently_alter_tiles)
         tiles_dug += 1
 
+    if is_fake_tiles:
+        return
+
     var TILE_WIDTH = getLevelTiles().cell_size.x
     var TILE_HEIGHT = getLevelTiles().cell_size.y
     if is_builder and level.player.checkSolidTilesOnMe():
@@ -443,6 +446,15 @@ func digTiles(solidTiles, should_summon_clouds):
             if is_digging_left or my_up_vector.x == 1: global_transform.origin.x -= TILE_WIDTH
             elif my_up_vector.y == 1:
                 global_transform.origin.y -= TILE_HEIGHT
+            elif my_up_vector.y == -1:
+                global_transform.origin.y += TILE_HEIGHT
+            elif my_up_vector.x == -1:
+                global_transform.origin.x += TILE_WIDTH
+    else:
+        if not is_builder:
+            if is_digging_left or my_up_vector.x == 1: global_transform.origin.x -= TILE_WIDTH
+            elif my_up_vector.y == 1:
+                on_ground = false
             elif my_up_vector.y == -1:
                 global_transform.origin.y += TILE_HEIGHT
             elif my_up_vector.x == -1:

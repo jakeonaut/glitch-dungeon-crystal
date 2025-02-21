@@ -399,7 +399,7 @@ shader_param/target_palette = ExtResource( 4 )
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 11 )
 show_crt_effect = true
-tileset_type = 2
+tileset_type = 7
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 22 )]
 

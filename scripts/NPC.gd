@@ -32,8 +32,7 @@ onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("Fallthr
 onready var fallthroughSolidCollisionShape = get_node("FallthroughSolid/CollisionShape") if has_node("FallthroughSolid/CollisionShape") else null
 onready var smallInteractionShape = get_node("SmallInteractionArea/CollisionShape") if has_node("SmallInteractionArea/CollisionShape") else null
 onready var smallerInteractionArea = get_node("SmallerInteractionArea") if has_node("SmallerInteractionArea") else null
-onready var exclamationSprite = get_node("ExclamationSprite")
-onready var exclamationAniPlayer = get_node("ExclamationSprite/AnimationPlayer")
+onready var exclamationAniPlayer = get_node("ExclamationSprite/AnimationPlayer") if has_node("ExclamationSprite") else null
 
 var spawnGlitchEffectRes = preload("res://sceneObjects/SpawnGlitchEffect.tscn")
 var glitchEnemyRes = preload("res://sceneObjects/Enemies/GlitchEnemy.tscn")
