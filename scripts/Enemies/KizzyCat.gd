@@ -1,18 +1,13 @@
 extends "GlitchEnemy.gd"
 
-onready var landing = get_node("landing")
 onready var poofSound = get_node("Sounds/PoofSound")
 onready var reassembleSound = get_node("Sounds/ReassembleSound")
-var basicShroomEnemyRes = preload("res://sceneObjects/Enemies/BasicShroomEnemy.tscn")
-var landing_position = null
 
 func _ready():
   smack_time_limit = 5
   smallInteractionArea.add_to_group("no_pushems")
-  landing.visible = false
   yield(TempTimer.idle_frame(self), "timeout")
   yield(TempTimer.idle_frame(self), "timeout")
-  landing_position = landing.global_transform.origin
 
 func setAsParent(_owner):
   walk_direction.x = -1
@@ -43,12 +38,6 @@ func _process(delta):
       if not has_teleported:
         # TODO
         reassembleSound.play()
-        # self.global_transform.origin = landing_position
-        # landing.global_transform.origin = lastPosition
-        # var temp_rotation_degrees = mySprite.rotation_degrees.z
-        # mySprite.rotation_degrees.z = landing.rotation_degrees.z
-        # landing.rotation_degrees.z = temp_rotation_degrees
-        # landing_position = lastPosition
         has_teleported = true
         for _i in range(1):
           spawnASpore(self.global_transform.origin, true)
@@ -92,21 +81,11 @@ func getSmacked(broom_origin = null, silently = false):
   pauseSelf = true
   # on_ground = true
   notDieSound.play()
+  level.flipGravity()
 
-  # if my_shroom != null and my_shroom.get_ref() != null:
-  #   my_shroom.get_ref().queue_free()
-  #   my_shroom = null
-
-  # var babyShroom = basicShroomEnemyRes.instance()
-  # if broom_origin != null and broom_origin.x > self.global_transform.origin.x:
-  #   babyShroom.walk_direction.x = -1
-  # else:
-  #   babyShroom.walk_direction.x = 1
-  # level.add_child(babyShroom)
-  # babyShroom.global_transform.origin = self.global_transform.origin
-  # # if global.currLevelZone == "gd1AbstractSuburbs":
-  # #   babyShroom.is_infected = true
-  # my_shroom = weakref(babyShroom)
+func passiveActivate(_delta, is_player):
+  if is_player:
+    getSmacked()
 
 # @override
 func unsmack():
