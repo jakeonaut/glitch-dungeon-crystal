@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -12,7 +12,7 @@
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=10]
 [ext_resource path="res://sceneObjects/QuestionBlock.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=12]
-[ext_resource path="res://sceneObjects/KizzyCat.tscn" type="PackedScene" id=14]
+[ext_resource path="res://sceneObjects/BrothCauldron.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=15]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=16]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=17]
@@ -204,372 +204,6 @@ tracks/1/keys = {
 resource_local_to_scene = true
 extents = Vector3( 0.25, 0.75, 1 )
 
-[sub_resource type="BoxShape" id=68]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
-
-[sub_resource type="Animation" id=69]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0.8 ) ]
-}
-
-[sub_resource type="Animation" id=70]
-resource_name = "broomSmackGlitch"
-length = 0.4
-step = 0.01
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.06, 0.11, 0.21, 0.25, 0.29, 0.31, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1.5, 0.6, 1 ), Vector3( 1, 1, 1 ), Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.05, 0.06, 0.11, 0.21, 0.25, 0.29, 0.31, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.015, 0.8 ), Vector3( 0, -0.224, 0.8 ), Vector3( 0, -0.489, 0.8 ), Vector3( 0, -0.021, 0.8 ), Vector3( 0, 0.19, 0.8 ), Vector3( 0, -0.021, 0.8 ), Vector3( 0, -0.224, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-
-[sub_resource type="Animation" id=71]
-resource_name = "bumpBotLeft"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( -0.186, -0.12, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=72]
-resource_name = "bumpBotRight"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0.281, -0.12, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=73]
-resource_name = "bumpCeil"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0.086, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-
-[sub_resource type="Animation" id=74]
-resource_name = "bumpLeft"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( -0.25, 0.241, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=75]
-resource_name = "bumpRight"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0.281, 0.241, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=76]
-resource_name = "fallFlat"
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.09, 0.1, 0.15, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1.5, 0.6, 1 ), Vector3( 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.09, 0.1, 0.15, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.015, 0.8 ), Vector3( 0, -0.276, 0.8 ), Vector3( 0, -0.489, 0.8 ), Vector3( 0, -0.021, 0.8 ) ]
-}
-
-[sub_resource type="Animation" id=77]
-length = 0.06
-step = 0.03
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.06 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 1.1, 0.9, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.06 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.127, 0.8 ) ]
-}
-
-[sub_resource type="Animation" id=78]
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0.17, 0.8 ), Vector3( 0, 0.021, 0.8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0.9, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=79]
-length = 0.6
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, -0.255, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-
-[sub_resource type="Animation" id=80]
-resource_name = "landSoft"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1.1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, -0.153, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-
-[sub_resource type="Animation" id=81]
-resource_name = "wakeup"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, 0.085, 0.8 ), Vector3( 0, 0.159, 0.8 ), Vector3( 0, 0.234, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 0.9, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
-}
-
 [sub_resource type="BoxShape" id=82]
 resource_local_to_scene = true
 extents = Vector3( 2, 0.24, 1 )
@@ -743,31 +377,6 @@ spawned_object_path = "res://sceneObjects/Enemies/BasicShroomEnemy.tscn"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44, -2, 0 )
 spawned_object_path = "res://sceneObjects/Enemies/BasicShroomEnemy.tscn"
 
-[node name="Furbo" parent="Viewport/level" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, -2, 0 )
-grav = 0
-
-[node name="CollisionShape" parent="Viewport/level/Furbo/FallthroughSolid" index="0"]
-shape = SubResource( 68 )
-
-[node name="landing" parent="Viewport/level/Furbo" index="7"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 0 )
-
-[node name="BounceAnimationPlayer" parent="Viewport/level/Furbo" index="8"]
-anims/RESET = SubResource( 69 )
-anims/broomSmackGlitch = SubResource( 70 )
-anims/bumpBotLeft = SubResource( 71 )
-anims/bumpBotRight = SubResource( 72 )
-anims/bumpCeil = SubResource( 73 )
-anims/bumpLeft = SubResource( 74 )
-anims/bumpRight = SubResource( 75 )
-anims/fallFlat = SubResource( 76 )
-anims/jumpSquat = SubResource( 77 )
-anims/jumpStart = SubResource( 78 )
-anims/land = SubResource( 79 )
-anims/landSoft = SubResource( 80 )
-anims/wakeup = SubResource( 81 )
-
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 7, 0 )
 
@@ -776,6 +385,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 5, 0 )
 
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 14.1452, 0 )
+
+[node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 17.1452, 0 )
 
 [node name="GlitchEnemy5" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 15.1452, 0 )
@@ -927,6 +539,10 @@ shape = SubResource( 82 )
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -3, 0 )
 
+[node name="BrothCauldron" parent="Viewport/level" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -3.84441, 0 )
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods3.tscn"
+
 [node name="Viewport2" parent="." instance=ExtResource( 20 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -960,7 +576,6 @@ material = SubResource( 44 )
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
-[editable path="Viewport/level/Furbo"]
 [editable path="Viewport/level/Mushroom4"]
 [editable path="Viewport/level/Mushroom5"]
 [editable path="Viewport/level/Mushroom6"]

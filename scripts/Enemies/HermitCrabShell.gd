@@ -122,9 +122,9 @@ func tumbleFall(direction_vector, is_corrupted = false):
   linear_velocity.x = x_val
   lv.x = x_val
 
-  vv = jump_val
   linear_velocity.y = jump_val
   lv.y = jump_val
+  vv = up.dot(lv)
   fall_timer = -999
 
 # @ override
@@ -244,9 +244,9 @@ func getSmacked(broom_origin = null, silently = false):
     elif (broom_origin != null and broom_origin.x > self.global_transform.origin.x) or (broom_origin == null and level.player.mySprite.flip_h):
       tumbleFall(Vector2(-1, 0), false)
     var jump_val = 10
-    vv = jump_val
     linear_velocity.y = jump_val
     lv.y = jump_val
+    vv = up.dot(lv)
   if is_extra_bouncy:
     behavior_jumping = true
   return .getSmacked(broom_origin, silently)

@@ -154,7 +154,7 @@ func passiveActivate(_delta, is_player):
       var jump_val = 14
       getPlayer().linear_velocity.y = jump_val
       getPlayer().lv.y = jump_val
-      getPlayer().vv = jump_val
+      getPlayer().vv = getPlayer().up.dot(jump_val)
   else:
     getPlayer().has_sweeped_glitch = true
 

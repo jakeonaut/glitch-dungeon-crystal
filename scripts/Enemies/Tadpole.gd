@@ -21,8 +21,8 @@ func tryDieToOffscreenCamera(_delta):
 func actuallyGoBackToPlayer():
   self.global_transform.origin = level.player.global_transform.origin
   self.lv.y = jump_force
-  self.vv = jump_force
   self.linear_velocity.y = jump_force
+  self.vv = up.dot(self.lv)
   walk_direction.x = randi() % 2
   if walk_direction.x == 0: walk_direction.x = -1
   

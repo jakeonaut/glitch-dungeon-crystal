@@ -92,9 +92,9 @@ func reelItIn(delta):
   hookInteractionArea.global_transform.origin.y += vv * delta
   var jump_val = 10
   gameMover.on_ground = false
-  gameMover.vv = jump_val
   gameMover.linear_velocity.y = jump_val
   gameMover.lv.y = jump_val
+  gameMover.vv = gameMover.up.dot(gameMover.lv)
   gameMover.hv = Vector3(0, 0, 0)
   gameMover.linear_velocity.x = 0
   gameMover.lv.x = 0

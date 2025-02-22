@@ -544,7 +544,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, -1 )
 
 [node name="BrothCauldron" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 8.39026, 0 )
-path = "res://levels/EndlessFantasy/gd1ToxicJungle/001pt5_StreetlightManifesto.tscn"
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/006SafariZone.tscn"
 
 [node name="FanPlant" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -3, 0 )

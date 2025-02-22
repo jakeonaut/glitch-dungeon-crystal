@@ -277,7 +277,7 @@ func miniUpwardGust(reverse_immediately = true):
     if reverse_immediately:
       linear_velocity.y = 1
       lv.y = 1
-      vv = 1
+      vv = up.dot(lv)
     else:
       linear_velocity.y /= 2
       lv.y /= 2
@@ -449,9 +449,15 @@ func _process(delta):
     broomSpriteVisible.get_material_override().set_shader_param("opacity", spriteOpacity)
   if "nterDoor" in aniPlayer.assigned_animation:
     spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x
-    spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y + 1.685 if aniPlayer.assigned_animation == "preEnterDoor" else self.global_transform.origin.y + 1.5
+    if grav > 0:
+      spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y + 1.685 if aniPlayer.assigned_animation == "preEnterDoor" else self.global_transform.origin.y + 1.5
+    else:
+      spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y - 1.685 if aniPlayer.assigned_animation == "preEnterDoor" else self.global_transform.origin.y - 1.5
   else:
-    spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y + 1.935
+    if grav > 0:
+      spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y + 1.935
+    else:
+      spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y - 1.935
     if mySprite.flip_h:
       spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x - 0.25
     else:
@@ -637,7 +643,7 @@ func properlyApplyTransformation():
     getCurseInfected()
 
 var bubblePopResistanceTimer = 0
-var bubblePopResistanceTimeLimit = 5
+var bubblePopResistanceTimeLimit = 2
 func processBubbleLogic(delta):
   bubbleSprite.visible = transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE
   if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
@@ -808,8 +814,8 @@ func tryDieToOffscreenCamera(_delta):
         fastStepSound.stop()
         getSmacked()
         transformation = TransformationState.UNDERGROUND
-      elif grav < 0:
-        level.flipGravity(1)
+      # elif grav < 0:
+      #   level.flipGravity(1)
   if global_transform.origin.y > getGameCamera().topmost_y and DEATH_MARGIN == 1:
     glitchTilesAroundMe(-2.5) # just show the player where they are...
 
@@ -1528,6 +1534,7 @@ func processMoleLogic(delta):
       self.global_transform.origin += dig_direction * 0.5
       if dig_direction != null and dig_direction.y > 0:
         should_magic_jump = true
+        # might be weird with gravity?? should just disable with gravity?? idk
         self.vv = -2
         self.camera_target_y_pos = self.global_transform.origin.y
         self.on_ground = false
@@ -1973,9 +1980,9 @@ func tumbleFall(direction_vector, is_corrupted = false):
   linear_velocity.x = x_val
   lv.x = x_val
 
-  vv = jump_val
   linear_velocity.y = jump_val
   lv.y = jump_val
+  vv = up.dot(lv)
 
   yield(TempTimer.idle_frame(self), "timeout")
   fall_timer = fall_time_max - 5

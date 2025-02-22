@@ -45,7 +45,7 @@ func landed():
     on_ground = false
     linear_velocity.y = -true_terminal_vel
     lv.y = -true_terminal_vel
-    vv = -true_terminal_vel
+    vv = up.dot(lv)
 
   var tiles_underfoot = getTilesBelow(getLevelTiles())
   for tile_coords in tiles_underfoot:
@@ -66,9 +66,9 @@ func getSmacked(broom_origin = null, silently = false):
     elif (broom_origin != null and broom_origin.x > self.global_transform.origin.x) or (broom_origin == null and level.player.mySprite.flip_h):
       walk_direction.x = -1
     var jump_val = 5
-    vv = jump_val
     linear_velocity.y = jump_val
     lv.y = jump_val
+    vv = up.dot(lv)
   return .getSmacked(broom_origin, silently)
 
 

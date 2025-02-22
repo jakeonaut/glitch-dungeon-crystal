@@ -3,6 +3,7 @@ extends "Sprite.gd"
 var sparkle_fade_timer = 0
 var sparkle_fade_time_limit = 1
 var multiplier = 1
+var grav_multiplier = 1
 
 func _ready():
     var material = get_material_override().duplicate()
@@ -18,7 +19,7 @@ func _process(delta):
         pass
 
     var opacity = get_material_override().get_shader_param("opacity")
-    global_transform.origin.y -= delta * (multiplier*(1 - opacity) + 1)
+    global_transform.origin.y -= (delta * (multiplier*(1 - opacity) + 1))*grav_multiplier
     sparkle_fade_timer += (delta * 22)
     if sparkle_fade_timer >= sparkle_fade_time_limit:
         sparkle_fade_timer = 0    

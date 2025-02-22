@@ -18,7 +18,7 @@ func setAsParent(_owner):
     walk_direction.x = -1
   linear_velocity.y = 5
   lv.y = 5
-  vv = 5
+  vv = up.dot(lv)
   # if level.player.nesting_doll_state == global.NestingDoll.GRANDMA:
   #   is_infected = true
   # else:

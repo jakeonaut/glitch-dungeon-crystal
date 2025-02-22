@@ -251,12 +251,20 @@ func adjustStuffForNestingDolls():
 func spawnOneSparkle(xdiff, above_the_head = false):
   var newSparkle = sparkleRes.instance()
   level.add_child(newSparkle)
+  if grav < 0:
+    newSparkle.grav_multiplier = -1
   newSparkle.global_transform.origin = self.global_transform.origin
   newSparkle.global_transform.origin.x -= xdiff - (hv.x / 20)
-  if above_the_head:
-    newSparkle.global_transform.origin.y += 2.3
+  if grav > 0:
+    if above_the_head:
+      newSparkle.global_transform.origin.y += 2.3
+    else:
+      newSparkle.global_transform.origin.y -= 1.3
   else:
-    newSparkle.global_transform.origin.y -= 1.3
+    if above_the_head:
+      newSparkle.global_transform.origin.y -= 2.3
+    else:
+      newSparkle.global_transform.origin.y += 1.3
   newSparkle.global_transform.origin.z -= 5.0
   newSparkle.get_material_override().set_shader_param(
     "target_palette", 
@@ -289,7 +297,7 @@ func spawnSparkles(delta, above_the_head = false):
   #       blink_time_limit = 20
   #       is_blinked = false
 
-onready var spellbookGlitchSprite = get_node("SpriteContainer/SpellbookGlitchSprite")
+onready var spellbookGlitchSprite = get_node("SpriteContainer/InnerSpriteContainer/SpellbookGlitchSprite")
 func normalGlitch():
   glitch_form = global.GlitchForm.NORMAL
   level.normalGlitch()

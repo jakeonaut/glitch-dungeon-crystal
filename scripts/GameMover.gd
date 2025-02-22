@@ -207,6 +207,9 @@ func _process(delta):
 
   if (global.pauseGame and not can_i_personally_ignore_game_pause) or pauseSelf: return
   if jump_force == null: jump_force = 16
+  # if (jump_force > 0 and grav < 0) or (jump_force < 0 and grav > 0):
+  #   jump_force *= -1
+
   if has_just_glitch_swapped:
     has_just_glitch_swapped_timer += (delta*11)
     if has_just_glitch_swapped_timer >= has_just_glitch_swapped_time_limit:
@@ -359,9 +362,9 @@ func processPhysics(delta):
   prev_glitch_form = glitch_form
 
 func resetVelocity():
+  linear_velocity.y = 0
+  lv.y = 0
   vv = 0
-  linear_velocity.y = vv
-  lv.y = vv
   hv = Vector3(0, 0, 0)
   dir = Vector3(0, 0, 0)
   linear_velocity.x = 0
@@ -495,8 +498,6 @@ func applyTerminalVelocity(_delta):
 
   if vv < -terminal_vel: #  or (glitch_form == global.GlitchForm.LADDER and vv <= 0 and (aniPlayer == null or aniPlayer.assigned_animation != "sinkInSand")):
     vv = -terminal_vel
-  if grav < 0 and vv > terminal_vel:
-    vv = terminal_vel
 
   if (glitch_form == global.GlitchForm.FLOOR or not should_collide_floor) and on_ground:
     vv = 0
@@ -901,6 +902,9 @@ func addJumpSmokeCloud(flip_flip_h = false):
     newSmokeCloud.flip_h = not mySprite.flip_h
   else:
     newSmokeCloud.flip_h = mySprite.flip_h
+  if grav < 0:
+    newSmokeCloud.flip_v = true
+    newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y + 0.24
   newSmokeCloud.get_material_override().set_shader_param("target_palette", level.current_sprite_palette)
   newSmokeCloud.is_really_glitchy = is_really_glitchy
 

@@ -55,21 +55,21 @@ func otherPassiveActivate(delta, gameMover):
   if getDirection().y != 0:
     var v_sign = 1
     var mult = 6
-    if gameMover.vv > 4:
+    if abs(gameMover.vv) > 4:
       mult = 2
     if getDirection().y == -1:
       v_sign = -1
-    gameMover.vv += (v_sign*mult*delta*22)
+    gameMover.lv.y += (v_sign*mult*delta*22)
     if gameMover.on_ground:
-      gameMover.vv = v_sign*2
+      gameMover.lv.y = v_sign*2
       gameMover.global_transform.origin.y += v_sign*0.5
     elif gameMover.pressingJump():
-      gameMover.vv = v_sign*2
+      gameMover.lv.y = v_sign*2
     gameMover.on_ground = false
     gameMover.truly_on_ground = false
     gameMover.was_on_ground = false
-    gameMover.lv.y = gameMover.vv
-    gameMover.linear_velocity.y = gameMover.vv
+    gameMover.linear_velocity.y = gameMover.lv.y
+    gameMover.vv = gameMover.up.dot(gameMover.lv)
     if gameMover.has_method("getFishyCured"): # I'M CHEATING!!!!
       gameMover.camera_target_y_pos = gameMover.global_transform.origin.y
     gameMover.was_fallthrough_area_collision_triggered = false

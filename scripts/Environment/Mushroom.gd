@@ -45,7 +45,7 @@ func fallthroughCollisionActivate(possible_game_mover):
             possible_game_mover.magicJump()
             getPlayer().linear_velocity.y = jump_val
             getPlayer().lv.y = jump_val
-            getPlayer().vv = jump_val
+            getPlayer().vv = getPlayer().up.dot(getPlayer().lv)
             # getPlayer().physics_vars.applyHalfGrav = true
             # getPlayer().physics_vars.applyHalfGravTimer = 3
             if is_mini:

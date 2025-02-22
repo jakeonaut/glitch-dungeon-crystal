@@ -571,28 +571,8 @@ func tryToSpawnEyeSpore(delta):
 
 var crow_stream_spawn_timer = 0
 var crow_stream_spawn_time_limit = 10
-func tryToSpawnCrowStream(delta):
+func tryToSpawnCrowStream(_delta):
     return
-
-    var CROW_SPEED = 10
-    if num_hits >= 2:
-        crow_stream_spawn_timer += (delta*11)
-        if crow_stream_spawn_timer >= crow_stream_spawn_time_limit:
-            crow_stream_spawn_timer = 0
-            var crowSpawner = level.get_node("CrowSpawner")
-            var newCrow = crowRes.instance()
-            newCrow.behavior_directional_bullet = true
-            newCrow.bullet_direction_vector = Vector3(CROW_SPEED, 0, 0)
-            newCrow.behavior_phase_through_walls = true
-            newCrow.crow_state = newCrow.CrowState.SWOOP_DIVE
-            crowSpawner.add_child(newCrow)
-            newCrow.global_transform.origin = crowSpawner.global_transform.origin
-            newCrow.global_transform.origin.x += 1
-            newCrow.secretAniPlayer.stop()
-            newCrow.secretAniPlayer.clear_queue()
-            newCrow.secretAniPlayer.play("flyAway")
-            # newCrow.reenemize(true)
-            newCrow.behavior_phase_through_walls = true
 
 func tryPlayBawkSound():
     pass

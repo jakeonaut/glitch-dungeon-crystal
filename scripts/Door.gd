@@ -464,7 +464,11 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
       if getPlayer().grav < 0:
         getPlayer().global_transform.origin.y += 1
     else:
-      getPlayer().global_transform.origin.y += 1
+      if getPlayer().grav < 0:
+        getPlayer().global_transform.origin.y -= 1
+      else:
+        getPlayer().global_transform.origin.y += 1
+
     if getPlayer().summonedBroom:
       getPlayer().summonedBroom.visible = false
       getPlayer().broomStop()

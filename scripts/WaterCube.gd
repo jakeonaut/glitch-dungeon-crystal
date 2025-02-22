@@ -109,8 +109,8 @@ func passiveActivate(delta, is_player):
     else:
       value = level.player.lv.y - (delta * 11)
     level.player.lv.y = value
-    level.player.vv = value
     level.player.linear_velocity.y = value
+    level.player.vv = level.player.up.dot(level.player.lv)
       
 func justStopPassiveActivate():
   if not getPlayer().is_touching_water and can_splash:

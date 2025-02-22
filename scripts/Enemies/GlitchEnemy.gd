@@ -564,15 +564,17 @@ func flipWalkingDirection():
 var sine_delta = 4
 var sine_velocity = 16
 func doSineMovementBehavior(delta):
+    var temp_vv = 0
     if behavior_sine_movement:
         grav = 0
         if is_smacked and should_smack_pause_me:
-            vv = 0
+            temp_vv = 0
         else:
-            vv = sin(sine_angle)*sine_velocity
+            temp_vv = sin(sine_angle)*sine_velocity
             sine_angle += (delta*sine_delta)
-        linear_velocity.y = vv
-        lv.y = vv
+        linear_velocity.y = temp_vv
+        lv.y = temp_vv
+        vv = up.dot(lv)
     
 func doVerticalWalkingBehavior():
     if walk_direction.y == 0:

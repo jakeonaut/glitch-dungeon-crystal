@@ -59,9 +59,9 @@ func restorePlayer():
   gameMover.lv.y = 0
   
   var jump_val = 5
-  gameMover.vv = jump_val
   gameMover.linear_velocity.y = jump_val
   gameMover.lv.y = jump_val
+  gameMover.vv = gameMover.up.dot(gameMover.lv)
   hookTarget = null
   if gameMover.physics_state == gameMover.PhysicsState.GLITCH_DYING:
     gameMover.hv = Vector3(0, 0, 0)

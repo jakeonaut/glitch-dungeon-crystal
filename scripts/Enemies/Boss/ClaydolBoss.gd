@@ -499,7 +499,7 @@ func spawnWorm():
     var jump_pop_val = 5
     worm.linear_velocity.y = jump_pop_val
     worm.lv.y = jump_pop_val
-    worm.vv = jump_pop_val
+    worm.vv = worm.up.dot(worm.lv)
     level.add_child(worm)
     worm.global_transform.origin.x = self.global_transform.origin.x
     worm.global_transform.origin.y = self.global_transform.origin.y + 13

@@ -16,8 +16,8 @@ var is_stone = false
 var teleporting = false
 var has_teleported = false
 var teleport_timer = 0
-var teleport_time_limit = 15
-var teleport_time_limit2 = 30
+var teleport_time_limit = 30
+var teleport_time_limit2 = 45
 func _process(delta):
 
   if linear_velocity.y > 0:
@@ -44,6 +44,7 @@ func _process(delta):
     if teleport_timer >= teleport_time_limit2:
       has_ever_been_smacked = false
       teleporting = false
+      pauseSelf = false
       visible = true
 
 
@@ -81,7 +82,10 @@ func getSmacked(broom_origin = null, silently = false):
   pauseSelf = true
   # on_ground = true
   notDieSound.play()
-  level.flipGravity()
+  level.player.gravitySound.pitch_scale = rand_range(0.8, 1.2)
+  level.player.gravitySound.play()
+  level.player.glitchTickle()
+  level.flipGravity(-1 * (level.player.grav / abs(level.player.grav)))
 
 func passiveActivate(_delta, is_player):
   if is_player:
