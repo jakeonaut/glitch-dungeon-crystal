@@ -64,7 +64,7 @@ func otherPassiveActivate(delta, gameMover):
       gameMover.lv.y = v_sign*2
       gameMover.global_transform.origin.y += v_sign*0.5
     elif gameMover.pressingJump():
-      gameMover.lv.y = v_sign*2
+      gameMover.lv.y += (v_sign*mult*delta*22)
     gameMover.on_ground = false
     gameMover.truly_on_ground = false
     gameMover.was_on_ground = false

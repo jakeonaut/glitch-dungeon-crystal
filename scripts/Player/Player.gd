@@ -407,6 +407,8 @@ func _process(delta):
   # is_turn_based = malware_infected and not physics_state == PhysicsState.BEING_TOSSED
   should_always_stop_walking_immediately = malware_infected
 
+  if glitch_form == global.GlitchForm.INVISIBLE and global.memory["broom"]:
+    global.memory["broom"] = false
   processSpriteRenderLogic(delta)
   processBroomRenderLogic(delta)
   processBagRenderLogic(delta)
@@ -874,6 +876,12 @@ func tryDieToOffscreenCamera(_delta):
           global_transform.origin.y = getGameCamera().topmost_y + DEATH_MARGIN
         if global.roomEdgeVector == Vector3(0, 1, 0):
           global_transform.origin.y = getGameCamera().botmost_y - DEATH_MARGIN
+
+        if level.weird_pacman_wrapping:
+          gravitySound.pitch_scale = rand_range(0.8, 1.2)
+          gravitySound.play()
+          glitchTickle()
+          level.flipGravity(-1 * (grav / abs(grav)))
         global.roomEdgeVector = null
         return
       global.roomEdgeVector = null

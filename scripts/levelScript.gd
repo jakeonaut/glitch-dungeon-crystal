@@ -39,6 +39,7 @@ export var display_title = "???"
 export var doesnt_have_broom = false
 var has_room_initialized = false
 export var pacman_wrapping = false
+export var weird_pacman_wrapping = false
 var malwareDragonflyRes = preload("res://sceneObjects/Buggies/MalwareDragonfly.tscn")
 
 var gameFrameBackgroundRes = preload("res://sceneObjects/GameFrameBackground.tscn")
@@ -931,8 +932,8 @@ func processBossHealth(delta):
   elif whichBoss.MAX_NUM_HITS == 3:
     uiLayer.bossLifeSprite1.visible = whichBoss.num_hits < whichBoss.MAX_NUM_HITS and (animate_life_timer >= animate_life_time_limit*4)
     uiLayer.bossLifeSprite2.visible = whichBoss.num_hits <= 1 and (animate_life_timer >= animate_life_time_limit*5)
-    uiLayer.bossLifeSprite3.visible = whichBoss.num_hits == 0 and (animate_life_timer >= animate_life_time_limit*6)
-    uiLayer.bossLifeSprite4.visible = false
+    uiLayer.bossLifeSprite3.visible = whichBoss.num_hits <= 0 and (animate_life_timer >= animate_life_time_limit*6)
+    uiLayer.bossLifeSprite4.visible = false # whichBoss.num_hits == 0 and (animate_life_timer >= animate_life_time_limit*7)
     uiLayer.bossLifeSprite5.visible = false
     uiLayer.bossLifeSprite6.visible = false
 

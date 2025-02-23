@@ -34,6 +34,7 @@ func _process(delta):
   
   delta = delta * global.time_dilation_multiplier
 
+  windGust.is_active = is_fan_spinning
   should_collide_horizontally = true
 
   if chicken_state == ChickenState.IDLE:
@@ -126,7 +127,6 @@ func getSmacked(broom_origin = null, silently = false):
   else:
     is_fan_spinning = true
     global.gustSound.play()
-  windGust.is_active = is_fan_spinning
 
 func actuallyDieToOffscreenCamera(_delta):
     queue_free()

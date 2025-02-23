@@ -773,7 +773,7 @@ func broomStop():
   invisible_glitch_walk_speed = remembered_invisible_glitch_walk_speed
   if transformation != TransformationState.FISHY:
     if has_sweeped_glitch and global.memory["broom_double_jump"]:
-      was_just_on_ground_timer = -8
+      was_just_on_ground_timer = was_just_on_ground_time_limit
     if linear_velocity.y < 0:
       linear_velocity.y = 0
     if jump_press_timer < jump_press_broom_time_limit or should_magic_jump:

@@ -5,6 +5,7 @@ onready var aniPlayer = get_node("AnimationPlayer")
 onready var appearSound = get_node("AppearSound")
 onready var popSound1 = get_node("PopSound")
 onready var popSound2 = get_node("PopSound2")
+onready var popSound3 = get_node("PopSound3")
 onready var purifyArea = get_node("PurifyArea")
 onready var purifyShape = get_node("PurifyArea/CollisionShape")
 var my_original_pos = null
@@ -140,7 +141,9 @@ func passiveActivate(_delta, is_player):
     return
 
   if getPlayer().transformation == getPlayer().TransformationState.FISHY:
-    return  
+    return
+  popSound3.pitch_scale = rand_range(1.0, 1.9)
+  popSound3.play()
   if not getPlayer().pressingDown() and (getPlayer().linear_velocity.y <= 0 or getPlayer().on_ground):
     getPlayer().camera_target_y_pos = getPlayer().global_transform.origin.y
     getPlayer().was_just_on_ground_timer = -8

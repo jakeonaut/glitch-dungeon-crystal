@@ -36,6 +36,7 @@ enum BossPhase {
     DEFEATED,
     ABOUT_TO_CRASH,
 }
+var has_crashed = false
 var boss_phase = BossPhase.ASLEEP
 var prev_boss_phase = BossPhase.ASLEEP
 var boss_phase_should_crash = 0
@@ -68,6 +69,7 @@ func getMyVariable():
 func getHurt():
     am_i_hurt = true
     num_hits += 1
+    RUN_COUNT_MAX += 1
     if num_hits >= MAX_NUM_HITS:
         level.saveTheGame()
         
@@ -82,7 +84,7 @@ func getHurt():
         global.pauseGame = true
         global.shouldRenderAsCinematic = true
         return
-    if num_hits >= 2 and boss_phase_should_crash == 0:
+    if num_hits >= 2 and boss_phase_should_crash == 0 and not has_crashed:
         boss_phase_should_crash = 1
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
@@ -121,22 +123,22 @@ func _process(delta):
         tryToSpawnCrowStream(delta)
         if not secretAniPlayer.is_playing():
             prev_boss_phase = boss_phase
-            boss_phase = BossPhase.SINGING
-            singing_counter = 0
-            secretAniPlayer.queue("idle")
-            secretAniPlayer.queue("idleWalk")
-            secretAniPlayer.queue("idleWalk")
-            secretAniPlayer.queue("idle")
-            secretAniPlayer.queue("flipLeftToRight")
-            secretAniPlayer.queue("idle")
-            secretAniPlayer.queue("idleWalk")
-            secretAniPlayer.queue("idleWalk")
-            secretAniPlayer.queue("idle")
-            secretAniPlayer.queue("flipRightToLeft")
-            # boss_phase = BossPhase.RUN_AROUND
-            # secretAniPlayer.stop()
-            # secretAniPlayer.clear_queue()
-            # secretAniPlayer.play("run")
+            # boss_phase = BossPhase.SINGING
+            # singing_counter = 0
+            # secretAniPlayer.queue("idle")
+            # secretAniPlayer.queue("idleWalk")
+            # secretAniPlayer.queue("idleWalk")
+            # secretAniPlayer.queue("idle")
+            # secretAniPlayer.queue("flipLeftToRight")
+            # secretAniPlayer.queue("idle")
+            # secretAniPlayer.queue("idleWalk")
+            # secretAniPlayer.queue("idleWalk")
+            # secretAniPlayer.queue("idle")
+            # secretAniPlayer.queue("flipRightToLeft")
+            boss_phase = BossPhase.RUN_AROUND
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            secretAniPlayer.play("run")
             run_counter = 0
             am_i_hurt = false
             global.pauseGame = false
@@ -181,43 +183,48 @@ func _process(delta):
             secretAniPlayer.queue("idleWalk")
             secretAniPlayer.queue("idle")
             secretAniPlayer.queue("flipRightToLeft")
+            # else:
+            #     run_counter = 0
+            #     secretAniPlayer.queue("flipLeftToRight")
+            #     secretAniPlayer.queue("run")
+            #     prev_boss_phase = boss_phase
+            #     boss_phase = BossPhase.RUN_AROUND
+            #     landingIndex = 11
     elif boss_phase == BossPhase.SINGING:
         if not secretAniPlayer.is_playing():
             singing_counter += 1
             if singing_counter >= singing_count_max:
-                spawnWeakEye()
-                for noteRef in noteRefArray:
-                    if noteRef != null and noteRef.get_ref():
-                        noteRef.get_ref().behavior_walk_flip = false
-                noteRefArray = []
-                singing_counter = 0
-                prev_boss_phase = boss_phase
-                boss_phase = BossPhase.IDLE
-                secretAniPlayer.queue("idle")
-                secretAniPlayer.queue("idle")
-                secretAniPlayer.queue("idle")
-                secretAniPlayer.queue("idle")
-                secretAniPlayer.queue("idle")
-                secretAniPlayer.queue("idle")
-            else:
-                secretAniPlayer.queue("idle")
-                secretAniPlayer.queue("idleWalk")
-                secretAniPlayer.queue("idleWalk")
-                secretAniPlayer.queue("idle")
-                secretAniPlayer.queue("flipLeftToRight")
-                secretAniPlayer.queue("idle")
-                secretAniPlayer.queue("idleWalk")
-                secretAniPlayer.queue("idleWalk")
-                secretAniPlayer.queue("idle")
-                secretAniPlayer.queue("flipRightToLeft")
+                if num_hits == 0:
+                    spawnWeakEye()
+                    for noteRef in noteRefArray:
+                        if noteRef != null and noteRef.get_ref():
+                            noteRef.get_ref().behavior_walk_flip = false
+                    noteRefArray = []
+                    singing_counter = 0
+                    prev_boss_phase = boss_phase
+                    boss_phase = BossPhase.IDLE
+                    secretAniPlayer.queue("idle")
+                    secretAniPlayer.queue("idle")
+                    secretAniPlayer.queue("idle")
+                    secretAniPlayer.queue("idle")
+                    secretAniPlayer.queue("idle")
+                    secretAniPlayer.queue("idle")
+                else:
+                    run_counter = 0
+                    boss_phase = BossPhase.RUN_AROUND
+                    secretAniPlayer.stop()
+                    secretAniPlayer.clear_queue()
+                    secretAniPlayer.queue("idleWalk")
+                    secretAniPlayer.queue("run")
     elif boss_phase == BossPhase.RUN_AROUND:
+        print("running")
         tryPlayBawkSound()
         tryToSpawnCrowStream(delta)
         tryToSpawnEyeSpore(delta)
         if secretAniPlayer.assigned_animation == "run" or secretAniPlayer.assigned_animation == "suddenlyBrake":
             run_speed = -0.5 if secretAniPlayer.assigned_animation == "suddenlyBrake" else 3.0
             processRunLogic(delta)
-        if run_counter >= RUN_COUNT_MAX and boss_phase_should_crash == 0:
+        if run_counter >= RUN_COUNT_MAX and (boss_phase_should_crash == 0 or has_crashed):
             run_counter = 0
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
@@ -229,6 +236,7 @@ func _process(delta):
             boss_phase = BossPhase.RUN_BACKWARDS
             landingIndex = 11
     elif boss_phase == BossPhase.RUN_BACKWARDS:
+        print("running... backwards")
         tryPlayBawkSound()
         tryToSpawnCrowStream(delta)
         tryToSpawnEyeSpore(delta)
@@ -264,6 +272,7 @@ func _process(delta):
                 self.global_transform.origin.x = -12
                 secretAniPlayer.stop()
                 secretAniPlayer.play("shellExplode")
+                has_crashed = true
         elif secretAniPlayer.assigned_animation == "shellExplode":
             run_speed = 0.1
             self.global_transform.origin.x += run_speed * (delta*11)
@@ -275,6 +284,7 @@ func _process(delta):
                 eyeSporeSpawn_timer = 0
     elif boss_phase == BossPhase.GOT_HURT:
         if not secretAniPlayer.is_playing():
+            am_i_hurt = false
             run_counter = 0
             boss_phase = BossPhase.RUN_AROUND
             secretAniPlayer.stop()
@@ -341,6 +351,8 @@ func wakeMeUp():
 
 func okayImDead():
     global.pauseGame = false
+    level.player.pauseInput = false
+    global.pauseMoveInput = false
     global.shouldRenderAsCinematic = false
     if global.memory["baba_yaga_boss"] < 2:
         # level.restartMusic()
@@ -396,7 +408,7 @@ func getLevelTiles():
   return levelTiles
 
 var run_counter = 0
-var RUN_COUNT_MAX = 1
+var RUN_COUNT_MAX = 2
 var run_speed = 3
 func processRunLogic(delta):
     var currLanding = landingArray[landingIndex]
@@ -405,6 +417,8 @@ func processRunLogic(delta):
         self.global_transform.origin.y = currLanding.global_transform.origin.y
     if landingIndex == 2 or landingIndex == 3 or landingIndex == 8 or landingIndex == 9:
         self.global_transform.origin.x = currLanding.global_transform.origin.x
+
+    print(currLanding.global_transform.origin)
 
     var angle_mult = 0.72
     if landingIndex == 0:
@@ -440,8 +454,7 @@ func processRunLogic(delta):
         self.global_transform.origin.x += run_speed * (delta*11)
         if self.global_transform.origin.x >= currLanding.global_transform.origin.x:
             landingIndex = 6
-            # if num_hits >= 1:
-            #     run_counter += 1
+            run_counter += 1
     elif landingIndex == 6:
         self.global_transform.origin.x += run_speed * (delta*11)
         if self.global_transform.origin.x >= currLanding.global_transform.origin.x:
@@ -468,8 +481,8 @@ func processRunLogic(delta):
         self.global_transform.origin.x -= run_speed * (delta*11)
         if self.global_transform.origin.x <= currLanding.global_transform.origin.x:
             landingIndex = 0
-            # if num_hits < 1:
             run_counter += 1
+            print("increment?")
 
 func processRunBackwardsLogic(delta):
     var currLanding = landingArray[landingIndex]
@@ -506,8 +519,7 @@ func processRunBackwardsLogic(delta):
         self.global_transform.origin.x -= run_speed * (delta*11)
         if self.global_transform.origin.x <= currLanding.global_transform.origin.x:
             landingIndex = 5
-            # if num_hits >= 1:
-            run_counter = 999
+            run_counter += 1
     elif landingIndex == 6:
         self.global_transform.origin.x -= run_speed * (delta*11)
         if self.global_transform.origin.x <= currLanding.global_transform.origin.x:
@@ -534,8 +546,7 @@ func processRunBackwardsLogic(delta):
         self.global_transform.origin.x += run_speed * (delta*11)
         if self.global_transform.origin.x >= currLanding.global_transform.origin.x:
             landingIndex -= 1
-            # if num_hits < 1:
-            # run_counter += 1
+            run_counter += 1
 
 func stepInIdleDir():
     var step_dist = 1
@@ -549,25 +560,37 @@ func stopInIdleDir():
 
 var eyeSporeRef = null
 var eyeSporeRes = preload("res://sceneObjects/Enemies/Boss/BabaYagaMiniShroom.tscn")
+var evilSporeRes = preload("res://sceneObjects/Enemies/EvilSpore.tscn")
+onready var mushroomSprite = get_node("SpriteContainer/HouseSprite/MushroomSprite")
 func tryToSpawnEyeSpore(delta):
-    if boss_phase_should_crash < 2:
-        return
+    # if boss_phase_should_crash < 2:
+    #     return
 
-    if eyeSporeRef == null:
-        eyeSporeSpawn_timer += (delta*11)
-        if eyeSporeSpawn_timer >= eyeSporeSpawn_time_limit:
-            eyeSporeSpawn_timer = 0
-            var newEyeSpore = eyeSporeRes.instance()
-            var randomPosition = landingArray[randi() % landingArray.size()]
-            level.add_child(newEyeSpore)
-            newEyeSpore.global_transform.origin = randomPosition.global_transform.origin
-            newEyeSpore.rotation_degrees = randomPosition.rotation_degrees
-            eyeSporeRef = weakref(newEyeSpore)
+    # if eyeSporeRef == null:
+    eyeSporeSpawn_timer += (delta*11)
+    if eyeSporeSpawn_timer >= eyeSporeSpawn_time_limit:
+        eyeSporeSpawn_timer = 0
+        var newEvilSpore = evilSporeRes.instance()
+        level.add_child(newEvilSpore)
+        newEvilSpore.spawnSound.play()
+        newEvilSpore.global_transform.origin = mushroomSprite.global_transform.origin
+        newEvilSpore.global_transform.origin.z = 0
+        newEvilSpore.on_ground = false
+        newEvilSpore.lv.y = 5
+        newEvilSpore.linear_velocity.y = 5
+        newEvilSpore.vv = newEvilSpore.up.dot(newEvilSpore.lv)
+
+        # var newEyeSpore = eyeSporeRes.instance()
+        # var randomPosition = landingArray[randi() % landingArray.size()]
+        # level.add_child(newEyeSpore)
+        # newEyeSpore.global_transform.origin = randomPosition.global_transform.origin
+        # newEyeSpore.rotation_degrees = randomPosition.rotation_degrees
+        # eyeSporeRef = weakref(newEyeSpore)
             
-    else:
-        if eyeSporeRef.get_ref() == null:
-            eyeSporeRef = null
-            eyeSporeSpawn_timer = 0
+    # else:
+    #     if eyeSporeRef.get_ref() == null:
+    #         eyeSporeRef = null
+    #         eyeSporeSpawn_timer = 0
 
 var crow_stream_spawn_timer = 0
 var crow_stream_spawn_time_limit = 10

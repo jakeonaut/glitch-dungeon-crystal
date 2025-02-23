@@ -2,6 +2,8 @@ extends "GlitchEnemy.gd"
 
 onready var poofSound = get_node("Sounds/PoofSound")
 onready var reassembleSound = get_node("Sounds/ReassembleSound")
+onready var spawnSound = get_node("Sounds/SpawnSound")
+export var is_evil = false
 
 func _ready():
   smack_time_limit = 5
@@ -47,6 +49,9 @@ func _process(delta):
       pauseSelf = false
       visible = true
 
+  if is_evil and on_ground:
+    landed()
+
 
   # if not is_smacked:
   #   if getPlayer().glitch_form == global.GlitchForm.INVISIBLE and is_stone:
@@ -69,12 +74,15 @@ func glitchSwitchSprite(_delta):
 func landed():
   .landed()
   behavior_jumping = false
+  if is_evil:
+    getSmacked()
 
 var my_shroom = null
 # @override
 func getSmacked(broom_origin = null, silently = false):
   if is_smacked or has_ever_been_smacked:
     return false
+  spawnGlitchSprout()
   poofSound.play()
   .getSmacked(broom_origin, silently)
   # if getPlayer().glitch_form == global.GlitchForm.INVISIBLE:
@@ -82,14 +90,14 @@ func getSmacked(broom_origin = null, silently = false):
   pauseSelf = true
   # on_ground = true
   notDieSound.play()
-  level.player.gravitySound.pitch_scale = rand_range(0.8, 1.2)
-  level.player.gravitySound.play()
-  level.player.glitchTickle()
-  level.flipGravity(-1 * (level.player.grav / abs(level.player.grav)))
 
 func passiveActivate(_delta, is_player):
   if is_player:
     getSmacked()
+    level.player.gravitySound.pitch_scale = rand_range(0.8, 1.2)
+    level.player.gravitySound.play()
+    level.player.glitchTickle()
+    level.flipGravity(-1 * (level.player.grav / abs(level.player.grav)))
 
 # @override
 func unsmack():
@@ -100,6 +108,8 @@ func unsmack():
     spawnASpore(self.global_transform.origin, false)
   teleport_timer = 0
   has_teleported = false
+  if is_evil:
+    queue_free()
   
   
 
@@ -183,10 +193,30 @@ func spawnASpore(where_origin, inverse):
       var r = 1
       spore.target_pos = Vector2(global_transform.origin.x + rand_range(-r, r), global_transform.origin.y + rand_range(-r, r))
       spore.delta_multiplier = 2.0
-      spore.mySprite.reverseIt()
+      spore.mySprite.get_ref().reverseIt()
     else:
       spore.global_transform.origin.x += rand_range(-1, 1)
       spore.global_transform.origin.y += rand_range(-1, 1)
       var r = 2
       spore.target_pos = Vector2(spore.global_transform.origin.x + rand_range(-r, r), spore.global_transform.origin.y + rand_range(-r, r))
       spore.delta_multiplier = 4.0
+
+var glitchEnemyRes = preload("res://sceneObjects/Enemies/GlitchEnemy.tscn")
+func spawnGlitchSprout():
+  if is_evil:
+    var newGlitchEnemy = glitchEnemyRes.instance()
+    newGlitchEnemy.is_static_in_level = false
+    newGlitchEnemy.visible = true
+    newGlitchEnemy.grav = 0
+    newGlitchEnemy.get_node("Sprite3D").frame_delay = 0.2
+    # newGlitchEnemy.behavior_evolve = true
+    # newGlitchEnemy.behavior_fizzle_out_after_evolve = true
+    level.add_child(newGlitchEnemy)
+    newGlitchEnemy.global_transform.origin = self.global_transform.origin
+    var newGlitchMaterial = newGlitchEnemy.mySprite.get_material_override().duplicate()
+    if newGlitchEnemy.mySprite.is_in_group("sprite"):
+      newGlitchEnemy.mySprite.remove_from_group("sprite")
+    if newGlitchMaterial is ShaderMaterial:
+      newGlitchMaterial.set_shader_param("target_palette", global.weird_base_palette)
+    newGlitchEnemy.mySprite.set_material_override(newGlitchMaterial)
+    newGlitchEnemy.glitchOut()

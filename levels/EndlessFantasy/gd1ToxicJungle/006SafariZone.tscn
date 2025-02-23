@@ -248,6 +248,7 @@ tileset_type = 7
 has_spellbook_page = true
 spellbook_spells = [ 3, 2 ]
 pacman_wrapping = true
+weird_pacman_wrapping = true
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 17 )]
 

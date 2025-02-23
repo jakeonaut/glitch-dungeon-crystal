@@ -131,17 +131,18 @@ func passiveActivate(_delta, is_player):
     level.player.was_fallthrough_area_collision_triggered = false
     level.player.tryClearFallthroughCollisionSolid(self.global_transform.origin)
   
-func otherPassiveActivate(_delta, gameMover):
-  if not hooked and not is_reeled_in:
-    level.clearOtherGrabbers(gameMover)
-    hooked = true
-    hookTarget = weakref(gameMover)
-    level.player.hookSound.play()
-    # if not level.player.pauseAnimation or level.player.physics_state == level.player.PhysicsState.BEING_TOSSED:
-    #   level.player.aniPlayer.play("hookCaught")
-    gameMover.behavior_walking = false
-    gameMover.behavior_was_thrown = false
-    gameMover.pauseAnimation = true
-    gameMover.physics_state = gameMover.PhysicsState.NORMAL
-    gameMover.was_fallthrough_area_collision_triggered = false
-    gameMover.tryClearFallthroughCollisionSolid(self.global_transform.origin)
+func otherPassiveActivate(_delta, _gameMover):
+  pass
+  # if not hooked and not is_reeled_in:
+  #   level.clearOtherGrabbers(gameMover)
+  #   hooked = true
+  #   hookTarget = weakref(gameMover)
+  #   level.player.hookSound.play()
+  #   # if not level.player.pauseAnimation or level.player.physics_state == level.player.PhysicsState.BEING_TOSSED:
+  #   #   level.player.aniPlayer.play("hookCaught")
+  #   gameMover.behavior_walking = false
+  #   gameMover.behavior_was_thrown = false
+  #   gameMover.pauseAnimation = true
+  #   gameMover.physics_state = gameMover.PhysicsState.NORMAL
+  #   gameMover.was_fallthrough_area_collision_triggered = false
+  #   gameMover.tryClearFallthroughCollisionSolid(self.global_transform.origin)

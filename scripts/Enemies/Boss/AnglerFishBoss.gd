@@ -9,6 +9,11 @@ onready var weakPointContainer = get_node("WeakPointContainer")
 onready var weakPointAniPlayer = get_node("WeakPointContainer/WeakPointAnimationPlayer")
 onready var weakEyeAniPlayer = get_node("WeakPointContainer/WeakEye/SecretAnimationPlayer")
 onready var weakPointTarget = get_node("WeakPointTarget")
+onready var tailContainer = get_node("TailContainer")
+onready var crystals = get_node("Crystals")
+onready var dangleContainer = get_node("DangleContainer")
+onready var screamSound = get_node("Sounds/ScreamSound")
+onready var chargeSound = get_node("Sounds/ChargeSound")
 var glitchHermitCrabManagerRes = preload("res://sceneObjects/Enemies/GlitchHermitCrabManager.tscn")
 var spawnedHermitCrabManagers = []
 var crystalGeodeRes = preload("res://sceneObjects/Crystals/FishCrystal.tscn")
@@ -24,6 +29,9 @@ enum BossPhase {
     WAKING_UP,
     PREPARING_CHARGE,
     CHARGING,
+    CHARGING_BACKWARDS,
+    TURNING_LEFT_TO_RIGHT,
+    TURNING_RIGHT_TO_LEFT,
     BARFING_SNAILS,
     HIDING_WITH_DUPLICATES,
     EAT_IT,
@@ -147,13 +155,14 @@ func _process(delta):
             weakPointAniPlayer.clear_queue()
             weakPointAniPlayer.play("idle")
     elif boss_phase == BossPhase.PREPARING_CHARGE:
+        how_many_final_charges = 0
         if secretAniPlayer.assigned_animation != "openUp" and secretAniPlayer.assigned_animation != "openIdle":
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("openUp")
             secretAniPlayer.queue("openIdle")
         # this position is stupid and specific to the level I'm in... oh well
-        moveToSpecificPosition(delta, Vector3(65, level.player.global_transform.origin.y, 0), 1, false)
+        moveToSpecificPosition(delta, Vector3(65, level.player.global_transform.origin.y, 0), 1.5, false)
         idle_timer += (delta*11)
         if idle_timer >= charging_time_limit:
             idle_timer = 0
@@ -161,56 +170,64 @@ func _process(delta):
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("charging")
+            chargeSound.play()
     elif boss_phase == BossPhase.CHARGING:
         behavior_walking = true
         walk_direction.x = -1
         # this is stupid and specific to the level I'm in... oh well
-        if global_transform.origin.x < 28 and (num_hits <= 1 or (num_hits == 2 and how_many_final_charges == 2)):
-            behavior_walking = false
-            dir = Vector3(0, 0, 0)
-            lv.x = 0
-            linear_velocity.x = 0
-            hv = Vector3(0, 0, 0)
-            boss_phase = BossPhase.STUN_FALL
-            level.player.bumpSound.play()
-            unenemize()
-            secretAniPlayer.stop()
-            secretAniPlayer.clear_queue()
-            secretAniPlayer.play("stunFall")
-            tryToStartWeakPointDetachment()
-            # level.player.malwareCured()
-            getSmacked()
-        # elif global_transform.origin.x < 16.134 and num_hits == 1:
-        #     secretAniPlayer.stop()
-        #     secretAniPlayer.clear_queue()
-        #     secretAniPlayer.play("fadeToBlack")
-        #     behavior_walking = false
-        #     dir = Vector3(0, 0, 0)
-        #     lv.x = 0
-        #     linear_velocity.x = 0
-        #     hv = Vector3(0, 0, 0)
-        #     boss_phase = BossPhase.HIDING_WITH_DUPLICATES
-        #     which_three = []
-        #     crystalLandings.shuffle()
-        #     which_three.push_back(crystalLandings[0])
-        #     which_three.push_back(crystalLandings[1])
-        #     which_three.push_back(crystalLandings[2])
-        elif global_transform.origin.x < 16.134 and num_hits == 2:
-            global_transform.origin.x = 90.134
-            global_transform.origin.y = level.player.global_transform.origin.y
-            how_many_final_charges += 1
-            # secretAniPlayer.stop()
-            # secretAniPlayer.clear_queue()
-            # secretAniPlayer.play("turnLeftToRight")
-            # secretAniPlayer.queue("gnashAttack")
-            # tryToStartWeakPointDetachment()
-            # behavior_walking = false
-            # dir = Vector3(0, 0, 0)
-            # lv.x = 0
-            # linear_velocity.x = 0
-            # hv = Vector3(0, 0, 0)
-            # boss_phase = BossPhase.GNASH_ATTACK_PREP
-            # idle_timer = 0
+        if global_transform.origin.x < 28:
+            if how_many_final_charges >= num_hits:
+                behavior_walking = false
+                dir = Vector3(0, 0, 0)
+                lv.x = 0
+                linear_velocity.x = 0
+                hv = Vector3(0, 0, 0)
+                boss_phase = BossPhase.STUN_FALL
+                level.player.bumpSound.play()
+                unenemize()
+                secretAniPlayer.stop()
+                secretAniPlayer.clear_queue()
+                secretAniPlayer.play("stunFall")
+                tryToStartWeakPointDetachment()
+                getSmacked()
+            elif global_transform.origin.x < 14:
+                how_many_final_charges += 1
+                boss_phase = BossPhase.CHARGING_BACKWARDS    
+                self.global_transform.origin.y = level.player.global_transform.origin.y
+                self.rotation_degrees.y = 180 # from 0
+                tailContainer.translation.z = 6 # from 0
+                dangleContainer.translation.z = 6 # from 0
+                crystals.translation.z = 2.13 # from -2.13
+                mySprite.translation.z = 2 # from -2
+                chargeSound.play()
+    elif boss_phase == BossPhase.CHARGING_BACKWARDS:
+        behavior_walking = true
+        walk_direction.x = 1
+        if global_transform.origin.x >= 66:
+            if how_many_final_charges >= num_hits:
+                behavior_walking = false
+                dir = Vector3(0, 0, 0)
+                lv.x = 0
+                linear_velocity.x = 0
+                hv = Vector3(0, 0, 0)
+                boss_phase = BossPhase.STUN_FALL
+                level.player.bumpSound.play()
+                unenemize()
+                secretAniPlayer.stop()
+                secretAniPlayer.clear_queue()
+                secretAniPlayer.play("stunFall")
+                tryToStartWeakPointDetachment()
+                getSmacked()
+            elif global_transform.origin.x >= 80:
+                how_many_final_charges += 1
+                boss_phase = BossPhase.CHARGING
+                self.global_transform.origin.y = level.player.global_transform.origin.y
+                self.rotation_degrees.y = 0 # from 180
+                tailContainer.translation.z = 0 # from 6
+                dangleContainer.translation.z = 0 # from 6
+                crystals.translation.z = -2.13 # from 2.13
+                mySprite.translation.z = -2 # from 2
+                chargeSound.play()
     elif boss_phase == BossPhase.HIDING_WITH_DUPLICATES:
         has_already_hidden = true
         behavior_walking = false
@@ -328,7 +345,12 @@ func _process(delta):
         has_already_hidden = false
         moveToSpecificPosition(delta, Vector3(52.134, -19.847, 0), 1, false)
         if not secretAniPlayer.is_playing():
-            if num_hits <= 2:
+            self.rotation_degrees.y = 0 # from 180
+            tailContainer.translation.z = 0 # from 6
+            dangleContainer.translation.z = 0 # from 6
+            crystals.translation.z = -2.13 # from 2.13
+            mySprite.translation.z = -2 # from 2
+            if num_hits <= MAX_NUM_HITS:
                 boss_phase = BossPhase.BARFING_SNAILS
                 secretAniPlayer.stop()
                 secretAniPlayer.clear_queue()
@@ -349,6 +371,11 @@ func _process(delta):
     
     if cubeCrystal.get_ref() != null:
         cubeCrystal.get_ref().meshInstance1.visible = false
+
+
+# @override
+func setSpriteFlipH(_flip_h):
+    pass
 
 func startBossFight():
     if boss_phase != BossPhase.LYING_IN_WAIT:

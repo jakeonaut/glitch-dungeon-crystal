@@ -1,0 +1,201 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
+[ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=2]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
+[ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=4]
+[ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=5]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=6]
+[ext_resource path="res://sceneObjects/BounceAnimationPlayer.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scripts/Enemies/KizzyCat.gd" type="Script" id=8]
+[ext_resource path="res://assets/sounds/151RetroMonsters/startEvolve.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/151RetroMonsters/glitchEvolve.wav" type="AudioStream" id=10]
+[ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=11]
+[ext_resource path="res://assets/DELETEME/horn.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/sounds/Octopus.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/sounds/smack.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/sounds/drown.wav" type="AudioStream" id=15]
+[ext_resource path="res://scripts/GameMoverSmallInteractionArea.gd" type="Script" id=16]
+[ext_resource path="res://assets/sounds/pop.wav" type="AudioStream" id=17]
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = ExtResource( 6 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.01
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.1
+shader_param/time_influence = 20.0
+shader_param/y_div = 10.0
+shader_param/texture_albedo = ExtResource( 5 )
+shader_param/base_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = ExtResource( 6 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.01
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.117
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 5 )
+shader_param/base_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 3 )
+
+[sub_resource type="CylinderShape" id=2]
+height = 1.6
+radius = 0.8
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 21, 13, 1 )
+
+[node name="EvilSpore" type="Spatial"]
+script = ExtResource( 8 )
+true_terminal_vel = 4
+grav = 7
+run_speed = 7
+feather_glitch_walk_speed = 7
+invisible_glitch_walk_speed = 5
+swimming_walk_speed = 7
+jump_force = 11
+invisible_jump_force = 10
+only_activate_in_range = false
+sprite_offset_y = 0.25
+normal_offset = 0.3
+is_evil = true
+
+[node name="SpriteContainer" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.5 )
+
+[node name="InnerSpriteContainer" type="Spatial" parent="SpriteContainer"]
+
+[node name="Sprite3D" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.8 )
+material_override = SubResource( 11 )
+pixel_size = 0.15
+texture = ExtResource( 5 )
+hframes = 8
+vframes = 16
+frame = 9
+script = ExtResource( 1 )
+automatically_change_color = false
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11 )
+visible = false
+material_override = SubResource( 10 )
+pixel_size = 0.12
+texture = ExtResource( 5 )
+hframes = 8
+vframes = 16
+frame = 4
+script = ExtResource( 1 )
+frame_delay = 0.3
+max_frames = 4
+
+[node name="InteractionArea" type="Area" parent="." groups=["enemies"]]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+script = ExtResource( 11 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="SmallInteractionArea" type="Area" parent="." groups=["corporeal_body"]]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.2, 0 )
+script = ExtResource( 16 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="Sounds" type="Spatial" parent="."]
+
+[node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 12 )
+volume_db = -30.0
+
+[node name="SpawnSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 17 )
+volume_db = -15.0
+pitch_scale = 0.5
+
+[node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 14 )
+volume_db = -20.0
+pitch_scale = 0.3
+
+[node name="PoofSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 15 )
+volume_db = -20.0
+pitch_scale = 1.5
+
+[node name="ReassembleSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 13 )
+volume_db = -10.0
+pitch_scale = 0.5
+
+[node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 10 )
+volume_db = -15.0
+
+[node name="StartEvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+pitch_scale = 0.5
+
+[node name="PlayerActivationArea" type="Area" parent="." groups=["playerActivation"]]
+script = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerActivationArea"]
+shape = SubResource( 6 )
+
+[node name="BounceAnimationPlayer" parent="." instance=ExtResource( 7 )]
