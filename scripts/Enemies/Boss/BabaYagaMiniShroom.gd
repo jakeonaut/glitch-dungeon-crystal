@@ -11,12 +11,14 @@ func _ready():
 
 
 func spawnWeakEye():
-    var newEye = weakEyeRes.instance()
-    newEye.is_fast = true
-    level.add_child(newEye)
-    newEye.global_transform.origin = eyeSpawner.global_transform.origin
-    newEye.global_transform.origin.z = 0
-    newEye.global_rotation = self.global_rotation
-    secretAniPlayer.stop()
-    secretAniPlayer.play("waitForWeakEye")
-    secretAniPlayer.queue("wither")
+  return
+
+  # var newEye = weakEyeRes.instance()
+  # newEye.is_fast = true
+  # level.add_child(newEye)
+  # newEye.global_transform.origin = eyeSpawner.global_transform.origin
+  # newEye.global_transform.origin.z = 0
+  # newEye.global_rotation = self.global_rotation
+  # secretAniPlayer.stop()
+  # secretAniPlayer.play("waitForWeakEye")
+  # secretAniPlayer.queue("wither")

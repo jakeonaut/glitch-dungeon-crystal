@@ -241,7 +241,7 @@ func change_scene():
   global.memory["transformation"] = level.player.transformation
   global.memory["currLevelZone"] = global.currLevelZone
   global.set_camera_position_on_respawn = true
-  global.malware_infected = current_scene.get_node("Viewport/level").player.malware_infected
+  global.malware_infected = false # current_scene.get_node("Viewport/level").player.malware_infected
 
   if self.path != "":
     root.remove_child(current_scene)

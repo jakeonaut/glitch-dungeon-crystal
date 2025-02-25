@@ -530,12 +530,12 @@ func pressingJump():
 
 # @overrride
 func actuallyApplyJump(play_sound = true):
-  if malware_infected:
-    on_ground = false
-    was_fallthrough_area_collision_triggered = false
-    has_just_jumped_timer = 0
-  else:
-    .actuallyApplyJump(play_sound)
+  # if malware_infected:
+  #   on_ground = false
+  #   was_fallthrough_area_collision_triggered = false
+  #   has_just_jumped_timer = 0
+  # else:
+  .actuallyApplyJump(play_sound)
 
 # @override
 func pressingMoveUp():
@@ -551,8 +551,8 @@ func pressingMoveLeft():
   if override_stop_left_input or physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
   var am_paused = pauseInput or isTextboxPausingMe()
-  # if malware_infected:
-  #   return Input.is_action_pressed("ui_right") and not am_paused
+  if malware_infected:
+    return Input.is_action_pressed("ui_right") and not am_paused
   if is_mushroom_infected:
     return mushroom_infection_direction == -1 and not am_paused
   var is_pressing_move_left = .pressingMoveLeft() or (Input.is_action_pressed("ui_left") and not am_paused)
@@ -564,8 +564,8 @@ func pressingMoveRight():
   if override_stop_right_input or physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
   var am_paused =  pauseInput or isTextboxPausingMe()
-  # if malware_infected:
-  #   return Input.is_action_pressed("ui_left") and not am_paused
+  if malware_infected:
+    return Input.is_action_pressed("ui_left") and not am_paused
   if is_mushroom_infected:
     return mushroom_infection_direction == 1 and not am_paused
   var is_pressing_move_right = .pressingMoveRight() or (Input.is_action_pressed("ui_right") and not am_paused)

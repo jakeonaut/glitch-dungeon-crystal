@@ -36,7 +36,7 @@
 [ext_resource path="res://materials/CrystalGeode2.tres" type="Material" id=34]
 [ext_resource path="res://assets/mini_mushroom.png" type="Texture" id=35]
 
-[sub_resource type="ArrayMesh" id=87]
+[sub_resource type="ArrayMesh" id=90]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -49,7 +49,7 @@ surfaces/0 = {
 "vertex_count": 8
 }
 
-[sub_resource type="ArrayMesh" id=88]
+[sub_resource type="ArrayMesh" id=91]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -1347,7 +1347,7 @@ shader_param/target_palette = ExtResource( 5 )
 resource_local_to_scene = true
 extents = Vector3( 2.9, 0.24, 1 )
 
-[sub_resource type="ShaderMaterial" id=89]
+[sub_resource type="ShaderMaterial" id=92]
 shader = ExtResource( 1 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
@@ -2152,6 +2152,18 @@ tracks/60/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ false ]
+}
+tracks/61/type = "value"
+tracks/61/path = NodePath("SpriteContainer/HouseSprite/MushroomSprite:material_override:shader_param/opacity")
+tracks/61/interp = 1
+tracks/61/loop_wrap = true
+tracks/61/imported = false
+tracks/61/enabled = true
+tracks/61/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
 }
 
 [sub_resource type="Animation" id=20]
@@ -4124,10 +4136,10 @@ tracks/24/loop_wrap = true
 tracks/24/imported = false
 tracks/24/enabled = true
 tracks/24/keys = {
-"times": PoolRealArray( 0, 1, 1.2, 1.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 1, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 4, 0, 4, 0 ]
+"values": [ 4, 0, 4, 0, 4 ]
 }
 tracks/25/type = "value"
 tracks/25/path = NodePath("SpriteContainer/LegsSprite3D:frame")
@@ -4323,7 +4335,19 @@ tracks/40/keys = {
 "times": PoolRealArray( 0, 1.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true, false ]
+"values": [ true, true ]
+}
+tracks/41/type = "value"
+tracks/41/path = NodePath("SpriteContainer/HouseSprite/MushroomSprite:material_override:shader_param/opacity")
+tracks/41/interp = 1
+tracks/41/loop_wrap = true
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
 }
 
 [sub_resource type="Animation" id=41]
@@ -5319,14 +5343,17 @@ transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="CubeCrystal/CubeContainer" index="0"]
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
-mesh = SubResource( 87 )
+mesh = SubResource( 90 )
 
 [node name="MeshInstance3" parent="CubeCrystal/CubeContainer" index="1"]
 transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
-mesh = SubResource( 88 )
+mesh = SubResource( 91 )
 
 [node name="MeshInstance2" parent="CubeCrystal/CubeContainer" index="2"]
 transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )
+
+[node name="Sprite3D" parent="CubeCrystal/NPC" index="0"]
+frame = 64
 
 [node name="LightAnimationPlayer" parent="CubeCrystal" index="13"]
 anims/RESET = SubResource( 81 )
@@ -5399,7 +5426,7 @@ shape = SubResource( 17 )
 
 [node name="MushroomSprite" type="Sprite3D" parent="SpriteContainer/HouseSprite"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.59029, 0.5 )
-material_override = SubResource( 89 )
+material_override = SubResource( 92 )
 extra_cull_margin = 0.06
 offset = Vector2( 0.5, 4 )
 pixel_size = 0.125

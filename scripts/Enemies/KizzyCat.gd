@@ -8,6 +8,7 @@ export var is_evil = false
 func _ready():
   smack_time_limit = 5
   smallInteractionArea.add_to_group("no_pushems")
+  on_ground = false
   yield(TempTimer.idle_frame(self), "timeout")
   yield(TempTimer.idle_frame(self), "timeout")
 
@@ -49,8 +50,8 @@ func _process(delta):
       pauseSelf = false
       visible = true
 
-  if is_evil and on_ground:
-    landed()
+  # if is_evil and on_ground:
+  #   landed()
 
 
   # if not is_smacked:
@@ -74,8 +75,8 @@ func glitchSwitchSprite(_delta):
 func landed():
   .landed()
   behavior_jumping = false
-  if is_evil:
-    getSmacked()
+  # if is_evil:
+  #   getSmacked()
 
 var my_shroom = null
 # @override
@@ -94,10 +95,13 @@ func getSmacked(broom_origin = null, silently = false):
 func passiveActivate(_delta, is_player):
   if is_player:
     getSmacked()
-    level.player.gravitySound.pitch_scale = rand_range(0.8, 1.2)
-    level.player.gravitySound.play()
-    level.player.glitchTickle()
-    level.flipGravity(-1 * (level.player.grav / abs(level.player.grav)))
+    if is_evil:
+      level.player.malwareCorruptMe()
+    else:
+      level.player.gravitySound.pitch_scale = rand_range(0.8, 1.2)
+      level.player.gravitySound.play()
+      level.player.glitchTickle()
+      level.flipGravity(-1 * (level.player.grav / abs(level.player.grav)))
 
 # @override
 func unsmack():

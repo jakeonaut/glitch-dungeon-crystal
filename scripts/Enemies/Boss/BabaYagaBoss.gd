@@ -7,7 +7,6 @@ onready var runTrack = get_tree().get_root().get_node("Game/Viewport/level/RunTr
 onready var spawnSound = get_node("Sounds/SpawnSound")
 onready var wakeUpSound = get_node("Sounds/WakeUpSound")
 var babaEggRes = preload("res://sceneObjects/Enemies/Boss/BabaYagaEgg.tscn")
-var crowRes = preload("res://sceneObjects/Enemies/CrowWitch.tscn")
 var glitchMusicNoteRes = preload("res://sceneObjects/Enemies/GlitchMusicNote.tscn")
 onready var noteSpawner = get_node("SpriteContainer/Sprite3D/NoteSpawner")
 onready var eyeSpawner = get_node("SpriteContainer/EyeSprite3D/EyeSpawner")
@@ -41,13 +40,8 @@ var boss_phase = BossPhase.ASLEEP
 var prev_boss_phase = BossPhase.ASLEEP
 var boss_phase_should_crash = 0
 var landingArray = []
+var sproutedArray = []
 var landingIndex = 0
-onready var crowContainer = get_node("CrowContainer")
-var crowArray = []
-var crow_swoop_timer = 0
-var crow_swoop_time_limit = 20
-var eyeSporeSpawn_timer = 0
-var eyeSporeSpawn_time_limit = 10
 
 func _ready():
     set_process(true)
@@ -58,6 +52,7 @@ func _ready():
     var runTracks = runTrack.get_children()
     for landing in runTracks:
         landingArray.push_back(landing)
+        sproutedArray.push_back(false)
 
     # if boss_phase == BossPhase.ASLEEP:
     #     babaYagaDoor.visible = true
@@ -67,6 +62,10 @@ func getMyVariable():
     return global.memory["baba_yaga_boss"]
 
 func getHurt():
+    for noteRef in noteRefArray:
+        if noteRef != null and noteRef.get_ref():
+            noteRef.get_ref().glitchOut()
+    noteRefArray = []
     am_i_hurt = true
     num_hits += 1
     RUN_COUNT_MAX += 1
@@ -120,7 +119,6 @@ func _process(delta):
         if level.player.transformation == level.player.TransformationState.CHICKEN or global.memory["baba_yaga_boss"] == 1:
             wakeMeUp()
     elif boss_phase == BossPhase.WAKEUP:
-        tryToSpawnCrowStream(delta)
         if not secretAniPlayer.is_playing():
             prev_boss_phase = boss_phase
             # boss_phase = BossPhase.SINGING
@@ -158,7 +156,6 @@ func _process(delta):
         return
 
     if boss_phase == BossPhase.IDLE:
-        tryToSpawnCrowStream(delta)
         if secretAniPlayer.assigned_animation == "suddenlyBrake":
             run_speed = 0.5
             if prev_boss_phase == BossPhase.RUN_AROUND:
@@ -194,32 +191,29 @@ func _process(delta):
         if not secretAniPlayer.is_playing():
             singing_counter += 1
             if singing_counter >= singing_count_max:
-                if num_hits == 0:
-                    spawnWeakEye()
-                    for noteRef in noteRefArray:
-                        if noteRef != null and noteRef.get_ref():
-                            noteRef.get_ref().behavior_walk_flip = false
-                    noteRefArray = []
-                    singing_counter = 0
-                    prev_boss_phase = boss_phase
-                    boss_phase = BossPhase.IDLE
-                    secretAniPlayer.queue("idle")
-                    secretAniPlayer.queue("idle")
-                    secretAniPlayer.queue("idle")
-                    secretAniPlayer.queue("idle")
-                    secretAniPlayer.queue("idle")
-                    secretAniPlayer.queue("idle")
-                else:
-                    run_counter = 0
-                    boss_phase = BossPhase.RUN_AROUND
-                    secretAniPlayer.stop()
-                    secretAniPlayer.clear_queue()
-                    secretAniPlayer.queue("idleWalk")
-                    secretAniPlayer.queue("run")
+                # if num_hits == 0:
+                spawnWeakEye()
+                for noteRef in noteRefArray:
+                    if noteRef != null and noteRef.get_ref():
+                        noteRef.get_ref().behavior_walk_flip = false
+                singing_counter = 0
+                prev_boss_phase = boss_phase
+                boss_phase = BossPhase.IDLE
+                secretAniPlayer.queue("idle")
+                secretAniPlayer.queue("idle")
+                secretAniPlayer.queue("idle")
+                secretAniPlayer.queue("idle")
+                secretAniPlayer.queue("idle")
+                secretAniPlayer.queue("idle")
+                # else:
+                #     run_counter = 0
+                #     boss_phase = BossPhase.RUN_AROUND
+                #     secretAniPlayer.stop()
+                #     secretAniPlayer.clear_queue()
+                #     secretAniPlayer.queue("idleWalk")
+                #     secretAniPlayer.queue("run")
     elif boss_phase == BossPhase.RUN_AROUND:
-        print("running")
         tryPlayBawkSound()
-        tryToSpawnCrowStream(delta)
         tryToSpawnEyeSpore(delta)
         if secretAniPlayer.assigned_animation == "run" or secretAniPlayer.assigned_animation == "suddenlyBrake":
             run_speed = -0.5 if secretAniPlayer.assigned_animation == "suddenlyBrake" else 3.0
@@ -234,11 +228,8 @@ func _process(delta):
             secretAniPlayer.queue("run")
             prev_boss_phase = boss_phase
             boss_phase = BossPhase.RUN_BACKWARDS
-            landingIndex = 11
     elif boss_phase == BossPhase.RUN_BACKWARDS:
-        print("running... backwards")
         tryPlayBawkSound()
-        tryToSpawnCrowStream(delta)
         tryToSpawnEyeSpore(delta)
         if secretAniPlayer.assigned_animation == "run" or secretAniPlayer.assigned_animation == "suddenlyBrake":
             run_speed = -0.5 if secretAniPlayer.assigned_animation == "suddenlyBrake" else 3.0
@@ -291,30 +282,6 @@ func _process(delta):
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("run")
             wakeUpSound.play()
-    elif boss_phase == BossPhase.LAY_AN_EGG:
-        if crowArray.size() > 0:
-            crow_swoop_timer += (delta*11)
-            if crow_swoop_timer >= crow_swoop_time_limit:
-                crow_swoop_timer = 0
-                var crowToSwoop = crowArray.pop_front()
-                while crowToSwoop == null or crowToSwoop.get_ref() == null:
-                    if crowArray.size() == 0:
-                        boss_phase = BossPhase.WAKEUP
-                        secretAniPlayer.stop()
-                        secretAniPlayer.clear_queue()
-                        secretAniPlayer.play("wakeup")
-                        if num_hits >= 2:
-                            eyeSprite.visible = false
-                        return
-                    crowToSwoop = crowArray.pop_front()
-                crowToSwoop.get_ref().startSwoopAttack()
-                crowArray.push_back(crowToSwoop)
-        elif crowContainer.get_child_count() == 0:
-            return
-        else:
-            crow_swoop_timer = 0
-            for crow in crowContainer.get_children():
-                crowArray.push_back(weakref(crow))
     if cubeCrystal.get_ref() != null:
         cubeCrystal.get_ref().meshInstance1.visible = false
 
@@ -362,7 +329,7 @@ func okayImDead():
         level.summonSmokeClouds(level.door.global_transform.origin, 2, true, true)
     var newRealCrystal = crystalGeodeRes.instance()
     level.add_child(newRealCrystal)
-    newRealCrystal.global_transform.origin = Vector3(6, 4, 0)
+    newRealCrystal.global_transform.origin = Vector3(8, -3, 0)
     level.summonSmokeClouds(newRealCrystal.global_transform.origin, 3, true, true, false)
     level.door.visible = true
     queue_free()
@@ -377,9 +344,9 @@ func trySpawnAGlitchNote():
             newNote.walk_direction.x = -1
         else:
             newNote.walk_direction.x = 1
-        if num_hits >= 1:
-            newNote.sine_velocity = 32
-            newNote.rotation_degrees.z = 180
+        # if num_hits >= 1:
+        #     newNote.sine_velocity = 32
+        #     newNote.rotation_degrees.z = 180
         level.add_child(newNote)
         newNote.global_transform.origin = noteSpawner.global_transform.origin
         newNote.global_transform.origin.z = 0
@@ -417,8 +384,6 @@ func processRunLogic(delta):
         self.global_transform.origin.y = currLanding.global_transform.origin.y
     if landingIndex == 2 or landingIndex == 3 or landingIndex == 8 or landingIndex == 9:
         self.global_transform.origin.x = currLanding.global_transform.origin.x
-
-    print(currLanding.global_transform.origin)
 
     var angle_mult = 0.72
     if landingIndex == 0:
@@ -482,7 +447,6 @@ func processRunLogic(delta):
         if self.global_transform.origin.x <= currLanding.global_transform.origin.x:
             landingIndex = 0
             run_counter += 1
-            print("increment?")
 
 func processRunBackwardsLogic(delta):
     var currLanding = landingArray[landingIndex]
@@ -560,9 +524,15 @@ func stopInIdleDir():
 
 var eyeSporeRef = null
 var eyeSporeRes = preload("res://sceneObjects/Enemies/Boss/BabaYagaMiniShroom.tscn")
+var eyeSporeSpawn_timer = 0
+var eyeSporeSpawn_time_limit = 5
+
 var evilSporeRes = preload("res://sceneObjects/Enemies/EvilSpore.tscn")
+
 onready var mushroomSprite = get_node("SpriteContainer/HouseSprite/MushroomSprite")
 func tryToSpawnEyeSpore(delta):
+    if num_hits <= 1:
+        return
     # if boss_phase_should_crash < 2:
     #     return
 
@@ -580,22 +550,19 @@ func tryToSpawnEyeSpore(delta):
         newEvilSpore.linear_velocity.y = 5
         newEvilSpore.vv = newEvilSpore.up.dot(newEvilSpore.lv)
 
-        # var newEyeSpore = eyeSporeRes.instance()
-        # var randomPosition = landingArray[randi() % landingArray.size()]
-        # level.add_child(newEyeSpore)
-        # newEyeSpore.global_transform.origin = randomPosition.global_transform.origin
-        # newEyeSpore.rotation_degrees = randomPosition.rotation_degrees
-        # eyeSporeRef = weakref(newEyeSpore)
+        # if not sproutedArray[landingIndex]:
+        #     var newEyeSpore = eyeSporeRes.instance()
+        #     var randomPosition = landingArray[landingIndex]
+        #     level.add_child(newEyeSpore)
+        #     newEyeSpore.global_transform.origin = randomPosition.global_transform.origin
+        #     newEyeSpore.rotation_degrees = randomPosition.rotation_degrees
+        #     eyeSporeRef = weakref(newEyeSpore)
+        #     sproutedArray[landingIndex] = true
             
     # else:
     #     if eyeSporeRef.get_ref() == null:
     #         eyeSporeRef = null
     #         eyeSporeSpawn_timer = 0
-
-var crow_stream_spawn_timer = 0
-var crow_stream_spawn_time_limit = 10
-func tryToSpawnCrowStream(_delta):
-    return
 
 func tryPlayBawkSound():
     pass

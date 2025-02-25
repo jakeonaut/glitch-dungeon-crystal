@@ -109,6 +109,7 @@ jump_force = 11
 invisible_jump_force = 10
 only_activate_in_range = false
 sprite_offset_y = 0.25
+can_spawn_mini_crystal = false
 normal_offset = 0.3
 is_evil = true
 
