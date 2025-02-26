@@ -11,7 +11,7 @@ UI.MainMenu.2,"File ",文件,"Файл ","Jogo "
 UI.MainMenu.2_2,"File ",文件,"Файл ","Jogo "
 UI.MainMenu.3,press %s to start,按 %s 开始,"Нажмите %s, чтобы начать",Aperte %s para iniciar
 UI.MainMenu.4,%s: delete file,%s：删除文件,%s: удалить файл,%s: apagar jogo
-UI.MainMenu.5,"Really Delete [wave]""File %s""[/wave]?\n                      %s Confirm\n                      %s Cancel","确认删除 “文件 %s ”吗？\n                  %s 确认\n                  %s 取消","Точно удалить «Файл %s»?\n              %s Подтвердить\n              %s Отмена","Tem certeza que quer apagar ""Jogo %s""?\n                %s Confirmar\n                %s Cancelar"
+UI.MainMenu.5,"Really Delete [wave]""File %s""[/wave]?\n                      %s Confirm\n                      %s Cancel","确认删除 ""文件 %s ""吗？\n                  %s 确认\n                  %s 取消","Точно удалить «Файл %s»?\n              %s Подтвердить\n              %s Отмена","Tem certeza que quer apagar ""Jogo %s""?\n                %s Confirmar\n                %s Cancelar"
 UI.PauseMenu.0,"%s to select, %s to resume ","按%s选择，按%s继续","%s для выбора, %s для отмены ",%s para selecionar e %s para continuar 
 UI.PauseMenu.1,resume,继续,Вернуться,continuar
 UI.PauseMenu.2,Input,操作方法,Управление,Tipo de controle
@@ -29,7 +29,7 @@ UI.InputMenu.Action.8,next spell,下一个咒语,Следующее заклин
 UI.InputMenu.Action.9,prev spell,上一个咒语,Предыдущее заклинание,feitiço anterior
 UI.InputMenu.Action.10,open map,打开地图,Открыть карту,abrir mapa
 UI.InputMenu.13,"press %s to select, %s to go back. hold %s: reset bindings","按%s选择，按%s返回 长按%s恢复默认设置","Нажмите %s для выбора, %s для возвращения. Удерживайте %s для сброса настроек","aperte %s para escolher e %s para voltar. segure %s para redefinir controles."
-UI.InputMenu.14,"press key to set ""[UI.InputMenu.Action.x]""",按键设定“[UI.InputMenu.Action.x]”,Задайте кнопку для действия «[UI.InputMenu.Action.x]»,"aperte uma tecla para definir ""[UI.InputMenu.Action.x]"""
+UI.InputMenu.14,"press key to set ""[UI.InputMenu.Action.x]""",按键设定""[UI.InputMenu.Action.x]"",Задайте кнопку для действия «[UI.InputMenu.Action.x]»,"aperte uma tecla para definir ""[UI.InputMenu.Action.x]"""
 UI.InputMenu.15,"reset bindings\n...3 ...2 ...1!","恢复默认设置中\n…3…2…1！","Сброс настроек\n3... 2... 1!","redefinindo controles\n...3 ...2 ...1!"
 UI.PauseMenu.3,Graphics,画面,Графика,Gráficos
 UI.GraphicsMenu.ON,ON,开,ВКЛ,LIGADO
@@ -39,8 +39,8 @@ UI.GraphicsMenu.2,Glitch Screen: ,闪屏： ,Глитч-эффекты: ,Efeito 
 UI.GraphicsMenu.3,Color Blind: ,色盲模式： ,Дальтонизм: ,Modo Daltônico: 
 UI.GraphicsMenu.4,Fullscreen: ,全屏： ,Весь экран: ,Tela Cheia: 
 UI.PauseMenu.4,Sound,声音,Звук,Som
-UI.SoundMenu.1,"Music Volume: [1-10, or ""Mute""]",音乐音量： [1-10 or “静音”］,"Музыка: [1-10, or ""ВЫКЛ""]","Volume da Música: [1-10, ou ""Mudo""]"
-UI.SoundMenu.2,"SFX Volume: [1-10, or ""Mute""]",音效音量：[1-10，or “静音”］,"Эффекты: [1-10, or ""ВЫКЛ""]","Volume do Som: [1-10, ou ""Mudo""]"
+UI.SoundMenu.1,"Music Volume: [1-10, or ""Mute""]",音乐音量： [1-10 or ""静音""］,"Музыка: [1-10, or ""ВЫКЛ""]","Volume da Música: [1-10, ou ""Mudo""]"
+UI.SoundMenu.2,"SFX Volume: [1-10, or ""Mute""]",音效音量：[1-10，or ""静音""］,"Эффекты: [1-10, or ""ВЫКЛ""]","Volume do Som: [1-10, ou ""Mudo""]"
 UI.SoundMenu.3,Music Glitches: ,故障音效： ,Глитч-музыка: ,Glitch Musical: 
 UI.PauseMenu.5,Quit to Main Menu,回到主菜单,Выход в главное меню,Voltar ao Menu Principal
 UI.QuitMenu.1,unsaved progress will be lost,您将丢失未保存的进度,Несохранённый прогресс будет потерян,todo progresso não salvo será perdido
@@ -52,7 +52,7 @@ Dialog.Player.1,"now, now,\nwhere did that cat go?","唉,那只猫又跑哪里�
 Dialog.Player.2,"•i don't remember having a\nbasement.. but what a mess!\nlet's sweep up that dust",我怎么不记得家里有个地窖…\n不过这也太乱了！\n还是先把这里打扫干净再说！,"Не помню, чтобы у меня\nбыл подвал... Какой бардак!\nНадо бы тут подмести.","ué, desde quando tem um\nporão aqui? que bagunça..."
 NPC.Cow.1,moo!!\n(cut that out),哞！！\n（闹够了没有）,Му-у!\n(Хватит.),muuu!\n(para com isso).
 NPC.Door.1,"locked, needs %s keys",这里是锁着的。还需要%s把钥匙。,Заперто. Нужно ключей: %s.,trancada. precisa de %s chaves.
-NPC.Crone.1,"•ah! a fellow crone! you \nsaved me from near-death.\nthis ""glitch"" corruption.. I\nseek the crystal elders\nto stop the spread...\nCould you help me out?  ",哎呀！老姐妹！\n要不是你救了我，\n我差点就死了！\n这个 “故障 ”引起的腐败啊...\n我想找水晶长老阻止它的蔓延，\n你能帮帮我吗？,"О, карга-сестрица!\nСпасибо, что спасла меня.\nЯ ищу старух, которые бы избавили\nнас от напасти с этими\nглитчами-разглитчами... Подсобишь?","ah! uma velhaca como eu!\nvocê salvou a minha vida, minha amiga.\nessa tal corrupção, “glitch”... preciso encontrar\nas anciãs de cristal para impedir\nque se espalhe... sabe onde elas estão? "
+NPC.Crone.1,"•ah! a fellow crone! you \nsaved me from near-death.\nthis ""glitch"" corruption.. I\nseek the crystal elders\nto stop the spread...\nCould you help me out?  ",哎呀！老姐妹！\n要不是你救了我，\n我差点就死了！\n这个 ""故障 ""引起的腐败啊...\n我想找水晶长老阻止它的蔓延，\n你能帮帮我吗？,"О, карга-сестрица!\nСпасибо, что спасла меня.\nЯ ищу старух, которые бы избавили\nнас от напасти с этими\nглитчами-разглитчами... Подсобишь?","ah! uma velhaca como eu!\nvocê salvou a minha vida, minha amiga.\nessa tal corrupção, ""glitch""... preciso encontrar\nas anciãs de cristal para impedir\nque se espalhe... sabe onde elas estão? "
 NPC.Crone.1_2,"•I think the crystals are ahead\nbut I can't get past this door..","我认为水晶在前面\n但我无法跨过这扇门..","Я думаю кристаллы впереди\nно я не могу пройти через эту дверь..","Eu acho que os cristais estão à frente\nmas não consigo passar por essa porta."
 NPC.Crone.1_3,"•Ah! great work.\nI'll meet you on ahead","啊!很棒的工作\n我会在前面遇见你","Ах! отличная работа.\nЯ встречу тебя впереди","Ah! ótimo trabalho.\nTe encontro na frente"
 NPC.Crone.2,don't test me hag,老太婆！你再抽我试试？,"Не испытывай меня, старая ты мымра.","não teste minha paciência, velha coroca."
@@ -68,18 +68,21 @@ UI.Alert.0,got small key!,拿到了一枚小钥匙！,Ключик!,você encont
 UI.Alert.1,angel egg!,天使的卵！,Ангельское яйцо!,ovo celestial!
 UI.Alert.2,all tidy!,打扫干净了！,Всё чисто!,tudo arrumadinho!
 NPC.Treasure.1,????\npress %s to Return,？？？？\n按 %s返回上一存档点,"????\nНажмите %s, чтобы «вернуться».",????\naperte %s para retornar
-NPC.Treasure.2,"•You got ""Grimoire""\n..but it's missing a\nfew pages",你拿到了“魔法书”\n…就是缺了几页,У вас есть «Гримуар»...\nно в нём не хватает\nпары страниц.,você encontrou o “GRIMÓRIO”...\nmas faltam algumas páginas
-NPC.Treasure.3,"got ""map"",\nview from inventory\nor press ""%s"".","-发现了 地图！\n在物品栏打开\n或按%s查看","– Вы нашли «карту».\nПосмотрите её в инвентаре\nили нажмите %s.","-você encontrou um “MAPA""\nveja no inventário ou aperte %s"
-NPC.Treasure.4,"•FISHING ROD GET\nbut you don't know\nhow to fish...","-拿到了 鱼竿\n但你不会钓鱼……","– Вы нашли удочку.\nНо вы же не знаете,\nкак надо рыбачить...","-você encontrou uma “VARA DE PESCA”\nmas saber pescar que é bom, nada..."
-NPC.Treasure.5,"•FLOWER POT GET\nwell, maybe it will be useful..","-拿到了 花盆\n行吧。万一以后用得着呢…","– Вы нашли горшок.\nМожет, он и пригодится...","-você encontrou um ""VASINHO DE FLORES”\nvai que serve para alguma coisa..."
-NPC.Treasure.6,"•CUTE PET GET\nalthough you're not sure that\nit's really that cute..","-拿到了 可爱的宠物\n虽然但是，这真的算可爱吗…","– Вы нашли милашку.\nПравда, так назвать его\nможно только с большой натяжкой...","-você encontrou um “BICHINHO FOFINHO”\nfofinho? tenho lá minhas dúvidas..."
+NPC.Treasure.2,"•You got ""Grimoire""\n..but it's missing a\nfew pages",你拿到了""魔法书""\n…就是缺了几页,У вас есть «Гримуар»...\nно в нём не хватает\nпары страниц.,você encontrou o ""GRIMÓRIO""...\nmas faltam algumas páginas
+NPC.Treasure.3,"got ""map"",\nview from inventory\nor press ""%s"".","-发现了 地图！\n在物品栏打开\n或按%s查看","– Вы нашли «карту».\nПосмотрите её в инвентаре\nили нажмите %s.","-você encontrou um ""MAPA""\nveja no inventário ou aperte %s"
+NPC.Treasure.4,"•FISHING ROD GET\nbut you don't know\nhow to fish...","-拿到了 鱼竿\n但你不会钓鱼……","– Вы нашли удочку.\nНо вы же не знаете,\nкак надо рыбачить...","-você encontrou uma ""VARA DE PESCA""\nmas saber pescar que é bom, nada..."
+NPC.Treasure.5,"•FLOWER POT GET\nwell, maybe it will be useful..","-拿到了 花盆\n行吧。万一以后用得着呢…","– Вы нашли горшок.\nМожет, он и пригодится...","-você encontrou um ""VASINHO DE FLORES""\nvai que serve para alguma coisa..."
+NPC.Treasure.6,"•CUTE PET GET\nalthough you're not sure that\nit's really that cute..","-拿到了 可爱的宠物\n虽然但是，这真的算可爱吗…","– Вы нашли милаш”ку.\nПравда, так назвать его\nможно только с большой натяжкой...","-você encontrou um ""BICHINHO FOFINHO""\nfofinho? tenho lá minhas dúvidas..."
 NPC.Treasure.7,"FISH MEMORY\ntry jumping in water","化鱼在水中跳跃","ДУША РЫБЫ\nПопробуйте прыгнуть\nв воду.","MEMÓRIA DE PEIXE\nque tal dar um mergulhinho?"
 NPC.Treasure.8,"CRICKET MEMORY\ntry digging through walls","化蟋蟀挖穿墙壁","ДУША МЕДВЕДКИ\nПопробуйте покопаться в стенах.","MEMÓRIA DE GRILO\nexperimente cavar as paredes"
 NPC.Treasure.9,"SPORE MEMORY\nsweep three times\nto teleport to your broomerang","化孢子横扫三次\n瞬移到回旋镖上","ДУША СПОР\nВзмахните метлой три раза,\nчтобы переместиться к метлорангу.","MEMÓRIA DE FUNGO\nvarra três vezes para se teleportar até sua vassourangue"
+NPC.MimicTreasure.1,"FISHING ROD","鱼竿","удочку","VARA DE PESCA"
+NPC.MimicTreasure.2,"FLOWER POT","花盆","горшок","VASINHO DE FLORES"
+NPC.MimicTreasure.3,"CUTE PET","可爱的宠物","милашку","BICHINHO FOFINHO"
 NPC.BabushkaCat.1,*meow* *prrrr*,喵~咕噜咕噜~,*мяу* *мур-р*,*miau* *prrrr*
 NPC.BabushkaCat.1_2,*me-OW!*,喵！！,*мяу!!*,*miau!!*
 Dialog.Player.3,oh hello dearie,哎呀~咪咪,"О, здравствуй!","oi, fofura."
-NPC.Tutorial.7,"with the ""Grimoire"":\npress %s to switch\nbetween spells","使用“魔法书”：\n按%s切换咒语","С «Гримуаром»:\nнажмите %s, чтобы\nсменить заклинание.","com o ""Grimório"":\naperte %s para\ntrocar de feitiço"
+NPC.Tutorial.7,"with the ""Grimoire"":\npress %s to switch\nbetween spells","使用""魔法书""：\n按%s切换咒语","С «Гримуаром»:\nнажмите %s, чтобы\nсменить заклинание.","com o ""Grimório"":\naperte %s para\ntrocar de feitiço"
 NPC.Tutorial.8,try swapping and jumping\nat the same time!,尝试同时交换和跳跃！,Попробуй сменить заклинание\nи прыгнуть одновременно!,tente trocar feitiços\nenquanto pula!
 NPC.Tutorial.9,hi..\n•because you're [color=red]old[/color]: you'll only\nremember 2 spells at a time,那个…年纪大了，\n你一次只能记住两个咒语咯,Вряд ли вы запомните\nбольше двух заклинаний.\nВозраст сказывается.,"oi..como a senhora está bem velhinha,\nsó consegue se lembrar de\n2 feitiços de cada vez"
 Dialog.Player.4,harumph!!,什么玩意儿！！,Ой-ой-ой!,hunf!!
@@ -144,8 +147,10 @@ NPC.Fisherman.12,"•we're trying out\nnew technique",我们要尝试些新的�
 NPC.BabushkaCat.3,"*mrow* (you're not\na tasty fish..)",喵呜~\n（你不是小鱼干）,*мур*\n(Ты не рыбка.),*miau* (você não\ntem gosto de peixe...).
 NPC.BabushkaCat.4,*mrow*!\n(is that any way\nto treat a friend?!),喵呜~\n（有你这么对待朋友的吗！？）,"*мур*\n(Значит,\nтак ты с друзьями?!)",*miau!*\n(é assim que você\ntrata os amigos?!).
 NPC.Fisherman.13,thanks for cleaning up the riff raff.,谢谢你赶走了那群小混混！,"Спасибо, что разобрались с этим сбродом.",obrigado por ter limpado a baderna.
-NPC.TreasureMimic.1,"pssst, i'll trade you [ITEM] for 20 shards. whaddayasay..?",嘘…20个碎片换我这个[ITEM] ，怎么说？,У меня есть [ITEM] за 20 осколков. Как вам?..,"ei, psiu, troco [ITEM] por 20 fragmentos. quequeceacha...?"
-NPC.TreasureMimic.2,"sorry old-timer, i got nothin else",不好意思啊老家伙，我一分都不剩了。,"Простите, старушка. У меня больше ничего нет.","foi mal, velhota, não tenho mais nada."
+NPC.TreasureMimic.1,"•pssst, i'll trade you\n%s for %s shards.\nwhaddayasay..?",嘘…\n%s个碎片换我这个%s，\n怎么说？,У меня есть %s\nза %s осколков.\nКак вам?..,"ei, psiu, troco\n%s por %s fragmentos.\nquequeceacha...?"
+NPC.TreasureMimic.2,"•sorry old-timer,\ni got nothin else",不好意思啊老家伙，\n我一分都不剩了。,"Простите, старушка.\nУ меня больше\nничего нет.","foi mal, velhota,\nnão tenho mais nada."
+NPC.TreasureMimic.3,"•sorry old-timer,\nneed %s more shards.","不好意思啊老家伙，\n还需要%s个魔法碎片。","Простите, старушка.\nНужны ещё осколки: %s.","foi mal, velhota,\nfaltam %s fragmentos."
+NPC.Crone.5,need %s more shards.\nthis is strong magic y'know.,还需要%s个魔法碎片。\n谁让这是强力魔法呢。,"Нужны ещё осколки: %s.\nЭто сильная магия,\nзнаешь ли.","faltam %s fragmentos.\nessa magia é poderosa, sabia?"
 UI.BossName.1,the Warty seadevil,恶魔角鮟鱇,Глубоководный удильщик,o Diabo Abissal
 UI.BossName.2,the Vessel of souls,灵魂容器,Сосуд душ,o Receptáculo das Almas
 UI.BossName.3,Baba Yaga's house,芭芭雅嘎的小屋,Избушка Бабы-яги,a Casa da Baba Yaga

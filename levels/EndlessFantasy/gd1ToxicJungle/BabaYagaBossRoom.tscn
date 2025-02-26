@@ -874,13 +874,19 @@ shape = SubResource( 222 )
 [node name="BabaYagaBoss" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -8, 0 )
 
+[node name="CubeContainer" parent="Viewport/level/BabaYagaBoss/CubeCrystal" index="0"]
+transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
+
 [node name="MeshInstance" parent="Viewport/level/BabaYagaBoss/CubeCrystal/CubeContainer" index="0"]
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707106, 0.707107, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 251 )
 
 [node name="MeshInstance3" parent="Viewport/level/BabaYagaBoss/CubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707106, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
+transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
 mesh = SubResource( 252 )
+
+[node name="MeshInstance2" parent="Viewport/level/BabaYagaBoss/CubeCrystal/CubeContainer" index="2"]
+transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )
 
 [node name="CollisionShape" parent="Viewport/level/BabaYagaBoss/SpriteContainer/HouseSprite/FallthroughSolid" index="0"]
 shape = SubResource( 223 )

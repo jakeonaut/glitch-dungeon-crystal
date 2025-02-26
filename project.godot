@@ -44,6 +44,8 @@ config/windows_native_icon="res://favicon.ico"
 name="glitch dungeon 2: lovely sweet dreams crystal"
 main_scene="res://MainMenu.tscn"
 config/name_zh_CN="老奶的故障地牢大冒险"
+config/name_ru="Babushka's Glitch Dungeon Crystal"
+config/name_pt_BR="A Masmorra Glitchada da Babushka"
 
 [autoload]
 
@@ -73,6 +75,7 @@ enabled=PoolStringArray( "res://addons/sprite_mesh/plugin.cfg" )
 
 "always on top"=false
 name_ru=""
+name_pt_BR=""
 
 [importer_defaults]
 
@@ -330,8 +333,13 @@ open_map={
  ]
 }
 
+[internationalization]
+
+locale/locale_filter_mode=1
+
 [locale]
 
+test="zh_CN"
 translations=PoolStringArray( "res://dialogUiLocalization.en.translation", "res://dialogUiLocalization.pt_BR.translation", "res://dialogUiLocalization.ru.translation", "res://dialogUiLocalization.zh_CN.translation" )
 translation_remaps={
 "res://YosterFontBig.tres": PoolStringArray( "res://dialogBodyFontTheme_zh_CN.tres:zh_CN", "res://YosterFontBig_ru.tres:ru", "res://YosterFontBig_ru.tres:pt_BR" ),

@@ -5,10 +5,10 @@ type="Translation"
 
 [deps]
 
-files=[ "res://dialogUiLocalization.en.translation", "res://dialogUiLocalization.zh_Hans_CN.translation", "res://dialogUiLocalization.ru.translation", "res://dialogUiLocalization.pt_BR.translation" ]
+files=[ "res://dialogUiLocalization.en.translation", "res://dialogUiLocalization.zh_CN.translation", "res://dialogUiLocalization.ru.translation", "res://dialogUiLocalization.pt_BR.translation" ]
 
 source_file="res://dialogUiLocalization.csv"
-dest_files=[ "res://dialogUiLocalization.en.translation", "res://dialogUiLocalization.zh_Hans_CN.translation", "res://dialogUiLocalization.ru.translation", "res://dialogUiLocalization.pt_BR.translation" ]
+dest_files=[ "res://dialogUiLocalization.en.translation", "res://dialogUiLocalization.zh_CN.translation", "res://dialogUiLocalization.ru.translation", "res://dialogUiLocalization.pt_BR.translation" ]
 
 [params]
 

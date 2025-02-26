@@ -16,10 +16,14 @@ func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SO
 func activateScript():
   var initial_text = ""
   if treasureSpellCollectable.okay_im_done:
-    initial_text = "•sorry old-timer,\ni got nothin else."
+    initial_text = tr("NPC.TreasureMimic.2")
     textBox.showYesNoOptions = false
   else:
-    initial_text = "•pssst, i'll trade you\n" + mimic.trade_item + ", for " + str(mimic.num_gems_needed) + " shards.\nwhaddyasay..?"
+    var locale = TranslationServer.get_locale()
+    var should_reverse = (locale == "zh_CN")
+    initial_text = tr("NPC.TreasureMimic.1") % (
+      [str(mimic.num_gems_needed), tr(mimic.trade_item)] if should_reverse else [tr(mimic.trade_item), str(mimic.num_gems_needed)]
+    )
     textBox.showYesNoOptions = true
 
   var finalText = initial_text

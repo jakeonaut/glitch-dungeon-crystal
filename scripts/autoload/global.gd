@@ -333,14 +333,14 @@ func resetMemory():
     memory["dogu_matryoshka_boss"] = 0
 
     # STORY OR LEVEL STATE
-    memory["babushka_cat_story_hook"] = 2
+    memory["babushka_cat_story_hook"] = 0
     memory["fishing_rod_shortcut"] = 0
 
     # POWERUPS
     # memory["spellbookPage"] = [] # we check if the key exists to see if we have it... -_-
-    memory["can_force_respawn"] = 1
-    memory["has_map_item"] = true
-    memory["broomerang"] = 1
+    memory["can_force_respawn"] = 0
+    memory["has_map_item"] = false
+    memory["broomerang"] = 0
     memory["broom_double_jump"] = 1
     memory["zora_flippers"] = 0
     memory["mole_cricket"] = 0
@@ -349,7 +349,7 @@ func resetMemory():
     memory["max_hp"] = 1
     memory["hp"] = memory["max_hp"]
     memory["angel_flute"] = false
-    memory["has_marked_bosses_on_map"] = true
+    memory["has_marked_bosses_on_map"] = false
 
     # DEFUNCT POWERUPS
     memory["multi_broom"] = false

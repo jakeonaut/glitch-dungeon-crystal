@@ -479,7 +479,7 @@ should_fade_away = true
 
 [node name="Mimic" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -3.3489, 0 )
-trade_item = "FLOWER POT"
+trade_item = "NPC.MimicTreasure.2"
 
 [node name="CollisionShape" parent="Viewport/level/Mimic/SmallInteractionArea" index="0"]
 shape = SubResource( 56 )

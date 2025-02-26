@@ -42,6 +42,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -49,11 +50,18 @@ shader_param/enable_black_unknown = true
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = true
 shader_param/enable_color_glitch = false
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
@@ -80,6 +88,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.0
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.0
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -87,11 +96,18 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = false
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 1.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
@@ -460,13 +476,14 @@ tracks/5/keys = {
 
 [sub_resource type="ShaderMaterial" id=18]
 shader = ExtResource( 7 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -474,11 +491,18 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = true
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 3.0
 shader_param/y_div = 2.87
@@ -510,14 +534,14 @@ showYesNoOptions = true
 [node name="CollisionShape" parent="MimicNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 20 )
 
-[node name="DialogStartSound" parent="MimicNPC/NPC TextBox/TextBox" index="13"]
+[node name="DialogStartSound" parent="MimicNPC/NPC TextBox/TextBox" index="10"]
 script = ExtResource( 18 )
 
-[node name="DialogSound" parent="MimicNPC/NPC TextBox/TextBox" index="14"]
+[node name="DialogSound" parent="MimicNPC/NPC TextBox/TextBox" index="11"]
 stream = ExtResource( 6 )
 volume_db = -15.0
 
-[node name="AbortSound" parent="MimicNPC/NPC TextBox/TextBox" index="16"]
+[node name="AbortSound" parent="MimicNPC/NPC TextBox/TextBox" index="13"]
 script = ExtResource( 9 )
 
 [node name="Sprite3D" parent="MimicNPC" index="3"]
@@ -556,17 +580,17 @@ shape = SubResource( 119 )
 
 [node name="NPC TextBox" parent="TreasureSpellCollectable" instance=ExtResource( 21 )]
 
-[node name="DialogStartSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="13"]
+[node name="DialogStartSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 19 )
 
-[node name="DialogSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="14"]
+[node name="DialogSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="11"]
 stream = null
 volume_db = -23.0
 
-[node name="NextDialogSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="15"]
+[node name="NextDialogSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="12"]
 volume_db = -10.0
 
-[node name="AbortSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="16"]
+[node name="AbortSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="13"]
 stream = null
 script = ExtResource( 10 )
 

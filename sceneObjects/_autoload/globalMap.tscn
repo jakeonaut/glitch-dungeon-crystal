@@ -1293,7 +1293,7 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="ExcavationRoom" parent="CricketCaves" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, 0 )
 material_override = SubResource( 15 )
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/ExcavationRoom.tscn"
@@ -1336,6 +1336,7 @@ can_nav_up = false
 
 [node name="DoguBossRoom" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1.5, 2, -2, -1 )
+visible = false
 material_override = SubResource( 33 )
 offset = Vector2( 0, 50 )
 pixel_size = 0.03

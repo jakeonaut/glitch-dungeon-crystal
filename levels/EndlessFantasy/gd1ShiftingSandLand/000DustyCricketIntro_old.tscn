@@ -1212,7 +1212,7 @@ anims/suddenly_fly = SubResource( 48 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4, 3, 0 )
 
 [node name="Flypath" parent="Viewport/level" instance=ExtResource( 29 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2121, -3.61622, 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2121, -5.61622, 1 )
 should_fade_away = true
 
 [node name="Flypath3" parent="Viewport/level" instance=ExtResource( 29 )]

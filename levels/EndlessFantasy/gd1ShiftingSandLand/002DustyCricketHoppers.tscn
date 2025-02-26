@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=27]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=28]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=29]
+[ext_resource path="res://sceneObjects/BrothCauldron.tscn" type="PackedScene" id=30]
 [ext_resource path="res://sceneObjects/Spawner.tscn" type="PackedScene" id=31]
 [ext_resource path="res://sceneObjects/MiniAdventures.tscn" type="PackedScene" id=32]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=33]
@@ -688,6 +689,10 @@ spawn_time_limit = 10
 max_num_children = 2
 x_range = Vector2( -4, 4 )
 should_shake_screen = true
+
+[node name="BrothCauldron" parent="Viewport/level" instance=ExtResource( 30 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 9.22997, 0 )
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
 
 [node name="Viewport2" parent="." instance=ExtResource( 21 )]
 
