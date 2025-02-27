@@ -11,6 +11,7 @@ var hit_cooldown = 0
 var hit_cooldown_limit = 5
 export(String, FILE) var spawned_object_path
 export var is_static_in_level = true
+export var is_locked = false
 var spawned_object_res = null
 var num_jumps = 0
 export var max_num_jumps = 1
@@ -48,7 +49,7 @@ func get_foreign_children():
   return spatial_children
   
 func isActive(_debug=false):
-  return not has_been_hit
+  return not has_been_hit and not is_locked
   
 func passiveActivate(_delta, is_player):
   if not has_been_hit and not hit_cooldown > 0:

@@ -97,6 +97,8 @@ func unsmack():
     # material.set_shader_param("y_div", 2.3)
     material.set_shader_param("normal_offset", .02)
     mySprite.material_override = material
+  should_move_left = false
+  should_move_right = false
 
 func isFallthroughCollisionActive():
   return level.player.glitch_form != self.glitch_form
@@ -105,24 +107,33 @@ func fallthroughCollisionActivate(_friend):
   # don't allow text interaction
   pass
 
-
-func getSmacked(_broom_origin = null, _silently = false):
-  return false
-  # if is_smacked:
-  #   return false
-  # # don't get smacked if we're on the wrong side of a wind up
-  # if level.player.mySprite.flip_h != which_side_is_player_on and global.memory["broom"]:
-  #   return false
+var should_move_left = false
+var should_move_right = false
+func getSmacked(broom_origin = null, _silently = false):
+  if is_smacked:
+    return false
+  # don't get smacked if we're on the wrong side of a wind up
+  if level.player.mySprite.flip_h != which_side_is_player_on and global.memory["broom"]:
+    return false
     
-  # if smackSound: smackSound.play()
-  # var material = mySprite.material_override
-  # if material is ShaderMaterial:
-  #   material.set_shader_param("time_influence", 35)
-  #   material.set_shader_param("y_div", 2.3)
-  #   material.set_shader_param("normal_offset", .15)
-  #   mySprite.material_override = material
-  # smack_timer = 0
-  # is_smacked = true
+  if smackSound: smackSound.play()
+  var material = mySprite.material_override
+  if material is ShaderMaterial:
+    material.set_shader_param("time_influence", 35)
+    material.set_shader_param("y_div", 2.3)
+    material.set_shader_param("normal_offset", .15)
+    mySprite.material_override = material
+  smack_timer = 0
+  is_smacked = true
+  if broom_origin.x < global_transform.origin.x:
+    should_move_right = true
+  elif broom_origin.x > global_transform.origin.x:
+    should_move_left = true
+
+  if should_move_left:
+    global_transform.origin.x -= 1
+  elif should_move_right:
+    global_transform.origin.x += 1
 
 func passiveActivate(_delta, _is_player):
   pass

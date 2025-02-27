@@ -338,9 +338,9 @@ func resetMemory():
 
     # POWERUPS
     # memory["spellbookPage"] = [] # we check if the key exists to see if we have it... -_-
-    memory["can_force_respawn"] = 0
-    memory["has_map_item"] = false
-    memory["broomerang"] = 0
+    memory["can_force_respawn"] = 1
+    memory["has_map_item"] = true
+    memory["broomerang"] = 1
     memory["broom_double_jump"] = 1
     memory["zora_flippers"] = 0
     memory["mole_cricket"] = 0

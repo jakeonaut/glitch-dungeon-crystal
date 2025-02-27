@@ -193,10 +193,6 @@ func unsmack():
     # material.set_shader_param("y_div", 2.3)
     material.set_shader_param("normal_offset", .02)
     mySprite.material_override = material
-  if should_move_left:
-    global_transform.origin.x -= 1
-  elif should_move_right:
-    global_transform.origin.x += 1
   should_move_left = false
   should_move_right = false
 
@@ -229,6 +225,11 @@ func getSmacked(broom_origin = null, _silently = false):
     should_move_right = true
   elif broom_origin.x > global_transform.origin.x:
     should_move_left = true
+
+  if should_move_left:
+    global_transform.origin.x -= 1
+  elif should_move_right:
+    global_transform.origin.x += 1
   # tryApplyMyGlitch()
 
 func passiveActivate(_delta, _is_player):

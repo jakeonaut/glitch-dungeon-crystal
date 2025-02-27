@@ -28,8 +28,6 @@ onready var highpriestessCrystal4 = get_node("CrystalsContainer/HighpriestessCry
 onready var highpriestessCrystal5 = get_node("CrystalsContainer/HighpriestessCrystal5")
 onready var goop3 = get_node("Goop3")
 
-onready var angelEgg = get_node("AngelEgg")
-
 var has_boss_started = false
 var debug_start_boss_immediately = false
 export var camera_size = 30
@@ -54,7 +52,6 @@ func setUpRoomInitializationOverride():
     croneAbortSound.which_one = -1
     croneAbortSound.activateScript()
     # global.setStaticLevelZoneLevelVar(self, crystalGeode.get_ref(), true)
-    angelEgg.queue_free()
     if elderTadpoleNPC.get_ref() != null:
       elderTadpoleNPC.get_ref().visible = false
     if fishElderNPC.get_ref() != null:
@@ -89,9 +86,12 @@ func setUpRoomInitializationOverride():
         ladderSpell.visible = true
         invisibleSpell.visible = true
         savePoint.visible = true
-    else:
-      angelEgg.queue_free()
-
+  
+  if global.memory["priestess"] < 2:
+    yield(get_tree().create_timer(1.0), "timeout")
+    summonSmokeClouds(door.global_transform.origin, 3, true, true)
+    door.visible = false
+    
 # @override
 func playMenuMusic():
   musicPlayer.changeSongPitch(0.5)
