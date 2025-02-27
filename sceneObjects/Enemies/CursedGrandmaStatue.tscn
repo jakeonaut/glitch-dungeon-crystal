@@ -132,7 +132,7 @@ script = ExtResource( 4 )
 true_terminal_vel = 14
 grav = 28
 
-[node name="SmallInteractionArea" type="Area" parent="."]
+[node name="SmallInteractionArea" type="Area" parent="." groups=["corporeal_body"]]
 script = ExtResource( 13 )
 
 [node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]

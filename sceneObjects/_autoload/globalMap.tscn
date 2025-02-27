@@ -1323,33 +1323,8 @@ path = "res://levels/EndlessFantasy/gd1CrystalTower/000_Start.tscn"
 can_nav_left = false
 can_nav_right = false
 
-[node name="LockedRoom1" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 8, 0 )
-frame = 26
-path = "res://levels/EndlessFantasy/gd1CrystalTower/LockedRoom1.tscn"
-can_nav_left = false
-can_nav_right = false
-can_nav_up = false
-can_nav_down = false
-
-[node name="LockedRoom2" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 10, 0 )
-frame = 26
-can_nav_left = false
-can_nav_right = false
-can_nav_up = false
-can_nav_down = false
-
-[node name="LockedRoom3" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 10, 0 )
-frame = 26
-can_nav_left = false
-can_nav_right = false
-can_nav_up = false
-can_nav_down = false
-
 [node name="PastoralTowerHub" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 5, 9, 0 )
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 5, 8, 0 )
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/PastoralTowerHub.tscn"
 can_nav_left = false
@@ -1357,8 +1332,17 @@ can_nav_right = false
 can_nav_up = false
 can_nav_down = false
 
+[node name="LockedRoom2" parent="CrystalTower" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 8, 0 )
+frame = 26
+path = "res://levels/EndlessFantasy/gd1CrystalTower/LockedRoom2.tscn"
+can_nav_left = false
+can_nav_right = false
+can_nav_up = false
+can_nav_down = false
+
 [node name="LongGlitchyHallway" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1, 6, 9, 0 )
+transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 0 )
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/LongGlitchyHallway.tscn"
 can_nav_left = false
@@ -1366,17 +1350,8 @@ can_nav_right = false
 can_nav_up = false
 can_nav_down = false
 
-[node name="GlitchSave" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1, 4, 9, 0 )
-frame = 26
-path = "res://levels/EndlessFantasy/gd1CrystalTower/005_CrystalPuzzle_GlitchSave.tscn"
-can_nav_left = false
-can_nav_right = false
-can_nav_up = false
-can_nav_down = false
-
 [node name="TowerToSacredDoors" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 5, 10, 0 )
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 5, 9, 0 )
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/002TowerToSacredDoors.tscn"
 can_nav_left = false
@@ -1385,7 +1360,7 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="preBossRoom" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 11, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 10, 0 )
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/preBossRoom.tscn"
 can_nav_left = false
@@ -1394,7 +1369,7 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="BossLevel" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 12, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 11, -1 )
 material_override = SubResource( 26 )
 offset = Vector2( -10, 30 )
 pixel_size = 0.03

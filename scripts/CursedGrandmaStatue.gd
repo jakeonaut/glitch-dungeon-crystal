@@ -14,7 +14,7 @@ onready var faceSprite = get_node("FaceSprite")
 func _ready():
   set_process(true)
   set_physics_process(false)
-  spriteYAlignment = 0.5
+  spriteYAlignment = 0.345
 
   mySprite.material_override = mySprite.material_override.duplicate()
   faceSprite.material_override = faceSprite.material_override.duplicate()

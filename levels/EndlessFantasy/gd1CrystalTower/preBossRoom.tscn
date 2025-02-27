@@ -829,7 +829,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 6, 0 )
 grav = 0
 
 [node name="NPC7" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.683, -2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.683, -14, 0 )
 grav = 0
 bbText = "NPC.TowerGuard.2"
 

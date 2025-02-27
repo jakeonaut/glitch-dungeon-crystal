@@ -90,6 +90,7 @@ NPC.Tutorial.10,did you notice?\nthe spell you forget\nis the one you had active
 NPC.Tutorial.11,"you were here once\nbefore, weren't you?",你之前来过这，对吗？,Вы ведь уже\nздесь были?,"você já esteve aqui antes,\nnão é mesmo?"
 NPC.Tutorial.12,[color=blue]holy aura[/color]\nmakes you forget...,圣洁光环会让你忘记…,Святая аура\nстирает память...,a aura sagrada faz\na gente esquecer...
 NPC.Tutorial.13,"when you're red, you \ncan walk on air.. try \nnot to jump at first!",当你是红色的时候，\n你可以在空中行走…\n但是别先跳跃！,"Когда вы светитесь красным,\nто можете ходить по воздуху!\nТолько не надо прыгать...","quando você ficar vermelha,\nvai poder andar no ar...\ncuidado com os pulos!"
+HolyAura.Display,"you forgot","你忘记","стереть память","esqueceu"
 NPC.GhostGirl.1,don't forget about me.\ndon't forget who you were.,别忘了我，\n也别忘了你自己是谁。,"Не забывай меня,\nне забывай себя.",não se esqueça de mim.\nnão se esqueça de\nquem você já foi.
 NPC.Crone.3,"•you awoke a crystal elder!\n•you seem to have\nsome [color=red]hag magic[/color]... I can \nenchant your broom with shards",你唤醒了一位水晶长老！\n看来您这位老太太有点意思…\n我可以用碎片\n给你的魔法施加点法术。,"Ты разбудила старуху!\nПохоже, у тебя есть\nдар мымровой магии...\nЯ могу зачаровать твою\nметлу с помощью осколков.",você despertou uma anciã de cristal!\nvejo que tem um pouco de\nmagia de bruxa em você...\nposso encantar sua vassoura\ncom fragmentos.
 NPC.Crone.4,"•trade %s shards for\n[color=red]BROOMERANG[/color]?",用 %s 个魔法碎片交换\n回旋扫帚？,Потратить %s\nосколков на МЕТЛОРАНГ?,quer trocar %s\nfragmentos pela VASSOURANGUE?

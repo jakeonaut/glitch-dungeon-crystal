@@ -1054,7 +1054,7 @@ func nullify():
     level.displaySpellMessageText("unaffected")
     return
 
-  level.displaySpellMessageText("lose magic")
+  level.displaySpellMessageText(tr("HolyAura.Display"))
   var did_erase = false
   global.memory["mp"] = 0
   self.can_cast_spell_timer = 0
