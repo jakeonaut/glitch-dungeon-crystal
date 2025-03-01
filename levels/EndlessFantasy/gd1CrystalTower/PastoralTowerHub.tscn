@@ -268,7 +268,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5936, 50.1, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -1, 0 )
-path = "res://levels/EndlessFantasy/gd1CrystalTower/000_Start.tscn"
+path = "res://levels/EndlessFantasy/gd1CrystalTower/ReverseEasyFling.tscn"
 
 [node name="Door4" parent="Viewport/level" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 10, 0 )
@@ -279,11 +279,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 14, 0 )
 path = "res://levels/EndlessFantasy/gd1CrystalTower/LockedRoom2.tscn"
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 36 )]
-transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 4, 19, 0 )
-is_locked = true
-should_lock = true
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 10, 23, 0 )
 path = "res://levels/EndlessFantasy/gd1CrystalTower/002TowerToSacredDoors.tscn"
-num_keys_unlock = 2
 
 [node name="FreeChicken" parent="Viewport/level" instance=ExtResource( 33 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500762, 0 )
@@ -370,9 +367,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 21, 0 )
 
 [node name="miniCubeCrystal3" parent="Viewport/level" instance=ExtResource( 34 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 9, 0 )
-
-[node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 23 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 37, 0 )
 
 [node name="AngelEgg2" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -16, 0 )

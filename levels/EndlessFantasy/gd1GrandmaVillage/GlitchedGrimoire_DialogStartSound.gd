@@ -5,7 +5,7 @@ func _ready():
 
 
 func activateScript():
-    var text = tr("NPC.GhostGirl.1")
+    var text = tr("NPC.Treasure.2_2")
     var textBox = get_node("..")
     textBox.text_final = text
     textBox.textNode.bbcode_text = text

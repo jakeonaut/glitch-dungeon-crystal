@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=3]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=4]
@@ -29,6 +29,10 @@ extents = Vector3( 0.5, 0.75, 1 )
 [sub_resource type="BoxShape" id=50]
 resource_local_to_scene = true
 extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=53]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="BoxShape" id=25]
 resource_local_to_scene = true
@@ -92,6 +96,10 @@ extents = Vector3( 0.5, 0.75, 1 )
 [sub_resource type="BoxShape" id=52]
 resource_local_to_scene = true
 extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=54]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="ViewportTexture" id=23]
 viewport_path = NodePath("Viewport")
@@ -196,14 +204,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3912, -1, 0 )
 path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/001pt5_StreetlightManifesto.tscn"
 
-[node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
-visible = false
-
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 shape = SubResource( 49 )
 
 [node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
 shape = SubResource( 50 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea2" index="0"]
+shape = SubResource( 53 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 25 )
@@ -215,10 +223,7 @@ shape = SubResource( 26 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0088, 9.1, 0 )
 path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000DieToSavePoint.tscn"
 
-[node name="Sprite3D2" parent="Viewport/level/Door5" index="1"]
-visible = false
-
-[node name="AnimationPlayer" parent="Viewport/level/Door5" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door5" index="6"]
 anims/doorClose = SubResource( 39 )
 anims/doorOpen = SubResource( 40 )
 anims/locked = SubResource( 41 )
@@ -228,6 +233,9 @@ shape = SubResource( 51 )
 
 [node name="PassiveCollisionShape" parent="Viewport/level/Door5/InteractionArea" index="1"]
 shape = SubResource( 52 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door5/InteractionArea2" index="0"]
+shape = SubResource( 54 )
 
 [node name="CollisionShape" parent="Viewport/level/Door5/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 25 )

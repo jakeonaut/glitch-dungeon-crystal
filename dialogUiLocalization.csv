@@ -69,6 +69,7 @@ UI.Alert.1,angel egg!,天使的卵！,Ангельское яйцо!,ovo celesti
 UI.Alert.2,all tidy!,打扫干净了！,Всё чисто!,tudo arrumadinho!
 NPC.Treasure.1,????\npress %s to Return,？？？？\n按 %s返回上一存档点,"????\nНажмите %s, чтобы «вернуться».",????\naperte %s para retornar
 NPC.Treasure.2,"•You got ""Grimoire""\n..but it's missing a\nfew pages",你拿到了""魔法书""\n…就是缺了几页,У вас есть «Гримуар»...\nно в нём не хватает\nпары страниц.,você encontrou o ""GRIMÓRIO""...\nmas faltam algumas páginas
+NPC.Treasure.2_2,"•You got ""Grimoire"" MEMORY!!",你拿到了圣洁""魔法书"",У вас есть\nДУША «Гримуар»,você encontrou o\nMEMÓRIA DE ""GRIMÓRIO""
 NPC.Treasure.3,"got ""map"",\nview from inventory\nor press ""%s"".","-发现了 地图！\n在物品栏打开\n或按%s查看","– Вы нашли «карту».\nПосмотрите её в инвентаре\nили нажмите %s.","-você encontrou um ""MAPA""\nveja no inventário ou aperte %s"
 NPC.Treasure.4,"•FISHING ROD GET\nbut you don't know\nhow to fish...","-拿到了 鱼竿\n但你不会钓鱼……","– Вы нашли удочку.\nНо вы же не знаете,\nкак надо рыбачить...","-você encontrou uma ""VARA DE PESCA""\nmas saber pescar que é bom, nada..."
 NPC.Treasure.5,"•FLOWER POT GET\nwell, maybe it will be useful..","-拿到了 花盆\n行吧。万一以后用得着呢…","– Вы нашли горшок.\nМожет, он и пригодится...","-você encontrou um ""VASINHO DE FLORES""\nvai que serve para alguma coisa..."
@@ -115,6 +116,7 @@ NPC.Elder.4,"hi! thanks *cough*\ni'll go meet my other sisters.\nbye bye",好了
 NPC.Elder.5,"•awaken my %s other sisters\nwe can pray to Goddess\nand clean up this world",还需要%s个水晶才能唤醒！\n我们要一起祈祷才会更有力量。,"Нужно пробудить ещё\nнемного кристаллов: %s!\nНаши молитвы сильнее,\nкогда мы вместе.",só faltam %s Cristais\npara despertar! juntas nossas\npreces são mais fortes.
 NPC.Elder.6,"thank you young one! we will meet\nat the holy site at top of tower.\nmake haste!",谢谢你啊小姑娘。\n我们会在塔顶的圣地与你会合。\n务必速来！,"Спасибо тебе, девочка!\nВстречаемся в священном\nместе на вершине башни.\nПоторопись!","muito obrigada, minha jovem!\nnos encontraremos no local\nsagrado no topo desta torre.\napresse-se!"
 NPC.Elder.7,Goddess! Awaken!\nCure this place of sin!\nMother!! Please help this place.,女神啊！觉醒吧\n治愈这个罪恶之地吧！\n母亲啊！请救救这片土地吧！,"Богиня, пробудись!\nОчисти этот мир от греха!\nМатушка, помоги нам.","Deusa! Desperte!\nVarra este lugar do pecado!\nMãe! Purifique este\nlugar, por favor."
+UI.GrimoireAdvice,"•try to rearrange spells\nin your inventory.\npress %s","改变咒语顺序\n物品栏\n按%s","Измените порядок\nзаклинаний\nИнвентарь,Нажмите %s","mudar ordem dos feitiços,\naperte %s para inventário"
 UI.Inventory.1,inventory,物品栏,Инвентарь,inventário
 UI.Inventory.2,--spells--,--咒语--,-Заклинания-,--feitiços--
 UI.Inventory.3,"change spell order, %s to swap",改变咒语顺序，按%s调换,"Измените порядок заклинаний, %s, чтобы поменять местами","mudar ordem dos feitiços, %s para trocar"
