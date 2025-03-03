@@ -884,9 +884,14 @@ func tryDieToOffscreenCamera(_delta):
           level.flipGravity(-1 * (grav / abs(grav)))
         global.roomEdgeVector = null
         return
-      global.roomEdgeVector = null
 
     # otherwise you just can't go there...
+    if global.roomEdgeVector == Vector3(0, 1, 0) and grav < 0:
+      level.flipGravity(1)
+      gravitySound.pitch_scale = rand_range(0.8, 1.2)
+      gravitySound.play()
+    global.roomEdgeVector = null
+
     if try_to_recover:
       tryToRecover()
     else:
@@ -1958,7 +1963,7 @@ func tumbleFall(direction_vector, is_corrupted = false):
       aniPlayer.queue("tumbleLeft")
     else:
       aniPlayer.queue("tumbleRight")
-    jump_val = 20
+    jump_val = 10
     should_free_when_falling = true
     on_ground = false
     # grav = 0

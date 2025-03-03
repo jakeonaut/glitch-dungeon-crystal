@@ -34,7 +34,10 @@ func _process(delta):
   #   queue_free()
   #   return
 
-  is_active = global.haveIBeenToThisLevelPath(path)
+  if path != "" and path != null:
+    is_active = global.haveIBeenToThisLevelPath(path)
+  else:
+    is_active = false
 
   if is_active and not aniPlayer.assigned_animation == "active":
     aniPlayer.play("active")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
@@ -31,9 +31,11 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=29]
 [ext_resource path="res://sceneObjects/WaterCubes/WaterCube.tscn" type="PackedScene" id=30]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=31]
+[ext_resource path="res://levels/EndlessFantasy/gd1GrandmaVillage/GrimoireInventoryAdviceDialogStartSound.gd" type="Script" id=32]
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=33]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=34]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=35]
+[ext_resource path="res://scripts/NPC.gd" type="Script" id=36]
 
 [sub_resource type="BoxShape" id=48]
 resource_local_to_scene = true
@@ -118,6 +120,14 @@ extents = Vector3( 1, 0.8, 1.3 )
 [sub_resource type="BoxShape" id=120]
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=123]
+resource_local_to_scene = true
+extents = Vector3( 3, 2, 1.3 )
+
+[sub_resource type="BoxShape" id=124]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="ViewportTexture" id=64]
 viewport_path = NodePath("Viewport")
@@ -427,6 +437,17 @@ is_bubble_spitter = true
 
 [node name="ElderTadpoleNPC" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -3, 0 )
+script = ExtResource( 36 )
+bbText = "UI.GrimoireAdvice"
+
+[node name="CollisionShape" parent="Viewport/level/ElderTadpoleNPC/SmallInteractionArea" index="0"]
+shape = SubResource( 123 )
+
+[node name="DialogStartSound" parent="Viewport/level/ElderTadpoleNPC/NPC TextBox/TextBox" index="10"]
+script = ExtResource( 32 )
+
+[node name="CollisionShape" parent="Viewport/level/ElderTadpoleNPC/FallthroughSolid" index="0"]
+shape = SubResource( 124 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 11 )]
 
@@ -456,4 +477,6 @@ flip_v = true
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
+[editable path="Viewport/level/ElderTadpoleNPC"]
+[editable path="Viewport/level/ElderTadpoleNPC/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=13]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=15]
+[ext_resource path="res://sceneObjects/BrothCauldron.tscn" type="PackedScene" id=16]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=17]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=19]
@@ -319,6 +320,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.412745, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50485, 2, 0 )
 grav = 0
 bbText = "NPC.TowerGuard.1"
+
+[node name="BrothCauldron" parent="Viewport/level" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3146, 2.19662, 0 )
+path = "res://levels/EndlessFantasy/gd1CrystalTower/preBossRoom.tscn"
 
 [node name="Viewport2" parent="." instance=ExtResource( 14 )]
 

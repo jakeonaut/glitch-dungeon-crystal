@@ -1358,7 +1358,7 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="TowerToSacredDoors" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 11, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 10, 0 )
 frame = 8
 path = "res://levels/EndlessFantasy/gd1CrystalTower/002TowerToSacredDoors.tscn"
 can_nav_left = false
@@ -1366,15 +1366,22 @@ can_nav_right = false
 can_nav_up = false
 can_nav_down = false
 
+[node name="preBossRoom" parent="CrystalTower" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 11, 0 )
+frame = 26
+path = "res://levels/EndlessFantasy/gd1CrystalTower/preBossRoom.tscn"
+can_nav_left = false
+can_nav_up = false
+can_nav_down = false
+
 [node name="BossLevel" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 10, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 11, -1 )
 material_override = SubResource( 26 )
 offset = Vector2( -10, -20 )
 texture = ExtResource( 16 )
 hframes = 4
 vframes = 2
 path = "res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom.tscn"
-can_nav_left = false
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false

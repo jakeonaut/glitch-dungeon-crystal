@@ -102,6 +102,8 @@ func passiveActivate(_delta, is_player):
       level.player.gravitySound.play()
       level.player.glitchTickle()
       level.flipGravity(-1 * (level.player.grav / abs(level.player.grav)))
+      for _i in range(5):
+        level.player.spawnASpore(level.player.global_transform.origin, false)
 
 # @override
 func unsmack():
