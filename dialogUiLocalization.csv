@@ -77,6 +77,8 @@ NPC.Treasure.6,"•CUTE PET GET\nalthough you're not sure that\nit's really that
 NPC.Treasure.7,"FISH MEMORY\ntry jumping in water","化鱼在水中跳跃","ДУША РЫБЫ\nПопробуйте прыгнуть\nв воду.","MEMÓRIA DE PEIXE\nque tal dar um mergulhinho?"
 NPC.Treasure.8,"CRICKET MEMORY\ntry digging through walls","化蟋蟀挖穿墙壁","ДУША МЕДВЕДКИ\nПопробуйте покопаться в стенах.","MEMÓRIA DE GRILO\nexperimente cavar as paredes"
 NPC.Treasure.9,"SPORE MEMORY\nsweep three times\nto teleport to your broomerang","化孢子横扫三次\n瞬移到回旋镖上","ДУША СПОР\nВзмахните метлой три раза,\nчтобы переместиться к метлорангу.","MEMÓRIA DE FUNGO\nvarra três vezes para se teleportar até sua vassourangue"
+NPC.AngelStatue.0,"...","…","...","..."
+NPC.AngelStatue.1,"teleport?","瞬移？","переместиться?","teleportar?"
 NPC.MimicTreasure.1,"FISHING ROD","鱼竿","удочку","VARA DE PESCA"
 NPC.MimicTreasure.2,"FLOWER POT","花盆","горшок","VASINHO DE FLORES"
 NPC.MimicTreasure.3,"CUTE PET","可爱的宠物","милашку","BICHINHO FOFINHO"

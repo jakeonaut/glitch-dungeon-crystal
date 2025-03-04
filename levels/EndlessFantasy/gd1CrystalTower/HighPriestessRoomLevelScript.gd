@@ -13,7 +13,6 @@ onready var savePoint = get_node("SavePoint")
 onready var ladderSpell = get_node("LadderSpell")
 onready var invisibleSpell = get_node("InvisibleSpell")
 onready var aniPlayer = get_node("AnimationPlayer")
-onready var door = get_node("Door")
 onready var grandmaStatues = get_node("GrandmaStatues")
 onready var elderTadpoleNPC = weakref(get_node("ElderTadpoleNPC"))
 onready var fishElderNPC = weakref(get_node("FishElderNPC"))
@@ -86,11 +85,6 @@ func setUpRoomInitializationOverride():
         ladderSpell.visible = true
         invisibleSpell.visible = true
         savePoint.visible = true
-  
-  if global.memory["priestess"] < 2:
-    yield(get_tree().create_timer(1.0), "timeout")
-    summonSmokeClouds(door.global_transform.origin, 3, true, true)
-    door.visible = false
     
 # @override
 func playMenuMusic():
@@ -114,27 +108,28 @@ var random_tiles_timer = 0
 var random_tiles_time_limit = 5
 var goddess_cutscene_counter = -1
 var crystalSpinAmount = 1
+var should_start_cutcene = 0
 func _process(delta):
   # i hate this but _process is not guaranteed to occur AFTER setUpRoomInitializationOverride
   if not has_room_initialized:
     return
 
   if not has_boss_started and global.memory["priestess"] == 0:
-    if goddess_cutscene_counter == -1 and player.glitch_form == global.GlitchForm.NORMAL and player.on_ground:
+    if goddess_cutscene_counter == -1 and should_start_cutcene == 1 and player.on_ground:
       global.pauseGame = true
       global.shouldRenderAsCinematic = true
       goddess_cutscene_counter = -99
       yield(get_tree().create_timer(1.0), "timeout")
-      aniPlayer.play("fadeDitherIn")
-      theGoddess.get_node("AnimationPlayer").play("bubbleUp", -1, 0.7)
+      # aniPlayer.play("fadeDitherIn")
+      # theGoddess.get_node("AnimationPlayer").play("bubbleUp", -1, 0.7)
       goddess_cutscene_counter = 0
       gameCamera.initial_size = camera_size
       gameCamera.zoomed_size = camera_size
     elif goddess_cutscene_counter == 0:
       levelTiles.purifyAllSpikes()
-      if not theGoddess.get_node("AnimationPlayer").is_playing():
-        secretGoddessNPC.activate(true)
-        goddess_cutscene_counter += 1
+      # if not theGoddess.get_node("AnimationPlayer").is_playing():
+      #   secretGoddessNPC.activate(true)
+      goddess_cutscene_counter += 1
     elif goddess_cutscene_counter == 1:
       if global.activeInteractor == null:
         # global.memory["glitch_world"] = 1
@@ -163,8 +158,8 @@ func _process(delta):
         yield(get_tree().create_timer(1.0), "timeout")
         player.glitch_death_timer = 8
         player.glitchTickle()
-        aniPlayer.play("fadeDitherOut")
-        theGoddess.get_node("AnimationPlayer").play("disintegrate", -1, 0.4)
+        # aniPlayer.play("fadeDitherOut")
+        # theGoddess.get_node("AnimationPlayer").play("disintegrate", -1, 0.4)
         # summonSmokeClouds(highpriestessCrystal5, 3)
         # highpriestessCrystal5.visible = true
         goddess_cutscene_counter = 3

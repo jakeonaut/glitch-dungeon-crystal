@@ -173,26 +173,28 @@ func applyNextGlitch():
   
 func applyObeliskGlitch(glitch, add_spell_to_grimoire = true):
   var spellToBeForgotten = null
-  if applyGlitch(glitch, false) and add_spell_to_grimoire and \
-     global.memory.has("spellbookPage") and not global.memory["spellbookPage"].has(glitch):
-    var maxSpellbookSize = 2
-    if global.memory["glitched_grimoire"]:
-      maxSpellbookSize = 3
-    if global.memory["glitched_grimoire2"]:
-      maxSpellbookSize = 4
-    if global.memory["spellbookPage"].size() > 0:
-      if global.memory["spellbookPage"].size() >= maxSpellbookSize:
-        var spellToBeForgottenIndex = spellCastPauseIndex # - 1
-        if spellToBeForgottenIndex < 0:
-          spellToBeForgottenIndex = global.memory["spellbookPage"].size() - 1
-        spellToBeForgotten = global.memory["spellbookPage"][spellToBeForgottenIndex]
-        if maxSpellbookSize == 2:
-          global.memory["spellbookPage"].pop_at(spellToBeForgottenIndex)
-        else:
-          global.memory["spellbookPage"][spellToBeForgottenIndex] = glitch
-    if maxSpellbookSize == 2 or global.memory["spellbookPage"].size() < maxSpellbookSize:
-      global.memory["spellbookPage"].push_back(glitch)
-    spellCastPauseIndex = global.memory["spellbookPage"].find(glitch)
+  if applyGlitch(glitch, false):
+    if add_spell_to_grimoire and global.memory.has("spellbookPage") and not global.memory["spellbookPage"].has(glitch): # NOT HAS
+      var maxSpellbookSize = 2
+      if global.memory["glitched_grimoire"]:
+        maxSpellbookSize = 3
+      if global.memory["glitched_grimoire2"]:
+        maxSpellbookSize = 4
+      if global.memory["spellbookPage"].size() > 0:
+        if global.memory["spellbookPage"].size() >= maxSpellbookSize:
+          var spellToBeForgottenIndex = spellCastPauseIndex # - 1
+          if spellToBeForgottenIndex < 0:
+            spellToBeForgottenIndex = global.memory["spellbookPage"].size() - 1
+          spellToBeForgotten = global.memory["spellbookPage"][spellToBeForgottenIndex]
+          if maxSpellbookSize == 2:
+            global.memory["spellbookPage"].pop_at(spellToBeForgottenIndex)
+          else:
+            global.memory["spellbookPage"][spellToBeForgottenIndex] = glitch
+      if maxSpellbookSize == 2 or global.memory["spellbookPage"].size() < maxSpellbookSize:
+        global.memory["spellbookPage"].push_back(glitch)
+      spellCastPauseIndex = global.memory["spellbookPage"].find(glitch)
+    if add_spell_to_grimoire and global.memory.has("spellbookPage") and global.memory["spellbookPage"].has(glitch): # HAS
+      spellCastPauseIndex = global.memory["spellbookPage"].find(glitch)
   if spellToBeForgotten == global.GlitchForm.NORMAL:
     return null
   return spellToBeForgotten
@@ -1334,8 +1336,8 @@ func getChickenInfected():
   if is_mushroom_infected or nesting_doll_state == global.NestingDoll.MATRIARCH or transformation == TransformationState.CHICKEN:
     return
   if not global.has_been_baba_yaga_cursed:
-    if not "BabaYagaBossRoom" in level.getLevelName():
-      self.sayThis("Baba Yaga's curse")
+    # if not "BabaYagaBossRoom" in level.getLevelName():
+    #   self.sayThis("Baba Yaga's curse")
     global.has_been_baba_yaga_cursed = true
   chicken_timer = 0
   summonFallenBroom(false, true, false)
@@ -2096,7 +2098,7 @@ func processBroomLogic(delta):
       is_in_broom_cooldown = false
       which_broom_attack = 1
 
-  if (Input.is_action_just_pressed("sub_action_button") or force_a_sweep) and not summonedBroom and not pauseSelf and not aa == "sweepFloor" and not global.hasGottenLevelGeode: # and (global.activeInteractor == null or global.activeInteractor.is_tiny):
+  if (Input.is_action_just_pressed("sub_action_button") or force_a_sweep) and not summonedBroom and not pauseSelf and not aa == "sweepFloor" and not global.hasGottenLevelGeode and not isTextboxPausingMe(): # and (global.activeInteractor == null or global.activeInteractor.is_tiny):
     teleport_to = null
     doBroomAttack(which_broom_attack)
     if linear_velocity.y < 0 and transformation != TransformationState.FISHY:
@@ -2513,7 +2515,7 @@ func iFellFlat():
   summonFallenBroom(false, true, false)
 
 func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = true):
-  if not global.memory["broom"] or not broomSpriteVisible.visible:
+  if not global.memory["broom"] or not broomSpriteVisible.visible or isTextboxPausingMe():
     return null
   broomSpriteVisible.visible = false
   summonSmokeClouds(3, false, false)

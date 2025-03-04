@@ -322,7 +322,7 @@ grav = 0
 bbText = "NPC.TowerGuard.1"
 
 [node name="BrothCauldron" parent="Viewport/level" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3146, 2.19662, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.96328, 2.05196, 0 )
 path = "res://levels/EndlessFantasy/gd1CrystalTower/preBossRoom.tscn"
 
 [node name="Viewport2" parent="." instance=ExtResource( 14 )]

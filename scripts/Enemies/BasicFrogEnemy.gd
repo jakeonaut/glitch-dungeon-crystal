@@ -181,6 +181,14 @@ func updateFallthroughSolids():
     if fallthroughSolid and not fallthroughSolid.is_in_group("fallthrough"):
       fallthroughSolid.add_to_group("fallthrough")
 
+# @override
+func processGlitchFormGlitchiness():
+  pass
+
+# @override
+func isActive(_debug=false):
+  return not is_smacked and visible and not behavior_evolve and not is_frozen and not am_i_dying # and (glitch_form == global.GlitchForm.NORMAL or glitch_form == getPlayer().glitch_form)
+
 var gulpin = false
 func startGulp():
   if not gulpin:
@@ -194,6 +202,9 @@ func startGulp():
       else:
         if lickedGameMover.has_method("normalizePlayerTransformation"):
           lickedGameMover.normalizePlayerTransformation()
+        if lickedGameMover == level.player:
+          if glitch_form != global.GlitchForm.NORMAL:
+            level.player.applyObeliskGlitch(self.glitch_form)
         lickedGameMover.physics_state = lickedGameMover.PhysicsState.IGNORE_PHYSICS
       
     notDieSound.play()
@@ -224,8 +235,9 @@ func spitOut():
   if lickedGameMover != null:
     if lickedGameMover.has_method("glitchTickle"): lickedGameMover.glitchTickle()
     if lickedGameMover.has_method("tumbleFall"): lickedGameMover.tumbleFall(Vector2(-1 if mySprite.flip_h else 1, 0))
-    if lickedGameMover == level.player and level.player.physics_state == level.player.PhysicsState.BEING_TOSSED:
-      level.player.playBounce("grow")
+    if lickedGameMover == level.player:
+      if level.player.physics_state == level.player.PhysicsState.BEING_TOSSED:
+        level.player.playBounce("grow")
     if is_bubble_spitter and lickedGameMover.has_method("getBubbleInfected"):
       lickedGameMover.getBubbleInfected()
       yield(get_tree().create_timer(0.2), "timeout")

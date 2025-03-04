@@ -968,7 +968,7 @@ pixel_size = 0.025
 texture = ExtResource( 32 )
 
 [node name="BrothCauldron" parent="Viewport/level" instance=ExtResource( 29 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.158756, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.00445198, 0 )
 path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
 
 [node name="Viewport2" parent="." instance=ExtResource( 11 )]

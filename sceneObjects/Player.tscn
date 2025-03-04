@@ -7689,6 +7689,19 @@ script = ExtResource( 10 )
 frame_delay = 0.5
 automatically_change_color = false
 
+[node name="InteractPrompt2" type="Sprite3D" parent="." groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 2.5, 7 )
+visible = false
+material_override = SubResource( 85 )
+pixel_size = 0.12
+texture = ExtResource( 47 )
+hframes = 12
+vframes = 10
+frame = 63
+script = ExtResource( 10 )
+frame_delay = 0.5
+automatically_change_color = false
+
 [node name="AngelZoneLevelDoor" parent="." instance=ExtResource( 82 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19 )
 visible = false

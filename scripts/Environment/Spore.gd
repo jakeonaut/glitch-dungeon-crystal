@@ -114,15 +114,21 @@ func bulletTryDieToSolids():
     if isTileSolid(tile_type_a, true, 1, tile_pos_a):
         bubbleStartPop()
 
-func isTileSolid(tile_type, _is_vertical, _sensor_direction, _tile_pos_coords):
-    if tile_type == GridMap.INVALID_CELL_ITEM:
-        return false
-    var tileShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)
-    if tileShape == null or tileShape.size() == 0:
-        return false
-    var tileCollisionShape = tileShape[0]
-    var tile_name = getLevelTiles().mesh_library.get_item_name(tile_type)
-    return (tileCollisionShape is BoxShape and not "Spikes" in tile_name)
+func isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords):
+  var checking_for_floor_collisions = is_vertical and sensor_direction == -1
+  if tile_type == GridMap.INVALID_CELL_ITEM:
+    return false
+  var tile_name = getLevelTiles().mesh_library.get_item_name(tile_type)
+  return (global.isTileSolid(tile_type, getLevelTiles().mesh_library) or (checking_for_floor_collisions and isTileFallthroughSolidTop(tile_type, tile_pos_coords)))  and not "Spikes" in tile_name
+  
+func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
+  var y = global_transform.origin.y
+  var tb = get_node("CollisionShape").shape.height/2
+  var bb = -tb
+  var is_above_top_of_tile = y + bb > tile_pos_coords.y
+  
+  var tile_name = getLevelTiles().mesh_library.get_item_name(tile_type)
+  return is_above_top_of_tile and ("Semisolid" in tile_name)
         
 func randomizeTargetPos():
     bubble_speed = rand_range(1.925, 3.8)

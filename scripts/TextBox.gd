@@ -371,7 +371,7 @@ func hideInteractPrompt():
 var tindex = -1
 var smackedBbText = null
 func showTextbox(wasSmacked = false):
-  selectedYesNoOption = true
+  selectedYesNoOption = false
   # TODO(jaketrower): DialogStartSound play nice with smackedBbText?
   dialogStartSound.play()
   dialogStartSound.activateScript()

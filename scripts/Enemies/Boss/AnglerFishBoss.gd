@@ -14,9 +14,9 @@ onready var crystals = get_node("Crystals")
 onready var dangleContainer = get_node("DangleContainer")
 onready var screamSound = get_node("Sounds/ScreamSound")
 onready var chargeSound = get_node("Sounds/ChargeSound")
-var glitchHermitCrabManagerRes = preload("res://sceneObjects/Enemies/GlitchHermitCrabManager.tscn")
-var spawnedHermitCrabManagers = []
-var crystalGeodeRes = preload("res://sceneObjects/Crystals/FishCrystal.tscn")
+var basicFrogEnemyRes = preload("res://sceneObjects/Enemies/BasicFrogEnemy.tscn")
+var basicFrogEnemies = []
+var crystalGeodeRes = preload("res://sceneObjects/CrystalGeode2.tscn")
 
 var num_hits = 0
 var MAX_NUM_HITS = 3
@@ -398,17 +398,16 @@ func startBossFight():
     level.gameCamera.zoomed_size = 30
 
 func barfRandomSnail():
-    if num_hits <= spawnedHermitCrabManagers.size():
+    if num_hits <= basicFrogEnemies.size():
         return
 
-    var glitchHermitCrabManager = glitchHermitCrabManagerRes.instance()
-    level.add_child(glitchHermitCrabManager)
+    var basicFrogEnemy = basicFrogEnemyRes.instance()
+    basicFrogEnemy.is_infected = true
+    level.add_child(basicFrogEnemy)
     yield(TempTimer.idle_frame(self), "timeout")
     # glitchHermitCrabManager.scale = Vector3(1.5, 1.5, 1.5)
-    glitchHermitCrabManager.global_transform.origin = self.global_transform.origin + Vector3(-3.333, 0.265, 0)
-    glitchHermitCrabManager.hermitCrabShell.get_ref().is_extra_bouncy = true
-    glitchHermitCrabManager.glitchHermitCrab.get_ref().getSmacked(self.global_transform.origin)
-    spawnedHermitCrabManagers.push_back(weakref(glitchHermitCrabManager))
+    basicFrogEnemy.global_transform.origin = self.global_transform.origin + Vector3(-3.333, 0.265, 0)
+    basicFrogEnemies.push_back(weakref(basicFrogEnemy))
 
 func teleportToPrey():
     if preyTarget != null and preyTarget.get_ref() != null:
@@ -540,9 +539,9 @@ func okayImDead():
         musicPlayer.stopAll()
         musicPlayer.playDefeatBossJingle()
         level.summonSmokeClouds(level.door.global_transform.origin, 2, true, true)
-    for glitchHermitCrabRef in spawnedHermitCrabManagers:
-        if glitchHermitCrabRef.get_ref():
-            glitchHermitCrabRef.get_ref().hermitCrabShell.get_ref().is_extra_bouncy = false
+    for basicFrogEnemyRef in basicFrogEnemies:
+        if basicFrogEnemyRef.get_ref():
+            basicFrogEnemyRef.get_ref().getSmacked()
     global.pauseGame = false
     global.shouldRenderAsCinematic = false
 

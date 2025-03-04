@@ -98,6 +98,7 @@ func landed():
     if chicken_state != ChickenState.IDLE:
         chicken_state = ChickenState.LAND
 
+var MAX_NUM_HITS = 5
 
 # @override
 func getSmacked(broom_origin = null, silently = false):
@@ -112,7 +113,7 @@ func getSmacked(broom_origin = null, silently = false):
     notDieSound.pitch_scale = rand_range(0.8, 1.2)
     notDieSound.play()
   mySprite.updateBaseFrame(6, 3)
-  if how_many_times_did_u_hit_me >= 3:
+  if how_many_times_did_u_hit_me >= MAX_NUM_HITS:
     how_many_times_did_u_hit_me = 0
     if level.player.transformation != level.player.TransformationState.CHICKEN:
         level.player.gravitySound.play()
@@ -135,7 +136,7 @@ func getSmacked(broom_origin = null, silently = false):
     afraid_time_limit *= 2
   chicken_state = ChickenState.AFRAID
 
-  if how_many_times_did_u_hit_me >= 3:
+  if how_many_times_did_u_hit_me >= MAX_NUM_HITS:
     how_many_times_did_u_hit_me = 0
     yield(get_tree().create_timer(0.2), "timeout")
     if level.player.transformation != level.player.TransformationState.CHICKEN:

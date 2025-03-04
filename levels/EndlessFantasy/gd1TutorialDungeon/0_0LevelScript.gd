@@ -46,6 +46,7 @@ func _process(_delta):
       global.pauseMoveInput = false
       global.shouldRenderAsCinematic = false
       player.textBox.interact()
+      global.okay_really_really_started_game = true
       global.activeInteractor = player.textBox
       showInstructions = false
       should_i_show_prompt = false

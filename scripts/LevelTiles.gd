@@ -486,14 +486,7 @@ func tryToSayTidy():
   level.displayMessageText(tr("UI.Alert.2"))
 
 func isTileSolid(tile_type):
-  if tile_type == GridMap.INVALID_CELL_ITEM:
-    return false
-  var tileShape = mesh_library.get_item_shapes(tile_type)
-  if tileShape == null or tileShape.size() == 0:
-    return false
-  var tileCollisionShape = tileShape[0]
-  var tile_name = mesh_library.get_item_name(tile_type)
-  return tileCollisionShape is BoxShape and not "Spikes" in tile_name
+  return global.isTileSolid(tile_type, mesh_library)
 
 func isTileFragileSolid(tile_type):
   if tile_type == GridMap.INVALID_CELL_ITEM:
@@ -865,7 +858,6 @@ func setTileset(tileset_type, properly_set_tiles = true):
     cosmeticLevelTiles.setTileset(tileset_type, properly_set_tiles)
 
 func normalGlitch(_palette = null):
-  # return
   # set_mesh_library(grey_tiles)
   if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
     properlySetTiles()
@@ -873,35 +865,30 @@ func normalGlitch(_palette = null):
   if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(global.dark_grey_palette)
 
 func floorGlitch(_palette = null):
-  # return
   if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
     properlySetTiles()
   changeColorPalette(red_palette, red_palette)
   if cosmeticLevelTiles: cosmeticLevelTiles.floorGlitch(global.dark_red_palette)
 
 func featherGlitch(_palette = null):
-  # return
   if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
     properlySetTiles()
   changeColorPalette(green_palette, green_palette)
   if cosmeticLevelTiles: cosmeticLevelTiles.featherGlitch(global.dark_green_palette)
 
 func invisibleGlitch(_palette = null):
-#  return
   if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
     properlySetTiles()
   changeColorPalette(black_palette, black_palette)
   if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(global.dark_black_palette)
   
 func ladderGlitch(_palette = null):
-  #return
   if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
     properlySetTiles()
   changeColorPalette(yellow_palette, yellow_palette)
   if cosmeticLevelTiles: cosmeticLevelTiles.ladderGlitch(global.dark_yellow_palette)
 
 func walkThroughWallsGlitch(_palette = null):
-  #return
   if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
     properlySetTiles()
   changeColorPalette(white_palette, white_palette)

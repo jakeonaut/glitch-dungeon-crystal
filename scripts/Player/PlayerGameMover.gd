@@ -367,8 +367,7 @@ func landed():
   has_used_magic_lantern = false
 
 func isTextboxPausingMe():
-   # and not global.activeInteractor.is_tiny
-   return false # global.activeInteractor != null and global.activeInteractor.am_i_a_textbox
+  return global.activeInteractor != null and global.activeInteractor.showYesNoOptions
 
 # @override
 func justPressedDown():

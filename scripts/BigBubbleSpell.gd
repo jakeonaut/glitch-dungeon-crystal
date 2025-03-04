@@ -134,6 +134,7 @@ func passiveActivate(_delta, is_player):
   bubbleStartPop()
   if not is_player and not global.memory["broom"]:
     return
+    
 
   level.player.getBubbleInfected()
 
@@ -178,12 +179,8 @@ func isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords):
   var checking_for_floor_collisions = is_vertical and sensor_direction == -1
   if tile_type == GridMap.INVALID_CELL_ITEM:
     return false
-  var tileShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)
-  if tileShape == null or tileShape.size() == 0:
-    return false
-  var tileCollisionShape = tileShape[0]
   var tile_name = getLevelTiles().mesh_library.get_item_name(tile_type)
-  return (tileCollisionShape is BoxShape or (checking_for_floor_collisions and isTileFallthroughSolidTop(tile_type, tile_pos_coords)))  and not "Spikes" in tile_name
+  return (global.isTileSolid(tile_type, getLevelTiles().mesh_library) or (checking_for_floor_collisions and isTileFallthroughSolidTop(tile_type, tile_pos_coords)))  and not "Spikes" in tile_name
   
 func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
   var y = global_transform.origin.y
@@ -191,11 +188,8 @@ func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
   var bb = -tb
   var is_above_top_of_tile = y + bb > tile_pos_coords.y
   
-  var tileShape = getLevelTiles().mesh_library.get_item_shapes(tile_type)
-  if tileShape == null or tileShape.size() == 0:
-    return false
-  var tileCollisionShape = tileShape[0]
-  return is_above_top_of_tile and (tileCollisionShape is PlaneShape)
+  var tile_name = getLevelTiles().mesh_library.get_item_name(tile_type)
+  return is_above_top_of_tile and ("Semisolid" in tile_name)
 
 func tryDieToOffscreenCamera(_delta):
   # TODO(jaketrower): should be if not in camera range at all...

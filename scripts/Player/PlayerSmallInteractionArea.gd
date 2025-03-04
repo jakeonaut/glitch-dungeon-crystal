@@ -7,6 +7,7 @@ var is_touching_enemy = false
 var is_touching_water = false
 var is_touching_waterfall = false
 var is_touching_door = false
+var is_touching_broth = false
 var is_touching_passive_door = false
 var touched_passive_door = null
 var is_touching_npc = false
@@ -32,6 +33,7 @@ func _process(delta):
     is_touching_water = false
     is_touching_waterfall = false
     is_touching_door = false
+    is_touching_broth = false
     is_touching_passive_door = false
     touched_passive_door = null
     is_touching_npc = false

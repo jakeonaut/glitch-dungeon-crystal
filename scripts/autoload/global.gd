@@ -248,6 +248,7 @@ var NUM_GEMS_FOR_BROOMERANG_WARP = 999
 var has_started_game = false
 var has_really_started_game = false
 var okay_really_really_started_game = false
+var another_start_game_variable = false
 var spellCastPauseIndex = null
 var correct_ritual = ["ui_down", "ui_down", "ui_down", "restart_key"]
 var has_been_baba_yaga_cursed = false
@@ -1023,6 +1024,7 @@ func doFallthroughObjectCollision(gameMover, area):
 
         if not gameMover.was_on_ground:
             gameMover.processLand()
+        gameMover.truly_on_ground = true
         return true
 
     # the above check counts for falling down onto the fallthroughCollision,
@@ -1034,6 +1036,7 @@ func doFallthroughObjectCollision(gameMover, area):
             x + lb, y + bb, x + rb, y + bb + diff
         ):
         gameMover.on_ground = true
+        gameMover.truly_on_ground = true
         return true
     return false
 
@@ -1392,3 +1395,9 @@ func getKeyInMemory(key_type, level):
             level.uiLayer.get_node("KeyStatusRect").rect_scale = Vector2(1.5, 1.5)
             level.uiLayer.get_node("KeyStatusRect").rect_position = Vector2(200, 325)
         global.memory["key"] += 1
+
+func isTileSolid(tile_type, mesh_library):
+  if tile_type == GridMap.INVALID_CELL_ITEM:
+    return false
+  var tile_name = mesh_library.get_item_name(tile_type)
+  return ("BrickSolid" in tile_name or "SoftSand" in tile_name or "DissolvingStone" in tile_name) and not "Spikes" in tile_name

@@ -479,6 +479,7 @@ func tryToRespawn():
       player.malware_infected = true
     player.getABroom() # after malware infection so we don't improperly give a broom
     if global.isBrothWarping and found_broth:
+      transition.reverse_granny_teleport()
       found_broth.spitSound.play()
       found_broth.spitSound2.play()
       found_broth.has_popped_out = true
@@ -938,6 +939,6 @@ func processBossHealth(delta):
     uiLayer.bossLifeSprite6.visible = false
 
   # Text!
-  uiLayer.deadTextLabel.visible = whichBoss.num_granny_hits == whichBoss.MAX_GRANNY_HITS
-  uiLayer.bossTextLabel.visible = whichBoss.num_hits == whichBoss.MAX_NUM_HITS
+  # uiLayer.deadTextLabel.visible = whichBoss.num_granny_hits == whichBoss.MAX_GRANNY_HITS
+  # uiLayer.bossTextLabel.visible = whichBoss.num_hits == whichBoss.MAX_NUM_HITS
   

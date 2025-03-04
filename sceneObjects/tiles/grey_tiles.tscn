@@ -1,4 +1,4 @@
-[gd_scene load_steps=14661 format=2]
+[gd_scene load_steps=14650 format=2]
 
 [ext_resource path="res://shaders/palette_swapper.shader" type="Shader" id=1]
 [ext_resource path="res://sceneObjects/tiles/tile_shader.tres" type="Shader" id=2]
@@ -32,9 +32,6 @@ shader_param/palettesize = 16
 [sub_resource type="CubeMesh" id=2]
 material = SubResource( 1 )
 size = Vector3( 1, 1, 1 )
-
-[sub_resource type="BoxShape" id=3]
-extents = Vector3( 0.5, 0.5, 0.5 )
 
 [sub_resource type="ArrayMesh" id=2113]
 surfaces/0 = {
@@ -136602,12 +136599,6 @@ script = ExtResource( 194 )
 meshes = [ SubResource( 16171 ), SubResource( 16172 ), SubResource( 16173 ), SubResource( 16174 ), SubResource( 16175 ), SubResource( 16176 ), SubResource( 16177 ), SubResource( 16178 ), SubResource( 16179 ), SubResource( 16180 ), SubResource( 16181 ), SubResource( 16182 ), SubResource( 16183 ), SubResource( 16184 ), SubResource( 16185 ), SubResource( 16186 ), SubResource( 16187 ), SubResource( 16188 ), SubResource( 16189 ), SubResource( 16190 ), SubResource( 16191 ), SubResource( 16192 ), SubResource( 16193 ), SubResource( 16194 ), SubResource( 16195 ), SubResource( 16196 ), SubResource( 16197 ), SubResource( 16198 ), SubResource( 16199 ), SubResource( 16200 ), SubResource( 16201 ), SubResource( 16202 ), SubResource( 16203 ), SubResource( 16204 ), SubResource( 16205 ), SubResource( 16206 ), SubResource( 16207 ), SubResource( 16208 ), SubResource( 16209 ), SubResource( 16210 ), SubResource( 16211 ), SubResource( 16212 ), SubResource( 16213 ), SubResource( 16214 ), SubResource( 16215 ), SubResource( 16216 ), SubResource( 16217 ), SubResource( 16218 ), SubResource( 16219 ), SubResource( 16220 ), SubResource( 16221 ), SubResource( 16222 ), SubResource( 16223 ), SubResource( 16224 ), SubResource( 16225 ), SubResource( 16226 ), SubResource( 16227 ), SubResource( 16228 ), SubResource( 16229 ), SubResource( 16230 ), SubResource( 16231 ), SubResource( 16232 ), SubResource( 16233 ), SubResource( 16234 ), SubResource( 16235 ), SubResource( 16236 ), SubResource( 16237 ), SubResource( 16238 ), SubResource( 16239 ), SubResource( 16240 ), SubResource( 16241 ), SubResource( 16242 ), SubResource( 16243 ), SubResource( 16244 ), SubResource( 16245 ), SubResource( 16246 ), SubResource( 16247 ), SubResource( 16248 ), SubResource( 16249 ), SubResource( 16250 ), SubResource( 16251 ), SubResource( 16252 ), SubResource( 16253 ), SubResource( 16254 ), SubResource( 16255 ), SubResource( 16256 ), SubResource( 16257 ), SubResource( 16258 ), SubResource( 16259 ), SubResource( 16260 ), SubResource( 16261 ), SubResource( 16262 ), SubResource( 16263 ), SubResource( 16264 ), SubResource( 16265 ), SubResource( 16266 ), SubResource( 16267 ), SubResource( 16268 ), SubResource( 16269 ), SubResource( 16270 ), SubResource( 16271 ), SubResource( 16272 ), SubResource( 16273 ), SubResource( 16274 ), SubResource( 16275 ), SubResource( 16276 ), SubResource( 16277 ), SubResource( 16278 ), SubResource( 16279 ), SubResource( 16280 ), SubResource( 16281 ), SubResource( 16282 ), SubResource( 16283 ), SubResource( 16284 ), SubResource( 16285 ), SubResource( 16286 ), SubResource( 16287 ), SubResource( 16288 ), SubResource( 16289 ), SubResource( 16290 ), SubResource( 16291 ), SubResource( 16292 ), SubResource( 16293 ), SubResource( 16294 ), SubResource( 16295 ), SubResource( 16296 ), SubResource( 16297 ), SubResource( 16298 ), SubResource( 16299 ), SubResource( 16300 ), SubResource( 16301 ), SubResource( 16302 ), SubResource( 16303 ), SubResource( 16304 ), SubResource( 16305 ), SubResource( 16306 ), SubResource( 16307 ), SubResource( 16308 ), SubResource( 16309 ), SubResource( 16310 ), SubResource( 16311 ), SubResource( 16312 ), SubResource( 16313 ), SubResource( 16314 ), SubResource( 16315 ), SubResource( 16316 ), SubResource( 16317 ), SubResource( 16318 ), SubResource( 16319 ), SubResource( 16320 ), SubResource( 16321 ), SubResource( 16322 ), SubResource( 16323 ), SubResource( 16324 ), SubResource( 16325 ), SubResource( 16326 ), SubResource( 16327 ), SubResource( 16328 ), SubResource( 16329 ), SubResource( 16330 ), SubResource( 16331 ), SubResource( 16332 ), SubResource( 16333 ), SubResource( 16334 ), SubResource( 16335 ), SubResource( 16336 ), SubResource( 16337 ), SubResource( 16338 ), SubResource( 16339 ), SubResource( 16340 ), SubResource( 16341 ), SubResource( 16342 ), SubResource( 16343 ), SubResource( 16344 ), SubResource( 16345 ), SubResource( 16346 ), SubResource( 16347 ), SubResource( 16348 ), SubResource( 16349 ), SubResource( 16350 ), SubResource( 16351 ), SubResource( 16352 ), SubResource( 16353 ), SubResource( 16354 ), SubResource( 16355 ), SubResource( 16356 ), SubResource( 16357 ), SubResource( 16358 ), SubResource( 16359 ), SubResource( 16360 ), SubResource( 16361 ), SubResource( 16362 ), SubResource( 16363 ), SubResource( 16364 ), SubResource( 16365 ), SubResource( 16366 ), SubResource( 16367 ), SubResource( 16368 ), SubResource( 16369 ), SubResource( 16370 ), SubResource( 16371 ), SubResource( 16372 ), SubResource( 16373 ), SubResource( 16374 ), SubResource( 16375 ), SubResource( 16376 ), SubResource( 16377 ), SubResource( 16378 ), SubResource( 16379 ), SubResource( 16380 ), SubResource( 16381 ), SubResource( 16382 ), SubResource( 16383 ), SubResource( 16384 ), SubResource( 16385 ), SubResource( 16386 ), SubResource( 16387 ), SubResource( 16388 ), SubResource( 16389 ), SubResource( 16390 ), SubResource( 16391 ), SubResource( 16392 ), SubResource( 16393 ), SubResource( 16394 ), SubResource( 16395 ), SubResource( 16396 ), SubResource( 16397 ), SubResource( 16398 ), SubResource( 16399 ), SubResource( 16400 ), SubResource( 16401 ), SubResource( 16402 ), SubResource( 16403 ), SubResource( 16404 ), SubResource( 16405 ), SubResource( 16406 ), SubResource( 16407 ), SubResource( 16408 ), SubResource( 16409 ), SubResource( 16410 ), SubResource( 16411 ), SubResource( 16412 ), SubResource( 16413 ), SubResource( 16414 ), SubResource( 16415 ), SubResource( 16416 ), SubResource( 16417 ), SubResource( 16418 ), SubResource( 16419 ), SubResource( 16420 ), SubResource( 16421 ), SubResource( 16422 ), SubResource( 16170 ), SubResource( 16423 ), SubResource( 16424 ), SubResource( 16425 ) ]
 material = SubResource( 1003 )
 
-[sub_resource type="PlaneShape" id=90]
-
-[sub_resource type="PlaneShape" id=16426]
-
-[sub_resource type="RayShape" id=17462]
-
 [sub_resource type="ArrayMesh" id=13671]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, 0.5, 1, 1.00001, 1.00136e-05 ),
@@ -158816,12 +158807,6 @@ material = SubResource( 1017 )
 material = ExtResource( 17 )
 size = Vector3( 1, 1, 1 )
 
-[sub_resource type="BoxShape" id=15465]
-extents = Vector3( 0.5, 0.5, 0.5 )
-
-[sub_resource type="BoxShape" id=15466]
-extents = Vector3( 0.4, 0.4, 0.4 )
-
 [sub_resource type="ShaderMaterial" id=120]
 shader = ExtResource( 6 )
 shader_param/albedo = null
@@ -165483,9 +165468,6 @@ script = ExtResource( 194 )
 meshes = [ SubResource( 15915 ), SubResource( 15916 ), SubResource( 15917 ), SubResource( 15918 ), SubResource( 15919 ), SubResource( 15920 ), SubResource( 15921 ), SubResource( 15922 ), SubResource( 15923 ), SubResource( 15924 ), SubResource( 15925 ), SubResource( 15926 ), SubResource( 15927 ), SubResource( 15928 ), SubResource( 15929 ), SubResource( 15930 ), SubResource( 15931 ), SubResource( 15932 ), SubResource( 15933 ), SubResource( 15934 ), SubResource( 15935 ), SubResource( 15936 ), SubResource( 15937 ), SubResource( 15938 ), SubResource( 15939 ), SubResource( 15940 ), SubResource( 15941 ), SubResource( 15942 ), SubResource( 15943 ), SubResource( 15944 ), SubResource( 15945 ), SubResource( 15946 ), SubResource( 15947 ), SubResource( 15948 ), SubResource( 15949 ), SubResource( 15950 ), SubResource( 15951 ), SubResource( 15952 ), SubResource( 15953 ), SubResource( 15954 ), SubResource( 15955 ), SubResource( 15956 ), SubResource( 15957 ), SubResource( 15958 ), SubResource( 15959 ), SubResource( 15960 ), SubResource( 15961 ), SubResource( 15962 ), SubResource( 15963 ), SubResource( 15964 ), SubResource( 15965 ), SubResource( 15966 ), SubResource( 15967 ), SubResource( 15968 ), SubResource( 15969 ), SubResource( 15970 ), SubResource( 15912 ), SubResource( 15971 ), SubResource( 15972 ), SubResource( 15973 ), SubResource( 15974 ), SubResource( 15975 ), SubResource( 15976 ), SubResource( 15977 ), SubResource( 15978 ), SubResource( 15979 ), SubResource( 15980 ), SubResource( 15981 ), SubResource( 15982 ), SubResource( 15983 ), SubResource( 15984 ), SubResource( 15985 ), SubResource( 15986 ), SubResource( 15987 ), SubResource( 15988 ), SubResource( 15989 ), SubResource( 15990 ), SubResource( 15991 ), SubResource( 15992 ), SubResource( 15993 ), SubResource( 15994 ), SubResource( 15995 ), SubResource( 15996 ), SubResource( 15997 ), SubResource( 15998 ), SubResource( 15999 ), SubResource( 16000 ), SubResource( 16001 ), SubResource( 16002 ), SubResource( 16003 ), SubResource( 16004 ), SubResource( 16005 ), SubResource( 16006 ), SubResource( 16007 ), SubResource( 16008 ), SubResource( 16009 ), SubResource( 16010 ), SubResource( 16011 ), SubResource( 16012 ), SubResource( 16013 ), SubResource( 16014 ), SubResource( 16015 ), SubResource( 16016 ), SubResource( 16017 ), SubResource( 16018 ), SubResource( 16019 ), SubResource( 16020 ), SubResource( 16021 ), SubResource( 16022 ), SubResource( 16023 ), SubResource( 16024 ), SubResource( 16025 ), SubResource( 16026 ), SubResource( 16027 ), SubResource( 16028 ), SubResource( 16029 ), SubResource( 16030 ), SubResource( 16031 ), SubResource( 16032 ), SubResource( 16033 ), SubResource( 16034 ), SubResource( 16035 ), SubResource( 16036 ), SubResource( 16037 ), SubResource( 16038 ), SubResource( 16039 ), SubResource( 16040 ), SubResource( 16041 ), SubResource( 16042 ), SubResource( 16043 ), SubResource( 16044 ), SubResource( 16045 ), SubResource( 16046 ), SubResource( 16047 ), SubResource( 16048 ), SubResource( 16049 ), SubResource( 16050 ), SubResource( 16051 ), SubResource( 16052 ), SubResource( 16053 ), SubResource( 16054 ), SubResource( 16055 ), SubResource( 16056 ), SubResource( 16057 ), SubResource( 16058 ), SubResource( 16059 ), SubResource( 16060 ), SubResource( 16061 ), SubResource( 16062 ), SubResource( 16063 ), SubResource( 16064 ), SubResource( 16065 ), SubResource( 16066 ), SubResource( 16067 ), SubResource( 16068 ), SubResource( 16069 ), SubResource( 16070 ), SubResource( 16071 ), SubResource( 16072 ), SubResource( 16073 ), SubResource( 16074 ), SubResource( 16075 ), SubResource( 16076 ), SubResource( 16077 ), SubResource( 16078 ), SubResource( 16079 ), SubResource( 16080 ), SubResource( 16081 ), SubResource( 16082 ), SubResource( 16083 ), SubResource( 16084 ), SubResource( 16085 ), SubResource( 16086 ), SubResource( 16087 ), SubResource( 16088 ), SubResource( 16089 ), SubResource( 16090 ), SubResource( 16091 ), SubResource( 16092 ), SubResource( 16093 ), SubResource( 16094 ), SubResource( 16095 ), SubResource( 16096 ), SubResource( 16097 ), SubResource( 16098 ), SubResource( 16099 ), SubResource( 16100 ), SubResource( 16101 ), SubResource( 16102 ), SubResource( 16103 ), SubResource( 16104 ), SubResource( 16105 ), SubResource( 16106 ), SubResource( 16107 ), SubResource( 16108 ), SubResource( 16109 ), SubResource( 16110 ), SubResource( 16111 ), SubResource( 16112 ), SubResource( 16113 ), SubResource( 16114 ), SubResource( 16115 ), SubResource( 16116 ), SubResource( 16117 ), SubResource( 16118 ), SubResource( 16119 ), SubResource( 16120 ), SubResource( 16121 ), SubResource( 16122 ), SubResource( 16123 ), SubResource( 16124 ), SubResource( 16125 ), SubResource( 16126 ), SubResource( 16127 ), SubResource( 16128 ), SubResource( 16129 ), SubResource( 16130 ), SubResource( 16131 ), SubResource( 16132 ), SubResource( 16133 ), SubResource( 16134 ), SubResource( 16135 ), SubResource( 16136 ), SubResource( 16137 ), SubResource( 16138 ), SubResource( 16139 ), SubResource( 16140 ), SubResource( 16141 ), SubResource( 16142 ), SubResource( 16143 ), SubResource( 16144 ), SubResource( 16145 ), SubResource( 16146 ), SubResource( 16147 ), SubResource( 16148 ), SubResource( 16149 ), SubResource( 16150 ), SubResource( 16151 ), SubResource( 16152 ), SubResource( 16153 ), SubResource( 16154 ), SubResource( 16155 ), SubResource( 16156 ), SubResource( 16157 ), SubResource( 16158 ), SubResource( 16159 ), SubResource( 16160 ), SubResource( 16161 ), SubResource( 16162 ), SubResource( 16163 ), SubResource( 16164 ), SubResource( 16165 ), SubResource( 16166 ), SubResource( 16167 ), SubResource( 16168 ), SubResource( 16169 ) ]
 material = SubResource( 19710 )
 
-[sub_resource type="BoxShape" id=13116]
-extents = Vector3( 0.5, 0.5, 0.5 )
-
 [sub_resource type="SpatialMaterial" id=19714]
 next_pass = ExtResource( 195 )
 flags_unshaded = true
@@ -169075,9 +169057,6 @@ script = ExtResource( 194 )
 meshes = [ SubResource( 2065 ), SubResource( 2066 ), SubResource( 2067 ), SubResource( 2068 ), SubResource( 2069 ), SubResource( 2070 ), SubResource( 2071 ), SubResource( 2072 ), SubResource( 2073 ), SubResource( 2074 ), SubResource( 2075 ), SubResource( 2076 ), SubResource( 2077 ), SubResource( 2078 ), SubResource( 2079 ), SubResource( 2080 ), SubResource( 2081 ), SubResource( 2082 ), SubResource( 2083 ), SubResource( 2084 ), SubResource( 2085 ), SubResource( 2086 ), SubResource( 2087 ), SubResource( 2088 ), SubResource( 2089 ), SubResource( 2090 ), SubResource( 2091 ), SubResource( 2092 ), SubResource( 2093 ), SubResource( 2094 ), SubResource( 2095 ), SubResource( 2096 ), SubResource( 2097 ), SubResource( 2098 ), SubResource( 2099 ), SubResource( 2100 ), SubResource( 2101 ), SubResource( 2102 ), SubResource( 2103 ), SubResource( 2104 ), SubResource( 2105 ), SubResource( 2106 ), SubResource( 2107 ), SubResource( 2108 ), SubResource( 2109 ), SubResource( 2110 ), SubResource( 2111 ), SubResource( 2112 ), SubResource( 2113 ), SubResource( 2114 ), SubResource( 2115 ), SubResource( 2116 ), SubResource( 2117 ), SubResource( 2118 ), SubResource( 2119 ), SubResource( 2120 ), SubResource( 2121 ), SubResource( 2122 ), SubResource( 2123 ), SubResource( 2124 ), SubResource( 2125 ), SubResource( 2126 ), SubResource( 2127 ), SubResource( 2128 ), SubResource( 2129 ), SubResource( 2130 ), SubResource( 2131 ), SubResource( 2132 ), SubResource( 2133 ), SubResource( 2134 ), SubResource( 2135 ), SubResource( 2136 ), SubResource( 2137 ), SubResource( 2138 ), SubResource( 2139 ), SubResource( 2140 ), SubResource( 2141 ), SubResource( 2142 ), SubResource( 2143 ), SubResource( 2144 ), SubResource( 2145 ), SubResource( 2146 ), SubResource( 2147 ), SubResource( 2148 ), SubResource( 2149 ), SubResource( 2150 ), SubResource( 2151 ), SubResource( 2152 ), SubResource( 2153 ), SubResource( 2154 ), SubResource( 2155 ), SubResource( 2156 ), SubResource( 2157 ), SubResource( 2158 ), SubResource( 2159 ), SubResource( 2160 ), SubResource( 2161 ), SubResource( 2162 ), SubResource( 2163 ), SubResource( 2164 ), SubResource( 2165 ), SubResource( 2166 ), SubResource( 2167 ), SubResource( 2168 ), SubResource( 2169 ), SubResource( 2170 ), SubResource( 2171 ), SubResource( 2172 ), SubResource( 2173 ), SubResource( 2174 ), SubResource( 2175 ), SubResource( 2176 ), SubResource( 2177 ), SubResource( 2178 ), SubResource( 2179 ), SubResource( 2180 ), SubResource( 2181 ), SubResource( 2182 ), SubResource( 2183 ), SubResource( 2184 ), SubResource( 2185 ), SubResource( 2186 ), SubResource( 2187 ), SubResource( 2188 ), SubResource( 2189 ), SubResource( 2190 ), SubResource( 2191 ), SubResource( 2192 ), SubResource( 2193 ), SubResource( 2194 ), SubResource( 2195 ), SubResource( 2196 ), SubResource( 2197 ), SubResource( 2198 ), SubResource( 2199 ), SubResource( 2200 ), SubResource( 2201 ), SubResource( 2202 ), SubResource( 2203 ), SubResource( 2204 ), SubResource( 2205 ), SubResource( 2206 ), SubResource( 2207 ), SubResource( 2208 ), SubResource( 2209 ), SubResource( 2210 ), SubResource( 2211 ), SubResource( 2212 ), SubResource( 2213 ), SubResource( 2214 ), SubResource( 2215 ), SubResource( 2216 ), SubResource( 2217 ), SubResource( 2218 ), SubResource( 2219 ), SubResource( 2220 ), SubResource( 2221 ), SubResource( 2222 ), SubResource( 2223 ), SubResource( 2224 ), SubResource( 2225 ), SubResource( 2226 ), SubResource( 2227 ), SubResource( 2228 ), SubResource( 2229 ), SubResource( 2230 ), SubResource( 2231 ), SubResource( 2232 ), SubResource( 2233 ), SubResource( 2234 ), SubResource( 2235 ), SubResource( 2236 ), SubResource( 2237 ), SubResource( 2238 ), SubResource( 2239 ), SubResource( 2240 ), SubResource( 2241 ), SubResource( 2242 ), SubResource( 2243 ), SubResource( 2244 ), SubResource( 2245 ), SubResource( 2246 ), SubResource( 2247 ), SubResource( 2248 ), SubResource( 2249 ), SubResource( 2250 ), SubResource( 2251 ), SubResource( 2252 ), SubResource( 2253 ), SubResource( 2254 ), SubResource( 2255 ), SubResource( 2256 ), SubResource( 2257 ), SubResource( 2258 ), SubResource( 2259 ), SubResource( 2260 ), SubResource( 2261 ), SubResource( 2262 ), SubResource( 2263 ), SubResource( 2264 ), SubResource( 2265 ), SubResource( 2266 ), SubResource( 2267 ), SubResource( 2268 ), SubResource( 2269 ), SubResource( 2270 ), SubResource( 2271 ), SubResource( 2272 ), SubResource( 2273 ), SubResource( 2274 ), SubResource( 2275 ), SubResource( 2276 ), SubResource( 2277 ), SubResource( 2278 ), SubResource( 2279 ), SubResource( 2280 ), SubResource( 2281 ), SubResource( 2282 ), SubResource( 2283 ), SubResource( 2284 ), SubResource( 2285 ), SubResource( 2286 ), SubResource( 2287 ), SubResource( 2288 ), SubResource( 2289 ), SubResource( 2290 ), SubResource( 2291 ), SubResource( 2292 ), SubResource( 2293 ), SubResource( 2294 ), SubResource( 2295 ), SubResource( 2296 ), SubResource( 2297 ), SubResource( 2298 ), SubResource( 2299 ), SubResource( 2300 ), SubResource( 2301 ), SubResource( 2302 ), SubResource( 2303 ), SubResource( 2304 ), SubResource( 2305 ), SubResource( 2306 ), SubResource( 2307 ), SubResource( 2308 ), SubResource( 2309 ), SubResource( 2310 ), SubResource( 2311 ), SubResource( 2312 ), SubResource( 2313 ), SubResource( 2314 ), SubResource( 2315 ), SubResource( 2316 ), SubResource( 2317 ), SubResource( 2318 ), SubResource( 2319 ), SubResource( 2320 ) ]
 material = SubResource( 15485 )
 
-[sub_resource type="BoxShape" id=13160]
-extents = Vector3( 0.5, 0.5, 0.5 )
-
 [sub_resource type="SpatialMaterial" id=15486]
 next_pass = ExtResource( 195 )
 flags_unshaded = true
@@ -169497,9 +169476,6 @@ albedo_texture = ExtResource( 196 )
 script = ExtResource( 194 )
 meshes = [ SubResource( 2065 ), SubResource( 2066 ), SubResource( 2067 ), SubResource( 2068 ), SubResource( 2069 ), SubResource( 2070 ), SubResource( 2071 ), SubResource( 2072 ), SubResource( 2073 ), SubResource( 2074 ), SubResource( 2075 ), SubResource( 2076 ), SubResource( 2077 ), SubResource( 2078 ), SubResource( 2079 ), SubResource( 2080 ), SubResource( 2081 ), SubResource( 2082 ), SubResource( 2083 ), SubResource( 2084 ), SubResource( 2085 ), SubResource( 2086 ), SubResource( 2087 ), SubResource( 2088 ), SubResource( 2089 ), SubResource( 2090 ), SubResource( 2091 ), SubResource( 2092 ), SubResource( 2093 ), SubResource( 2094 ), SubResource( 2095 ), SubResource( 2096 ), SubResource( 2097 ), SubResource( 2098 ), SubResource( 2099 ), SubResource( 2100 ), SubResource( 2101 ), SubResource( 2102 ), SubResource( 2103 ), SubResource( 2104 ), SubResource( 2105 ), SubResource( 2106 ), SubResource( 2107 ), SubResource( 2108 ), SubResource( 2109 ), SubResource( 2110 ), SubResource( 2111 ), SubResource( 2112 ), SubResource( 2113 ), SubResource( 2114 ), SubResource( 2115 ), SubResource( 2116 ), SubResource( 2117 ), SubResource( 2118 ), SubResource( 2119 ), SubResource( 2120 ), SubResource( 2121 ), SubResource( 2122 ), SubResource( 2123 ), SubResource( 2124 ), SubResource( 2125 ), SubResource( 2126 ), SubResource( 2127 ), SubResource( 2128 ), SubResource( 2129 ), SubResource( 2130 ), SubResource( 2131 ), SubResource( 2132 ), SubResource( 2133 ), SubResource( 2134 ), SubResource( 2135 ), SubResource( 2136 ), SubResource( 2137 ), SubResource( 2138 ), SubResource( 2139 ), SubResource( 2140 ), SubResource( 2141 ), SubResource( 2142 ), SubResource( 2143 ), SubResource( 2144 ), SubResource( 2145 ), SubResource( 2146 ), SubResource( 2147 ), SubResource( 2148 ), SubResource( 2149 ), SubResource( 2150 ), SubResource( 2151 ), SubResource( 2152 ), SubResource( 2153 ), SubResource( 2154 ), SubResource( 2155 ), SubResource( 2156 ), SubResource( 2157 ), SubResource( 2158 ), SubResource( 2159 ), SubResource( 2160 ), SubResource( 2161 ), SubResource( 2162 ), SubResource( 2163 ), SubResource( 2164 ), SubResource( 2165 ), SubResource( 2166 ), SubResource( 2167 ), SubResource( 2168 ), SubResource( 2169 ), SubResource( 2170 ), SubResource( 2171 ), SubResource( 2172 ), SubResource( 2173 ), SubResource( 2174 ), SubResource( 2175 ), SubResource( 2176 ), SubResource( 2177 ), SubResource( 2178 ), SubResource( 2179 ), SubResource( 2180 ), SubResource( 2181 ), SubResource( 2182 ), SubResource( 2183 ), SubResource( 2184 ), SubResource( 2185 ), SubResource( 2186 ), SubResource( 2187 ), SubResource( 2188 ), SubResource( 2189 ), SubResource( 2190 ), SubResource( 2191 ), SubResource( 2192 ), SubResource( 2193 ), SubResource( 2194 ), SubResource( 2195 ), SubResource( 2196 ), SubResource( 2197 ), SubResource( 2198 ), SubResource( 2199 ), SubResource( 2200 ), SubResource( 2201 ), SubResource( 2202 ), SubResource( 2203 ), SubResource( 2204 ), SubResource( 2205 ), SubResource( 2206 ), SubResource( 2207 ), SubResource( 2208 ), SubResource( 2209 ), SubResource( 2210 ), SubResource( 2211 ), SubResource( 2212 ), SubResource( 2213 ), SubResource( 2214 ), SubResource( 2215 ), SubResource( 2216 ), SubResource( 2217 ), SubResource( 2218 ), SubResource( 2219 ), SubResource( 2220 ), SubResource( 2221 ), SubResource( 2222 ), SubResource( 2223 ), SubResource( 2224 ), SubResource( 2225 ), SubResource( 2226 ), SubResource( 2227 ), SubResource( 2228 ), SubResource( 2229 ), SubResource( 2230 ), SubResource( 2231 ), SubResource( 2232 ), SubResource( 2233 ), SubResource( 2234 ), SubResource( 2235 ), SubResource( 2236 ), SubResource( 2237 ), SubResource( 2238 ), SubResource( 2239 ), SubResource( 2240 ), SubResource( 2241 ), SubResource( 2242 ), SubResource( 2243 ), SubResource( 2244 ), SubResource( 2245 ), SubResource( 2246 ), SubResource( 2247 ), SubResource( 2248 ), SubResource( 2249 ), SubResource( 2250 ), SubResource( 2251 ), SubResource( 2252 ), SubResource( 2253 ), SubResource( 2254 ), SubResource( 2255 ), SubResource( 2256 ), SubResource( 2257 ), SubResource( 2258 ), SubResource( 2259 ), SubResource( 2260 ), SubResource( 2261 ), SubResource( 2262 ), SubResource( 2263 ), SubResource( 2264 ), SubResource( 2265 ), SubResource( 2266 ), SubResource( 2267 ), SubResource( 2268 ), SubResource( 2269 ), SubResource( 2270 ), SubResource( 2271 ), SubResource( 2272 ), SubResource( 2273 ), SubResource( 2274 ), SubResource( 2275 ), SubResource( 2276 ), SubResource( 2277 ), SubResource( 2278 ), SubResource( 2279 ), SubResource( 2280 ), SubResource( 2281 ), SubResource( 2282 ), SubResource( 2283 ), SubResource( 2284 ), SubResource( 2285 ), SubResource( 2286 ), SubResource( 2287 ), SubResource( 2288 ), SubResource( 2289 ), SubResource( 2290 ), SubResource( 2291 ), SubResource( 2292 ), SubResource( 2293 ), SubResource( 2294 ), SubResource( 2295 ), SubResource( 2296 ), SubResource( 2297 ), SubResource( 2298 ), SubResource( 2299 ), SubResource( 2300 ), SubResource( 2301 ), SubResource( 2302 ), SubResource( 2303 ), SubResource( 2304 ), SubResource( 2305 ), SubResource( 2306 ), SubResource( 2307 ), SubResource( 2308 ), SubResource( 2309 ), SubResource( 2310 ), SubResource( 2311 ), SubResource( 2312 ), SubResource( 2313 ), SubResource( 2314 ), SubResource( 2315 ), SubResource( 2316 ), SubResource( 2317 ), SubResource( 2318 ), SubResource( 2319 ), SubResource( 2320 ) ]
 material = SubResource( 15527 )
-
-[sub_resource type="BoxShape" id=13373]
-extents = Vector3( 0.5, 0.5, 0.5 )
 
 [sub_resource type="SpatialMaterial" id=15528]
 next_pass = ExtResource( 195 )
@@ -173145,9 +173121,6 @@ script = ExtResource( 194 )
 meshes = [ SubResource( 2065 ), SubResource( 2066 ), SubResource( 2067 ), SubResource( 2068 ), SubResource( 2069 ), SubResource( 2070 ), SubResource( 2071 ), SubResource( 2072 ), SubResource( 2073 ), SubResource( 2074 ), SubResource( 2075 ), SubResource( 2076 ), SubResource( 2077 ), SubResource( 2078 ), SubResource( 2079 ), SubResource( 2080 ), SubResource( 2081 ), SubResource( 2082 ), SubResource( 2083 ), SubResource( 2084 ), SubResource( 2085 ), SubResource( 2086 ), SubResource( 2087 ), SubResource( 2088 ), SubResource( 2089 ), SubResource( 2090 ), SubResource( 2091 ), SubResource( 2092 ), SubResource( 2093 ), SubResource( 2094 ), SubResource( 2095 ), SubResource( 2096 ), SubResource( 2097 ), SubResource( 2098 ), SubResource( 2099 ), SubResource( 2100 ), SubResource( 2101 ), SubResource( 2102 ), SubResource( 2103 ), SubResource( 2104 ), SubResource( 2105 ), SubResource( 2106 ), SubResource( 2107 ), SubResource( 2108 ), SubResource( 2109 ), SubResource( 2110 ), SubResource( 2111 ), SubResource( 2112 ), SubResource( 2113 ), SubResource( 2114 ), SubResource( 2115 ), SubResource( 2116 ), SubResource( 2117 ), SubResource( 2118 ), SubResource( 2119 ), SubResource( 2120 ), SubResource( 2121 ), SubResource( 2122 ), SubResource( 2123 ), SubResource( 2124 ), SubResource( 2125 ), SubResource( 2126 ), SubResource( 2127 ), SubResource( 2128 ), SubResource( 2129 ), SubResource( 2130 ), SubResource( 2131 ), SubResource( 2132 ), SubResource( 2133 ), SubResource( 2134 ), SubResource( 2135 ), SubResource( 2136 ), SubResource( 2137 ), SubResource( 2138 ), SubResource( 2139 ), SubResource( 2140 ), SubResource( 2141 ), SubResource( 2142 ), SubResource( 2143 ), SubResource( 2144 ), SubResource( 2145 ), SubResource( 2146 ), SubResource( 2147 ), SubResource( 2148 ), SubResource( 2149 ), SubResource( 2150 ), SubResource( 2151 ), SubResource( 2152 ), SubResource( 2153 ), SubResource( 2154 ), SubResource( 2155 ), SubResource( 2156 ), SubResource( 2157 ), SubResource( 2158 ), SubResource( 2159 ), SubResource( 2160 ), SubResource( 2161 ), SubResource( 2162 ), SubResource( 2163 ), SubResource( 2164 ), SubResource( 2165 ), SubResource( 2166 ), SubResource( 2167 ), SubResource( 2168 ), SubResource( 2169 ), SubResource( 2170 ), SubResource( 2171 ), SubResource( 2172 ), SubResource( 2173 ), SubResource( 2174 ), SubResource( 2175 ), SubResource( 2176 ), SubResource( 2177 ), SubResource( 2178 ), SubResource( 2179 ), SubResource( 2180 ), SubResource( 2181 ), SubResource( 2182 ), SubResource( 2183 ), SubResource( 2184 ), SubResource( 2185 ), SubResource( 2186 ), SubResource( 2187 ), SubResource( 2188 ), SubResource( 2189 ), SubResource( 2190 ), SubResource( 2191 ), SubResource( 2192 ), SubResource( 2193 ), SubResource( 2194 ), SubResource( 2195 ), SubResource( 2196 ), SubResource( 2197 ), SubResource( 2198 ), SubResource( 2199 ), SubResource( 2200 ), SubResource( 2201 ), SubResource( 2202 ), SubResource( 2203 ), SubResource( 2204 ), SubResource( 2205 ), SubResource( 2206 ), SubResource( 2207 ), SubResource( 2208 ), SubResource( 2209 ), SubResource( 2210 ), SubResource( 2211 ), SubResource( 2212 ), SubResource( 2213 ), SubResource( 2214 ), SubResource( 2215 ), SubResource( 2216 ), SubResource( 2217 ), SubResource( 2218 ), SubResource( 2219 ), SubResource( 2220 ), SubResource( 2221 ), SubResource( 2222 ), SubResource( 2223 ), SubResource( 2224 ), SubResource( 2225 ), SubResource( 2226 ), SubResource( 2227 ), SubResource( 2228 ), SubResource( 2229 ), SubResource( 2230 ), SubResource( 2231 ), SubResource( 2232 ), SubResource( 2233 ), SubResource( 2234 ), SubResource( 2235 ), SubResource( 2236 ), SubResource( 2237 ), SubResource( 2238 ), SubResource( 2239 ), SubResource( 2240 ), SubResource( 2241 ), SubResource( 2242 ), SubResource( 2243 ), SubResource( 2244 ), SubResource( 2245 ), SubResource( 2246 ), SubResource( 2247 ), SubResource( 2248 ), SubResource( 2249 ), SubResource( 2250 ), SubResource( 2251 ), SubResource( 2252 ), SubResource( 2253 ), SubResource( 2254 ), SubResource( 2255 ), SubResource( 2256 ), SubResource( 2257 ), SubResource( 2258 ), SubResource( 2259 ), SubResource( 2260 ), SubResource( 2261 ), SubResource( 2262 ), SubResource( 2263 ), SubResource( 2264 ), SubResource( 2265 ), SubResource( 2266 ), SubResource( 2267 ), SubResource( 2268 ), SubResource( 2269 ), SubResource( 2270 ), SubResource( 2271 ), SubResource( 2272 ), SubResource( 2273 ), SubResource( 2274 ), SubResource( 2275 ), SubResource( 2276 ), SubResource( 2277 ), SubResource( 2278 ), SubResource( 2279 ), SubResource( 2280 ), SubResource( 2281 ), SubResource( 2282 ), SubResource( 2283 ), SubResource( 2284 ), SubResource( 2285 ), SubResource( 2286 ), SubResource( 2287 ), SubResource( 2288 ), SubResource( 2289 ), SubResource( 2290 ), SubResource( 2291 ), SubResource( 2292 ), SubResource( 2293 ), SubResource( 2294 ), SubResource( 2295 ), SubResource( 2296 ), SubResource( 2297 ), SubResource( 2298 ), SubResource( 2299 ), SubResource( 2300 ), SubResource( 2301 ), SubResource( 2302 ), SubResource( 2303 ), SubResource( 2304 ), SubResource( 2305 ), SubResource( 2306 ), SubResource( 2307 ), SubResource( 2308 ), SubResource( 2309 ), SubResource( 2310 ), SubResource( 2311 ), SubResource( 2312 ), SubResource( 2313 ), SubResource( 2314 ), SubResource( 2315 ), SubResource( 2316 ), SubResource( 2317 ), SubResource( 2318 ), SubResource( 2319 ), SubResource( 2320 ) ]
 material = SubResource( 13158 )
 
-[sub_resource type="BoxShape" id=15571]
-extents = Vector3( 0.5, 0.5, 0.5 )
-
 [sub_resource type="SpatialMaterial" id=13161]
 next_pass = ExtResource( 195 )
 flags_unshaded = true
@@ -173573,9 +173546,6 @@ albedo_texture = ExtResource( 196 )
 script = ExtResource( 194 )
 meshes = [ SubResource( 2065 ), SubResource( 2066 ), SubResource( 2067 ), SubResource( 2068 ), SubResource( 2069 ), SubResource( 2070 ), SubResource( 2071 ), SubResource( 2072 ), SubResource( 2073 ), SubResource( 2074 ), SubResource( 2075 ), SubResource( 2076 ), SubResource( 2077 ), SubResource( 2078 ), SubResource( 2079 ), SubResource( 2080 ), SubResource( 2081 ), SubResource( 2082 ), SubResource( 2083 ), SubResource( 2084 ), SubResource( 2085 ), SubResource( 2086 ), SubResource( 2087 ), SubResource( 2088 ), SubResource( 2089 ), SubResource( 2090 ), SubResource( 2091 ), SubResource( 2092 ), SubResource( 2093 ), SubResource( 2094 ), SubResource( 2095 ), SubResource( 2096 ), SubResource( 2097 ), SubResource( 2098 ), SubResource( 2099 ), SubResource( 2100 ), SubResource( 2101 ), SubResource( 2102 ), SubResource( 2103 ), SubResource( 2104 ), SubResource( 2105 ), SubResource( 2106 ), SubResource( 2107 ), SubResource( 2108 ), SubResource( 2109 ), SubResource( 2110 ), SubResource( 2111 ), SubResource( 2112 ), SubResource( 2113 ), SubResource( 2114 ), SubResource( 2115 ), SubResource( 2116 ), SubResource( 2117 ), SubResource( 2118 ), SubResource( 2119 ), SubResource( 2120 ), SubResource( 2121 ), SubResource( 2122 ), SubResource( 2123 ), SubResource( 2124 ), SubResource( 2125 ), SubResource( 2126 ), SubResource( 2127 ), SubResource( 2128 ), SubResource( 2129 ), SubResource( 2130 ), SubResource( 2131 ), SubResource( 2132 ), SubResource( 2133 ), SubResource( 2134 ), SubResource( 2135 ), SubResource( 2136 ), SubResource( 2137 ), SubResource( 2138 ), SubResource( 2139 ), SubResource( 2140 ), SubResource( 2141 ), SubResource( 2142 ), SubResource( 2143 ), SubResource( 2144 ), SubResource( 2145 ), SubResource( 2146 ), SubResource( 2147 ), SubResource( 2148 ), SubResource( 2149 ), SubResource( 2150 ), SubResource( 2151 ), SubResource( 2152 ), SubResource( 2153 ), SubResource( 2154 ), SubResource( 2155 ), SubResource( 2156 ), SubResource( 2157 ), SubResource( 2158 ), SubResource( 2159 ), SubResource( 2160 ), SubResource( 2161 ), SubResource( 2162 ), SubResource( 2163 ), SubResource( 2164 ), SubResource( 2165 ), SubResource( 2166 ), SubResource( 2167 ), SubResource( 2168 ), SubResource( 2169 ), SubResource( 2170 ), SubResource( 2171 ), SubResource( 2172 ), SubResource( 2173 ), SubResource( 2174 ), SubResource( 2175 ), SubResource( 2176 ), SubResource( 2177 ), SubResource( 2178 ), SubResource( 2179 ), SubResource( 2180 ), SubResource( 2181 ), SubResource( 2182 ), SubResource( 2183 ), SubResource( 2184 ), SubResource( 2185 ), SubResource( 2186 ), SubResource( 2187 ), SubResource( 2188 ), SubResource( 2189 ), SubResource( 2190 ), SubResource( 2191 ), SubResource( 2192 ), SubResource( 2193 ), SubResource( 2194 ), SubResource( 2195 ), SubResource( 2196 ), SubResource( 2197 ), SubResource( 2198 ), SubResource( 2199 ), SubResource( 2200 ), SubResource( 2201 ), SubResource( 2202 ), SubResource( 2203 ), SubResource( 2204 ), SubResource( 2205 ), SubResource( 2206 ), SubResource( 2207 ), SubResource( 2208 ), SubResource( 2209 ), SubResource( 2210 ), SubResource( 2211 ), SubResource( 2212 ), SubResource( 2213 ), SubResource( 2214 ), SubResource( 2215 ), SubResource( 2216 ), SubResource( 2217 ), SubResource( 2218 ), SubResource( 2219 ), SubResource( 2220 ), SubResource( 2221 ), SubResource( 2222 ), SubResource( 2223 ), SubResource( 2224 ), SubResource( 2225 ), SubResource( 2226 ), SubResource( 2227 ), SubResource( 2228 ), SubResource( 2229 ), SubResource( 2230 ), SubResource( 2231 ), SubResource( 2232 ), SubResource( 2233 ), SubResource( 2234 ), SubResource( 2235 ), SubResource( 2236 ), SubResource( 2237 ), SubResource( 2238 ), SubResource( 2239 ), SubResource( 2240 ), SubResource( 2241 ), SubResource( 2242 ), SubResource( 2243 ), SubResource( 2244 ), SubResource( 2245 ), SubResource( 2246 ), SubResource( 2247 ), SubResource( 2248 ), SubResource( 2249 ), SubResource( 2250 ), SubResource( 2251 ), SubResource( 2252 ), SubResource( 2253 ), SubResource( 2254 ), SubResource( 2255 ), SubResource( 2256 ), SubResource( 2257 ), SubResource( 2258 ), SubResource( 2259 ), SubResource( 2260 ), SubResource( 2261 ), SubResource( 2262 ), SubResource( 2263 ), SubResource( 2264 ), SubResource( 2265 ), SubResource( 2266 ), SubResource( 2267 ), SubResource( 2268 ), SubResource( 2269 ), SubResource( 2270 ), SubResource( 2271 ), SubResource( 2272 ), SubResource( 2273 ), SubResource( 2274 ), SubResource( 2275 ), SubResource( 2276 ), SubResource( 2277 ), SubResource( 2278 ), SubResource( 2279 ), SubResource( 2280 ), SubResource( 2281 ), SubResource( 2282 ), SubResource( 2283 ), SubResource( 2284 ), SubResource( 2285 ), SubResource( 2286 ), SubResource( 2287 ), SubResource( 2288 ), SubResource( 2289 ), SubResource( 2290 ), SubResource( 2291 ), SubResource( 2292 ), SubResource( 2293 ), SubResource( 2294 ), SubResource( 2295 ), SubResource( 2296 ), SubResource( 2297 ), SubResource( 2298 ), SubResource( 2299 ), SubResource( 2300 ), SubResource( 2301 ), SubResource( 2302 ), SubResource( 2303 ), SubResource( 2304 ), SubResource( 2305 ), SubResource( 2306 ), SubResource( 2307 ), SubResource( 2308 ), SubResource( 2309 ), SubResource( 2310 ), SubResource( 2311 ), SubResource( 2312 ), SubResource( 2313 ), SubResource( 2314 ), SubResource( 2315 ), SubResource( 2316 ), SubResource( 2317 ), SubResource( 2318 ), SubResource( 2319 ), SubResource( 2320 ) ]
 material = SubResource( 408 )
-
-[sub_resource type="BoxShape" id=15614]
-extents = Vector3( 0.5, 0.5, 0.5 )
 
 [sub_resource type="SpatialMaterial" id=665]
 next_pass = SubResource( 17720 )
@@ -177162,11 +177132,6 @@ material = SubResource( 745 )
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 mesh = SubResource( 2 )
 
-[node name="StaticBody" type="StaticBody" parent="MeshInstance"]
-
-[node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolid" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, 0 )
 mesh = SubResource( 2113 )
@@ -177190,11 +177155,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 664 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolid2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -1 )
@@ -177220,11 +177180,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 666 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid2/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolid3" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -2 )
 mesh = SubResource( 2577 )
@@ -177248,11 +177203,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 668 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid3"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid3/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolid4" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -3 )
@@ -177278,11 +177228,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 670 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid4"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid4/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolid5" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -4 )
 mesh = SubResource( 3089 )
@@ -177306,11 +177251,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 672 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid5"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid5/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolid6" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -5 )
@@ -177336,11 +177276,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 674 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid6"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid6/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolid7" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -6 )
 mesh = SubResource( 3601 )
@@ -177364,11 +177299,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 676 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid7"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid7/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolid8" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -7 )
@@ -177394,11 +177324,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 678 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid8"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid8/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolidTop" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, 0 )
 mesh = SubResource( 4113 )
@@ -177422,11 +177347,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 680 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolidTopLeft" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, 0 )
@@ -177452,11 +177372,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 682 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="DissolvingStone1" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1, 1, 0 )
 mesh = SubResource( 17709 )
@@ -177480,11 +177395,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 682 )
-
-[node name="StaticBody" type="StaticBody" parent="DissolvingStone1"]
-
-[node name="CollisionShape" type="CollisionShape" parent="DissolvingStone1/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="DissolvingStone2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1, 1, -1 )
@@ -177510,11 +177420,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 682 )
 
-[node name="StaticBody" type="StaticBody" parent="DissolvingStone2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="DissolvingStone2/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="DissolvingStone3" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1, 1, -2 )
 mesh = SubResource( 17711 )
@@ -177538,11 +177443,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 682 )
-
-[node name="StaticBody" type="StaticBody" parent="DissolvingStone3"]
-
-[node name="CollisionShape" type="CollisionShape" parent="DissolvingStone3/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolidTopLeft2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, -1 )
@@ -177568,11 +177468,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 684 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft2/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolidTopRight" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 1, 0 )
 mesh = SubResource( 4881 )
@@ -177596,11 +177491,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 686 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolidTopRight2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 1, -1 )
@@ -177626,11 +177516,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 688 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight2/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolidTop2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -1 )
 mesh = SubResource( 5393 )
@@ -177654,11 +177539,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 690 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop2/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolidTop3" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -2 )
@@ -177684,11 +177564,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 692 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop3"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop3/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolidTop4" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -3 )
 mesh = SubResource( 5905 )
@@ -177712,11 +177587,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 694 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop4"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop4/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolidTop5" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -4 )
@@ -177742,11 +177612,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 696 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop5"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop5/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolidTop6" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -5 )
 mesh = SubResource( 6417 )
@@ -177770,11 +177635,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 698 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop6"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop6/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolidTop7" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.499999, 0.00117858, 0, -0.00117858, 0.499999, 1, 1, -6 )
@@ -177800,11 +177660,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 700 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop7"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop7/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolidTop8" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 1, -7 )
 mesh = SubResource( 6929 )
@@ -177828,11 +177683,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 702 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop8"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop8/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolidBot" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, 0 )
@@ -177858,11 +177708,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 704 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolidBot2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -1 )
 mesh = SubResource( 7441 )
@@ -177886,11 +177731,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 706 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot2/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolidBot3" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -2 )
@@ -177916,11 +177756,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 708 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot3"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot3/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolidBot4" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -3 )
 mesh = SubResource( 7953 )
@@ -177944,11 +177779,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 710 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot4"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot4/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolidBot5" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -4 )
@@ -177974,11 +177804,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 712 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot5"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot5/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolidBot6" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -5 )
 mesh = SubResource( 8465 )
@@ -178002,11 +177827,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 714 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot6"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot6/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolidBot7" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -6 )
@@ -178032,11 +177852,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 716 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot7"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot7/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolidBot8" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -7 )
 mesh = SubResource( 8977 )
@@ -178060,11 +177875,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 718 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot8"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot8/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolidBot9" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -0.988725, -8 )
@@ -178090,11 +177900,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 720 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot9"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot9/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolidRoof" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, 0 )
 mesh = SubResource( 9489 )
@@ -178118,11 +177923,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 722 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolidRoof2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -1 )
@@ -178148,11 +177948,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 724 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof2/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolidRoof3" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -2 )
 mesh = SubResource( 10001 )
@@ -178176,11 +177971,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 726 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof3"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof3/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolidRoof4" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -3 )
@@ -178206,11 +177996,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 728 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof4"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof4/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolidRoof5" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -4 )
 mesh = SubResource( 10513 )
@@ -178234,11 +178019,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 730 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof5"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof5/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolidRoof6" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -5 )
@@ -178264,11 +178044,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 732 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof6"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof6/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolidRoof7" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -1.98872, -6 )
 mesh = SubResource( 11025 )
@@ -178292,11 +178067,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 734 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof7"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof7/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolidCeil" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, 0 )
@@ -178322,11 +178092,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 736 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolidCeil2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -1 )
 mesh = SubResource( 11537 )
@@ -178350,11 +178115,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 738 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil2/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolidCeil3" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -2 )
@@ -178380,11 +178140,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 740 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil3"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil3/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolidCeil4" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -3 )
 mesh = SubResource( 12049 )
@@ -178408,11 +178163,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 742 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil4"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil4/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="BrickSolidCeil5" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -4 )
@@ -178438,11 +178188,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 744 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil5"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil5/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="BrickSolidCeil6" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -2.98872, -5 )
 mesh = SubResource( 12561 )
@@ -178466,11 +178211,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 746 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil6"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil6/StaticBody"]
-shape = SubResource( 3 )
 
 [node name="CloudSemisolidTop" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 1, 0 )
@@ -178496,12 +178236,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 1004 )
 
-[node name="StaticBody" type="StaticBody" parent="CloudSemisolidTop"]
-
-[node name="CollisionShape" type="CollisionShape" parent="CloudSemisolidTop/StaticBody"]
-transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
-shape = SubResource( 90 )
-
 [node name="PinkCloudSemisolid" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, -1, 0 )
 mesh = SubResource( 16193 )
@@ -178525,12 +178259,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 1004 )
-
-[node name="StaticBody" type="StaticBody" parent="PinkCloudSemisolid"]
-
-[node name="CollisionShape" type="CollisionShape" parent="PinkCloudSemisolid/StaticBody"]
-transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
-shape = SubResource( 16426 )
 
 [node name="PinkCloudSemisolidTop" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4, 0, 0 )
@@ -178556,12 +178284,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 1004 )
 
-[node name="StaticBody" type="StaticBody" parent="PinkCloudSemisolidTop"]
-
-[node name="CollisionShape" type="CollisionShape" parent="PinkCloudSemisolidTop/StaticBody"]
-transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
-shape = SubResource( 17462 )
-
 [node name="CloudSemisolidTop2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 1, -1 )
 mesh = SubResource( 13671 )
@@ -178585,12 +178307,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 1006 )
-
-[node name="StaticBody" type="StaticBody" parent="CloudSemisolidTop2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="CloudSemisolidTop2/StaticBody"]
-transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
-shape = SubResource( 90 )
 
 [node name="CloudSemisolidTop3" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 1, -2 )
@@ -178616,12 +178332,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 1008 )
 
-[node name="StaticBody" type="StaticBody" parent="CloudSemisolidTop3"]
-
-[node name="CollisionShape" type="CollisionShape" parent="CloudSemisolidTop3/StaticBody"]
-transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
-shape = SubResource( 90 )
-
 [node name="CloudSemisolidTop4" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 1, -3 )
 mesh = SubResource( 14183 )
@@ -178645,12 +178355,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 1010 )
-
-[node name="StaticBody" type="StaticBody" parent="CloudSemisolidTop4"]
-
-[node name="CollisionShape" type="CollisionShape" parent="CloudSemisolidTop4/StaticBody"]
-transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
-shape = SubResource( 90 )
 
 [node name="CloudSemisolid" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 0, 0 )
@@ -178676,12 +178380,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 1012 )
 
-[node name="StaticBody" type="StaticBody" parent="CloudSemisolid"]
-
-[node name="CollisionShape" type="CollisionShape" parent="CloudSemisolid/StaticBody"]
-transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
-shape = SubResource( 90 )
-
 [node name="CloudSemisolid2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 0, -1 )
 mesh = SubResource( 14695 )
@@ -178705,12 +178403,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 1014 )
-
-[node name="StaticBody" type="StaticBody" parent="CloudSemisolid2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="CloudSemisolid2/StaticBody"]
-transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
-shape = SubResource( 90 )
 
 [node name="CloudSemisolid3" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 0, -2 )
@@ -178736,12 +178428,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 1016 )
 
-[node name="StaticBody" type="StaticBody" parent="CloudSemisolid3"]
-
-[node name="CollisionShape" type="CollisionShape" parent="CloudSemisolid3/StaticBody"]
-transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
-shape = SubResource( 90 )
-
 [node name="CloudSemisolid4" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 0, -3 )
 mesh = SubResource( 15207 )
@@ -178766,87 +178452,26 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 1018 )
 
-[node name="StaticBody" type="StaticBody" parent="CloudSemisolid4"]
-
-[node name="CollisionShape" type="CollisionShape" parent="CloudSemisolid4/StaticBody"]
-transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.5, 0 )
-shape = SubResource( 90 )
-
 [node name="Spikes" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, 0 )
 mesh = SubResource( 15464 )
-
-[node name="StaticBody" type="StaticBody" parent="Spikes"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Spikes/StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
-shape = SubResource( 15465 )
-
-[node name="Area" type="Area" parent="Spikes" groups=["spikes"]]
-
-[node name="CollisionShape" type="CollisionShape" parent="Spikes/Area"]
-shape = SubResource( 15466 )
 
 [node name="Spikes2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, -1 )
 mesh = SubResource( 15468 )
 material/0 = SubResource( 17463 )
 
-[node name="StaticBody" type="StaticBody" parent="Spikes2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Spikes2/StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
-shape = SubResource( 15465 )
-
-[node name="Area" type="Area" parent="Spikes2" groups=["spikes"]]
-
-[node name="CollisionShape" type="CollisionShape" parent="Spikes2/Area"]
-shape = SubResource( 15466 )
-
 [node name="Spikes3" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, -2 )
 mesh = SubResource( 15470 )
-
-[node name="StaticBody" type="StaticBody" parent="Spikes3"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Spikes3/StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
-shape = SubResource( 15465 )
-
-[node name="Area" type="Area" parent="Spikes3" groups=["spikes"]]
-
-[node name="CollisionShape" type="CollisionShape" parent="Spikes3/Area"]
-shape = SubResource( 15466 )
 
 [node name="Spikes4" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, -3 )
 mesh = SubResource( 15470 )
 
-[node name="StaticBody" type="StaticBody" parent="Spikes4"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Spikes4/StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
-shape = SubResource( 15465 )
-
-[node name="Area" type="Area" parent="Spikes4" groups=["spikes"]]
-
-[node name="CollisionShape" type="CollisionShape" parent="Spikes4/Area"]
-shape = SubResource( 15466 )
-
 [node name="Spikes5" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 0, -4 )
 mesh = SubResource( 15464 )
-
-[node name="StaticBody" type="StaticBody" parent="Spikes5"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Spikes5/StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
-shape = SubResource( 15465 )
-
-[node name="Area" type="Area" parent="Spikes5" groups=["spikes"]]
-
-[node name="CollisionShape" type="CollisionShape" parent="Spikes5/Area"]
-shape = SubResource( 15466 )
 
 [node name="GlitchSpikes" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -1, 0 )
@@ -178873,76 +178498,21 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 16684 )
 
-[node name="StaticBody" type="StaticBody" parent="GlitchSpikes"]
-
-[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes/StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
-shape = SubResource( 15465 )
-
-[node name="Area" type="Area" parent="GlitchSpikes" groups=["spikes"]]
-
-[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes/Area"]
-shape = SubResource( 15466 )
-
 [node name="GlitchSpikes2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -1, -1 )
 mesh = SubResource( 15478 )
-
-[node name="StaticBody" type="StaticBody" parent="GlitchSpikes2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes2/StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
-shape = SubResource( 15465 )
-
-[node name="Area" type="Area" parent="GlitchSpikes2" groups=["spikes"]]
-
-[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes2/Area"]
-shape = SubResource( 15466 )
 
 [node name="GlitchSpikes3" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -1, -2 )
 mesh = SubResource( 15480 )
 
-[node name="StaticBody" type="StaticBody" parent="GlitchSpikes3"]
-
-[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes3/StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
-shape = SubResource( 15465 )
-
-[node name="Area" type="Area" parent="GlitchSpikes3" groups=["spikes"]]
-
-[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes3/Area"]
-shape = SubResource( 15466 )
-
 [node name="GlitchSpikes4" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -1, -3 )
 mesh = SubResource( 15482 )
 
-[node name="StaticBody" type="StaticBody" parent="GlitchSpikes4"]
-
-[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes4/StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
-shape = SubResource( 15465 )
-
-[node name="Area" type="Area" parent="GlitchSpikes4" groups=["spikes"]]
-
-[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes4/Area"]
-shape = SubResource( 15466 )
-
 [node name="GlitchSpikes5" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -1, -4 )
 mesh = SubResource( 15484 )
-
-[node name="StaticBody" type="StaticBody" parent="GlitchSpikes5"]
-
-[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes5/StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
-shape = SubResource( 15465 )
-
-[node name="Area" type="Area" parent="GlitchSpikes5" groups=["spikes"]]
-
-[node name="CollisionShape" type="CollisionShape" parent="GlitchSpikes5/Area"]
-shape = SubResource( 15466 )
 
 [node name="BrickSolid_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, 0, 0 )
@@ -178968,11 +178538,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13115 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolid2_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, 0, -1 )
 mesh = SubResource( 2378 )
@@ -178996,11 +178561,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13117 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid2_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid2_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolid3_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, 0, -2 )
@@ -179026,11 +178586,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13118 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid3_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid3_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolid4_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, 0, -3 )
 mesh = SubResource( 2892 )
@@ -179054,11 +178609,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13119 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid4_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid4_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolid5_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, 0, -4 )
@@ -179084,11 +178634,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13120 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid5_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid5_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolid6_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, 0, -5 )
 mesh = SubResource( 3406 )
@@ -179112,11 +178657,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13121 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid6_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid6_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolid7_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, 0, -6 )
@@ -179142,11 +178682,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13122 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid7_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid7_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolid8_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, 0, -7 )
 mesh = SubResource( 3920 )
@@ -179170,11 +178705,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13123 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid8_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid8_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolidTop_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, 1, 0 )
@@ -179200,11 +178730,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13124 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolidTopLeft_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4, 1, 0 )
 mesh = SubResource( 4409 )
@@ -179228,11 +178753,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13125 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolidTopLeft2_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4, 1, -1 )
@@ -179258,11 +178778,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13126 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft2_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft2_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolidTopRight_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, 1, 0 )
 mesh = SubResource( 4922 )
@@ -179286,11 +178801,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13127 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolidTopRight2_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, 1, -1 )
@@ -179316,11 +178826,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13128 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight2_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight2_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolidTop2_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, 1, -1 )
 mesh = SubResource( 5434 )
@@ -179344,11 +178849,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13129 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop2_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop2_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolidTop3_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, 1, -2 )
@@ -179374,11 +178874,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13130 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop3_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop3_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolidTop4_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, 1, -3 )
 mesh = SubResource( 5948 )
@@ -179402,11 +178897,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13131 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop4_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop4_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolidTop5_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, 1, -4 )
@@ -179432,11 +178922,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13132 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop5_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop5_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolidTop6_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, 1, -5 )
 mesh = SubResource( 6462 )
@@ -179460,11 +178945,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13133 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop6_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop6_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolidTop7_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.499999, 0.00117858, 0, -0.00117858, 0.499999, 5, 1, -6 )
@@ -179490,11 +178970,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13134 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop7_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop7_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolidTop8_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, 1, -7 )
 mesh = SubResource( 6976 )
@@ -179518,11 +178993,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13135 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop8_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop8_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolidBot_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -0.988725, 0 )
@@ -179548,11 +179018,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13136 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolidBot2_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -0.988725, -1 )
 mesh = SubResource( 7514 )
@@ -179576,11 +179041,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13137 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot2_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot2_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolidBot3_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -0.988725, -2 )
@@ -179606,11 +179066,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13138 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot3_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot3_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolidBot4_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -0.988725, -3 )
 mesh = SubResource( 8028 )
@@ -179634,11 +179089,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13139 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot4_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot4_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolidBot5_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -0.988725, -4 )
@@ -179664,11 +179114,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13140 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot5_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot5_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolidBot6_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -0.988725, -5 )
 mesh = SubResource( 8542 )
@@ -179692,11 +179137,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13141 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot6_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot6_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolidBot7_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -0.988725, -6 )
@@ -179722,11 +179162,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13142 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot7_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot7_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolidBot8_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -0.988725, -7 )
 mesh = SubResource( 9056 )
@@ -179750,11 +179185,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13143 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot8_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot8_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolidBot9_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -0.988725, -8 )
@@ -179780,11 +179210,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13144 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot9_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot9_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolidRoof_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -1.98872, 0 )
 mesh = SubResource( 9497 )
@@ -179808,11 +179233,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13145 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolidRoof2_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -1.98872, -1 )
@@ -179838,11 +179258,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13146 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof2_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof2_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolidRoof3_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -1.98872, -2 )
 mesh = SubResource( 10011 )
@@ -179866,11 +179281,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13147 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof3_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof3_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolidRoof4_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -1.98872, -3 )
@@ -179896,11 +179306,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13148 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof4_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof4_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolidRoof5_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -1.98872, -4 )
 mesh = SubResource( 10525 )
@@ -179924,11 +179329,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13149 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof5_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof5_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolidRoof6_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -1.98872, -5 )
@@ -179954,11 +179354,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13150 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof6_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof6_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolidRoof7_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -1.98872, -6 )
 mesh = SubResource( 11039 )
@@ -179982,11 +179377,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13151 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof7_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof7_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolidCeil_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -2.98872, 0 )
@@ -180012,11 +179402,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13152 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolidCeil2_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -2.98872, -1 )
 mesh = SubResource( 11562 )
@@ -180040,11 +179425,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13153 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil2_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil2_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolidCeil3_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -2.98872, -2 )
@@ -180070,11 +179450,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13154 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil3_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil3_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolidCeil4_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -2.98872, -3 )
 mesh = SubResource( 12076 )
@@ -180098,11 +179473,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13155 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil4_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil4_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolidCeil5_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -2.98872, -4 )
@@ -180128,11 +179498,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13156 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil5_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil5_green/StaticBody"]
-shape = SubResource( 13116 )
-
 [node name="BrickSolidCeil6_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -2.98872, -5 )
 mesh = SubResource( 12590 )
@@ -180156,11 +179521,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13157 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil6_green"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil6_green/StaticBody"]
-shape = SubResource( 13116 )
 
 [node name="BrickSolid_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -5, 0 )
@@ -180186,11 +179546,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13159 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolid2_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -5, -1 )
 mesh = SubResource( 2450 )
@@ -180214,11 +179569,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13162 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid2_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid2_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="BrickSolid3_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -5, -2 )
@@ -180244,11 +179594,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13164 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid3_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid3_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolid4_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -5, -3 )
 mesh = SubResource( 2964 )
@@ -180272,11 +179617,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13166 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid4_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid4_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="BrickSolid5_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -5, -4 )
@@ -180302,11 +179642,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13168 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid5_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid5_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolid6_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -5, -5 )
 mesh = SubResource( 3478 )
@@ -180330,11 +179665,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13170 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid6_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid6_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="BrickSolid7_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -5, -6 )
@@ -180360,11 +179690,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13172 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid7_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid7_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolid8_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -5, -7 )
 mesh = SubResource( 3992 )
@@ -180388,11 +179713,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13174 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid8_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid8_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="BrickSolidTop_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -4, 0 )
@@ -180418,11 +179738,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13176 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolidTopLeft_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -4, 0 )
 mesh = SubResource( 4481 )
@@ -180446,11 +179761,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13178 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="BrickSolidTopLeft2_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -4, -1 )
@@ -180476,11 +179786,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13180 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft2_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft2_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolidTopRight_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -4, 0 )
 mesh = SubResource( 4994 )
@@ -180504,11 +179809,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13182 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="BrickSolidTopRight2_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -4, -1 )
@@ -180534,11 +179834,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13184 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight2_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight2_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolidTop2_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -4, -1 )
 mesh = SubResource( 5506 )
@@ -180562,11 +179857,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13186 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop2_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop2_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="BrickSolidTop3_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -4, -2 )
@@ -180592,11 +179882,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13188 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop3_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop3_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolidTop4_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -4, -3 )
 mesh = SubResource( 6020 )
@@ -180620,11 +179905,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13190 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop4_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop4_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="BrickSolidTop5_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -4, -4 )
@@ -180650,11 +179930,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13192 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop5_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop5_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolidTop6_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -4, -5 )
 mesh = SubResource( 6534 )
@@ -180678,11 +179953,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13194 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop6_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop6_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="BrickSolidTop7_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.499999, 0.00117858, 0, -0.00117858, 0.499999, 1, -4, -6 )
@@ -180708,11 +179978,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13196 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop7_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop7_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolidTop8_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -4, -7 )
 mesh = SubResource( 7048 )
@@ -180736,11 +180001,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13198 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop8_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop8_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="BrickSolidBot_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -5.98873, 0 )
@@ -180766,11 +180026,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13200 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolidBot2_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -5.98873, -1 )
 mesh = SubResource( 7586 )
@@ -180794,11 +180049,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13202 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot2_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot2_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="BrickSolidBot3_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -5.98873, -2 )
@@ -180824,11 +180074,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13204 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot3_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot3_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolidBot4_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -5.98873, -3 )
 mesh = SubResource( 8100 )
@@ -180852,11 +180097,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13206 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot4_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot4_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="BrickSolidBot5_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -5.98873, -4 )
@@ -180882,11 +180122,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13208 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot5_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot5_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolidBot6_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -5.98873, -5 )
 mesh = SubResource( 8614 )
@@ -180910,11 +180145,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13210 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot6_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot6_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="BrickSolidBot7_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -5.98873, -6 )
@@ -180940,11 +180170,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13212 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot7_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot7_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolidBot8_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -5.98873, -7 )
 mesh = SubResource( 9128 )
@@ -180968,11 +180193,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13214 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot8_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot8_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="BrickSolidBot9_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -5.98873, -8 )
@@ -180998,11 +180218,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13216 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot9_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot9_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolidRoof_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -6.98872, 0 )
 mesh = SubResource( 9569 )
@@ -181026,11 +180241,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13218 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="BrickSolidRoof2_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -6.98872, -1 )
@@ -181056,11 +180266,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13220 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof2_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof2_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolidRoof3_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -6.98872, -2 )
 mesh = SubResource( 10083 )
@@ -181084,11 +180289,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13222 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof3_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof3_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="BrickSolidRoof4_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -6.98872, -3 )
@@ -181114,11 +180314,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13224 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof4_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof4_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolidRoof5_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -6.98872, -4 )
 mesh = SubResource( 10597 )
@@ -181142,11 +180337,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13226 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof5_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof5_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="BrickSolidRoof6_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -6.98872, -5 )
@@ -181172,11 +180362,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13228 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof6_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof6_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolidRoof7_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -6.98872, -6 )
 mesh = SubResource( 11111 )
@@ -181200,11 +180385,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13230 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof7_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof7_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="BrickSolidCeil_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -7.98872, 0 )
@@ -181230,11 +180410,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13232 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolidCeil2_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -7.98872, -1 )
 mesh = SubResource( 11634 )
@@ -181258,11 +180433,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13234 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil2_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil2_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="BrickSolidCeil3_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -7.98872, -2 )
@@ -181288,11 +180458,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13236 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil3_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil3_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolidCeil4_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -7.98872, -3 )
 mesh = SubResource( 12148 )
@@ -181316,11 +180481,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13238 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil4_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil4_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="BrickSolidCeil5_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -7.98872, -4 )
@@ -181346,11 +180506,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13240 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil5_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil5_red/StaticBody"]
-shape = SubResource( 13160 )
-
 [node name="BrickSolidCeil6_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -7.98872, -5 )
 mesh = SubResource( 12662 )
@@ -181374,11 +180529,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13242 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil6_red"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil6_red/StaticBody"]
-shape = SubResource( 13160 )
 
 [node name="SoftSand" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7, -5, 0 )
@@ -181404,11 +180554,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13372 )
 
-[node name="StaticBody" type="StaticBody" parent="SoftSand"]
-
-[node name="CollisionShape" type="CollisionShape" parent="SoftSand/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="SoftSand2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7, -5, -1 )
 mesh = SubResource( 2458 )
@@ -181432,11 +180577,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13374 )
-
-[node name="StaticBody" type="StaticBody" parent="SoftSand2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="SoftSand2/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="SoftSandTop" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7, -4, 0 )
@@ -181462,11 +180602,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13381 )
 
-[node name="StaticBody" type="StaticBody" parent="SoftSandTop"]
-
-[node name="CollisionShape" type="CollisionShape" parent="SoftSandTop/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="SoftSandTop2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7, -4, -1 )
 mesh = SubResource( 5514 )
@@ -181490,11 +180625,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13386 )
-
-[node name="StaticBody" type="StaticBody" parent="SoftSandTop2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="SoftSandTop2/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolid_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -5, 0 )
@@ -181520,11 +180650,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13372 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolid2_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -5, -1 )
 mesh = SubResource( 2458 )
@@ -181548,11 +180673,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13374 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid2_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid2_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolid3_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -5, -2 )
@@ -181578,11 +180698,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13375 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid3_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid3_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolid4_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -5, -3 )
 mesh = SubResource( 2972 )
@@ -181606,11 +180721,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13376 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid4_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid4_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolid5_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -5, -4 )
@@ -181636,11 +180746,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13377 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid5_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid5_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolid6_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -5, -5 )
 mesh = SubResource( 3486 )
@@ -181664,11 +180769,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13378 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid6_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid6_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolid7_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -5, -6 )
@@ -181694,11 +180794,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13379 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid7_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid7_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolid8_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -5, -7 )
 mesh = SubResource( 4000 )
@@ -181722,11 +180817,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13380 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid8_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid8_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolidTop_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -4, 0 )
@@ -181752,11 +180842,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13381 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolidTopLeft_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4, -4, 0 )
 mesh = SubResource( 4489 )
@@ -181780,11 +180865,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13382 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolidTopLeft2_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4, -4, -1 )
@@ -181810,11 +180890,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13383 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft2_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft2_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolidTopRight_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -4, 0 )
 mesh = SubResource( 5002 )
@@ -181838,11 +180913,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13384 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolidTopRight2_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -4, -1 )
@@ -181868,11 +180938,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13385 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight2_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight2_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolidTop2_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -4, -1 )
 mesh = SubResource( 5514 )
@@ -181896,11 +180961,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13386 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop2_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop2_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolidTop3_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -4, -2 )
@@ -181926,11 +180986,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13387 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop3_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop3_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolidTop4_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -4, -3 )
 mesh = SubResource( 6028 )
@@ -181954,11 +181009,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13388 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop4_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop4_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolidTop5_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -4, -4 )
@@ -181984,11 +181034,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13389 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop5_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop5_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolidTop6_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -4, -5 )
 mesh = SubResource( 6542 )
@@ -182012,11 +181057,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13390 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop6_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop6_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolidTop7_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.499999, 0.00117858, 0, -0.00117858, 0.499999, 5, -4, -6 )
@@ -182042,11 +181082,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13391 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop7_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop7_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolidTop8_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -4, -7 )
 mesh = SubResource( 7056 )
@@ -182070,11 +181105,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13392 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop8_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop8_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolidBot_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -5.98873, 0 )
@@ -182100,11 +181130,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13393 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolidBot2_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -5.98873, -1 )
 mesh = SubResource( 7594 )
@@ -182128,11 +181153,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13394 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot2_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot2_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolidBot3_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -5.98873, -2 )
@@ -182158,11 +181178,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13395 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot3_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot3_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolidBot4_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -5.98873, -3 )
 mesh = SubResource( 8108 )
@@ -182186,11 +181201,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13396 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot4_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot4_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolidBot5_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -5.98873, -4 )
@@ -182216,11 +181226,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13397 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot5_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot5_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolidBot6_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -5.98873, -5 )
 mesh = SubResource( 8622 )
@@ -182244,11 +181249,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13398 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot6_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot6_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolidBot7_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -5.98873, -6 )
@@ -182274,11 +181274,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13399 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot7_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot7_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolidBot8_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -5.98873, -7 )
 mesh = SubResource( 9136 )
@@ -182302,11 +181297,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13400 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot8_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot8_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolidBot9_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -5.98873, -8 )
@@ -182332,11 +181322,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13401 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot9_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot9_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolidRoof_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -6.98872, 0 )
 mesh = SubResource( 9577 )
@@ -182360,11 +181345,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13402 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolidRoof2_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -6.98872, -1 )
@@ -182390,11 +181370,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13403 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof2_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof2_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolidRoof3_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -6.98872, -2 )
 mesh = SubResource( 10091 )
@@ -182418,11 +181393,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13404 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof3_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof3_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolidRoof4_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -6.98872, -3 )
@@ -182448,11 +181418,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13405 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof4_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof4_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolidRoof5_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -6.98872, -4 )
 mesh = SubResource( 10605 )
@@ -182476,11 +181441,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13406 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof5_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof5_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolidRoof6_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -6.98872, -5 )
@@ -182506,11 +181466,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13407 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof6_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof6_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolidRoof7_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -6.98872, -6 )
 mesh = SubResource( 11119 )
@@ -182534,11 +181489,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13408 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof7_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof7_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolidCeil_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -7.98872, 0 )
@@ -182564,11 +181514,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13409 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolidCeil2_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -7.98872, -1 )
 mesh = SubResource( 11642 )
@@ -182592,11 +181537,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13410 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil2_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil2_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolidCeil3_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -7.98872, -2 )
@@ -182622,11 +181562,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13411 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil3_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil3_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolidCeil4_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -7.98872, -3 )
 mesh = SubResource( 12156 )
@@ -182650,11 +181585,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13412 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil4_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil4_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolidCeil5_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -7.98872, -4 )
@@ -182680,11 +181610,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13413 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil5_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil5_yellow/StaticBody"]
-shape = SubResource( 13373 )
-
 [node name="BrickSolidCeil6_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -7.98872, -5 )
 mesh = SubResource( 12670 )
@@ -182708,11 +181633,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 13414 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil6_yellow"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil6_yellow/StaticBody"]
-shape = SubResource( 13373 )
 
 [node name="BrickSolid_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -10, 0 )
@@ -182738,11 +181658,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15570 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolid2_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -10, -1 )
 mesh = SubResource( 2530 )
@@ -182766,11 +181681,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15572 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid2_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid2_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolid3_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -10, -2 )
@@ -182796,11 +181706,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15573 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid3_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid3_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolid4_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -10, -3 )
 mesh = SubResource( 3044 )
@@ -182824,11 +181729,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15574 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid4_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid4_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolid5_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -10, -4 )
@@ -182854,11 +181754,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15575 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid5_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid5_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolid6_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -10, -5 )
 mesh = SubResource( 3558 )
@@ -182882,11 +181777,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15576 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid6_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid6_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolid7_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -10, -6 )
@@ -182912,11 +181802,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15577 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid7_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid7_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolid8_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -10, -7 )
 mesh = SubResource( 4072 )
@@ -182940,11 +181825,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15578 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid8_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid8_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolidTop_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -9, 0 )
@@ -182970,11 +181850,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15579 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolidTopLeft_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -9, 0 )
 mesh = SubResource( 4561 )
@@ -182998,11 +181873,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15580 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolidTopLeft2_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -9, -1 )
@@ -183028,11 +181898,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15581 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft2_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft2_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolidTopRight_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -9, 0 )
 mesh = SubResource( 5074 )
@@ -183056,11 +181921,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15582 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolidTopRight2_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -9, -1 )
@@ -183086,11 +181946,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15583 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight2_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight2_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolidTop2_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -9, -1 )
 mesh = SubResource( 5586 )
@@ -183114,11 +181969,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15584 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop2_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop2_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolidTop3_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -9, -2 )
@@ -183144,11 +181994,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15585 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop3_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop3_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolidTop4_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -9, -3 )
 mesh = SubResource( 6100 )
@@ -183172,11 +182017,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15586 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop4_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop4_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolidTop5_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -9, -4 )
@@ -183202,11 +182042,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15587 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop5_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop5_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolidTop6_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -9, -5 )
 mesh = SubResource( 6614 )
@@ -183230,11 +182065,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15588 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop6_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop6_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolidTop7_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.499999, 0.00117858, 0, -0.00117858, 0.499999, 1, -9, -6 )
@@ -183260,11 +182090,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15589 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop7_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop7_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolidTop8_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, -9, -7 )
 mesh = SubResource( 7128 )
@@ -183288,11 +182113,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15590 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop8_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop8_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolidBot_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -10.9887, 0 )
@@ -183318,11 +182138,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15591 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolidBot2_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -10.9887, -1 )
 mesh = SubResource( 7666 )
@@ -183346,11 +182161,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15592 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot2_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot2_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolidBot3_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -10.9887, -2 )
@@ -183376,11 +182186,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15593 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot3_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot3_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolidBot4_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -10.9887, -3 )
 mesh = SubResource( 8180 )
@@ -183404,11 +182209,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15594 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot4_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot4_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolidBot5_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -10.9887, -4 )
@@ -183434,11 +182234,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15595 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot5_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot5_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolidBot6_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -10.9887, -5 )
 mesh = SubResource( 8694 )
@@ -183462,11 +182257,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15596 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot6_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot6_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolidBot7_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -10.9887, -6 )
@@ -183492,11 +182282,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15597 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot7_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot7_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolidBot8_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -10.9887, -7 )
 mesh = SubResource( 9208 )
@@ -183520,11 +182305,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15598 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot8_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot8_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolidBot9_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -10.9887, -8 )
@@ -183550,11 +182330,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15599 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot9_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot9_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolidRoof_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -11.9887, 0 )
 mesh = SubResource( 9649 )
@@ -183578,11 +182353,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15600 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolidRoof2_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -11.9887, -1 )
@@ -183608,11 +182378,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15601 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof2_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof2_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolidRoof3_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -11.9887, -2 )
 mesh = SubResource( 10163 )
@@ -183636,11 +182401,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15602 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof3_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof3_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolidRoof4_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -11.9887, -3 )
@@ -183666,11 +182426,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15603 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof4_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof4_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolidRoof5_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -11.9887, -4 )
 mesh = SubResource( 10677 )
@@ -183694,11 +182449,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15604 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof5_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof5_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolidRoof6_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -11.9887, -5 )
@@ -183724,11 +182474,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15605 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof6_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof6_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolidRoof7_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -11.9887, -6 )
 mesh = SubResource( 11191 )
@@ -183752,11 +182497,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15606 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof7_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof7_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolidCeil_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -12.9887, 0 )
@@ -183782,11 +182522,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15607 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolidCeil2_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -12.9887, -1 )
 mesh = SubResource( 11714 )
@@ -183810,11 +182545,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15608 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil2_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil2_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolidCeil3_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -12.9887, -2 )
@@ -183840,11 +182570,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15609 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil3_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil3_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolidCeil4_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -12.9887, -3 )
 mesh = SubResource( 12228 )
@@ -183868,11 +182593,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15610 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil4_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil4_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolidCeil5_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -12.9887, -4 )
@@ -183898,11 +182618,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15611 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil5_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil5_black/StaticBody"]
-shape = SubResource( 15571 )
-
 [node name="BrickSolidCeil6_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.02255, -12.9887, -5 )
 mesh = SubResource( 12742 )
@@ -183926,11 +182641,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15612 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil6_black"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil6_black/StaticBody"]
-shape = SubResource( 15571 )
 
 [node name="BrickSolid_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -10, 0 )
@@ -183956,11 +182666,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15613 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolid2_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -10, -1 )
 mesh = SubResource( 2538 )
@@ -183984,11 +182689,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15615 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid2_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid2_white/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="BrickSolid3_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -10, -2 )
@@ -184014,11 +182714,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15616 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid3_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid3_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolid4_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -10, -3 )
 mesh = SubResource( 3052 )
@@ -184042,11 +182737,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15617 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid4_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid4_white/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="BrickSolid5_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -10, -4 )
@@ -184072,11 +182762,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15618 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid5_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid5_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolid6_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -10, -5 )
 mesh = SubResource( 3566 )
@@ -184100,11 +182785,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15619 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid6_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid6_white/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="BrickSolid7_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -10, -6 )
@@ -184130,11 +182810,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15620 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolid7_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid7_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolid8_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -10, -7 )
 mesh = SubResource( 4080 )
@@ -184158,11 +182833,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15621 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolid8_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolid8_white/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="TransparentGlitchTile" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1, -1, 0 )
@@ -184212,11 +182882,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15613 )
 
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="FragileBrickSolid2" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -1 )
 mesh = SubResource( 2538 )
@@ -184240,11 +182905,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15615 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid2/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="FragileBrickSolid3" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -2 )
@@ -184270,11 +182930,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15616 )
 
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid3"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid3/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="FragileBrickSolid4" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -3 )
 mesh = SubResource( 3052 )
@@ -184298,11 +182953,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15617 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid4"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid4/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="FragileBrickSolid5" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -4 )
@@ -184328,11 +182978,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15618 )
 
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid5"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid5/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="FragileBrickSolid6" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -5 )
 mesh = SubResource( 3566 )
@@ -184356,11 +183001,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15619 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid6"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid6/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="FragileBrickSolid7" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -6 )
@@ -184386,11 +183026,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15620 )
 
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid7"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid7/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="FragileBrickSolid8" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, -7 )
 mesh = SubResource( 4080 )
@@ -184414,11 +183049,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15621 )
-
-[node name="StaticBody" type="StaticBody" parent="FragileBrickSolid8"]
-
-[node name="CollisionShape" type="CollisionShape" parent="FragileBrickSolid8/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="BrickSolidTop_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -9, 0 )
@@ -184444,11 +183074,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15622 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolidTopLeft_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4, -9, 0 )
 mesh = SubResource( 4569 )
@@ -184472,11 +183097,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15623 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft_white/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="BrickSolidTopLeft2_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4, -9, -1 )
@@ -184502,11 +183122,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15624 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopLeft2_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopLeft2_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolidTopRight_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -9, 0 )
 mesh = SubResource( 5082 )
@@ -184530,11 +183145,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15625 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight_white/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="BrickSolidTopRight2_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -9, -1 )
@@ -184560,11 +183170,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15626 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTopRight2_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTopRight2_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolidTop2_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -9, -1 )
 mesh = SubResource( 5594 )
@@ -184588,11 +183193,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15627 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop2_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop2_white/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="BrickSolidTop3_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -9, -2 )
@@ -184618,11 +183218,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15628 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop3_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop3_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolidTop4_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -9, -3 )
 mesh = SubResource( 6108 )
@@ -184646,11 +183241,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15629 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop4_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop4_white/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="BrickSolidTop5_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -9, -4 )
@@ -184676,11 +183266,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15630 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop5_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop5_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolidTop6_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -9, -5 )
 mesh = SubResource( 6622 )
@@ -184704,11 +183289,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15631 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop6_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop6_white/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="BrickSolidTop7_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.499999, 0.00117858, 0, -0.00117858, 0.499999, 5, -9, -6 )
@@ -184734,11 +183314,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15632 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop7_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop7_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolidTop8_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5, -9, -7 )
 mesh = SubResource( 7136 )
@@ -184762,11 +183337,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15633 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidTop8_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidTop8_white/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="BrickSolidBot_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -10.9887, 0 )
@@ -184792,11 +183362,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15634 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolidBot2_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -10.9887, -1 )
 mesh = SubResource( 7674 )
@@ -184820,11 +183385,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15635 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot2_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot2_white/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="BrickSolidBot3_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -10.9887, -2 )
@@ -184850,11 +183410,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15636 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot3_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot3_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolidBot4_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -10.9887, -3 )
 mesh = SubResource( 8188 )
@@ -184878,11 +183433,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15637 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot4_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot4_white/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="BrickSolidBot5_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -10.9887, -4 )
@@ -184908,11 +183458,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15638 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot5_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot5_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolidBot6_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -10.9887, -5 )
 mesh = SubResource( 8702 )
@@ -184936,11 +183481,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15639 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot6_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot6_white/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="BrickSolidBot7_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -10.9887, -6 )
@@ -184966,11 +183506,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15640 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot7_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot7_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolidBot8_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -10.9887, -7 )
 mesh = SubResource( 9216 )
@@ -184994,11 +183529,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15641 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot8_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot8_white/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="BrickSolidBot9_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -10.9887, -8 )
@@ -185024,11 +183554,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15898 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidBot9_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidBot9_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolidRoof_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -11.9887, 0 )
 mesh = SubResource( 9657 )
@@ -185052,11 +183577,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15899 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof_white/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="BrickSolidRoof2_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -11.9887, -1 )
@@ -185082,11 +183602,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15900 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof2_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof2_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolidRoof3_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -11.9887, -2 )
 mesh = SubResource( 10171 )
@@ -185110,11 +183625,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15901 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof3_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof3_white/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="BrickSolidRoof4_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -11.9887, -3 )
@@ -185140,11 +183650,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15902 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof4_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof4_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolidRoof5_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -11.9887, -4 )
 mesh = SubResource( 10685 )
@@ -185168,11 +183673,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15903 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof5_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof5_white/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="BrickSolidRoof6_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -11.9887, -5 )
@@ -185198,11 +183698,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15904 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof6_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof6_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolidRoof7_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -11.9887, -6 )
 mesh = SubResource( 11199 )
@@ -185226,11 +183721,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15905 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidRoof7_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidRoof7_white/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="BrickSolidCeil_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -12.9887, 0 )
@@ -185256,11 +183746,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15906 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolidCeil2_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -12.9887, -1 )
 mesh = SubResource( 11722 )
@@ -185284,11 +183769,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15907 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil2_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil2_white/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="BrickSolidCeil3_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -12.9887, -2 )
@@ -185314,11 +183794,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15908 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil3_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil3_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolidCeil4_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -12.9887, -3 )
 mesh = SubResource( 12236 )
@@ -185342,11 +183817,6 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15909 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil4_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil4_white/StaticBody"]
-shape = SubResource( 15614 )
 
 [node name="BrickSolidCeil5_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -12.9887, -4 )
@@ -185372,11 +183842,6 @@ generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15910 )
 
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil5_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil5_white/StaticBody"]
-shape = SubResource( 15614 )
-
 [node name="BrickSolidCeil6_white" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.02255, -12.9887, -5 )
 mesh = SubResource( 12750 )
@@ -185400,8 +183865,3 @@ region_rect = Rect2( 0, 0, 1, 1 )
 generation_alpha_threshold = 0.0
 generation_uv_correction = 0.0
 generated_sprite_mesh = SubResource( 15911 )
-
-[node name="StaticBody" type="StaticBody" parent="BrickSolidCeil6_white"]
-
-[node name="CollisionShape" type="CollisionShape" parent="BrickSolidCeil6_white/StaticBody"]
-shape = SubResource( 15614 )
