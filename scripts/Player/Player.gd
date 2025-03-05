@@ -2131,6 +2131,34 @@ func processBroomLogic(delta):
   #     summonFallenBroom(true)
   force_a_sweep = false
 
+func sneezeCloud():
+  summonSmokeClouds(1, false, true, 1)
+
+func startCutsceneIntroAni(aniName):
+  pauseAnimation = true
+  pauseInput = true
+  pauseSelf = true
+  global.pauseMoveInput = true
+  global.shouldRenderAsCinematic = true
+  level.gameCamera.zoom_in_on_player = true
+  level.gameCamera.zoomed_size = 3 * level.gameCamera.initial_size / 4
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play(aniName)
+
+func finishCutsceneIntroAni():
+  pauseAnimation = false
+  pauseInput = false
+  pauseSelf = false
+  global.pauseMoveInput = false
+  global.shouldRenderAsCinematic = false
+  level.gameCamera.zoom_in_on_player = false
+  level.gameCamera.zoomed_size = level.gameCamera.initial_size
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("fall")
+
+
 var SOFT_SAND_TOP_TILE = 275
 func doBroomAttack(which_broom_attack):
   # TODO(jaketrower): has just turned around

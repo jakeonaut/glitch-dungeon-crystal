@@ -16,7 +16,7 @@ var zoomed_size = 7
 var start_applying_parallax = false
 var how_fast_to_switch_targets = 1
 export var is_doing_fake_static = false
-var am_i_zooming = false
+var zoom_in_on_player = false
 var can_i_move = true
 
 var levelTiles = null
@@ -130,7 +130,15 @@ func _process(delta):
       set_interpolation_enabled(false)
       if actual_target.get_ref() == initial_target: how_fast_to_switch_targets = 0
 
-    if global.activeInteractor != null and is_instance_valid(global.activeInteractor) and global.activeInteractor.can_camera_zoom and initial_size > 12:
+    if zoom_in_on_player:
+      actual_target = weakref(initial_target)
+      set_target(actual_target.get_ref())      
+      self.size = self.size + (zoomed_size - self.size) * (delta*5)
+      if stepify(self.size, 0.1) == stepify(zoomed_size, 0.1):
+        self.size = zoomed_size
+      set_speed(2)
+      set_interpolation_enabled(true)
+    elif global.activeInteractor != null and is_instance_valid(global.activeInteractor) and global.activeInteractor.can_camera_zoom and initial_size > 12:
       actual_target = weakref(global.activeInteractor.textboxCameraTarget.get_ref())
       set_target(actual_target.get_ref())
       # interpolation = A + (B - A) * t
@@ -139,12 +147,6 @@ func _process(delta):
         self.size = zoomed_size
       set_speed(2)
       set_interpolation_enabled(true)
-    elif am_i_zooming:
-      actual_target = weakref(initial_target)
-      set_target(actual_target.get_ref())      
-      self.size = self.size + (zoomed_size - self.size) * (delta*5)
-      if stepify(self.size, 0.1) == stepify(zoomed_size, 0.1):
-        self.size = zoomed_size
     else:
       actual_target = weakref(initial_target)
       set_target(actual_target.get_ref())      

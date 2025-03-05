@@ -127,7 +127,7 @@ func stopAnimation():
     # level.levelTiles.randomize_num_counter = 0
     # level.player.pauseSelf = false
     # level.restartMusic()
-    # level.gameCamera.am_i_zooming = false
+    # level.gameCamera.zoom_in_on_player = false
 
 var is_smacked = false
 var smack_timer = 0
