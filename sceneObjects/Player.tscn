@@ -1,4 +1,4 @@
-[gd_scene load_steps=193 format=2]
+[gd_scene load_steps=194 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -2000,6 +2000,23 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=129]
+resource_name = "catDragging"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 52, 53 ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -7580,6 +7597,7 @@ anims/broomSmackFast = SubResource( 47 )
 anims/broomSmackGlitch = SubResource( 70 )
 "anims/broomSmackGlitch (copy)" = SubResource( 83 )
 anims/broomSweep = SubResource( 41 )
+anims/catDragging = SubResource( 129 )
 anims/collapse = SubResource( 9 )
 anims/enterDoor = SubResource( 49 )
 anims/faceLeft = SubResource( 10 )

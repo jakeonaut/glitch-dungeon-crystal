@@ -246,6 +246,7 @@ func getPurified():
     global.memory["clean_crystals"] += 1
     global.setLevelZoneThing("crystal_geode", true)
     if "HighPriestessRoom" in level.getShortLevelName():
+        print("excuse me?")
         level.restartMusic()
 
     if global.memory["babushka_cat_story_hook"] == 1:

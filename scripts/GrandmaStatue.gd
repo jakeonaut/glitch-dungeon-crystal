@@ -18,6 +18,18 @@ var is_extra_life_active = false
 var original_pos = null
 var original_glitch_form = null
 
+var glitchGrandmaManagerRes = preload("res://sceneObjects/Enemies/GlitchGrandmaManager.tscn")
+func glitchMyself(override_glitch_form = null):
+  var newGlitchGrandmaManager = glitchGrandmaManagerRes.instance()
+  newGlitchGrandmaManager.glitch_form = self.glitch_form if override_glitch_form == null else override_glitch_form
+  if override_glitch_form == global.GlitchForm.FLOOR:
+    newGlitchGrandmaManager.can_jump_or_fall = false
+    newGlitchGrandmaManager.override_am_i_in_range_of_player = true
+  get_parent().add_child(newGlitchGrandmaManager)
+  newGlitchGrandmaManager.global_transform.origin = self.global_transform.origin
+  get_parent().remove_child(self)
+  queue_free()
+
 func _ready():
   set_process(true)
   set_physics_process(false)

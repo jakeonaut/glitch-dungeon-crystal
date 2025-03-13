@@ -47,6 +47,7 @@ export var behavior_thrower = false
 export var behavior_evolve = false
 export var behavior_fizzle_out_after_evolve = false
 export var behavior_phase_through_walls = false
+export var behavior_phase_through_bodies = false
 export var behavior_mini_explore = false
 export var behavior_directional_bullet = false
 export var walk_direction = Vector2(1, 0)
@@ -597,7 +598,7 @@ func doVerticalWalkingBehavior():
         grav = 0
                 
 func tryDieToBody():
-    if smallInteractionArea == null:
+    if smallInteractionArea == null or behavior_phase_through_bodies:
         return
     var areas = smallInteractionArea.get_overlapping_areas()
     for area in areas:

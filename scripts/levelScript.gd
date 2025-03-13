@@ -156,8 +156,8 @@ func _ready_impl():
     uiLayer.setDisplayTitle(global.getDisplayTitle(self.getLevelZoneName()))
   tryShowUIElements()
   trySpawnFollowers()
-  restartMusic()
   setUpRoomInitializationOverride()
+  restartMusic()
   if global.hasGottenLevelGeode or is_randomizing:
     levelTiles.randomize_num += 10
     levelTiles.randomize_num_counter = 15

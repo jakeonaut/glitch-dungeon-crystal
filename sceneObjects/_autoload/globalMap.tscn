@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://sceneObjects/_autoload/globalMap.gd" type="Script" id=1]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=21]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=22]
 [ext_resource path="res://assets/sprites/babaYagaBoss.png" type="Texture" id=23]
+[ext_resource path="res://assets/sprites/god_head.png" type="Texture" id=24]
 [ext_resource path="res://assets/sprites/babaYagaBossEye.png" type="Texture" id=25]
 [ext_resource path="res://assets/palettes/tidepool_palette.png" type="Texture" id=26]
 
@@ -782,6 +783,42 @@ shader_param/texture_albedo = ExtResource( 16 )
 shader_param/base_palette = ExtResource( 6 )
 shader_param/target_palette = ExtResource( 5 )
 
+[sub_resource type="ShaderMaterial" id=38]
+shader = ExtResource( 7 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 0.5
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 2
+shader_param/black_offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = true
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 24 )
+shader_param/base_palette = ExtResource( 6 )
+shader_param/target_palette = ExtResource( 9 )
+
 [node name="globalMap" type="Spatial"]
 script = ExtResource( 1 )
 
@@ -1380,7 +1417,21 @@ material_override = SubResource( 26 )
 offset = Vector2( -10, -20 )
 texture = ExtResource( 16 )
 hframes = 4
+vframes = 4
+path = "res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom.tscn"
+can_nav_right = false
+can_nav_up = false
+can_nav_down = false
+has_angel_statue = true
+
+[node name="PrimordialOoze" parent="CrystalTower" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 0 )
+material_override = SubResource( 38 )
+pixel_size = 0.1
+texture = ExtResource( 24 )
+hframes = 6
 vframes = 2
+frame = 4
 path = "res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom.tscn"
 can_nav_right = false
 can_nav_up = false

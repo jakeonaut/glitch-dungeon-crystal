@@ -68,7 +68,6 @@ func tryToPlay(stream_player):
     if stream_player.name == null:
         return
 
-    print("try to play: " + str(stream_player))
     if stream_player.is_playing(): return
     if did_play_treasure_jingle or did_play_defeat_boss_jingle:
         restartPlayingTheme = stream_player

@@ -339,7 +339,6 @@ locale/locale_filter_mode=1
 
 [locale]
 
-test="zh_CN"
 translations=PoolStringArray( "res://dialogUiLocalization.en.translation", "res://dialogUiLocalization.pt_BR.translation", "res://dialogUiLocalization.ru.translation", "res://dialogUiLocalization.zh_CN.translation" )
 translation_remaps={
 "res://YosterFontBig.tres": PoolStringArray( "res://dialogBodyFontTheme_zh_CN.tres:zh_CN", "res://YosterFontBig_ru.tres:ru", "res://YosterFontBig_ru.tres:pt_BR" ),

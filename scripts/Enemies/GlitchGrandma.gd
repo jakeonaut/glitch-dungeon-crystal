@@ -11,6 +11,7 @@ onready var secretAniPlayer = get_node("SecretAniPlayer")
 var SWEEP_BUFFER_DIST = 4
 var secretMultiBroom = null
 var has_sweeped_glitch = false
+var can_jump_or_fall = true
 
 enum BehaviorState {
   NORMAL,
@@ -53,12 +54,23 @@ func reallyDie():
 func tryDieToOffscreenCamera(_delta):
     var DEATH_MARGIN = 5
     if getGameCamera().rightmost_x > -999:
-        if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
-        global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
-        global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
-        global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
-            setGlobalMemoryOfHasBeenDefeated()
-            queue_free()
+        if level.pacman_wrapping:
+            DEATH_MARGIN = 1
+            if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN:
+              global_transform.origin.x = getGameCamera().leftmost_x + DEATH_MARGIN
+            if global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN:
+              global_transform.origin.x = getGameCamera().rightmost_x - DEATH_MARGIN
+            if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
+              global_transform.origin.y = getGameCamera().botmost_y + DEATH_MARGIN
+            if global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+              global_transform.origin.y = getGameCamera().topmost_y - DEATH_MARGIN
+        else:
+          if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
+          global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
+          global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
+          global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+              setGlobalMemoryOfHasBeenDefeated()
+              queue_free()
 
 # @override
 func processGlitchFormGlitchiness():
@@ -66,11 +78,11 @@ func processGlitchFormGlitchiness():
 
 # @override
 func pressingDown():
-  return level.player.pressingDown()
+  return level.player.pressingDown() and can_jump_or_fall
 
 # @override
 func justPressedDown():
-  return level.player.justPressedDown()
+  return level.player.justPressedDown() and can_jump_or_fall
 
 # @override
 func processWallLadderWalking(delta):
@@ -113,7 +125,7 @@ func processGrandmaBehavior(_delta):
       secretAniPlayer.clear_queue()
       secretAniPlayer.play("walk")
 
-    if level.player.pressingJump():
+    if level.player.pressingJump() and can_jump_or_fall:
       behavior_jumping = true
       if on_ground and not "jump" in secretAniPlayer.assigned_animation:
         secretAniPlayer.stop()
@@ -254,19 +266,19 @@ func glitchTickle():
   return
 
         
-# @override
-func ouchies(broom_origin):
-  .ouchies_base(broom_origin)
-  if am_i_dying or not visible: return
-  unenemize()
+# # @override
+# func ouchies(broom_origin):
+#   .ouchies_base(broom_origin)
+#   if am_i_dying or not visible: return
+#   unenemize()
       
-  am_i_dying = true
-  grav = 0
-  if summonedBroom:
-    broomStop()
-  summonFallenBroom(broom_origin)
-  secretAniPlayer.stop()
-  secretAniPlayer.play("die")
+#   am_i_dying = true
+#   grav = 0
+#   if summonedBroom:
+#     broomStop()
+#   summonFallenBroom(broom_origin)
+#   secretAniPlayer.stop()
+#   secretAniPlayer.play("die")
   
 var teleport_to = null
 var teleport_to_origin = null
@@ -298,6 +310,9 @@ func summonFallenBroom(_broom_origin):
 
 # @override
 func iJustPressedDown():
+  if not can_jump_or_fall:
+    return
+    
   if glitch_form == global.GlitchForm.FLOOR and on_ground and not truly_on_ground:
     .iJustPressedDown() # super
     return

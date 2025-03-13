@@ -342,6 +342,7 @@ func resetMemory():
     memory["can_force_respawn"] = 1
     memory["has_map_item"] = true
     memory["broomerang"] = 1
+    memory["babushka_cat_sprint"] = 1
     memory["broom_double_jump"] = 0
     memory["zora_flippers"] = 0
     memory["mole_cricket"] = 0

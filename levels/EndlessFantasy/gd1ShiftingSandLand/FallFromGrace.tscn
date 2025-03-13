@@ -260,9 +260,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 4.6, 0 )
 
 [node name="NPC" parent="Viewport/level/DustFarmer" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, -1.6, 0 )
-bbText = "•Error: NPC: 
-GET bb_text not found..
-just kidding."
+bbText = "NPC.ClayWorker.1"
 can_move = false
 can_camera_zoom = false
 is_a_body = false
@@ -270,54 +268,6 @@ is_wiggling_fast = true
 
 [node name="CollisionShape" parent="Viewport/level/DustFarmer/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 29 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/DustFarmer/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/DustFarmer/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/DustFarmer/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/DustFarmer/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/DustFarmer/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/DustFarmer/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/DustFarmer/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/DustFarmer/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="Sprite3D" parent="Viewport/level/DustFarmer/NPC" index="3"]
 frame = 78

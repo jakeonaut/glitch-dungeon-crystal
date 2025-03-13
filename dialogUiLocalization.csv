@@ -161,7 +161,7 @@ UI.BossName.2,the Vessel of souls,灵魂容器,Сосуд душ,o Receptáculo 
 UI.BossName.3,Baba Yaga's house,芭芭雅嘎的小屋,Избушка Бабы-яги,a Casa da Baba Yaga
 UI.BossName.4,the High priestess (crone),女祭司,Верховная жрица,a Grã-Sacerdotisa
 NPC.BrothKappa.1,hm.. sorry.\noccupied.,咳，有人了。,Простите...\nзанято.,ei...\ntem gente!
-NPC.ClayWorker.1,ERROR: NPC: GET text not found.. just kidding.,错误：NPC：无法获取…开玩笑的啦,ОШИБКА! НЕИГРОВОЙ ПЕРСОНАЖ: ТЕКСТ НЕ НАЙДЕН... Да шучу я.,ERRO: NPC: texto não encontrado... brincadeira...
+NPC.ClayWorker.1,•ERROR: NPC:\nGET text not found..\njust kidding.,错误：NPC：\n无法获取…开玩笑的啦,ОШИБКА!\nНЕИГРОВОЙ ПЕРСОНАЖ:\nТЕКСТ НЕ НАЙДЕН...\nДа шучу я.,ERRO: NPC:\ntexto não encontrado...\nbrincadeira...
 NPC.ClayWorker.2,sacred [color=#ffff00]Wall Ladder[/color] spell:\nthe essence of the\nbodies of locusts,神圣墙梯咒语：\n蝗虫尸体的精华,Священное заклинание\nлестницы – сие суть\nтело саранчи.,Trilha Impossível:\nfeitiço sagrado feito da\nessência dos gafanhotos.
 NPC.ClayWorker.3,a little gramdma guidance:\ntry smacking everything,来自奶奶的忠告：\n抽就完了,Подсказка для бабули:\nпопробуйте всё крушить.,dica de vovó:\nexperimente bater em tudo.
 NPC.ClayWorker.4,"um, not me though..\nplease",喂，别抽我啊…\n拜托,Но меня не надо...\nпожалуйста.,"epa, menos em mim,\npor favor..."

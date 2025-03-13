@@ -2,6 +2,7 @@ extends Spatial
 
 var weakEyeRes = preload("res://sceneObjects/Enemies/WeakEye.tscn")
 var spawnGlitchEffectRes = preload("res://sceneObjects/SpawnGlitchEffect.tscn")
+var spawnPriestessGlitchEffectRes = preload("res://sceneObjects/SpawnPriestessGlitchEffect.tscn")
 var glitchEnemyRes = preload("res://sceneObjects/Enemies/GlitchEnemy.tscn")
 var fallenAngelRes = preload("res://sceneObjects/Enemies/FallenAngel.tscn")
 var basicFrogEnemyRes = preload("res://sceneObjects/Enemies/BasicFrogEnemy.tscn")
@@ -114,6 +115,9 @@ func getHurt():
     num_spawn_limit += 2
     if num_hits == MAX_NUM_HITS:
         yaBeatMe()
+    else:
+        yield(get_tree().create_timer(1.0), "timeout")
+        level.glitchNextGrandmaStatue()
 
 func killTheBullets():
     var glitchBullets = get_tree().get_nodes_in_group("enemies")
@@ -142,14 +146,21 @@ func randomExplosion():
         original_pos.z
     ), 3, true, true)
 
+func spawnRandomPriestessGlitchEffect():
+    var newEffect = spawnPriestessGlitchEffectRes.instance()
+    level.add_child(newEffect)
+    newEffect.global_transform.origin = Vector3(
+        original_pos.x + rand_range(-5, 5),
+        original_pos.y + rand_range(-3, 5),
+        original_pos.z
+    )
+
 func animationDefeatedEnd():
-    boss_phase = BossPhase.FROG_PLAGUE_READY
-    secretAniPlayer.stop()
-    secretAniPlayer.clear_queue()
+    # boss_phase = BossPhase.FROG_PLAGUE_READY
     level.enterMemoryZone()
-    var smokeClouds = level.summonSmokeClouds(global_transform.origin, 3, true, true)
-    for i in range(len(smokeClouds)):
-        smokeClouds[i].scale *= 3
+    # var smokeClouds = level.summonSmokeClouds(global_transform.origin, 3, true, true)
+    # for i in range(len(smokeClouds)):
+    #     smokeClouds[i].scale *= 3
 
 
 var am_i_hidden = false
@@ -159,8 +170,12 @@ var save_point_spawn_timer = 0
 var save_point_spawn_time_limit = 20
 var glitch_crystal_timer = 0
 var glitch_crystal_time_limit = 5
+var goddess_glitch_effect_spawn_timer = 0
+var goddess_glitch_effect_spawn_time_limit = 2.5
 func _process(delta):
     if global.pauseGame or am_i_hidden:
+        if boss_phase == BossPhase.DEFEATED:
+            processDefeatEffects(delta)
         return
 
     # rotate crystals
@@ -173,7 +188,7 @@ func _process(delta):
     # processSavePointSpawns(delta)
 
     if boss_phase == BossPhase.DEFEATED:
-        pass
+        processDefeatEffects(delta)
     elif boss_phase == BossPhase.FROG_PLAGUE_READY:
         if not secretAniPlayer.is_playing():
             mySprite.visible = false
@@ -253,8 +268,8 @@ func _process(delta):
                     # spawnFallenAngel(0, true)
                     pass
                 if num_spawns >= num_spawn_limit or level.player.physics_state == level.player.PhysicsState.GLITCH_HURT:
-                    if level.player.physics_state == level.player.PhysicsState.GLITCH_HURT:
-                        killTheBullets()
+                    # if level.player.physics_state == level.player.PhysicsState.GLITCH_HURT:
+                    #     killTheBullets()
                     spawnAttack(0, true)
                     num_spawns = 0
                     big_spawn_timer = 0
@@ -296,6 +311,17 @@ func frogCleanup(delta):
 
 func isFrogInfected(frog):
     return frog.is_infected
+
+func processDefeatEffects(delta):
+    var desiredLocationX = 6.353
+    var desiredLocationY =  2.411
+    global_transform.origin.x = global_transform.origin.x + (desiredLocationX - global_transform.origin.x) * (delta * 2)
+    global_transform.origin.y = global_transform.origin.y + (desiredLocationY - global_transform.origin.y) * (delta * 2)
+
+    goddess_glitch_effect_spawn_timer += (delta*11)
+    if goddess_glitch_effect_spawn_timer >= goddess_glitch_effect_spawn_time_limit:
+        goddess_glitch_effect_spawn_timer = 0
+        spawnRandomPriestessGlitchEffect()
     
 func moveAbout(delta):
     var step = 1
@@ -341,29 +367,30 @@ func getRandomSpawnPosition(theMax = 10):
     return Vector3(pos.x + randX, pos.y + randY, pos.z)
 
 func spawnAttack(which_spawn, spawn_on_player):
-    var newGlitchEnemy = glitchEnemyRes.instance()
-    newGlitchEnemy.is_static_in_level = false
-    newGlitchEnemy.visible = true
-    newGlitchEnemy.grav = 0
-    newGlitchEnemy.get_node("Sprite3D").frame_delay = 0.2
-    newGlitchEnemy.behavior_evolve = true
-    newGlitchEnemy.behavior_fizzle_out_after_evolve = true
-    level.add_child(newGlitchEnemy)
-    var landingArray = landingArrayMedium
-    if spawn_on_player:
-        newGlitchEnemy.global_transform.origin = getPlayer().global_transform.origin
-    else:
-        newGlitchEnemy.global_transform.origin = landingArray[which_spawn].global_transform.origin if which_spawn < len(landingArray) else getRandomSpawnPosition()
-    var newGlitchMaterial = newGlitchEnemy.mySprite.get_material_override().duplicate()
-    if newGlitchEnemy.mySprite.is_in_group("sprite"):
-        newGlitchEnemy.mySprite.remove_from_group("sprite")
-    if newGlitchMaterial is ShaderMaterial:
-        newGlitchMaterial.set_shader_param("target_palette", global.weird_base_palette)
-    newGlitchEnemy.mySprite.set_material_override(newGlitchMaterial)
+    return
+    # var newGlitchEnemy = glitchEnemyRes.instance()
+    # newGlitchEnemy.is_static_in_level = false
+    # newGlitchEnemy.visible = true
+    # newGlitchEnemy.grav = 0
+    # newGlitchEnemy.get_node("Sprite3D").frame_delay = 0.2
+    # newGlitchEnemy.behavior_evolve = true
+    # newGlitchEnemy.behavior_fizzle_out_after_evolve = true
+    # level.add_child(newGlitchEnemy)
+    # var landingArray = landingArrayMedium
+    # if spawn_on_player:
+    #     newGlitchEnemy.global_transform.origin = getPlayer().global_transform.origin
+    # else:
+    #     newGlitchEnemy.global_transform.origin = landingArray[which_spawn].global_transform.origin if which_spawn < len(landingArray) else getRandomSpawnPosition()
+    # var newGlitchMaterial = newGlitchEnemy.mySprite.get_material_override().duplicate()
+    # if newGlitchEnemy.mySprite.is_in_group("sprite"):
+    #     newGlitchEnemy.mySprite.remove_from_group("sprite")
+    # if newGlitchMaterial is ShaderMaterial:
+    #     newGlitchMaterial.set_shader_param("target_palette", global.weird_base_palette)
+    # newGlitchEnemy.mySprite.set_material_override(newGlitchMaterial)
 
-    var newSpawnGlitchEffect = spawnGlitchEffectRes.instance()
-    level.add_child(newSpawnGlitchEffect)
-    newSpawnGlitchEffect.global_transform.origin = newGlitchEnemy.global_transform.origin
+    # var newSpawnGlitchEffect = spawnGlitchEffectRes.instance()
+    # level.add_child(newSpawnGlitchEffect)
+    # newSpawnGlitchEffect.global_transform.origin = newGlitchEnemy.global_transform.origin
 
 func spawnFallenAngel(which_spawn, spawn_above_player):
     var fallenAngel = fallenAngelRes.instance()
@@ -391,6 +418,7 @@ func spawnGlitchBullet():
     bullet.visible = true
     bullet.behavior_directional_bullet = true
     bullet.behavior_phase_through_walls = true
+    bullet.behavior_phase_through_bodies = true
 
     var player_pos = level.player.global_transform.origin
     var staff_pos = staffSpawnPoint.global_transform.origin

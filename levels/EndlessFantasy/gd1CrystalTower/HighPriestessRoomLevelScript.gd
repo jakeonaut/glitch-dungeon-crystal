@@ -7,11 +7,13 @@ onready var altarSprite = get_node("AltarSprite")
 onready var highPriestessBoss = weakref(get_node("HighPriestessBoss"))
 onready var croneNPC = get_node("CroneNPC")
 onready var croneNPCDefeated = get_node("CroneNPCDefeated")
-onready var glitchedGrimoire = get_node("GlitchedGrimoire")
+# onready var glitchedGrimoire = get_node("GlitchedGrimoire")
 onready var theGoddess = get_node("TheGoddess")
 onready var savePoint = get_node("SavePoint")
-onready var ladderSpell = get_node("LadderSpell")
-onready var invisibleSpell = get_node("InvisibleSpell")
+onready var featherSpell = get_node("FeatherSpell")
+onready var floorSpell = get_node("FloorSpell")
+# onready var ladderSpell2 = get_node("LadderSpell2")
+# onready var invisibleSpell = get_node("InvisibleSpell")
 onready var aniPlayer = get_node("AnimationPlayer")
 onready var grandmaStatues = get_node("GrandmaStatues")
 onready var elderTadpoleNPC = weakref(get_node("ElderTadpoleNPC"))
@@ -32,8 +34,12 @@ var debug_start_boss_immediately = false
 export var camera_size = 30
 # @override
 func setUpRoomInitializationOverride():
-  # if not global.memory.has("roomPath"):
-  #   debug_start_boss_immediately = true
+  #  TODO(jaketrower): remove this!!!
+  if not global.memory.has("roomPath"):
+    debug_start_boss_immediately = true
+    # highPriestessBoss.get_ref().MAX_NUM_HITS = 1
+
+
   if global.memory["priestess"] == 1:
     debug_start_boss_immediately = true
 
@@ -81,10 +87,10 @@ func setUpRoomInitializationOverride():
       # glitchedGrimoire.visible = true
       # glitchedGrimoire.global_transform.origin.y = -4
       # theGoddess.get_node("AnimationPlayer").play("bubbleUp")
-      if global.memory["glitched_grimoire"]:
-        ladderSpell.visible = true
-        invisibleSpell.visible = true
-        savePoint.visible = true
+      # if global.memory["glitched_grimoire"]:
+      #   ladderSpell.visible = true
+      #   invisibleSpell.visible = true
+      #   savePoint.visible = true
     
 # @override
 func playMenuMusic():
@@ -97,6 +103,8 @@ func restartMusic():
   musicPlayer.changeSongPitch(1.0)
   if global.memory["priestess"] == 1:
     musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
+  elif global.memory["priestess"] == 0 and debug_start_boss_immediately:
+    return
   else:
     musicPlayer.conductFromScenePath(getLevelName())
 
@@ -266,27 +274,52 @@ func triggerCroneDefeatedDialog():
   player.pauseSelf = true
   global.shouldRenderAsCinematic = true
   musicPlayer.stopAll()
+  # yield(get_tree().create_timer(0.5), "timeout")
+  # summonSmokeClouds(ladderSpell2.global_transform.origin, 1, true, true)
+  var grandmaStatueArr = grandmaStatues.get_children()
+  for grandmaStatue in grandmaStatueArr:
+    summonSmokeClouds(grandmaStatue.global_transform.origin, 1)
+    grandmaStatue.queue_free()
+    yield(get_tree().create_timer(0.5), "timeout")
 
 func playGlitchTransitionAnimation():
   aniPlayer.stop()
   aniPlayer.clear_queue()
   aniPlayer.play("glitchTransition")
+  highPriestessBoss.get_ref().secretAniPlayer.stop()
+  highPriestessBoss.get_ref().secretAniPlayer.clear_queue()
+  highPriestessBoss.get_ref().secretAniPlayer.play("defeatedEnd")
+
+var spawnGlitchEffectRes = preload("res://sceneObjects/SpawnGlitchEffect.tscn")
+func glitchNextGrandmaStatue():
+  var grandmaStatueToGlitch = null
+  var grandmaStatueArr = grandmaStatues.get_children()
+  for grandmaStatue in grandmaStatueArr:
+    if grandmaStatue.is_in_group("grandma_statue"):
+      grandmaStatueToGlitch = grandmaStatue
+      break
+  if grandmaStatueToGlitch == null:
+    return
+
+  var newSpawnGlitchEffect = spawnGlitchEffectRes.instance()
+  self.add_child(newSpawnGlitchEffect)
+  newSpawnGlitchEffect.global_transform.origin = grandmaStatueToGlitch.global_transform.origin
+
+  summonSmokeClouds(grandmaStatueToGlitch.global_transform.origin, 3)
+  grandmaStatueToGlitch.glitchMyself(global.GlitchForm.FLOOR)
+  reindexGrandmaStatueCatalogue()
 
 func enterMemoryZone():
   is_really_defeated = true
-  var grandmaStatueArr = grandmaStatues.get_children()
-  for grandmaStatue in grandmaStatueArr:
-    summonSmokeClouds(grandmaStatue.global_transform.origin, 1)
-  grandmaStatues.queue_free()
   aniPlayer.play("glitchTransitionEnd")
-  aniPlayer.queue("croneTwitch")
+  # aniPlayer.queue("croneTwitch")
   glitchTickle(1)
   # generateEyeTiles()
   # player.grav = player.PLAYER_GRAV
   # player.pauseSelf = false
   # player.nullify()
   # global.shouldRenderAsCinematic = false
-  highPriestessBoss.get_ref().queue_free()
+  # highPriestessBoss.get_ref().queue_free()
   # self.summonSmokeClouds(glitchedGrimoire.global_transform.origin, 5, true, true)
   # glitchedGrimoire.grav = 20
   # glitchedGrimoire.visible = true
@@ -327,6 +360,7 @@ func unhideHighPriestess():
   #   crystalGeode3.get_ref().queue_free()
   #   crystalGeode4.get_ref().queue_free()
   #   crystalGeode5.get_ref().queue_free()
+  global.memory["priestess"] = 1
   musicPlayer.stopAll()
   musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
   global.memory["priestess"] = 1
