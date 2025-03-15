@@ -100,7 +100,7 @@ NPC.Crone.4,"•trade %s shards for\n[color=red]BROOMERANG[/color]?",用 %s 个�
 NPC.Crone.5,need %s more shards.\nthis is strong magic y'know.,还需要%s个魔法碎片。\n谁让这是强力魔法呢。,"Нужны ещё осколки: %s.\nЭто сильная магия,\nзнаешь ли.","faltam %s fragmentos.\nessa magia é poderosa, sabia?"
 NPC.Crone.6,BROOMERANG GET!\nsweep twice to THROW,得到了 回旋扫帚！\n横扫两次投掷,"У тебя есть МЕТЛОРАНГ!\nВзмахни метлой два раза,\nчтобы её БРОСИТЬ.",VASSOURANGUE!\nvarra 2 vezes para LANÇAR
 NPC.Crone.7,"•the tower will unlock when\nyou've awoken all 4 elders\nit holds some strong magic.",这所高塔具有强大的魔法，\n需要唤醒4位水晶长老才能解锁。,"Эта башня откроется,\nкогда ты пробудишь 4 старух.\nУ неё сильная магия.",esta torre abrirá quando você\ndespertar 4 anciãs de cristal.\nela guarda uma magia poderosa.
-NPC.Door.2,"magically sealed, needs 4 more Crystals to be purified",已被魔法封印。还需要 4 块水晶才能净化.,Запечатано магией. Нужно очистить ещё кристаллы: 4.,"selada com magia, precisa de mais 4 Cristais para ser purificada."
+NPC.Door.2,"magically sealed, needs %s",已被魔法封印。还需%s,Запечатано магией. %s.,"selada com magia, %s."
 NPC.Crystal.1,"you awoke a\n     [color=#00ffff][wave amp=50 freq=2]Crystal Elder[/wave][/color]","你唤醒了一\n     [color=#00ffff][wave amp=50 freq=2]位水晶长老！[/wave][/color]","Вы пробудили\n     [color=#00ffff][wave amp=50 freq=2]старуху[/wave][/color]","você acordou \n     [color=#00ffff][wave amp=50 freq=2]uma anciã de cristal.[/wave][/color]"
 NPC.Crystal.2,"deaths: ","死亡： ","Смертей: ","mortes: "
 NPC.Crystal.3,"angel eggs: ","天使卵：","Ангельских яиц: ","ovos celestiais: "
