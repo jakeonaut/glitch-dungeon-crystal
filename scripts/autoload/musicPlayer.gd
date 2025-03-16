@@ -6,6 +6,7 @@ export var transition_type = 1 # TRANS_SINE
 
 onready var windPlayer = get_node("WindPlayer")
 onready var restZonePlayer = get_node("RestZonePlayer")
+onready var weirdRestZonePlayer = get_node("WeirdRestZonePlayer")
 onready var titleThemePlayer = get_node("TitleThemePlayer")
 onready var wakeupPlayer = get_node("WakeupPlayer")
 onready var grannyPlayer = get_node("GrannyPlayer")
@@ -106,6 +107,7 @@ func stopAll():
     fade_out(longAdventureThemePlayer)
     fade_out(windPlayer)
     fade_out(restZonePlayer)
+    fade_out(weirdRestZonePlayer)
     fade_out(grannyPlayer)
     fade_out(croneThemePlayer)
     fade_out(mainMenuPlayer)
@@ -192,6 +194,11 @@ func conductFromScenePath(path):
         tryToPlay(exploreThemePlayer)
     elif path.find("gd1FishingVillage") > 0:
         tryToPlay(swampThemePlayer)
+    elif path.find("PrimordialOoze") > 0:
+        tryToPlay(weirdRestZonePlayer)
+        changeSongPitch(0.3)
+        default_song_pitch = 0.3
+        return
     elif path.find("gd1CrystalTower") > 0 or path.find("entrance_to_tower") > 0:
         tryToPlay(goddessThemePlayer)
     elif path.find("gd1GrandmaVillage") > 0:
@@ -231,8 +238,6 @@ func conductFromScenePath(path):
         tryToPlay(titleThemePlayer)
     elif path.find("005DebugTown") > 0:
         tryToPlay(dungeonThemePlayer)
-    elif path.find("PrimordialOoze") > 0:
-        tryToPlay(debugThemePlayer)
     elif path.find("001Your") > 0  or path.find("gd1"):
         tryToPlay(croneThemePlayer)
     else:

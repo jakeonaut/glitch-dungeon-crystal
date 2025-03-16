@@ -667,7 +667,10 @@ func regainNestingDoll():
 var summonedBroom = null
 # @override
 func getWalkSpeed(delta):
-  return getWalkSpeedHelper(delta) * 1.0
+  return getWalkSpeedHelper(delta) * (1.0 if not isItWeird() else 0.5)
+
+func isItWeird():
+  return "PrimordialOozeRoom" in level.getShortLevelName()
 
 func getWalkSpeedHelper(delta):
   if transformation == TransformationState.CHICKEN:

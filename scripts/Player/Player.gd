@@ -429,7 +429,7 @@ func _process(delta):
     OS.window_fullscreen = !OS.window_fullscreen
     level.uiLayer.pauseMenu.shouldUpdateMenuText = true
   var can_respawn_out_of_pause = not global.pauseGame or (global.activeInteractor != null and not global.shouldRenderAsCinematic)
-  if global.memory["can_force_respawn"] and Input.is_action_just_pressed("restart_key") and not global.isPauseMenuOpen and can_respawn_out_of_pause and ritual_state_index < len(global.correct_ritual)-1:
+  if not isItWeird() and global.memory["can_force_respawn"] and Input.is_action_just_pressed("restart_key") and not global.isPauseMenuOpen and can_respawn_out_of_pause and ritual_state_index < len(global.correct_ritual)-1:
     respawn_key_hp = global.memory["hp"]
     if global.activeInteractor != null:
       global.activeInteractor.hideTextbox()
@@ -898,6 +898,9 @@ func tryDieToOffscreenCamera(_delta):
       tryToRecover()
     else:
       global_transform.origin = repositioned_player
+      print(level.getShortLevelName())
+      if isItWeird() and global.activeInteractor == null:
+        sayThis("NPC.GhostGirl.1")
       if physics_state == PhysicsState.BEING_TOSSED:
         bigBump()
         pauseAnimation = false
@@ -2056,7 +2059,7 @@ func processBroomLogic(delta):
     return
 
 
-  var can_throw_broom = global.memory["broomerang"]
+  var can_throw_broom = global.memory["broomerang"] and not isItWeird()
 
   var aa = aniPlayer.assigned_animation
   if (aa == "broomSmackGlitch" or aa == "sweepFloor") and not aniPlayer.is_playing():
@@ -2074,7 +2077,7 @@ func processBroomLogic(delta):
   if not global.memory["broom"]:
     # if nesting_doll_state == global.NestingDoll.BABY and Input.is_action_just_pressed("sub_action_button") and Input.is_action_pressed("ui_down"):
     #   summonSporeShroom()
-    if global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing() and global.memory["broomerang"] == 1:
+    if global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing() and global.memory["broomerang"] == 1 and not isItWeird():
       # if fallenBroomRef.get_ref() and not fallenBroomRef.get_ref().returning:
       #   var distance = global_transform.origin.distance_to(fallenBroomRef.get_ref().global_transform.origin)
       #   if distance >= 2:

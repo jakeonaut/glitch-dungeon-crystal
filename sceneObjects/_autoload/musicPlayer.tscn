@@ -36,6 +36,11 @@ volume_db = -15.0
 stream = ExtResource( 17 )
 volume_db = -18.0
 
+[node name="WeirdRestZonePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -18.0
+pitch_scale = 0.3
+
 [node name="TitleThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -20.0

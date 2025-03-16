@@ -344,6 +344,10 @@ func randomizeTargetPos():
         original_pos.z
     )
 
+func showTheGruesomeChild():
+    level.showTheGruesomeChild()
+    self.queue_free()
+
 func spawnWeakEye():
     var weakEye = weakEyeRes.instance()
     weakEye.is_static_in_level = false

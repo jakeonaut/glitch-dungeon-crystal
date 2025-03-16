@@ -261,6 +261,10 @@ func change_scene():
     startAdjacentLevelLoading()
   else:
     global.pauseGame = false
+    if global.grannyEnteringRoom or global.isBrothWarping:
+      self.reverse_granny_teleport()
+    else:
+      self.reverse_fade()
     
   if global.activeThrowableObject:
     global.activeThrowableObjectPath = global.activeThrowableObject.filename

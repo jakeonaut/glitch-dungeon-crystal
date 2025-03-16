@@ -28,6 +28,7 @@ onready var highpriestessCrystal3 = get_node("CrystalsContainer/HighpriestessCry
 onready var highpriestessCrystal4 = get_node("CrystalsContainer/HighpriestessCrystal4")
 onready var highpriestessCrystal5 = get_node("CrystalsContainer/HighpriestessCrystal5")
 onready var goop3 = get_node("Goop3")
+onready var gruesomeChildNPC = get_node("GruesomeChildNPC")
 
 var has_boss_started = false
 var debug_start_boss_immediately = false
@@ -37,7 +38,7 @@ func setUpRoomInitializationOverride():
   #  TODO(jaketrower): remove this!!!
   if not global.memory.has("roomPath"):
     debug_start_boss_immediately = true
-    # highPriestessBoss.get_ref().MAX_NUM_HITS = 1
+    highPriestessBoss.get_ref().MAX_NUM_HITS = 1
 
 
   if global.memory["priestess"] == 1:
@@ -200,7 +201,6 @@ func _process(delta):
       musicPlayer.stopAll()
       musicPlayer.tryToPlay(musicPlayer.croneThemePlayer)
 
-
   if global.memory["priestess"] <= 0 and goddess_cutscene_counter >= 2 and \
       highpriestessCrystal.global_transform.origin.y > 3 and \
       highpriestessCrystal2.global_transform.origin.y > 3 and \
@@ -231,9 +231,9 @@ func _process(delta):
         player.aniPlayer.stop()
         player.aniPlayer.clear_queue()
         player.aniPlayer.play("fall")
-
-  if is_really_defeated:
-    pass  
+  elif is_defeated and is_really_defeated:
+    player.pauseSelf = false
+    player.grav = 28
 
   if (highPriestessBoss.get_ref() != null) and (highPriestessBoss.get_ref().visible or goddess_cutscene_counter >= 0):
     random_tiles_timer += (delta*11)
@@ -309,6 +309,11 @@ func glitchNextGrandmaStatue():
   grandmaStatueToGlitch.glitchMyself(global.GlitchForm.FLOOR)
   reindexGrandmaStatueCatalogue()
 
+func showTheGruesomeChild():
+  summonSmokeClouds(gruesomeChildNPC.global_transform.origin, 3, true, true)
+  gruesomeChildNPC.visible = true
+  gruesomeChildNPC.grav = 60
+
 func enterMemoryZone():
   is_really_defeated = true
   aniPlayer.play("glitchTransitionEnd")
@@ -331,8 +336,9 @@ func enterMemoryZone():
   # self.pacman_wrapping = false
   global.grannyEnteringRoom = true
   global.isEnteringRoom = true
-  global.memory["roomPath"] = self.getLevelName()
-  transition.granny_teleport_to(memory_zone_path)
+  # global.memory["roomPath"] = self.getLevelName()
+  transition.colorRect.visible = false
+  transition.granny_teleport_to("")
 
 func glitchTickle(glitch_death_timer):
   if glitch_death_timer > 1:

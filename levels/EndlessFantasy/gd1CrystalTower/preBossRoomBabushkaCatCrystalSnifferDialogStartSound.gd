@@ -16,8 +16,8 @@ func activateScript():
   #   level.uiLayer.get_node("EquipmentRect").visible = true
   #   level.uiLayer.get_node("EquipmentRect").rect_scale = Vector2(1.5, 1.5)
   #   level.uiLayer.get_node("EquipmentRect").rect_position = Vector2(300, 250)
-  if global.memory["glitch_world"] > 0:
-    var newText = "*meow*, (seems like this place\nis falling apart. let's get out!!)"
+  if global.memory["glitch_world"] > 0 or global.memory["priestess"] >= 2:
+    var newText = tr("NPC.BabushkaCat.6")
     textBox.text_final = newText
     textBox.textNode.bbcode_text = newText
     
