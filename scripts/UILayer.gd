@@ -445,13 +445,12 @@ func processHiscoreRenderLogic(delta):
     global.pauseGame = false
     level.player.pauseSelf = false
     level.player.physics_state = level.player.PhysicsState.NORMAL
+    level.player.pauseInput = false
     global.shouldRenderAsCinematic = false
     var babushkaCatFollower = level.get_node("PetBabushkaCatFollower") if level.has_node("PetBabushkaCatFollower") else null
     if global.memory["babushka_cat_story_hook"] == 2 and babushkaCatFollower != null and babushkaCatFollower.gameMoverTarget == null:
       babushkaCatFollower.popFromFollowers()
       babushkaCatFollower.queue_free()
-    if level.has_node("CubeCrystal"):
-      level.get_node("CubeCrystal").lightAniPlayer.play("omen")
 
 func tryLerpFromCenter(rect, delta, final_pos):
   if rect.rect_scale.x != 1:

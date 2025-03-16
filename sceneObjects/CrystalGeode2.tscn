@@ -502,7 +502,7 @@ tracks/26/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.5 ]
+"values": [ 1.0 ]
 }
 tracks/27/type = "value"
 tracks/27/path = NodePath("CubeContainer/MeshInstance2:scale")
@@ -554,7 +554,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.0, 0.5 ]
+"values": [ 0.0, 1.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("CubeContainer/MeshInstance2:scale")
@@ -618,7 +618,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.5, 0.0 ]
+"values": [ 1.0, 0.0 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("CubeContainer/MeshInstance2:scale")
@@ -846,9 +846,12 @@ tracks/13/loop_wrap = true
 tracks/13/imported = false
 tracks/13/enabled = true
 tracks/13/keys = {
-"times": PoolRealArray( 1.9 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.5, 1.9 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "freeUpPlayer"
+}, {
 "args": [  ],
 "method": "speakToMe"
 } ]
@@ -884,7 +887,7 @@ tracks/16/loop_wrap = true
 tracks/16/imported = false
 tracks/16/enabled = false
 tracks/16/keys = {
-"times": PoolRealArray( 0, 1.9 ),
+"times": PoolRealArray( 0, 1.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector3( 4, 4, 4 ), Vector3( 1, 1.5, 1 ) ]
@@ -984,6 +987,42 @@ tracks/24/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 1, 1, 1 ), Vector3( 2, 2, 2 ), Vector3( 4, 4, 4 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("CubeContainer/MeshInstance2:material_override:shader_param/alpha2")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("CubeContainer/MeshInstance2:scale")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 0.7, 1 ), Vector3( 4, 3.5, 4 ) ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("NPC:visible")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0, 1.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=50]
@@ -1531,6 +1570,7 @@ frame = 8
 script = ExtResource( 16 )
 
 [node name="LightAnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
 anims/RESET = SubResource( 44 )
 anims/fadeIn = SubResource( 85 )
 anims/fakeBreak = SubResource( 84 )
