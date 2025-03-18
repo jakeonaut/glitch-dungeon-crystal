@@ -34,7 +34,7 @@
 [ext_resource path="res://assets/palettes/purpledawn-1x.png" type="Texture" id=32]
 [ext_resource path="res://assets/palettes/bubblegum-16-1x.png" type="Texture" id=33]
 [ext_resource path="res://assets/sprites/god_head.png" type="Texture" id=34]
-[ext_resource path="res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessInteractionAreaEventStart.gd" type="Script" id=35]
+[ext_resource path="res://levels/EndlessFantasy/gd1CrystalTower/PrimordialOozeInteractionAreaEventStart.gd" type="Script" id=35]
 [ext_resource path="res://sceneObjects/InteractionAreaEvent.tscn" type="PackedScene" id=36]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Scream3.wav" type="AudioStream" id=37]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn" type="PackedScene" id=38]
@@ -316,7 +316,7 @@ shader_param/enable_no_transparency = false
 shader_param/enable_black_unknown = true
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
-shader_param/offset = 8
+shader_param/offset = 1
 shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
@@ -1936,7 +1936,7 @@ script = ExtResource( 29 )
 shape = SubResource( 331 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 28 )]
-transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, -40, -4.39204, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -40, -4.39204, 0 )
 grav = 0
 
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]

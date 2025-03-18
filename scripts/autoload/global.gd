@@ -321,7 +321,7 @@ func resetMemory():
     memory["demo_mode"] = 0
     # if you've beaten the midpoint boss
     memory["clean_crystals"] = 0
-    memory["priestess"] = 2
+    memory["priestess"] = 0
     memory["glitch_world"] = 0
     memory["glitched_grimoire"] = false
     memory["forget_me_not"] = false
@@ -339,10 +339,10 @@ func resetMemory():
 
     # POWERUPS
     # memory["spellbookPage"] = [] # we check if the key exists to see if we have it... -_-
-    memory["can_force_respawn"] = 1
-    memory["has_map_item"] = true
-    memory["broomerang"] = 1
-    memory["babushka_cat_sprint"] = 1
+    memory["can_force_respawn"] = 0
+    memory["has_map_item"] = false
+    memory["broomerang"] = 0
+    memory["babushka_cat_sprint"] = 0
     memory["broom_double_jump"] = 0
     memory["zora_flippers"] = 0
     memory["mole_cricket"] = 0
