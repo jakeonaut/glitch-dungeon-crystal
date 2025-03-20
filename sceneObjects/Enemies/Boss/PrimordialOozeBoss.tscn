@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://assets/sprites/god_body.png" type="Texture" id=15]
 [ext_resource path="res://assets/fonts/Angel-sealingGlyphs-Regular.otf" type="DynamicFontData" id=16]
 [ext_resource path="res://sceneObjects/Enemies/Boss/PrimordialOozeNPCAbortSound.gd" type="Script" id=17]
+[ext_resource path="res://sceneObjects/Enemies/Boss/EndOfGameNPCAbortSound.gd" type="Script" id=18]
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 2 )
@@ -424,6 +425,9 @@ bbText = "Dialog.Player.6"
 
 [node name="CollisionShape" parent="EndOfGameNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
+
+[node name="AbortSound" parent="EndOfGameNPC/NPC TextBox/TextBox" index="13"]
+script = ExtResource( 18 )
 
 [node name="Sprite3D" parent="EndOfGameNPC" index="3"]
 pixel_size = 0.0001

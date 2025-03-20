@@ -2164,6 +2164,8 @@ func finishCutsceneIntroAni():
 
 var SOFT_SAND_TOP_TILE = 275
 func doBroomAttack(which_broom_attack):
+  if isItWeird():
+    return
   # TODO(jaketrower): has just turned around
   # if Input.is_action_pressed("ui_down") and isKindOfOnGround():
   #   aniPlayer.play("sweepFloor")
