@@ -16,6 +16,10 @@ func passiveActivate(_delta, _is_player):
   has_animated = true
   level.get_node("AnimationPlayer").play("judgement")
   global.pauseGame = true
+  level.gameCamera.initial_size = 40
+  level.gameCamera.zoomed_size = 40
+  yield(get_tree().create_timer(4.0), "timeout")
+  level.get_node("PrimordialOozeBoss/PrimordialOozeNPC").activate(true)
 
 func _process(delta):
   pass

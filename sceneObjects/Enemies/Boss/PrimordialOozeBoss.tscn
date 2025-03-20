@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -13,7 +13,10 @@
 [ext_resource path="res://assets/sounds/castStart.wav" type="AudioStream" id=11]
 [ext_resource path="res://assets/sounds/jump.wav" type="AudioStream" id=12]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Pain5.wav" type="AudioStream" id=13]
+[ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/sprites/god_body.png" type="Texture" id=15]
+[ext_resource path="res://assets/fonts/Angel-sealingGlyphs-Regular.otf" type="DynamicFontData" id=16]
+[ext_resource path="res://sceneObjects/Enemies/Boss/PrimordialOozeNPCAbortSound.gd" type="Script" id=17]
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 2 )
@@ -250,6 +253,29 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
+[sub_resource type="BoxShape" id=12]
+resource_local_to_scene = true
+extents = Vector3( 3, 2, 1.3 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 64
+font_data = ExtResource( 16 )
+
+[sub_resource type="Theme" id=14]
+default_font = SubResource( 13 )
+
+[sub_resource type="BoxShape" id=15]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
+[sub_resource type="BoxShape" id=16]
+resource_local_to_scene = true
+extents = Vector3( 3, 2, 1.3 )
+
+[sub_resource type="BoxShape" id=17]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
 [node name="PrimordialOozeBoss" type="Spatial"]
 
 [node name="HeadSprite3D" type="Sprite3D" parent="." groups=["sprite"]]
@@ -356,4 +382,57 @@ visible = true
 transform = Transform( 1, 0, 0, 0, 0.990268, -0.139173, 0, 0.139173, 0.990268, 2, 5.967, 3.33 )
 visible = true
 
+[node name="PrimordialOozeNPC" parent="." instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 12, 0 )
+grav = 0
+bbText = "WHO. HAS. AWOKEN. ME?
+AH. MY CHILDREN. THEY WISH FOR A CLEAN SLATE?
+IT. SHALL BE MY WILL.
+YOU ARE GREAT YOU
+HAVE AN AMAZING
+WISDOM AND POWER
+BRING. ME. THREE. SOULS.
+AND ALL MY ANGELS EGGS
+END
+"
+
+[node name="CollisionShape" parent="PrimordialOozeNPC/SmallInteractionArea" index="0"]
+shape = SubResource( 12 )
+
+[node name="NPC TextBox" parent="PrimordialOozeNPC" index="2"]
+visible = false
+
+[node name="TextBox" parent="PrimordialOozeNPC/NPC TextBox" index="0"]
+visible = true
+
+[node name="Text" parent="PrimordialOozeNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer" index="0"]
+theme = SubResource( 14 )
+
+[node name="AbortSound" parent="PrimordialOozeNPC/NPC TextBox/TextBox" index="13"]
+script = ExtResource( 17 )
+
+[node name="Sprite3D" parent="PrimordialOozeNPC" index="3"]
+pixel_size = 0.0001
+
+[node name="CollisionShape" parent="PrimordialOozeNPC/FallthroughSolid" index="0"]
+shape = SubResource( 15 )
+
+[node name="EndOfGameNPC" parent="." instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 12, 0 )
+grav = 0
+bbText = "Dialog.Player.6"
+
+[node name="CollisionShape" parent="EndOfGameNPC/SmallInteractionArea" index="0"]
+shape = SubResource( 16 )
+
+[node name="Sprite3D" parent="EndOfGameNPC" index="3"]
+pixel_size = 0.0001
+
+[node name="CollisionShape" parent="EndOfGameNPC/FallthroughSolid" index="0"]
+shape = SubResource( 17 )
+
 [editable path="Crystals/HighpriestessCrystal"]
+[editable path="PrimordialOozeNPC"]
+[editable path="PrimordialOozeNPC/NPC TextBox"]
+[editable path="EndOfGameNPC"]
+[editable path="EndOfGameNPC/NPC TextBox"]

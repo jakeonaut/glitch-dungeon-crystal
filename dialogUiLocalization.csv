@@ -206,7 +206,7 @@ NPC.Goddess.2,"BRING. ME. THREE. SOULS.\nAND ALL MY ANGELS EGGS","给我，三�
 Dialog.Player.5,Seems like you're missing some things..,你好像还差点什么…,"Похоже, чего-то не хватает...",parece que ainda está faltando algumas coisas...
 NPC.Crone.8,well. it's quite nice here. I guess that we could try to get along. with what little time we have left..,好吧，这里还挺不错的。在我们剩下为数不多的时间里，我们可以试着和谐相处…,"А здесь неплохо. Наверное, мы бы поладили. Учитывая, что осталось нам всего ничего.",até que é gostosinho aqui. acho que dá pra gente se entender melhor e aproveitar o tempo que nos resta...
 NPC.Crone.9,"ah, I'm so tired.. why can't I just sleep",唉，好累啊…要是能直接去睡觉就好了,"А, я так устала... Почему я не могу уснуть?","ai, que canseira... por que é que eu não consigo pegar no sono?"
-Dialog.Player.6,what a long day.. i should warm up some stew.,总算搞完了…我得去把菜热上了,Ну и денёк выдался. Разогрею-ка я чего-нибудь поесть.,que dia longo... mereço uma sopinha.
+Dialog.Player.6,what a long day..\ni should warm up some stew.,总算搞完了…\n我得去把菜热上了,Ну и денёк выдался.\nРазогрею-ка я\nчего-нибудь поесть.,que dia longo...\nmereço uma sopinha.
 EndCredits.0,END,终,КОНЕЦ,FIM
 EndCredits.9,thanks for playing!,谢谢你玩我的游戏,Спасибо за игру!,obrigado por jogar!
 EndCredits.1,a game by [JAKEONAUT],游戏作者：[JAKEONAUT],Создатель игры: [JAKEONAUT],jogo por [JAKEONAUT]

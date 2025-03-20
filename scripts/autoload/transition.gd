@@ -135,6 +135,11 @@ func startAdjacentLevelLoading():
       adjacent_level_loaders[RoomMap.SOUTH] = ResourceLoader.load_interactive(roomPath_south)
     set_process(true) # so that we can "interactively load"
 
+func end_the_game():
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("long_fade_no_change")
+
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
 func edge_fade_to(scn_path):
   long_fade_to(scn_path)
