@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=2]
+[gd_scene load_steps=116 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/Enemies/Boss/PrimordialOozeBoss.tscn" type="PackedScene" id=2]
@@ -387,6 +387,23 @@ tracks/7/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ Vector3( 1.5, 1.5, 1 ), Vector3( 2, 2, 1 ) ]
+}
+
+[sub_resource type="Animation" id=345]
+resource_name = "skullChatter"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("PrimordialOozeBoss/HeadSprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 5, 6 ]
 }
 
 [sub_resource type="ShaderMaterial" id=219]
@@ -1948,6 +1965,7 @@ is_randomizing = true
 anims/RESET = SubResource( 336 )
 anims/finalJudgement = SubResource( 342 )
 anims/judgement = SubResource( 337 )
+anims/skullChatter = SubResource( 345 )
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 10 )]
 

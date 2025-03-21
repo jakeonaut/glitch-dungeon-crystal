@@ -379,6 +379,8 @@ func pressingDown():
 
 # @override
 func justPressedJump():
+  if isItWeird():
+    return false
   if transformation == TransformationState.CHICKEN:
     return should_magic_jump or ((pressingMoveRight() or pressingMoveLeft()) and truly_on_ground) or Input.is_action_just_pressed("jump_button")
   # if is_mushroom_infected:
@@ -387,6 +389,8 @@ func justPressedJump():
   
 # @override
 func recentlyJustPressedJump():
+  if isItWeird():
+    return false
   # if is_mushroom_infected:
   #   return false
   return jump_press_timer < jump_press_time_limit
@@ -510,6 +514,8 @@ func glitchTilesAroundMe(margin = 0.25, rand_timer = false):
 
 # @override
 func pressingJump():
+  if isItWeird():
+    return false
   if transformation == TransformationState.CHICKEN:
     return should_magic_jump or ((pressingMoveRight() or pressingMoveLeft()) and truly_on_ground) or Input.is_action_pressed("jump_button")
   if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
@@ -670,7 +676,7 @@ func getWalkSpeed(delta):
   return getWalkSpeedHelper(delta) * (1.0 if not isItWeird() else 0.5)
 
 func isItWeird():
-  return "PrimordialOozeRoom" in level.getShortLevelName()
+  return "PrimordialOozeRoom" in level.getShortLevelName() or "EndCredits" in level.getShortLevelName() or "IntroVideo" in level.getShortLevelName()
 
 func getWalkSpeedHelper(delta):
   if transformation == TransformationState.CHICKEN:

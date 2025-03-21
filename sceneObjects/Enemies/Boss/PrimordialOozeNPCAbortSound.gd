@@ -9,6 +9,8 @@ func activateScript():
         return
     has_activated = true
     # transition.end_the_game()
+    level.get_node("AnimationPlayer").stop()
+    level.get_node("AnimationPlayer").clear_queue()
     level.get_node("AnimationPlayer").play("finalJudgement")
     global.activeInteractor = null
     yield(get_tree().create_timer(4.0), "timeout")

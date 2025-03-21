@@ -15,6 +15,7 @@ func isActive(_debug=false):
 func passiveActivate(_delta, _is_player):
   has_animated = true
   level.get_node("AnimationPlayer").play("judgement")
+  level.get_node("AnimationPlayer").queue("skullChatter")
   global.pauseGame = true
   level.gameCamera.initial_size = 40
   level.gameCamera.zoomed_size = 40
