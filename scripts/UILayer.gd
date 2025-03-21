@@ -381,7 +381,7 @@ func processHiscoreRenderLogic(delta):
   endOfLevel.visible = true
   hiscoreRect.visible = true
   congratsHiscoreLabel.visible = true
-  congratsHiscoreLabel.bbcode_text = tr("NPC.Crystal.1")
+  congratsHiscoreLabel.bbcode_text = tr("NPC.Crystal.1") if not global.isEndOfGame else tr("NPC.Crystal.End")
 
   hiscoreTimer += (delta*11)
   if hiscoreTimer >= hiscoreTimeLimit:
@@ -441,21 +441,25 @@ func processHiscoreRenderLogic(delta):
     # global.isEnteringRoom = true
     global.hasGottenLevelGeode = false
     global.hasLevelGeodeBeenSmacked = false
-    global.pauseMoveInput = false
-    global.pauseGame = false
-    level.player.pauseSelf = false
-    level.player.physics_state = level.player.PhysicsState.NORMAL
-    level.player.pauseInput = false
-    global.shouldRenderAsCinematic = false
-    var babushkaCatFollower = level.get_node("PetBabushkaCatFollower") if level.has_node("PetBabushkaCatFollower") else null
-    if global.memory["babushka_cat_story_hook"] == 2 and babushkaCatFollower != null and babushkaCatFollower.gameMoverTarget == null:
-      babushkaCatFollower.popFromFollowers()
-      var npc = babushkaCatFollower.get_node("NPC")
-      babushkaCatFollower.remove_child(npc)
-      level.add_child(npc)
-      npc.global_transform.origin = babushkaCatFollower.global_transform.origin
-      babushkaCatFollower.queue_free()
-      npc.glitchOut()
+    if global.isEndOfGame:
+      var endOfGameNPC = level.get_node("PrimordialOozeBoss/EndOfGameNPC") if level.has_node("PrimordialOozeBoss/EndOfGameNPC") else null
+      if endOfGameNPC: endOfGameNPC.activate(true)
+    else:
+      global.pauseMoveInput = false
+      global.pauseGame = false
+      level.player.pauseSelf = false
+      level.player.physics_state = level.player.PhysicsState.NORMAL
+      level.player.pauseInput = false
+      global.shouldRenderAsCinematic = false
+      var babushkaCatFollower = level.get_node("PetBabushkaCatFollower") if level.has_node("PetBabushkaCatFollower") else null
+      if global.memory["babushka_cat_story_hook"] == 2 and babushkaCatFollower != null and babushkaCatFollower.gameMoverTarget == null:
+        babushkaCatFollower.popFromFollowers()
+        var npc = babushkaCatFollower.get_node("NPC")
+        babushkaCatFollower.remove_child(npc)
+        level.add_child(npc)
+        npc.global_transform.origin = babushkaCatFollower.global_transform.origin
+        babushkaCatFollower.queue_free()
+        npc.glitchOut()
 
 func tryLerpFromCenter(rect, delta, final_pos):
   if rect.rect_scale.x != 1:

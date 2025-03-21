@@ -102,6 +102,7 @@ NPC.Crone.6,BROOMERANG GET!\nsweep twice to THROW,得到了 回旋扫帚！\n横
 NPC.Crone.7,"•the tower will unlock when\nyou've awoken all 4 elders\nit holds some strong magic.",这所高塔具有强大的魔法，\n需要唤醒4位水晶长老才能解锁。,"Эта башня откроется,\nкогда ты пробудишь 4 старух.\nУ неё сильная магия.",esta torre abrirá quando você\ndespertar 4 anciãs de cristal.\nela guarda uma magia poderosa.
 NPC.Door.2,"magically sealed, needs %s",已被魔法封印。还需%s,Запечатано магией. %s.,"selada com magia, %s."
 NPC.Crystal.1,"you awoke a\n     [color=#00ffff][wave amp=50 freq=2]Crystal Elder[/wave][/color]","你唤醒了一\n     [color=#00ffff][wave amp=50 freq=2]位水晶长老！[/wave][/color]","Вы пробудили\n     [color=#00ffff][wave amp=50 freq=2]старуху[/wave][/color]","você acordou \n     [color=#00ffff][wave amp=50 freq=2]uma anciã de cristal.[/wave][/color]"
+NPC.Crystal.End,"[color=#00ffff][wave amp=50 freq=2]primordial ooze,[/wave][/color]\ncleanse this world","[color=#00ffff][wave amp=50 freq=2]远古淤泥,[/wave][/color]\n把这个世界打扫干净。","[color=#00ffff][wave amp=50 freq=2]Первичная слизь,[/wave][/color]\nочистим этот мир.","[color=#00ffff][wave amp=50 freq=2]Sopa Primordial[/wave/][/color]\nlimpar este mundo todinho."
 NPC.Crystal.2,"deaths: ","死亡： ","Смертей: ","mortes: "
 NPC.Crystal.3,"angel eggs: ","天使卵：","Ангельских яиц: ","ovos celestiais: "
 NPC.Crystal.4,"broom sweeps: ","扫帚攻击： ","Взмахов метлой: ","vassouradas: "

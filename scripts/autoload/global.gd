@@ -198,6 +198,7 @@ var activeThrowableObject = null
 var activeThrowableObjectPath = null
 var activeSavePoint = null
 
+var isEndOfGame = false
 var isRespawning = false
 var isEnteringRoom = false
 var isBrothWarping = false
