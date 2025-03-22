@@ -1,0 +1,104 @@
+终
+---
+老奶的故障地牢大冒险
+游戏作者：jakeonaut
+游戏作者：pets club 2
+---
+*宣传美术：*
+amargo0o
+
+*电影开场：*
+Fernando Finamore
+
+*图块集美术：*
+Zaebucca
+
+*音乐*
+markeryjane
+
+*老青蛙的音乐主题：*
+Zhao Pu
+
+*额外的怪物艺术：*
+CAREFREE MEDIA
+
+*秘密故障马：*
+xoxohorses
+
+---
+*简体中文本地化：*
+Yuning YANG
+
+*巴西葡萄牙语本地化：*
+Herbert Neto
+
+*俄语本地化：*
+Dmitry Kornyukhov & Arty Ra
+
+*法语本地化：*
+Fusionnist
+
+---
+*游戏测试并特别感谢*
+leez, Oliver, felis, Paul & Grace Carroll, The Lonesome Varmints, Lu Lu Li, BalthazarGalactus, gooselyn, Daydreamin Blu, sleepyhead, darionmccoy, PixelCod, Corey Hardt, curelapsed, Forestherd, Ryan Trawick, Pixel-boy, backyard321, Camille Leon, Azzurra Iris Lea Monde, Polyducks, first_mistake_forever_more, Voxandra, Boowow!, blex chapman, buddygrouse, nilson
+---
+*背景美术*
+Glitch Pixel Patterns, Brushes & Sprites: Dataerase
+MRMOTEXT: Mrmo Tarius
+MiniAdventures: Mrmo Tarius
+Aseprite: David Capello
+1-Bit Kingdom: Vryell
+Mushroom Forest Zone Asset Pack: Balloon Cart
+Pixel Font Pack: Matt Walkden
+Pixel Side-Scroller Churchyard Tileset: Thomas Feichtmeir 'Cyangmou'
+Legend of Zink Asset Pack: Balloon Cart
+151 Retro Monsters SFX Pack: Archizer
+Error Boy Soundpack Vol 1-2: U-GameZ
+Ghost Voices - SFX: pd flattery
+Mega Marine Pack with Extras: RAPIDPUNCHES
+FROGBLOCK - a textmode font: Polyducks
+GBC Pokemon Overworld Sprites: Anima_nel
+Ark Pixel Font
+High Birth: VEXED
+Enter Input - VEXED
+1-Bit Background Pack - edermunizz
+Typeface: Angel-Sealing Glyphs: Speak the Sky
+HUGE pixelart asset pack: Sam
+video games have been queer - nilson
+Magic Notes: thecatamites
+---
+*lospec 调色板*
+AYY4: Polyducks
+TWILIGHT 5: Star
+NEON MOON TAROT: Interprete Pixel
+JAPANESE WOODBLOCK PALETTE: Polyducks
+---
+*freesound.org 音效*
+Richcraft - Frying pan hit: richcraftstudios
+Small Gong.aiff: AsdfgOrt
+Sonic Skid: plasterbrain
+Crow noise: marcusgar
+Cow machine.wav: deleted_user_2104797
+Chickens in the coop, morning: fthgurdy
+open a wood box.wav: jaeger2801
+matryoshka2.WAV: gyzhor
+Waterfall.Not such a big.Drizzling.Side and above(11lrs).wav: newlocknew
+Bubbles 004.wav: ristooooo1
+Cartoon, Drowning 02.wav: MATRIXXX_
+shot.flac: qubodup
+Grandma NUT.mp3: dj_dos_putin
+smacks.wav: shanedk
+Jump and spark.wav: sparkle1
+Swinging staff whoosh (low) 02.wav: Nightflame
+Glitch 2: TiesWijnen
+slot2.wav: lukaso
+8 bit blast.wav: Projecteur
+Arcade Splatter: plasterbrain
+CHEWING-loud clear chewing noise: mickfire
+Water Pour: JohnsonBrandEditing
+PowerUp.wav: kianda
+---
+thank you to my own grandmas, and grandmas around the world
+---
+let's all become babushka
+谢谢你玩我的游戏

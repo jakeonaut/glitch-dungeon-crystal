@@ -387,15 +387,14 @@ visible = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 12, 0 )
 grav = 0
 bbText = "WHO. HAS. AWOKEN. ME?
-AH. MY CHILDREN. THEY WISH FOR A CLEAN SLATE?
-IT. SHALL BE MY WILL.
-YOU ARE GREAT YOU
-HAVE AN AMAZING
-WISDOM AND POWER
-BRING. ME. THREE. SOULS.
-AND ALL MY ANGELS EGGS
-END
-"
+YOU WISH FOR A CLEAN SLATE?
+what do you think
+happens when you die?
+END. END. END. END.
+So I will
+forever live with my regret.
+You cannot receive
+absolution."
 
 [node name="CollisionShape" parent="PrimordialOozeNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 12 )
@@ -421,7 +420,7 @@ shape = SubResource( 15 )
 [node name="EndOfGameNPC" parent="." instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 12, 0 )
 grav = 0
-bbText = "Dialog.Player.6"
+bbText = "NPC.Crone.9"
 
 [node name="CollisionShape" parent="EndOfGameNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )

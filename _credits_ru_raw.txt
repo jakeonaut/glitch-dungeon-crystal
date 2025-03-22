@@ -1,0 +1,104 @@
+КОНЕЦ
+---
+Babushka's Glitch Dungeon Crystal
+Создатель игры jakeonaut
+опубликовано pets club 2
+---
+*Промо-графика*
+amargo0o
+
+*вступительная анимация*
+Fernando Finamore
+
+*Графика игры*
+Zaebucca
+
+*Музыка*
+markeryjane
+
+*песня о лягушке-старухе*
+Zhao Pu
+
+*дополнительные спрайты монстров*
+CAREFREE MEDIA
+
+*секретный глюк лошадь*
+xoxohorses
+
+---
+*Перевод на русский*
+Dmitry Kornyukhov & Arty Ra
+
+*Перевод на китайский (упрощённый)*
+Yuning YANG
+
+*Перевод на португальский (Бразилия)*
+Herbert Neto
+
+*Перевод на французская*
+Fusionnist
+
+---
+*Тестировщики и особая благодарность*
+leez, Oliver, felis, Paul & Grace Carroll, The Lonesome Varmints, Lu Lu Li, BalthazarGalactus, gooselyn, Daydreamin Blu, sleepyhead, darionmccoy, PixelCod, Corey Hardt, curelapsed, Forestherd, Ryan Trawick, Pixel-boy, backyard321, Camille Leon, Azzurra Iris Lea Monde, Polyducks, first_mistake_forever_more, Voxandra, Boowow!, blex chapman, buddygrouse, nilson
+---
+*itch.io Фоновая графика*
+Glitch Pixel Patterns, Brushes & Sprites: Dataerase
+MRMOTEXT: Mrmo Tarius
+MiniAdventures: Mrmo Tarius
+Aseprite: David Capello
+1-Bit Kingdom: Vryell
+Mushroom Forest Zone Asset Pack: Balloon Cart
+Pixel Font Pack: Matt Walkden
+Pixel Side-Scroller Churchyard Tileset: Thomas Feichtmeir 'Cyangmou'
+Legend of Zink Asset Pack: Balloon Cart
+151 Retro Monsters SFX Pack: Archizer
+Error Boy Soundpack Vol 1-2: U-GameZ
+Ghost Voices - SFX: pd flattery
+Mega Marine Pack with Extras: RAPIDPUNCHES
+FROGBLOCK - a textmode font: Polyducks
+GBC Pokemon Overworld Sprites: Anima_nel
+Ark Pixel Font
+High Birth: VEXED
+Enter Input - VEXED
+1-Bit Background Pack - edermunizz
+Typeface: Angel-Sealing Glyphs: Speak the Sky
+HUGE pixelart asset pack: Sam
+video games have been queer - nilson
+Magic Notes: thecatamites
+---
+*lospec палитры*
+AYY4: Polyducks
+TWILIGHT 5: Star
+NEON MOON TAROT: Interprete Pixel
+JAPANESE WOODBLOCK PALETTE: Polyducks
+---
+*freesound.org звуковые эффекты*
+Richcraft - Frying pan hit: richcraftstudios
+Small Gong.aiff: AsdfgOrt
+Sonic Skid: plasterbrain
+Crow noise: marcusgar
+Cow machine.wav: deleted_user_2104797
+Chickens in the coop, morning: fthgurdy
+open a wood box.wav: jaeger2801
+matryoshka2.WAV: gyzhor
+Waterfall.Not such a big.Drizzling.Side and above(11lrs).wav: newlocknew
+Bubbles 004.wav: ristooooo1
+Cartoon, Drowning 02.wav: MATRIXXX_
+shot.flac: qubodup
+Grandma NUT.mp3: dj_dos_putin
+smacks.wav: shanedk
+Jump and spark.wav: sparkle1
+Swinging staff whoosh (low) 02.wav: Nightflame
+Glitch 2: TiesWijnen
+slot2.wav: lukaso
+8 bit blast.wav: Projecteur
+Arcade Splatter: plasterbrain
+CHEWING-loud clear chewing noise: mickfire
+Water Pour: JohnsonBrandEditing
+PowerUp.wav: kianda
+---
+спасибо моим бабушкам и бабушкам по всему миру
+---
+давайте все станем бабушкой
+Спасибо за игру!

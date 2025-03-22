@@ -4,25 +4,45 @@ Babushka's Glitch Dungeon Crystal
 a game by jakeonaut
 published by pets club 2
 ---
-*this game wouldn't exist without*
-logo & promotional art: amargo0o
-opening cinematic: Fernando Finamore
-tileset art & most palettes: Zaebucca
-music: markeryjane
-musical theme of crone: Zhao Pu
-add'l monster sprites: CAREFREE MEDIA
-secret glitch horse: xoxohorses
+*logo & promotional art*
+amargo0o
+
+*opening cinematic*
+Fernando Finamore
+
+*tileset art & most palettes*
+Zaebucca
+
+*music*
+markeryjane
+
+*musical theme of crone*
+Zhao Pu
+
+*add'l monster sprites*
+CAREFREE MEDIA
+
+*secret glitch horse*
+xoxohorses
+
 ---
-*localizations:*
-chinese (simplified): Yuning YANG
-brazilian portuguese: Herbert Neto
-russian: Dmitry Kornyukhov & Arty Ra
-french: Fusionnist
+*chinese (simplified) localization*
+Yuning YANG
+
+*brazilian portuguese localization*
+Herbert Neto
+
+*russian localization*
+Dmitry Kornyukhov & Arty Ra
+
+*french localization*
+Fusionnist
+
 ---
 *playtesters & special thanks*
-leez, felis, Paul & Grace Carroll, The Lonesome Varmints, Lu Lu Li, BalthazarGalactus, gooselyn, Daydreamin Blu, sleepyhead, darionmccoy, PixelCod, Corey Hardt, curelapsed, Forestherd, Ryan Trawick, Pixel-boy, backyard321, Camille Leon, Azzurra Iris Lea Monde, Polyducks, first_mistake_forever_more, Voxandra, Boowow!, blex chapman, buddygrouse, nilson
+leez, Oliver, felis, Paul & Grace Carroll, The Lonesome Varmints, Lu Lu Li, BalthazarGalactus, gooselyn, Daydreamin Blu, sleepyhead, darionmccoy, PixelCod, Corey Hardt, curelapsed, Forestherd, Ryan Trawick, Pixel-boy, backyard321, Camille Leon, Azzurra Iris Lea Monde, Polyducks, first_mistake_forever_more, Voxandra, Boowow!, blex chapman, buddygrouse, nilson
 ---
-*assets, fonts, sfx: itch.io*
+*itch.io assets*
 Glitch Pixel Patterns, Brushes & Sprites: Dataerase
 MRMOTEXT: Mrmo Tarius
 MiniAdventures: Mrmo Tarius
@@ -30,7 +50,7 @@ Aseprite: David Capello
 1-Bit Kingdom: Vryell
 Mushroom Forest Zone Asset Pack: Balloon Cart
 Pixel Font Pack: Matt Walkden
-Pixel Side-Scroller Churchyard Tileset: Thomas Feichtmeir "Cyangmou"
+Pixel Side-Scroller Churchyard Tileset: Thomas Feichtmeir 'Cyangmou'
 Legend of Zink Asset Pack: Balloon Cart
 151 Retro Monsters SFX Pack: Archizer
 Error Boy Soundpack Vol 1-2: U-GameZ
