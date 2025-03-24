@@ -527,9 +527,9 @@ func _process(delta):
 
   # if Input.is_action_just_pressed("action_button") and can_cast_spell_timer >= can_cast_spell_time_limit:
   #   applySpellbookGlitch()
-  if Input.is_action_just_pressed("debug_glitch_button"):
+  if global.memory["debug"] and Input.is_action_just_pressed("debug_glitch_button"):
     applyNextGlitch()
-  if Input.is_action_just_pressed("debug_toggle_spellbook"):
+  if global.memory["debug"] and Input.is_action_just_pressed("debug_toggle_spellbook"):
     if global.memory["glitched_grimoire"]:
       global.memory["glitched_grimoire"] = false
       global.memory.erase("spellbookPage")
@@ -539,12 +539,12 @@ func _process(delta):
       global.memory["spellbookPage"] = [GlitchForm.FLOOR, GlitchForm.FEATHER, GlitchForm.LADDER, GlitchForm.INVISIBLE]
     else:
       global.memory["spellbookPage"] = [glitch_form] if glitch_form != GlitchForm.NORMAL else []
-  if Input.is_action_just_pressed("debug_upgrade_broom"):
+  if global.memory["debug"] and Input.is_action_just_pressed("debug_upgrade_broom"):
     if global.memory["broomerang"] == 0:
       global.memory["broomerang"] = 1
     elif global.memory["broomerang"] < 2:
       global.memory["broomerang"] = 2
-  if Input.is_action_just_pressed("debug_more_crystals"):
+  if global.memory["debug"] and Input.is_action_just_pressed("debug_more_crystals"):
     var num_keys = global.memory["key"] if global.memory.has("key") else null
     if num_keys == null:
       global.memory["key"] = 0
@@ -623,6 +623,7 @@ func unsmack():
   mySprite.material_override.set_shader_param("normal_offset", .02)
   mySprite.material_override.set_shader_param("enable_palette_cycle", false)
 
+func startTeleport():
   if global.memory["mushroom_soul"] and teleport_to != null and Input.is_action_pressed("sub_action_button") and global.activeInteractor == null:
     pauseSelf = true
     global.pauseMoveInput = true
@@ -689,6 +690,7 @@ func processTeleportationLogic(delta):
           #   # teleportTarget.global_transform.origin = temp_position
           if teleport_to_origin != null:
             self.global_transform.origin = teleport_to_origin
+            self.camera_target_y_pos = self.global_transform.origin.y
         has_teleported = true
         teleport_to = null
         teleport_to_origin = null
@@ -884,6 +886,10 @@ func tryDieToOffscreenCamera(_delta):
           gravitySound.play()
           glitchTickle()
           level.flipGravity(-1 * (grav / abs(grav)))
+          if glitch_form == global.GlitchForm.FEATHER:
+            lv.y *= 2
+            vv *= 2
+            linear_velocity.y *= 2
         global.roomEdgeVector = null
         return
 
@@ -2085,7 +2091,9 @@ func processBroomLogic(delta):
       var found_fallen_broom = false
       var fallenBroomArray = self.get_tree().get_nodes_in_group("fallen_broom_group")
       for fallenBroom in fallenBroomArray:
-        if not fallenBroom.returning and fallenBroom.visible and not fallenBroom.should_die_on_land and not fallenBroom.is_dying and fallenBroom.should_return and fallenBroom.can_return_via_input:
+        if fallenBroom.visible and global.memory["mushroom_soul"] > 0:
+          fallenBroom.warpToIt()
+        elif not fallenBroom.returning and fallenBroom.visible and not fallenBroom.should_die_on_land and not fallenBroom.is_dying and fallenBroom.should_return and fallenBroom.can_return_via_input:
           fallenBroom.returning = true
           found_fallen_broom = true
       if found_fallen_broom:

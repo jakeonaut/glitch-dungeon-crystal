@@ -946,7 +946,7 @@ func spawnASpore(where_origin, inverse):
     var r = 1
     spore.target_pos = Vector2(global_transform.origin.x + rand_range(-r, r), global_transform.origin.y + rand_range(-r, r))
     spore.delta_multiplier = 2.0
-    spore.mySprite.reverseIt()
+    spore.mySprite.get_ref().reverseIt()
   else:
     spore.global_transform.origin.x += rand_range(-1, 1)
     spore.global_transform.origin.y += rand_range(-1, 1)

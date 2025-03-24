@@ -2083,8 +2083,7 @@ pixel_size = 0.0001
 shape = SubResource( 307 )
 
 [node name="Goop1" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.385457, -1.08 )
-visible = false
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5, 0.385457, -1.08 )
 material_override = SubResource( 318 )
 pixel_size = 0.125
 texture = ExtResource( 54 )
@@ -2095,8 +2094,7 @@ frame_delay = 0.3
 max_frames = 4
 
 [node name="Goop2" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0.385457, -1.08 )
-visible = false
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0.385457, -1.08 )
 material_override = SubResource( 318 )
 pixel_size = 0.125
 texture = ExtResource( 54 )
@@ -2152,15 +2150,15 @@ transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, -33, -4, 0 )
 grav = 0
 
 [node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 15.0872, 0 )
 grav = 0
 
 [node name="AngelEgg2" parent="Viewport/level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 15.0872, 0 )
 grav = 0
 
 [node name="AngelEgg3" parent="Viewport/level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -3.3396, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 16.7476, 0 )
 grav = 0
 
 [node name="Sprite3D" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
@@ -2175,7 +2173,7 @@ script = ExtResource( 49 )
 max_frames = 4
 
 [node name="Sprite3D2" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0.4, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 15.4, 0 )
 material_override = SubResource( 329 )
 pixel_size = 0.125
 transparent = false
@@ -2189,7 +2187,7 @@ script = ExtResource( 49 )
 should_randomize_frame_delay = true
 
 [node name="Sprite3D3" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.4, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 17.4, 0 )
 material_override = SubResource( 329 )
 pixel_size = 0.125
 transparent = false
@@ -2203,7 +2201,7 @@ script = ExtResource( 49 )
 should_randomize_frame_delay = true
 
 [node name="Sprite3D4" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -1.6, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 13.4, 0 )
 material_override = SubResource( 329 )
 pixel_size = 0.125
 transparent = false
@@ -2217,7 +2215,7 @@ script = ExtResource( 49 )
 should_randomize_frame_delay = true
 
 [node name="Sprite3D5" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -0.6, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 14.4, 0 )
 material_override = SubResource( 329 )
 pixel_size = 0.125
 transparent = false

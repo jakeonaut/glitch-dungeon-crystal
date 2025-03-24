@@ -739,9 +739,9 @@ func activate(_is_player):
         getPlayer().glitchTickle()
         level.summonSmokeClouds(global_transform.origin, 5, true, true)
         getPlayer().getSmacked()
-        if getPlayer().teleport_to == null:
-            getPlayer().teleport_to = weakref(self)
-            getPlayer().teleport_to_origin = self.global_transform.origin
+        # if getPlayer().teleport_to == null:
+        #     getPlayer().teleport_to = weakref(self)
+        #     getPlayer().teleport_to_origin = self.global_transform.origin
         return result
     elif smallInteractionArea != null and smallInteractionArea.is_in_group("enemies"):
         if global.memory["glitched_broom"]:

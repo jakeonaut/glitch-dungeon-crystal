@@ -153,7 +153,7 @@ func playDefeatBossJingle():
 
 
 func conductFromScenePath(path):
-    if global.userSettings["stopAllMusic"] or path.find("000Intro") > 0:
+    if global.userSettings["stopAllMusic"] or path.find("000Intro") > 0 or path.find("IntroVideo") > 0:
         stopAll()
         return
     changeSongPitch(1.0)

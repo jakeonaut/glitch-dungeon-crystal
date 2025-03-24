@@ -97,24 +97,11 @@ func _process(delta):
                 global.pauseGame = true
     elif projectile:
         on_ground = false
-        if Input.is_action_just_pressed("sub_action_button") and global.memory["broomerang"] >= 2 and can_warp:
-            if not level.player.can_broomerang_warp:
-                level.player.errorSound.play()
-            else:
-                level.player.global_transform.origin = global_transform.origin
-                level.player.global_transform.origin.y -= 1
-                level.player.camera_target_y_pos = level.player.global_transform.origin.y
-                level.player.gravitySound.play()
-                level.player.linear_velocity = self.linear_velocity
-                level.player.lv = self.lv
-                level.player.vv = self.vv
-                level.player.hv = self.hv
-                level.player.tryClearFallthroughCollisionSolid(self.global_transform.origin)
-                abortSound.activateScript()
-                level.player.can_broomerang_warp = false
+        if Input.is_action_just_pressed("sub_action_button"):
+            warpToIt()
         if returning and global.activeInteractor and global.activeInteractor.is_important:
             global.pauseGame = true
-    # can_warp = true
+    can_warp = true
 
     if vv > 0 and not projectile:
         behavior_was_thrown = false
@@ -187,6 +174,28 @@ func _process(delta):
         if return_timer >= return_time_limit:
             returning = true
             on_ground = false
+
+func warpToIt():
+    if global.memory["mushroom_soul"] > 0 and can_warp:
+        if not level.player.can_broomerang_warp and level.player.teleport_to == null:
+            level.player.errorSound.play()
+        else:
+            if level.player.teleport_to == null:
+                level.player.teleport_to = weakref(self)
+                level.player.teleport_to_origin = self.global_transform.origin
+                level.player.startTeleport()
+            # put spore teleport here?
+            # level.player.global_transform.origin = global_transform.origin
+            # level.player.global_transform.origin.y -= 1
+            level.player.camera_target_y_pos = self.global_transform.origin.y
+            # level.player.gravitySound.play()
+            # level.player.linear_velocity = self.linear_velocity
+            # level.player.lv = self.lv
+            # level.player.vv = self.vv
+            # level.player.hv = self.hv
+            # level.player.tryClearFallthroughCollisionSolid(self.global_transform.origin)
+            abortSound.activateScript()
+            level.player.can_broomerang_warp = false
 
 func oneMoreHit(delta):
     # give me one last chance to hit QuestionBlocks and anything else that's clustered up
@@ -316,9 +325,9 @@ func hitStuff(_delta):
             if not area.get_node("..").am_i_dying:
                 if not returning:
                     my_broom_owner.getSmacked()
-                    if my_broom_owner.teleport_to == null:
-                        my_broom_owner.teleport_to = weakref(area.get_parent())
-                        my_broom_owner.teleport_to_origin = area.get_parent().global_transform.origin
+                    # if my_broom_owner.teleport_to == null:
+                    #     my_broom_owner.teleport_to = weakref(area.get_parent())
+                    #     my_broom_owner.teleport_to_origin = area.get_parent().global_transform.origin
                 area.get_node("..").ouchies(global_transform.origin)
                 my_broom_owner.has_sweeped_glitch = true
                 level.summonSmokeClouds(global_transform.origin, 5, true, true)
@@ -344,9 +353,9 @@ func hitStuff(_delta):
                     have_i_smacked_an_npc = true
                 if not returning:
                     my_broom_owner.getSmacked()
-                    if my_broom_owner.teleport_to == null:
-                        my_broom_owner.teleport_to = weakref(area.get_parent())
-                        my_broom_owner.teleport_to_origin = area.get_parent().global_transform.origin
+                    # if my_broom_owner.teleport_to == null:
+                    #     my_broom_owner.teleport_to = weakref(area.get_parent())
+                    #     my_broom_owner.teleport_to_origin = area.get_parent().global_transform.origin
                 if smackResult != null:
                     has_hit_something = true
         elif area.is_in_group("bug") and is_active:
@@ -356,9 +365,9 @@ func hitStuff(_delta):
                 if not (area.is_in_group("tadpole") and smackResult == null):
                     if not returning:
                         my_broom_owner.getSmacked()
-                        if my_broom_owner.teleport_to == null:
-                            my_broom_owner.teleport_to = weakref(area.get_parent())
-                            my_broom_owner.teleport_to_origin = area.get_parent().global_transform.origin
+                        # if my_broom_owner.teleport_to == null:
+                        #     my_broom_owner.teleport_to = weakref(area.get_parent())
+                        #     my_broom_owner.teleport_to_origin = area.get_parent().global_transform.origin
                     has_hit_something = true
         elif area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
             # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false

@@ -127,7 +127,7 @@ func adjustSprite():
   else:
     mySprite.global_transform.origin.x += 0.96
   mySprite.global_transform.origin.y = level.player.global_transform.origin.y + 1.08
-  mySprite.global_transform.origin.z = level.player.global_transform.origin.z + 1
+  mySprite.global_transform.origin.z = level.player.global_transform.origin.z + 2
           
 # @override
 func alignMySprite():

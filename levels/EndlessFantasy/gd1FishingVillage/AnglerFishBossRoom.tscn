@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=2]
+[gd_scene load_steps=121 format=2]
 
 [ext_resource path="res://sceneObjects/Enemies/BasicFrogEnemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -31,8 +31,12 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishingRod.tscn" type="PackedScene" id=29]
 [ext_resource path="res://assets/pokeball0000.png" type="Texture" id=30]
 [ext_resource path="res://sceneObjects/WaterCubes/BogWaterCube.tscn" type="PackedScene" id=31]
+[ext_resource path="res://levels/EndlessFantasy/gd1FishingVillage/BigFishDialogStartSound.gd" type="Script" id=32]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/ZoraFlippers.tscn" type="PackedScene" id=33]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/BigMimicController.gd" type="Script" id=34]
+[ext_resource path="res://levels/EndlessFantasy/gd1FishingVillage/BigFishAbortSound.gd" type="Script" id=35]
 
-[sub_resource type="ArrayMesh" id=99]
+[sub_resource type="ArrayMesh" id=104]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -45,7 +49,7 @@ surfaces/0 = {
 "vertex_count": 8
 }
 
-[sub_resource type="ArrayMesh" id=100]
+[sub_resource type="ArrayMesh" id=105]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -2112,6 +2116,13 @@ tracks/1/keys = {
 resource_local_to_scene = true
 extents = Vector3( 1.2, 0.24, 1 )
 
+[sub_resource type="BoxShape" id=102]
+resource_local_to_scene = true
+extents = Vector3( 3, 2, 1.3 )
+
+[sub_resource type="BoxShape" id=103]
+resource_local_to_scene = true
+
 [sub_resource type="BoxShape" id=54]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
@@ -2781,7 +2792,7 @@ viewport_path = NodePath("Viewport")
 [sub_resource type="ViewportTexture" id=28]
 viewport_path = NodePath("Viewport2")
 
-[sub_resource type="ArrayMesh" id=101]
+[sub_resource type="ArrayMesh" id=106]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -2887,13 +2898,19 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.9, -16, 0 )
 [node name="AnglerFishBoss" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 58.1339, -25.8473, 0 )
 
+[node name="CubeContainer" parent="Viewport/level/AnglerFishBoss/CubeCrystal" index="0"]
+transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
+
 [node name="MeshInstance" parent="Viewport/level/AnglerFishBoss/CubeCrystal/CubeContainer" index="0"]
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
-mesh = SubResource( 99 )
+mesh = SubResource( 104 )
 
 [node name="MeshInstance3" parent="Viewport/level/AnglerFishBoss/CubeCrystal/CubeContainer" index="1"]
 transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
-mesh = SubResource( 100 )
+mesh = SubResource( 105 )
+
+[node name="MeshInstance2" parent="Viewport/level/AnglerFishBoss/CubeCrystal/CubeContainer" index="2"]
+transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )
 
 [node name="landings" type="Spatial" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43, -24.7462, 0 )
@@ -3430,11 +3447,34 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, -20, 0 )
 spawned_object_path = ""
 has_spawned = true
 
-[node name="BigFishNPC" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49, -27, 0 )
+[node name="BigFishNPC" type="Spatial" parent="Viewport/level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, -20, 0 )
+script = ExtResource( 34 )
+
+[node name="MimicNPC" parent="Viewport/level/BigFishNPC" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -7, 0 )
 grav = 0
-bbText = "I've lost my fishing rod. now my
-youngins will surely go hungry."
+bbText = "NPC.BigFisherman.1"
+
+[node name="CollisionShape" parent="Viewport/level/BigFishNPC/MimicNPC/SmallInteractionArea" index="0"]
+shape = SubResource( 102 )
+
+[node name="DialogStartSound" parent="Viewport/level/BigFishNPC/MimicNPC/NPC TextBox/TextBox" index="10"]
+script = ExtResource( 32 )
+
+[node name="AbortSound" parent="Viewport/level/BigFishNPC/MimicNPC/NPC TextBox/TextBox" index="13"]
+script = ExtResource( 35 )
+
+[node name="TreasureSpellCollectable" parent="Viewport/level/BigFishNPC" instance=ExtResource( 33 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -7, 0 )
+bbText = "NPC.Treasure.7"
+is_active = false
+
+[node name="CollisionShape" parent="Viewport/level/BigFishNPC/TreasureSpellCollectable/SmallInteractionArea" index="0"]
+shape = SubResource( 103 )
+
+[node name="TreasureSprite3D" parent="Viewport/level/BigFishNPC/TreasureSpellCollectable" index="4"]
+pixel_size = 0.0001
 
 [node name="BasicTadpoleEnemy" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, -32, 0 )
@@ -3699,7 +3739,7 @@ flip_v = true
 [node name="UILayer" parent="." instance=ExtResource( 16 )]
 
 [node name="MeshInstance" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 101 )
+mesh = SubResource( 106 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
 transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
@@ -3712,6 +3752,10 @@ transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.52
 [editable path="Viewport/level/BasicFrogEnemy"]
 [editable path="Viewport/level/GrandmaStatue2"]
 [editable path="Viewport/level/GrandmaStatue5"]
+[editable path="Viewport/level/BigFishNPC/MimicNPC"]
+[editable path="Viewport/level/BigFishNPC/MimicNPC/NPC TextBox"]
+[editable path="Viewport/level/BigFishNPC/TreasureSpellCollectable"]
+[editable path="Viewport/level/BigFishNPC/TreasureSpellCollectable/NPC TextBox"]
 [editable path="Viewport/level/NPC"]
 [editable path="Viewport/level/NPC/NPC TextBox"]
 [editable path="Viewport/level/FishingRod"]

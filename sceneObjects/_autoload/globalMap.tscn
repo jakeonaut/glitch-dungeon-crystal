@@ -1047,6 +1047,7 @@ vframes = 16
 frame = 63
 path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
 can_nav_left = false
+can_nav_right = false
 can_nav_up = false
 kill_after_glitch = true
 

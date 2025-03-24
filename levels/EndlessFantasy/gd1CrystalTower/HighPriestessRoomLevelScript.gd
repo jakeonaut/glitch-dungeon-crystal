@@ -36,7 +36,7 @@ export var camera_size = 30
 # @override
 func setUpRoomInitializationOverride():
   #  TODO(jaketrower): remove this!!!
-  if not global.memory.has("roomPath"):
+  if not global.memory.has("roomPath") and global.memory["debug"]:
     debug_start_boss_immediately = true
     highPriestessBoss.get_ref().MAX_NUM_HITS = 1
 
