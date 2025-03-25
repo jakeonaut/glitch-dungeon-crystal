@@ -112,7 +112,7 @@ NPC.Crystal.End,"[color=#00ffff][wave amp=50 freq=2]primordial ooze,[/wave][/col
 NPC.Crystal.2,"deaths: ","死亡： ","Смертей: ","mortes: "
 NPC.Crystal.3,"angel eggs: ","天使卵：","Ангельских яиц: ","ovos celestiais: "
 NPC.Crystal.4,"broom sweeps: ","扫帚攻击： ","Взмахов метлой: ","vassouradas: "
-NPC.Crystal.5,"jumps: ","扫帚攻击： ","Прыжков: ","pulos: 65"
+NPC.Crystal.5,"jumps: ","扫帚攻击： ","Прыжков: ","pulos: "
 NPC.Crystal.6,"love: ","LOVE: ","Любви: ","amor: "
 NPC.Crystal.7,"shards: ","个碎片： ","осколков: ","fragmentos: "
 NPC.Crystal.NULL,NULL,NULL,НЕТ,NULL

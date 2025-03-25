@@ -392,9 +392,7 @@ shape = SubResource( 56 )
 shape = SubResource( 57 )
 
 [node name="TreasureSpellCollectable" parent="Viewport/level/Mimic" index="3"]
-bbText = "•FISHING ROD GET
-but you don't know
-how to fish..."
+bbText = "NPC.Treasure.4"
 
 [node name="CollisionShape" parent="Viewport/level/Mimic/TreasureSpellCollectable/SmallInteractionArea" index="0"]
 shape = SubResource( 58 )

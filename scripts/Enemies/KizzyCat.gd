@@ -75,8 +75,8 @@ func glitchSwitchSprite(_delta):
 func landed():
   .landed()
   behavior_jumping = false
-  # if is_evil:
-  #   getSmacked()
+  if is_evil:
+    getSmacked()
 
 var my_shroom = null
 # @override

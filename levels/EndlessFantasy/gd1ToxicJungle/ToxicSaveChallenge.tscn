@@ -656,7 +656,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7, 0, 0 )
 
 [node name="Mimic" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 10.6511, 0 )
-trade_item = "CUTE PET"
+trade_item = "NPC.MimicTreasure.3"
 
 [node name="CollisionShape" parent="Viewport/level/Mimic/SmallInteractionArea" index="0"]
 shape = SubResource( 21 )
@@ -678,10 +678,7 @@ anims/walkStart = SubResource( 30 )
 shape = SubResource( 31 )
 
 [node name="TreasureSpellCollectable" parent="Viewport/level/Mimic" index="3"]
-bbText = "•CUTE PET GET:
-although you're not sure that
-it's really that cute..
-"
+bbText = "NPC.Treasure.6"
 
 [node name="CollisionShape" parent="Viewport/level/Mimic/TreasureSpellCollectable/SmallInteractionArea" index="0"]
 shape = SubResource( 32 )

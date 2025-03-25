@@ -453,15 +453,6 @@ func processHiscoreRenderLogic(delta):
       level.player.physics_state = level.player.PhysicsState.NORMAL
       level.player.pauseInput = false
       global.shouldRenderAsCinematic = false
-      var babushkaCatFollower = level.get_node("PetBabushkaCatFollower") if level.has_node("PetBabushkaCatFollower") else null
-      if global.memory["babushka_cat_story_hook"] == 2 and babushkaCatFollower != null and babushkaCatFollower.gameMoverTarget == null:
-        babushkaCatFollower.popFromFollowers()
-        var npc = babushkaCatFollower.get_node("NPC")
-        babushkaCatFollower.remove_child(npc)
-        level.add_child(npc)
-        npc.global_transform.origin = babushkaCatFollower.global_transform.origin
-        babushkaCatFollower.queue_free()
-        npc.glitchOut()
 
 func tryLerpFromCenter(rect, delta, final_pos):
   if rect.rect_scale.x != 1:

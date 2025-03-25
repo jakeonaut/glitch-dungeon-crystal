@@ -8,6 +8,18 @@ func setUpRoomInitializationOverride():
     door2.num_keys_unlock = 2
     door2.path = "res://levels/EndlessFantasy/gd1/00000EndOfDemo.tscn"
 
+  var babushkaCatFollower = self.get_node("PetBabushkaCatFollower") if self.has_node("PetBabushkaCatFollower") else null
+  if global.memory["babushka_cat_story_hook"] == 1 and babushkaCatFollower != null:
+    global.memory["babushka_cat_story_hook"] = 2
+    global.memory["currPet"] = null
+    babushkaCatFollower.popFromFollowers()
+    var npc = babushkaCatFollower.get_node("NPC")
+    babushkaCatFollower.remove_child(npc)
+    self.add_child(npc)
+    npc.global_transform.origin = babushkaCatFollower.global_transform.origin
+    babushkaCatFollower.queue_free()
+    npc.glitchOut()
+
   # if global.memory["clean_crystals"] >= 4:    
   #   door2.is_locked = false
   #   door2.animationPlayer.play("doorOpen")

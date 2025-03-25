@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://assets/palettes/pastoral_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
@@ -10,7 +10,18 @@
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Pain7.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/sounds/bawk.wav" type="AudioStream" id=9]
 [ext_resource path="res://scripts/Follower.gd" type="Script" id=10]
-[ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=11]
+[ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=12]
+[ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=13]
+[ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/sounds/pop.wav" type="AudioStream" id=15]
+[ext_resource path="res://assets/sounds/eba_speech_old_women.wav" type="AudioStream" id=16]
+[ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=17]
+[ext_resource path="res://scripts/NPC.gd" type="Script" id=18]
+[ext_resource path="res://assets/miniAdventures.png" type="Texture" id=19]
+[ext_resource path="res://assets/sounds/eb_menu6.wav" type="AudioStream" id=20]
+[ext_resource path="res://assets/sounds/smack.wav" type="AudioStream" id=21]
+[ext_resource path="res://sceneObjects/MiniAdventures.tscn" type="PackedScene" id=22]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
@@ -52,9 +63,247 @@ shader_param/target_palette = ExtResource( 1 )
 resource_local_to_scene = true
 extents = Vector3( 3, 2, 1.3 )
 
-[sub_resource type="BoxShape" id=3]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
+[sub_resource type="BoxShape" id=24]
+extents = Vector3( 1, 0.8, 1 )
+
+[sub_resource type="ShaderMaterial" id=21]
+shader = ExtResource( 5 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 2 )
+shader_param/target_palette = ExtResource( 11 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "default"
+length = 0.1
+
+[sub_resource type="Animation" id=17]
+resource_name = "fall"
+length = 0.1
+
+[sub_resource type="Animation" id=6]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "jump"
+length = 0.001
+
+[sub_resource type="Animation" id=15]
+resource_name = "land"
+length = 0.1
+
+[sub_resource type="Animation" id=16]
+resource_name = "stand"
+length = 0.1
+
+[sub_resource type="Animation" id=22]
+resource_name = "walk"
+
+[sub_resource type="Animation" id=23]
+resource_name = "walkStart"
+
+[sub_resource type="ShaderMaterial" id=19]
+shader = ExtResource( 5 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.001
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.05
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 19 )
+shader_param/base_palette = ExtResource( 2 )
+shader_param/target_palette = ExtResource( 12 )
+
+[sub_resource type="ShaderMaterial" id=25]
+shader = ExtResource( 5 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
+shader_param/texture_albedo = ExtResource( 13 )
+shader_param/base_palette = ExtResource( 2 )
+shader_param/target_palette = ExtResource( 12 )
+
+[sub_resource type="Animation" id=26]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 59 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:pixel_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+
+[sub_resource type="Animation" id=27]
+resource_name = "exclaim"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 59, 60, 59 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:pixel_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0625, 0.16, 0.125, 0.125, 0.0625 ]
+}
 
 [node name="PetBabushkaCatFollower" type="Spatial"]
 script = ExtResource( 10 )
@@ -94,16 +343,102 @@ stream = ExtResource( 7 )
 volume_db = -10.0
 pitch_scale = 0.5
 
-[node name="NPC" parent="." instance=ExtResource( 11 )]
+[node name="NPC" type="Spatial" parent="." groups=["npc"]]
+script = ExtResource( 18 )
+grav = 0
 
-[node name="CollisionShape" parent="NPC/SmallInteractionArea" index="0"]
+[node name="SmallInteractionArea" type="Area" parent="NPC" groups=["malware", "npc"]]
+script = ExtResource( 17 )
+
+[node name="CollisionShape" type="CollisionShape" parent="NPC/SmallInteractionArea"]
 shape = SubResource( 2 )
 
-[node name="Sprite3D" parent="NPC" index="3"]
+[node name="SmallerInteractionArea" type="Area" parent="NPC" groups=["corporeal_body", "malware"]]
+
+[node name="CollisionShape" type="CollisionShape" parent="NPC/SmallerInteractionArea"]
+shape = SubResource( 24 )
+
+[node name="NPC TextBox" parent="NPC" instance=ExtResource( 14 )]
+
+[node name="TextBox" parent="NPC/NPC TextBox" index="0"]
+margin_bottom = 491.0
+
+[node name="ColorRect2" parent="NPC/NPC TextBox/TextBox/ColorRect" index="0"]
+margin_bottom = 90.0
+
+[node name="ColorRect3" parent="NPC/NPC TextBox/TextBox/ColorRect/ColorRect2" index="0"]
+margin_bottom = 91.0
+
+[node name="NextPrompt" parent="NPC/NPC TextBox/TextBox" index="8"]
+position = Vector2( 439.5, 80 )
+
+[node name="EndPrompt" parent="NPC/NPC TextBox/TextBox" index="9"]
+position = Vector2( 439.5, 80 )
+
+[node name="DialogStartSound" parent="NPC/NPC TextBox/TextBox" index="10"]
+stream = ExtResource( 15 )
+volume_db = -20.0
+
+[node name="DialogSound" parent="NPC/NPC TextBox/TextBox" index="11"]
+stream = ExtResource( 16 )
+volume_db = -23.0
+
+[node name="AbortSound" parent="NPC/NPC TextBox/TextBox" index="13"]
+stream = ExtResource( 20 )
+volume_db = -30.0
+pitch_scale = 0.7
+
+[node name="Sprite3D" type="Sprite3D" parent="NPC" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )
+material_override = SubResource( 21 )
 pixel_size = 0.0001
+transparent = false
+double_sided = false
+texture = ExtResource( 4 )
+hframes = 8
+vframes = 10
+frame = 10
+region_rect = Rect2( 0, 0, 62, 0 )
+script = ExtResource( 3 )
+should_randomize_frame_delay = true
 
-[node name="CollisionShape" parent="NPC/FallthroughSolid" index="0"]
-shape = SubResource( 3 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NPC"]
+anims/default = SubResource( 5 )
+anims/fall = SubResource( 17 )
+anims/flickerOn = SubResource( 6 )
+anims/jump = SubResource( 7 )
+anims/land = SubResource( 15 )
+anims/stand = SubResource( 16 )
+anims/walk = SubResource( 22 )
+anims/walkStart = SubResource( 23 )
 
-[editable path="NPC"]
+[node name="InteractPrompt" parent="NPC" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 2, -1 )
+visible = false
+material_override = SubResource( 19 )
+frame = 745
+frame_delay = 0.5
+
+[node name="SmackSound" type="AudioStreamPlayer" parent="NPC"]
+stream = ExtResource( 21 )
+volume_db = -20.0
+pitch_scale = 0.65
+
+[node name="TextBoxCameraTarget" type="Spatial" parent="NPC"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+
+[node name="ExclamationSprite" type="Sprite3D" parent="NPC"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0781498, 2, 0 )
+visible = false
+material_override = SubResource( 25 )
+pixel_size = 0.125
+texture = ExtResource( 13 )
+hframes = 8
+vframes = 8
+frame = 59
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NPC/ExclamationSprite"]
+anims/RESET = SubResource( 26 )
+anims/exclaim = SubResource( 27 )
+
 [editable path="NPC/NPC TextBox"]
