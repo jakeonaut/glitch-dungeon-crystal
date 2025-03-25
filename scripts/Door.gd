@@ -139,7 +139,7 @@ func getKeyName(x_more_crystals):
   elif key_type == global.KeyItem.CAT:
     key_name = "SPORE KEY"
   elif key_type == global.KeyItem.CRYSTAL:
-    key_name = str(x_more_crystals) + " more CRYSTALS\nto be purified"
+    key_name = tr("NPC.Door.3") % str(x_more_crystals)
   elif key_type == global.KeyItem.ZONE_CRYSTAL:
     key_name = "purify [wave]CRYSTAL[/wave]\n in this zone"
   elif key_type == global.KeyItem.DEMO:

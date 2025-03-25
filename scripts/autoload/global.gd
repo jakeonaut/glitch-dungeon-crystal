@@ -320,8 +320,9 @@ func resetMemory():
     memory["mp"] = memory["max_mp"]
     memory["level_zonez"] = []
 
+    # ==============================================
     memory["demo_mode"] = 0
-    # if you've beaten the midpoint boss
+    # if you've beaten the final boss
     memory["clean_crystals"] = 0
     memory["priestess"] = 0
     memory["glitch_world"] = 0
@@ -329,11 +330,10 @@ func resetMemory():
     memory["forget_me_not"] = false
     memory["glitched_grimoire2"] = false
     
-
     # crystal elder bosses
-    memory["baba_yaga_boss"] = 3
-    memory["angler_seaman_boss"] = 3
-    memory["dogu_matryoshka_boss"] = 3
+    memory["baba_yaga_boss"] = 0
+    memory["angler_seaman_boss"] = 0
+    memory["dogu_matryoshka_boss"] = 0
 
     # STORY OR LEVEL STATE
     memory["babushka_cat_story_hook"] = 0
@@ -343,20 +343,21 @@ func resetMemory():
     # memory["spellbookPage"] = [] # we check if the key exists to see if we have it... -_-
     memory["can_force_respawn"] = 0
     memory["has_map_item"] = false
-    memory["broomerang"] = 1
+    memory["broomerang"] = 0
     memory["babushka_cat_sprint"] = 0
     memory["broom_double_jump"] = 0
     memory["zora_flippers"] = 0
-    memory["fishingRod"] = true
+    memory["fishingRod"] = false
     memory["mole_cricket"] = 0
-    memory["flowerPot"] = true
-    memory["mushroom_soul"] = 1
-    memory["cutePet"] = true
+    memory["flowerPot"] = false
+    memory["mushroom_soul"] = 0
+    memory["cutePet"] = false
     memory["glitched_broom"] = false
     memory["max_hp"] = 1
     memory["hp"] = memory["max_hp"]
     memory["angel_flute"] = false
     memory["has_marked_bosses_on_map"] = false
+    # ==============================================
 
     # DEFUNCT POWERUPS
     memory["multi_broom"] = false
@@ -394,6 +395,7 @@ func resetUserSettings():
     userSettings["colorblindMode"] = true
     userSettings["stopAllMusic"] = false
     userSettings["canChangeSongPitch"] = true
+    userSettings["stopAllSfx"] = false
     userSettings["spellAssist"] = false
 
 var anna_mode_counter = 0

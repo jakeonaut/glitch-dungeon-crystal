@@ -163,7 +163,7 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="NormalMenu"]
-margin_left = 198.0
+margin_left = 136.0
 margin_top = 65.0
 margin_right = 702.0
 margin_bottom = 473.0
@@ -195,7 +195,7 @@ margin_bottom = 522.0
 margin_left = 124.0
 margin_top = 70.0
 margin_right = 639.0
-margin_bottom = 460.0
+margin_bottom = 514.0
 rect_pivot_offset = Vector2( -511, -189 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -2200,7 +2200,7 @@ scroll_active = false
 [node name="CursorSprite" type="Sprite" parent="."]
 visible = false
 material = SubResource( 62 )
-position = Vector2( 160, 80 )
+position = Vector2( 40, 80 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 14 )
 hframes = 6

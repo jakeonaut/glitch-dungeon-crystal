@@ -27,7 +27,7 @@ func setUpRoomInitializationOverride():
 
   if global.memory["clean_crystals"] >= 4:
     broomUpgradeCrone.queue_free()
-  var hasEnteredTower = global.memory.has("gd1CrystalTower")
+  var hasEnteredTower = false # global.memory.has("gd1CrystalTower")
   if global.memory["angler_seaman_boss"] < 3 or hasEnteredTower:
     fishElderNPC.queue_free()
   if global.memory["baba_yaga_boss"] < 3 or hasEnteredTower:

@@ -6,43 +6,48 @@ UI.GlitchSpell.2,Air Walk,空中漫步,Лёгкость,Passeio Etéreo
 UI.GlitchSpell.3,Ladder,拾级而上,Лестница,Trilha Impossível
 UI.GlitchSpell.4,Ghost,隐身术,Призрак,Forma Fantasma
 UI.MainMenu.0,Choose language,选择语言,Выберите язык,Escolha o idioma
-UI.MainMenu.1,Press %s for Options.,"按 %s 打开选项","Нажмите %s, чтобы открыть настройки",Aperte %s para Opções
+UI.MainMenu.1,Press %s for Options.,"按 %s 打开选项","Нажмите %s, чтобы открыть настройки","%s opções"
 UI.MainMenu.2,"File ",文件,"Файл ","Jogo "
 UI.MainMenu.2_2,"File ",文件,"Файл ","Jogo "
-UI.MainMenu.3,press %s to start,按 %s 开始,"Нажмите %s, чтобы начать",Aperte %s para iniciar
-UI.MainMenu.4,%s: delete file,%s：删除文件,%s: удалить файл,%s: apagar jogo
-UI.MainMenu.5,"Really Delete [wave]""File %s""[/wave]?\n                      %s Confirm\n                      %s Cancel","确认删除 ""文件 %s ""吗？\n                  %s 确认\n                  %s 取消","Точно удалить «Файл %s»?\n              %s Подтвердить\n              %s Отмена","Tem certeza que quer apagar ""Jogo %s""?\n                %s Confirmar\n                %s Cancelar"
-UI.PauseMenu.0,"%s to select, %s to resume ","按%s选择，按%s继续","%s для выбора, %s для отмены ",%s para selecionar e %s para continuar 
-UI.PauseMenu.1,resume,继续,Вернуться,continuar
+UI.MainMenu.3,press %s to start,按 %s 开始,"Нажмите %s, чтобы начать",%s iniciar
+UI.MainMenu.4,%s: delete file,%s：删除文件,%s: удалить файл,%s deletar
+UI.MainMenu.5,"Really Delete [wave]""File %s""[/wave]?\n                      %s Confirm\n                      %s Cancel","确认删除 ""文件 %s ""吗？\n                  %s 确认\n                  %s 取消","Точно удалить «Файл %s»?\n              %s Подтвердить\n              %s Отмена","deletar ""Jogo %s""?\n                %s Confirmar\n                %s Cancelar"
+UI.PauseMenu.0,"%s to select, %s to resume ","按%s选择，按%s继续","%s для выбора, %s для отмены ",%s selecionar e %s voltar 
+UI.PauseMenu.1,resume,继续,Вернуться,Voltar
 UI.PauseMenu.2,Input,操作方法,Управление,Tipo de controle
 UI.InputMenu.1,Keyboard,键盘,Клавиатура,Teclado
 UI.InputMenu.2,Controller,手柄,Контроллер,Controle
-UI.InputMenu.Action.1,move left,向左,Влево,para a esquerda
+UI.InputMenu.Action.1,move left,向左,Влево,esquerda
 UI.Tutorial.InputPrompt.1,"%s to Sweep. %s to Jump. %s%s to walk..","%s 扫帚。%s 跳跃。%s%s 向左向右","%s Метла. %sПрыжок. %s%s ходить","%s vassourada. %s pular. %s%s andar"
-UI.InputMenu.Action.2,move right,向右,Вправо,para a direita
-UI.InputMenu.Action.3,down,向下,Вниз,para baixo
-UI.InputMenu.Action.4,up,向上,Вверх,para cima
+UI.InputMenu.Action.2,move right,向右,Вправо,direita
+UI.InputMenu.Action.3,down,向下,Вниз,baixo
+UI.InputMenu.Action.4,up,向上,Вверх,cima
 UI.InputMenu.Action.5,jump,跳跃,Прыжок,pular
 UI.InputMenu.Action.6,sweep broom,扫帚,Метла,vassourada
-UI.InputMenu.Action.7,Return to save.,回到上一个存档点,«Вернуться»,retorna para o último save
+UI.InputMenu.Action.7,Return to save.,回到上一个存档点,«Вернуться»,último checkpoint
 UI.InputMenu.Action.8,next spell,下一个咒语,Следующее заклинание,próximo feitiço
 UI.InputMenu.Action.9,prev spell,上一个咒语,Предыдущее заклинание,feitiço anterior
 UI.InputMenu.Action.10,open map,打开地图,Открыть карту,abrir mapa
-UI.InputMenu.13,"press %s to select, %s to go back. hold %s: reset bindings","按%s选择，按%s返回 长按%s恢复默认设置","Нажмите %s для выбора, %s для возвращения. Удерживайте %s для сброса настроек","aperte %s para escolher e %s para voltar. segure %s para redefinir controles."
-UI.InputMenu.14,"press key to set ""[UI.InputMenu.Action.x]""",按键设定""[UI.InputMenu.Action.x]"",Задайте кнопку для действия «[UI.InputMenu.Action.x]»,"aperte uma tecla para definir ""[UI.InputMenu.Action.x]"""
+UI.InputMenu.13_0,"press %s to select, %s to go back.","按%s选择，按%s返回","Нажмите %s для выбора,\n%s для возвращения.","aperte %s escolher\ne %s voltar."
+UI.InputMenu.13_1,"Really quit?\npress %s to select, %s to go back.","真的退出吗？\n按%s选择，按%s返回","Действительно уйти?\nНажмите %s для выбора,\n%s для возвращения.","Realmente desistir?\naperte %s escolher\ne %s voltar."
+UI.InputMenu.13_2,"unsaved progress will be lost.\npress %s to select, %s to go back.","未保存的进度将会丢失。\n按%s选择，按%s返回","Несохраненный прогресс будет утерян.\nНажмите %s для выбора,\n%s для возвращения.","o progresso não salvo será perdido.\naperte %s escolher\ne %s voltar."
+UI.InputMenu.13,"press %s to select, %s to go back. hold %s: reset bindings","按%s选择，按%s返回\n长按%s恢复默认设置","Нажмите %s для выбора,\n%s для возвращения.\nУдерживайте %s для сброса настроек","aperte %s escolher\ne %s voltar.\nsegure %s para redefinir"
+UI.InputMenu.14,"press key to set %s",按键设定%s,Задайте кнопку\nдля действия %s,"aperte a tecla para definir %s"
 UI.InputMenu.15,"reset bindings\n...3 ...2 ...1!","恢复默认设置中\n…3…2…1！","Сброс настроек\n3... 2... 1!","redefinindo controles\n...3 ...2 ...1!"
 UI.PauseMenu.3,Graphics,画面,Графика,Gráficos
 UI.GraphicsMenu.ON,ON,开,ВКЛ,LIGADO
-UI.GraphicsMenu.OFF,OFF,开,关,DESLIGADO
+UI.GraphicsMenu.OFF,OFF,关,ВЫКЛ,DESLIGADO
 UI.GraphicsMenu.1,CRT Filter: ,显像管滤波器： ,ЭЛТ-фильтр: ,Filtro CRT: 
 UI.GraphicsMenu.2,Glitch Screen: ,闪屏： ,Глитч-эффекты: ,Efeito Glitch: 
 UI.GraphicsMenu.3,Color Blind: ,色盲模式： ,Дальтонизм: ,Modo Daltônico: 
 UI.GraphicsMenu.4,Fullscreen: ,全屏： ,Весь экран: ,Tela Cheia: 
 UI.PauseMenu.4,Sound,声音,Звук,Som
-UI.SoundMenu.1,"Music Volume: [1-10, or ""Mute""]",音乐音量： [1-10 or ""静音""］,"Музыка: [1-10, or ""ВЫКЛ""]","Volume da Música: [1-10, ou ""Mudo""]"
-UI.SoundMenu.2,"SFX Volume: [1-10, or ""Mute""]",音效音量：[1-10，or ""静音""］,"Эффекты: [1-10, or ""ВЫКЛ""]","Volume do Som: [1-10, ou ""Mudo""]"
+UI.SoundMenu.0,"[1-10, or ""Mute""]",[1-10 or ""静音""］,"[1-10, or ""ВЫКЛ""]","[1-10, ou ""Mudo""]"
+UI.SoundMenu.1,"Music Volume:",音乐音量：,"Музыка:","Volume da Música:"
+UI.SoundMenu.2,"SFX Volume:",音效音量：,"Эффекты:","Volume do Som:"
 UI.SoundMenu.3,Music Glitches: ,故障音效： ,Глитч-музыка: ,Glitch Musical: 
-UI.PauseMenu.5,Quit to Main Menu,回到主菜单,Выход в главное меню,Voltar ao Menu Principal
+UI.PauseMenu.5,Quit to Main Menu,回到主菜单,Выход в главное меню,Voltar ao Menu
+UI.PauseMenu.6,Quit Game,退出游戏,Выйти из игры,Sair do jogo
 UI.QuitMenu.1,unsaved progress will be lost,您将丢失未保存的进度,Несохранённый прогресс будет потерян,todo progresso não salvo será perdido
 UI.Confirmation,Confirm,确认,Подтвердить,Confirmar
 UI.Cancel,cancel,取消,Отмена,Cancelar
@@ -53,8 +58,8 @@ Dialog.Player.2,"•i don't remember having a\nbasement.. but what a mess!\nlet'
 NPC.Cow.1,moo!!\n(cut that out),哞！！\n（闹够了没有）,Му-у!\n(Хватит.),muuu!\n(para com isso).
 NPC.Door.1,"locked, needs %s keys",这里是锁着的。还需要%s把钥匙。,Заперто. Нужно ключей: %s.,trancada. precisa de %s chaves.
 NPC.Crone.1,"•ah! a fellow crone! you \nsaved me from near-death.\nthis ""glitch"" corruption.. I\nseek the crystal elders\nto stop the spread...\nCould you help me out?  ",哎呀！老姐妹！\n要不是你救了我，\n我差点就死了！\n这个 ""故障 ""引起的腐败啊...\n我想找水晶长老阻止它的蔓延，\n你能帮帮我吗？,"О, карга-сестрица!\nСпасибо, что спасла меня.\nЯ ищу старух, которые бы избавили\nнас от напасти с этими\nглитчами-разглитчами... Подсобишь?","ah! uma velhaca como eu!\nvocê salvou a minha vida, minha amiga.\nessa tal corrupção, ""glitch""... preciso encontrar\nas anciãs de cristal para impedir\nque se espalhe... sabe onde elas estão? "
-NPC.Crone.1_2,"•I think the crystals are ahead\nbut I can't get past this door..","我认为水晶在前面\n但我无法跨过这扇门..","Я думаю кристаллы впереди\nно я не могу пройти через эту дверь..","Eu acho que os cristais estão à frente\nmas não consigo passar por essa porta."
-NPC.Crone.1_3,"•Ah! great work.\nI'll meet you on ahead","啊!很棒的工作\n我会在前面遇见你","Ах! отличная работа.\nЯ встречу тебя впереди","Ah! ótimo trabalho.\nTe encontro na frente"
+NPC.Crone.1_2,"•I think the crystals are ahead\nbut I can't get past this door..","我认为水晶在前面\n但我无法跨过这扇门..","Я думаю кристаллы впереди\nно я не могу пройти через эту дверь..","os cristais devem estar em\nalgum lugar atrás desta porta...\nmas não consigo abri\nla de jeito nenhum."
+NPC.Crone.1_3,"•Ah! great work.\nI'll meet you on ahead","啊!很棒的工作\n我会在前面遇见你","Ах! отличная работа.\nЯ встречу тебя впереди","ah, que maravilha!\nte encontro mais adiante,\nquerida!"
 NPC.Crone.2,don't test me hag,老太婆！你再抽我试试？,"Не испытывай меня, старая ты мымра.","não teste minha paciência, velha coroca."
 NPC.Tutorial.0,touch magic pillar to learn:,触摸魔法柱习得：,"Коснитесь волшебной колонны, чтобы изучить:",toque no pilar mágico para aprender:
 NPC.Tutorial.1,"touch magic pillar to learn\n[color=#00ff00]Feather Fall[/color] spell: jump high\nby holding jump button",[color=#00ff00]一飞冲天[/color]：长按跳跃键高跳,"[color=#00ff00]Пёрышко[/color] – удерживайте кнопку прыжка, чтобы прыгнуть выше.",[color=#00ff00]Sopro de Pena[/color]: pule mais alto\nsegurando o botão de pulo.
@@ -101,7 +106,8 @@ NPC.Crone.5,need %s more shards.\nthis is strong magic y'know.,还需要%s个魔
 NPC.Crone.6,BROOMERANG GET!\nsweep twice to THROW,得到了 回旋扫帚！\n横扫两次投掷,"У тебя есть МЕТЛОРАНГ!\nВзмахни метлой два раза,\nчтобы её БРОСИТЬ.",VASSOURANGUE!\nvarra 2 vezes para LANÇAR
 NPC.Crone.7,"•the tower will unlock when\nyou've awoken all 4 elders\nit holds some strong magic.",这所高塔具有强大的魔法，\n需要唤醒4位水晶长老才能解锁。,"Эта башня откроется,\nкогда ты пробудишь 4 старух.\nУ неё сильная магия.",esta torre abrirá quando você\ndespertar 4 anciãs de cristal.\nela guarda uma magia poderosa.
 NPC.Door.2,"magically sealed, needs %s",已被魔法封印。还需%s,Запечатано магией. %s.,"selada com magia, %s."
-NPC.Crystal.1,"you awoke a\n     [color=#00ffff][wave amp=50 freq=2]Crystal Elder[/wave][/color]","你唤醒了一\n     [color=#00ffff][wave amp=50 freq=2]位水晶长老！[/wave][/color]","Вы пробудили\n     [color=#00ffff][wave amp=50 freq=2]старуху[/wave][/color]","você acordou \n     [color=#00ffff][wave amp=50 freq=2]uma anciã de cristal.[/wave][/color]"
+NPC.Door.3,"%s more\nCRYSTAL ELDERS","还需要%s位水晶长老","%s ещё\nстаруха кристалл","%s mais\nanciãs de cristal"
+NPC.Crystal.1,"you awoke a\n     [color=#00ffff][wave amp=50 freq=2]Crystal Elder[/wave][/color]","你唤醒了一\n     [color=#00ffff][wave amp=50 freq=2]位水晶长老！[/wave][/color]","Вы пробудили\n     [color=#00ffff][wave amp=50 freq=2]старуха кристалл[/wave][/color]","você acordou \n     [color=#00ffff][wave amp=50 freq=2]uma anciã de cristal.[/wave][/color]"
 NPC.Crystal.End,"[color=#00ffff][wave amp=50 freq=2]primordial ooze,[/wave][/color]\ncleanse this world","[color=#00ffff][wave amp=50 freq=2]远古淤泥,[/wave][/color]\n把这个世界打扫干净。","[color=#00ffff][wave amp=50 freq=2]Первичная слизь,[/wave][/color]\nочистим этот мир.","[color=#00ffff][wave amp=50 freq=2]Sopa Primordial[/wave/][/color]\nlimpar este mundo todinho."
 NPC.Crystal.2,"deaths: ","死亡： ","Смертей: ","mortes: "
 NPC.Crystal.3,"angel eggs: ","天使卵：","Ангельских яиц: ","ovos celestiais: "

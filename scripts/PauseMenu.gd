@@ -160,7 +160,6 @@ func _process(delta):
     pauseTitleRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = true
-    cursorSprite.position.x = 160
     cursorSprite.visible = true
     processNormalLogic(delta)
 
@@ -169,7 +168,6 @@ func _process(delta):
     largerPopup.visible = false
     normalMenu.visible = true
     colorblindPlayers.visible = true
-    cursorSprite.position.x = 160
     cursorSprite.visible = true
     processGraphicsLogic(delta)
   else:
@@ -180,7 +178,6 @@ func _process(delta):
     pauseTitleRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = true
-    cursorSprite.position.x = 160
     cursorSprite.visible = true
     processSoundLogic(delta)
   else:
@@ -190,7 +187,6 @@ func _process(delta):
     pauseTitleRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = true
-    cursorSprite.position.x = 160
     cursorSprite.visible = true
     processQuitToMainLogic(delta)
   else:
@@ -200,7 +196,6 @@ func _process(delta):
     pauseTitleRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = true
-    cursorSprite.position.x = 160
     cursorSprite.visible = true
     processTopInputLogic(delta)
 
@@ -208,7 +203,6 @@ func _process(delta):
     pauseTitleRect.visible = true
     largerPopup.visible = false
     normalMenu.visible = false
-    cursorSprite.position.x = 108
     cursorSprite.visible = true
     inputMenu.visible = true
     processControlsLogic(delta)
@@ -239,10 +233,6 @@ func _process(delta):
     inventoryOptionIndex = 0
     inventoryOptionIndexX = 0
 
-  if cursorSprite.position.x >= 150:
-    cursorSprite.scale = Vector2(4, 4)
-  else:
-    cursorSprite.scale = Vector2(3, 3)
   if Input.is_action_just_pressed("dev_demo_reset") and global.memory["demo_mode"] > 0:
     global.has_started_game = true
     global.has_really_started_game = true
@@ -255,9 +245,24 @@ func _process(delta):
 
   pauseTitleRect.rect_position = Vector2(164, 400)
 
+func repositionCursorSprite(index):
+  cursorSprite.position.x = 110
+  cursorSprite.position.y = 80 + (65*index)
+  # if cursorSprite.position.x >= 150:
+  cursorSprite.scale = Vector2(4, 4)
+  # else:
+  #   cursorSprite.scale = Vector2(3, 3)
+
+func repositionInputCursorSprite(index, showCondensedMenu):
+  cursorSprite.scale = Vector2(3, 3)
+  cursorSprite.position.x = 100
+  #if showCondensedMenu:
+  cursorSprite.position.y = 75 + (31*index)
+  #else:
+  #  cursorSprite.position.y = 114 + (44*index)
 
 var normalMenuOptions = [tr("UI.PauseMenu.1"), tr("UI.PauseMenu.2"), tr("UI.PauseMenu.3"), tr("UI.PauseMenu.4"), tr("UI.PauseMenu.5")]
-var normalMenuOptionsOnMainMenu = [tr("UI.PauseMenu.1"), tr("UI.PauseMenu.2"), tr("UI.PauseMenu.3"), tr("UI.PauseMenu.4"), "Quit Game"]
+var normalMenuOptionsOnMainMenu = [tr("UI.PauseMenu.1"), tr("UI.PauseMenu.2"), tr("UI.PauseMenu.3"), tr("UI.PauseMenu.4"), tr("UI.PauseMenu.6")]
 var normalOptionIndex = 0
 func processNormalLogic(_delta):
   if global.isOnMainMenu:
@@ -291,10 +296,7 @@ func processNormalLogic(_delta):
     normalOptionIndex = len(normalMenuOptions) - 1
   elif normalOptionIndex >= len(normalMenuOptions):
     normalOptionIndex = 0
-  if global.memory["demo_mode"] >= 2:
-    cursorSprite.position.y = 120 + (40*normalOptionIndex)
-  else:
-    cursorSprite.position.y = 80 + (65*normalOptionIndex)
+  repositionCursorSprite(normalOptionIndex)
 
   if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     pauseMenuState = PauseMenuState.TEMP
@@ -334,7 +336,7 @@ onready var colorblindHats = get_node("ColorblindPlayers/ColorblindHats")
 var graphicsOptions = [tr("UI.GraphicsMenu.1"), tr("UI.GraphicsMenu.2"), tr("UI.GraphicsMenu.3"), tr("UI.GraphicsMenu.4")]
 var graphicsOptionIndex = 0
 func processGraphicsLogic(_delta):
-  pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to go back"
+  pauseTitleText.bbcode_text = tr("UI.InputMenu.13_0") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
 
   if shouldUpdateMenuText:
     var text = ""
@@ -362,7 +364,7 @@ func processGraphicsLogic(_delta):
     graphicsOptionIndex = len(graphicsOptions) - 1
   elif graphicsOptionIndex >= len(graphicsOptions):
     graphicsOptionIndex = 0
-  cursorSprite.position.y = 120 + (80*graphicsOptionIndex)
+  repositionCursorSprite(graphicsOptionIndex)
 
   if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     shouldUpdateMenuText = true
@@ -393,10 +395,10 @@ func processGlitchScreen(delta):
       level.glitchScreenEffect.visible = false
       glitch_death_timer = 0
 
-var soundOptions = ["Play Music", tr("UI.SoundMenu.3")]
+var soundOptions = [tr("UI.SoundMenu.1"), tr("UI.SoundMenu.3"), tr("UI.SoundMenu.2")]
 var soundOptionIndex = 0
 func processSoundLogic(_delta):
-  pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to go back"
+  pauseTitleText.bbcode_text = tr("UI.InputMenu.13_0") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
 
   if shouldUpdateMenuText:
     var text = ""
@@ -404,6 +406,7 @@ func processSoundLogic(_delta):
       var option = soundOptions[i] + ": "
       if i == 0: option += (tr("UI.GraphicsMenu.OFF") if global.userSettings["stopAllMusic"] else tr("UI.GraphicsMenu.ON"))
       if i == 1: option += (tr("UI.GraphicsMenu.ON") if global.userSettings["canChangeSongPitch"] else tr("UI.GraphicsMenu.OFF"))
+      if i == 2: option += (tr("UI.GraphicsMenu.ON") if global.userSettings["stopAllSfx"] else tr("UI.GraphicsMenu.OFF"))
 
       if i == soundOptionIndex:
         text += "[wave]" + str(option) + "[/wave]\n" 
@@ -422,7 +425,7 @@ func processSoundLogic(_delta):
     soundOptionIndex = len(soundOptions) - 1
   elif soundOptionIndex >= len(soundOptions):
     soundOptionIndex = 0
-  cursorSprite.position.y = 120 + (80*soundOptionIndex)
+  repositionCursorSprite(soundOptionIndex)
 
   if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     shouldUpdateMenuText = true
@@ -437,19 +440,21 @@ func processSoundLogic(_delta):
       if global.userSettings["canChangeSongPitch"]:
         musicPlayer.changeSongPitch(rand_range(0.8, 1.5))
       glitch_death_timer = 1
+    elif soundOptionIndex == 2:
+      global.userSettings["stopAllSfx"] = not global.userSettings["stopAllSfx"]
     level.saveUserSettings()
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
     pauseMenuState = PauseMenuState.NORMAL
     shouldUpdateMenuText = true
 
 
-var quitToMainOptions = ["Yes", "cancel"]
+var quitToMainOptions = [tr("UI.Yes"), tr("UI.Cancel")]
 var quitToMainOptionIndex = 0
 func processQuitToMainLogic(_delta):
   if global.isOnMainMenu:
-    pauseTitleText.bbcode_text = "Really quit?\n" + global.getInputText("menu_confirm") + " to confirm, " + global.getInputText("menu_cancel") + " to cancel"
+    pauseTitleText.bbcode_text = tr("UI.InputMenu.13_1") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")] # "Really quit?\n" + global.getInputText("menu_confirm") + " to confirm, " + global.getInputText("menu_cancel") + " to cancel"
   else:
-    pauseTitleText.bbcode_text = "unsaved progress will be lost.\n" + global.getInputText("menu_confirm") + " to confirm, " + global.getInputText("menu_cancel") + " to cancel"
+    pauseTitleText.bbcode_text = tr("UI.InputMenu.13_2") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")] # "unsaved progress will be lost.\n" + global.getInputText("menu_confirm") + " to confirm, " + global.getInputText("menu_cancel") + " to cancel"
 
   if shouldUpdateMenuText:
     var text = ""
@@ -472,7 +477,7 @@ func processQuitToMainLogic(_delta):
     quitToMainOptionIndex = len(quitToMainOptions) - 1
   elif quitToMainOptionIndex >= len(quitToMainOptions):
     quitToMainOptionIndex = 0
-  cursorSprite.position.y = 120 + (80*quitToMainOptionIndex)
+  repositionCursorSprite(quitToMainOptionIndex)
 
   if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     if quitToMainOptionIndex == 0:
@@ -1144,10 +1149,10 @@ func setGlitchSprite(sprite, glitch):
   elif glitch == global.GlitchForm.BUBBLE: sprite.frame = 4
 
 
-var topInputOptions = ["Keyboard", "Controller"]
+var topInputOptions = [tr("UI.InputMenu.1"), tr("UI.InputMenu.2")]
 var topInputOptionIndex = 0
 func processTopInputLogic(_delta):
-  pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to go back"
+  pauseTitleText.bbcode_text = tr("UI.InputMenu.13_0") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
 
   if shouldUpdateMenuText:
     var text = ""
@@ -1171,7 +1176,7 @@ func processTopInputLogic(_delta):
     topInputOptionIndex = len(topInputOptions) - 1
   elif topInputOptionIndex >= len(topInputOptions):
     topInputOptionIndex = 0
-  cursorSprite.position.y = 120 + (80*topInputOptionIndex)
+  repositionCursorSprite(topInputOptionIndex)
 
   if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     if topInputOptionIndex == 0:
@@ -1188,63 +1193,63 @@ func initializeControlsConfig():
   var newControlsConfig = [
     {
       "input_action": "ui_left",
-      "label_str": "move left",
+      "label_str": tr("UI.InputMenu.Action.1"),
       "default_keyCode": 16777231, 
       "button_index": JOY_DPAD_LEFT,
       "default_button_index": JOY_DPAD_LEFT,
     },
     {
       "input_action": "ui_right",
-      "label_str": "move right",
+      "label_str": tr("UI.InputMenu.Action.2"),
       "default_keyCode": 16777233, 
       "button_index": JOY_DPAD_RIGHT,
       "default_button_index": JOY_DPAD_RIGHT,
     },
     {
       "input_action": "ui_down",
-      "label_str": "down",
+      "label_str": tr("UI.InputMenu.Action.3"),
       "default_keyCode": 16777234, 
       "button_index": JOY_DPAD_DOWN,
       "default_button_index": JOY_DPAD_DOWN,
     },
     {
       "input_action": "ui_up",
-      "label_str": "up",
-      "default_keyCode": 16777232, 
+      "label_str": tr("UI.InputMenu.Action.4"),
+      "default_keyCode": 16777232,
       "button_index": JOY_DPAD_UP,
       "default_button_index": JOY_DPAD_UP,
     },
     {
       "input_action": "jump_button",
-      "label_str": "jump",
+      "label_str": tr("UI.InputMenu.Action.5"),
       "default_keyCode": 90, 
       "button_index": JOY_DS_A,
       "default_button_index": JOY_DS_A,
     },
     {
       "input_action": "sub_action_button",
-      "label_str": "sweep broom",
+      "label_str": tr("UI.InputMenu.Action.6"),
       "default_keyCode": 88, 
       "button_index": JOY_DS_B,
       "default_button_index": JOY_DS_B,
     },
     {
       "input_action": "restart_key",
-      "label_str": "Return to save.",
+      "label_str": tr("UI.InputMenu.Action.7"),
       "default_keyCode": 82, 
       "button_index": JOY_DS_Y, 
       "default_button_index": JOY_DS_Y,
     },
     {
       "input_action": "alt_action_button",
-      "label_str": "next spell",
+      "label_str": tr("UI.InputMenu.Action.8"),
       "default_keyCode": 32, 
       "button_index": JOY_DS_X, 
       "default_button_index": JOY_DS_X, 
     },
     {
       "input_action": "left_button",
-      "label_str": "prev spell",
+      "label_str": tr("UI.InputMenu.Action.9"),
       "default_keyCode": 16777237, 
       "button_index": JOY_L, 
       "default_button_index": JOY_L, 
@@ -1271,7 +1276,7 @@ func initializeControlsConfig():
     # },
     {
       "input_action": "open_map",
-      "label_str": "open map",
+      "label_str": tr("UI.InputMenu.Action.10"),
       "default_keyCode": 67, 
       "button_index": JOY_L, 
       "default_button_index": JOY_L, 
@@ -1314,12 +1319,12 @@ func processControlsLogic(_delta):
   var tempControlsConfig = getVisibleControlsConfig()
 
   if global.is_reading_input:
-    pauseTitleText.bbcode_text = "press key to set \"" + str(tempControlsConfig[control_index].label_str) + "\""
+    pauseTitleText.bbcode_text = tr("UI.InputMenu.14") % str(tempControlsConfig[control_index].label_str)
   else:
     if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
-      pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to go back\n hold [font=res://DarkInputFont_small.tres]B[/font]: reset bindings"
+      pauseTitleText.bbcode_text = tr("UI.InputMenu.13") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel"), "[font=res://DarkInputFont_small.tres]B[/font]"]
     elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
-      pauseTitleText.bbcode_text = "press " + global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to go back\n   hold " + global.getInputText("ui_cancel_controller") + ": reset bindings"
+      pauseTitleText.bbcode_text = tr("UI.InputMenu.13") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel"), global.getInputText("ui_cancel_controller")]
 
   if global.is_reading_input:
     if global.last_read_input != null:
@@ -1330,7 +1335,6 @@ func processControlsLogic(_delta):
           global.setKeyCode(tempControlsConfig[control_index].input_action, global.last_read_input)
           global.userSettings["controls_config"] = tempControlsConfig
           global.is_reading_input = false
-          print("hiii")
           global.is_reading_keyboard_input = false
           last_control_index = -1
           level.saveUserSettings()
@@ -1368,15 +1372,12 @@ func processControlsLogic(_delta):
     control_index = properSize - 1
   if control_index >= properSize:
     control_index = 0
-  if showCondensedMenu:
-    cursorSprite.position.y = 100 + (29*control_index)
-  else:
-    cursorSprite.position.y = 114 + (44*control_index)
+  repositionInputCursorSprite(control_index, showCondensedMenu)
 
   var inputLabelText = ""
   if showCondensedMenu:
-    inputLabelText = "[font=res://pauseMenuFontInputCondensed.tres]"
-  var buttonInputText = "[font=res://pauseMenuFontInputCondensed.tres][center]"
+    inputLabelText = ""
+  var buttonInputText = "[center]"
   for i in range(properSize):
     var controlConfig = tempControlsConfig[i]
     if control_index == i:

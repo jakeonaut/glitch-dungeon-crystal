@@ -121,7 +121,7 @@ func _process(delta):
   processHiscoreRenderLogic(delta)
   # TODO(jaketrower):
   if global.memory.has("key"):
-    keyStatusRect.visible = true
+    keyStatusRect.visible = not global.isPauseMenuOpen
     keyStatusText1.text = str(global.memory["key"])
     keyStatusText2.text = str(global.memory["key"])
   else:
@@ -196,13 +196,15 @@ func _process(delta):
       savingTextLabel.visible = false
       savingSprite3D.rotation_degrees.y = 0
 
-  if should_display_spell_message_text:
+  if global.isPauseMenuOpen: spellMessageTextLabel.visible = false
+  elif should_display_spell_message_text:
     spell_message_text_timer += (delta*22)
     if spell_message_text_timer >= spell_message_text_time_limit:
       should_display_spell_message_text = false
       spellMessageTextLabel.visible = false
 
-  if should_display_message_text:
+  if global.isPauseMenuOpen: messageTextLabel.visible = false
+  elif should_display_message_text:
     message_text_timer += (delta*22)
     if message_text_timer >= message_text_time_limit:
       should_display_message_text = false
@@ -237,7 +239,7 @@ func _process(delta):
   # else:
   miniCrystalCubeRect.visible = false
 
-  get_node("EquipmentRect").visible = global.memory.has("spellbookPage")
+  get_node("EquipmentRect").visible = global.memory.has("spellbookPage") and not global.isPauseMenuOpen
   glitchSpriteContainer.visible = (global.memory["hasEverTouchedObelisk"] or level.player.glitch_form != global.GlitchForm.NORMAL) and not global.memory.has("spellbookPage")
   # tryLerpSpriteFromCenter(get_node("GlitchSprite"), delta, Vector2(0, 1))
   if savingTextureRect != null and savingTextureRect.texture == null and savingViewport != null:
@@ -307,7 +309,7 @@ func _process(delta):
   else:
     setGlitchSprite(glitchSpellSprite1, level.player.glitch_form)
 
-  if global.userSettings["canGlitchScreen"] and level.pacman_wrapping:
+  if global.userSettings["canGlitchScreen"] and level.pacman_wrapping and not global.isPauseMenuOpen:
     edgeDistortion.visible = true # a little visually glitchy at times in a way i dont like
     # x_edge/y_edge is finnicky in PoisonShroomCove/LostWoods1
     # edgeDistortionLeft.visible = (level.gameCamera.x_edge == -1 or level.gameCamera.x_edge == 2)
