@@ -151,6 +151,7 @@ func _ready_impl():
     player.wearCostume(global.memory["player_costume"])
 
   tryToRespawn()
+  global.updateLevelZoneTime()
   global.tryInitializeLevelZone(self.getLevelZoneName())
   if global.memory["currLevelZone"] != global.currLevelZone and not global.memory["glitch_world"]:
     uiLayer.setDisplayTitle(global.getDisplayTitle(self.getLevelZoneName()))
@@ -182,6 +183,7 @@ func _ready_impl():
   player.properlyApplyTransformation()
   has_room_initialized = true
   global.setHaveIBeenToLevel(self)
+  global.setLevelZoneStartTime()
 
 func tryToAddGameFrameBackground():
   var gameTree = get_tree().get_root().get_node("Game")

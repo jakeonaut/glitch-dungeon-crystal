@@ -904,7 +904,6 @@ func tryDieToOffscreenCamera(_delta):
       tryToRecover()
     else:
       global_transform.origin = repositioned_player
-      print(level.getShortLevelName())
       if isItWeird() and global.activeInteractor == null:
         sayThis("NPC.GhostGirl.1")
       if physics_state == PhysicsState.BEING_TOSSED:

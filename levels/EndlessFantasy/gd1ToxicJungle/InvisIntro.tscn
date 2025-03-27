@@ -1342,6 +1342,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 19, 0 )
 grav = 0
 
+[node name="Furbo2" parent="Viewport/level" instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 33.5073, 0 )
+grav = 0
+
 [node name="Viewport2" parent="." instance=ExtResource( 23 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]

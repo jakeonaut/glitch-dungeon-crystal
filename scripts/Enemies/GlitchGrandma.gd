@@ -29,6 +29,7 @@ func _ready():
 
 func _process(delta):
   if not visible or am_i_dying: return
+  can_jump_or_fall = glitch_form != global.GlitchForm.FLOOR
   
   spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.userSettings["colorblindMode"]
   if glitch_form == global.GlitchForm.FEATHER:

@@ -14,7 +14,6 @@ enum GlitchForm {
   WALK_THROUGH_WALLS,
 }
 export(GlitchForm) var glitch_form = GlitchForm.NORMAL
-export var can_jump_or_fall = true
 export var override_am_i_in_range_of_player = false
 
 enum WhichMode {
@@ -30,7 +29,6 @@ func _ready():
 
 func _process(_delta):
   if glitchGrandma.get_ref():
-    glitchGrandma.get_ref().can_jump_or_fall = can_jump_or_fall
     glitchGrandma.get_ref().override_am_i_in_range_of_player = override_am_i_in_range_of_player
   processGlitchFormActivation()
 

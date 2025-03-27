@@ -331,19 +331,19 @@ func resetMemory():
     memory["glitched_grimoire2"] = false
     
     # crystal elder bosses
-    memory["baba_yaga_boss"] = 0
-    memory["angler_seaman_boss"] = 0
-    memory["dogu_matryoshka_boss"] = 0
+    memory["baba_yaga_boss"] = 2
+    memory["angler_seaman_boss"] = 2
+    memory["dogu_matryoshka_boss"] = 2
 
     # STORY OR LEVEL STATE
-    memory["babushka_cat_story_hook"] = 0
+    memory["babushka_cat_story_hook"] = 1
     memory["fishing_rod_shortcut"] = 0
 
     # POWERUPS
     # memory["spellbookPage"] = [] # we check if the key exists to see if we have it... -_-
-    memory["can_force_respawn"] = 0
-    memory["has_map_item"] = false
-    memory["broomerang"] = 0
+    memory["can_force_respawn"] = 1
+    memory["has_map_item"] = true
+    memory["broomerang"] = 1
     memory["babushka_cat_sprint"] = 0
     memory["broom_double_jump"] = 0
     memory["zora_flippers"] = 0
@@ -1108,13 +1108,19 @@ func getNameRelativeToLevel(level, node):
   return nameRelativeToLevelPath
 
 func setHaveIBeenToLevel(level):
-    tryInitializeLevelZone(level.getLevelZoneName())
-    if currLevelZone == null or not global.memory.has(currLevelZone): 
+    var tempLevelZone = level.getLevelZoneName()
+    var levelName = level.getShortLevelName()
+    if tempLevelZone == null:
+        return null
+    tryInitializeLevelZone(tempLevelZone)
+    if not global.memory.has(tempLevelZone): 
         return null
 
-    if not global.memory[currLevelZone].has(level.getShortLevelName()):
-        global.memory[currLevelZone][level.getShortLevelName()] = {}
-    global.memory[currLevelZone][level.getShortLevelName()]["have_i_been_here"] = true
+    if not global.memory[tempLevelZone].has(levelName):
+        global.memory[tempLevelZone][levelName] = {}
+    if not global.memory[tempLevelZone][levelName].has("have_i_been_here") or not global.memory[tempLevelZone][levelName]["have_i_been_here"]:
+        level.levelTiles.tryToCountAndIncrementTotalGlitchTiles()
+    global.memory[tempLevelZone][levelName]["have_i_been_here"] = true
 
 func haveIBeenToThisLevel(level):
     tryInitializeLevelZone(level.getLevelZoneName())
@@ -1257,6 +1263,22 @@ func incrementLevelZoneSweeps():
 
 func incrementLevelZoneGlitchTiles(amt):
     incrementLevelZoneThing("num_glitch_tiles", amt)
+
+func incrementLevelZoneTotalGlitchTiles(amt):
+    incrementLevelZoneThing("total_num_glitch_tiles", amt)
+
+func updateLevelZoneTime():
+    var startTime = getLevelZoneThing("start_time")
+    if startTime == null:
+        return
+    var currTime = Time.get_unix_time_from_system()
+    incrementLevelZoneTime(currTime - startTime)
+    setLevelZoneThing("start_time", null)
+func setLevelZoneStartTime():
+    setLevelZoneThing("start_time", Time.get_unix_time_from_system())
+
+func incrementLevelZoneTime(amt):
+    incrementLevelZoneThing("total_time", amt)
 
 var removedLevelZoneTilesKey = "removed_tiles"
 func removeLevelZoneTile(levelName, coords):

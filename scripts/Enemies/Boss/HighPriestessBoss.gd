@@ -117,7 +117,7 @@ func getHurt():
         yaBeatMe()
     else:
         yield(get_tree().create_timer(1.0), "timeout")
-        level.glitchNextGrandmaStatue()
+        level.glitchNextGrandmaStatue(global.GlitchForm.FEATHER if num_hits == 2 else global.GlitchForm.FLOOR)
 
 func killTheBullets():
     var glitchBullets = get_tree().get_nodes_in_group("enemies")

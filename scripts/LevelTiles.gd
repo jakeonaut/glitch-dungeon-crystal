@@ -477,13 +477,23 @@ func tryToSayTidy():
   for spike_id in spike_id_array:
     if get_used_cells_by_item(spike_id).size() > 0:
       return
-
   if level.get_tree().get_nodes_in_group("weak_enemies").size() > 0:
     return
   if level.get_tree().get_nodes_in_group("enemies").size() > 0:
     return
-  
   level.displayMessageText(tr("UI.Alert.2"))
+
+func tryToCountAndIncrementTotalGlitchTiles():
+  var levelZone = level.getLevelZoneName()
+  var levelName = level.getShortLevelName()
+  if global.memory[levelZone][levelName].has("have_i_been_here") and global.memory[levelZone][levelName]["have_i_been_here"]:
+    return
+
+  var num_spikes_in_level = 0
+  var spike_id_array = [51, 52, 53, 54, 55]
+  for spike_id in spike_id_array:
+    num_spikes_in_level += get_used_cells_by_item(spike_id).size()
+  global.incrementLevelZoneTotalGlitchTiles(num_spikes_in_level)
 
 func isTileSolid(tile_type):
   return global.isTileSolid(tile_type, mesh_library)

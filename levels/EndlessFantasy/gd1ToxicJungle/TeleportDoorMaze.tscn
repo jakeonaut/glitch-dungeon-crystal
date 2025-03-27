@@ -726,10 +726,7 @@ anims/RESET = SubResource( 35 )
 anims/exclaim = SubResource( 36 )
 
 [node name="TreasureSpellCollectable" parent="Viewport/level/Mimic" index="3"]
-bbText = "•SPORE'S MEMORY:
-hold the sweep button
-to teleport when you smack.
-works with broomerang."
+bbText = "NPC.Treasure.6"
 
 [node name="CollisionShape" parent="Viewport/level/Mimic/TreasureSpellCollectable/SmallInteractionArea" index="0"]
 shape = SubResource( 37 )

@@ -544,7 +544,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.1, 0.5 )
 shape = SubResource( 37 )
 
 [node name="Mushroom4" parent="Viewport/level/MrMoTexBG" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 30.5, 20, 0 )
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 30.5, 21, 0 )
 
 [node name="Sprite3D" parent="Viewport/level/MrMoTexBG/Mushroom4" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, -2.8 )
@@ -674,7 +674,7 @@ frame = 0
 shape = SubResource( 59 )
 
 [node name="Furbo" parent="Viewport/level" instance=ExtResource( 24 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 13, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 14, 0 )
 
 [node name="Furbo2" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 35, 0 )

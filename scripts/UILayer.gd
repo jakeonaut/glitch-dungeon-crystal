@@ -357,6 +357,7 @@ onready var deathsHiscoreLabel = get_node("EndOfLevel/DeathsHiscoreLabel")
 onready var angelHiscoreLabel = get_node("EndOfLevel/AngelHiscoreLabel")
 onready var jumpsHiscoreLabel = get_node("EndOfLevel/JumpsHiscoreLabel")
 onready var loveHiscoreLabel = get_node("EndOfLevel/LoveHiscoreLabel")
+onready var timeHiscoreLabel = get_node("EndOfLevel/TimeHiscoreLabel")
 
 onready var pressEnterLabel = get_node("EndOfLevel/PressEnterLabel")
 var hiscoreDisplayIndex = 0
@@ -364,6 +365,7 @@ var hiscoreCounter = 0
 # var totalHiscoreCounter = 0
 var hiscoreTimer = 0
 var hiscoreTimeLimit = 1
+var stupidTimeAgedStartTimeTemp = null
 func processHiscoreRenderLogic(delta):
   if not global.hasGottenLevelGeode:
     endOfLevel.visible = false
@@ -375,6 +377,7 @@ func processHiscoreRenderLogic(delta):
     deathsHiscoreLabel.visible = false
     jumpsHiscoreLabel.visible = false
     loveHiscoreLabel.visible = false
+    timeHiscoreLabel.visible = false
     pressEnterLabel.visible = false
 
     glitchStatusText1.visible = true
@@ -382,8 +385,28 @@ func processHiscoreRenderLogic(delta):
   # global.pauseMoveInput = true
   endOfLevel.visible = true
   hiscoreRect.visible = true
-  congratsHiscoreLabel.visible = true
-  congratsHiscoreLabel.bbcode_text = tr("NPC.Crystal.1") if not global.isEndOfGame else tr("NPC.Crystal.End")
+  if not congratsHiscoreLabel.visible:
+    congratsHiscoreLabel.visible = true
+    congratsHiscoreLabel.bbcode_text = tr("NPC.Crystal.1") if not global.isEndOfGame else tr("NPC.Crystal.End")
+
+  if timeHiscoreLabel.visible and stupidTimeAgedStartTimeTemp != null:
+    var total_time = global.getThingFromAllLevelZonez("total_time")
+    var time_aged = total_time if total_time != null else tr("NPC.Crystal.NULL")
+    if total_time != null and stupidTimeAgedStartTimeTemp != null:
+      time_aged += (Time.get_unix_time_from_system() - stupidTimeAgedStartTimeTemp)
+    # @warning_ignore("integer_division")
+    var SECONDS_IN_MINUTE = 60
+    var SECONDS_IN_HOUR = SECONDS_IN_MINUTE * SECONDS_IN_MINUTE
+    var hours = int(time_aged) / int(SECONDS_IN_HOUR)
+    time_aged -= (hours * SECONDS_IN_HOUR)
+    var minutes = int(time_aged) / int(SECONDS_IN_MINUTE)
+    var optional_minute_zero = "" if minutes >= 10 else "0"
+    time_aged -= (minutes * SECONDS_IN_MINUTE)
+    var seconds = int(time_aged) / 1
+    var optional_second_zero = "" if seconds >= 10 else "0"
+    var time_aged_formatted = str(hours) + ":" + optional_minute_zero + str(minutes) + ":" + optional_second_zero + str(seconds)
+
+    timeHiscoreLabel.text = tr("NPC.Crystal.9") + time_aged_formatted
 
   hiscoreTimer += (delta*11)
   if hiscoreTimer >= hiscoreTimeLimit:
@@ -393,7 +416,7 @@ func processHiscoreRenderLogic(delta):
     if hiscoreDisplayIndex == 0:
       crystalCubeHiscoreLabel.visible = false # true
       crystalCubeHiscoreLabel.text = tr("NPC.Crystal.7") + str(hiscoreCounter)
-      var hiscoreSource = global.getLevelZoneThing("num_mini_crystal_cubes")
+      var hiscoreSource = global.getThingFromAllLevelZonez("num_mini_crystal_cubes")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter = hiscoreSource
         # totalHiscoreCounter += 1
@@ -403,7 +426,7 @@ func processHiscoreRenderLogic(delta):
     elif hiscoreDisplayIndex == 1:
       deathsHiscoreLabel.visible = true
       deathsHiscoreLabel.text = tr("NPC.Crystal.2") + str(hiscoreCounter)
-      var hiscoreSource = global.getLevelZoneThing("num_deaths")
+      var hiscoreSource = global.getThingFromAllLevelZonez("num_deaths")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter = hiscoreSource
         # totalHiscoreCounter += 1
@@ -413,7 +436,7 @@ func processHiscoreRenderLogic(delta):
     elif hiscoreDisplayIndex == 2:
       angelHiscoreLabel.visible = true
       angelHiscoreLabel.text = tr("NPC.Crystal.3") + str(hiscoreCounter)
-      var hiscoreSource = global.getLevelZoneThing("angelTadpole")
+      var hiscoreSource = global.getThingFromAllLevelZonez("angelTadpole")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter += 1
         # totalHiscoreCounter += 1
@@ -423,18 +446,26 @@ func processHiscoreRenderLogic(delta):
         hiscoreTimeLimit = 5
     elif hiscoreDisplayIndex == 3:
       glitchTilesHiscoreLabel.visible = true
-      glitchTilesHiscoreLabel.text = tr("NPC.Crystal.4") + str(global.getLevelZoneThing("num_broom_sweeps"))
+      glitchTilesHiscoreLabel.text = tr("NPC.Crystal.4") + str(global.getThingFromAllLevelZonez("num_broom_sweeps"))
       hiscoreDisplayIndex += 1
     elif hiscoreDisplayIndex == 4:
       jumpsHiscoreLabel.visible = true
-      jumpsHiscoreLabel.text = tr("NPC.Crystal.5") + str(global.getLevelZoneThing("num_jumps"))
+      jumpsHiscoreLabel.text = tr("NPC.Crystal.5") + str(global.getThingFromAllLevelZonez("num_jumps"))
       hiscoreDisplayIndex += 1
     elif hiscoreDisplayIndex == 5:
       loveHiscoreLabel.visible = true
-      loveHiscoreLabel.text = tr("NPC.Crystal.6") + str(global.getLevelZoneThing("love"))
+      loveHiscoreLabel.text = tr("NPC.Crystal.8") + str(global.getThingFromAllLevelZonez("num_glitch_tiles")) + "/" + str(global.getThingFromAllLevelZonez("total_num_glitch_tiles"))
+      hiscoreDisplayIndex += 1
+    elif hiscoreDisplayIndex == 6:
+      if stupidTimeAgedStartTimeTemp == null:
+        stupidTimeAgedStartTimeTemp = global.getLevelZoneThing("start_time")
+        global.updateLevelZoneTime()
+        global.setLevelZoneThing("start_time", null)
+      timeHiscoreLabel.visible = true
+      timeHiscoreLabel.text = ""
       hiscoreDisplayIndex += 1
       hiscoreTimeLimit = 15
-    elif hiscoreDisplayIndex == 6:
+    elif hiscoreDisplayIndex == 7:
       pressEnterLabel.visible = not pressEnterLabel.visible
       var sweep_button_text = global.getInputText("sub_action_button")
       pressEnterLabel.bbcode_text = tr("NPC.Crystal.Final") % sweep_button_text

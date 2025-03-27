@@ -209,6 +209,7 @@ __meta__ = {
 "_editor_description_": "Lv1: Debug"
 }
 show_crt_effect = true
+has_spellbook_page = true
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 10 )]
 

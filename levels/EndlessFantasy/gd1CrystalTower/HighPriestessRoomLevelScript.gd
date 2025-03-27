@@ -291,7 +291,7 @@ func playGlitchTransitionAnimation():
   highPriestessBoss.get_ref().secretAniPlayer.play("defeatedEnd")
 
 var spawnGlitchEffectRes = preload("res://sceneObjects/SpawnGlitchEffect.tscn")
-func glitchNextGrandmaStatue():
+func glitchNextGrandmaStatue(glitch_form):
   var grandmaStatueToGlitch = null
   var grandmaStatueArr = grandmaStatues.get_children()
   for grandmaStatue in grandmaStatueArr:
@@ -306,7 +306,8 @@ func glitchNextGrandmaStatue():
   newSpawnGlitchEffect.global_transform.origin = grandmaStatueToGlitch.global_transform.origin
 
   summonSmokeClouds(grandmaStatueToGlitch.global_transform.origin, 3)
-  grandmaStatueToGlitch.glitchMyself(global.GlitchForm.FLOOR)
+  var newGlitchGrandmaManager = grandmaStatueToGlitch.glitchMyself(glitch_form)
+  newGlitchGrandmaManager.override_am_i_in_range_of_player = true
   reindexGrandmaStatueCatalogue()
 
 func showTheGruesomeChild():
@@ -338,7 +339,7 @@ func enterMemoryZone():
   global.isEnteringRoom = true
   # global.memory["roomPath"] = self.getLevelName()
   transition.colorRect.visible = false
-  transition.granny_teleport_to("")
+  transition.granny_teleport_to("res://levels/EndlessFantasy/gd1CrystalTower/PrimordialOozeRoom.tscn")
 
 func glitchTickle(glitch_death_timer):
   if glitch_death_timer > 1:
