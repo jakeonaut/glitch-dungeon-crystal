@@ -863,6 +863,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 0 )
 material_override = SubResource( 1 )
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000GreenGlitchIntro.tscn"
+can_nav_left = false
 can_nav_up = false
 can_nav_down = false
 

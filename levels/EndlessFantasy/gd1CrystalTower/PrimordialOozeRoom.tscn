@@ -2345,25 +2345,30 @@ shape = SubResource( 162 )
 [node name="Sounds" type="Spatial" parent="Viewport/level/WeakEye"]
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Viewport/level/WeakEye/Sounds"]
+bus="Sfx"
 stream = ExtResource( 46 )
 volume_db = -2.0
 pitch_scale = 0.9
 
 [node name="WakeUpSound" type="AudioStreamPlayer" parent="Viewport/level/WeakEye/Sounds"]
+bus="Sfx"
 stream = ExtResource( 50 )
 volume_db = -10.0
 pitch_scale = 0.5
 
 [node name="GoodnightSound" type="AudioStreamPlayer" parent="Viewport/level/WeakEye/Sounds"]
+bus="Sfx"
 stream = ExtResource( 48 )
 volume_db = -15.0
 pitch_scale = 0.75
 
 [node name="DieSound2" type="AudioStreamPlayer" parent="Viewport/level/WeakEye/Sounds"]
+bus="Sfx"
 stream = ExtResource( 62 )
 volume_db = -5.0
 
 [node name="DieSound3" type="AudioStreamPlayer" parent="Viewport/level/WeakEye/Sounds"]
+bus="Sfx"
 stream = ExtResource( 50 )
 volume_db = -15.0
 

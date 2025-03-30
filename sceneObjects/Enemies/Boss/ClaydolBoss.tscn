@@ -4523,40 +4523,48 @@ should_animate = false
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="SpawnSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 13 )
 volume_db = -3.0
 
 [node name="BlinkSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 22 )
 volume_db = -20.0
 pitch_scale = 2.0
 
 [node name="BlinkSound2" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 22 )
 volume_db = -20.0
 pitch_scale = 2.0
 
 [node name="AttackSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 9 )
 volume_db = -8.0
 pitch_scale = 1.2
 
 [node name="AttackStartSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 10 )
 volume_db = -15.0
 pitch_scale = 1.1
 
 [node name="DigSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 17 )
 volume_db = -24.0
 pitch_scale = 1.4
 
 [node name="ThudSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 15 )
 volume_db = -25.0
 pitch_scale = 0.7
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 23 )
 volume_db = -2.0
 pitch_scale = 0.9

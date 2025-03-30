@@ -11,21 +11,25 @@
 script = ExtResource( 2 )
 
 [node name="DoorSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 1 )
 volume_db = -32.0
 pitch_scale = 0.9
 
 [node name="LifeUISound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 4 )
 volume_db = -10.0
 pitch_scale = 1.1
 
 [node name="GlitchedDoorSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 3 )
 volume_db = -15.0
 pitch_scale = 0.5
 
 [node name="GustSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 6 )
 volume_db = -12.0
 pitch_scale = 1.2

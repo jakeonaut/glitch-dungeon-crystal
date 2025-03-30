@@ -27,6 +27,7 @@ onready var lockedSound = get_node("LockedSound")
 onready var keySound = get_node("KeySound")
 onready var sillySound = get_node("SillySound")
 onready var chickenRes = preload("res://sceneObjects/FreeChicken.tscn")
+onready var label3D = get_node("Label3D")
 
 var canPlayDoorSound = true
 
@@ -157,6 +158,9 @@ func spawnChicken():
     
 onready var meshInstance2 = get_node("MeshInstance2")
 func _process(delta):
+  if is_locked:
+    label3D.visible = true
+    label3D.text = str(num_keys_unlock)
   tryProcessGlitchedPath()
 
   if not is_passive and (key_type == global.KeyItem.CRYSTAL or key_type == global.KeyItem.ZONE_CRYSTAL or key_type == global.KeyItem.DEMO):

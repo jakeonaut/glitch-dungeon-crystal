@@ -166,6 +166,7 @@ max_frames = 1
 automatically_change_color = false
 
 [node name="SmackSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -20.0
 pitch_scale = 2.0

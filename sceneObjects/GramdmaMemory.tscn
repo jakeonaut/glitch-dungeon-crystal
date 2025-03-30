@@ -289,11 +289,13 @@ frame = 745
 frame_delay = 0.3
 
 [node name="SmackSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 14 )
 volume_db = -20.0
 pitch_scale = 0.65
 
 [node name="TeleportSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 11 )
 volume_db = -12.0
 pitch_scale = 0.9

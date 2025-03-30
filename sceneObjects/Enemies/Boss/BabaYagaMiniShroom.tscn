@@ -366,16 +366,19 @@ anims/wither = SubResource( 5 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0 )
 
 [node name="SpawnSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -30.0
 pitch_scale = 0.7
 
 [node name="SpawnSound2" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -35.0
 pitch_scale = 0.5
 
 [node name="WitherSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 9 )
 volume_db = -5.0
 pitch_scale = 0.7

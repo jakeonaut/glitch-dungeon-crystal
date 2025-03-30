@@ -182,6 +182,8 @@ func _process(delta):
     textNodeCanvasLayer.hide()
     portraitContainer.visible = false
     return
+  if not textboxParent.get_ref() and not self.visible and not global.activeInteractor == self:
+    queue_free()
 
   textNodeCanvasLayer.visible = self.visible and not global.isPauseMenuOpen
   textPrompt.visible = not floating_text and (isWaitingForEndPrompt() or isWaitingForNextPrompt()) and not is_tiny

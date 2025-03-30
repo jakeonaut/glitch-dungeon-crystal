@@ -116,14 +116,17 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 shape = SubResource( 13 )
 
 [node name="CastGlitchSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -20.0
 
 [node name="WindUpSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -22.0
 
 [node name="NoticeSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 15 )
 volume_db = -20.0
 

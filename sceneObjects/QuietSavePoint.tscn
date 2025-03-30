@@ -258,6 +258,7 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.24
 shape = SubResource( 16 )
 
 [node name="SaveSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -25.0
 

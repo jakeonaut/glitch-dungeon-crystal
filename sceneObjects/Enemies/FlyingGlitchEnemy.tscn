@@ -111,6 +111,7 @@ shape = SubResource( 3 )
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -30.0
 

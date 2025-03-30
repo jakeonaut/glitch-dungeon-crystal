@@ -1489,34 +1489,41 @@ shape = SubResource( 22 )
 shape = SubResource( 39 )
 
 [node name="shatterSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 15 )
 volume_db = -20.0
 pitch_scale = 0.7
 
 [node name="cubeSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 17 )
 volume_db = -10.0
 
 [node name="cubeSound2" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 13 )
 volume_db = -10.0
 pitch_scale = 0.63
 
 [node name="cubeSound3" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -15.0
 
 [node name="GetHitSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 14 )
 volume_db = -18.0
 pitch_scale = 2.0
 
 [node name="GetHitSound2" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 14 )
 volume_db = -15.0
 pitch_scale = 1.5
 
 [node name="GetHitSound3" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 14 )
 volume_db = -13.0
 pitch_scale = 1.2

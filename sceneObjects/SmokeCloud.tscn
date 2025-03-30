@@ -57,5 +57,6 @@ max_frames = 3
 should_fizzle_out = true
 
 [node name="CleanGlitchSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 6 )
 volume_db = -25.0

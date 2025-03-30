@@ -117,6 +117,7 @@ frame_delay = 0.2
 automatically_change_color = false
 
 [node name="NotDieSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -5.0
 

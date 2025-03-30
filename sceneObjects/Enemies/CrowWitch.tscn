@@ -366,36 +366,44 @@ shape = SubResource( 2 )
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 9 )
 volume_db = -30.0
 
 [node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 12 )
 volume_db = -25.0
 pitch_scale = 1.5
 
 [node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -15.0
 
 [node name="StartEvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 10 )
 volume_db = -10.0
 pitch_scale = 0.5
 
 [node name="WingFlapSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 15 )
 volume_db = -25.0
 
 [node name="CawSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 10 )
 volume_db = -25.0
 
 [node name="CastGlitchSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 17 )
 volume_db = -20.0
 
 [node name="WindUpSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 16 )
 volume_db = -22.0
 

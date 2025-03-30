@@ -876,6 +876,7 @@ anims/glitchTransitionEnd = SubResource( 208 )
 anims/glitchTransitionStart = SubResource( 201 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Viewport/level/AnimationPlayer"]
+bus="Sfx"
 stream = ExtResource( 21 )
 volume_db = -15.0
 

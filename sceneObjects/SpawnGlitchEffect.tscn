@@ -76,6 +76,7 @@ frame_delay = 0.01
 max_frames = 4
 
 [node name="AppearSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -15.0
 pitch_scale = 1.7

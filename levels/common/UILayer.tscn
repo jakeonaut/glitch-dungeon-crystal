@@ -1141,20 +1141,24 @@ script = ExtResource( 21 )
 shape = SubResource( 15 )
 
 [node name="cubeSound" type="AudioStreamPlayer" parent="GlitchStatusRect/Viewport/miniCubeCrystal"]
+bus="Sfx"
 stream = ExtResource( 27 )
 volume_db = -33.0
 pitch_scale = 1.5
 
 [node name="cubeSound2" type="AudioStreamPlayer" parent="GlitchStatusRect/Viewport/miniCubeCrystal"]
+bus="Sfx"
 stream = ExtResource( 32 )
 volume_db = -8.0
 
 [node name="cubeSound4" type="AudioStreamPlayer" parent="GlitchStatusRect/Viewport/miniCubeCrystal"]
+bus="Sfx"
 stream = ExtResource( 33 )
 volume_db = -15.0
 pitch_scale = 0.4
 
 [node name="cubeSound3" type="AudioStreamPlayer" parent="GlitchStatusRect/Viewport/miniCubeCrystal"]
+bus="Sfx"
 stream = ExtResource( 23 )
 volume_db = -40.411
 pitch_scale = 1.43
@@ -1542,6 +1546,7 @@ text = "left
 scroll_active = false
 
 [node name="MenuMoveSound" type="AudioStreamPlayer" parent="BroomUpgradeMenu"]
+bus="Sfx"
 stream = ExtResource( 28 )
 volume_db = -15.0
 pitch_scale = 0.9

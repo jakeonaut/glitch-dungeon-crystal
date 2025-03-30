@@ -287,6 +287,7 @@ max_frames = 1
 should_animate = false
 
 [node name="SpawnSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -25.0
 pitch_scale = 1.4
@@ -322,6 +323,7 @@ texture = ExtResource( 11 )
 hframes = 2
 
 [node name="BounceSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 13 )
 volume_db = -30.0
 

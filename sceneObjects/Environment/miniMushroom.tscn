@@ -79,5 +79,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0102768, -0.188829, 0 )
 shape = SubResource( 2 )
 
 [node name="BounceSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 4 )
 volume_db = -30.0

@@ -118,6 +118,7 @@ should_randomize_frame_delay = true
 max_frames = 8
 
 [node name="CollectSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 6 )
 volume_db = 15.0
 pitch_scale = 0.2

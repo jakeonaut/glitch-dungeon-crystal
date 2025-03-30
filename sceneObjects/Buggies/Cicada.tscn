@@ -54,6 +54,7 @@ script = ExtResource( 1 )
 shape = SubResource( 29 )
 
 [node name="CatchSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 5 )
 volume_db = -30.0
 pitch_scale = 3.0

@@ -1028,6 +1028,7 @@ frame_delay = 0.15
 should_animate = false
 
 [node name="BroomSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = 3.0
 pitch_scale = 0.9
@@ -1298,30 +1299,36 @@ tab_size = 2
 scroll_active = false
 
 [node name="DialogStartSound" type="AudioStreamPlayer" parent="NPC TextBox/TextBox"]
+bus="Sfx"
 volume_db = -15.0
 script = ExtResource( 20 )
 
 [node name="DialogSound" type="AudioStreamPlayer" parent="NPC TextBox/TextBox"]
+bus="Sfx"
 stream = ExtResource( 21 )
 volume_db = -20.0
 pitch_scale = 0.7
 script = ExtResource( 20 )
 
 [node name="NextDialogSound" type="AudioStreamPlayer" parent="NPC TextBox/TextBox"]
+bus="Sfx"
 stream = ExtResource( 21 )
 volume_db = -20.0
 script = ExtResource( 20 )
 
 [node name="AbortSound" type="AudioStreamPlayer" parent="NPC TextBox/TextBox"]
+bus="Sfx"
 stream = ExtResource( 21 )
 volume_db = -20.0
 script = ExtResource( 30 )
 
 [node name="CollectSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -25.0
 
 [node name="SmackSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 13 )
 volume_db = -20.0
 pitch_scale = 0.65

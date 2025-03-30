@@ -7322,268 +7322,326 @@ shape = SubResource( 68 )
 [node name="Sounds" type="Node" parent="."]
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 12 )
 volume_db = -5.0
 pitch_scale = 1.05
 
 [node name="ScreenShakeSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 60 )
 volume_db = -15.0
 pitch_scale = 2.0
 
 [node name="HookSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 28 )
 volume_db = -20.0
 
 [node name="ReelSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 54 )
 volume_db = -10.0
 pitch_scale = 0.6
 
 [node name="DollOpenSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 52 )
 volume_db = -18.0
 pitch_scale = 0.95
 
 [node name="DollCloseSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 53 )
 volume_db = -18.0
 pitch_scale = 1.1
 
 [node name="FootstepSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 34 )
 volume_db = -8.0
 
 [node name="WaterFootstepSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 75 )
 volume_db = -32.0
 
 [node name="TileFootstepSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 91 )
 volume_db = -22.0
 
 [node name="SandFootstepSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 90 )
 volume_db = -24.0
 pitch_scale = 2.0
 
 [node name="UnpauseSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 45 )
 volume_db = -15.0
 
 [node name="PauseSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 78 )
 volume_db = -25.0
 
 [node name="InventorySound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 78 )
 volume_db = -25.0
 pitch_scale = 0.9
 
 [node name="BlinkSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 19 )
 volume_db = -40.0
 pitch_scale = 2.0
 
 [node name="LandSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 35 )
 volume_db = -35.0
 
 [node name="GrannyLandSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 16 )
 volume_db = -20.0
 
 [node name="TransformSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 13 )
 volume_db = -25.0
 pitch_scale = 1.1
 
 [node name="NoSpellSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 26 )
 volume_db = -25.0
 pitch_scale = 1.2
 
 [node name="ErrorSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 73 )
 volume_db = -25.0
 pitch_scale = 0.5
 
 [node name="TickleSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 26 )
 volume_db = -23.0
 pitch_scale = 0.5
 
 [node name="MalwareSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 65 )
 volume_db = -23.0
 pitch_scale = 2.0
 
 [node name="RitualSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 77 )
 volume_db = -23.0
 pitch_scale = 0.7
 
 [node name="ReturnSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 44 )
 volume_db = -2.0
 pitch_scale = 0.5
 
 [node name="NullifySound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 33 )
 volume_db = -22.0
 pitch_scale = 0.8
 
 [node name="RechargeSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 40 )
 volume_db = -12.0
 pitch_scale = 1.2
 
 [node name="DoubleJumpSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 13 )
 volume_db = -30.0
 
 [node name="SporeSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 43 )
 volume_db = -15.0
 pitch_scale = 2.0
 
 [node name="WetJumpSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 14 )
 volume_db = -14.0
 pitch_scale = 1.3
 
 [node name="JumpOverallsSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 15 )
 volume_db = -30.0
 pitch_scale = 0.5
 
 [node name="BumpSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 17 )
 volume_db = -26.0
 
 [node name="BumpSound2" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 58 )
 volume_db = -25.0
 
 [node name="FallSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 18 )
 volume_db = -80.0
 pitch_scale = 0.8
 
 [node name="WormSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 19 )
 volume_db = -35.0
 pitch_scale = 0.6
 
 [node name="WormClimbSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 20 )
 volume_db = -30.0
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 21 )
 volume_db = -18.0
 
 [node name="HurtSound2" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 24 )
 volume_db = -15.0
 
 [node name="HurtSound3" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 66 )
 volume_db = -18.0
 
 [node name="SkateSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 22 )
 volume_db = -8.0
 pitch_scale = 1.2
 
 [node name="BroomSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 9 )
 volume_db = -25.0
 
 [node name="FlapSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 86 )
 volume_db = -5.0
 pitch_scale = 1.5
 
 [node name="NoBroomSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 9 )
 volume_db = -28.0
 pitch_scale = 1.6
 
 [node name="InfectSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 42 )
 volume_db = -15.0
 pitch_scale = 0.8
 
 [node name="InfectReverseSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 56 )
 volume_db = -15.0
 pitch_scale = 0.8
 
 [node name="GetItemSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 29 )
 volume_db = -15.0
 
 [node name="PoisonWaterSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 11 )
 volume_db = -10.0
 pitch_scale = 2.0
 
 [node name="PoisonWaterReverseSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 23 )
 volume_db = -10.0
 pitch_scale = 2.0
 
 [node name="SweepSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 49 )
 volume_db = -32.0
 
 [node name="BroomReverseSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 88 )
 volume_db = -5.0
 pitch_scale = 1.1
 
 [node name="BroomSound2" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 50 )
 volume_db = -7.0
 
 [node name="DigSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 51 )
 volume_db = -18.0
 pitch_scale = 0.8
 
 [node name="DigSound2" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 72 )
 volume_db = -5.0
 
 [node name="RunSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 87 )
 volume_db = -5.0
 
 [node name="FastStepSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 60 )
 volume_db = -15.0
 pitch_scale = 2.0
 
 [node name="GravitySound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 63 )
 pitch_scale = 0.6
 
 [node name="FishFormSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 79 )
 volume_db = -15.0
 
 [node name="GravitySound2" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 70 )
 volume_db = -5.0
 pitch_scale = 0.6
 
 [node name="MiniSplashSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 64 )
 volume_db = 2.0
 pitch_scale = 1.2
 
 [node name="SaveSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 76 )
 volume_db = -32.0
 pitch_scale = 0.9
@@ -7760,11 +7818,13 @@ path = "res://levels/EndlessFantasy/gd1PrimordialOoze/AngelWarpZone.tscn"
 is_level_door = true
 
 [node name="WarpSound2" type="AudioStreamPlayer" parent="AngelZoneLevelDoor"]
+bus="Sfx"
 stream = ExtResource( 84 )
 volume_db = -20.0
 pitch_scale = 0.7
 
 [node name="TeleportSound" type="AudioStreamPlayer" parent="AngelZoneLevelDoor"]
+bus="Sfx"
 stream = ExtResource( 83 )
 volume_db = -12.0
 pitch_scale = 0.9

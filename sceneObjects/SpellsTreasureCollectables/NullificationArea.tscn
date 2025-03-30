@@ -511,10 +511,12 @@ should_randomize_frame_delay = true
 max_frames = 6
 
 [node name="TransformSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -10.0
 
 [node name="FadeAwaySound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 9 )
 volume_db = -25.0
 

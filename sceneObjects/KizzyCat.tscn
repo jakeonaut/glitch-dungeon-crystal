@@ -158,29 +158,35 @@ shape = SubResource( 2 )
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 10 )
 volume_db = -30.0
 
 [node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 11 )
 volume_db = -20.0
 pitch_scale = 0.3
 
 [node name="PoofSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 16 )
 volume_db = -20.0
 pitch_scale = 1.5
 
 [node name="ReassembleSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 15 )
 volume_db = -10.0
 pitch_scale = 0.5
 
 [node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -15.0
 
 [node name="StartEvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 9 )
 volume_db = -10.0
 pitch_scale = 0.5

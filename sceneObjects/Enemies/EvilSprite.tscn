@@ -160,14 +160,17 @@ anims/default = SubResource( 5 )
 anims/flickerOn = SubResource( 6 )
 
 [node name="CastGlitchSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 10 )
 volume_db = -20.0
 
 [node name="WindUpSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 11 )
 volume_db = -22.0
 
 [node name="NoticeSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 12 )
 volume_db = -20.0
 

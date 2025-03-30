@@ -405,30 +405,36 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0647551, 0 )
 shape = SubResource( 9 )
 
 [node name="DoorCloseSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -20.0
 pitch_scale = 0.7
 
 [node name="DoorOpenSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -20.0
 
 [node name="WarpSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 6 )
 volume_db = -20.0
 pitch_scale = 0.7
 
 [node name="KeySound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 20 )
 volume_db = -25.0
 pitch_scale = 2.0
 
 [node name="LockedSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 17 )
 volume_db = -20.0
 pitch_scale = 0.7
 
 [node name="SillySound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 14 )
 volume_db = -20.0
 
@@ -485,6 +491,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.63618, 0 )
 shape = SubResource( 11 )
 
 [node name="TeleportSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 27 )
 volume_db = -12.0
 pitch_scale = 0.9

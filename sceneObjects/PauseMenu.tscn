@@ -118,6 +118,7 @@ shader_param/palette_out = ExtResource( 24 )
 [sub_resource type="CanvasItemMaterial" id=62]
 
 [node name="PauseMenu" type="Control"]
+visible = false
 margin_left = -86.0
 margin_right = 640.0
 margin_bottom = 522.0
@@ -165,7 +166,7 @@ margin_bottom = 40.0
 [node name="RichTextLabel" type="RichTextLabel" parent="NormalMenu"]
 margin_left = 136.0
 margin_top = 65.0
-margin_right = 702.0
+margin_right = 809.0
 margin_bottom = 473.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -242,10 +243,10 @@ text = "•move left:
 scroll_active = false
 
 [node name="ButtonInputs" type="RichTextLabel" parent="InputMenu/ScrollContainer"]
-margin_left = 252.0
-margin_top = -9.0
-margin_right = 412.0
-margin_bottom = 443.0
+margin_left = 198.0
+margin_top = -13.0
+margin_right = 460.0
+margin_bottom = 439.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( -745, -223 )
@@ -286,20 +287,24 @@ S
 scroll_active = false
 
 [node name="MenuMoveSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 11 )
 volume_db = -20.0
 pitch_scale = 0.9
 
 [node name="MenuConfirmSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 2 )
 volume_db = -25.0
 pitch_scale = 0.9
 
 [node name="TeleportSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 5 )
 volume_db = -20.0
 
 [node name="MenuCancelSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 3 )
 volume_db = -20.0
 pitch_scale = 0.9
@@ -2210,9 +2215,10 @@ script = ExtResource( 13 )
 
 [node name="ColorblindPlayers" type="Control" parent="."]
 visible = false
-margin_left = 520.0
-margin_right = 560.0
-margin_bottom = 40.0
+margin_left = 547.0
+margin_top = 53.0
+margin_right = 587.0
+margin_bottom = 93.0
 
 [node name="PlayerSpritGreen" type="Sprite" parent="ColorblindPlayers"]
 material = SubResource( 62 )

@@ -141,6 +141,8 @@ visible = false
 is_permanent = true
 
 [node name="LaughSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
+bus="Sfx"
 stream = ExtResource( 2 )
 volume_db = -10.0
 

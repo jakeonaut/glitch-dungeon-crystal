@@ -181,6 +181,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.56768, 0 )
 shape = SubResource( 54 )
 
 [node name="SmackSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 5 )
 volume_db = -10.0
 

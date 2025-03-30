@@ -88,6 +88,7 @@ frame_delay = 1.0
 automatically_change_color = false
 
 [node name="BroomSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 13 )
 volume_db = 5.0
 
@@ -133,11 +134,13 @@ script = ExtResource( 12 )
 key_type = 0
 
 [node name="CollectSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 11 )
 volume_db = -25.0
 pitch_scale = 1.5
 
 [node name="SmackSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 9 )
 volume_db = -80.0
 pitch_scale = 0.65
@@ -145,6 +148,7 @@ pitch_scale = 0.65
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="LandSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 15 )
 volume_db = -10.0
 pitch_scale = 3.0

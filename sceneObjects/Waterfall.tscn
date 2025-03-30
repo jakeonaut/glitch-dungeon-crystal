@@ -511,16 +511,19 @@ visible = false
 material = SubResource( 4 )
 
 [node name="SplashSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 12 )
 volume_db = -25.0
 pitch_scale = 2.0
 
 [node name="MiniSplashSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 11 )
 volume_db = -6.0
 pitch_scale = 1.5
 
 [node name="MiniSplashSound2" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 13 )
 volume_db = -6.0
 

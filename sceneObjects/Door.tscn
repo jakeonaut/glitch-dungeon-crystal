@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://scripts/Door.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -712,6 +712,14 @@ shader_param/alpha2 = 0.5
 shader_param/should_use_vertex_color = false
 shader_param/texture_albedo = ExtResource( 26 )
 
+[sub_resource type="DynamicFontData" id=82]
+antialiased = false
+font_path = "res://assets/fonts/yoster.ttf"
+
+[sub_resource type="DynamicFont" id=83]
+size = 128
+font_data = SubResource( 82 )
+
 [node name="Door" type="Spatial" groups=["doors"]]
 script = ExtResource( 1 )
 
@@ -809,30 +817,36 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0647551, 0 )
 shape = SubResource( 81 )
 
 [node name="DoorCloseSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 10 )
 volume_db = -20.0
 pitch_scale = 0.7
 
 [node name="DoorOpenSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 13 )
 volume_db = -20.0
 
 [node name="WarpSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 25 )
 volume_db = -20.0
 pitch_scale = 0.7
 
 [node name="KeySound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 11 )
 volume_db = -25.0
 pitch_scale = 2.0
 
 [node name="LockedSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -20.0
 pitch_scale = 0.7
 
 [node name="SillySound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 16 )
 volume_db = -20.0
 
@@ -897,5 +911,11 @@ transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 3.56
 visible = false
 material_override = SubResource( 79 )
 mesh = ExtResource( 27 )
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+visible = false
+text = "2"
+font = SubResource( 83 )
 
 [editable path="NPC/NPC TextBox"]

@@ -152,6 +152,7 @@ audio_listener_enable_3d = true
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 8 )
+dont_glitch_tiles = true
 show_crt_effect = true
 starting_glitch_type = 2
 has_spellbook_page = true

@@ -1884,29 +1884,35 @@ shape = SubResource( 32 )
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 15 )
 volume_db = -5.0
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 24 )
 volume_db = -10.0
 pitch_scale = 2.0
 
 [node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 13 )
 volume_db = -15.0
 
 [node name="FlapWingSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 19 )
 volume_db = -30.0
 pitch_scale = 2.0
 
 [node name="ThudSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 10 )
 volume_db = -30.0
 pitch_scale = 1.25
 
 [node name="StartEvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 11 )
 volume_db = -10.0
 pitch_scale = 0.5
@@ -1928,6 +1934,7 @@ max_distance = 20.0
 out_of_range_mode = 1
 
 [node name="HeartSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 17 )
 volume_db = -34.0
 pitch_scale = 1.2

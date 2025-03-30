@@ -294,6 +294,7 @@ anims/appear = SubResource( 90 )
 anims/appearEnd = SubResource( 130 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Viewport/level/AnimationPlayer"]
+bus="Sfx"
 stream = ExtResource( 19 )
 volume_db = -15.0
 

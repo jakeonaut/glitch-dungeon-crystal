@@ -5288,49 +5288,59 @@ script = ExtResource( 12 )
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="SpawnSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 9 )
 volume_db = -3.0
 
 [node name="ShatterSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 28 )
 volume_db = -15.0
 pitch_scale = 0.7
 
 [node name="AttackSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -8.0
 pitch_scale = 1.2
 
 [node name="AttackStartSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -20.0
 pitch_scale = 1.1
 
 [node name="TweetSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 22 )
 volume_db = -25.0
 pitch_scale = 0.3
 
 [node name="WakeUpSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 24 )
 volume_db = -15.0
 pitch_scale = 0.9
 
 [node name="RunBawkSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 29 )
 volume_db = -10.0
 
 [node name="EyeBlinkSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 23 )
 volume_db = -15.0
 pitch_scale = 2.0
 
 [node name="FootstepSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 25 )
 volume_db = -16.0
 pitch_scale = 2.0
 
 [node name="SkidSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 30 )
 volume_db = -22.0
 pitch_scale = 0.9

@@ -457,15 +457,18 @@ anims/bounce = SubResource( 41 )
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 12 )
 volume_db = -18.0
 pitch_scale = 0.9
 
 [node name="ChompSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -10.0
 
 [node name="BounceSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 14 )
 volume_db = -30.0
 

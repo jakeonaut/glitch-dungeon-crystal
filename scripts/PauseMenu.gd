@@ -267,7 +267,7 @@ var normalOptionIndex = 0
 func processNormalLogic(_delta):
   if global.isOnMainMenu:
     normalMenuOptions = normalMenuOptionsOnMainMenu
-  pauseTitleText.bbcode_text = (tr("UI.PauseMenu.0") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]) + global.getInputText("menu_up") + " " + global.getInputText("menu_down")
+  pauseTitleText.bbcode_text = (tr("UI.PauseMenu.0") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")])
 
   if shouldUpdateMenuText:
     var text = ""
@@ -341,7 +341,7 @@ func processGraphicsLogic(_delta):
   if shouldUpdateMenuText:
     var text = ""
     for i in range(len(graphicsOptions)):
-      var option = graphicsOptions[i] + ": "
+      var option = graphicsOptions[i]
       if i == 0: option += (tr("UI.GraphicsMenu.ON") if global.userSettings["show_crt_effect"] else tr("UI.GraphicsMenu.OFF"))
       if i == 1: option += (tr("UI.GraphicsMenu.ON") if global.userSettings["canGlitchScreen"] else tr("UI.GraphicsMenu.OFF"))
       if i == 2: option += (tr("UI.GraphicsMenu.ON") if global.userSettings["colorblindMode"] else tr("UI.GraphicsMenu.OFF"))
@@ -403,10 +403,10 @@ func processSoundLogic(_delta):
   if shouldUpdateMenuText:
     var text = ""
     for i in range(len(soundOptions)):
-      var option = soundOptions[i] + ": "
+      var option = soundOptions[i]
       if i == 0: option += (tr("UI.GraphicsMenu.OFF") if global.userSettings["stopAllMusic"] else tr("UI.GraphicsMenu.ON"))
       if i == 1: option += (tr("UI.GraphicsMenu.ON") if global.userSettings["canChangeSongPitch"] else tr("UI.GraphicsMenu.OFF"))
-      if i == 2: option += (tr("UI.GraphicsMenu.ON") if global.userSettings["stopAllSfx"] else tr("UI.GraphicsMenu.OFF"))
+      if i == 2: option += (tr("UI.GraphicsMenu.OFF") if global.userSettings["stopAllSfx"] else tr("UI.GraphicsMenu.ON"))
 
       if i == soundOptionIndex:
         text += "[wave]" + str(option) + "[/wave]\n" 
@@ -442,6 +442,7 @@ func processSoundLogic(_delta):
       glitch_death_timer = 1
     elif soundOptionIndex == 2:
       global.userSettings["stopAllSfx"] = not global.userSettings["stopAllSfx"]
+      
     level.saveUserSettings()
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
     pauseMenuState = PauseMenuState.NORMAL
@@ -657,7 +658,7 @@ func processInventoryLogic(delta):
       popupRect.visible = not popupRect.visible
       if inventoryOptionIndexX == 0:
         var numEggs = global.getThingFromAllLevelZonez("angelEgg")
-        popupText.text = tr("UI.Inventory.7") + ": " + str(numEggs) # "angel eggs:\n  spawn of goddess\n  got " 
+        popupText.text = tr("UI.Inventory.7") + str(numEggs) # "angel eggs:\n  spawn of goddess\n  got " 
       elif inventoryOptionIndexX == 1:
         if global.memory["angler_seaman_boss"] == 3:
           popupText.text = "goddess dream of deceit"
@@ -1353,7 +1354,7 @@ func processControlsLogic(_delta):
       control_index += 1
     elif Input.is_action_just_pressed("menu_up"):
       control_index -= 1
-    if (Input.is_action_just_pressed("menu_confirm") or Input.is_action_just_pressed("popup_menu")) and not Input.is_action_pressed("ui_cancel"):
+    if (Input.is_action_just_pressed("menu_confirm") or Input.is_action_just_pressed("popup_menu")) and not Input.is_action_pressed("ui_cancel") and not Input.is_action_pressed("toggle_fullscreen"):
       global.is_reading_input = true
       if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
         global.is_reading_keyboard_input = true
@@ -1378,6 +1379,8 @@ func processControlsLogic(_delta):
   if showCondensedMenu:
     inputLabelText = ""
   var buttonInputText = "[center]"
+  if pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
+    buttonInputText += "[font=res://DarkInputExtraFont_small.tres]"
   for i in range(properSize):
     var controlConfig = tempControlsConfig[i]
     if control_index == i:
@@ -1385,7 +1388,7 @@ func processControlsLogic(_delta):
       if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
         buttonTextAdd = "press key" if global.is_reading_input else global.getInputText(controlConfig.input_action, 2, true, showCondensedMenu)
       elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
-        buttonTextAdd = "press button" if global.is_reading_input else global.getInputText(controlConfig.input_action, 1)
+        buttonTextAdd = "[/font]press button[font=res://DarkInputExtraFont_small.tres]" if global.is_reading_input else global.getInputText(controlConfig.input_action, 1, false)
       buttonInputText += buttonTextAdd + " \n"
       inputLabelText += "[wave]" + controlConfig.label_str + "[/wave]\n"
     else:
@@ -1393,12 +1396,12 @@ func processControlsLogic(_delta):
       if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
         buttonTextAdd = "[color=gray]" + global.getInputText(controlConfig.input_action, 2, true, showCondensedMenu) + "[/color]"
       elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
-        buttonTextAdd = "[color=gray]" + global.getInputText(controlConfig.input_action, 1) + "[/color]"
+        buttonTextAdd = "[color=gray]" + global.getInputText(controlConfig.input_action, 1, false) + "[/color]"
       buttonInputText += buttonTextAdd + "\n"
       inputLabelText += "[color=gray]" + controlConfig.label_str + "[/color] \n"
   if last_control_index != control_index or shouldUpdateMenuText:
     inputLabelTextLabel.bbcode_text = inputLabelText
-    buttonInputTextLabel.bbcode_text = buttonInputText + "[/center]"
+    buttonInputTextLabel.bbcode_text = buttonInputText
 
   last_control_index = control_index
 

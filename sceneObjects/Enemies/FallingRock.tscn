@@ -764,20 +764,24 @@ should_animate = false
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -13.0
 pitch_scale = 0.5
 
 [node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -30.0
 pitch_scale = 1.5
 
 [node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 6 )
 volume_db = -15.0
 
 [node name="StartEvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 5 )
 volume_db = -10.0
 pitch_scale = 0.5

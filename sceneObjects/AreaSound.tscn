@@ -14,4 +14,5 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Sound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 script = ExtResource( 2 )

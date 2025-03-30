@@ -537,20 +537,24 @@ script = ExtResource( 4 )
 shape = SubResource( 15 )
 
 [node name="cubeSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 5 )
 volume_db = -33.0
 pitch_scale = 1.5
 
 [node name="cubeSound2" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 9 )
 volume_db = -8.0
 
 [node name="cubeSound4" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 14 )
 volume_db = -15.0
 pitch_scale = 0.4
 
 [node name="cubeSound3" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 6 )
 volume_db = -40.411
 pitch_scale = 1.43

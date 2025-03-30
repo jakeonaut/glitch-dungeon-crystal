@@ -27,11 +27,13 @@ script = ExtResource( 3 )
 shape = SubResource( 1 )
 
 [node name="SpawnSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 4 )
 volume_db = -20.0
 pitch_scale = 0.95
 
 [node name="SpawnSound2" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 5 )
 volume_db = -20.0
 pitch_scale = 2.0

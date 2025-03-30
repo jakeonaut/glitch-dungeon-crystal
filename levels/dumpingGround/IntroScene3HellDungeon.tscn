@@ -407,21 +407,25 @@ scale = Vector2( 3.1958, 3.08572 )
 texture = ExtResource( 35 )
 
 [node name="DialogStartSound" type="AudioStreamPlayer" parent="Viewport/level/NPC/NPC TextBox/TextBox"]
+bus="Sfx"
 volume_db = -15.0
 script = ExtResource( 42 )
 
 [node name="DialogSound" type="AudioStreamPlayer" parent="Viewport/level/NPC/NPC TextBox/TextBox"]
+bus="Sfx"
 stream = ExtResource( 32 )
 volume_db = -25.0
 pitch_scale = 0.76
 script = ExtResource( 12 )
 
 [node name="NextDialogSound" type="AudioStreamPlayer" parent="Viewport/level/NPC/NPC TextBox/TextBox"]
+bus="Sfx"
 stream = ExtResource( 40 )
 volume_db = -20.0
 script = ExtResource( 42 )
 
 [node name="AbortSound" type="AudioStreamPlayer" parent="Viewport/level/NPC/NPC TextBox/TextBox"]
+bus="Sfx"
 stream = ExtResource( 15 )
 volume_db = -12.0
 pitch_scale = 0.7

@@ -102,16 +102,19 @@ max_frames = 5
 should_fizzle_out = true
 
 [node name="SplashSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 9 )
 volume_db = -25.0
 pitch_scale = 2.0
 
 [node name="MiniSplashSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -6.0
 pitch_scale = 1.5
 
 [node name="MiniSplashSound2" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 10 )
 volume_db = -6.0
 

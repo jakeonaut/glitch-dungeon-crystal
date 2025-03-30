@@ -575,24 +575,29 @@ anims/windUpCast = SubResource( 3 )
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="LaughSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 12 )
 volume_db = -10.0
 
 [node name="SpawnSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 5 )
 volume_db = -3.0
 
 [node name="AttackSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -8.0
 pitch_scale = 1.2
 
 [node name="AttackStartSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 11 )
 volume_db = -15.0
 pitch_scale = 1.1
 
 [node name="SpawnSavePointSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 4 )
 volume_db = -20.0
 pitch_scale = 0.9

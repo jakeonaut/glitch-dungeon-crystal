@@ -17,10 +17,12 @@ script = ExtResource( 2 )
 shape = SubResource( 4 )
 
 [node name="TransformSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 6 )
 volume_db = -10.0
 
 [node name="FadeAwaySound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -10.0
 pitch_scale = 0.5

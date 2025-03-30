@@ -515,6 +515,7 @@ script = ExtResource( 8 )
 num_gems_needed = 20
 
 [node name="AwakenSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 11 )
 volume_db = -15.0
 
@@ -629,20 +630,24 @@ anims/isOpen = SubResource( 16 )
 anims/openUp = SubResource( 14 )
 
 [node name="CollectSound" type="AudioStreamPlayer" parent="TreasureSpellCollectable"]
+bus="Sfx"
 stream = ExtResource( 19 )
 volume_db = -10.0
 pitch_scale = 0.8
 
 [node name="AweSound" type="AudioStreamPlayer" parent="TreasureSpellCollectable"]
+bus="Sfx"
 stream = ExtResource( 13 )
 volume_db = -15.0
 pitch_scale = 0.9
 
 [node name="OpenSound" type="AudioStreamPlayer" parent="TreasureSpellCollectable"]
+bus="Sfx"
 stream = ExtResource( 20 )
 volume_db = -15.0
 
 [node name="SmackSound" type="AudioStreamPlayer" parent="TreasureSpellCollectable"]
+bus="Sfx"
 stream = ExtResource( 17 )
 volume_db = -20.0
 pitch_scale = 0.65

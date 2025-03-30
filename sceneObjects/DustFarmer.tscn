@@ -170,6 +170,7 @@ anims/start = SubResource( 6 )
 anims/windDown = SubResource( 5 )
 
 [node name="GustSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 4 )
 volume_db = -12.0
 pitch_scale = 1.2
@@ -177,6 +178,7 @@ script = ExtResource( 2 )
 repeat = false
 
 [node name="ChargeSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 6 )
 volume_db = 1.0
 pitch_scale = 0.5

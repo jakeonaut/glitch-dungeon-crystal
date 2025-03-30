@@ -239,10 +239,12 @@ anims/hitDown = SubResource( 13 )
 anims/reset = SubResource( 14 )
 
 [node name="BonkSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -15.0
 
 [node name="BonkSound2" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 6 )
 volume_db = -10.0
 pitch_scale = 0.9

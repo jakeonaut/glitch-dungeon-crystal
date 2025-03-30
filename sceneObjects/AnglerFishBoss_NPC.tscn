@@ -4341,25 +4341,30 @@ shape = SubResource( 24 )
 [node name="Sounds" type="Spatial" parent="WeakPointContainer"]
 
 [node name="DieSound" type="AudioStreamPlayer" parent="WeakPointContainer/Sounds"]
+bus="Sfx"
 stream = ExtResource( 28 )
 volume_db = -2.0
 pitch_scale = 0.9
 
 [node name="MissSound" type="AudioStreamPlayer" parent="WeakPointContainer/Sounds"]
+bus="Sfx"
 stream = ExtResource( 31 )
 volume_db = -2.0
 pitch_scale = 0.9
 
 [node name="NotDieSound" type="AudioStreamPlayer" parent="WeakPointContainer/Sounds"]
+bus="Sfx"
 stream = ExtResource( 23 )
 volume_db = -20.0
 pitch_scale = 0.8
 
 [node name="EvolveSound" type="AudioStreamPlayer" parent="WeakPointContainer/Sounds"]
+bus="Sfx"
 stream = ExtResource( 21 )
 volume_db = -15.0
 
 [node name="StartEvolveSound" type="AudioStreamPlayer" parent="WeakPointContainer/Sounds"]
+bus="Sfx"
 stream = ExtResource( 16 )
 volume_db = -10.0
 pitch_scale = 0.5
@@ -4439,25 +4444,30 @@ anims/hiddenTeleport = SubResource( 161 )
 [node name="Sounds" type="Spatial" parent="WeakPointContainer/WeakEye"]
 
 [node name="DieSound" type="AudioStreamPlayer" parent="WeakPointContainer/WeakEye/Sounds"]
+bus="Sfx"
 stream = ExtResource( 28 )
 volume_db = -2.0
 pitch_scale = 0.9
 
 [node name="WakeUpSound" type="AudioStreamPlayer" parent="WeakPointContainer/WeakEye/Sounds"]
+bus="Sfx"
 stream = ExtResource( 33 )
 volume_db = -10.0
 pitch_scale = 0.5
 
 [node name="GoodnightSound" type="AudioStreamPlayer" parent="WeakPointContainer/WeakEye/Sounds"]
+bus="Sfx"
 stream = ExtResource( 35 )
 volume_db = -15.0
 pitch_scale = 0.75
 
 [node name="DieSound2" type="AudioStreamPlayer" parent="WeakPointContainer/WeakEye/Sounds"]
+bus="Sfx"
 stream = ExtResource( 30 )
 volume_db = -5.0
 
 [node name="DieSound3" type="AudioStreamPlayer" parent="WeakPointContainer/WeakEye/Sounds"]
+bus="Sfx"
 stream = ExtResource( 33 )
 volume_db = -15.0
 
@@ -4467,39 +4477,47 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.522, 1.884, 0 )
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="SpawnSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 32 )
 volume_db = -3.0
 
 [node name="AttackSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 24 )
 volume_db = -8.0
 pitch_scale = 1.2
 
 [node name="ScreamSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 28 )
 volume_db = -8.0
 pitch_scale = 1.2
 
 [node name="AttackStartSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 29 )
 volume_db = -15.0
 pitch_scale = 1.1
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 27 )
 volume_db = -13.0
 pitch_scale = 0.5
 
 [node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 24 )
 volume_db = -20.0
 pitch_scale = 0.8
 
 [node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 26 )
 volume_db = -15.0
 
 [node name="StartEvolveSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 16 )
 volume_db = -10.0
 pitch_scale = 0.5

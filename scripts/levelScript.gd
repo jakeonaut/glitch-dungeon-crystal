@@ -16,6 +16,7 @@ onready var viewport2or3 = get_node("../../Viewport3") if has_node("../../Viewpo
 var current_sprite_palette = global.grey_palette
 export var player_message = "???"
 
+export var dont_glitch_tiles = false
 export var show_crt_effect = false
 export var show_dither_effect = false
 var ditherPaletteEffectRectMaterial = preload("res://materials/DitherPaletteEffectRect.tres")
@@ -397,7 +398,7 @@ func tryToRespawn():
           break
       # if we didn't find a door, try to find last entered door in the room
       # useful for weird triangle circuit navigation
-      if found_door == null:
+      if found_door == null and global.roomEdgeVector == null:
         for door in doors:
           if global.getStaticLevelZoneLevelVar(self, door) == door.DoorMemory.LAST_ENTERED:
             found_door = door

@@ -59,9 +59,11 @@ should_fizzle_out = true
 curr_opacity = 0.9
 
 [node name="CleanGlitchSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -25.0
 
 [node name="BubbleSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 3 )
 pitch_scale = 0.75

@@ -844,34 +844,41 @@ shape = SubResource( 29 )
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -4.0
 pitch_scale = 0.8
 
 [node name="DieSound2" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 12 )
 volume_db = -4.0
 pitch_scale = 0.8
 
 [node name="ThudSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 20 )
 volume_db = -30.0
 pitch_scale = 1.25
 
 [node name="ScreamSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 9 )
 volume_db = -10.0
 
 [node name="ZombieSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 14 )
 volume_db = -20.0
 
 [node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 10 )
 volume_db = -20.0
 pitch_scale = 0.7
 
 [node name="DigSound" type="AudioStreamPlayer" parent="Sounds"]
+bus="Sfx"
 stream = ExtResource( 15 )
 volume_db = -24.0
 pitch_scale = 1.4

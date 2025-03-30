@@ -331,9 +331,9 @@ func resetMemory():
     memory["glitched_grimoire2"] = false
     
     # crystal elder bosses
-    memory["baba_yaga_boss"] = 2
-    memory["angler_seaman_boss"] = 2
-    memory["dogu_matryoshka_boss"] = 2
+    memory["baba_yaga_boss"] = 0
+    memory["angler_seaman_boss"] = 0
+    memory["dogu_matryoshka_boss"] = 0
 
     # STORY OR LEVEL STATE
     memory["babushka_cat_story_hook"] = 1
@@ -347,11 +347,11 @@ func resetMemory():
     memory["babushka_cat_sprint"] = 0
     memory["broom_double_jump"] = 0
     memory["zora_flippers"] = 0
-    memory["fishingRod"] = false
-    memory["mole_cricket"] = 0
-    memory["flowerPot"] = false
-    memory["mushroom_soul"] = 0
-    memory["cutePet"] = false
+    memory["fishingRod"] = true
+    memory["mole_cricket"] = 1
+    memory["flowerPot"] = true
+    memory["mushroom_soul"] = 1
+    memory["cutePet"] = true
     memory["glitched_broom"] = false
     memory["max_hp"] = 1
     memory["hp"] = memory["max_hp"]
@@ -455,6 +455,10 @@ func prepareForTransition(level, enteredDoor = null):
 func _process(delta):
     delta = delta * time_dilation_multiplier
 
+    if global.userSettings["stopAllSfx"]:
+        AudioServer.set_bus_volume_db(2, -80.0)
+    else:
+        AudioServer.set_bus_volume_db(2, 0.0)
     processEasterEggs()
 
     if mini_cube_crystal_pitch >= mini_cube_crystal_pitch_max:
@@ -891,7 +895,7 @@ func getLargeInputText(input_action, input_display = 0, use_bbtext = true):
                         return buttonIndexStr
                     return "[font=res://DarkInputExtraFont.tres]" + buttonIndexStr + "[/font]"
                 else:
-                    return "(" + getButtonIndexStr(inputEvent.button_index, glyphType, false) + ")"
+                    return getButtonIndexStr(inputEvent.button_index, glyphType, false)
             # if inputEvent is InputEventJoypadMotion:
             #     if use_bbtext:
             #         return "[font=res://DarkInputExtraFont.tres]" + getAxisStr(inputEvent.axis, inputEvent.axis_value) + "[/font]"
@@ -902,7 +906,7 @@ func getLargeInputText(input_action, input_display = 0, use_bbtext = true):
                 if use_bbtext:
                     return "[font=res://DarkInputFont.tres]" + getKeyCodeStr(inputEvent.get_scancode()) + "[/font]"
                 else:
-                    return "[" + getKeyCodeStr(inputEvent.get_scancode(), false) + "]"
+                    return getKeyCodeStr(inputEvent.get_scancode(), false)
         
     return null
 
@@ -921,7 +925,7 @@ func getInputText(input_action, input_display = 0, use_bbtext = true, showConden
                         return buttonIndexStr
                     return "[font=res://DarkInputExtraFont_small.tres]" + buttonIndexStr + "[/font]"
                 else:
-                    return "(" + getButtonIndexStr(inputEvent.button_index, glyphType, false) + ")"
+                    return getButtonIndexStr(inputEvent.button_index, glyphType)
             # if inputEvent is InputEventJoypadMotion:
             #     if use_bbtext:
             #         return "[font=res://DarkInputExtraFont_small.tres]" + getAxisStr(inputEvent.axis, inputEvent.axis_value) + "[/font]"
@@ -934,7 +938,7 @@ func getInputText(input_action, input_display = 0, use_bbtext = true, showConden
                         return "[font=res://DarkInputFont_smallCondensed.tres]" + getKeyCodeStr(inputEvent.get_scancode()) + "[/font]"
                     return "[font=res://DarkInputFont_small.tres]" + getKeyCodeStr(inputEvent.get_scancode()) + "[/font]"
                 else:
-                    return "[" + getKeyCodeStr(inputEvent.get_scancode(), false) + "]"
+                    return getKeyCodeStr(inputEvent.get_scancode(), false)
         
     return null
 

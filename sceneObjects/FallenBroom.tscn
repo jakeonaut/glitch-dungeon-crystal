@@ -952,6 +952,7 @@ frame_delay = 0.15
 should_animate = false
 
 [node name="BroomSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = 3.0
 pitch_scale = 0.9
@@ -1004,10 +1005,12 @@ stream = null
 script = ExtResource( 11 )
 
 [node name="CollectSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 12 )
 volume_db = -80.0
 
 [node name="SmackSound" type="AudioStreamPlayer" parent="."]
+bus="Sfx"
 stream = ExtResource( 14 )
 volume_db = -80.0
 pitch_scale = 0.65
