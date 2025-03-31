@@ -204,6 +204,7 @@ func tryInitializeFromDebug():
     pass
   else:
     global.memory["initialized_from_debug"] = true
+    global.memory["priestess"] = 0
     if (has_spellbook_page or has_glitched_grimoire) and not global.memory.has("spellbookPage"):
       global.memory["spellbookPage"] = []
       for spellbook_spell in spellbook_spells:
@@ -335,7 +336,7 @@ func saveTheGame(message = "saving!!"):
   uiLayer.displaySavingText(message)
   global.memory["transformation"] = self.player.transformation
   global.memory["roomPath"] = self.getLevelName()
-  global.saveGame()
+  global.saveGame(self)
 
 func saveUserSettings(message = "saving settings.."):
   uiLayer.displaySavingText(message)

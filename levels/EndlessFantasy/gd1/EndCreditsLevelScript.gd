@@ -1,13 +1,13 @@
 extends "../../../scripts/levelScript.gd"
 
-onready var endCreditsNPC = get_node("EndCreditsNPC")
+onready var label3d = get_node("Label3D")
 
 # @override
 func setUpRoomInitializationOverride():
-    pass
+    label3d.text = tr("EndCredits.FULL")
 
 # @override
 func _process(delta):
-    if global.activeInteractor == null:
-        endCreditsNPC.activate(true)
-    
+    if global.isPauseMenuOpen:
+        return
+    label3d.global_transform.origin.y += (delta*2)

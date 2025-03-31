@@ -323,8 +323,8 @@ func resetMemory():
     # ==============================================
     memory["demo_mode"] = 0
     # if you've beaten the final boss
-    memory["clean_crystals"] = 0
-    memory["priestess"] = 0
+    memory["clean_crystals"] = 4
+    memory["priestess"] = 2
     memory["glitch_world"] = 0
     memory["glitched_grimoire"] = false
     memory["forget_me_not"] = false
@@ -548,7 +548,10 @@ var user_settings_files = [
     "user://usersettings.config"
 ]
 var save_game_index = 0
-func saveGame():
+func saveGame(level):
+    if "EndCredits" in level.getShortLevelName() or "IntroVideo" in level.getShortLevelName() or "PrimordialOoze" in level.getShortLevelName():
+        return
+
     var save_game_file = save_game_files[save_game_index]
     var file = File.new()
     file.open(save_game_file, File.WRITE)
@@ -945,6 +948,7 @@ func getInputText(input_action, input_display = 0, use_bbtext = true, showConden
 func normalizeLoadedMemory():
     if typeof(global.memory["nesting_doll"]) == TYPE_BOOL:
         global.memory["nesting_doll"] = global.NestingDoll.GRANDMA
+    global.memory["priestess"] = 0
 
 func normalizeLoadedUserSettings():
     # global.userSettings
