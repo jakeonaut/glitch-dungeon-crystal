@@ -59,8 +59,6 @@ var glitch_death_timer = 0
 
 var control_index = 0
 var last_control_index = -1
-var hasInitializedControlsConfig = false
-var controlsConfig = []
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var player = null
@@ -140,7 +138,7 @@ func _process(delta):
     popupRect.visible = false
     return
 
-  if not hasInitializedControlsConfig:
+  if not global.hasInitializedControlsConfig:
     return
   if not popupRectCanvasLayer.visible:
     popupRectCanvasLayer.visible = true
@@ -1190,126 +1188,17 @@ func processTopInputLogic(_delta):
     pauseMenuState = PauseMenuState.NORMAL
     shouldUpdateMenuText = true
 
-func initializeControlsConfig():
-  var newControlsConfig = [
-    {
-      "input_action": "ui_left",
-      "label_str": tr("UI.InputMenu.Action.1"),
-      "default_keyCode": 16777231, 
-      "button_index": JOY_DPAD_LEFT,
-      "default_button_index": JOY_DPAD_LEFT,
-    },
-    {
-      "input_action": "ui_right",
-      "label_str": tr("UI.InputMenu.Action.2"),
-      "default_keyCode": 16777233, 
-      "button_index": JOY_DPAD_RIGHT,
-      "default_button_index": JOY_DPAD_RIGHT,
-    },
-    {
-      "input_action": "ui_down",
-      "label_str": tr("UI.InputMenu.Action.3"),
-      "default_keyCode": 16777234, 
-      "button_index": JOY_DPAD_DOWN,
-      "default_button_index": JOY_DPAD_DOWN,
-    },
-    {
-      "input_action": "ui_up",
-      "label_str": tr("UI.InputMenu.Action.4"),
-      "default_keyCode": 16777232,
-      "button_index": JOY_DPAD_UP,
-      "default_button_index": JOY_DPAD_UP,
-    },
-    {
-      "input_action": "jump_button",
-      "label_str": tr("UI.InputMenu.Action.5"),
-      "default_keyCode": 90, 
-      "button_index": JOY_DS_A,
-      "default_button_index": JOY_DS_A,
-    },
-    {
-      "input_action": "sub_action_button",
-      "label_str": tr("UI.InputMenu.Action.6"),
-      "default_keyCode": 88, 
-      "button_index": JOY_DS_B,
-      "default_button_index": JOY_DS_B,
-    },
-    {
-      "input_action": "restart_key",
-      "label_str": tr("UI.InputMenu.Action.7"),
-      "default_keyCode": 82, 
-      "button_index": JOY_DS_Y, 
-      "default_button_index": JOY_DS_Y,
-    },
-    {
-      "input_action": "alt_action_button",
-      "label_str": tr("UI.InputMenu.Action.8"),
-      "default_keyCode": 32, 
-      "button_index": JOY_DS_X, 
-      "default_button_index": JOY_DS_X, 
-    },
-    {
-      "input_action": "left_button",
-      "label_str": tr("UI.InputMenu.Action.9"),
-      "default_keyCode": 16777237, 
-      "button_index": JOY_L, 
-      "default_button_index": JOY_L, 
-    },
-    # {
-    #   "input_action": "spell_1",
-    #   "label_str": "spell 1",
-    #   "default_keyCode": 49, 
-    # },
-    # {
-    #   "input_action": "spell_2",
-    #   "label_str": "spell 2",
-    #   "default_keyCode": 50, 
-    # },
-    # {
-    #   "input_action": "spell_3",
-    #   "label_str": "spell 3",
-    #   "default_keyCode": 51, 
-    # },
-    # {
-    #   "input_action": "spell_4",
-    #   "label_str": "spell 4",
-    #   "default_keyCode": 52, 
-    # },
-    {
-      "input_action": "open_map",
-      "label_str": tr("UI.InputMenu.Action.10"),
-      "default_keyCode": 67, 
-      "button_index": JOY_L, 
-      "default_button_index": JOY_L, 
-    },
-  ]
-  if global.userSettings.has("controls_config") and not global.hasInitializedControlsConfig:
-    var rememberedControlsConfig = global.userSettings["controls_config"]
-    for control_config in newControlsConfig:
-      for remembered_config in rememberedControlsConfig:
-        if remembered_config.input_action == control_config.input_action:
-          global.setKeyCode(control_config.input_action, remembered_config["key_code"])
-          control_config["key_code"] = remembered_config["key_code"]
-          break
-      # make sure its set to default if it was erased from memory
-      if not control_config.has("key_code") or control_config["key_code"] == null:
-        control_config["key_code"] = global.getKeyCode(control_config.input_action)
-    global.hasInitializedControlsConfig = true
-  else:
-    for control_config in newControlsConfig:
-      control_config["key_code"] = global.getKeyCode(control_config.input_action)
-
-  controlsConfig = newControlsConfig
-
 func getVisibleControlsConfig():
   var visibleControlsConfig = []
-  for controlConfig in controlsConfig:
-    var whichInput = controlConfig["input_action"]
-    if whichInput == "restart_key" and not global.memory["can_force_respawn"]:
+  for controlConfig in global.controlsConfig:
+    var ia = controlConfig["input_action"]
+    if ia == "restart_key" and not global.memory["can_force_respawn"]:
       continue
-    if (whichInput == "alt_action_button" or whichInput == "left_button") and not global.memory.has("spellbookPage"):
+    if (ia == "alt_action_button" or ia == "left_button") and not global.memory.has("spellbookPage"):
       continue
-    if whichInput == "open_map" and not global.memory["has_map_item"]:
+    if ia == "open_map" and not global.memory["has_map_item"]:
+      continue
+    if ia == "spell_1" or ia == "spell_2" or ia == "spell_3" or ia == "spell_4":
       continue
     visibleControlsConfig.push_back(controlConfig)
   return visibleControlsConfig
@@ -1342,12 +1231,24 @@ func processControlsLogic(_delta):
       elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
         if global.last_read_input != JOY_START:
           tempControlsConfig[control_index].button_index = global.last_read_input
+          tempControlsConfig[control_index].axis = null
+          tempControlsConfig[control_index].axis_value = null
           global.setButtonIndex(tempControlsConfig[control_index].input_action, global.last_read_input)
           global.userSettings["controls_config"] = tempControlsConfig
           global.is_reading_input = false
           global.is_reading_controller_input = false
           last_control_index = -1
           level.saveUserSettings()
+    if global.last_read_joystick_input != null and pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
+      tempControlsConfig[control_index].button_index = null
+      tempControlsConfig[control_index].axis = global.last_read_joystick_input[0]
+      tempControlsConfig[control_index].axis_value = global.last_read_joystick_input[1]
+      global.setJoystickAxis(tempControlsConfig[control_index].input_action, global.last_read_joystick_input[0], global.last_read_joystick_input[1])
+      global.userSettings["controls_config"] = tempControlsConfig
+      global.is_reading_input = false
+      global.is_reading_controller_input = false
+      last_control_index = -1
+      level.saveUserSettings()
     return
   else:
     if Input.is_action_just_pressed("menu_down"):
@@ -1361,6 +1262,7 @@ func processControlsLogic(_delta):
       elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
         global.is_reading_controller_input = true
       global.last_read_input = null
+      global.last_read_joystick_input = null
       last_control_index = -1
     elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
       yield(get_tree().create_timer(0.1), "timeout")
@@ -1396,7 +1298,7 @@ func processControlsLogic(_delta):
       if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
         buttonTextAdd = "[color=gray]" + global.getInputText(controlConfig.input_action, 2, true, showCondensedMenu) + "[/color]"
       elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
-        buttonTextAdd = "[color=gray]" + global.getInputText(controlConfig.input_action, 1, false) + "[/color]"
+        buttonTextAdd = "[color=gray]" + global.getInputText(controlConfig.input_action, 1, false, false) + "[/color]"
       buttonInputText += buttonTextAdd + "\n"
       inputLabelText += "[color=gray]" + controlConfig.label_str + "[/color] \n"
   if last_control_index != control_index or shouldUpdateMenuText:
@@ -1422,10 +1324,7 @@ func processPopupRenderLogic(delta):
       elif popupTimer < 15:
         popupText.text = "reset bindings\n ... 3 ... 2 ... 1!"
       if popupTimer >= popupTimeLimit:
-        for i in range(controlsConfig.size()):
-          controlsConfig[i]["key_code"] = controlsConfig[i]["default_keyCode"]
-          global.setKeyCode(controlsConfig[i].input_action, controlsConfig[i].default_keyCode)  
-        global.userSettings["controls_config"] = controlsConfig
+        global.resetKeyBindings()
         level.saveUserSettings()
         canResetBindings = false
         shouldUpdateMenuText = true
@@ -1442,11 +1341,7 @@ func processPopupRenderLogic(delta):
       elif popupTimer < 15:
         popupText.text = "reset bindings\n ... 3 ... 2 ... 1!"
       if popupTimer >= popupTimeLimit:
-        for i in range(controlsConfig.size()):
-          if controlsConfig[i].has("default_button_index"):
-            controlsConfig[control_index].button_index = controlsConfig[i].default_button_index
-            global.setButtonIndex(controlsConfig[i].input_action, controlsConfig[i].default_button_index)
-        global.userSettings["controls_config"] = controlsConfig
+        global.resetControllerBindings()
         level.saveUserSettings()
         canResetBindings = false
         shouldUpdateMenuText = true

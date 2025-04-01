@@ -1203,42 +1203,42 @@ scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 46 )
 
 [node name="DialogStartSound" type="AudioStreamPlayer" parent="Viewport/level/NPC/NPC TextBox/TextBox"]
-bus="Sfx"
 stream = ExtResource( 44 )
 volume_db = -20.0
+bus = "Sfx"
 script = ExtResource( 36 )
 
 [node name="DialogSound" type="AudioStreamPlayer" parent="Viewport/level/NPC/NPC TextBox/TextBox"]
-bus="Sfx"
 stream = ExtResource( 54 )
 volume_db = -23.0
 pitch_scale = 0.7
+bus = "Sfx"
 script = ExtResource( 36 )
 
 [node name="NextDialogSound" type="AudioStreamPlayer" parent="Viewport/level/NPC/NPC TextBox/TextBox"]
-bus="Sfx"
 stream = ExtResource( 44 )
 volume_db = -20.0
+bus = "Sfx"
 script = ExtResource( 36 )
 
 [node name="AbortSound" type="AudioStreamPlayer" parent="Viewport/level/NPC/NPC TextBox/TextBox"]
-bus="Sfx"
 stream = ExtResource( 53 )
 volume_db = -30.0
 pitch_scale = 0.7
+bus = "Sfx"
 script = ExtResource( 36 )
 
 [node name="BroomSelectSound" type="AudioStreamPlayer" parent="Viewport/level/NPC/NPC TextBox/TextBox"]
-bus="Sfx"
 stream = ExtResource( 50 )
 volume_db = -8.0
 pitch_scale = 0.9
+bus = "Sfx"
 
 [node name="BroomConfirmSound" type="AudioStreamPlayer" parent="Viewport/level/NPC/NPC TextBox/TextBox"]
-bus="Sfx"
 stream = ExtResource( 48 )
 volume_db = -5.0
 pitch_scale = 0.9
+bus = "Sfx"
 
 [node name="Sprite3D" type="Sprite3D" parent="Viewport/level/NPC" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )
@@ -1278,10 +1278,10 @@ frame = 745
 frame_delay = 0.5
 
 [node name="SmackSound" type="AudioStreamPlayer" parent="Viewport/level/NPC"]
-bus="Sfx"
 stream = ExtResource( 56 )
 volume_db = -20.0
 pitch_scale = 0.65
+bus = "Sfx"
 
 [node name="TextBoxCameraTarget" type="Spatial" parent="Viewport/level/NPC"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )

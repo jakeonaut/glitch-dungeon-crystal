@@ -336,7 +336,7 @@ func resetMemory():
     memory["dogu_matryoshka_boss"] = 0
 
     # STORY OR LEVEL STATE
-    memory["babushka_cat_story_hook"] = 1
+    memory["babushka_cat_story_hook"] = 3
     memory["fishing_rod_shortcut"] = 0
 
     # POWERUPS
@@ -385,6 +385,8 @@ func resetMemory():
     memory["anna_mode"] = false
     memory["blue_mode"] = false
 
+# don't call this except for on game initialize (not game load), and only immediately preceeding
+# trying to load user settings from file...
 func resetUserSettings():
     userSettings = {}
 
@@ -680,17 +682,51 @@ func parseJsonPreserveInt(json_str):
 
 var is_reading_input = false
 var last_read_input = null
-var hasInitializedControlsConfig = false
+var last_read_joystick_input = null
 var is_reading_keyboard_input = false
 var is_reading_controller_input = false
+var GLOBAL_DEADZONE = 0.5
 func _input(ev):
     if not is_reading_input:
         return
 
     if is_reading_keyboard_input and ev is InputEventKey and ev.pressed:
         last_read_input = ev.scancode
-    if is_reading_controller_input and ev is InputEventJoypadButton and ev.pressed:
-        last_read_input = ev.button_index
+    if is_reading_controller_input: 
+        if ev is InputEventJoypadButton and ev.pressed:
+            last_read_input = ev.button_index
+        # why ev.axis < 4 ? so we don't count left / right analog trigger...
+        if ev is InputEventJoypadMotion and ev.axis < 4 and \
+           (ev.axis_value > GLOBAL_DEADZONE or ev.axis_value < -GLOBAL_DEADZONE):
+            last_read_joystick_input = [ev.axis, 1 if ev.axis_value > 0 else -1]
+
+func getJoystickAxisStr(axis, axis_value, useSpecialChar = true):
+    if axis == JOY_AXIS_0:
+        if axis_value < 0:
+            return "a" if useSpecialChar else "Lstick Left"
+        if axis_value > 0:
+            return "d" if useSpecialChar else "Lstick Right"
+    elif axis == JOY_AXIS_1:
+        if axis_value < 0:
+            return "w" if useSpecialChar else "Lstick Up"
+        if axis_value > 0:
+            return "x" if useSpecialChar else "Lstick Down"
+    elif axis == JOY_AXIS_2:
+        if axis_value < 0:
+            return "f" if useSpecialChar else "Rstick Left"
+        if axis_value > 0:
+            return "h" if useSpecialChar else "Rstick Right"
+    elif axis == JOY_AXIS_3:
+        if axis_value < 0:
+            return "t" if useSpecialChar else "Rstick Up"
+        if axis_value > 0:
+            return "b" if useSpecialChar else "Rstick Down"
+
+    # taken from getButtonIndexStr below...
+    elif axis == JOY_ANALOG_L2:
+        return "O" if useSpecialChar else "L2"
+    elif axis == JOY_ANALOG_R2:
+        return "P" if useSpecialChar else "R2"
 
 enum GlyphType {
     XBOX,
@@ -743,39 +779,16 @@ func getButtonIndexStr(button_index, glyph_type = GlyphType.NINTENDO, useSpecial
             return "Q" if useSpecialChar else "L1"
         JOY_L2:
             return "O" if useSpecialChar else "L2"
-        JOY_L3: # TODO(jaketrower): if useSpecialChar
-            return "L3"
+        JOY_L3:
+            return "{" if useSpecialChar else "L3"
         JOY_R:
             return "W" if useSpecialChar else "R1"
         JOY_R2:
             return "P" if useSpecialChar else "R2"
-        JOY_R3: # TODO(jaketrower): if useSpecialChar
-            return "R3"
+        JOY_R3:
+            return "}" if useSpecialChar else "R3"
         _:
             return "?"
-
-func getAxisStr(axis, axis_value, useSpecialChar = true):
-    if axis == JOY_AXIS_0:
-        if axis_value > 0.5:
-            return "h" if useSpecialChar else "Lstick Right"
-        elif axis_value < 0.5:
-            return "f" if useSpecialChar else "Lstick Left"
-    if axis == JOY_AXIS_1:
-        if axis_value < 0.5:
-            return "t" if useSpecialChar else "Lstick Up"
-        elif axis_value > 0.5:
-            return "b" if useSpecialChar else "Lstick Down"
-    if axis == JOY_AXIS_2:
-        if axis_value > 0.5:
-            return "h" if useSpecialChar else "Rstick Right"
-        elif axis_value < 0.5:
-            return "f" if useSpecialChar else "Rstick Left"
-    if axis == JOY_AXIS_3:
-        if axis_value < 0.5:
-            return "t" if useSpecialChar else "Rstick Up"
-        elif axis_value > 0.5:
-            return "b" if useSpecialChar else "Rstick Down"
-    return "?"
 
 func getKeyCodeStr(keycode, useSpecialChar = true):
     var keycode_str = OS.get_scancode_string(keycode)
@@ -855,6 +868,124 @@ func getKeyCodeStr(keycode, useSpecialChar = true):
         _:
             return keycode_str.to_lower()
 
+var hasInitializedControlsConfig = false
+var controlsConfig = []
+func initializeControlsConfig():
+  global.controlsConfig = [
+    {
+      "input_action": "ui_left",
+      "label_str": tr("UI.InputMenu.Action.1"),
+    },
+    {
+      "input_action": "ui_right",
+      "label_str": tr("UI.InputMenu.Action.2"),
+    },
+    {
+      "input_action": "ui_down",
+      "label_str": tr("UI.InputMenu.Action.3"),
+    },
+    {
+      "input_action": "ui_up",
+      "label_str": tr("UI.InputMenu.Action.4"),
+    },
+    {
+      "input_action": "jump_button",
+      "label_str": tr("UI.InputMenu.Action.5"),
+    },
+    {
+      "input_action": "sub_action_button",
+      "label_str": tr("UI.InputMenu.Action.6"),
+    },
+    {
+      "input_action": "restart_key",
+      "label_str": tr("UI.InputMenu.Action.7"),
+    },
+    {
+      "input_action": "alt_action_button",
+      "label_str": tr("UI.InputMenu.Action.8"),
+    },
+    {
+      "input_action": "left_button",
+      "label_str": tr("UI.InputMenu.Action.9"),
+    },
+    {
+      "input_action": "spell_1",
+      "label_str": tr("UI.InputMenu.Action.9_0") % "1",
+    },
+    {
+      "input_action": "spell_2",
+      "label_str": tr("UI.InputMenu.Action.9_0") % "2",
+    },
+    {
+      "input_action": "spell_3",
+      "label_str": tr("UI.InputMenu.Action.9_0") % "3",
+    },
+    {
+      "input_action": "spell_4",
+      "label_str": tr("UI.InputMenu.Action.9_0") % "4",
+    },
+    {
+      "input_action": "open_map",
+      "label_str": tr("UI.InputMenu.Action.10"),
+    },
+  ]
+  if global.userSettings.has("controls_config"):
+    var rememberedControlsConfig = global.userSettings["controls_config"]
+    for control_config in global.controlsConfig:
+      for remembered_config in rememberedControlsConfig:
+        if remembered_config.input_action == control_config.input_action:
+          if remembered_config.has("key_code") and remembered_config["key_code"] != null:
+            global.setKeyCode(control_config.input_action, remembered_config["key_code"])
+            control_config["key_code"] = remembered_config["key_code"]
+          if remembered_config.has("button_index") and remembered_config["button_index"] != null:
+            global.setButtonIndex(control_config.input_action, remembered_config["button_index"])
+            control_config["button_index"] = remembered_config["button_index"]
+          if remembered_config.has("axis") and remembered_config.has("axis_value") and remembered_config["axis"] != null and remembered_config["axis_value"] != null:
+            global.setJoystickAxis(control_config.input_action, remembered_config.axis, remembered_config.axis_value)
+            control_config["axis"] = remembered_config.axis
+            control_config["axis_value"] = remembered_config.axis_value
+      # make sure its set to default if it was erased from memory
+      if not control_config.has("key_code") or control_config["key_code"] == null:
+        control_config["key_code"] = global.getKeyCode(control_config.input_action)
+      if not control_config.has("button_index") or control_config["button_index"] == null:
+        control_config["button_index"] = global.getButtonIndex(control_config.input_action)
+      if not control_config.has("axis") or not control_config.has("axis_value"):
+        var axisVars = global.getJoystickAxis(control_config.input_action)
+        if axisVars != null:
+            control_config["axis"] = axisVars[0]
+            control_config["axis_value"] = axisVars[1]
+  else:
+    for control_config in global.controlsConfig:
+      control_config["key_code"] = global.getKeyCode(control_config.input_action)
+      control_config["button_index"] = global.getButtonIndex(control_config.input_action)
+      var axisVars = global.getJoystickAxis(control_config.input_action)
+      if axisVars != null:
+        control_config["axis"] = axisVars[0]
+        control_config["axis_value"] = axisVars[1]
+
+func resetKeyBindings():
+  var tempControlsConfig = global.userSettings["controls_config"] if global.userSettings.has("controls_config") else {}
+  for control_config in tempControlsConfig:
+    if control_config.has("key_code"):
+        control_config.erase("key_code")
+  global.userSettings["controls_config"] = tempControlsConfig
+  InputMap.load_from_globals() # reset ALL input_actions to default...
+  global.initializeControlsConfig() # will load in the "remembered" ControllerBindings
+
+func resetControllerBindings():
+  var tempControlsConfig = global.userSettings["controls_config"] if global.userSettings.has("controls_config") else {}
+  for control_config in tempControlsConfig:
+    if control_config.has("button_index"):
+        control_config.erase("button_index")
+    if control_config.has("axis"):
+        control_config.erase("axis")
+    if control_config.has("axis_value"):
+        control_config.erase("axis_value")
+  global.userSettings["controls_config"] = tempControlsConfig
+  InputMap.load_from_globals() # reset ALL input_actions to default...
+  global.initializeControlsConfig() # will load in the "remembered" KeyBindings
+
+
 func getKeyCode(input_action):
   var inputEvents = InputMap.get_action_list(input_action)
   for inputEvent in inputEvents:
@@ -871,14 +1002,47 @@ func setKeyCode(input_action, key_code):
   new_event.set_scancode(key_code)
   InputMap.action_add_event(input_action, new_event)
 
+func getButtonIndex(input_action):
+  var inputEvents = InputMap.get_action_list(input_action)
+  for inputEvent in inputEvents:
+    if inputEvent is InputEventJoypadButton:
+      return inputEvent.get_button_index()
+  return null
+
 func setButtonIndex(input_action, button_index):
   var inputEvents = InputMap.get_action_list(input_action)
   for inputEvent in inputEvents:
     if inputEvent is InputEventJoypadButton:
       InputMap.action_erase_event(input_action, inputEvent)
+    # ENFORCING ONE OR THE OTHER...
+    if inputEvent is InputEventJoypadMotion:
+      InputMap.action_erase_event(input_action, inputEvent)
   var new_event = InputEventJoypadButton.new()
   new_event.set_button_index(button_index)
   InputMap.action_add_event(input_action, new_event)
+
+func getJoystickAxis(input_action):
+    var inputEvents = InputMap.get_action_list(input_action)
+    for inputEvent in inputEvents:
+        if inputEvent is InputEventJoypadMotion:
+            return [inputEvent.get_axis(), inputEvent.get_axis_value()]
+    return null
+
+func setJoystickAxis(input_action, axis, axis_value):
+    if axis_value == 0:
+        return
+
+    var inputEvents = InputMap.get_action_list(input_action)
+    for inputEvent in inputEvents:
+        if inputEvent is InputEventJoypadMotion:
+            InputMap.action_erase_event(input_action, inputEvent)
+        # ENFORCING ONE OR THE OTHER...
+        if inputEvent is InputEventJoypadButton:
+            InputMap.action_erase_event(input_action, inputEvent)
+    var new_event = InputEventJoypadMotion.new()
+    new_event.set_axis(axis)
+    new_event.set_axis_value(axis_value)
+    InputMap.action_add_event(input_action, new_event)
 
 func isControllerConnected():
     return Input.get_connected_joypads().size() > 0
@@ -899,6 +1063,12 @@ func getLargeInputText(input_action, input_display = 0, use_bbtext = true):
                     return "[font=res://DarkInputExtraFont.tres]" + buttonIndexStr + "[/font]"
                 else:
                     return getButtonIndexStr(inputEvent.button_index, glyphType, false)
+            elif inputEvent is InputEventJoypadMotion:
+                if use_bbtext:
+                    var joystickAxisStr = getJoystickAxisStr(inputEvent.axis, inputEvent.axis_value)
+                    return "[font=res://DarkInputExtraFont.tres]" + joystickAxisStr + "[/font]"
+                else:
+                    return getJoystickAxisStr(inputEvent.axis, inputEvent.axis_value, false)
             # if inputEvent is InputEventJoypadMotion:
             #     if use_bbtext:
             #         return "[font=res://DarkInputExtraFont.tres]" + getAxisStr(inputEvent.axis, inputEvent.axis_value) + "[/font]"
@@ -919,21 +1089,24 @@ func getInputText(input_action, input_display = 0, use_bbtext = true, showConden
 
     var inputEvents = InputMap.get_action_list(input_action)
     var glyphType = GlyphType.NINTENDO
+    var strToReturn = ""
     for inputEvent in inputEvents:
         if is_controller_connected:
             if inputEvent is InputEventJoypadButton:
                 if use_bbtext:
                     var buttonIndexStr = getButtonIndexStr(inputEvent.button_index, glyphType)
                     if buttonIndexStr == "Start" or buttonIndexStr == "Select":
-                        return buttonIndexStr
-                    return "[font=res://DarkInputExtraFont_small.tres]" + buttonIndexStr + "[/font]"
+                        strToReturn += buttonIndexStr
+                    else:
+                        strToReturn += "[font=res://DarkInputExtraFont_small.tres]" + buttonIndexStr + "[/font]"
                 else:
-                    return getButtonIndexStr(inputEvent.button_index, glyphType)
-            # if inputEvent is InputEventJoypadMotion:
-            #     if use_bbtext:
-            #         return "[font=res://DarkInputExtraFont_small.tres]" + getAxisStr(inputEvent.axis, inputEvent.axis_value) + "[/font]"
-            #     else:
-            #         return getAxisStr(inputEvent.axis, inputEvent.axis_value, false)
+                    strToReturn += getButtonIndexStr(inputEvent.button_index, glyphType)
+            elif inputEvent is InputEventJoypadMotion:
+                if use_bbtext:
+                    var joystickAxisStr = getJoystickAxisStr(inputEvent.axis, inputEvent.axis_value)
+                    strToReturn += "[font=res://DarkInputExtraFont_small.tres]" + joystickAxisStr + "[/font]"
+                else:
+                    strToReturn += getJoystickAxisStr(inputEvent.axis, inputEvent.axis_value)
         else:
             if inputEvent is InputEventKey:
                 if use_bbtext:
@@ -942,8 +1115,7 @@ func getInputText(input_action, input_display = 0, use_bbtext = true, showConden
                     return "[font=res://DarkInputFont_small.tres]" + getKeyCodeStr(inputEvent.get_scancode()) + "[/font]"
                 else:
                     return getKeyCodeStr(inputEvent.get_scancode(), false)
-        
-    return null
+    return strToReturn
 
 func normalizeLoadedMemory():
     if typeof(global.memory["nesting_doll"]) == TYPE_BOOL:

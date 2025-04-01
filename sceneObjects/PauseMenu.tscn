@@ -243,9 +243,9 @@ text = "•move left:
 scroll_active = false
 
 [node name="ButtonInputs" type="RichTextLabel" parent="InputMenu/ScrollContainer"]
-margin_left = 198.0
+margin_left = 256.0
 margin_top = -13.0
-margin_right = 460.0
+margin_right = 518.0
 margin_bottom = 439.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -287,27 +287,27 @@ S
 scroll_active = false
 
 [node name="MenuMoveSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 11 )
 volume_db = -20.0
 pitch_scale = 0.9
+bus = "Sfx"
 
 [node name="MenuConfirmSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 2 )
 volume_db = -25.0
 pitch_scale = 0.9
+bus = "Sfx"
 
 [node name="TeleportSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 5 )
 volume_db = -20.0
+bus = "Sfx"
 
 [node name="MenuCancelSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 3 )
 volume_db = -20.0
 pitch_scale = 0.9
+bus = "Sfx"
 
 [node name="InventoryRect" type="ColorRect" parent="."]
 visible = false
