@@ -2213,6 +2213,65 @@ vframes = 5
 frame = 26
 script = ExtResource( 13 )
 
+[node name="SecretButtonText" type="Control" parent="."]
+visible = false
+margin_left = 5.0
+margin_top = -29.0
+margin_right = 45.0
+margin_bottom = 11.0
+
+[node name="LeftButton" type="RichTextLabel" parent="SecretButtonText"]
+margin_left = 568.0
+margin_top = 247.0
+margin_right = 688.0
+margin_bottom = 367.0
+rect_scale = Vector2( 0.5, 0.5 )
+rect_clip_content = false
+theme = ExtResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[font=res://DarkInputFont_smallCondensed.tres]V[/font]"
+text = "V"
+scroll_active = false
+
+[node name="RightButton" type="RichTextLabel" parent="SecretButtonText"]
+margin_left = 626.0
+margin_top = 247.0
+margin_right = 746.0
+margin_bottom = 367.0
+rect_scale = Vector2( 0.5, 0.5 )
+rect_clip_content = false
+theme = ExtResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[font=res://DarkInputFont_smallCondensed.tres]V[/font]"
+text = "V"
+scroll_active = false
+
+[node name="TopButton" type="RichTextLabel" parent="SecretButtonText"]
+margin_left = 599.0
+margin_top = 214.0
+margin_right = 719.0
+margin_bottom = 334.0
+rect_scale = Vector2( 0.5, 0.5 )
+rect_clip_content = false
+theme = ExtResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[font=res://DarkInputFont_smallCondensed.tres]V[/font]"
+text = "V"
+scroll_active = false
+
+[node name="BottomButton" type="RichTextLabel" parent="SecretButtonText"]
+margin_left = 599.0
+margin_top = 282.0
+margin_right = 719.0
+margin_bottom = 402.0
+rect_scale = Vector2( 0.5, 0.5 )
+rect_clip_content = false
+theme = ExtResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[font=res://DarkInputFont_smallCondensed.tres]V[/font]"
+text = "V"
+scroll_active = false
+
 [node name="ColorblindPlayers" type="Control" parent="."]
 visible = false
 margin_left = 547.0

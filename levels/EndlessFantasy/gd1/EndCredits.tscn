@@ -438,7 +438,6 @@ spawned_object_path = ""
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.1182, 3.14345, 0 )
 grav = 0
-bbText = "NPC.Fisherman.3"
 can_move = false
 can_camera_zoom = false
 is_a_body = false
@@ -547,13 +546,13 @@ is_fan_spinning = true
 transparent_bg = true
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
-visible = false
 margin_right = 1280.0
 margin_bottom = 1024.0
 texture = SubResource( 240 )
 flip_v = true
 
 [node name="EndOfGameAni" type="Sprite" parent="Viewport2"]
+visible = false
 position = Vector2( 0, 110 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 18 )
@@ -568,8 +567,10 @@ anims/auto = SubResource( 245 )
 [node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 16 )]
 
 [node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
-visible = true
 material = SubResource( 241 )
+
+[node name="BasicCrtEffectRect" parent="Viewport2/ScreenEffects" index="1"]
+visible = true
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
@@ -578,14 +579,12 @@ texture = SubResource( 242 )
 flip_v = true
 
 [node name="UILayer" parent="." instance=ExtResource( 14 )]
+visible = false
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 16 )]
 
 [node name="DitherPaletteEffectRect" parent="ScreenEffects" index="0"]
 material = SubResource( 243 )
-
-[node name="BasicCrtEffectRect" parent="ScreenEffects" index="1"]
-visible = true
 
 [editable path="Viewport/level/Player"]
 [editable path="Viewport/level/Player/TextContainer"]

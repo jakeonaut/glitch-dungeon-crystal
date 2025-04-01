@@ -399,6 +399,7 @@ func resetUserSettings():
     userSettings["canChangeSongPitch"] = true
     userSettings["stopAllSfx"] = false
     userSettings["spellAssist"] = false
+    userSettings["glyphType"] = GlyphType.XBOX
 
 var anna_mode_counter = 0
 var anna_key_helper = false
@@ -574,6 +575,19 @@ func doesAnySaveGameExist():
         if file.file_exists(save_game_file):
             return true
     return false
+
+func toggleGlyphType():
+    if userSettings.has("glyphType"):
+        if userSettings["glyphType"] == GlyphType.XBOX:
+            userSettings["glyphType"] = GlyphType.PLAYSTATION
+            return
+        if userSettings["glyphType"] == GlyphType.PLAYSTATION:
+            userSettings["glyphType"] = GlyphType.NINTENDO
+            return
+        if userSettings["glyphType"] == GlyphType.NINTENDO:
+            userSettings["glyphType"] = GlyphType.XBOX
+            return
+    userSettings["glyphType"] = GlyphType.XBOX
 
 func saveUserSettings():
     var user_settings_file = user_settings_files[0]
@@ -1052,17 +1066,16 @@ func getLargeInputText(input_action, input_display = 0, use_bbtext = true):
     var is_controller_connected = (self.isControllerConnected() or input_display == 1) and not input_display == 2
 
     var inputEvents = InputMap.get_action_list(input_action)
-    var glyphType = GlyphType.NINTENDO
     for inputEvent in inputEvents:
         if is_controller_connected:
             if inputEvent is InputEventJoypadButton:
                 if use_bbtext:
-                    var buttonIndexStr = getButtonIndexStr(inputEvent.button_index, glyphType)
+                    var buttonIndexStr = getButtonIndexStr(inputEvent.button_index, userSettings["glyphType"])
                     if buttonIndexStr == "Start" or buttonIndexStr == "Select":
                         return buttonIndexStr
                     return "[font=res://DarkInputExtraFont.tres]" + buttonIndexStr + "[/font]"
                 else:
-                    return getButtonIndexStr(inputEvent.button_index, glyphType, false)
+                    return getButtonIndexStr(inputEvent.button_index, userSettings["glyphType"], false)
             elif inputEvent is InputEventJoypadMotion:
                 if use_bbtext:
                     var joystickAxisStr = getJoystickAxisStr(inputEvent.axis, inputEvent.axis_value)
@@ -1088,19 +1101,18 @@ func getInputText(input_action, input_display = 0, use_bbtext = true, showConden
     var is_controller_connected = (self.isControllerConnected() or input_display == 1) and not input_display == 2
 
     var inputEvents = InputMap.get_action_list(input_action)
-    var glyphType = GlyphType.NINTENDO
     var strToReturn = ""
     for inputEvent in inputEvents:
         if is_controller_connected:
             if inputEvent is InputEventJoypadButton:
                 if use_bbtext:
-                    var buttonIndexStr = getButtonIndexStr(inputEvent.button_index, glyphType)
+                    var buttonIndexStr = getButtonIndexStr(inputEvent.button_index, userSettings["glyphType"])
                     if buttonIndexStr == "Start" or buttonIndexStr == "Select":
                         strToReturn += buttonIndexStr
                     else:
                         strToReturn += "[font=res://DarkInputExtraFont_small.tres]" + buttonIndexStr + "[/font]"
                 else:
-                    strToReturn += getButtonIndexStr(inputEvent.button_index, glyphType)
+                    strToReturn += getButtonIndexStr(inputEvent.button_index, userSettings["glyphType"])
             elif inputEvent is InputEventJoypadMotion:
                 if use_bbtext:
                     var joystickAxisStr = getJoystickAxisStr(inputEvent.axis, inputEvent.axis_value)
