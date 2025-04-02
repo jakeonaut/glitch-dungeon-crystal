@@ -192,6 +192,20 @@ func _process(delta):
   #   aniPlayer.stop()
   #   aniPlayer.clear_queue()
   #   aniPlayer.queue("fishingSitDown")
+  var areAnyTilesBelowMeSpikes = false
+  if glitch_form == global.GlitchForm.INVISIBLE:
+    var solidTilesBelow = getTilesBelow(getLevelTiles())
+    for i in range(solidTilesBelow.size()):
+      var coords = solidTilesBelow[i]
+      if coords == null: continue
+      var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
+      if getLevelTiles().isTileSpikes(tile_type):
+        areAnyTilesBelowMeSpikes = true
+        break
+  if pressingDown() and on_ground and (glitch_form == global.GlitchForm.LADDER or (
+                                        glitch_form == global.GlitchForm.INVISIBLE and areAnyTilesBelowMeSpikes)):
+    processMoleDigTimer(Vector3(0, -2, 0))
+    
 
     
 onready var tileCollisionShape = get_node("TileArea/CollisionShape")
@@ -378,6 +392,14 @@ func pressingDown():
   return Input.is_action_pressed("ui_down") and not pauseInput and not isTextboxPausingMe()
 
 # @override
+func pressingMoveDown():
+  return Input.is_action_pressed("ui_down") and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()
+
+# @override
+func pressingMoveUp():
+  return Input.is_action_pressed("ui_up") and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()
+
+# @override
 func justPressedJump():
   if isItWeird():
     return false
@@ -403,7 +425,7 @@ var malware_infected = false
 var PLAYER_GRAV = 28
 onready var digSound2 = get_node("Sounds/DigSound2")
 var dig_timer = 0
-var dig_time_limit = 8
+var dig_time_limit = 4
 var dig_below_timer = 0
 var dig_below_time_limit = 5
 var can_dig_up = false
@@ -421,32 +443,45 @@ func collideWithWall(local_lv):
     getABroom()
   if grav == 0:
     grav = PLAYER_GRAV
+  var tile_buffer = 0.5 if glitch_form == global.GlitchForm.INVISIBLE else 0.1
   if pressingMoveLeft():
-    var leftTiles = getTilesLeftOf(getLevelTiles(), 0.1)
+    var leftTiles = getTilesLeftOf(getLevelTiles(), tile_buffer, glitch_form == global.GlitchForm.INVISIBLE)
     var touching_fragile_solid = false
+    var touching_spikes = false
     for i in range(leftTiles.size()):
       var coords = leftTiles[i]
       if coords == null: continue
       var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
-      if getLevelTiles().isTileFragileSolid(tile_type):
+      if not touching_fragile_solid and getLevelTiles().isTileFragileSolid(tile_type):
         glitchTickle()
         touching_fragile_solid = true
-        break
-      if on_ground and glitch_form == global.GlitchForm.FLOOR and not touching_fragile_solid:
-        processMoleDigTimer(Vector3(-2, 0, 0))
+      if not touching_spikes and getLevelTiles().isTileSpikes(tile_type):
+        touching_spikes = true
+    if on_ground and not touching_fragile_solid and not pressingJump() and (glitch_form == global.GlitchForm.FLOOR or (
+      glitch_form == global.GlitchForm.INVISIBLE and touching_spikes
+    )):
+      processMoleDigTimer(Vector3(-2, 0, 0))
+    else:
+      dig_timer = 0
   if pressingMoveRight():
-    var rightTiles = getTilesRightOf(getLevelTiles(), 0.1)
+    var rightTiles = getTilesRightOf(getLevelTiles(), tile_buffer, glitch_form == global.GlitchForm.INVISIBLE)
     var touching_fragile_solid = false
+    var touching_spikes = false
     for i in range(rightTiles.size()):
       var coords = rightTiles[i]
       if coords == null: continue
       var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
-      if getLevelTiles().isTileFragileSolid(tile_type):
+      if not touching_fragile_solid and getLevelTiles().isTileFragileSolid(tile_type):
         glitchTickle()
         touching_fragile_solid = true
-        break
-    if on_ground and glitch_form == global.GlitchForm.FLOOR and not touching_fragile_solid:
+      if not touching_spikes and getLevelTiles().isTileSpikes(tile_type):
+        touching_spikes = true
+    if on_ground and not touching_fragile_solid and not pressingJump() and (glitch_form == global.GlitchForm.FLOOR or (
+      glitch_form == global.GlitchForm.INVISIBLE and touching_spikes
+    )):
       processMoleDigTimer(Vector3(2, 0, 0))
+    else:
+      dig_timer = 0
 
 onready var digSound = get_node("Sounds/DigSound")
 func processMoleDigTimer(digDirection):
@@ -457,13 +492,17 @@ func processMoleDigTimer(digDirection):
   dig_timer += (secret_delta*11)
   # on_ground = true
   # mySprite.flip_h = not mySprite.flip_h
+  dig_direction = digDirection
+  glitchTickle()
+  glitchTilesAroundMe(-1)
   if dig_timer > dig_time_limit:
     can_dig_up = false
     tryClearFallthroughCollisionSolid(self.global_transform.origin)
     transformation = TransformationState.UNDERGROUND_RETURNING
+    mySprite.visible = false
+    global.memory["broom"] = false
     moleSprite.visible = false
     summonSmokeClouds(3, true, true, 0)
-    dig_direction = digDirection
     global_transform.origin += digDirection
     digSound.play()
     physics_vars.should_apply_gravity = false
@@ -518,6 +557,8 @@ func pressingJump():
     return false
   if transformation == TransformationState.CHICKEN:
     return should_magic_jump or ((pressingMoveRight() or pressingMoveLeft()) and truly_on_ground) or Input.is_action_pressed("jump_button")
+  if transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING:
+    return false
   if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
     return false
   if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
@@ -541,14 +582,6 @@ func actuallyApplyJump(play_sound = true):
   #   has_just_jumped_timer = 0
   # else:
   .actuallyApplyJump(play_sound)
-
-# @override
-func pressingMoveUp():
-  return Input.is_action_pressed("ui_up") and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()
-  
-# @override
-func pressingMoveDown():
-  return Input.is_action_pressed("ui_down") and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()
   
 var override_stop_left_input = false
 # @override

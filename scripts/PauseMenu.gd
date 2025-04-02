@@ -1020,50 +1020,56 @@ func tryDrawMap():
             sprite.material.set_shader_param("offset", 11)
         continue
       setProperMapFrame(sprite, mapGrid, i, j)
-      if mapRoom.has_angel_statue:
-        print(mapRoom.path + ": " + str(getBabushkaCatSniffedVar(mapRoom.path)))
-        if getBabushkaCatSniffedVar(mapRoom.path) > 0 or "0_1Haven" in mapRoom.path:
-          sprite.frame = 61
-          sprite.material.set_shader_param("offset", 11)
+      # if mapRoom.has_angel_statue:
+      #   print(mapRoom.path + ": " + str(getBabushkaCatSniffedVar(mapRoom.path)))
+      #   if getBabushkaCatSniffedVar(mapRoom.path) > 0 or "0_1Haven" in mapRoom.path:
+      #     sprite.frame = 61
+      #     sprite.material.set_shader_param("offset", 11)
 
-        for angelStatue in angelStatues:
-          if mapRoom.path == angelStatue[1]:
-            if global.memory["angel_flute"]:
-              var angelSprite = mapAngelSprite.duplicate()
-              sprite.visible = false
-              angelSprite.visible = true
-              angelSprite.position = sprite.position
-              mapAngelSprite.get_parent().add_child(angelSprite)
-            else:
-              sprite.material.set_shader_param("offset", 6)
-      elif "BossRoom" in mapRoom.path and not "preBossRoom" in mapRoom.path:
+      #   for angelStatue in angelStatues:
+      #     if mapRoom.path == angelStatue[1]:
+      #       if global.memory["angel_flute"]:
+      #         var angelSprite = mapAngelSprite.duplicate()
+      #         sprite.visible = false
+      #         angelSprite.visible = true
+      #         angelSprite.position = sprite.position
+      #         mapAngelSprite.get_parent().add_child(angelSprite)
+      #       else:
+      #         sprite.material.set_shader_param("offset", 6)
+      if "BossRoom" in mapRoom.path and not "preBossRoom" in mapRoom.path:
         if "AnglerFish" in mapRoom.path:
-          if global.memory["angler_seaman_boss"] >= 2:
-            sprite.frame = 182
+          if global.memory["angler_seaman_boss"] >= 3:
+            sprite.frame = 238
+          elif global.memory["angler_seaman_boss"] >= 2:
+            sprite.frame = 239
           else:
             sprite.frame = 217
             sprite.material.set_shader_param("offset", 0)
         if "Claydol" in mapRoom.path:
-          if global.memory["dogu_matryoshka_boss"] >= 2:
-            sprite.frame = 182
+          if global.memory["dogu_matryoshka_boss"] >= 3:
+            sprite.frame = 238
+          elif global.memory["dogu_matryoshka_boss"] >= 2:
+            sprite.frame = 239
           else:
             sprite.frame = 217
             sprite.material.set_shader_param("offset", 0)
         if "BabaYaga" in mapRoom.path:
-          if global.memory["baba_yaga_boss"] >= 2:
-            sprite.frame = 182
+          if global.memory["baba_yaga_boss"] >= 3:
+            sprite.frame = 238
+          elif global.memory["baba_yaga_boss"] >= 2:
+            sprite.frame = 239
           else:
             sprite.frame = 217
             sprite.material.set_shader_param("offset", 0)
-      elif mapRoom.has_mole_memory and getBabushkaCatSniffedVar(mapRoom.path) >= 2:
+      elif mapRoom.has_mole_memory: # and getBabushkaCatSniffedVar(mapRoom.path) >= 2:
         sprite.frame = 90 if not soulSprite2.visible else 91
         # map_cricketSoulSprite.visible = true
         # map_cricketSoulSprite.position = sprite.position
-      elif mapRoom.has_baba_memory and getBabushkaCatSniffedVar(mapRoom.path) >= 2:
+      elif mapRoom.has_baba_memory: # and getBabushkaCatSniffedVar(mapRoom.path) >= 2:
         sprite.frame = 90 if not soulSprite3.visible else 91
         # map_mushroomSoulSprite.visible = true
         # map_mushroomSoulSprite.position = sprite.position
-      elif mapRoom.has_fish_memory and getBabushkaCatSniffedVar(mapRoom.path) >= 2:
+      elif mapRoom.has_fish_memory: # and getBabushkaCatSniffedVar(mapRoom.path) >= 2:
         sprite.frame = 90 if not soulSprite1.visible else 91
         # map_fishSoulSprite.visible = true
         # map_fishSoulSprite.position = sprite.position

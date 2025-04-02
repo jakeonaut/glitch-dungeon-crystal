@@ -586,7 +586,7 @@ func getTilesLeftOf(currLevelTiles, buffer = 0.5, ignore_just_give_me_coords = f
 
   return solidTilesLeftOf
 
-func getTilesRightOf(currLevelTiles, buffer = 0.1, ignore_just_give_me_coords = false, allow_negative = false):
+func getTilesRightOf(currLevelTiles, buffer = 0.1, ignore_just_give_me_coords = false, allow_negative = false, debug = false):
   var x = global_transform.origin.x
   var y = global_transform.origin.y
   var z = global_transform.origin.z
@@ -607,6 +607,8 @@ func getTilesRightOf(currLevelTiles, buffer = 0.1, ignore_just_give_me_coords = 
   var solidTilesRightOf = [null, null, null]
   if isTileSolid(tile_type_a, true, 1, tile_pos_a) or (tile_type_a != -1 and ignore_just_give_me_coords) or allow_negative:
     solidTilesRightOf[0] = coords_a
+  if debug:
+    print(str(tile_type_a) + ", " + str(tile_type_mid) + str(tile_type_b))
   if isTileSolid(tile_type_mid, true, 1, tile_pos_mid) or (tile_type_mid != -1 and ignore_just_give_me_coords) or allow_negative:
     solidTilesRightOf[1] = coords_mid
   if isTileSolid(tile_type_b, true, 1, tile_pos_b) or (tile_type_b != -1 and ignore_just_give_me_coords) or allow_negative:

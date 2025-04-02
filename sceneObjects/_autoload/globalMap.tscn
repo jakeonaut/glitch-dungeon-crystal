@@ -1301,7 +1301,7 @@ material_override = SubResource( 34 )
 frame = 38
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/TeleportDoorMaze.tscn"
 can_nav_left = false
-has_crypt_key = true
+has_baba_memory = true
 
 [node name="CricketCaves" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 0 )

@@ -1482,8 +1482,8 @@ func checkSolidTilesOnMe():
 
 func processMoleLogic(delta):
   if transformation == TransformationState.MOLE_DIGGING:
-    if not moleSprite.visible and not aniPlayer.assigned_animation == "transformToMole":
-      allSpritesBackToNormal(moleSprite)
+    # if not moleSprite.visible and not aniPlayer.assigned_animation == "transformToMole":
+    #   allSpritesBackToNormal(moleSprite)
     dig_smoke_timer += (delta*11)
     if dig_smoke_timer >= dig_smoke_time_limit:
       dig_smoke_timer = 0
@@ -1491,13 +1491,19 @@ func processMoleLogic(delta):
     moleSprite.flip_h = mySprite.flip_h
     if dig_direction == null or (dig_direction.y > 0 and not on_ceiling and was_on_ceiling) or \
        (dig_direction.x > 0 and not pressingMoveRight()) or (dig_direction.x < 0 and not pressingMoveLeft()) or \
-       (dig_direction.y < 0 and not pressingMoveDown()):
+       (dig_direction.y < 0 and not pressingMoveDown()) or (dig_direction.x != 0 and (pressingJump() or pressingDown())):
       getMoleCured()
+      dig_timer = 0
       was_just_on_ground_timer = 0
       jump_squat_jump_input_timer = 0
       feather_jump_timer = feather_jump_time_limit if glitch_form == global.GlitchForm.FLOOR else feather_jump_time_limit / 2
       jump_press_timer = jump_press_time_limit / 2
       on_ground = true
+    elif glitch_form == global.GlitchForm.INVISIBLE and dig_direction != null:
+      if dig_direction.x > 0 and pressingMoveRight():
+        processMoleDigTimer(Vector3(2, 0, 0))
+      if dig_direction.x < 0 and pressingMoveLeft():
+        processMoleDigTimer(Vector3(-2, 0, 0))
   elif transformation == TransformationState.UNDERGROUND_RETURNING:
     override_camera_y = global_transform.origin.y
     dig_below_timer = 0
@@ -1554,7 +1560,6 @@ func processMoleLogic(delta):
     if checkSolidTilesOnMe():
       global_transform.origin -= (dig_direction * delta*11.0)
     else:
-      self.global_transform.origin += dig_direction * 0.5
       if dig_direction != null and dig_direction.y > 0:
         should_magic_jump = true
         # might be weird with gravity?? should just disable with gravity?? idk
@@ -1572,24 +1577,26 @@ func processMoleLogic(delta):
     # TODO(jaketrower): TODO(jaketrower): TODO(jaketrower): TODO(jaketrower):
     if dig_direction != null and dig_timer > 0 and transformation != TransformationState.MOLE_DIGGING and (
       (glitch_form == global.GlitchForm.FEATHER and pressingJump() and dig_direction.y >= 0 and on_ceiling and not was_on_ceiling) or
-      (glitch_form == global.GlitchForm.FLOOR and (pressingMoveLeft() or pressingMoveRight()) and on_ground)
+      (glitch_form == global.GlitchForm.FLOOR and (pressingMoveLeft() or pressingMoveRight()) and on_ground) or
+      (glitch_form == global.GlitchForm.LADDER and pressingDown() and dig_direction.y <= 0 and on_ground) or
+      (glitch_form == global.GlitchForm.INVISIBLE and dig_direction != null) # second check is redundant
     ):
       transformation = TransformationState.MOLE_DIGGING
-      aniPlayer.stop()
-      aniPlayer.clear_queue()
-      aniPlayer.play("transformToMole")
-      pauseAnimation = true
-      if summonedBroom:
-        broomStop()
-        summonFallenBroom(true, false, false)
-      global.memory["broom"] = false
+      # aniPlayer.stop()
+      # aniPlayer.clear_queue()
+      # aniPlayer.play("transformToMole")
+      # pauseAnimation = true
+      # if summonedBroom:
+      #   broomStop()
+      #   summonFallenBroom(true, false, false)
+      # global.memory["broom"] = false
     else:
       dig_timer = 0
     if not pressingJump() and on_ground:
       can_dig_up = true
-    if moleSprite.visible and not aniPlayer.assigned_animation == "revertFromMole":
-      allSpritesBackToNormal(mySprite)
-      getABroom()
+    # if moleSprite.visible and not aniPlayer.assigned_animation == "revertFromMole":
+    #   allSpritesBackToNormal(mySprite)
+    #   getABroom()
 
 func applyGravity(delta):
   if dig_timer > 0 and (pressingJump() or glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall()) and can_dig_up and (on_ceiling or was_on_ceiling):
@@ -1603,7 +1610,8 @@ func applyGravity(delta):
   #   on_ground = true
   #   was_on_ground = true
   #   feather_jump_timer = 0
-  if glitch_form == global.GlitchForm.FEATHER:
+  if glitch_form == global.GlitchForm.FEATHER or (glitch_form == global.GlitchForm.INVISIBLE and not on_ground):
+    print("erase 7")
     dig_timer = 0
   .applyGravity(delta)
 
@@ -1618,27 +1626,29 @@ func collideWithCeiling(local_lv):
       bigBump()
   on_ceiling = true
   var solidTilesAbove = getTilesAbove(getLevelTiles())
-  var areAnyTilesAboveMeGlitched = false
+  var areAnyTilesAboveMeFragileBrickSolid = false
+  var areAnyTilesAboveMeSpikes = false
   for i in range(solidTilesAbove.size()):
     var coords = solidTilesAbove[i]
     if coords == null: continue
     var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
-    if getLevelTiles().isTileFragileSolid(tile_type):
-      areAnyTilesAboveMeGlitched = true
+    if not areAnyTilesAboveMeFragileBrickSolid and getLevelTiles().isTileFragileSolid(tile_type):
+      areAnyTilesAboveMeFragileBrickSolid = true
       if pressingJump():
         if not noBroomSound.is_playing() and global.memory["mole_cricket"] > 0 and glitch_form == global.GlitchForm.FEATHER:
           noBroomSound.play()
-          glitchTilesAroundMe()
+          # glitchTilesAroundMe()
         glitchTickle()
-      break
+    if not areAnyTilesAboveMeSpikes and getLevelTiles().isTileSpikes(tile_type):
+      areAnyTilesAboveMeSpikes = true
   if (
     local_lv.y < 0 or not can_dig_up or global.memory["mole_cricket"] == 0 or nesting_doll_state == global.NestingDoll.MATRIARCH or
     nesting_doll_state == global.NestingDoll.BABY or
     not pressingJump() or
     # (dig_timer == 0 and (pressingMoveLeft() or pressingMoveRight())) or 
-    areAnyTilesAboveMeGlitched or
+    areAnyTilesAboveMeFragileBrickSolid or
     (transformation != TransformationState.NORMAL and transformation != TransformationState.MOLE_DIGGING)
-    or glitch_form != global.GlitchForm.FEATHER
+    or (glitch_form != global.GlitchForm.FEATHER and not (glitch_form == global.GlitchForm.INVISIBLE and areAnyTilesAboveMeSpikes))
   ):
     local_lv.y = 0
     getMoleCured()
@@ -1683,9 +1693,9 @@ func getMoleCured():
   print('mole cured')
   dig_timer = 0
   dig_below_timer = 0
-  aniPlayer.stop()
-  aniPlayer.clear_queue()
-  aniPlayer.play("revertFromMole")
+  # aniPlayer.stop()
+  # aniPlayer.clear_queue()
+  # aniPlayer.play("revertFromMole")
   transformation = TransformationState.NORMAL
   getABroom() # HAS TO BE AFTER SETTING THE TRANSFORMATION STATE
   
@@ -2494,7 +2504,8 @@ func processPoisonWaterLogic(_delta):
 var has_landed_since_recovering = true
 # @override
 func landed():
-  dig_timer = 0
+  if dig_direction == null or not dig_direction.y <= 0 or not ((glitch_form == global.GlitchForm.LADDER or glitch_form == global.GlitchForm.INVISIBLE) and pressingDown()):
+    dig_timer = 0
   .landed()
   if not (is_mushroom_infected or is_mushroom_prefected):
     has_landed_since_recovering = true

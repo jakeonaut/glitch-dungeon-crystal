@@ -998,7 +998,7 @@ position = Vector2( 4.5, -47 )
 texture = ExtResource( 19 )
 hframes = 16
 vframes = 16
-frame = 183
+frame = 217
 
 [node name="MapSprite8" type="Sprite" parent="MapRect/ColorRect/ColorRect/MapBackgroundSprite"]
 material = SubResource( 64 )
@@ -1006,7 +1006,7 @@ position = Vector2( 13, -47 )
 texture = ExtResource( 19 )
 hframes = 16
 vframes = 16
-frame = 183
+frame = 239
 
 [node name="MapSprite9" type="Sprite" parent="MapRect/ColorRect/ColorRect/MapBackgroundSprite"]
 material = SubResource( 64 )

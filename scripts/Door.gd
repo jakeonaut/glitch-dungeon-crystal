@@ -158,7 +158,7 @@ func spawnChicken():
     
 onready var meshInstance2 = get_node("MeshInstance2")
 func _process(delta):
-  if is_locked:
+  if is_locked and key_type == global.KeyItem.NORMAL:
     label3D.visible = true
     label3D.text = str(num_keys_unlock)
   tryProcessGlitchedPath()

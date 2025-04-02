@@ -130,10 +130,10 @@ func getSmacked(broom_origin = null, _silently = false):
   elif broom_origin.x > global_transform.origin.x:
     should_move_left = true
 
-  if should_move_left:
-    global_transform.origin.x -= 1
-  elif should_move_right:
-    global_transform.origin.x += 1
+  # if should_move_left:
+  #   global_transform.origin.x -= 1
+  # elif should_move_right:
+  #   global_transform.origin.x += 1
 
 func passiveActivate(_delta, _is_player):
   pass

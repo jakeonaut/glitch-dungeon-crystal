@@ -817,38 +817,38 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0647551, 0 )
 shape = SubResource( 81 )
 
 [node name="DoorCloseSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 10 )
 volume_db = -20.0
 pitch_scale = 0.7
+bus = "Sfx"
 
 [node name="DoorOpenSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 13 )
 volume_db = -20.0
+bus = "Sfx"
 
 [node name="WarpSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 25 )
 volume_db = -20.0
 pitch_scale = 0.7
+bus = "Sfx"
 
 [node name="KeySound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 11 )
 volume_db = -25.0
 pitch_scale = 2.0
+bus = "Sfx"
 
 [node name="LockedSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -20.0
 pitch_scale = 0.7
+bus = "Sfx"
 
 [node name="SillySound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 16 )
 volume_db = -20.0
+bus = "Sfx"
 
 [node name="NPC" type="Spatial" parent="." groups=["npc"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1 )
