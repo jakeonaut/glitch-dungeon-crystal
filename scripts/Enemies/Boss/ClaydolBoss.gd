@@ -14,7 +14,7 @@ var num_granny_hits = 0
 var MAX_GRANNY_HITS = 3
 
 var dreidel_timer = 0
-var dreidel_time_limit = 40
+var dreidel_time_limit = 60
 var dizzy_timer = 0
 var dizzy_time_limit = 120
 var smokeCloudTimer = 0
@@ -179,7 +179,7 @@ func _process(delta):
                 secretAniPlayer.play("dizzy")
                 boss_phase = BossPhase.DIZZY
                 thudSound.play()
-                global_transform.origin.y -= 2
+                global_transform.origin.y -= 4
                 spawnWeakEye()
         else:
             pass
@@ -238,7 +238,7 @@ func _process(delta):
 
         behavior_walking = true
         dreidel_timer += (delta*11)
-        walk_speed = 16 * sin(dreidel_timer / (PI * 3)) + 16
+        walk_speed = 16 * sin(dreidel_timer / (PI * 3)) + 8
         # tryGetStunnedByWalls()
         if dreidel_timer >= dreidel_time_limit:
             behavior_walking = false

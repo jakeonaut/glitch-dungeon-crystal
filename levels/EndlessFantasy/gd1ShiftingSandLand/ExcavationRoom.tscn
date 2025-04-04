@@ -29,7 +29,7 @@
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=27]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=28]
 [ext_resource path="res://assets/backgrounds/cave_layer_0.png" type="Texture" id=29]
-[ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=31]
+[ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=30]
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=32]
 
 [sub_resource type="BoxShape" id=56]
@@ -47,7 +47,7 @@ extents = Vector3( 0.5, 0.24, 1 )
 [sub_resource type="BoxShape" id=59]
 resource_local_to_scene = true
 
-[sub_resource type="ShaderMaterial" id=62]
+[sub_resource type="ShaderMaterial" id=64]
 shader = ExtResource( 26 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
@@ -81,7 +81,7 @@ shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 32 )
 shader_param/base_palette = ExtResource( 27 )
-shader_param/target_palette = ExtResource( 31 )
+shader_param/target_palette = ExtResource( 30 )
 
 [sub_resource type="Animation" id=46]
 length = 0.001
@@ -500,8 +500,8 @@ shape = SubResource( 59 )
 script = ExtResource( 24 )
 
 [node name="Sprite3D" parent="Viewport/level/Mimic/TreasureSpellCollectable" index="3"]
-material_override = SubResource( 62 )
-frame = 60
+material_override = SubResource( 64 )
+frame = 86
 should_animate = false
 
 [node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 22 )]

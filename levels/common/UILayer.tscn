@@ -1130,7 +1130,7 @@ mesh = SubResource( 17226 )
 script = ExtResource( 30 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 material_override = SubResource( 17211 )
 mesh = SubResource( 17 )
 
@@ -1141,27 +1141,27 @@ script = ExtResource( 21 )
 shape = SubResource( 15 )
 
 [node name="cubeSound" type="AudioStreamPlayer" parent="GlitchStatusRect/Viewport/miniCubeCrystal"]
-bus="Sfx"
 stream = ExtResource( 27 )
 volume_db = -33.0
 pitch_scale = 1.5
+bus = "Sfx"
 
 [node name="cubeSound2" type="AudioStreamPlayer" parent="GlitchStatusRect/Viewport/miniCubeCrystal"]
-bus="Sfx"
 stream = ExtResource( 32 )
 volume_db = -8.0
+bus = "Sfx"
 
 [node name="cubeSound4" type="AudioStreamPlayer" parent="GlitchStatusRect/Viewport/miniCubeCrystal"]
-bus="Sfx"
 stream = ExtResource( 33 )
 volume_db = -15.0
 pitch_scale = 0.4
+bus = "Sfx"
 
 [node name="cubeSound3" type="AudioStreamPlayer" parent="GlitchStatusRect/Viewport/miniCubeCrystal"]
-bus="Sfx"
 stream = ExtResource( 23 )
 volume_db = -40.411
 pitch_scale = 1.43
+bus = "Sfx"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GlitchStatusRect/Viewport/miniCubeCrystal"]
 autoplay = "RESET"
@@ -1546,10 +1546,10 @@ text = "left
 scroll_active = false
 
 [node name="MenuMoveSound" type="AudioStreamPlayer" parent="BroomUpgradeMenu"]
-bus="Sfx"
 stream = ExtResource( 28 )
 volume_db = -15.0
 pitch_scale = 0.9
+bus = "Sfx"
 
 [node name="SavingTextLabel" type="RichTextLabel" parent="."]
 visible = false
@@ -1681,27 +1681,12 @@ text = "MAGIC: 10"
 scroll_active = false
 
 [node name="PauseMenu" parent="." instance=ExtResource( 9 )]
-visible = false
 
-[node name="CanvasLayer" parent="PauseMenu" index="12"]
+[node name="CanvasLayer" parent="PauseMenu" index="13"]
+visible = false
 offset = Vector2( 0, 0 )
 scale = Vector2( 3, 3 )
 transform = Transform2D( 3, 0, 0, 3, 0, 0 )
-
-[node name="PopupRect" parent="PauseMenu/CanvasLayer" index="0"]
-margin_left = 35.0
-margin_top = 101.0
-margin_right = 407.0
-margin_bottom = 217.0
-
-[node name="ColorRect" parent="PauseMenu/CanvasLayer/PopupRect" index="0"]
-margin_bottom = 110.0
-
-[node name="ColorRect" parent="PauseMenu/CanvasLayer/PopupRect/ColorRect" index="0"]
-margin_bottom = 103.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LevelTitle" type="ColorRect" parent="."]
 visible = false

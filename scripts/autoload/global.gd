@@ -289,6 +289,9 @@ func _ready():
     loadUserSettings()
 
 var MAX_CRYSTALS_FOR_TOWER = 4
+var zora_flippers_enabled = true
+var mole_cricket_enabled = true
+var mushroom_soul_enabled = true
 func resetMemory():
     memory = {}
 
@@ -323,8 +326,8 @@ func resetMemory():
     # ==============================================
     memory["demo_mode"] = 0
     # if you've beaten the final boss
-    memory["clean_crystals"] = 4
-    memory["priestess"] = 2
+    memory["clean_crystals"] = 0
+    memory["priestess"] = 0
     memory["glitch_world"] = 0
     memory["glitched_grimoire"] = false
     memory["forget_me_not"] = false
@@ -336,19 +339,19 @@ func resetMemory():
     memory["dogu_matryoshka_boss"] = 0
 
     # STORY OR LEVEL STATE
-    memory["babushka_cat_story_hook"] = 3
+    memory["babushka_cat_story_hook"] = 0
     memory["fishing_rod_shortcut"] = 0
 
     # POWERUPS
     # memory["spellbookPage"] = [] # we check if the key exists to see if we have it... -_-
-    memory["can_force_respawn"] = 1
+    memory["can_force_respawn"] = 0
     memory["has_map_item"] = true
     memory["broomerang"] = 1
     memory["babushka_cat_sprint"] = 0
     memory["broom_double_jump"] = 0
-    memory["zora_flippers"] = 0
+    memory["zora_flippers"] = 1
     memory["fishingRod"] = true
-    memory["mole_cricket"] = 0
+    memory["mole_cricket"] = 1
     memory["flowerPot"] = true
     memory["mushroom_soul"] = 1
     memory["cutePet"] = true

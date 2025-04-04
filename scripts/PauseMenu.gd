@@ -3,6 +3,12 @@ extends Control
 onready var popupRectCanvasLayer = get_node("CanvasLayer")
 onready var popupRect = get_node("CanvasLayer/PopupRect")
 onready var popupText = get_node("CanvasLayer/PopupRect/ColorRect/ColorRect/RichTextLabel")
+onready var popupYesButton = get_node("CanvasLayer/PopupRect/YesButton")
+onready var popupYesCursor = get_node("CanvasLayer/PopupRect/YesButton/CursorSprite")
+onready var popupNoButton = get_node("CanvasLayer/PopupRect/NoButton")
+onready var popupNoCursor = get_node("CanvasLayer/PopupRect/NoButton/CursorSprite")
+var shouldShowPopupYesNoOptions = false
+var popupYesNoOptions = false
 var popupTimer = 0
 var popupTimeLimit = 20
 var canResetBindings = true
@@ -147,6 +153,8 @@ func _process(delta):
     return
   if not popupRectCanvasLayer.visible:
     popupRectCanvasLayer.visible = true
+  # popupRect.rect_position = Vector2(100, 250)
+  # popupRect.rect_size = Vector2(400, 60)
 
   if Input.is_action_just_pressed("menu_down"):
     menuMoveSound.play()
@@ -532,6 +540,18 @@ func processInventoryLogic(delta):
       pauseTitleText.bbcode_text = tr("UI.Inventory.3") % global.getInputText("menu_confirm") # "change spell order, " + global.getInputText("menu_left") + global.getInputText("menu_right") + "\n" + global.getInputText("menu_confirm") + " to swap"
   processInventoryRender(delta)
   tryDrawMap()
+
+  if popupRect.visible:
+    popupYesButton.visible = shouldShowPopupYesNoOptions
+    popupNoButton.visible = shouldShowPopupYesNoOptions
+    popupYesCursor.visible = popupYesNoOptions
+    popupNoCursor.visible = not popupYesNoOptions
+    if shouldShowPopupYesNoOptions:
+      if Input.is_action_just_pressed("menu_right") or Input.is_action_just_pressed("menu_left"):
+        popupYesNoOptions = not popupYesNoOptions
+  else:
+    popupYesCursor.visible = false
+    popupNoCursor.visible = false
   
   var activeColor = Color("#dcdcdc")
   var inactiveColor = Color("#006400")
@@ -636,8 +656,12 @@ func processInventoryLogic(delta):
         selectedGlitchSprite = -1
       if spellbookSize > 0:
         popupRect.visible = not popupRect.visible
+        shouldShowPopupYesNoOptions = false
+        popupYesNoOptions = false
     elif inventoryOptionIndex == 1:
       popupRect.visible = not popupRect.visible
+      shouldShowPopupYesNoOptions = false
+      popupYesNoOptions = false
       if inventoryOptionIndexX == 0:
         popupText.text = tr("UI.Inventory.5") # "your trusty broom.." if not global.memory["glitched_broom"] else "uyro utsryt oomr;b"
         # if global.memory["broomerang"] > 1:
@@ -654,14 +678,29 @@ func processInventoryLogic(delta):
         popupText.text = "an enchanted bag\nlets you take another hit"
     elif inventoryOptionIndex == 2:
       popupRect.visible = not popupRect.visible
+      shouldShowPopupYesNoOptions = true
       if inventoryOptionIndexX == 0:
         popupText.text = tr("NPC.Treasure.7") # "memory of fish:\n  swim in water\n"
+        if popupRect.visible:
+          popupYesNoOptions = global.zora_flippers_enabled
+        else:
+          global.zora_flippers_enabled = popupYesNoOptions
       elif inventoryOptionIndexX == 1:
         popupText.text = tr("NPC.Treasure.8") # "mole cricket memory:\n  jump and hold to dig\n  up through ceilings"
+        if popupRect.visible:
+          popupYesNoOptions = global.mole_cricket_enabled
+        else:
+          global.mole_cricket_enabled = popupYesNoOptions
       elif inventoryOptionIndexX == 2:
         popupText.text = tr("NPC.Treasure.9") # "spore memory:\n  hold sweep button to\n  teleport when smacking  \n  works with broomerang"
+        if popupRect.visible:
+          popupYesNoOptions = global.mushroom_soul_enabled
+        else:
+          global.mushroom_soul_enabled = popupYesNoOptions
     elif inventoryOptionIndex == 3:
       popupRect.visible = not popupRect.visible
+      shouldShowPopupYesNoOptions = false
+      popupYesNoOptions = false
       if inventoryOptionIndexX == 0:
         var numEggs = global.getThingFromAllLevelZonez("angelEgg")
         popupText.text = tr("UI.Inventory.7") + str(numEggs) # "angel eggs:\n  spawn of goddess\n  got " 
@@ -698,6 +737,8 @@ func processInventoryLogic(delta):
       else:
         var levelZoneName = angelStatueArrValue[0]
         popupRect.visible = not popupRect.visible
+        shouldShowPopupYesNoOptions = false
+        popupYesNoOptions = false
         if popupRect.visible:
           angelStatueToTeleportTo = angelStatueArrValue
         popupText.text = "teleport to " + levelZoneName + "?"
@@ -705,6 +746,8 @@ func processInventoryLogic(delta):
     angelStatueToTeleportTo = null
     if popupRect.visible:
       popupRect.visible = false
+      shouldShowPopupYesNoOptions = false
+      popupYesNoOptions = false
       selectedGlitchSprite = -1
     elif selectedGlitchSprite >= 0:
       selectedGlitchSprite = -1
@@ -940,8 +983,11 @@ func processInventoryRender(_delta):
   petSprite.visible = false
 
   soulSprite1.visible = global.memory["zora_flippers"]
+  soulSprite1.scale = Vector2(3, 3) if global.zora_flippers_enabled else Vector2(1, 1)
   soulSprite2.visible = global.memory["mole_cricket"]
+  soulSprite2.scale = Vector2(3, 3) if global.mole_cricket_enabled else Vector2(1, 1)
   soulSprite3.visible = global.memory["mushroom_soul"]
+  soulSprite3.scale = Vector2(3, 3) if global.mushroom_soul_enabled else Vector2(1, 1)
   soulLabel.visible = soulSprite1.visible or soulSprite2.visible or soulSprite3.visible
   var numEggs = global.getThingFromAllLevelZonez("angelEgg")
   angelEggSprite.visible = numEggs > 0
@@ -1372,6 +1418,8 @@ func processPopupRenderLogic(delta):
   else:
     if pauseMenuState != PauseMenuState.INVENTORY:
       popupRect.visible = false
+      shouldShowPopupYesNoOptions = false
+      popupYesNoOptions = false
     popupTimer = 0
     if not Input.is_action_pressed("ui_cancel") and not Input.is_action_pressed("popup_menu") and not Input.is_action_pressed("ui_start"):
       canResetBindings = true

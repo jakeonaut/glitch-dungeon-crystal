@@ -485,7 +485,7 @@ func collideWithWall(local_lv):
 
 onready var digSound = get_node("Sounds/DigSound")
 func processMoleDigTimer(digDirection):
-  if global.memory["mole_cricket"] == 0:
+  if global.memory["mole_cricket"] == 0 or not global.mole_cricket_enabled:
     dig_timer = 0
     return
 

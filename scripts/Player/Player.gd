@@ -624,7 +624,7 @@ func unsmack():
   mySprite.material_override.set_shader_param("enable_palette_cycle", false)
 
 func startTeleport():
-  if global.memory["mushroom_soul"] and teleport_to != null and Input.is_action_pressed("sub_action_button") and global.activeInteractor == null:
+  if global.memory["mushroom_soul"] and global.mushroom_soul_enabled and teleport_to != null and Input.is_action_pressed("sub_action_button") and global.activeInteractor == null:
     pauseSelf = true
     global.pauseMoveInput = true
     visible = false
@@ -682,7 +682,7 @@ func processTeleportationLogic(delta):
       if not has_teleported:
         # TODO
         # reassembleSound.play()
-        if global.memory["mushroom_soul"]:
+        if global.memory["mushroom_soul"] and global.mushroom_soul_enabled:
           # if teleport_to != null and teleport_to.get_ref() != null:
           #   var teleportTarget = teleport_to.get_ref()
           #   var temp_position = self.global_transform.origin
@@ -1131,7 +1131,11 @@ var bubble_timer = 0
 var bubble_time_limit = 2
 onready var fishFormSound = get_node("Sounds/FishFormSound")
 func processFishyLogic(_delta):
-  if not global.memory["zora_flippers"]:
+  if not global.memory["zora_flippers"] or not global.zora_flippers_enabled:
+    if transformation == TransformationState.FISHY:
+      getFishyCured()
+    elif fishySprite.visible and not aniPlayer.assigned_animation == "revertFromFishy":
+      allSpritesBackToNormal(mySprite)
     return
 
   var has_been_in_water = (is_touching_water and was_touching_water) # or (is_touching_sandstream and was_touching_sandstream)
@@ -1634,14 +1638,16 @@ func collideWithCeiling(local_lv):
     if not areAnyTilesAboveMeFragileBrickSolid and getLevelTiles().isTileFragileSolid(tile_type):
       areAnyTilesAboveMeFragileBrickSolid = true
       if pressingJump():
-        if not noBroomSound.is_playing() and global.memory["mole_cricket"] > 0 and glitch_form == global.GlitchForm.FEATHER:
+        if not noBroomSound.is_playing() and (global.memory["mole_cricket"] > 0 and not global.mole_cricket_enabled) and glitch_form == global.GlitchForm.FEATHER:
           noBroomSound.play()
           # glitchTilesAroundMe()
         glitchTickle()
     if not areAnyTilesAboveMeSpikes and getLevelTiles().isTileSpikes(tile_type):
       areAnyTilesAboveMeSpikes = true
   if (
-    local_lv.y < 0 or not can_dig_up or global.memory["mole_cricket"] == 0 or nesting_doll_state == global.NestingDoll.MATRIARCH or
+    local_lv.y < 0 or not can_dig_up or
+    global.memory["mole_cricket"] == 0 or not global.mole_cricket_enabled or
+    nesting_doll_state == global.NestingDoll.MATRIARCH or
     nesting_doll_state == global.NestingDoll.BABY or
     not pressingJump() or
     # (dig_timer == 0 and (pressingMoveLeft() or pressingMoveRight())) or 
@@ -2098,7 +2104,7 @@ func processBroomLogic(delta):
       var found_fallen_broom = false
       var fallenBroomArray = self.get_tree().get_nodes_in_group("fallen_broom_group")
       for fallenBroom in fallenBroomArray:
-        if fallenBroom.visible and global.memory["mushroom_soul"] > 0:
+        if fallenBroom.visible and global.memory["mushroom_soul"] > 0 and global.mushroom_soul_enabled:
           fallenBroom.warpToIt()
         elif not fallenBroom.returning and fallenBroom.visible and not fallenBroom.should_die_on_land and not fallenBroom.is_dying and fallenBroom.should_return and fallenBroom.can_return_via_input:
           fallenBroom.returning = true
