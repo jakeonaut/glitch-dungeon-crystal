@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://assets/palettes/kirokaze-gameboy-1x.png" type="Texture" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=27]
 [ext_resource path="res://assets/palettes/pseudo_greyscale.png" type="Texture" id=28]
 [ext_resource path="res://sceneObjects/MushroomNPC.tscn" type="PackedScene" id=29]
+[ext_resource path="res://scripts/ShortcutDoor.gd" type="Script" id=30]
 
 [sub_resource type="BoxShape" id=34]
 resource_local_to_scene = true
@@ -1443,6 +1444,14 @@ shape = SubResource( 78 )
 [node name="AnimationPlayer" parent="Viewport/level/MushroomNPC/ExclamationSprite" index="0"]
 anims/RESET = SubResource( 79 )
 anims/exclaim = SubResource( 80 )
+
+[node name="BabaShortcutDoor" parent="Viewport/level" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.95749, 2.96579, 0 )
+visible = false
+script = ExtResource( 30 )
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
+memory_str = "babaShortcut"
+starting_glitch_type = ""
 
 [node name="Viewport2" parent="." instance=ExtResource( 13 )]
 

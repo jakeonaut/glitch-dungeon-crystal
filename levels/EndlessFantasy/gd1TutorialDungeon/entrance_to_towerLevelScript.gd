@@ -1,15 +1,9 @@
 extends "../../../scripts/levelScript.gd"
 
 onready var door2 = get_node("Door2")
-onready var priestessShortcut = get_node("PriestessShortcutDoor")
 
 # @override
 func setUpRoomInitializationOverride():
-  if not global.memory.has("priestessShortcut") or not global.memory["priestessShortcut"]:
-    priestessShortcut.visible = false
-  else:
-    priestessShortcut.visible = true
-  
   if global.memory["demo_mode"] > 0:
     door2.num_keys_unlock = 2
     door2.path = "res://levels/EndlessFantasy/gd1/00000EndOfDemo.tscn"

@@ -1,6 +1,7 @@
 extends "../../../scripts/levelScript.gd"
 
 onready var door = get_node("Door")
+onready var shortcutDoor = get_node("ShortcutDoor")
 onready var doguMatryoshkaBoss = get_node("ClaydolBoss")
 onready var lostSoulsNPC = get_node("LostSoulsNPC")
 # onready var dreamOfDeath = get_node("DreamOfDeath")
@@ -9,6 +10,9 @@ onready var lostSoulsNPC = get_node("LostSoulsNPC")
 func setUpRoomInitializationOverride():
     if global.memory["dogu_matryoshka_boss"] >= 3:
         doguMatryoshkaBoss.queue_free()
+        yield(get_tree().create_timer(0.5), "timeout")
+        summonSmokeClouds(shortcutDoor.global_transform.origin, 2, true, true)
+        shortcutDoor.visible = true
     else:
         lostSoulsNPC.queue_free()
         if global.memory["dogu_matryoshka_boss"] == 2:
@@ -25,6 +29,9 @@ func purifyAllWeakEnemies(summon_smoke_clouds = true):
     if global.memory["dogu_matryoshka_boss"] <= 3:
         global.memory["dogu_matryoshka_boss"] = 3
     .purifyAllWeakEnemies(summon_smoke_clouds)
+    yield(get_tree().create_timer(0.5), "timeout")
+    summonSmokeClouds(shortcutDoor.global_transform.origin, 2, true, true)
+    shortcutDoor.visible = true
 
 func _process(_delta):
     # if global.memory["dogu_matryoshka_boss"] >= 2:

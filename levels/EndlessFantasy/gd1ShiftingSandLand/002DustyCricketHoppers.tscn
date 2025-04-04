@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=27]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=28]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=29]
+[ext_resource path="res://scripts/ShortcutDoor.gd" type="Script" id=30]
 [ext_resource path="res://sceneObjects/Spawner.tscn" type="PackedScene" id=31]
 [ext_resource path="res://sceneObjects/MiniAdventures.tscn" type="PackedScene" id=32]
 [ext_resource path="res://sceneObjects/Buggies/Dragonfly.tscn" type="PackedScene" id=33]
@@ -699,6 +700,14 @@ spawn_time_limit = 20
 max_num_children = 2
 x_range = Vector2( -4, 4 )
 should_shake_screen = true
+
+[node name="ClaydolShortcutDoor" parent="Viewport/level" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 66.9575, -6.03421, 0 )
+visible = false
+script = ExtResource( 30 )
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
+memory_str = "claydolShortcut"
+starting_glitch_type = ""
 
 [node name="Viewport2" parent="." instance=ExtResource( 21 )]
 

@@ -335,12 +335,12 @@ func resetMemory():
     memory["glitched_grimoire2"] = false
     
     # crystal elder bosses
-    memory["angler_seaman_boss"] = 0
+    memory["angler_seaman_boss"] = 3
     memory["dogu_matryoshka_boss"] = 0
     memory["baba_yaga_boss"] = 0
     # and associated shortcuts
-    memory["anglerShortcut"] = 0
-    memory["claydolShortcut"] = 0
+    memory["anglerShortcut"] = 1
+    memory["claydolShortcut"] = 1
     memory["babaShortcut"] = 0
     memory["priestessShortcut"] = 0
     

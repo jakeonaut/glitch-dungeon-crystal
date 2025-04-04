@@ -1,6 +1,7 @@
 extends "../../../scripts/levelScript.gd"
 
 onready var door = get_node("Door")
+onready var shortcutDoor = get_node("ShortcutDoor")
 onready var anglerFishBoss = get_node("AnglerFishBoss")
 onready var bigFishNPC = get_node("BigFishNPC")
 onready var basicTadpoleEnemy1 = get_node("BasicTadpoleEnemy")
@@ -23,12 +24,18 @@ func purifyAllWeakEnemies(summon_smoke_clouds = true):
     if global.memory["angler_seaman_boss"] <= 3:
         global.memory["angler_seaman_boss"] = 3
     .purifyAllWeakEnemies(summon_smoke_clouds)
+    yield(get_tree().create_timer(0.5), "timeout")
+    summonSmokeClouds(shortcutDoor.global_transform.origin, 2, true, true)
+    shortcutDoor.visible = true
 
 # @override
 func setUpRoomInitializationOverride():
     if global.memory["angler_seaman_boss"] >= 3:
         anglerFishBoss.queue_free()
         fishies.queue_free()
+        yield(get_tree().create_timer(0.5), "timeout")
+        summonSmokeClouds(shortcutDoor.global_transform.origin, 2, true, true)
+        shortcutDoor.visible = true
     else:
         bigFishNPC.queue_free()
         basicTadpoleEnemy1.queue_free()

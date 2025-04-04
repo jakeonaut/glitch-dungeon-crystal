@@ -1,4 +1,4 @@
-[gd_scene load_steps=176 format=2]
+[gd_scene load_steps=177 format=2]
 
 [ext_resource path="res://levels/EndlessFantasy/gd1TutorialDungeon/0_1HavenLevelScript.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=2]
@@ -43,6 +43,7 @@
 [ext_resource path="res://scripts/0_1HavenElderNPC_DialogStartSound.gd" type="Script" id=41]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=42]
 [ext_resource path="res://assets/palettes/inkpink-1x.png" type="Texture" id=43]
+[ext_resource path="res://scripts/ShortcutDoor.gd" type="Script" id=44]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=45]
 [ext_resource path="res://sceneObjects/AngelStatue.tscn" type="PackedScene" id=46]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/MapTreasure.tscn" type="PackedScene" id=47]
@@ -4546,17 +4547,26 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3649, 1.1759, 0 )
 [node name="AnglerShortcutDoor" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8476, -7.03421, 0 )
 visible = false
+script = ExtResource( 44 )
 path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
+memory_str = "anglerShortcut"
+starting_glitch_type = ""
 
 [node name="BabaShortcutDoor" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.75965, -15.1076, 0 )
 visible = false
+script = ExtResource( 44 )
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/007CrystalHaven.tscn"
+memory_str = "babaShortcut"
+starting_glitch_type = ""
 
 [node name="ClaydolShortcutDoor" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91075, -21.0493, 0 )
 visible = false
+script = ExtResource( 44 )
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/002DustyCricketHoppers.tscn"
+memory_str = "claydolShortcut"
+starting_glitch_type = ""
 
 [node name="Viewport2" parent="." instance=ExtResource( 21 )]
 

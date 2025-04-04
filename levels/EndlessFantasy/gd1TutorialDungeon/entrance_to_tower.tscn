@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=20]
+[ext_resource path="res://scripts/ShortcutDoor.gd" type="Script" id=21]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/FreeChicken.tscn" type="PackedScene" id=23]
 [ext_resource path="res://assets/meshes/crystal.tres" type="ArrayMesh" id=24]
@@ -423,7 +424,10 @@ transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.24
 [node name="PriestessShortcutDoor" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.2055, 10.0447, 0 )
 visible = false
+script = ExtResource( 21 )
 path = "res://levels/EndlessFantasy/gd1CrystalTower/preBossRoom.tscn"
+memory_str = "priestessShortcut"
+starting_glitch_type = ""
 
 [node name="Viewport2" parent="." instance=ExtResource( 15 )]
 

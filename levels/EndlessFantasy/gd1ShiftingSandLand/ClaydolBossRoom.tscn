@@ -1143,6 +1143,11 @@ anims/idle = SubResource( 248 )
 anims/isOpen = SubResource( 249 )
 anims/openUp = SubResource( 250 )
 
+[node name="ShortcutDoor" parent="Viewport/level" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.688, -6.03421, 0 )
+visible = false
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
+
 [node name="Viewport2" parent="." instance=ExtResource( 18 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
