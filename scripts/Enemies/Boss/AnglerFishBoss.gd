@@ -63,6 +63,8 @@ var how_many_final_charges = 0
 
 onready var spawnSound = get_node("Sounds/SpawnSound")
 func _ready():
+    if global.memory["anglerShortcut"] == 0:
+        global.memory["anglerShortcut"] = 1
     set_process(true)
     is_sprite_flipped = true
     should_collide_floor = false

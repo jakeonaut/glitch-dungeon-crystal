@@ -44,6 +44,8 @@ var sproutedArray = []
 var landingIndex = 0
 
 func _ready():
+    if global.memory["babaShortcut"] == 0:
+        global.memory["babaShortcut"] = 1
     set_process(true)
     # Wait two frames cuz idk
     yield(TempTimer.idle_frame(self), "timeout")

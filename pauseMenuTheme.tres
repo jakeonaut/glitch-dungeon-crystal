@@ -1,13 +1,6 @@
-[gd_resource type="Theme" load_steps=3 format=2]
+[gd_resource type="Theme" load_steps=2 format=2]
 
-[ext_resource path="res://assets/fonts/High_Birth.ttf" type="DynamicFontData" id=1]
-
-[sub_resource type="DynamicFont" id=60]
-size = 32
-outline_size = 4
-outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-use_mipmaps = true
-font_data = ExtResource( 1 )
+[ext_resource path="res://unlocalized/pauseMenuFont.tres" type="DynamicFont" id=1]
 
 [resource]
-default_font = SubResource( 60 )
+default_font = ExtResource( 1 )

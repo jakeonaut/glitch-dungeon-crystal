@@ -264,6 +264,9 @@ func _process(delta):
   processBossHealth(delta)
 
 func processPauseMenu():
+  if player.isItWeird() or player.isItKindaWeird():
+    return
+
   if global.shouldRenderAsCinematic:
     global.is_reading_input = false
     global.is_reading_keyboard_input = false

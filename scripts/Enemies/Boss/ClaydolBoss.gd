@@ -55,6 +55,8 @@ var big_rock_count_max = 3
 var myBigRock = null
 
 func _ready():
+    if global.memory["claydolShortcut"] == 0:
+        global.memory["claydolShortcut"] = 1
     set_process(true)
     # sprite_offset_y = 7.5
 

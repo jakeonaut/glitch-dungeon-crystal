@@ -287,6 +287,7 @@ func _ready():
     resetMemory()
     resetUserSettings()
     loadUserSettings()
+    changeLocale(userSettings["locale"], false)
 
 var MAX_CRYSTALS_FOR_TOWER = 4
 var zora_flippers_enabled = true
@@ -334,9 +335,15 @@ func resetMemory():
     memory["glitched_grimoire2"] = false
     
     # crystal elder bosses
-    memory["baba_yaga_boss"] = 0
     memory["angler_seaman_boss"] = 0
     memory["dogu_matryoshka_boss"] = 0
+    memory["baba_yaga_boss"] = 0
+    # and associated shortcuts
+    memory["anglerShortcut"] = 0
+    memory["claydolShortcut"] = 0
+    memory["babaShortcut"] = 0
+    memory["priestessShortcut"] = 0
+    
 
     # STORY OR LEVEL STATE
     memory["babushka_cat_story_hook"] = 0
@@ -403,6 +410,13 @@ func resetUserSettings():
     userSettings["stopAllSfx"] = false
     userSettings["spellAssist"] = false
     userSettings["glyphType"] = GlyphType.XBOX
+    userSettings["locale"] = 'en'
+
+func changeLocale(locale, saveSettings = true):
+    TranslationServer.set_locale(locale)
+    if saveSettings:
+        userSettings["locale"] = locale
+        saveUserSettings()
 
 var anna_mode_counter = 0
 var anna_key_helper = false
@@ -887,65 +901,46 @@ func getKeyCodeStr(keycode, useSpecialChar = true):
 
 var hasInitializedControlsConfig = false
 var controlsConfig = []
+func resetControlsConfigLabels():
+    # good luck! hope this never gets out of sync with global.controlsConfig!
+    var controlConfigLabels = [
+        { "label_str": tr("UI.InputMenu.Action.1") },
+        { "label_str": tr("UI.InputMenu.Action.2") },
+        { "label_str": tr("UI.InputMenu.Action.3") },
+        { "label_str": tr("UI.InputMenu.Action.4") },
+        { "label_str": tr("UI.InputMenu.Action.5") },
+        { "label_str": tr("UI.InputMenu.Action.6") },
+        { "label_str": tr("UI.InputMenu.Action.7") },
+        { "label_str": tr("UI.InputMenu.Action.8") },
+        { "label_str": tr("UI.InputMenu.Action.9") },
+        { "label_str": tr("UI.InputMenu.Action.9_0") % "1" },
+        { "label_str": tr("UI.InputMenu.Action.9_0") % "2" },
+        { "label_str": tr("UI.InputMenu.Action.9_0") % "3" },
+        { "label_str": tr("UI.InputMenu.Action.9_0") % "4" },
+        { "label_str": tr("UI.InputMenu.Action.10") },
+    ]
+    for i in range(len(controlConfigLabels)):
+        global.controlsConfig[i]["label_str"] = controlConfigLabels[i]["label_str"]
+
 func initializeControlsConfig():
+  # good luck! hope this never gets out of sync with controlConfigLabels (above)
   global.controlsConfig = [
-    {
-      "input_action": "ui_left",
-      "label_str": tr("UI.InputMenu.Action.1"),
-    },
-    {
-      "input_action": "ui_right",
-      "label_str": tr("UI.InputMenu.Action.2"),
-    },
-    {
-      "input_action": "ui_down",
-      "label_str": tr("UI.InputMenu.Action.3"),
-    },
-    {
-      "input_action": "ui_up",
-      "label_str": tr("UI.InputMenu.Action.4"),
-    },
-    {
-      "input_action": "jump_button",
-      "label_str": tr("UI.InputMenu.Action.5"),
-    },
-    {
-      "input_action": "sub_action_button",
-      "label_str": tr("UI.InputMenu.Action.6"),
-    },
-    {
-      "input_action": "restart_key",
-      "label_str": tr("UI.InputMenu.Action.7"),
-    },
-    {
-      "input_action": "alt_action_button",
-      "label_str": tr("UI.InputMenu.Action.8"),
-    },
-    {
-      "input_action": "left_button",
-      "label_str": tr("UI.InputMenu.Action.9"),
-    },
-    {
-      "input_action": "spell_1",
-      "label_str": tr("UI.InputMenu.Action.9_0") % "1",
-    },
-    {
-      "input_action": "spell_2",
-      "label_str": tr("UI.InputMenu.Action.9_0") % "2",
-    },
-    {
-      "input_action": "spell_3",
-      "label_str": tr("UI.InputMenu.Action.9_0") % "3",
-    },
-    {
-      "input_action": "spell_4",
-      "label_str": tr("UI.InputMenu.Action.9_0") % "4",
-    },
-    {
-      "input_action": "open_map",
-      "label_str": tr("UI.InputMenu.Action.10"),
-    },
+    { "input_action": "ui_left" },
+    { "input_action": "ui_right" },
+    { "input_action": "ui_down" },
+    { "input_action": "ui_up" },
+    { "input_action": "jump_button" },
+    { "input_action": "sub_action_button" },
+    { "input_action": "restart_key" },
+    { "input_action": "alt_action_button" },
+    { "input_action": "left_button" },
+    { "input_action": "spell_1" },
+    { "input_action": "spell_2" },
+    { "input_action": "spell_3" },
+    { "input_action": "spell_4" },
+    { "input_action": "open_map" },
   ]
+  resetControlsConfigLabels()
   if global.userSettings.has("controls_config"):
     var rememberedControlsConfig = global.userSettings["controls_config"]
     for control_config in global.controlsConfig:

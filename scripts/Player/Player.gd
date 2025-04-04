@@ -429,7 +429,7 @@ func _process(delta):
     OS.window_fullscreen = !OS.window_fullscreen
     level.uiLayer.pauseMenu.shouldUpdateMenuText = true
   var can_respawn_out_of_pause = not global.pauseGame or (global.activeInteractor != null and not global.shouldRenderAsCinematic)
-  if not isItWeird() and global.memory["can_force_respawn"] and Input.is_action_just_pressed("restart_key") and not global.isPauseMenuOpen and can_respawn_out_of_pause and ritual_state_index < len(global.correct_ritual)-1:
+  if not isItWeird() and not isItKindaWeird() and global.memory["can_force_respawn"] and Input.is_action_just_pressed("restart_key") and not global.isPauseMenuOpen and can_respawn_out_of_pause and ritual_state_index < len(global.correct_ritual)-1:
     respawn_key_hp = global.memory["hp"]
     if global.activeInteractor != null:
       global.activeInteractor.hideTextbox()
@@ -904,7 +904,7 @@ func tryDieToOffscreenCamera(_delta):
       tryToRecover()
     else:
       global_transform.origin = repositioned_player
-      if isItWeird() and global.activeInteractor == null:
+      if isItWeird() and not isItKindaWeird() and global.activeInteractor == null:
         sayThis("NPC.GhostGirl.1")
       if physics_state == PhysicsState.BEING_TOSSED:
         bigBump()

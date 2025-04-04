@@ -258,8 +258,8 @@ func loadGame(saveGameIndex):
         global.has_really_started_game = true
         global.okay_really_really_started_game = true
         global.isRespawning = true
-        if global.memory.has("roomPath"):
-            var roomPath = global.memory["roomPath"]
+        if global.memory.has("savedRoomPath") or global.memory.has("roomPath"):
+            var roomPath = global.memory["savedRoomPath"] if global.memory.has("savedRoomPath") else global.memory["roomPath"]
             global.isEnteringRoom = true
             transition.long_fade_to(roomPath)
             return

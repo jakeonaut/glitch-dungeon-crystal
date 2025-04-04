@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/palettes/bubblegum-16-1x.png" type="Texture" id=1]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=15]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=16]
 [ext_resource path="res://grandma.ogv" type="VideoStream" id=17]
+[ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=18]
+[ext_resource path="res://pauseMenuTheme.tres" type="Theme" id=19]
 
 [sub_resource type="ViewportTexture" id=240]
 viewport_path = NodePath("Viewport")
@@ -156,6 +158,11 @@ texture = ExtResource( 13 )
 [node name="AnimationPlayer" parent="Viewport/level/Player" index="6"]
 autoplay = "sweepFloor"
 
+[node name="Door" parent="Viewport/level" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23.1985, 0 )
+path = "res://levels/EndlessFantasy/gd1/MainMenu.tscn"
+canPlayDoorSound = false
+
 [node name="Viewport2" parent="." instance=ExtResource( 15 )]
 size = Vector2( 1920, 1080 )
 
@@ -183,6 +190,22 @@ margin_bottom = 1080.0
 texture = SubResource( 242 )
 expand = true
 flip_v = true
+
+[node name="SkipPrompt" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 800.0
+margin_top = 948.0
+margin_right = 1452.0
+margin_bottom = 1084.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 1.5, 1.5 )
+theme = ExtResource( 19 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "Press [font=res://DarkInputFont_small.tres]R[/font] for OPTIONS"
+text = "Press R for OPTIONS"
+scroll_active = false
 
 [node name="UILayer" parent="." instance=ExtResource( 14 )]
 visible = false

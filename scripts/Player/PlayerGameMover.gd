@@ -711,6 +711,9 @@ func getWalkSpeed(delta):
 func isItWeird():
   return "PrimordialOozeRoom" in level.getShortLevelName() or "IntroVideo" in level.getShortLevelName()
 
+func isItKindaWeird():
+  return "EndCredits" in level.getShortLevelName()
+
 func getWalkSpeedHelper(delta):
   if transformation == TransformationState.CHICKEN:
     return 6

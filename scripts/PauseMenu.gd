@@ -47,9 +47,6 @@ onready var map_doguBossSprite = get_node("MapRect/ColorRect/ColorRect/MapBackgr
 onready var map_mushroomSoulSprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/MushroomSoulSprite")
 onready var map_cricketSoulSprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/CricketSoulSprite")
 onready var map_fishSoulSprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/FishSoulSprite")
-onready var map_cryptKeySprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/CryptKeySprite")
-onready var map_phishingKeySprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/PhishingKeySprite")
-onready var map_sporeKeySprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/SporeKeySprite")
 
 onready var mapCursorSprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/CursorSprite")
 onready var mapCursorSprite2 = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite/CursorSprite2")
@@ -89,6 +86,7 @@ enum PauseMenuState {
   TEMP,
   # SECRET_RITUAL,
   INVENTORY,
+  LOCALE,
 }
 var pauseMenuState = PauseMenuState.NORMAL
 var shouldUpdateMenuText = true
@@ -173,6 +171,15 @@ func _process(delta):
     normalMenu.visible = true
     cursorSprite.visible = true
     processNormalLogic(delta)
+
+  if pauseMenuState == PauseMenuState.LOCALE:
+    pauseTitleRect.visible = true
+    largerPopup.visible = false
+    normalMenu.visible = true
+    cursorSprite.visible = true
+    processLocaleLogic(delta)
+  else:
+    localeOptionIndex = 0
 
   if pauseMenuState == PauseMenuState.GRAPHICS:
     pauseTitleRect.visible = true
@@ -275,10 +282,10 @@ func repositionInputCursorSprite(index, showCondensedMenu):
   #else:
   #  cursorSprite.position.y = 114 + (44*index)
 
-var normalMenuOptions = [tr("UI.PauseMenu.1"), tr("UI.PauseMenu.2"), tr("UI.PauseMenu.3"), tr("UI.PauseMenu.4"), tr("UI.PauseMenu.5")]
-var normalMenuOptionsOnMainMenu = [tr("UI.PauseMenu.1"), tr("UI.PauseMenu.2"), tr("UI.PauseMenu.3"), tr("UI.PauseMenu.4"), tr("UI.PauseMenu.6")]
 var normalOptionIndex = 0
 func processNormalLogic(_delta):
+  var normalMenuOptions = [tr("UI.PauseMenu.1"), tr("UI.PauseMenu.2"), tr("UI.PauseMenu.3"), tr("UI.PauseMenu.4"), tr("UI.PauseMenu.5")]
+  var normalMenuOptionsOnMainMenu = [tr("UI.MainMenu.0"), tr("UI.PauseMenu.2"), tr("UI.PauseMenu.3"), tr("UI.PauseMenu.4"), tr("UI.PauseMenu.6")]
   if global.isOnMainMenu:
     normalMenuOptions = normalMenuOptionsOnMainMenu
   pauseTitleText.bbcode_text = (tr("UI.PauseMenu.0") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")])
@@ -317,10 +324,13 @@ func processNormalLogic(_delta):
     shouldUpdateMenuText = true
     if normalOptionIndex == 0:
       yield(get_tree().create_timer(0.1), "timeout")
-      global.isPauseMenuOpen = false
-      global.pauseGame = false
-      getPlayer().unpauseSound.play()
-      level.restartMusic()
+      if global.isOnMainMenu:
+        pauseMenuState = PauseMenuState.LOCALE
+      else:
+        global.isPauseMenuOpen = false
+        global.pauseGame = false
+        getPlayer().unpauseSound.play()
+        level.restartMusic()  
     elif normalOptionIndex == 1:
       yield(get_tree().create_timer(0.1), "timeout")
       pauseMenuState = PauseMenuState.TOP_INPUT
@@ -345,11 +355,56 @@ func processNormalLogic(_delta):
     getPlayer().unpauseSound.play()
     level.restartMusic()
 
+var localeOptions = [
+  ["[font=res://unlocalized/pauseMenuFontCondensed.tres]English[/font]", "en"],
+  ["[font=res://unlocalized/pauseMenuFontCondensed_zh_CN.tres]简体字[/font]", "zh_CN"],
+  ["[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Português[/font]", "pt_BR"],
+  # uncomment out once supported
+  # ["[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Pусский[/font]", "ru"],
+  # ["[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Français[/font]", "fr"],
+]
+var localeOptionIndex = 0
+func processLocaleLogic(_delta):
+  pauseTitleText.bbcode_text = tr("UI.InputMenu.13_0") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
+
+  if shouldUpdateMenuText:
+    var text = "[font=res://unlocalized/pauseMenuFontCondensed.tres]"
+    for i in range(len(localeOptions)):
+      var option = localeOptions[i][0]
+      if i == localeOptionIndex:
+        text += "[wave]" + str(option) + "[/wave]\n" 
+      else:
+        text += "[color=gray]" + str(option) + "[/color]\n" 
+    normalMenuText.bbcode_text = text + "[/font]"
+    shouldUpdateMenuText = false
+
+  if Input.is_action_just_pressed("menu_down"):
+    localeOptionIndex += 1
+    shouldUpdateMenuText = true
+  elif Input.is_action_just_pressed("menu_up"):
+    localeOptionIndex -= 1
+    shouldUpdateMenuText = true
+  if localeOptionIndex < 0:
+    localeOptionIndex = len(localeOptions) - 1
+  elif localeOptionIndex >= len(localeOptions):
+    localeOptionIndex = 0
+  repositionInputCursorSprite(localeOptionIndex, true)
+
+  if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
+    shouldUpdateMenuText = true
+    var locale = localeOptions[localeOptionIndex][1]
+    global.changeLocale(locale)
+  elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
+    global.changeLocale(global.userSettings["locale"], false)
+    global.resetControlsConfigLabels()
+    pauseMenuState = PauseMenuState.NORMAL
+    shouldUpdateMenuText = true
+
 onready var colorblindPlayers = get_node("ColorblindPlayers")
 onready var colorblindHats = get_node("ColorblindPlayers/ColorblindHats")
-var graphicsOptions = [tr("UI.GraphicsMenu.1"), tr("UI.GraphicsMenu.2"), tr("UI.GraphicsMenu.3"), tr("UI.GraphicsMenu.4")]
 var graphicsOptionIndex = 0
 func processGraphicsLogic(_delta):
+  var graphicsOptions = [tr("UI.GraphicsMenu.1"), tr("UI.GraphicsMenu.2"), tr("UI.GraphicsMenu.3"), tr("UI.GraphicsMenu.4")]
   pauseTitleText.bbcode_text = tr("UI.InputMenu.13_0") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
 
   if shouldUpdateMenuText:
@@ -409,9 +464,9 @@ func processGlitchScreen(delta):
       level.glitchScreenEffect.visible = false
       glitch_death_timer = 0
 
-var soundOptions = [tr("UI.SoundMenu.1"), tr("UI.SoundMenu.3"), tr("UI.SoundMenu.2")]
 var soundOptionIndex = 0
 func processSoundLogic(_delta):
+  var soundOptions = [tr("UI.SoundMenu.1"), tr("UI.SoundMenu.3"), tr("UI.SoundMenu.2")]
   pauseTitleText.bbcode_text = tr("UI.InputMenu.13_0") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
 
   if shouldUpdateMenuText:
@@ -463,9 +518,9 @@ func processSoundLogic(_delta):
     shouldUpdateMenuText = true
 
 
-var quitToMainOptions = [tr("UI.Yes"), tr("UI.Cancel")]
 var quitToMainOptionIndex = 0
 func processQuitToMainLogic(_delta):
+  var quitToMainOptions = [tr("UI.Yes"), tr("UI.Cancel")]
   if global.isOnMainMenu:
     pauseTitleText.bbcode_text = tr("UI.InputMenu.13_1") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")] # "Really quit?\n" + global.getInputText("menu_confirm") + " to confirm, " + global.getInputText("menu_cancel") + " to cancel"
   else:
@@ -705,20 +760,11 @@ func processInventoryLogic(delta):
         var numEggs = global.getThingFromAllLevelZonez("angelEgg")
         popupText.text = tr("UI.Inventory.7") + str(numEggs) # "angel eggs:\n  spawn of goddess\n  got " 
       elif inventoryOptionIndexX == 1:
-        if global.memory["angler_seaman_boss"] == 3:
-          popupText.text = "goddess dream of deceit"
-        else:
-          popupText.text = "phishing key:\n  to sea of corruption"
+        popupText.text = tr("NPC.Treasure.4")
       elif inventoryOptionIndexX == 2:
-        if global.memory["baba_yaga_boss"] == 3:
-          popupText.text = "goddess dream of demon"
-        else:
-          popupText.text = "spore key:\n  to baba's forest"
+        popupText.text = tr("NPC.Treasure.5")
       elif inventoryOptionIndexX == 3:
-        if global.memory["dogu_matryoshka_boss"] == 3:
-          popupText.text = "goddess dream of death"
-        else:
-          popupText.text = "crypt key:\n  to forgotten crypt"
+        popupText.text = tr("NPC.Treasure.6")
     elif angelStatueToTeleportTo != null:
       var level_to_spawn_to = angelStatueToTeleportTo[1]
       global.memory["roomPath"] = level.getLevelName()
@@ -795,7 +841,7 @@ func normalizeInventoryOptionIndex(y, x):
         menuConfirmSound.play()
         mapCursorSprite.restart()
         mapCursorSprite2.restart()
-        inventoryOptionIndexX = angelStatues.size() - 1
+        inventoryOptionIndexX = 0 # angelStatues.size() - 1
       if inventoryOptionIndex == 4 and not hasAngelFlute:
         inventoryOptionIndex = 3
       if inventoryOptionIndex == 3 and not keyLabel.visible:
@@ -850,11 +896,11 @@ func normalizeInventoryOptionIndex(y, x):
     if x >= 0:
       if inventoryOptionIndexX == 0 and not angelEggSprite.visible:
         inventoryOptionIndexX = 1
-      if inventoryOptionIndexX == 1 and not fishKeySprite.visible:
+      if inventoryOptionIndexX == 1 and not fishingRodSprite.visible:
         inventoryOptionIndexX = 2
-      if inventoryOptionIndexX == 2 and not sporeKeySprite.visible:
+      if inventoryOptionIndexX == 2 and not flowerPotSprite.visible:
         inventoryOptionIndexX = 3
-      if (inventoryOptionIndexX == 3 and not pyramidKeySprite.visible) or inventoryOptionIndexX > 3:
+      if (inventoryOptionIndexX == 3 and not cutePetSprite.visible) or inventoryOptionIndexX > 3:
         if hasAngelFlute:
           inventoryOptionIndex = 4
           menuConfirmSound.play()
@@ -863,16 +909,16 @@ func normalizeInventoryOptionIndex(y, x):
           inventoryOptionIndexX = 0
           return
         else:
-          inventoryOptionIndexX = 0 if angelEggSprite.visible else 1 if fishKeySprite.visible else 2 if sporeKeySprite.visible else 3
+          inventoryOptionIndexX = 0 if angelEggSprite.visible else 1 if fishingRodSprite.visible else 2 if flowerPotSprite.visible else 3
     elif x < 0:
-      if inventoryOptionIndexX == 3 and not pyramidKeySprite.visible:
+      if inventoryOptionIndexX == 3 and not cutePetSprite.visible:
         inventoryOptionIndexX = 2
-      if inventoryOptionIndexX == 2 and not sporeKeySprite.visible:
+      if inventoryOptionIndexX == 2 and not flowerPotSprite.visible:
         inventoryOptionIndexX = 1
-      if inventoryOptionIndexX == 1 and not fishKeySprite.visible:
+      if inventoryOptionIndexX == 1 and not fishingRodSprite.visible:
         inventoryOptionIndexX = 0
       if (inventoryOptionIndexX == 0 and not angelEggSprite.visible) or inventoryOptionIndexX < 0:
-        inventoryOptionIndexX = 3 if pyramidKeySprite.visible else 2 if sporeKeySprite.visible else 1 if fishKeySprite.visible else 0 
+        inventoryOptionIndexX = 3 if cutePetSprite.visible else 2 if flowerPotSprite.visible else 1 if fishingRodSprite.visible else 0 
 
   if inventoryOptionIndex == 4:
     inventoryOptionIndexX += x
@@ -907,9 +953,9 @@ onready var soulSprite3 = get_node("InventoryRect/SoulSprite3")
 onready var soulLabel = get_node("InventoryRect/SoulLabel")
 onready var angelEggSprite = get_node("InventoryRect/AngelEggSprite")
 onready var angelEggLabel = get_node("InventoryRect/AngelEggLabel")
-onready var fishKeySprite = get_node("InventoryRect/FishKeySprite")
-onready var sporeKeySprite = get_node("InventoryRect/SporeKeySprite")
-onready var pyramidKeySprite = get_node("InventoryRect/PyramidKeySprite")
+onready var fishingRodSprite = get_node("InventoryRect/FishingRodSprite")
+onready var flowerPotSprite = get_node("InventoryRect/FlowerPotSprite")
+onready var cutePetSprite = get_node("InventoryRect/CutePetSprite")
 onready var keyLabel = get_node("InventoryRect/KeyLabel")
 func processInventoryRender(_delta):
   if inventoryOptionIndex == 0:
@@ -993,17 +1039,11 @@ func processInventoryRender(_delta):
   angelEggSprite.visible = numEggs > 0
   angelEggLabel.visible = angelEggSprite.visible
   angelEggLabel.bbcode_text = str(numEggs)
-  fishKeySprite.visible = (global.memory.has("key_items") and global.memory["key_items"].has(global.KeyItem.FISH)) or global.memory["angler_seaman_boss"] == 3
-  sporeKeySprite.visible = (global.memory.has("key_items") and global.memory["key_items"].has(global.KeyItem.CAT)) or global.memory["baba_yaga_boss"] == 3
-  pyramidKeySprite.visible = (global.memory.has("key_items") and global.memory["key_items"].has(global.KeyItem.PYRAMID)) or global.memory["dogu_matryoshka_boss"] == 3
-  if global.memory["angler_seaman_boss"] == 3:
-    fishKeySprite.frame = 25
-  if global.memory["baba_yaga_boss"] == 3:
-    sporeKeySprite.frame = 24
-  if global.memory["dogu_matryoshka_boss"] == 3:
-    pyramidKeySprite.frame = 26
+  fishingRodSprite.visible = (global.memory.has("fishingRod") and global.memory["fishingRod"])
+  flowerPotSprite.visible = (global.memory.has("flowerPot") and global.memory["flowerPot"])
+  cutePetSprite.visible = (global.memory.has("cutePet") and global.memory["cutePet"])
   mapAngelSprite.visible = false
-  keyLabel.visible = fishKeySprite.visible or sporeKeySprite.visible or pyramidKeySprite.visible or angelEggSprite.visible
+  keyLabel.visible = fishingRodSprite.visible or flowerPotSprite.visible or cutePetSprite.visible or angelEggSprite.visible
   mapCursorSprite.visible = inventoryOptionIndex == 4
   mapCursorSprite2.visible = mapCursorSprite.visible
   # dreamLabel.visible = dreamSprite1.visible or dreamSprite2.visible or dreamSprite3.visible
@@ -1027,9 +1067,6 @@ func tryDrawMap():
   map_mushroomSoulSprite.visible = false
   map_cricketSoulSprite.visible = false
   map_fishSoulSprite.visible = false
-  map_cryptKeySprite.visible = false
-  map_phishingKeySprite.visible = false
-  map_sporeKeySprite.visible = false
   var mapGrid = transition.mapManager.gimmeMapGrid()
   var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
   for i in range(MAP_HEIGHT):
@@ -1119,21 +1156,6 @@ func tryDrawMap():
         sprite.frame = 90 if not soulSprite1.visible else 91
         # map_fishSoulSprite.visible = true
         # map_fishSoulSprite.position = sprite.position
-      elif mapRoom.has_crypt_key and getBabushkaCatSniffedVar(mapRoom.path) >= 2:
-        sprite.frame = 248 if not pyramidKeySprite.visible else 246
-        sprite.material.set_shader_param("offset", 1)
-        # map_cryptKeySprite.visible = true
-        # map_cryptKeySprite.position = sprite.position
-      elif mapRoom.has_phishing_key and getBabushkaCatSniffedVar(mapRoom.path) >= 2:
-        sprite.frame = 248 if not fishKeySprite.visible else 246
-        sprite.material.set_shader_param("offset", 3)
-        # map_phishingKeySprite.visible = true
-        # map_phishingKeySprite.position = sprite.position
-      elif mapRoom.has_spore_key and getBabushkaCatSniffedVar(mapRoom.path) >= 2:
-        sprite.frame = 248 if not sporeKeySprite.visible else 246
-        sprite.material.set_shader_param("offset", 2)
-        # map_sporeKeySprite.visible = true
-        # map_sporeKeySprite.position = sprite.position
       
       # if global.memory.has("prev_room") and global.memory["prev_room"] == mapRoom.path:
       #   sprite.material.set_shader_param("offset", 10)
@@ -1208,9 +1230,9 @@ func setGlitchSprite(sprite, glitch):
   elif glitch == global.GlitchForm.BUBBLE: sprite.frame = 4
 
 
-var topInputOptions = [tr("UI.InputMenu.1"), tr("UI.InputMenu.2"), tr("UI.InputMenu.3")]
 var topInputOptionIndex = 0
 func processTopInputLogic(_delta):
+  var topInputOptions = [tr("UI.InputMenu.1"), tr("UI.InputMenu.2"), tr("UI.InputMenu.3")]
   pauseTitleText.bbcode_text = tr("UI.InputMenu.13_0") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
 
   if shouldUpdateMenuText:

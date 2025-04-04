@@ -586,7 +586,7 @@ hframes = 6
 vframes = 5
 frame = 5
 
-[node name="FishKeySprite" type="Sprite" parent="InventoryRect"]
+[node name="FishingRodSprite" type="Sprite" parent="InventoryRect"]
 position = Vector2( 163, 286 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
@@ -596,7 +596,7 @@ frame = 16
 script = ExtResource( 13 )
 max_frames = 1
 
-[node name="SporeKeySprite" type="Sprite" parent="InventoryRect"]
+[node name="FlowerPotSprite" type="Sprite" parent="InventoryRect"]
 position = Vector2( 219, 286 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
@@ -606,7 +606,7 @@ frame = 25
 script = ExtResource( 13 )
 max_frames = 1
 
-[node name="PyramidKeySprite" type="Sprite" parent="InventoryRect"]
+[node name="CutePetSprite" type="Sprite" parent="InventoryRect"]
 position = Vector2( 280, 286 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
@@ -2337,8 +2337,8 @@ transform = Transform2D( 1.5, 0, 0, 1.5, 160, 14 )
 [node name="PopupRect" type="ColorRect" parent="CanvasLayer"]
 margin_left = 109.0
 margin_top = 112.0
-margin_right = 471.0
-margin_bottom = 224.0
+margin_right = 469.0
+margin_bottom = 222.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )

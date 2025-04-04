@@ -29,7 +29,7 @@ onready var sillySound = get_node("SillySound")
 onready var chickenRes = preload("res://sceneObjects/FreeChicken.tscn")
 onready var label3D = get_node("Label3D")
 
-var canPlayDoorSound = true
+export var canPlayDoorSound = true
 
 var spawn_timer = 0
 var spawn_time_limit = 3
@@ -511,11 +511,11 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
       getPlayer().pauseInput = false
     return
 
+  global.prepareForTransition(level, self)
+  
   if start_of_game:
     transition.really_long_fade_to(self.path)
     return
-    
-  global.prepareForTransition(level, self)
 
   if "LevelDoor" in self.id:
     transition.granny_teleport_to(self.path)

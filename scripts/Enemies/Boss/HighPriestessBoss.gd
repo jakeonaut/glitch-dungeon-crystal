@@ -60,6 +60,8 @@ onready var laughSound = get_node("Sounds/LaughSound")
 onready var spawnSound = get_node("Sounds/SpawnSound")
 onready var spawnSavePointSound = get_node("Sounds/SpawnSavePointSound")
 func _ready():
+    if global.memory["priestessShortcut"] == 0:
+        global.memory["priestessShortcut"] = 1
     set_process(true)
     # Wait two frames cuz idk
     yield(TempTimer.idle_frame(self), "timeout")

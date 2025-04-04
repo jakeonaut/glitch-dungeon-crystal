@@ -33,7 +33,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Babushka's Glitch Dungeon Crystal"
-run/main_scene="res://levels/EndlessFantasy/gd1/MainMenu.tscn"
+run/main_scene="res://levels/EndlessFantasy/gd1/IntroVideo.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="GlitchDungeonCrystal"
 run/low_processor_mode=true
@@ -338,6 +338,7 @@ locale/locale_filter_mode=1
 
 [locale]
 
+test="zh_CN"
 translations=PoolStringArray( "res://dialogUiLocalization.en.translation", "res://dialogUiLocalization.pt_BR.translation", "res://dialogUiLocalization.ru.translation", "res://dialogUiLocalization.zh_CN.translation", "res://dialogUiLocalization.fr.translation" )
 translation_remaps={
 "res://YosterFontBig.tres": PoolStringArray( "res://dialogBodyFontTheme_zh_CN.tres:zh_CN", "res://YosterFontBig_ru.tres:ru", "res://YosterFontBig_ru.tres:pt_BR", "res://YosterFontBig_ru.tres:fr" ),
@@ -346,6 +347,7 @@ translation_remaps={
 "res://levels/common/UITheme_real.tres": PoolStringArray( "res://levels/common/UITheme_real_zh_CN.tres:zh_CN", "res://levels/common/UITheme_real_ru.tres:ru", "res://levels/common/UITheme_real_ru.tres:pt_BR", "res://levels/common/UITheme_real_ru.tres:fr" ),
 "res://levels/common/UITheme_real_spaced.tres": PoolStringArray( "res://levels/common/UITheme_real_spaced_zh_CN.tres:zh_CN", "res://levels/common/UITheme_real_spaced_ru.tres:ru", "res://levels/common/UITheme_real_spaced_ru.tres:pt_BR", "res://levels/common/UITheme_real_spaced_ru.tres:fr" ),
 "res://levels/common/UITheme_small.tres": PoolStringArray( "res://levels/common/UITheme_small_zh_CN.tres:zh_CN" ),
+"res://levels/common/dialogBodyFont_Font.tres": PoolStringArray( "res://levels/common/dialogBodyFont_ru_Font.tres:fr", "res://levels/common/dialogBodyFont_ru_Font.tres:ru", "res://levels/common/dialogBodyFont_ru_Font.tres:pt_BR", "res://levels/common/dialogBodyFont_zh_CN_Font.tres:zh_CN" ),
 "res://pauseMenuTheme.tres": PoolStringArray( "res://pauseMenuTheme_zh_CN.tres:zh_CN", "res://pauseMenuTheme_ru.tres:ru", "res://pauseMenuTheme_ru.tres:pt_BR", "res://pauseMenuTheme_ru.tres:fr" ),
 "res://pauseMenuThemeInputCondensed.tres": PoolStringArray( "res://pauseMenuThemeInputCondensed_ru.tres:ru", "res://pauseMenuThemeInputCondensed_ru.tres:pt_BR", "res://pauseMenuThemeInputCondensed_zh_CN.tres:zh_CN", "res://pauseMenuThemeInputCondensed_ru.tres:fr" ),
 "res://uiTutorialFont.tres": PoolStringArray( "res://uiTutorialFont_zh_CN.tres:zh_CN", "res://uiTutorialFont_ru.tres:ru", "res://uiTutorialFont_ru.tres:pt_BR", "res://uiTutorialFont_ru.tres:fr" )
