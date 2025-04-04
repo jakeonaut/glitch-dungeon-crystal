@@ -7,7 +7,7 @@
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=5]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=6]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=7]
-[ext_resource path="res://sceneObjects/BrothCauldron.tscn" type="PackedScene" id=8]
+[ext_resource path="res://sceneObjects/MushroomNPC.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sceneObjects/Enemies/FanPlant.tscn" type="PackedScene" id=9]
 [ext_resource path="res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods3LevelScript.gd" type="Script" id=10]
 [ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=12]
@@ -549,13 +549,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -2, -1 )
 [node name="Mushroom3" parent="Viewport/level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -4, -0.735847 )
 
-[node name="BrothCauldron" parent="Viewport/level" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 8.39026, 0 )
-path = "res://levels/EndlessFantasy/gd1ToxicJungle/006SafariZone.tscn"
-
 [node name="FanPlant" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -3, 0 )
 is_fan_spinning = true
+
+[node name="MushroomNPC" parent="Viewport/level" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 8, 0 )
+bbText = "NPC.SporeCreature.1"
 
 [node name="Viewport2" parent="." instance=ExtResource( 20 )]
 

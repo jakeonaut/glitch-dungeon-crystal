@@ -22,8 +22,6 @@ var flip_time_limit = 20
 var cooldown_timer = 0
 var cooldown_time_limit = 40
 var is_in_cooldown = false
-onready var wormAniPlayer = get_node("WormAnimationPlayer")
-onready var mushroomBounceAniPlayer = get_node("MushroomBounceAniPlayer")
 
 func _ready():
   original_material = mySprite.get_material_override().duplicate()
@@ -39,6 +37,20 @@ func _process(delta):
     cooldown_timer = 0
     is_in_cooldown = false
   lastPosition = self.global_transform.origin
+  checkForWalkPathOverrides()
+
+func checkForWalkPathOverrides():
+  if has_ever_been_smacked:
+    return
+
+  var areas = smallInteractionArea.get_overlapping_areas()
+  for area in areas:
+      if area.is_in_group("walkpath"):
+        var walk_anchor = area.get_node("..")
+        if walk_anchor.frame == 1:
+          walk_direction.x = 1
+        elif walk_anchor.frame == 2:
+          walk_direction.x = -1
 
 # @override
 func pressingMoveLeft():
@@ -68,7 +80,7 @@ func handleSlimeWalking(delta):
         slime_state_timer = 0
         slime_state = SlimeState.IDLE 
     elif slime_state == SlimeState.IDLE:
-      mySprite.restart()
+      mySprite.trySetFrame(19 if not is_hungry else 17)
       behavior_walking = false
       if slime_state_timer >= slime_idle_time_limit:
         slime_state_timer = 0
@@ -119,6 +131,7 @@ func getSmacked(broom_origin = null, silently = false):
   behavior_intermittent_walking = false
   smallInteractionArea.add_to_group("no_pushems")
 
+export var building_time_limit = 10
 var moleCricketRes = preload("res://sceneObjects/Enemies/GlitchMoleCricket.tscn")
 # @override
 func unsmack():
@@ -130,6 +143,7 @@ func unsmack():
   evolvedSelf.grav = 0
   evolvedSelf.on_ground = true
   evolvedSelf.my_up_vector = self.my_up_vector
+  evolvedSelf.building_time_limit = building_time_limit
   level.add_child(evolvedSelf)
   evolvedSelf.global_transform.origin = self.global_transform.origin
   evolvedSelf.get_node("Sprite3D2").rotation_degrees = mySprite.rotation_degrees

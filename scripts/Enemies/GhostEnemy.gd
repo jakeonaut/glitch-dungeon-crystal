@@ -14,6 +14,7 @@ var scared_timer = 0
 var scared_time_limit = 30
 onready var booSound = get_node("Sounds/BooSound")
 onready var hauntSound = get_node("Sounds/HauntSound")
+onready var secretAniPlayer = get_node("SecretAniPlayer")
 
 func _ready():
   scared_timer = scared_time_limit
@@ -66,10 +67,18 @@ func _process(delta):
       my_opacity = 0.9
       mySprite.material_override.set_shader_param("opacity", my_opacity)
   elif moving_towards_player:
+    if global.activeInteractor != null:
+      if mySprite.should_animate: secretAniPlayer.play("shy")
+      return
+    mySprite.flip_h = (level.player.global_transform.origin.x < global_transform.origin.x)
+    if mySprite.flip_h != level.player.mySprite.flip_h:
+      if mySprite.should_animate: secretAniPlayer.play("shy")
+      return
+      
+    if not mySprite.should_animate: secretAniPlayer.play("scary")
     var step = 2
     var directionVector = (level.player.global_transform.origin - global_transform.origin).normalized()
     global_transform.origin += directionVector * (delta*step)
-    mySprite.flip_h = (level.player.global_transform.origin.x < global_transform.origin.x)
   else:
     var step = 10
     if target_pos != null:

@@ -151,6 +151,12 @@ func _ready_impl():
   if global.memory.has("player_costume"):
     player.wearCostume(global.memory["player_costume"])
 
+  if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
+    if global.isRespawning:
+      global.memory["grav_direction"] = 1
+    else:
+      flipGravity(-1)
+  
   tryToRespawn()
   global.updateLevelZoneTime()
   global.tryInitializeLevelZone(self.getLevelZoneName())
@@ -178,8 +184,6 @@ func _ready_impl():
   player.mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
   if player_message != "???":
     player.sayThis(player_message)
-  if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
-    flipGravity(-1)
   player.transformation = global.memory["transformation"] if global.memory.has("transformation") else player.TransformationState.NORMAL
   player.properlyApplyTransformation()
   has_room_initialized = true

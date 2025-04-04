@@ -171,14 +171,14 @@ func _process(delta):
       if holding_up_timer < holding_up_time_limit:
         holding_up_timer += (delta*11)
     else:
-      if holding_up_timer > 0:
-        holding_up_timer -= (delta*11)
+      if not (holding_up_timer >= holding_up_time_limit and pressingMoveUp()):
+        holding_up_timer = 0
       if pressingDown() and on_ground:
         if holding_down_timer < holding_down_time_limit:
           holding_down_timer += (delta*11)
       else:
-        if holding_down_timer > 0:
-          holding_down_timer -= (delta*11)
+        if not (holding_down_timer >= holding_down_time_limit and pressingDown()):
+          holding_down_timer = 0
 
     if holding_up_timer >= holding_up_time_limit:
       cameraTarget.global_transform.origin.y += 10

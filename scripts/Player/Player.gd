@@ -1611,7 +1611,6 @@ func applyGravity(delta):
   #   was_on_ground = true
   #   feather_jump_timer = 0
   if glitch_form == global.GlitchForm.FEATHER or (glitch_form == global.GlitchForm.INVISIBLE and not on_ground):
-    print("erase 7")
     dig_timer = 0
   .applyGravity(delta)
 
@@ -1690,7 +1689,6 @@ func getMoleCured():
   should_collide_floor = true
   should_collide_ceil = true
   should_collide_horizontally = true
-  print('mole cured')
   dig_timer = 0
   dig_below_timer = 0
   # aniPlayer.stop()

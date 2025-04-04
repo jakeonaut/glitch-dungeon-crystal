@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
@@ -28,7 +28,6 @@
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=26]
 [ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=27]
 [ext_resource path="res://assets/backgrounds/holy_forest.png" type="Texture" id=28]
-[ext_resource path="res://sceneObjects/BrothCauldron.tscn" type="PackedScene" id=29]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=30]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishingRod.tscn" type="PackedScene" id=31]
 [ext_resource path="res://icon.png" type="Texture" id=32]
@@ -966,10 +965,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4, 0 )
 visible = false
 pixel_size = 0.025
 texture = ExtResource( 32 )
-
-[node name="BrothCauldron" parent="Viewport/level" instance=ExtResource( 29 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.00445198, 0 )
-path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
 
 [node name="Viewport2" parent="." instance=ExtResource( 11 )]
 

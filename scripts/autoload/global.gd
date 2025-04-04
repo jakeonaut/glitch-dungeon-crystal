@@ -348,7 +348,7 @@ func resetMemory():
     memory["broom_double_jump"] = 0
     memory["zora_flippers"] = 0
     memory["fishingRod"] = true
-    memory["mole_cricket"] = 1
+    memory["mole_cricket"] = 0
     memory["flowerPot"] = true
     memory["mushroom_soul"] = 1
     memory["cutePet"] = true

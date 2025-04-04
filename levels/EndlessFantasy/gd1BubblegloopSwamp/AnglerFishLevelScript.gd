@@ -8,6 +8,10 @@ onready var basicTadpoleEnemy2 = get_node("BasicTadpoleEnemy2")
 onready var basicTadpoleEnemy3 = get_node("BasicTadpoleEnemy3")
 onready var basicTadpoleEnemy4 = get_node("BasicTadpoleEnemy4")
 
+onready var npc = get_node("NPC")
+onready var npc2 = get_node("NPC2")
+onready var npc3 = get_node("NPC3")
+
 onready var fishies = get_node("Fishies")
 onready var floodedWaterCubes = get_node("FloodedWaterCubes")
 # onready var dreamOfDeceit = get_node("DreamOfDeceit")
@@ -39,10 +43,20 @@ func setUpRoomInitializationOverride():
             door.visible = false
 
 func _process(_delta):
-    pass
+    processNPCSprite(npc)
+    processNPCSprite(npc2)
+    processNPCSprite(npc3)
     # if global.memory["angler_seaman_boss"] >= 2:
     #     dreamOfDeceit.visible = true
     #     dreamOfDeceit.grav = 60
+
+func processNPCSprite(npc):
+    if global.memory["angler_seaman_boss"] > 0 and global.memory["angler_seaman_boss"] < 2:
+        if npc.mySprite.start_frame == 20:
+            npc.mySprite.updateBaseFrame(4, 7)
+    else:
+        if npc.mySprite.start_frame == 60:
+            npc.mySprite.updateBaseFrame(4, 2)
 
   
 # @override

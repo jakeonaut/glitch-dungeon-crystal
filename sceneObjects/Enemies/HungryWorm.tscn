@@ -1,7 +1,6 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=1]
-[ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=2]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Dog Yelp.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/sounds/chomp.wav" type="AudioStream" id=5]
@@ -11,9 +10,7 @@
 [ext_resource path="res://assets/sounds/assets_sfx_jumpcartoon.wav" type="AudioStream" id=9]
 [ext_resource path="res://scripts/Enemies/Worm.gd" type="Script" id=10]
 [ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=11]
-[ext_resource path="res://assets/palettes/pokemon-sgb-1x.png" type="Texture" id=12]
 [ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=13]
-[ext_resource path="res://assets/infected_enemy_sheet0000.png" type="Texture" id=14]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=15]
 
 [sub_resource type="ShaderMaterial" id=36]
@@ -52,358 +49,6 @@ shader_param/texture_albedo = ExtResource( 11 )
 shader_param/base_palette = ExtResource( 3 )
 shader_param/target_palette = ExtResource( 15 )
 
-[sub_resource type="Animation" id=25]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3D:flip_h")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite3D:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 19 ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Sounds/ChompSound:playing")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Sprite3D:material_override:shader_param/texture_albedo")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ ExtResource( 11 ) ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ ExtResource( 12 ) ]
-}
-
-[sub_resource type="Animation" id=26]
-resource_name = "bob"
-length = 1.5
-loop = true
-
-[sub_resource type="Animation" id=20]
-resource_name = "default"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=37]
-resource_name = "gulp"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 0.9, 1.1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.5, 1.5, 1 ), Vector3( 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 20, 19, 24, 16, 26, 25, 19, 20 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3D:offset")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.25, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 1 ), Vector2( 0, 2 ), Vector2( 0, 0 ) ]
-}
-tracks/3/type = "method"
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0.3, 0.4, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"values": [ {
-"args": [  ],
-"method": "jumpToPlayerPosition"
-}, {
-"args": [  ],
-"method": "cureMushroom"
-}, {
-"args": [  ],
-"method": "finishGulp"
-} ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Sounds/ChompSound:playing")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0.2, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
-[sub_resource type="Animation" id=27]
-resource_name = "puffAttack"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:material_override:shader_param/enable_palette_cycle")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ false, true, false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.2, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ ExtResource( 3 ), ExtResource( 12 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3D:material_override:shader_param/enable_glitch")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ false, true, false ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite3D:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 19, 20, 19, 20, 19, 20, 19, 20, 19 ]
-}
-tracks/4/type = "method"
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0.8 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "spawnFiveSpores"
-} ]
-}
-
-[sub_resource type="Animation" id=38]
-resource_name = "transform"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:material_override:shader_param/texture_albedo")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ ExtResource( 11 ), ExtResource( 14 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:material_override:shader_param/target_palette")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ ExtResource( 12 ), ExtResource( 2 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite3D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.5, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 19, 20, 19, 18, 17 ]
-}
-
-[sub_resource type="Animation" id=40]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0.345, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=41]
-resource_name = "bounce"
-length = 0.2
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0.345, 0 ), Vector3( 0, 0.267799, 0 ), Vector3( 0, 0.345, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
-}
-
 [sub_resource type="CylinderShape" id=28]
 height = 1.6
 radius = 0.8
@@ -438,41 +83,29 @@ double_sided = false
 texture = ExtResource( 11 )
 hframes = 8
 vframes = 16
-frame = 17
+frame = 18
 region_rect = Rect2( 0, 0, 62, 0 )
 script = ExtResource( 7 )
+max_frames = 1
 should_animate = false
-
-[node name="WormAnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "bob"
-anims/RESET = SubResource( 25 )
-anims/bob = SubResource( 26 )
-anims/default = SubResource( 20 )
-anims/gulp = SubResource( 37 )
-anims/puffAttack = SubResource( 27 )
-anims/transform = SubResource( 38 )
-
-[node name="MushroomBounceAniPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 40 )
-anims/bounce = SubResource( 41 )
 
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 4 )
 volume_db = -18.0
 pitch_scale = 0.9
+bus = "Sfx"
 
 [node name="ChompSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 5 )
 volume_db = -10.0
+bus = "Sfx"
 
 [node name="BounceSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 9 )
 volume_db = -30.0
+bus = "Sfx"
 
 [node name="InteractionArea" type="Area" parent="." groups=["no_pushems"]]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )

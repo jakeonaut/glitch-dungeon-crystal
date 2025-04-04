@@ -3615,7 +3615,6 @@ anims/getItem = SubResource( 82 )
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 67.9663, -12.043, 0 )
 grav = 0
-bbText = "NPC.Fisherman.10"
 can_move = false
 can_camera_zoom = false
 is_a_body = false
@@ -3742,7 +3741,7 @@ flip_v = true
 mesh = SubResource( 106 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [editable path="Viewport/level/AnglerFishBoss"]
 [editable path="Viewport/level/AnglerFishBoss/CubeCrystal"]

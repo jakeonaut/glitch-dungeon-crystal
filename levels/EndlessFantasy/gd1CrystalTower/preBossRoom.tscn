@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=1]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=2]
@@ -24,7 +24,6 @@
 [ext_resource path="res://assets/palettes/kirokaze-gameboy-1x.png" type="Texture" id=22]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=23]
 [ext_resource path="res://assets/palettes/inkpink-1x.png" type="Texture" id=24]
-[ext_resource path="res://sceneObjects/BrothCauldron.tscn" type="PackedScene" id=25]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=26]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=27]
 [ext_resource path="res://levels/EndlessFantasy/gd1CrystalTower/preBossRoomBabushkaCatCrystalSnifferDialogStartSound.gd" type="Script" id=28]
@@ -880,10 +879,6 @@ my_up_vector = Vector2( 1, 0 )
 
 [node name="Sprite" parent="Viewport/level/GlitchWorldSpawner3/UpwardDigGlitch" index="0"]
 frame = 1
-
-[node name="BrothCauldron" parent="Viewport/level" instance=ExtResource( 25 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.75243, -0.987939, 0 )
-path = "res://levels/EndlessFantasy/gd1CrystalTower/000_Start.tscn"
 
 [node name="NullificationArea" parent="Viewport/level" instance=ExtResource( 31 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 9, 0 )

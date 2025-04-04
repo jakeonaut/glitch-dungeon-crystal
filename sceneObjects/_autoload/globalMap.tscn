@@ -897,6 +897,7 @@ can_nav_left = false
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false
+hide_me_from_map = true
 
 [node name="0_0" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 0 )
@@ -1022,6 +1023,7 @@ can_nav_left = false
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false
+hide_me_from_map = true
 
 [node name="FishingVillage" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 0 )
@@ -1180,7 +1182,7 @@ can_nav_down = false
 kill_after_glitch = true
 
 [node name="LostWoods4" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, -3, -5, 0 )
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, -3, -4, 0 )
 material_override = SubResource( 37 )
 flip_h = true
 frame = 38
@@ -1202,7 +1204,7 @@ can_nav_down = false
 kill_after_glitch = true
 
 [node name="InvisRoom" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -6, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -6, 0 )
 material_override = SubResource( 37 )
 frame = 38
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/002InvisRoom.tscn"
@@ -1221,7 +1223,6 @@ can_nav_left = false
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false
-has_baba_memory = true
 
 [node name="MushroomCave" parent="ToxicJungle" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -7, 0 )
@@ -1296,7 +1297,7 @@ overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
 overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
 
 [node name="TeleportDoorMaze" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -7, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -5, 0 )
 material_override = SubResource( 34 )
 frame = 38
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/TeleportDoorMaze.tscn"
@@ -1306,8 +1307,15 @@ has_baba_memory = true
 [node name="CricketCaves" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 0 )
 
-[node name="FallFromGrace" parent="CricketCaves" instance=ExtResource( 3 )]
+[node name="FallFromGrace_Freefall" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2, 0 )
+frame = 78
+path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/FallFromGrace_Freefall.tscn"
+can_nav_left = false
+can_nav_right = false
+
+[node name="FallFromGrace" parent="CricketCaves" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0 )
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/FallFromGrace.tscn"
 can_nav_left = false
@@ -1315,14 +1323,14 @@ can_nav_right = false
 can_nav_down = false
 
 [node name="000Start" parent="CricketCaves" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
 can_nav_left = false
 can_nav_up = false
 
 [node name="DustyCricketIntro" parent="CricketCaves" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0 )
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0 )
 material_override = SubResource( 7 )
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000DustyCricketIntro.tscn"
@@ -1330,7 +1338,7 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="DustyCricketIntro_old" parent="CricketCaves" instance=ExtResource( 3 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 1, 1, 0 )
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0 )
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000DustyCricketIntro_old.tscn"
 can_nav_left = false
@@ -1339,21 +1347,22 @@ can_nav_down = false
 has_phishing_key = true
 
 [node name="RedHallway" parent="CricketCaves" instance=ExtResource( 3 )]
-transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0 )
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
 material_override = SubResource( 8 )
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000RedTunnelHallway.tscn"
 can_nav_right = false
 
 [node name="DustFreefall" parent="CricketCaves" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1.5, 0, 0, 0, 1, 3, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1.5, 0, 0, 0, 1, 3, -1, 0 )
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/006DustFreefall.tscn"
+can_nav_right = false
 can_nav_up = false
 can_nav_down = false
 
 [node name="ExcavationRoom" parent="CricketCaves" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0 )
 material_override = SubResource( 15 )
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/ExcavationRoom.tscn"
@@ -1362,21 +1371,15 @@ can_nav_right = false
 can_nav_down = false
 has_mole_memory = true
 
-[node name="002BroomIntro" parent="CricketCaves" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0 )
-frame = 78
-path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/002BroomIntro.tscn"
-can_nav_up = false
-
 [node name="CricketCaveHub1" parent="CricketCaves" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1, 0 )
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/005_CricketCaveHub1.tscn"
 can_nav_left = false
 can_nav_down = false
 
 [node name="005TidepoolCaves" parent="CricketCaves" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 0 )
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/005_TidepoolCaves.tscn"
 can_nav_left = false
@@ -1385,7 +1388,7 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="DustyHoppers" parent="CricketCaves" instance=ExtResource( 3 )]
-transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 2, -1, 0 )
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 3, 0, 0 )
 material_override = SubResource( 32 )
 texture = ExtResource( 10 )
 vframes = 16
@@ -1395,7 +1398,7 @@ can_nav_left = false
 can_nav_up = false
 
 [node name="DoguBossRoom" parent="CricketCaves" instance=ExtResource( 3 )]
-transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1.5, 3, -1, -1 )
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1.5, 4, 0, -1 )
 material_override = SubResource( 33 )
 offset = Vector2( 0, 50 )
 pixel_size = 0.03
@@ -1495,6 +1498,7 @@ path = "res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom.tscn"
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false
+hide_me_from_map = true
 has_angel_statue = true
 
 [node name="BubblegloopSwamp" type="Spatial" parent="."]

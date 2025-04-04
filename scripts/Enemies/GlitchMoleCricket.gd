@@ -421,6 +421,7 @@ func digTiles(solidTiles, should_summon_clouds, is_fake_tiles = false):
     if is_builder and level.player.checkSolidTilesOnMe():
         if my_up_vector.y == 1:
             level.player.global_transform.origin.y += TILE_HEIGHT
+            level.player.camera_target_y_pos = level.player.global_transform.origin.y
         elif my_up_vector.y == -1:
             level.player.global_transform.origin.y -= TILE_HEIGHT
         elif my_up_vector.x == 1:
