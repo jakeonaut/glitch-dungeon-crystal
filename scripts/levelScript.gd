@@ -106,6 +106,7 @@ func _ready_impl():
     uiLayer.offset = Vector2(0, 0)
     uiLayer.edgeDistortion.offset = Vector2(0, 0)
     uiLayer.textBoxes.offset = Vector2(0, 0)
+    uiLayer.pauseMenu.popupRect.rect_position.x = 0
   screenEffectsContainer.offset = Vector2(320, 28)
   if not get_tree().get_root().has_node("Game/GameFrameBackground"):
     viewportTexture.rect_position = Vector2(320, 28)

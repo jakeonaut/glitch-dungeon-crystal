@@ -2379,6 +2379,7 @@ text = "the dungeon"
 scroll_active = false
 
 [node name="YesButton" type="ColorRect" parent="CanvasLayer/PopupRect"]
+visible = false
 margin_left = 86.3333
 margin_top = 96.6666
 margin_right = 236.333
@@ -2414,6 +2415,7 @@ text = "yes"
 scroll_active = false
 
 [node name="NoButton" type="ColorRect" parent="CanvasLayer/PopupRect"]
+visible = false
 margin_left = 213.667
 margin_top = 96.6667
 margin_right = 363.667

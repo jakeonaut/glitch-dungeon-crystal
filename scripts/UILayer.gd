@@ -436,7 +436,7 @@ func processHiscoreRenderLogic(delta):
     elif hiscoreDisplayIndex == 2:
       angelHiscoreLabel.visible = true
       angelHiscoreLabel.text = tr("NPC.Crystal.3") + str(hiscoreCounter)
-      var hiscoreSource = global.getThingFromAllLevelZonez("angelTadpole")
+      var hiscoreSource = global.getThingFromAllLevelZonez("angelEgg")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter += 1
         # totalHiscoreCounter += 1

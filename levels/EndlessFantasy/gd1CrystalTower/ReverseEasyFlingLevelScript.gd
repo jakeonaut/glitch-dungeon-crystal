@@ -11,9 +11,16 @@ onready var npc6 = weakref(get_node("NPC6"))
 onready var npc7 = weakref(get_node("NPC7"))
 onready var npc8 = weakref(get_node("NPC8"))
 onready var npc9 = weakref(get_node("NPC9"))
+onready var ladderSpell = get_node("LadderSpell")
+onready var floorSpell = get_node("FloorSpell")
+onready var featherSpell = get_node("FeatherSpell")
 
 # @override
 func setUpRoomInitializationOverride():
+  if global.memory["glitched_grimoire"]:
+    ladderSpell.visible = true
+    floorSpell.visible = true
+    featherSpell.visible = true
   # if global.memory.has("spellbookPage"):
   #   if door2.is_locked:
   #     door2.animationPlayer.clear_queue()

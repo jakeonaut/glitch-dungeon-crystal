@@ -146,6 +146,7 @@ script = ExtResource( 26 )
 show_crt_effect = true
 starting_glitch_type = 1
 tileset_type = 10
+has_spellbook_page = true
 spellbook_spells = [ 2, 1 ]
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 12 )]

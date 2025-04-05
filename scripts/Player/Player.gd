@@ -434,7 +434,6 @@ func _process(delta):
     if global.activeInteractor != null:
       global.activeInteractor.hideTextbox()
     tryDieToEnemy(delta, true, true, true)
-    global.incrementLevelZoneThing("num_deaths", -1)
   
   delta = delta * global.time_dilation_multiplier
 
