@@ -335,12 +335,12 @@ func resetMemory():
     memory["glitched_grimoire2"] = false
     
     # crystal elder bosses
-    memory["angler_seaman_boss"] = 3
+    memory["angler_seaman_boss"] = 0
     memory["dogu_matryoshka_boss"] = 0
     memory["baba_yaga_boss"] = 0
     # and associated shortcuts
-    memory["anglerShortcut"] = 1
-    memory["claydolShortcut"] = 1
+    memory["anglerShortcut"] = 0
+    memory["claydolShortcut"] = 0
     memory["babaShortcut"] = 0
     memory["priestessShortcut"] = 0
     
@@ -353,15 +353,15 @@ func resetMemory():
     # memory["spellbookPage"] = [] # we check if the key exists to see if we have it... -_-
     memory["can_force_respawn"] = 0
     memory["has_map_item"] = true
-    memory["broomerang"] = 1
+    memory["broomerang"] = 0
     memory["babushka_cat_sprint"] = 0
     memory["broom_double_jump"] = 0
-    memory["zora_flippers"] = 1
-    memory["fishingRod"] = true
-    memory["mole_cricket"] = 1
-    memory["flowerPot"] = true
-    memory["mushroom_soul"] = 1
-    memory["cutePet"] = true
+    memory["zora_flippers"] = 0
+    memory["fishingRod"] = false
+    memory["mole_cricket"] = 0
+    memory["flowerPot"] = false
+    memory["mushroom_soul"] = 0
+    memory["cutePet"] = false
     memory["glitched_broom"] = false
     memory["max_hp"] = 1
     memory["hp"] = memory["max_hp"]

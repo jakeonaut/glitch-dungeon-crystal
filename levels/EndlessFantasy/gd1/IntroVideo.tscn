@@ -177,7 +177,9 @@ flip_v = true
 margin_right = 1920.0
 margin_bottom = 1080.0
 stream = ExtResource( 17 )
+volume_db = -5.0
 autoplay = true
+bus = "Sfx"
 
 [node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 16 )]
 
