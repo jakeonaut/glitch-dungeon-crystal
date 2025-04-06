@@ -24,6 +24,7 @@ func getSmacked(broom_origin = null, silently = false):
   ):
     notDieSound.play()
     dieSound.play()
+    level.player.glitchTickle()
     anglerFish.boss_phase = anglerFish.BossPhase.HURT
     anglerFish.secretAniPlayer.stop()
     anglerFish.secretAniPlayer.clear_queue()

@@ -920,15 +920,15 @@ frame_delay = 0.2
 max_frames = 4
 
 [node name="BroomSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -3.0
+bus = "Sfx"
 
 [node name="GlitchSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 10 )
 volume_db = -7.0
 pitch_scale = 0.9
+bus = "Sfx"
 
 [node name="Area" type="Area" parent="."]
 

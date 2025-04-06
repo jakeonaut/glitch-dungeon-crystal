@@ -20,3 +20,4 @@ func activateScript():
   global.memory["mushroom_soul"] = 1
 
   level.saveTheGame()
+  global.tryGiveMemoryAchievement()

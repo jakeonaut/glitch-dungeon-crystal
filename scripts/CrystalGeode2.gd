@@ -246,7 +246,7 @@ func getPurified():
     global.memory["clean_crystals"] += 1
     global.setLevelZoneThing("crystal_geode", true)
     if "HighPriestessRoom" in level.getShortLevelName():
-        print("excuse me?")
+        # print("excuse me?")
         level.restartMusic()
 
     level.saveTheGame()
@@ -254,13 +254,13 @@ func getPurified():
 export var spawn_an_elder = true
 # actually "spawn elderNPC" but the animations are already calling it...
 func freeUpPlayer():
-    print("?")
+    # print("?")
     is_active = false
 
     if is_fake or not spawn_an_elder or high_priestess_crystal or (global.memory["priestess"] > 0 and global.justAngelWarped):
         return
 
-    print("??")
+    # print("??")
     var elderNPC = npcRes.instance()
     level.add_child(elderNPC)
     level.summonSmokeClouds(global_transform.origin, 3, true, true)

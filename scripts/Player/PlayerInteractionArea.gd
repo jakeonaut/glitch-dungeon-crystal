@@ -96,7 +96,6 @@ func _process(_delta):
             var activatedSomething = global.activeInteractor.InteractActivate()
             if activatedSomething and player.summonedBroom != null:
                 player.broomStop()
-                print("...2")
                 has_activated_something = true
     elif global.activeInteractor == null and nearest_area != null and nearest_area.get_node("..").has_method("tryShowInteractPrompt") and can_activate:
         if fallthrough_collision_area == null or fallthrough_collision_area.get_node("..") != nearest_area.get_node(".."):

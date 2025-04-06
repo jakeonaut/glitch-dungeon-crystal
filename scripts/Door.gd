@@ -95,13 +95,15 @@ func _ready():
 
   id = self.generateId()
   var _generateChickens = false
-  if (is_locked or should_lock) and ((
+  if (is_locked or should_lock or locked_to_weakeye) and ((
     global.memory.has(level.getShortLevelName()) and global.memory[level.getShortLevelName()].has(self.id)
-  ) or (
-    key_type != global.KeyItem.NORMAL and key_type != global.KeyItem.CRYSTAL and key_type != global.KeyItem.ZONE_CRYSTAL and \
-    global.memory.has("key_items") and global.memory["key_items"].has(key_type) and \
-    global.memory["key_items"][key_type] == global.ItemState.USED_IT
   )):
+  # ) or (
+  #   key_type != global.KeyItem.NORMAL and key_type != global.KeyItem.CRYSTAL and key_type != global.KeyItem.ZONE_CRYSTAL and \
+  #   global.memory.has("key_items") and global.memory["key_items"].has(key_type) and \
+  #   global.memory["key_items"][key_type] == global.ItemState.USED_IT
+  # )):
+    locked_to_weakeye = false
     is_locked = false
     should_lock = false
     _generateChickens = true
@@ -110,7 +112,7 @@ func _ready():
   animationPlayer.stop()
   if is_locked:
     queueLockAnimation()
-  elif should_lock or locked_to_monsters:
+  elif should_lock or locked_to_monsters or locked_to_weakeye:
     is_locked = true
     doorCloseSound.play()
     animationPlayer.queue("doorBarred")
@@ -156,9 +158,13 @@ func spawnChicken():
   freeChicken.spawn_origin = freeChicken.global_transform.origin
   level.summonSmokeClouds(freeChicken.global_transform.origin, 1, false, true)
     
+var weakEyeRes = preload("res://sceneObjects/Enemies/WeakEye.tscn")
+var weakEyeRef = null
+export var locked_to_weakeye = false
+var has_spawned_weakeye = false
 onready var meshInstance2 = get_node("MeshInstance2")
 func _process(delta):
-  if is_locked and key_type == global.KeyItem.NORMAL:
+  if is_locked and key_type == global.KeyItem.NORMAL and not locked_to_weakeye and not locked_to_monsters:
     label3D.visible = true
     label3D.text = str(num_keys_unlock)
   tryProcessGlitchedPath()
@@ -178,6 +184,21 @@ func _process(delta):
       startDoorUnlock()
       is_locked = false
       locked_to_monsters = false
+  if locked_to_weakeye and is_locked:
+    if not has_spawned_weakeye:
+      if level:
+        has_spawned_weakeye = true
+        var newWeakEye = weakEyeRes.instance()
+        newWeakEye.is_permanent = true
+        level.add_child(newWeakEye)
+        newWeakEye.global_transform.origin = self.global_transform.origin
+        newWeakEye.global_transform.origin.y += 4
+        newWeakEye.reenemize(true)
+        weakEyeRef = weakref(newWeakEye)
+    elif weakEyeRef == null or weakEyeRef.get_ref() == null:
+      startDoorUnlock()
+      is_locked = false
+      locked_to_weakeye = false
   if is_passive:
     mySprite.visible = false
     mySprite2.visible = false
@@ -371,7 +392,7 @@ var was_i_just_unlocked = false
 func startDoorUnlock():
   var num_keys = global.memory["key"] if global.memory.has("key") else null
 
-  if not locked_to_monsters:
+  if not locked_to_monsters and not locked_to_weakeye:
     unlocking_key_array = []
     if key_type != global.KeyItem.NORMAL:
       num_keys_unlock = 1
@@ -391,7 +412,7 @@ func startDoorUnlock():
   npc.can_activate = false
   npc.is_active = false
   is_locked = false
-  if locked_to_monsters:
+  if locked_to_monsters or locked_to_weakeye:
     npc.textBox.hideTextbox()
     animationPlayer.clear_queue()
     animationPlayer.stop()

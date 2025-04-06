@@ -102,6 +102,7 @@ func _process(delta):
         unenemize()
         if cubeCrystal.get_ref() != null and cubeCrystal.get_ref().meshInstance1.visible:
             cubeCrystal.get_ref().meshInstance1.visible = false
+            cubeCrystal.get_ref().ok_byebye = true
             startBossFight()
         if global.memory["angler_seaman_boss"] == 1:
             startBossFight()
@@ -534,6 +535,7 @@ func defeatMe():
     secretAniPlayer.queue("defeated")
     global.pauseGame = true
     global.shouldRenderAsCinematic = true
+    Steam.set_achievement("ANGLER_BOSS")
 
 func okayImDead():
     if global.memory["angler_seaman_boss"] < 2:

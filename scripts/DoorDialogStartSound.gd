@@ -17,8 +17,8 @@ func activateScript():
     door.key_type = global.KeyItem.NORMAL
 
   if door.is_locked:
-    if door.locked_to_monsters:
-      npc.textBoxContainer.bbText = "•it won't open"
+    if door.locked_to_monsters or door.locked_to_weakeye:
+      npc.textBoxContainer.bbText = tr("NPC.Door.2") % tr("NPC.Crystal.NULL")
     elif door.key_type == global.KeyItem.NORMAL:
       # var num_keys = global.memory["key"] if global.memory.has("key") else null
       if door.is_locked:

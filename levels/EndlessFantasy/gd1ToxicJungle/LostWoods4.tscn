@@ -1,7 +1,6 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
-[ext_resource path="res://sceneObjects/ParallaxBackground_MushroomCave.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sceneObjects/BiggestNPC.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/palettes/kirokaze-gameboy-1x.png" type="Texture" id=4]
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=5]
@@ -679,9 +678,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -1 )
 
 [node name="Mushroom2" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -4, -1 )
-
-[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
 
 [node name="EldestMonkeyNPC" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -0.15892, 0 )

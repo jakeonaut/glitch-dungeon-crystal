@@ -352,7 +352,7 @@ func resetMemory():
     # POWERUPS
     # memory["spellbookPage"] = [] # we check if the key exists to see if we have it... -_-
     memory["can_force_respawn"] = 0
-    memory["has_map_item"] = true
+    memory["has_map_item"] = false
     memory["broomerang"] = 0
     memory["babushka_cat_sprint"] = 0
     memory["broom_double_jump"] = 0
@@ -395,6 +395,32 @@ func resetMemory():
     memory["anna_mode"] = false
     memory["blue_mode"] = false
 
+var allLocales = {
+    "en": { "code": "en", "stopPosition": 350, "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed.tres]English[/font]" },
+    "zh_CN": { "code": "zh_CN", "stopPosition": 339, "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_zh_CN.tres]简体字[/font]" }, 
+    "ru": { "code": "ru", "stopPosition": 359, "supported": false, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Pусский[/font]" },
+    "pt_BR": { "code": "pt_BR", "stopPosition": 344, "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Português[/font]" },
+    "fr": { "code": "fr", "stopPosition": 350, "supported": false, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Français[/font]" },
+}
+func getSupportedLocalesArray():
+    var supportedLocales = []
+    for localeKey in allLocales:
+        if not allLocales[localeKey].supported: continue
+        supportedLocales.append(allLocales[localeKey])
+    return supportedLocales
+
+func normalizeLocaleHelper(locale):
+    if locale == "zh":
+        return "zh_CN"
+    if locale == "pt":
+        return "pt_BR"
+func normalizeLocale(locale):
+    var normalizedLocale = normalizeLocaleHelper(locale)
+    if not normalizedLocale in allLocales or not allLocales[normalizedLocale].supported:
+        return "en"
+    return normalizedLocale
+    
+
 # don't call this except for on game initialize (not game load), and only immediately preceeding
 # trying to load user settings from file...
 func resetUserSettings():
@@ -410,7 +436,7 @@ func resetUserSettings():
     userSettings["stopAllSfx"] = false
     userSettings["spellAssist"] = false
     userSettings["glyphType"] = GlyphType.XBOX
-    userSettings["locale"] = 'en'
+    userSettings["locale"] = normalizeLocale(OS.get_locale_language())
 
 func changeLocale(locale, saveSettings = true):
     TranslationServer.set_locale(locale)
@@ -496,6 +522,10 @@ func _process(delta):
             respawnVarTimerHack = 0
             hasJustEnteredRoom = false
             isEnteringRoom = false
+
+func tryGiveMemoryAchievement():
+  if global.memory["zora_flippers"] > 0 and global.memory["mole_cricket"] > 0 and global.memory["mushroom_soul"] > 0:
+    Steam.set_achievement("MEMORIES")
 
 var SACRED_LEVEL_NAME = "res://levels/EndlessFantasy"
 var MINI_SACRED_LEVEL_NAME = "EndlessFantasy"
@@ -659,6 +689,20 @@ func loadGame(saveGameIndex):
         currLevelZone = getLevelZoneName(global.memory["roomPath"])
         if not global.memory["level_zonez"].has(currLevelZone):
             global.memory["level_zonez"].push_back(currLevelZone)
+
+    # do some achievement backloading
+    if global.memory["priestess"] >= 2:
+        Steam.set_achievement("PRIESTESS_BOSS")
+    if global.memory["baba_yaga_boss"] >= 2:
+        Steam.set_achievement("BABA_BOSS")
+    if global.memory["dogu_matryoshka_boss"] >= 2:
+        Steam.set_achievement("CLAYDOL_BOSS")
+    if global.memory["angler_seaman_boss"] >= 2:
+        Steam.set_achievement("ANGLER_BOSS")
+    if global.memory["broomerang"] >= 1:
+        Steam.set_achievement("BROOMERANG")
+    if global.getThingFromAllLevelZonez("angelEgg") >= 1:
+        Steam.set_achievement("ANGEL_EGG_FIRST")
 
     # reset boss flags from 1 to 0 if we are loading, so we can start the opening cinematic again for all of them.
     # if the boss flag is 2 already, it means you've beat them, so don't reset

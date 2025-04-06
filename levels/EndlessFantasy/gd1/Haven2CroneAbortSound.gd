@@ -25,7 +25,8 @@ func activateScript():
         global.incrementLevelZoneThing("num_mini_crystal_cubes", -global.NUM_GEMS_FOR_BROOMERANG)
         global.memory["broomerang"] = 1
         level.player.sayThis(tr("NPC.Crone.6"))
-        global.memory["crone"] = 3 # not two... skip the bag for now... 
+        global.memory["crone"] = 3 # not two... skip the bag for now...
+        Steam.set_achievement("BROOMERANG")
       else:
         level.player.errorSound.play()
         level.player.sayThis(tr("NPC.Crone.5") % str(global.NUM_GEMS_FOR_BROOMERANG - num_cubes))

@@ -20,3 +20,4 @@ func activateScript():
   level.player.glitchTickle()
 
   level.saveTheGame()
+  global.tryGiveMemoryAchievement()

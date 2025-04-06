@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://assets/palettes/kirokaze-gameboy-1x.png" type="Texture" id=2]
@@ -21,7 +21,6 @@
 [ext_resource path="res://sceneObjects/KizzyCat.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/palettes/inkpink-1x.png" type="Texture" id=20]
 [ext_resource path="res://sceneObjects/Enemies/EvilSpore.tscn" type="PackedScene" id=21]
-[ext_resource path="res://sceneObjects/ParallaxBackground_MushroomCave.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/Enemies/FanPlant.tscn" type="PackedScene" id=23]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=24]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=25]
@@ -810,6 +809,7 @@ shape = SubResource( 20 )
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 42, 5, 0 )
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/BabaYagaBossRoom.tscn"
+locked_to_weakeye = true
 
 [node name="AnimationPlayer" parent="Viewport/level/Door3" index="6"]
 anims/RESET = SubResource( 56 )
@@ -1229,9 +1229,6 @@ vframes = 8
 
 [node name="SavePoint3" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-
-[node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 0 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 33, 0 )

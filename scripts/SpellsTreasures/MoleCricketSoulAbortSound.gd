@@ -20,3 +20,4 @@ func activateScript():
   global.memory["mole_cricket"] = 1
 
   level.saveTheGame()
+  global.tryGiveMemoryAchievement()

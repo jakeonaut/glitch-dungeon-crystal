@@ -74,6 +74,7 @@ func _process(delta):
         unenemize()
         if cubeCrystal.get_ref() != null and cubeCrystal.get_ref().meshInstance1.visible:
             cubeCrystal.get_ref().meshInstance1.visible = false
+            cubeCrystal.get_ref().ok_byebye = true
             global.memory["dogu_matryoshka_boss"] = -2
             miniShakeScreen()
             musicPlayer.stopAll()
@@ -517,6 +518,7 @@ func miniShakeScreen():
     level.gameCamera.miniShakeScreen()
 
 func getHurt():
+    level.player.glitchTickle()
     big_rock_counter = 0
     mySprite.visible = true
     secretAniPlayer.stop()
@@ -542,6 +544,7 @@ func yaBeatMe():
     secretAniPlayer.queue("defeated")
     global.pauseGame = true
     global.shouldRenderAsCinematic = true
+    Steam.set_achievement("CLAYDOL_BOSS")
 
 var crystalGeodeRes = preload("res://sceneObjects/CrystalGeode2.tscn")
 func okayImDead():

@@ -399,41 +399,13 @@ tracks/0/keys = {
 
 [node name="Broomerang" type="Spatial"]
 script = ExtResource( 9 )
-true_terminal_vel = null
 grav = 0
-walk_speed = null
-run_speed = null
-feather_glitch_walk_speed = null
-floor_glitch_walk_speed = null
-invisible_glitch_walk_speed = null
-swimming_walk_speed = null
-jump_force = null
-invisible_jump_force = null
-nextTextBoxPath = null
 bbText = "•BROOM UPGRADE
 sweep twice to throw"
-smackedBbText = null
 portrait = ExtResource( 13 )
 is_important = true
-is_really_important = null
-can_be_activated_invisibly = null
 can_activate = false
 can_move = false
-can_camera_zoom = null
-is_fast_text = null
-dont_recolor_me = null
-is_immediate = null
-is_a_body = null
-floating_text = null
-can_move_player = null
-is_active = null
-tiny_textbox = null
-is_static_in_level = null
-is_wiggling_fast = null
-dont_align_sprite = null
-stop_all_music = null
-display_textbox = null
-canPause = null
 
 [node name="InteractionArea" type="Area" parent="."]
 script = ExtResource( 1 )

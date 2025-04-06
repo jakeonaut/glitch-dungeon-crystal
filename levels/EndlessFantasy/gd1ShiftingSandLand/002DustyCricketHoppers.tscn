@@ -620,6 +620,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 77, -3, 0 )
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/ClaydolBossRoom.tscn"
 num_keys_unlock = 1
 key_type = 2
+locked_to_weakeye = true
 
 [node name="MiniAdventures5" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.484, 8.51851, -1 )

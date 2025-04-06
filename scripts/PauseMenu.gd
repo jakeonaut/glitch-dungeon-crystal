@@ -355,22 +355,15 @@ func processNormalLogic(_delta):
     getPlayer().unpauseSound.play()
     level.restartMusic()
 
-var localeOptions = [
-  ["[font=res://unlocalized/pauseMenuFontCondensed.tres]English[/font]", "en"],
-  ["[font=res://unlocalized/pauseMenuFontCondensed_zh_CN.tres]简体字[/font]", "zh_CN"],
-  ["[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Português[/font]", "pt_BR"],
-  # uncomment out once supported
-  # ["[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Pусский[/font]", "ru"],
-  # ["[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Français[/font]", "fr"],
-]
 var localeOptionIndex = 0
 func processLocaleLogic(_delta):
   pauseTitleText.bbcode_text = tr("UI.InputMenu.13_0") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
 
+  var localeOptions = global.getSupportedLocalesArray()
   if shouldUpdateMenuText:
     var text = "[font=res://unlocalized/pauseMenuFontCondensed.tres]"
     for i in range(len(localeOptions)):
-      var option = localeOptions[i][0]
+      var option = localeOptions[i].label
       if i == localeOptionIndex:
         text += "[wave]" + str(option) + "[/wave]\n" 
       else:
@@ -392,8 +385,8 @@ func processLocaleLogic(_delta):
 
   if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     shouldUpdateMenuText = true
-    var locale = localeOptions[localeOptionIndex][1]
-    global.changeLocale(locale)
+    var localeCode = localeOptions[localeOptionIndex].code
+    global.changeLocale(localeCode)
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
     global.changeLocale(global.userSettings["locale"], false)
     global.resetControlsConfigLabels()

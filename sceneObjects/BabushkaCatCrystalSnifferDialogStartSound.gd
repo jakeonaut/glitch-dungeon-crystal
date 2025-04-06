@@ -25,8 +25,8 @@ func activateScript():
       textBox.textNode.bbcode_text = newText
     else:
       var newText = tr("NPC.BabushkaCat.2")
-      if global.memory["has_map_item"]:
-        newText += tr("NPC.BabushkaCat.2_2")
+      # if global.memory["has_map_item"]:
+      #   newText += tr("NPC.BabushkaCat.2_2")
       textBox.text_final = newText
       textBox.textNode.bbcode_text = newText
       level.redrawMap()

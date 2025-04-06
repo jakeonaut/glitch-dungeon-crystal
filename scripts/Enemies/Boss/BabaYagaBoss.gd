@@ -64,6 +64,7 @@ func getMyVariable():
     return global.memory["baba_yaga_boss"]
 
 func getHurt():
+    level.player.glitchTickle()
     for noteRef in noteRefArray:
         if noteRef != null and noteRef.get_ref():
             noteRef.get_ref().glitchOut()
@@ -84,6 +85,7 @@ func getHurt():
         global.pauseMoveInput = true
         global.pauseGame = true
         global.shouldRenderAsCinematic = true
+        Steam.set_achievement("BABA_BOSS")
         return
     if num_hits >= 2 and boss_phase_should_crash == 0 and not has_crashed:
         boss_phase_should_crash = 1
@@ -117,6 +119,7 @@ func _process(delta):
     if boss_phase == BossPhase.ASLEEP:
         if cubeCrystal.get_ref() != null and cubeCrystal.get_ref().meshInstance1.visible:
             cubeCrystal.get_ref().meshInstance1.visible = false
+            cubeCrystal.get_ref().ok_byebye = true
             wakeMeUp()
         if level.player.transformation == level.player.TransformationState.CHICKEN or global.memory["baba_yaga_boss"] == 1:
             wakeMeUp()
