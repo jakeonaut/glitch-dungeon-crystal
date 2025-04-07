@@ -537,8 +537,9 @@ var evilSporeRes = preload("res://sceneObjects/Enemies/EvilSpore.tscn")
 
 onready var mushroomSprite = get_node("SpriteContainer/HouseSprite/MushroomSprite")
 func tryToSpawnEyeSpore(delta):
-    if num_hits <= 1:
-        return
+    # if num_hits <= 1:
+    #     return
+    eyeSporeSpawn_time_limit = 35 - num_hits * 15
     # if boss_phase_should_crash < 2:
     #     return
 

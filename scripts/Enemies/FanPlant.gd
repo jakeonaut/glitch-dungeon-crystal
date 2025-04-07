@@ -36,6 +36,9 @@ func _process(delta):
 
   windGust.is_active = is_fan_spinning
   should_collide_horizontally = true
+  if not can_deactivate_fan:
+    mySprite.material_override.set_shader_param("target_palette", smacked_palette)
+    notDieSound.pitch_scale = 0.5
 
   if chicken_state == ChickenState.IDLE:
     if is_fan_spinning:
@@ -97,12 +100,16 @@ func landed():
   if chicken_state != ChickenState.IDLE:
     chicken_state = ChickenState.LAND
 
-
+export var can_deactivate_fan = true
 # @override
 func getSmacked(broom_origin = null, silently = false):
   if is_smacked or am_i_dying:
     return false
   .getSmacked(broom_origin, silently)
+
+  if not can_deactivate_fan:
+    return
+
   if dieSound:
     dieSound.pitch_scale = rand_range(0.8, 1.2)
     dieSound.play()
@@ -111,7 +118,8 @@ func getSmacked(broom_origin = null, silently = false):
     notDieSound.play()
   mySprite.updateBaseFrame(6, 3)
 
-  behavior_jumping = true
+  if grav != 0:
+    behavior_jumping = true
   walk_direction.x = 1
   if level.player.mySprite.flip_h:
     walk_direction.x = -1
@@ -121,6 +129,7 @@ func getSmacked(broom_origin = null, silently = false):
   walk_speed = 8
   jump_force = 8
 
+  
   if is_fan_spinning:
     is_fan_spinning = false
     chargeSound.play()

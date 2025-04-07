@@ -36,7 +36,7 @@
 [ext_resource path="res://materials/CrystalGeode2.tres" type="Material" id=34]
 [ext_resource path="res://assets/mini_mushroom.png" type="Texture" id=35]
 
-[sub_resource type="ArrayMesh" id=90]
+[sub_resource type="ArrayMesh" id=93]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -49,7 +49,7 @@ surfaces/0 = {
 "vertex_count": 8
 }
 
-[sub_resource type="ArrayMesh" id=91]
+[sub_resource type="ArrayMesh" id=94]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -5288,62 +5288,62 @@ script = ExtResource( 12 )
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="SpawnSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 9 )
 volume_db = -3.0
+bus = "Sfx"
 
 [node name="ShatterSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 28 )
 volume_db = -15.0
 pitch_scale = 0.7
+bus = "Sfx"
 
 [node name="AttackSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -8.0
 pitch_scale = 1.2
+bus = "Sfx"
 
 [node name="AttackStartSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -20.0
 pitch_scale = 1.1
+bus = "Sfx"
 
 [node name="TweetSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 22 )
 volume_db = -25.0
 pitch_scale = 0.3
+bus = "Sfx"
 
 [node name="WakeUpSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 24 )
 volume_db = -15.0
 pitch_scale = 0.9
+bus = "Sfx"
 
 [node name="RunBawkSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 29 )
 volume_db = -10.0
+bus = "Sfx"
 
 [node name="EyeBlinkSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 23 )
 volume_db = -15.0
 pitch_scale = 2.0
+bus = "Sfx"
 
 [node name="FootstepSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 25 )
 volume_db = -16.0
 pitch_scale = 2.0
+bus = "Sfx"
 
 [node name="SkidSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 30 )
 volume_db = -22.0
 pitch_scale = 0.9
+bus = "Sfx"
 
 [node name="CubeCrystal" parent="." instance=ExtResource( 33 )]
 transform = Transform( 0.48, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 9.80053, -2.13 )
@@ -5353,11 +5353,11 @@ transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="CubeCrystal/CubeContainer" index="0"]
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
-mesh = SubResource( 90 )
+mesh = SubResource( 93 )
 
 [node name="MeshInstance3" parent="CubeCrystal/CubeContainer" index="1"]
 transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
-mesh = SubResource( 91 )
+mesh = SubResource( 94 )
 
 [node name="MeshInstance2" parent="CubeCrystal/CubeContainer" index="2"]
 transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )

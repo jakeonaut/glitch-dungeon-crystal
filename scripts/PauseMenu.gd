@@ -577,7 +577,7 @@ func processInventoryLogic(delta):
   if (inventoryOptionIndex == 4 or angelStatueToTeleportTo != null) and angelStatueArrValue != null:
     pauseTitleText.bbcode_text = str(angelStatueArrValue[0]) + "\n" + global.getInputText("menu_confirm") + " to teleport, " + global.getInputText("menu_cancel") + " to cancel"
   else:
-    pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " " + tr("UI.Confirmation") + ", " + global.getInputText("menu_cancel") + " " + tr("UI.PauseMenu.1") + ",\n" + global.getInputText("menu_left") + " " + global.getInputText("menu_right") + " " + global.getInputText("menu_up") + " " + global.getInputText("menu_down")
+    pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " " + tr("UI.Confirmation") + ", " + global.getInputText("menu_cancel") + " " + tr("UI.PauseMenu.1")
     # pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to resume\n" + global.getInputText("menu_left") + " " + global.getInputText("menu_right") + " " + global.getInputText("menu_up") + " " + global.getInputText("menu_down")
   var spellbook = global.memory["spellbookPage"] if global.memory.has("spellbookPage") else []
   var spellbookSize = spellbook.size()

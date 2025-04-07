@@ -239,20 +239,20 @@ should_animate = false
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 10 )
 volume_db = -18.0
 pitch_scale = 0.9
+bus = "Sfx"
 
 [node name="ChompSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 14 )
 volume_db = -10.0
+bus = "Sfx"
 
 [node name="BounceSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 9 )
 volume_db = -30.0
+bus = "Sfx"
 
 [node name="InteractionArea" type="Area" parent="." groups=["no_pushems"]]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
@@ -293,18 +293,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1 )
 visible = false
 
 [node name="GustSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 15 )
 volume_db = -12.0
 pitch_scale = 1.2
+bus = "Sfx"
 script = ExtResource( 11 )
 repeat = false
 
 [node name="ChargeSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 13 )
 volume_db = 1.0
 pitch_scale = 0.5
+bus = "Sfx"
 script = ExtResource( 11 )
 repeat = false
 

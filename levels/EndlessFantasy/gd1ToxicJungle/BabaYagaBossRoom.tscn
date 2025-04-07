@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=89 format=2]
 
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=1]
 [ext_resource path="res://levels/EndlessFantasy/gd1ToxicJungle/BabaYagaLevelScript.gd" type="Script" id=2]
@@ -35,6 +35,10 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/BigMimicController.gd" type="Script" id=33]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=34]
 [ext_resource path="res://assets/sprites/doors.png" type="Texture" id=35]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=36]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/InvisibleSpell.tscn" type="PackedScene" id=37]
+[ext_resource path="res://assets/mushroom.png" type="Texture" id=38]
+[ext_resource path="res://assets/palettes/pseudo_greyscale.png" type="Texture" id=39]
 
 [sub_resource type="Animation" id=89]
 length = 0.001
@@ -193,7 +197,7 @@ tracks/1/keys = {
 resource_local_to_scene = true
 extents = Vector3( 1.2, 0.24, 1 )
 
-[sub_resource type="ArrayMesh" id=260]
+[sub_resource type="ArrayMesh" id=263]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -206,7 +210,7 @@ surfaces/0 = {
 "vertex_count": 8
 }
 
-[sub_resource type="ArrayMesh" id=261]
+[sub_resource type="ArrayMesh" id=264]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -1186,6 +1190,46 @@ tracks/9/keys = {
 "values": [ false, true ]
 }
 
+[sub_resource type="ShaderMaterial" id=265]
+shader = ExtResource( 34 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 38 )
+shader_param/base_palette = ExtResource( 23 )
+shader_param/target_palette = ExtResource( 39 )
+
+[sub_resource type="BoxShape" id=266]
+resource_local_to_scene = true
+extents = Vector3( 2, 0.24, 1 )
+
 [sub_resource type="ShaderMaterial" id=262]
 shader = ExtResource( 34 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
@@ -1328,7 +1372,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 65530, 0, 1, 65531, 0, 1, 65532, 0, 1, 65536, 0, 1, 65549, 0, 1, 65550, 0, 1, 65551, 0, 1, 131069, 0, 1, 131070, 0, 1, 131071, 0, 1, 131072, 0, 1, 131085, 0, 1, 131087, 0, 1, 131092, 0, 51, 131093, 0, 51, 131094, 0, 51, 196605, 0, 1, 196608, 0, 1, 196618, 0, 1, 196619, 0, 1, 196620, 0, 1, 196621, 0, 1, 196622, 0, 1, 196623, 0, 1, 196628, 0, 51, 196630, 0, 51, 196634, 0, 1, 196635, 0, 1, 196636, 0, 1, 196637, 0, 1, 196638, 0, 1, 262125, 0, 1, 262126, 0, 1, 262127, 0, 1, 262141, 0, 1, 262144, 0, 1, 262154, 0, 1, 262157, 0, 1, 262164, 0, 51, 262165, 0, 51, 262166, 0, 51, 262170, 0, 1, 262172, 0, 1, 262173, 0, 1, 262174, 0, 1, 327661, 0, 1, 327662, 0, 1, 327663, 0, 1, 327677, 0, 1, 327678, 0, 1, 327679, 0, 1, 327681, 0, 51, 327682, 0, 51, 327683, 0, 51, 327690, 0, 1, 327693, 0, 1, 327706, 0, 1, 327707, 0, 1, 327708, 0, 1, 327709, 0, 1, 327710, 0, 1, 393197, 0, 1, 393198, 0, 1, 393199, 0, 1, 393217, 0, 51, 393219, 0, 51, 393226, 0, 1, 393227, 0, 1, 393228, 0, 1, 393229, 0, 1, 393239, 0, 51, 393240, 0, 51, 393241, 0, 51, 393242, 0, 51, 393244, 0, 1, 393245, 0, 1, 393246, 0, 1, 458733, 0, 1, 458735, 0, 1, 458739, 0, 51, 458740, 0, 51, 458741, 0, 51, 458753, 0, 51, 458754, 0, 51, 458755, 0, 51, 458775, 0, 51, 458778, 0, 51, 458780, 0, 1, 458781, 0, 1, 458782, 0, 1, 524269, 0, 1, 524270, 0, 1, 524271, 0, 1, 524275, 0, 51, 524277, 0, 51, 524278, 0, 1, 524279, 0, 1, 524280, 0, 1, 524294, 0, 51, 524295, 0, 51, 524296, 0, 51, 524297, 0, 51, 524311, 0, 51, 524314, 0, 51, 524316, 0, 1, 524317, 0, 1, 524318, 0, 1, 589805, 0, 1, 589806, 0, 1, 589807, 0, 1, 589811, 0, 51, 589812, 0, 51, 589813, 0, 51, 589814, 0, 1, 589816, 0, 1, 589830, 0, 51, 589833, 0, 51, 589847, 0, 51, 589848, 0, 51, 589849, 0, 51, 589850, 0, 51, 589852, 0, 1, 589853, 0, 1, 589854, 0, 1, 655341, 0, 1, 655342, 0, 1, 655343, 0, 1, 655350, 0, 1, 655351, 0, 1, 655352, 0, 1, 655366, 0, 51, 655369, 0, 51, 655388, 0, 1, 655389, 0, 1, 655390, 0, 1, 720877, 0, 1, 720878, 0, 1, 720879, 0, 1, 720902, 0, 51, 720903, 0, 51, 720904, 0, 51, 720905, 0, 51, 720924, 0, 1, 720925, 0, 1, 720926, 0, 1, 786413, 0, 1, 786414, 0, 1, 786415, 0, 1, 786416, 0, 1, 786417, 0, 1, 786460, 0, 1, 786461, 0, 1, 786462, 0, 1, 851949, 0, 1, 851950, 0, 1, 851951, 0, 1, 851953, 0, 1, 851996, 0, 1, 851997, 0, 1, 851998, 0, 1, 917485, 0, 1, 917486, 0, 1, 917487, 0, 1, 917488, 0, 1, 917489, 0, 1, 1114140, 0, 1, 1114141, 0, 1, 1114142, 0, 1, 1179629, 0, 1, 1179630, 0, 1, 1179631, 0, 1, 1179677, 0, 1, 1179678, 0, 1, 1245165, 0, 1, 1245166, 0, 1, 1245167, 0, 1, 1245212, 0, 37, 1245213, 0, 37, 1245214, 0, 37, 1310701, 0, 37, 1310702, 0, 37, 1310703, 0, 37, 1310745, 0, 37, 1310747, 0, 37, 1310748, 0, 37, 1310750, 0, 37, 1376237, 0, 37, 1376239, 0, 37, 1376241, 0, 37, 1376242, 0, 37, 1376243, 0, 37, 1376256, 0, 1, 1376257, 0, 1, 1376258, 0, 1, 1376259, 0, 37, 1376260, 0, 37, 1376261, 0, 263, 1376262, 0, 37, 1376263, 0, 37, 1376264, 0, 37, 1376265, 0, 37, 1376266, 0, 37, 1376267, 0, 37, 1376268, 0, 37, 1376269, 0, 37, 1376270, 0, 37, 1376271, 0, 37, 1376272, 0, 37, 1376273, 0, 37, 1376274, 0, 37, 1376275, 0, 37, 1376276, 0, 37, 1376277, 0, 37, 1376278, 0, 37, 1376279, 0, 37, 1376280, 0, 37, 1376281, 0, 37, 1376282, 0, 37, 1376283, 0, 37, 1376284, 0, 37, 1376285, 0, 37, 1376286, 0, 37, 1441773, 0, 37, 1441774, 0, 37, 1441775, 0, 37, 1441776, 0, 37, 1441777, 0, 37, 1441778, 0, 37, 1441779, 0, 37, 1441780, 0, 37, 1441781, 0, 37, 1441782, 0, 37, 1441783, 0, 37, 1441784, 0, 37, 1441785, 0, 37, 1441786, 0, 37, 1441787, 0, 37, 1441788, 0, 37, 1441792, 0, 1, 1441794, 0, 1, 1441795, 0, 37, 1441796, 0, 37, 1441797, 0, 37, 1441798, 0, 37, 1441799, 0, 37, 1441800, 0, 37, 1441801, 0, 37, 1441802, 0, 37, 1441803, 0, 37, 1441804, 0, 37, 1441805, 0, 37, 1441806, 0, 37, 1441807, 0, 37, 1441808, 0, 37, 1441809, 0, 37, 1441810, 0, 37, 1441811, 0, 37, 1441812, 0, 37, 1441813, 0, 37, 1441814, 0, 37, 1441815, 0, 37, 1441816, 0, 37, 1441817, 0, 37, 1441818, 0, 37, 1441819, 0, 37, 1441820, 0, 37, 1441821, 0, 37, 1441822, 0, 37, 1507309, 0, 37, 1507310, 0, 37, 1507311, 0, 37, 1507312, 0, 37, 1507313, 0, 37, 1507314, 0, 37, 1507315, 0, 37, 1507316, 0, 37, 1507317, 0, 37, 1507318, 0, 37, 1507319, 0, 37, 1507320, 0, 37, 1507321, 0, 37, 1507322, 0, 37, 1507323, 0, 37, 1507324, 0, 37, -655360, 0, 1, -655359, 0, 1, -655358, 0, 1, -655357, 0, 1, -655356, 0, 1, -655355, 0, 1, -655354, 0, 1, -655353, 0, 1, -655352, 0, 1, -655351, 0, 1, -655350, 0, 1, -655349, 0, 1, -655348, 0, 1, -655347, 0, 1, -655346, 0, 1, -655345, 0, 1, -655344, 0, 1, -655343, 0, 1, -655342, 0, 1, -655341, 0, 1, -655340, 0, 1, -655339, 0, 1, -655338, 0, 1, -655337, 0, 1, -655336, 0, 37, -655335, 0, 37, -655333, 0, 37, -655332, 0, 1, -655330, 0, 1, -589843, 0, 1, -589841, 0, 1, -589840, 0, 1, -589838, 0, 1, -589837, 0, 1, -589836, 0, 1, -589835, 0, 1, -589834, 0, 1, -589833, 0, 1, -589832, 0, 1, -589831, 0, 1, -589830, 0, 1, -589829, 0, 1, -589828, 0, 1, -589824, 0, 1, -589823, 0, 1, -589822, 0, 1, -589821, 0, 1, -589820, 0, 1, -589819, 0, 1, -589818, 0, 1, -589817, 0, 1, -589816, 0, 1, -589815, 0, 1, -589814, 0, 1, -589813, 0, 1, -589811, 0, 1, -589810, 0, 1, -589809, 0, 1, -589808, 0, 1, -589807, 0, 1, -589806, 0, 1, -589805, 0, 1, -589804, 0, 1, -589803, 0, 1, -589802, 0, 1, -589801, 0, 1, -589800, 0, 1, -589799, 0, 1, -589798, 0, 37, -589797, 0, 37, -589796, 0, 1, -589795, 0, 1, -589794, 0, 1, -524307, 0, 1, -524306, 0, 1, -524305, 0, 1, -524304, 0, 1, -524303, 0, 1, -524302, 0, 1, -524301, 0, 1, -524300, 0, 1, -524299, 0, 1, -524298, 0, 1, -524297, 0, 1, -524296, 0, 1, -524295, 0, 1, -524294, 0, 1, -524293, 0, 1, -524292, 0, 1, -524262, 0, 1, -524261, 0, 37, -524260, 0, 1, -524259, 0, 1, -524258, 0, 1, -458771, 0, 1, -458770, 0, 1, -458769, 0, 1, -458768, 0, 1, -458767, 0, 1, -458766, 0, 1, -458725, 0, 1, -458724, 0, 1, -458722, 0, 1, -393235, 0, 1, -393233, 0, 1, -393188, 0, 1, -393187, 0, 1, -327699, 0, 1, -327698, 0, 1, -327680, 0, 51, -327679, 0, 51, -327678, 0, 51, -327651, 0, 1, -327650, 0, 1, -262163, 0, 1, -262162, 0, 1, -262161, 0, 1, -262144, 0, 51, -262142, 0, 51, -262116, 0, 1, -262115, 0, 1, -262114, 0, 1, -196627, 0, 1, -196626, 0, 1, -196625, 0, 1, -196608, 0, 51, -196607, 0, 51, -196606, 0, 51, -196580, 0, 1, -196579, 0, 1, -196578, 0, 1, -131091, 0, 1, -131090, 0, 1, -131089, 0, 1, -131044, 0, 1, -131042, 0, 1, -65555, 0, 1, -65554, 0, 1, -65553, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65508, 0, 1, -65507, 0, 1, -65506, 0, 1, -19, 0, 1, -18, 0, 1, -17, 0, 1, -6, 0, 1, -4, 0, 1 )
+"cells": PoolIntArray( 131092, 0, 51, 131093, 0, 51, 131094, 0, 51, 196628, 0, 51, 196630, 0, 51, 196634, 0, 1, 196635, 0, 1, 196636, 0, 1, 196637, 0, 1, 196638, 0, 1, 262125, 0, 1, 262126, 0, 1, 262127, 0, 1, 262164, 0, 51, 262165, 0, 51, 262166, 0, 51, 262170, 0, 1, 262172, 0, 1, 262173, 0, 1, 262174, 0, 1, 327661, 0, 1, 327662, 0, 1, 327663, 0, 1, 327681, 0, 51, 327682, 0, 51, 327683, 0, 51, 327706, 0, 1, 327707, 0, 1, 327708, 0, 1, 327709, 0, 1, 327710, 0, 1, 393197, 0, 1, 393198, 0, 1, 393199, 0, 1, 393217, 0, 51, 393219, 0, 51, 393239, 0, 51, 393240, 0, 51, 393241, 0, 51, 393242, 0, 51, 393244, 0, 1, 393245, 0, 1, 393246, 0, 1, 458733, 0, 1, 458735, 0, 1, 458739, 0, 51, 458740, 0, 51, 458741, 0, 51, 458753, 0, 51, 458754, 0, 51, 458755, 0, 51, 458775, 0, 51, 458778, 0, 51, 458780, 0, 1, 458781, 0, 1, 458782, 0, 1, 524269, 0, 1, 524270, 0, 1, 524271, 0, 1, 524275, 0, 51, 524277, 0, 51, 524294, 0, 51, 524295, 0, 51, 524296, 0, 51, 524297, 0, 51, 524311, 0, 51, 524314, 0, 51, 524316, 0, 1, 524317, 0, 1, 524318, 0, 1, 589805, 0, 1, 589806, 0, 1, 589807, 0, 1, 589811, 0, 51, 589812, 0, 51, 589813, 0, 51, 589830, 0, 51, 589833, 0, 51, 589847, 0, 51, 589848, 0, 51, 589849, 0, 51, 589850, 0, 51, 589852, 0, 1, 589853, 0, 1, 589854, 0, 1, 655341, 0, 1, 655342, 0, 1, 655343, 0, 1, 655366, 0, 51, 655369, 0, 51, 655388, 0, 1, 655389, 0, 1, 655390, 0, 1, 720877, 0, 1, 720878, 0, 1, 720879, 0, 1, 720902, 0, 51, 720903, 0, 51, 720904, 0, 51, 720905, 0, 51, 720924, 0, 1, 720925, 0, 1, 720926, 0, 1, 786413, 0, 1, 786414, 0, 1, 786415, 0, 1, 786416, 0, 1, 786417, 0, 1, 786460, 0, 1, 786461, 0, 1, 786462, 0, 1, 851949, 0, 1, 851950, 0, 1, 851951, 0, 1, 851953, 0, 1, 851996, 0, 1, 851997, 0, 1, 851998, 0, 1, 917485, 0, 1, 917486, 0, 1, 917487, 0, 1, 917488, 0, 1, 917489, 0, 1, 1114140, 0, 1, 1114141, 0, 1, 1114142, 0, 1, 1179629, 0, 1, 1179630, 0, 1, 1179631, 0, 1, 1179677, 0, 1, 1179678, 0, 1, 1245165, 0, 1, 1245166, 0, 1, 1245167, 0, 1, 1245212, 0, 37, 1245213, 0, 37, 1245214, 0, 37, 1310701, 0, 37, 1310702, 0, 37, 1310703, 0, 37, 1310745, 0, 37, 1310747, 0, 37, 1310748, 0, 37, 1310750, 0, 37, 1376237, 0, 37, 1376239, 0, 37, 1376241, 0, 37, 1376242, 0, 37, 1376243, 0, 37, 1376256, 0, 1, 1376257, 0, 1, 1376258, 0, 1, 1376259, 0, 37, 1376260, 0, 37, 1376261, 0, 263, 1376262, 0, 37, 1376263, 0, 37, 1376264, 0, 37, 1376265, 0, 37, 1376266, 0, 37, 1376267, 0, 37, 1376268, 0, 37, 1376269, 0, 37, 1376270, 0, 37, 1376271, 0, 37, 1376272, 0, 37, 1376273, 0, 37, 1376274, 0, 37, 1376275, 0, 37, 1376276, 0, 37, 1376277, 0, 37, 1376278, 0, 37, 1376279, 0, 37, 1376280, 0, 37, 1376281, 0, 37, 1376282, 0, 37, 1376283, 0, 37, 1376284, 0, 37, 1376285, 0, 37, 1376286, 0, 37, 1441773, 0, 37, 1441774, 0, 37, 1441775, 0, 37, 1441776, 0, 37, 1441777, 0, 37, 1441778, 0, 37, 1441779, 0, 37, 1441780, 0, 37, 1441781, 0, 37, 1441782, 0, 37, 1441783, 0, 37, 1441784, 0, 37, 1441785, 0, 37, 1441786, 0, 37, 1441787, 0, 37, 1441788, 0, 37, 1441792, 0, 1, 1441794, 0, 1, 1441795, 0, 37, 1441796, 0, 37, 1441797, 0, 37, 1441798, 0, 37, 1441799, 0, 37, 1441800, 0, 37, 1441801, 0, 37, 1441802, 0, 37, 1441803, 0, 37, 1441804, 0, 37, 1441805, 0, 37, 1441806, 0, 37, 1441807, 0, 37, 1441808, 0, 37, 1441809, 0, 37, 1441810, 0, 37, 1441811, 0, 37, 1441812, 0, 37, 1441813, 0, 37, 1441814, 0, 37, 1441815, 0, 37, 1441816, 0, 37, 1441817, 0, 37, 1441818, 0, 37, 1441819, 0, 37, 1441820, 0, 37, 1441821, 0, 37, 1441822, 0, 37, 1507309, 0, 37, 1507310, 0, 37, 1507311, 0, 37, 1507312, 0, 37, 1507313, 0, 37, 1507314, 0, 37, 1507315, 0, 37, 1507316, 0, 37, 1507317, 0, 37, 1507318, 0, 37, 1507319, 0, 37, 1507320, 0, 37, 1507321, 0, 37, 1507322, 0, 37, 1507323, 0, 37, 1507324, 0, 37, -655360, 0, 1, -655359, 0, 1, -655358, 0, 1, -655357, 0, 1, -655356, 0, 1, -655355, 0, 1, -655354, 0, 1, -655353, 0, 1, -655352, 0, 1, -655351, 0, 1, -655350, 0, 1, -655349, 0, 1, -655348, 0, 1, -655347, 0, 1, -655346, 0, 1, -655345, 0, 1, -655344, 0, 1, -655343, 0, 1, -655342, 0, 1, -655341, 0, 1, -655340, 0, 1, -655339, 0, 1, -655338, 0, 1, -655337, 0, 1, -655336, 0, 37, -655335, 0, 37, -655333, 0, 37, -655332, 0, 1, -655330, 0, 1, -589843, 0, 1, -589841, 0, 1, -589840, 0, 1, -589838, 0, 1, -589837, 0, 1, -589836, 0, 1, -589835, 0, 1, -589834, 0, 1, -589833, 0, 1, -589832, 0, 1, -589831, 0, 1, -589830, 0, 1, -589829, 0, 1, -589828, 0, 1, -589824, 0, 1, -589823, 0, 1, -589822, 0, 1, -589821, 0, 1, -589820, 0, 1, -589819, 0, 1, -589818, 0, 1, -589817, 0, 1, -589816, 0, 1, -589815, 0, 1, -589814, 0, 1, -589813, 0, 1, -589811, 0, 1, -589810, 0, 1, -589809, 0, 1, -589808, 0, 1, -589807, 0, 1, -589806, 0, 1, -589805, 0, 1, -589804, 0, 1, -589803, 0, 1, -589802, 0, 1, -589801, 0, 1, -589800, 0, 1, -589799, 0, 1, -589798, 0, 37, -589797, 0, 37, -589796, 0, 1, -589795, 0, 1, -589794, 0, 1, -524307, 0, 1, -524306, 0, 1, -524305, 0, 1, -524304, 0, 1, -524303, 0, 1, -524302, 0, 1, -524301, 0, 1, -524300, 0, 1, -524299, 0, 1, -524298, 0, 1, -524297, 0, 1, -524296, 0, 1, -524295, 0, 1, -524294, 0, 1, -524293, 0, 1, -524292, 0, 1, -524262, 0, 1, -524261, 0, 37, -524260, 0, 1, -524259, 0, 1, -524258, 0, 1, -458771, 0, 1, -458770, 0, 1, -458769, 0, 1, -458768, 0, 1, -458767, 0, 1, -458766, 0, 1, -458725, 0, 1, -458724, 0, 1, -458722, 0, 1, -393235, 0, 1, -393233, 0, 1, -393188, 0, 1, -393187, 0, 1, -327699, 0, 1, -327698, 0, 1, -327651, 0, 1, -327650, 0, 1, -262163, 0, 1, -262162, 0, 1, -262161, 0, 1, -262144, 0, 51, -262116, 0, 1, -262115, 0, 1, -262114, 0, 1, -196627, 0, 1, -196626, 0, 1, -196625, 0, 1, -196610, 0, 51, -196609, 0, 51, -196608, 0, 51, -196580, 0, 1, -196579, 0, 1, -196578, 0, 1, -131091, 0, 1, -131090, 0, 1, -131089, 0, 1, -131074, 0, 51, -131072, 0, 51, -131044, 0, 1, -131042, 0, 1, -65555, 0, 1, -65554, 0, 1, -65553, 0, 1, -65538, 0, 51, -65537, 0, 51, -65508, 0, 1, -65507, 0, 1, -65506, 0, 1, -19, 0, 1, -18, 0, 1, -17, 0, 1 )
 }
 script = ExtResource( 5 )
 __meta__ = {
@@ -1352,6 +1396,9 @@ __meta__ = {
 "_editor_clip_": 0
 }
 
+[node name="FeatherSpell" parent="Viewport/level/LevelTiles" instance=ExtResource( 36 )]
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 20, 18.4114, 0 )
+
 [node name="Player" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6758, -6.95296, 0 )
 
@@ -1363,8 +1410,14 @@ grav = 0
 is_extra_life = true
 max_dist_to_player = 999
 
+[node name="GrandmaStatue8" parent="Viewport/level/GrandmaStatues" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.64747, 0 )
+grav = 0
+is_extra_life = true
+max_dist_to_player = 999
+
 [node name="GrandmaStatue7" parent="Viewport/level/GrandmaStatues" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2.04809, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 5.59668, 0 )
 grav = 0
 is_extra_life = true
 max_dist_to_player = 999
@@ -1378,19 +1431,13 @@ shape = SubResource( 222 )
 [node name="BabaYagaBoss" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -8, 0 )
 
-[node name="CubeContainer" parent="Viewport/level/BabaYagaBoss/CubeCrystal" index="0"]
-transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
-
 [node name="MeshInstance" parent="Viewport/level/BabaYagaBoss/CubeCrystal/CubeContainer" index="0"]
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707106, 0.707107, 5.33851e-08, 0, 0, 0 )
-mesh = SubResource( 260 )
+mesh = SubResource( 263 )
 
 [node name="MeshInstance3" parent="Viewport/level/BabaYagaBoss/CubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
-mesh = SubResource( 261 )
-
-[node name="MeshInstance2" parent="Viewport/level/BabaYagaBoss/CubeCrystal/CubeContainer" index="2"]
-transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )
+transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707106, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
+mesh = SubResource( 264 )
 
 [node name="CollisionShape" parent="Viewport/level/BabaYagaBoss/SpriteContainer/HouseSprite/FallthroughSolid" index="0"]
 shape = SubResource( 223 )
@@ -1510,24 +1557,6 @@ texture = ExtResource( 22 )
 hframes = 2
 vframes = 2
 
-[node name="Mushroom" parent="Viewport/level" instance=ExtResource( 26 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -6, -1 )
-
-[node name="Mushroom3" parent="Viewport/level" instance=ExtResource( 26 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -7, -1 )
-
-[node name="Mushroom2" parent="Viewport/level" instance=ExtResource( 26 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -2, -1 )
-
-[node name="Mushroom4" parent="Viewport/level" instance=ExtResource( 26 )]
-transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -7, 19, -1 )
-
-[node name="Mushroom5" parent="Viewport/level" instance=ExtResource( 26 )]
-transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -4, 16, -1 )
-
-[node name="Mushroom6" parent="Viewport/level" instance=ExtResource( 26 )]
-transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 16, 17, -1 )
-
 [node name="Door" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.49463, -7, 0 )
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/007CrystalHaven.tscn"
@@ -1618,13 +1647,395 @@ is_fan_spinning = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, -7, 0 )
 is_fan_spinning = true
 
+[node name="Mushroom14" parent="Viewport/level" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.098, 0.110545, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/Mushroom14" index="0"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D12" parent="Viewport/level/Mushroom14" index="1"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D2" parent="Viewport/level/Mushroom14" index="2"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D3" parent="Viewport/level/Mushroom14" index="3"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D4" parent="Viewport/level/Mushroom14" index="4"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D5" parent="Viewport/level/Mushroom14" index="5"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D9" parent="Viewport/level/Mushroom14" index="6"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D10" parent="Viewport/level/Mushroom14" index="7"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D11" parent="Viewport/level/Mushroom14" index="8"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D6" parent="Viewport/level/Mushroom14" index="9"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D7" parent="Viewport/level/Mushroom14" index="10"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D8" parent="Viewport/level/Mushroom14" index="11"]
+material_override = SubResource( 265 )
+
+[node name="CollisionShape" parent="Viewport/level/Mushroom14/FallthroughSolid" index="0"]
+shape = SubResource( 266 )
+
+[node name="Mushroom15" parent="Viewport/level" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.098, -6.98224, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/Mushroom15" index="0"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D12" parent="Viewport/level/Mushroom15" index="1"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D2" parent="Viewport/level/Mushroom15" index="2"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D3" parent="Viewport/level/Mushroom15" index="3"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D4" parent="Viewport/level/Mushroom15" index="4"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D5" parent="Viewport/level/Mushroom15" index="5"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D9" parent="Viewport/level/Mushroom15" index="6"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D10" parent="Viewport/level/Mushroom15" index="7"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D11" parent="Viewport/level/Mushroom15" index="8"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D6" parent="Viewport/level/Mushroom15" index="9"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D7" parent="Viewport/level/Mushroom15" index="10"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D8" parent="Viewport/level/Mushroom15" index="11"]
+material_override = SubResource( 265 )
+
+[node name="CollisionShape" parent="Viewport/level/Mushroom15/FallthroughSolid" index="0"]
+shape = SubResource( 266 )
+
+[node name="Mushroom16" parent="Viewport/level" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.902, -6.98224, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/Mushroom16" index="0"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D12" parent="Viewport/level/Mushroom16" index="1"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D2" parent="Viewport/level/Mushroom16" index="2"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D3" parent="Viewport/level/Mushroom16" index="3"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D4" parent="Viewport/level/Mushroom16" index="4"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D5" parent="Viewport/level/Mushroom16" index="5"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D9" parent="Viewport/level/Mushroom16" index="6"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D10" parent="Viewport/level/Mushroom16" index="7"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D11" parent="Viewport/level/Mushroom16" index="8"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D6" parent="Viewport/level/Mushroom16" index="9"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D7" parent="Viewport/level/Mushroom16" index="10"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D8" parent="Viewport/level/Mushroom16" index="11"]
+material_override = SubResource( 265 )
+
+[node name="CollisionShape" parent="Viewport/level/Mushroom16/FallthroughSolid" index="0"]
+shape = SubResource( 266 )
+
+[node name="Mushroom17" parent="Viewport/level" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.902, -1.98224, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/Mushroom17" index="0"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D12" parent="Viewport/level/Mushroom17" index="1"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D2" parent="Viewport/level/Mushroom17" index="2"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D3" parent="Viewport/level/Mushroom17" index="3"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D4" parent="Viewport/level/Mushroom17" index="4"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D5" parent="Viewport/level/Mushroom17" index="5"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D9" parent="Viewport/level/Mushroom17" index="6"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D10" parent="Viewport/level/Mushroom17" index="7"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D11" parent="Viewport/level/Mushroom17" index="8"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D6" parent="Viewport/level/Mushroom17" index="9"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D7" parent="Viewport/level/Mushroom17" index="10"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D8" parent="Viewport/level/Mushroom17" index="11"]
+material_override = SubResource( 265 )
+
+[node name="CollisionShape" parent="Viewport/level/Mushroom17/FallthroughSolid" index="0"]
+shape = SubResource( 266 )
+
+[node name="Mushroom18" parent="Viewport/level" instance=ExtResource( 26 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.902, -5.98224, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/Mushroom18" index="0"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D12" parent="Viewport/level/Mushroom18" index="1"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D2" parent="Viewport/level/Mushroom18" index="2"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D3" parent="Viewport/level/Mushroom18" index="3"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D4" parent="Viewport/level/Mushroom18" index="4"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D5" parent="Viewport/level/Mushroom18" index="5"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D9" parent="Viewport/level/Mushroom18" index="6"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D10" parent="Viewport/level/Mushroom18" index="7"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D11" parent="Viewport/level/Mushroom18" index="8"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D6" parent="Viewport/level/Mushroom18" index="9"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D7" parent="Viewport/level/Mushroom18" index="10"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D8" parent="Viewport/level/Mushroom18" index="11"]
+material_override = SubResource( 265 )
+
+[node name="CollisionShape" parent="Viewport/level/Mushroom18/FallthroughSolid" index="0"]
+shape = SubResource( 266 )
+
+[node name="Mushroom19" parent="Viewport/level" instance=ExtResource( 26 )]
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 15.902, 17.0178, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/Mushroom19" index="0"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D12" parent="Viewport/level/Mushroom19" index="1"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D2" parent="Viewport/level/Mushroom19" index="2"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D3" parent="Viewport/level/Mushroom19" index="3"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D4" parent="Viewport/level/Mushroom19" index="4"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D5" parent="Viewport/level/Mushroom19" index="5"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D9" parent="Viewport/level/Mushroom19" index="6"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D10" parent="Viewport/level/Mushroom19" index="7"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D11" parent="Viewport/level/Mushroom19" index="8"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D6" parent="Viewport/level/Mushroom19" index="9"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D7" parent="Viewport/level/Mushroom19" index="10"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D8" parent="Viewport/level/Mushroom19" index="11"]
+material_override = SubResource( 265 )
+
+[node name="CollisionShape" parent="Viewport/level/Mushroom19/FallthroughSolid" index="0"]
+shape = SubResource( 266 )
+
+[node name="Mushroom20" parent="Viewport/level" instance=ExtResource( 26 )]
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 7.902, 13.0178, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/Mushroom20" index="0"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D12" parent="Viewport/level/Mushroom20" index="1"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D2" parent="Viewport/level/Mushroom20" index="2"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D3" parent="Viewport/level/Mushroom20" index="3"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D4" parent="Viewport/level/Mushroom20" index="4"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D5" parent="Viewport/level/Mushroom20" index="5"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D9" parent="Viewport/level/Mushroom20" index="6"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D10" parent="Viewport/level/Mushroom20" index="7"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D11" parent="Viewport/level/Mushroom20" index="8"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D6" parent="Viewport/level/Mushroom20" index="9"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D7" parent="Viewport/level/Mushroom20" index="10"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D8" parent="Viewport/level/Mushroom20" index="11"]
+material_override = SubResource( 265 )
+
+[node name="CollisionShape" parent="Viewport/level/Mushroom20/FallthroughSolid" index="0"]
+shape = SubResource( 266 )
+
+[node name="Mushroom21" parent="Viewport/level" instance=ExtResource( 26 )]
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -4.098, 16.0178, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/Mushroom21" index="0"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D12" parent="Viewport/level/Mushroom21" index="1"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D2" parent="Viewport/level/Mushroom21" index="2"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D3" parent="Viewport/level/Mushroom21" index="3"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D4" parent="Viewport/level/Mushroom21" index="4"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D5" parent="Viewport/level/Mushroom21" index="5"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D9" parent="Viewport/level/Mushroom21" index="6"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D10" parent="Viewport/level/Mushroom21" index="7"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D11" parent="Viewport/level/Mushroom21" index="8"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D6" parent="Viewport/level/Mushroom21" index="9"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D7" parent="Viewport/level/Mushroom21" index="10"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D8" parent="Viewport/level/Mushroom21" index="11"]
+material_override = SubResource( 265 )
+
+[node name="CollisionShape" parent="Viewport/level/Mushroom21/FallthroughSolid" index="0"]
+shape = SubResource( 266 )
+
+[node name="Mushroom22" parent="Viewport/level" instance=ExtResource( 26 )]
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -7.098, 19.0178, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/Mushroom22" index="0"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D12" parent="Viewport/level/Mushroom22" index="1"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D2" parent="Viewport/level/Mushroom22" index="2"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D3" parent="Viewport/level/Mushroom22" index="3"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D4" parent="Viewport/level/Mushroom22" index="4"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D5" parent="Viewport/level/Mushroom22" index="5"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D9" parent="Viewport/level/Mushroom22" index="6"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D10" parent="Viewport/level/Mushroom22" index="7"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D11" parent="Viewport/level/Mushroom22" index="8"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D6" parent="Viewport/level/Mushroom22" index="9"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D7" parent="Viewport/level/Mushroom22" index="10"]
+material_override = SubResource( 265 )
+
+[node name="Sprite3D8" parent="Viewport/level/Mushroom22" index="11"]
+material_override = SubResource( 265 )
+
+[node name="CollisionShape" parent="Viewport/level/Mushroom22/FallthroughSolid" index="0"]
+shape = SubResource( 266 )
+
 [node name="FanPlant3" parent="Viewport/level" instance=ExtResource( 28 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 6, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 5, 0 )
+grav = 0
 is_fan_spinning = true
+can_deactivate_fan = false
 
 [node name="FanPlant4" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 8, 0 )
+grav = 0
 is_fan_spinning = true
+can_deactivate_fan = false
 
 [node name="ShortcutDoor" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.688, -8.03421, 0 )
@@ -1639,6 +2050,9 @@ texture = ExtResource( 35 )
 hframes = 5
 vframes = 6
 frame = 27
+
+[node name="InvisibleSpell" parent="Viewport/level" instance=ExtResource( 37 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -5.7257, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 17 )]
 
@@ -1699,6 +2113,15 @@ material = SubResource( 44 )
 [editable path="Viewport/level/EldestMonkeyNPC/MimicNPC/NPC TextBox"]
 [editable path="Viewport/level/EldestMonkeyNPC/TreasureSpellCollectable"]
 [editable path="Viewport/level/EldestMonkeyNPC/TreasureSpellCollectable/NPC TextBox"]
+[editable path="Viewport/level/Mushroom14"]
+[editable path="Viewport/level/Mushroom15"]
+[editable path="Viewport/level/Mushroom16"]
+[editable path="Viewport/level/Mushroom17"]
+[editable path="Viewport/level/Mushroom18"]
+[editable path="Viewport/level/Mushroom19"]
+[editable path="Viewport/level/Mushroom20"]
+[editable path="Viewport/level/Mushroom21"]
+[editable path="Viewport/level/Mushroom22"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="Viewport3/ScreenEffects"]
 [editable path="ScreenEffects"]

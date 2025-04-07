@@ -402,7 +402,7 @@ func startBossFight():
     level.gameCamera.zoomed_size = 30
 
 func barfRandomSnail():
-    if num_hits <= basicFrogEnemies.size():
+    if num_hits + 1 <= basicFrogEnemies.size():
         return
 
     var basicFrogEnemy = basicFrogEnemyRes.instance()
