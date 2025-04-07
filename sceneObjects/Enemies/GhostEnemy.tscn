@@ -49,8 +49,8 @@ shader_param/texture_albedo = ExtResource( 3 )
 shader_param/base_palette = ExtResource( 2 )
 shader_param/target_palette = ExtResource( 2 )
 
-[sub_resource type="BoxShape" id=10]
-extents = Vector3( 1, 1.2, 0.5 )
+[sub_resource type="BoxShape" id=14]
+extents = Vector3( 0.8, 0.8, 0.5 )
 
 [sub_resource type="Animation" id=11]
 length = 0.001
@@ -370,7 +370,7 @@ script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.390735, 0 )
-shape = SubResource( 10 )
+shape = SubResource( 14 )
 
 [node name="SecretAniPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 11 )

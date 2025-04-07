@@ -412,6 +412,7 @@ func startDoorUnlock():
   npc.can_activate = false
   npc.is_active = false
   is_locked = false
+  setGlobalMemoryOfHasUnlocked()
   if locked_to_monsters or locked_to_weakeye:
     npc.textBox.hideTextbox()
     animationPlayer.clear_queue()
@@ -423,7 +424,6 @@ func startDoorUnlock():
     level.player.physics_state = level.player.PhysicsState.OCCUPIED
     global.pauseMoveInput = true
     getPlayer().pauseSelf = true
-    setGlobalMemoryOfHasUnlocked()
     is_unlocking = true
     getPlayer().hv = Vector3(0, 0, 0)
     getPlayer().linear_velocity.x = 0

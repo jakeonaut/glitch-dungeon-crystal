@@ -477,6 +477,8 @@ func tryToSayTidy():
   for spike_id in spike_id_array:
     if get_used_cells_by_item(spike_id).size() > 0:
       return
+  if level.get_tree().get_nodes_in_group("nonviolent_enemies").size() > 0:
+    return
   if level.get_tree().get_nodes_in_group("weak_enemies").size() > 0:
     return
   if level.get_tree().get_nodes_in_group("enemies").size() > 0:

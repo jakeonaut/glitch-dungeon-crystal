@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://assets/palettes/kirokaze-gameboy-1x.png" type="Texture" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://sceneObjects/KizzyCat.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/palettes/inkpink-1x.png" type="Texture" id=20]
 [ext_resource path="res://sceneObjects/Enemies/EvilSpore.tscn" type="PackedScene" id=21]
+[ext_resource path="res://assets/sprites/doors.png" type="Texture" id=22]
 [ext_resource path="res://sceneObjects/Enemies/FanPlant.tscn" type="PackedScene" id=23]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=24]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=25]
@@ -694,6 +695,42 @@ tracks/2/keys = {
 "update": 0,
 "values": [ 0.0625, 0.16, 0.125, 0.125, 0.0625 ]
 }
+
+[sub_resource type="ShaderMaterial" id=81]
+shader = ExtResource( 25 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.001
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 2
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = true
+shader_param/shake_power_3d = 0.01
+shader_param/shake_rate = 0.1
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
+shader_param/texture_albedo = ExtResource( 22 )
+shader_param/base_palette = ExtResource( 24 )
+shader_param/target_palette = ExtResource( 15 )
 
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
@@ -1449,6 +1486,15 @@ script = ExtResource( 30 )
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
 memory_str = "babaShortcut"
 starting_glitch_type = ""
+
+[node name="Sprite3D3" type="Sprite3D" parent="Viewport/level/BabaShortcutDoor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.86934, -0.9 )
+material_override = SubResource( 81 )
+pixel_size = 0.12
+texture = ExtResource( 22 )
+hframes = 5
+vframes = 6
+frame = 27
 
 [node name="Viewport2" parent="." instance=ExtResource( 13 )]
 

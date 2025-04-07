@@ -106,6 +106,7 @@ func _process(delta):
             startBossFight()
         if global.memory["angler_seaman_boss"] == 1:
             startBossFight()
+            cubeCrystal.get_ref().ok_byebye = true
         return
     elif boss_phase == BossPhase.WAKING_UP:
         if not secretAniPlayer.is_playing():

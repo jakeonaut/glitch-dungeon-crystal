@@ -1561,7 +1561,7 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
         continue
     if area.is_in_group("tadpole"):
       continue
-    elif area.is_in_group("weak_enemies") and area.has_method("isActive") and area.isActive() and is_active:
+    elif (area.is_in_group("weak_enemies")or area.is_in_group("nonviolent_enemies")) and area.has_method("isActive") and area.isActive() and is_active:
       if not area.get_node("..").am_i_dying:
         area.get_node("..").ouchies(global_transform.origin)
         level.summonSmokeClouds(global_transform.origin, 5, true, true)
