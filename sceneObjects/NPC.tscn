@@ -349,10 +349,10 @@ frame = 745
 frame_delay = 0.5
 
 [node name="SmackSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 14 )
 volume_db = -20.0
 pitch_scale = 0.65
+bus = "Sfx"
 
 [node name="TextBoxCameraTarget" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )

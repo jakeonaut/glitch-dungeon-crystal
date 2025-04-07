@@ -122,6 +122,7 @@ func _process(delta):
             cubeCrystal.get_ref().ok_byebye = true
             wakeMeUp()
         if level.player.transformation == level.player.TransformationState.CHICKEN or global.memory["baba_yaga_boss"] == 1:
+            cubeCrystal.get_ref().ok_byebye = true
             wakeMeUp()
     elif boss_phase == BossPhase.WAKEUP:
         if not secretAniPlayer.is_playing():

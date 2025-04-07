@@ -321,7 +321,7 @@ func hitStuff(_delta):
     for area in areas:
         if area.is_in_group("tadpole"):
             continue
-        elif area.is_in_group("weak_enemies") and area.has_method("isActive") and area.isActive():
+        elif (area.is_in_group("weak_enemies") or area.is_in_group("nonviolent_enemies")) and area.has_method("isActive") and area.isActive():
             if not area.get_node("..").am_i_dying:
                 if not returning:
                     my_broom_owner.getSmacked()

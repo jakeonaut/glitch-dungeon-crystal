@@ -1395,7 +1395,9 @@ vframes = 16
 frame = 48
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/002DustyCricketHoppers.tscn"
 can_nav_left = false
+can_nav_right = false
 can_nav_up = false
+can_nav_down = false
 
 [node name="DoguBossRoom" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1.5, 4, 0, -1 )

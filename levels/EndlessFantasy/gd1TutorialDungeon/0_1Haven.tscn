@@ -1,4 +1,4 @@
-[gd_scene load_steps=177 format=2]
+[gd_scene load_steps=179 format=2]
 
 [ext_resource path="res://levels/EndlessFantasy/gd1TutorialDungeon/0_1HavenLevelScript.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=2]
@@ -48,6 +48,7 @@
 [ext_resource path="res://sceneObjects/AngelStatue.tscn" type="PackedScene" id=46]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/MapTreasure.tscn" type="PackedScene" id=47]
 [ext_resource path="res://sceneObjects/WaterCubes/BogWaterCube.tscn" type="PackedScene" id=48]
+[ext_resource path="res://assets/sprites/doors.png" type="Texture" id=49]
 
 [sub_resource type="ShaderMaterial" id=17]
 shader = ExtResource( 6 )
@@ -3868,6 +3869,42 @@ resource_name = "walk"
 [sub_resource type="Animation" id=366]
 resource_name = "walkStart"
 
+[sub_resource type="ShaderMaterial" id=367]
+shader = ExtResource( 6 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.001
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 2
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = true
+shader_param/shake_power_3d = 0.01
+shader_param/shake_rate = 0.1
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
+shader_param/texture_albedo = ExtResource( 49 )
+shader_param/base_palette = ExtResource( 8 )
+shader_param/target_palette = ExtResource( 42 )
+
 [sub_resource type="ViewportTexture" id=134]
 viewport_path = NodePath("Viewport")
 
@@ -3885,7 +3922,7 @@ shader_param/target_palette = ExtResource( 3 )
 [sub_resource type="ViewportTexture" id=119]
 viewport_path = NodePath("Viewport2")
 
-[sub_resource type="ArrayMesh" id=367]
+[sub_resource type="ArrayMesh" id=368]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -4552,6 +4589,15 @@ path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
 memory_str = "anglerShortcut"
 starting_glitch_type = ""
 
+[node name="Sprite3D3" type="Sprite3D" parent="Viewport/level/AnglerShortcutDoor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.86934, -0.9 )
+material_override = SubResource( 367 )
+pixel_size = 0.12
+texture = ExtResource( 49 )
+hframes = 5
+vframes = 6
+frame = 27
+
 [node name="BabaShortcutDoor" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.75965, -15.1076, 0 )
 visible = false
@@ -4560,6 +4606,15 @@ path = "res://levels/EndlessFantasy/gd1ToxicJungle/007CrystalHaven.tscn"
 memory_str = "babaShortcut"
 starting_glitch_type = ""
 
+[node name="Sprite3D3" type="Sprite3D" parent="Viewport/level/BabaShortcutDoor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.86934, -0.9 )
+material_override = SubResource( 367 )
+pixel_size = 0.12
+texture = ExtResource( 49 )
+hframes = 5
+vframes = 6
+frame = 27
+
 [node name="ClaydolShortcutDoor" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91075, -21.0493, 0 )
 visible = false
@@ -4567,6 +4622,15 @@ script = ExtResource( 44 )
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/002DustyCricketHoppers.tscn"
 memory_str = "claydolShortcut"
 starting_glitch_type = ""
+
+[node name="Sprite3D3" type="Sprite3D" parent="Viewport/level/ClaydolShortcutDoor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.86934, -0.9 )
+material_override = SubResource( 367 )
+pixel_size = 0.12
+texture = ExtResource( 49 )
+hframes = 5
+vframes = 6
+frame = 27
 
 [node name="Viewport2" parent="." instance=ExtResource( 21 )]
 
@@ -4592,10 +4656,10 @@ flip_v = true
 [node name="UILayer" parent="." instance=ExtResource( 11 )]
 
 [node name="MeshInstance" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 367 )
+mesh = SubResource( 368 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [editable path="Viewport/level/GameCamera"]
 [editable path="Viewport/level/Player"]

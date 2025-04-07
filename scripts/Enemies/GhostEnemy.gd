@@ -26,6 +26,11 @@ func _process(delta):
   delta = delta * global.time_dilation_multiplier
   behavior_phase_through_walls = true
 
+  if mySprite.should_animate:
+    reenemize()
+  else:
+    unenemize()
+
   if just_a_figment:
     mySprite.material_override.set_shader_param("enable_glitch_3d", false)
     global_transform.origin.x += x_speed * delta
@@ -58,6 +63,7 @@ func _process(delta):
       global_transform.origin.x -= 5
     global_transform.origin.y += 5
     mySprite.flip_h = (level.player.global_transform.origin.x < global_transform.origin.x)
+    mySprite.material_override.set_shader_param("opacity", 0)
     if scared_timer >= scared_time_limit:
       hauntSound.play()
   elif my_opacity < 0.9:
@@ -126,6 +132,7 @@ func getSmacked(broom_origin = null, silently = false):
     just_a_figment = true
     mySprite.material_override.set_shader_param("enable_glitch_3d", false)
     .getSmacked(broom_origin, silently)
+    secretAniPlayer.play("scary")
 
 # func passiveActivate(_delta, is_player):
 #   if just_a_figment or is_following_player:

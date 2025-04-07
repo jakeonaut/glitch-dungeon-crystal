@@ -57,7 +57,7 @@ func _process(delta):
         if area.has_method("PassivePassiveInteractActivate"):
             area.PassivePassiveInteractActivate(delta)
 
-        if area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
+        if area.is_in_group("enemies") and not area.is_in_group("nonviolent_enemies") and area.has_method("isActive") and area.isActive():
             var enemy = area.get_node("..")
             is_touching_enemy = true
             if enemy.has_method("doSomethingElseToPlayer"):

@@ -15,6 +15,7 @@ var MAX_GRANNY_HITS = 3
 
 var dreidel_timer = 0
 var dreidel_time_limit = 60
+var dreidel_charge_time_limit = 10
 var dizzy_timer = 0
 var dizzy_time_limit = 120
 var smokeCloudTimer = 0
@@ -96,6 +97,7 @@ func _process(delta):
             level.gameCamera.zoomed_size = 30
             return
         if global.memory["dogu_matryoshka_boss"] == 1:
+            cubeCrystal.get_ref().ok_byebye = true
             global_transform.origin.y += 10.5
             boss_phase = BossPhase.WAKEUP
             level.gameCamera.initial_size = 35
@@ -239,6 +241,15 @@ func _process(delta):
             smokeCloudTimer = 0
             level.summonSmokeClouds(global_transform.origin, 2, false, true)
 
+        if drillCharging:
+            behavior_walking = true
+            walk_speed = sin(dreidel_timer / (PI * 3)) + 1
+            dreidel_timer += (delta*11)
+            if dreidel_timer >= dreidel_charge_time_limit:
+                dreidel_timer = 0
+                drillCharging = false
+            return
+
         behavior_walking = true
         dreidel_timer += (delta*11)
         walk_speed = 16 * sin(dreidel_timer / (PI * 3)) + 8
@@ -274,6 +285,7 @@ func _process(delta):
         cubeCrystal.get_ref().meshInstance1.visible = false
 
 func queueUpAJump():
+    walk_speed = 3*num_hits + 3
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("jumpSquat")
@@ -321,6 +333,7 @@ func getSmacked(broom_origin = null, silently = false):
 
     return .getSmacked(broom_origin, silently)
 
+var drillCharging = false
 # @override
 func landed():
     .landed()
@@ -337,6 +350,7 @@ func landed():
         if boss_phase != BossPhase.DRILL_DREIDEL_SPIN:
             spawnGhostEnemy()
             dreidel_timer = 0
+            drillCharging = true
         boss_phase = BossPhase.DRILL_DREIDEL_SPIN
         # for _i in range(2):
         #     if digTiles(getTilesBelow(getLevelTiles()), true):
@@ -493,6 +507,7 @@ func spawnGhostEnemy():
     level.add_child(ghostEnemy)
     ghostEnemy.global_transform.origin.x = self.global_transform.origin.x
     ghostEnemy.global_transform.origin.y = self.global_transform.origin.y
+    ghostEnemy.scared_time_limit = 60
     ghostEnemies.push_back(weakref(ghostEnemy))
     return ghostEnemy
     
