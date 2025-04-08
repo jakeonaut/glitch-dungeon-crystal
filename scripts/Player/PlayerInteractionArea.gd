@@ -13,7 +13,7 @@ func _process(_delta):
     var fallthrough_collision_area = null
     var player = get_node("..")
     has_activated_something = false
-    var can_activate = not global.pauseMoveInput and player.on_ground
+    var can_activate = not global.pauseMoveInput and (player.on_ground or player.justPressedJump())
     var hadGlobalActiveInteractor = global.activeInteractor != null
 
     if global.hasJustEnteredRoom or global.isEnteringRoom or global.isPauseMenuOpen:
@@ -60,7 +60,7 @@ func _process(_delta):
                                     (player_x - 1 < area_x and player_x + 1 > area_x)
         can_activate = can_activate and is_player_facing_area
 
-    if Input.is_action_just_pressed("ui_down"):
+    if Input.is_action_just_pressed("enter_door"):
         # short circuit to textbox if one exists
         if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
             if global.activeInteractor.is_in_group("door_textbox") and nearest_area != null and nearest_area.is_in_group("door"):
@@ -72,7 +72,7 @@ func _process(_delta):
         # give priority to active area if user pressing interact action
         elif nearest_area and not global.pauseMoveInput and nearest_area.is_in_group("door"):
             nearest_area.InteractActivate()
-    if Input.is_action_just_pressed("sub_action_button"):
+    if Input.is_action_just_pressed("talk_button"):
         var activated_something = false
         if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
             activated_something = global.activeInteractor.InteractActivate()
@@ -80,7 +80,7 @@ func _process(_delta):
         elif nearest_area and can_activate and nearest_area.is_in_group("npc") and not nearest_area.is_in_group("door"):
             # if fallthrough_collision_area == null or fallthrough_collision_area.get_node("..") != nearest_area.get_node(".."):
             activated_something = nearest_area.InteractActivate()        
-        if activated_something and player.summonedBroom != null and (not hadGlobalActiveInteractor or (player.smallInteractionArea.is_touching_npc and player.on_ground)):
+        if activated_something and player.summonedBroom != null and (not hadGlobalActiveInteractor or (player.smallInteractionArea.is_touching_npc and (player.on_ground or player.justPressedJump()))):
             player.broomStop()
             has_activated_something = true
     #     # Give secondary priority to held objects action.

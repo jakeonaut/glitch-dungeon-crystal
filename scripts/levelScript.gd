@@ -247,10 +247,6 @@ func tryInitializeFromDebug():
 
 func _process(delta):
   delta = delta * global.time_dilation_multiplier
-
-  if not global.hasInitializedControlsConfig:
-    global.initializeControlsConfig()
-    global.hasInitializedControlsConfig = true
   if should_adjust_player:
     adjustPlayerForEdgeTransition()
 

@@ -240,7 +240,7 @@ func _process(delta):
   miniCrystalCubeRect.visible = false
 
   get_node("EquipmentRect").visible = global.memory.has("spellbookPage") and not global.isPauseMenuOpen
-  glitchSpriteContainer.visible = (global.memory["hasEverTouchedObelisk"] or level.player.glitch_form != global.GlitchForm.NORMAL) and not global.memory.has("spellbookPage")
+  glitchSpriteContainer.visible = (global.memory["hasEverTouchedObelisk"] or level.player.glitch_form != global.GlitchForm.NORMAL) and not global.memory.has("spellbookPage") and not global.isPauseMenuOpen
   # tryLerpSpriteFromCenter(get_node("GlitchSprite"), delta, Vector2(0, 1))
   if savingTextureRect != null and savingTextureRect.texture == null and savingViewport != null:
     savingTextureRect.texture = savingViewport.get_texture()
@@ -467,10 +467,10 @@ func processHiscoreRenderLogic(delta):
       hiscoreTimeLimit = 15
     elif hiscoreDisplayIndex == 7:
       pressEnterLabel.visible = not pressEnterLabel.visible
-      var sweep_button_text = global.getInputText("sub_action_button")
+      var sweep_button_text = global.getInputText("talk_button")
       pressEnterLabel.bbcode_text = tr("NPC.Crystal.Final") % sweep_button_text
   
-  if hiscoreDisplayIndex >= 5 and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("sub_action_button") or Input.is_action_just_pressed("jump_button") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))):
+  if hiscoreDisplayIndex >= 5 and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("talk_button") or Input.is_action_just_pressed("sub_action_button") or Input.is_action_just_pressed("jump_button") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))):
     # global.isEnteringRoom = true
     global.hasGottenLevelGeode = false
     global.hasLevelGeodeBeenSmacked = false

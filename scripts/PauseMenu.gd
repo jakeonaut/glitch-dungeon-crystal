@@ -57,6 +57,7 @@ onready var secretLeftButtonText = get_node("SecretButtonText/LeftButton")
 onready var secretRightButtonText = get_node("SecretButtonText/RightButton")
 onready var secretTopButtonText = get_node("SecretButtonText/TopButton")
 onready var secretBottomButtonText = get_node("SecretButtonText/BottomButton")
+onready var enterDoorPrompt = get_node("SecretButtonText/EnterDoorPrompt")
 
 # INPUT MENU
 onready var inputMenu = get_node("InputMenu")
@@ -264,7 +265,7 @@ func _process(delta):
     global.currLevelZone = null
     transition.long_fade_to("res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn")
 
-  pauseTitleRect.rect_position = Vector2(164, 400)
+  pauseTitleRect.rect_position = Vector2(164, 420)
 
 func repositionCursorSprite(index):
   cursorSprite.position.x = 110
@@ -274,11 +275,11 @@ func repositionCursorSprite(index):
   # else:
   #   cursorSprite.scale = Vector2(3, 3)
 
-func repositionInputCursorSprite(index, showCondensedMenu):
+func repositionInputCursorSprite(index, _showCondensedMenu):
   cursorSprite.scale = Vector2(3, 3)
   cursorSprite.position.x = 100
   #if showCondensedMenu:
-  cursorSprite.position.y = 75 + (31*index)
+  cursorSprite.position.y = 35 + (31*index)
   #else:
   #  cursorSprite.position.y = 114 + (44*index)
 
@@ -382,6 +383,7 @@ func processLocaleLogic(_delta):
   elif localeOptionIndex >= len(localeOptions):
     localeOptionIndex = 0
   repositionInputCursorSprite(localeOptionIndex, true)
+  cursorSprite.position.y += 40
 
   if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     shouldUpdateMenuText = true
@@ -1225,7 +1227,7 @@ func setGlitchSprite(sprite, glitch):
 
 var topInputOptionIndex = 0
 func processTopInputLogic(_delta):
-  var topInputOptions = [tr("UI.InputMenu.1"), tr("UI.InputMenu.2"), tr("UI.InputMenu.3")]
+  var topInputOptions = [tr("UI.InputMenu.1"), tr("UI.InputMenu.2"), tr("UI.InputMenu.3"), tr("UI.InputMenu.Action.3_0")]
   pauseTitleText.bbcode_text = tr("UI.InputMenu.13_0") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
 
   if shouldUpdateMenuText:
@@ -1244,6 +1246,7 @@ func processTopInputLogic(_delta):
   secretRightButtonText.bbcode_text = "[font=res://DarkInputExtraFont.tres]" + global.getButtonIndexStr(JOY_XBOX_B, global.userSettings["glyphType"]) + "[/font]"
   secretTopButtonText.bbcode_text = "[font=res://DarkInputExtraFont.tres]" + global.getButtonIndexStr(JOY_XBOX_Y, global.userSettings["glyphType"]) + "[/font]"
   secretBottomButtonText.bbcode_text = "[font=res://DarkInputExtraFont.tres]" + global.getButtonIndexStr(JOY_XBOX_A, global.userSettings["glyphType"]) + "[/font]"
+  enterDoorPrompt.flip_v = global.getEnterDoorDirection() > 0
 
   if Input.is_action_just_pressed("menu_down"):
     topInputOptionIndex += 1
@@ -1267,6 +1270,9 @@ func processTopInputLogic(_delta):
     elif topInputOptionIndex == 2:
       global.toggleGlyphType()
       global.saveUserSettings()
+    elif topInputOptionIndex == 3:
+      global.toggleEnterDoorDirection()
+      global.saveUserSettings()
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
     pauseMenuState = PauseMenuState.NORMAL
     shouldUpdateMenuText = true
@@ -1280,6 +1286,8 @@ func getVisibleControlsConfig():
     if (ia == "alt_action_button" or ia == "left_button") and not global.memory.has("spellbookPage"):
       continue
     if ia == "open_map" and not global.memory["has_map_item"]:
+      continue
+    if ia == "enter_door":
       continue
     if ia == "spell_1" or ia == "spell_2" or ia == "spell_3" or ia == "spell_4":
       continue
@@ -1316,6 +1324,8 @@ func processControlsLogic(_delta):
           tempControlsConfig[control_index].button_index = global.last_read_input
           tempControlsConfig[control_index].axis = null
           tempControlsConfig[control_index].axis_value = null
+          tempControlsConfig[control_index].axis2 = null
+          tempControlsConfig[control_index].axis2_value = null
           global.setButtonIndex(tempControlsConfig[control_index].input_action, global.last_read_input)
           global.userSettings["controls_config"] = tempControlsConfig
           global.is_reading_input = false

@@ -1637,7 +1637,7 @@ func collideWithCeiling(local_lv):
     if not areAnyTilesAboveMeFragileBrickSolid and getLevelTiles().isTileFragileSolid(tile_type):
       areAnyTilesAboveMeFragileBrickSolid = true
       if pressingJump():
-        if not noBroomSound.is_playing() and (global.memory["mole_cricket"] > 0 and not global.mole_cricket_enabled) and glitch_form == global.GlitchForm.FEATHER:
+        if not noBroomSound.is_playing() and (global.memory["mole_cricket"] > 0 and global.mole_cricket_enabled) and glitch_form == global.GlitchForm.FEATHER:
           noBroomSound.play()
           # glitchTilesAroundMe()
         glitchTickle()

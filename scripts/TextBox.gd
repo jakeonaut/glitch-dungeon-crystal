@@ -190,7 +190,7 @@ func _process(delta):
   if global.isPauseMenuOpen:
     return
   if textPrompt.visible:
-    var sweep_button_text = global.getLargeInputText("sub_action_button")
+    var sweep_button_text = global.getLargeInputText("talk_button")
     textPrompt.bbcode_text = "[center][wave]" + sweep_button_text + "[/wave][/center]"
   if text_final == "•": text_final = ""
   delta = delta * global.time_dilation_multiplier
@@ -341,7 +341,7 @@ func showInteractPrompt(is_comic_alert = false):
   if global.activeInteractor == self:
     return
     
-  var sweep_button_text = global.getLargeInputText("sub_action_button")
+  var sweep_button_text = global.getLargeInputText("talk_button")
   if not is_interact_prompt:
     if is_comic_alert:
       textNode.bbcode_text = "[wave]!" + sweep_button_text + "![/wave]"

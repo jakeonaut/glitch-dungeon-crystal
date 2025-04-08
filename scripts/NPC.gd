@@ -236,6 +236,7 @@ func glitchOut():
   queue_free()
 
 func activate(is_player):
+  print("try activate")
   if textBox.text_final == "":
     can_be_smacked = true
     return false

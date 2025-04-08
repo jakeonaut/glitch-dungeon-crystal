@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scripts/autoload/musicPlayer.gd" type="Script" id=1]
 [ext_resource path="res://assets/music/debug town.mp3" type="AudioStream" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://assets/music/explore.mp3" type="AudioStream" id=22]
 [ext_resource path="res://assets/sounds/eba_leaves.wav" type="AudioStream" id=23]
 [ext_resource path="res://assets/music/A1-21-0202-chill.mp3" type="AudioStream" id=24]
+[ext_resource path="res://assets/music/boss2.mp3" type="AudioStream" id=25]
 
 [node name="musicPlayer" type="Node"]
 script = ExtResource( 1 )
@@ -47,6 +48,7 @@ bus = "Music"
 [node name="TitleThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -20.0
+pitch_scale = 0.9
 bus = "Music"
 
 [node name="WakeupPlayer" type="AudioStreamPlayer" parent="."]
@@ -57,6 +59,7 @@ bus = "Music"
 [node name="GrannyPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
 volume_db = -20.0
+pitch_scale = 0.9
 bus = "Music"
 
 [node name="CroneThemePlayer" type="AudioStreamPlayer" parent="."]
@@ -67,6 +70,7 @@ bus = "Music"
 [node name="MainMenuPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 volume_db = -11.0
+pitch_scale = 0.9
 bus = "Music"
 
 [node name="DungeonThemePlayer" type="AudioStreamPlayer" parent="."]
@@ -119,7 +123,7 @@ bus = "Music"
 
 [node name="RealizationThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-volume_db = -30.0
+volume_db = -25.0
 bus = "Music"
 
 [node name="SuburbThemePlayer" type="AudioStreamPlayer" parent="."]
@@ -152,6 +156,11 @@ stream = ExtResource( 15 )
 volume_db = -25.0
 bus = "Music"
 
+[node name="Boss2ThemePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 25 )
+volume_db = -25.0
+bus = "Music"
+
 [node name="TreasureJingle" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 20 )
 volume_db = -20.0
@@ -181,5 +190,4 @@ bus = "Music"
 [node name="LeavesSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 23 )
 volume_db = -35.0
-pitch_scale = 0.
 bus = "Sfx"

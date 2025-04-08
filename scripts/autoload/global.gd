@@ -288,6 +288,8 @@ func _ready():
     resetUserSettings()
     loadUserSettings()
     changeLocale(userSettings["locale"], false)
+    global.initializeControlsConfig()
+    global.hasInitializedControlsConfig = true
 
 var MAX_CRYSTALS_FOR_TOWER = 4
 var zora_flippers_enabled = true
@@ -855,13 +857,13 @@ func getButtonIndexStr(button_index, glyph_type = GlyphType.NINTENDO, useSpecial
         JOY_L2:
             return "O" if useSpecialChar else "L2"
         JOY_L3:
-            return "{" if useSpecialChar else "L3"
+            return "[" if useSpecialChar else "L3"
         JOY_R:
             return "W" if useSpecialChar else "R1"
         JOY_R2:
             return "P" if useSpecialChar else "R2"
         JOY_R3:
-            return "}" if useSpecialChar else "R3"
+            return "]" if useSpecialChar else "R3"
         _:
             return "?"
 
@@ -951,9 +953,11 @@ func resetControlsConfigLabels():
         { "label_str": tr("UI.InputMenu.Action.1") },
         { "label_str": tr("UI.InputMenu.Action.2") },
         { "label_str": tr("UI.InputMenu.Action.3") },
+        { "label_str": tr("UI.InputMenu.Action.3_0") },
         { "label_str": tr("UI.InputMenu.Action.4") },
         { "label_str": tr("UI.InputMenu.Action.5") },
         { "label_str": tr("UI.InputMenu.Action.6") },
+        { "label_str": tr("UI.InputMenu.Action.6_0") },
         { "label_str": tr("UI.InputMenu.Action.7") },
         { "label_str": tr("UI.InputMenu.Action.8") },
         { "label_str": tr("UI.InputMenu.Action.9") },
@@ -972,9 +976,11 @@ func initializeControlsConfig():
     { "input_action": "ui_left" },
     { "input_action": "ui_right" },
     { "input_action": "ui_down" },
+    { "input_action": "enter_door" },
     { "input_action": "ui_up" },
     { "input_action": "jump_button" },
     { "input_action": "sub_action_button" },
+    { "input_action": "talk_button" },
     { "input_action": "restart_key" },
     { "input_action": "alt_action_button" },
     { "input_action": "left_button" },
@@ -994,22 +1000,31 @@ func initializeControlsConfig():
             global.setKeyCode(control_config.input_action, remembered_config["key_code"])
             control_config["key_code"] = remembered_config["key_code"]
           if remembered_config.has("button_index") and remembered_config["button_index"] != null:
-            global.setButtonIndex(control_config.input_action, remembered_config["button_index"])
+            global.setButtonIndex(control_config.input_action, remembered_config["button_index"], false)
             control_config["button_index"] = remembered_config["button_index"]
           if remembered_config.has("axis") and remembered_config.has("axis_value") and remembered_config["axis"] != null and remembered_config["axis_value"] != null:
-            global.setJoystickAxis(control_config.input_action, remembered_config.axis, remembered_config.axis_value)
+            global.setJoystickAxis(control_config.input_action, remembered_config.axis, remembered_config.axis_value, false, false)
             control_config["axis"] = remembered_config.axis
             control_config["axis_value"] = remembered_config.axis_value
+          if remembered_config.has("axis2") and remembered_config.has("axis2_value") and remembered_config["axis2"] != null and remembered_config["axis2_value"] != null:
+            global.setJoystickAxis(control_config.input_action, remembered_config.axis2, remembered_config.axis2_value, false, false)
+            control_config["axis2"] = remembered_config.axis2
+            control_config["axis2_value"] = remembered_config.axis2_value
       # make sure its set to default if it was erased from memory
       if not control_config.has("key_code") or control_config["key_code"] == null:
         control_config["key_code"] = global.getKeyCode(control_config.input_action)
-      if not control_config.has("button_index") or control_config["button_index"] == null:
-        control_config["button_index"] = global.getButtonIndex(control_config.input_action)
-      if not control_config.has("axis") or not control_config.has("axis_value"):
-        var axisVars = global.getJoystickAxis(control_config.input_action)
-        if axisVars != null:
-            control_config["axis"] = axisVars[0]
-            control_config["axis_value"] = axisVars[1]
+    # don't wanna reset if user unbinded joystick axis soo... if you mess with the config it's on you!!!
+    #   if not control_config.has("button_index") or control_config["button_index"] == null:
+    #     control_config["button_index"] = global.getButtonIndex(control_config.input_action)
+    #   if not control_config.has("axis") or not control_config.has("axis_value"):
+    #     var axisVars = global.getJoystickAxis(control_config.input_action)
+    #     if axisVars != null:
+    #         control_config["axis"] = axisVars[0]
+    #         control_config["axis_value"] = axisVars[1]
+    #         var axis2Vars = global.getJoystickAxis(control_config.input_action, axisVars[0])
+    #         if axis2Vars != null:
+    #             control_config["axis2"] = axis2Vars[0]
+    #             control_config["axis2_value"] = axis2Vars[1]
   else:
     for control_config in global.controlsConfig:
       control_config["key_code"] = global.getKeyCode(control_config.input_action)
@@ -1018,6 +1033,10 @@ func initializeControlsConfig():
       if axisVars != null:
         control_config["axis"] = axisVars[0]
         control_config["axis_value"] = axisVars[1]
+        var axis2Vars = global.getJoystickAxis(control_config.input_action, axisVars[0])
+        if axis2Vars != null:
+            control_config["axis2"] = axis2Vars[0]
+            control_config["axis2_value"] = axis2Vars[1]
 
 func resetKeyBindings():
   var tempControlsConfig = global.userSettings["controls_config"] if global.userSettings.has("controls_config") else {}
@@ -1065,40 +1084,88 @@ func getButtonIndex(input_action):
       return inputEvent.get_button_index()
   return null
 
-func setButtonIndex(input_action, button_index):
+func setButtonIndex(input_action, button_index, erase_joystick = true):
   var inputEvents = InputMap.get_action_list(input_action)
   for inputEvent in inputEvents:
     if inputEvent is InputEventJoypadButton:
       InputMap.action_erase_event(input_action, inputEvent)
     # ENFORCING ONE OR THE OTHER...
-    if inputEvent is InputEventJoypadMotion:
+    if erase_joystick and inputEvent is InputEventJoypadMotion:
       InputMap.action_erase_event(input_action, inputEvent)
   var new_event = InputEventJoypadButton.new()
   new_event.set_button_index(button_index)
   InputMap.action_add_event(input_action, new_event)
 
-func getJoystickAxis(input_action):
+func getJoystickAxis(input_action, axis_to_skip = null):
     var inputEvents = InputMap.get_action_list(input_action)
     for inputEvent in inputEvents:
         if inputEvent is InputEventJoypadMotion:
-            return [inputEvent.get_axis(), inputEvent.get_axis_value()]
+            var axis = inputEvent.get_axis()
+            if axis == axis_to_skip: continue
+            return [axis, inputEvent.get_axis_value()]
     return null
 
-func setJoystickAxis(input_action, axis, axis_value):
+func setJoystickAxis(input_action, axis, axis_value, erase_joystick = true, erase_joypad = true):
     if axis_value == 0:
         return
 
     var inputEvents = InputMap.get_action_list(input_action)
     for inputEvent in inputEvents:
-        if inputEvent is InputEventJoypadMotion:
+        if erase_joystick and inputEvent is InputEventJoypadMotion:
             InputMap.action_erase_event(input_action, inputEvent)
         # ENFORCING ONE OR THE OTHER...
-        if inputEvent is InputEventJoypadButton:
+        if erase_joypad and inputEvent is InputEventJoypadButton:
             InputMap.action_erase_event(input_action, inputEvent)
     var new_event = InputEventJoypadMotion.new()
     new_event.set_axis(axis)
     new_event.set_axis_value(axis_value)
     InputMap.action_add_event(input_action, new_event)
+
+func getEnterDoorDirection():
+    var enterDoorActions = InputMap.get_action_list("enter_door")
+    for inputEvent in enterDoorActions:
+        if inputEvent is InputEventJoypadButton:
+            if inputEvent.button_index == JOY_DPAD_DOWN:
+                return -1
+            if inputEvent.button_index == JOY_DPAD_UP:
+                return 1
+    return -1
+
+func toggleEnterDoorDirection():
+    var dir = getEnterDoorDirection()
+
+    var input_action = "enter_door"
+    var control_index = -1
+    for i in range(len(global.controlsConfig)):
+        if global.controlsConfig[i]["input_action"] == input_action:
+            control_index = i
+            break
+    if dir == 1:
+        setKeyCode(input_action, KEY_DOWN)
+        setButtonIndex(input_action, JOY_DPAD_DOWN, true)
+        setJoystickAxis(input_action, JOY_AXIS_1, -1.0, true, false)
+        setJoystickAxis(input_action, JOY_AXIS_3, -1.0, false, false)
+        if control_index >= 0:
+            global.controlsConfig[control_index].key_code = KEY_DOWN
+            global.controlsConfig[control_index].button_index = JOY_DPAD_DOWN
+            global.controlsConfig[control_index].axis = JOY_AXIS_1
+            global.controlsConfig[control_index].axis_value = -1.0
+            global.controlsConfig[control_index].axis2 = JOY_AXIS_3
+            global.controlsConfig[control_index].axis2_value = -1.0
+            global.userSettings["controls_config"] = global.controlsConfig
+    elif dir == -1:
+        setKeyCode(input_action, KEY_UP)
+        setButtonIndex(input_action, JOY_DPAD_UP, true)
+        setJoystickAxis(input_action, JOY_AXIS_1, 1.0, true, false)
+        setJoystickAxis(input_action, JOY_AXIS_3, 1.0, false, false)
+        if control_index >= 0:
+            global.controlsConfig[control_index].key_code = KEY_UP
+            global.controlsConfig[control_index].button_index = JOY_DPAD_UP
+            global.controlsConfig[control_index].axis = JOY_AXIS_1
+            global.controlsConfig[control_index].axis_value = 1.0
+            global.controlsConfig[control_index].axis2 = JOY_AXIS_3
+            global.controlsConfig[control_index].axis2_value = 1.0
+            global.userSettings["controls_config"] = global.controlsConfig
 
 func isControllerConnected():
     return Input.get_connected_joypads().size() > 0

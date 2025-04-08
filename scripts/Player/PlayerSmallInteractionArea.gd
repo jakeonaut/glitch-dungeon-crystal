@@ -104,3 +104,6 @@ func _process(delta):
 
     parent.interactPromptSprite.visible = is_touching_door and \
                                           not global.isEnteringRoom and not global.pauseGame
+    if parent.interactPromptSprite.visible:
+        parent.interactPromptSprite.flip_v = global.getEnterDoorDirection() > 0
+        parent.interactPromptSprite.translation.y = 3.0 if parent.interactPromptSprite.flip_v else 3.5

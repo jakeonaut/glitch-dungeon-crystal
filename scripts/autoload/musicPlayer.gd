@@ -28,6 +28,7 @@ onready var exploreThemePlayer = get_node("ExploreThemePlayer")
 onready var goddessThemePlayer = get_node("GoddessThemePlayer")
 onready var townThemePlayer = get_node("TownThemePlayer")
 onready var bossThemePlayer = get_node("BossThemePlayer")
+onready var boss2ThemePlayer = get_node("Boss2ThemePlayer")
 onready var crystalThemePlayer = get_node("CrystalThemePlayer")
 onready var continueThemePlayer = get_node("ContinueThemePlayer")
 onready var catacombThemePlayer = get_node("CatacombThemePlayer")
@@ -127,6 +128,7 @@ func stopAll():
     fade_out(goddessThemePlayer)
     fade_out(townThemePlayer)
     fade_out(bossThemePlayer)
+    fade_out(boss2ThemePlayer)
     fade_out(crystalThemePlayer)
     fade_out(continueThemePlayer)
     fade_out(catacombThemePlayer)
@@ -167,29 +169,24 @@ func conductFromScenePath(path):
         if global.memory["priestess"] == 0:
             tryToPlay(crystalThemePlayer)
         elif global.memory["priestess"] == 1:
-            tryToPlay(bossThemePlayer)
+            tryToPlay(boss2ThemePlayer)
         elif global.memory["priestess"] == 2:
             tryToPlay(windPlayer)
-    elif (path.find("HighPriestessRoom") > 0 and global.memory["priestess"] > 0) or path.find("BossRoom") > 0:
+    elif path.find("BossRoom") > 0:
         tryToPlay(bossThemePlayer)
-        if global.memory["priestess"] >= 2:
-            changeSongPitch(1.0)
-            default_song_pitch = 1.0
-            return
     elif path.find("MainMenu") > 0:
-        tryToPlay(grannyPlayer)
-        if global.memory["priestess"] >= 2:
-            changeSongPitch(1.0)
-            default_song_pitch = 1.0
-            return
+        tryToPlay(titleThemePlayer)
+        changeSongPitch(0.9)
+        default_song_pitch = 0.9
+        return
     elif path.find("StoryHook") > 0 or path.find("NullificationPurgatory") > 0 or path.find("NullifyIntro") > 0 or path.find("LadderIntro") > 0 or path.find("GhostIntro") > 0:
-        tryToPlay(debugThemePlayer)
+        tryToPlay(dungeonThemePlayer)
         changeSongPitch(1.0)
         default_song_pitch = 1.0
     elif path.find("0_1Haven") > 0:
         tryToPlay(croneThemePlayer)
     elif path.find("gd1ToxicJungle") > 0:
-        tryToPlay(poisonThemePlayer)
+        tryToPlay(suburbThemePlayer)
     elif path.find("gd1ShiftingSandLand") > 0:
         tryToPlay(exploreThemePlayer)
     elif path.find("gd1FishingVillage") > 0:
@@ -236,6 +233,8 @@ func conductFromScenePath(path):
         tryToPlay(oceanThemePlayer)
     elif path.find("EndOfDemo") > 0:
         tryToPlay(titleThemePlayer)
+    elif path.find("EndCredits") > 0:
+        tryToPlay(realizationThemePlayer)
     elif path.find("005DebugTown") > 0:
         tryToPlay(dungeonThemePlayer)
     elif path.find("001Your") > 0  or path.find("gd1"):

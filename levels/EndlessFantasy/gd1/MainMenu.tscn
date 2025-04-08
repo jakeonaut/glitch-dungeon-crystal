@@ -2410,6 +2410,8 @@ script = ExtResource( 58 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 4 )
 material_override = SubResource( 71 )
 frame = 16
+frame_delay = 0.8
+should_randomize_frame_delay = false
 automatically_change_color = false
 
 [node name="AnimationPlayer" parent="Viewport/level/BabushkaCat" index="4"]

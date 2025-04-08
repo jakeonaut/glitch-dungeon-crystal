@@ -178,6 +178,10 @@ func _process(delta):
     elif boss_phase == BossPhase.CHARGING:
         behavior_walking = true
         walk_direction.x = -1
+        if global_transform.origin.y - 2 > level.player.global_transform.origin.y:
+            global_transform.origin.y -= delta*2
+        elif global_transform.origin.y + 2 < level.player.global_transform.origin.y:
+            global_transform.origin.y += delta*2
         # this is stupid and specific to the level I'm in... oh well
         if global_transform.origin.x < 28:
             if how_many_final_charges >= num_hits:
@@ -402,7 +406,7 @@ func startBossFight():
     level.gameCamera.zoomed_size = 30
 
 func barfRandomSnail():
-    if num_hits + 1 <= basicFrogEnemies.size():
+    if num_hits*2 <= basicFrogEnemies.size():
         return
 
     var basicFrogEnemy = basicFrogEnemyRes.instance()
@@ -411,6 +415,15 @@ func barfRandomSnail():
     yield(TempTimer.idle_frame(self), "timeout")
     # glitchHermitCrabManager.scale = Vector3(1.5, 1.5, 1.5)
     basicFrogEnemy.global_transform.origin = self.global_transform.origin + Vector3(-3.333, 0.265, 0)
+    basicFrogEnemy.jump_time_limit = 5
+    basicFrogEnemy.jump_timer = 0
+    basicFrogEnemy.grav = 20
+    basicFrogEnemy.jump_force = 15
+    basicFrogEnemy.on_ground = true
+    basicFrogEnemy.behavior_walking = true
+    basicFrogEnemy.behavior_jumping = true
+    basicFrogEnemy.walk_direction.x = -1
+    basicFrogEnemy.override_am_i_in_range_of_player = true
     basicFrogEnemies.push_back(weakref(basicFrogEnemy))
 
 func teleportToPrey():

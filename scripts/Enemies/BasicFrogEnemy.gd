@@ -96,7 +96,7 @@ func _process(delta):
       mySprite.translation.z = 0.5
 
   if is_infected:
-    is_turn_based = true
+    # is_turn_based = true
     if not was_infected:
       mySprite.get_material_override().set_shader_param("enable_glitch", true)
       mySprite.get_material_override().set_shader_param("time_influence", 21.644)
@@ -156,7 +156,7 @@ func _process(delta):
     spawn_timer = 0
     behavior_jumping = false
 
-    if behavior_walking and air_time_limit > 0 and not is_turn_based:
+    if behavior_walking and air_time_limit > 0 and not is_infected: # is_turn_based:
       air_timer += (delta * 22)
       if air_timer >= air_time_limit:
         behavior_walking = false

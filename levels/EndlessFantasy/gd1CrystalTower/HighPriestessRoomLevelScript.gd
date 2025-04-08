@@ -103,7 +103,7 @@ func playMenuMusic():
 func restartMusic():
   musicPlayer.changeSongPitch(1.0)
   if global.memory["priestess"] == 1:
-    musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
+    musicPlayer.tryToPlay(musicPlayer.boss2ThemePlayer)
   elif global.memory["priestess"] == 0 and debug_start_boss_immediately:
     return
   else:
