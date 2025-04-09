@@ -409,6 +409,13 @@ func _process(delta):
   # is_turn_based = malware_infected and not physics_state == PhysicsState.BEING_TOSSED
   should_always_stop_walking_immediately = malware_infected
 
+  if is_playing_mini_cutscene:
+    if Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("popup_menu"):
+      aniPlayer.stop()
+      aniPlayer.clear_queue()
+      aniPlayer.play("fall")
+      finishCutsceneIntroAni()
+
   if glitch_form == global.GlitchForm.INVISIBLE and global.memory["broom"]:
     global.memory["broom"] = false
   processSpriteRenderLogic(delta)
@@ -2157,6 +2164,7 @@ func processBroomLogic(delta):
 func sneezeCloud():
   summonSmokeClouds(1, false, true, 1)
 
+var is_playing_mini_cutscene = false
 func startCutsceneIntroAni(aniName):
   pauseAnimation = true
   pauseInput = true
@@ -2168,8 +2176,10 @@ func startCutsceneIntroAni(aniName):
   aniPlayer.stop()
   aniPlayer.clear_queue()
   aniPlayer.play(aniName)
+  is_playing_mini_cutscene = true
 
 func finishCutsceneIntroAni():
+  is_playing_mini_cutscene = false
   pauseAnimation = false
   pauseInput = false
   pauseSelf = false

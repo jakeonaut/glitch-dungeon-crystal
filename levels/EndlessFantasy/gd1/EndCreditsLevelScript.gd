@@ -30,11 +30,8 @@ func _process(delta):
         holdToQuitTimer = 0
         hideHoldToQuitTimer = 0
     elif quitPromptRect.visible:
-        if Input.is_action_pressed("ui_start"):
-            hideHoldToQuitTimer = 0
-            holdToQuitTimer += (delta*11)
-            if holdToQuitTimer >= holdToQuitTimeLimit:
-                get_tree().quit()
+        if Input.is_action_just_pressed("ui_start"):
+            get_tree().quit()
         else:
             holdToQuitTimer = 0
             hideHoldToQuitTimer += (delta*11)

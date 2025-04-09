@@ -168,6 +168,7 @@ enabled=PoolStringArray( "res://addons/sprite_mesh/plugin.cfg", "res://addons/st
 "always on top"=false
 name_ru=""
 name_pt_BR=""
+log=false
 
 [importer_defaults]
 

@@ -59,7 +59,7 @@ func setUpRoomInitializationOverride():
         mainMenuUi.visible = false
         show_dither_effect = false
         show_crt_effect = true
-        babushkaCat.visible = false
+        babushkaCat.get_ref().visible = false
         var finalText = tr("NPC.Cow.2")
         cowNPC.textBox.text_final = finalText
         cowNPC.textBox.textNode.bbcode_text = finalText
@@ -73,7 +73,7 @@ onready var eventSound3 = get_node("EventSound3")
 onready var glitchMoleCricket = get_node("GlitchMoleCricket")
 onready var glitchMoleCricket2 = get_node("GlitchMoleCricket2")
 onready var glitchMoleCricket3 = get_node("GlitchMoleCricket3")
-onready var babushkaCat = get_node("BabushkaCat")
+onready var babushkaCat = weakref(get_node("BabushkaCat"))
 onready var secretGlitchyNPC = get_node("SecretGlitchyNPC")
 onready var secretGlitchyNPC2 = get_node("SecretGlitchyNPC2")
 onready var secretGlitchyNPC3 = get_node("SecretGlitchyNPC3")
@@ -181,10 +181,10 @@ func startGame(saveGameIndex):
   levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
 
   secretGlitchyNPC2.glitchOut()
-  babushkaCat.mySprite.updateBaseFrame(2, 2)
+  babushkaCat.get_ref().mySprite.updateBaseFrame(2, 2)
   # babushkaCat.tryShowInteractPrompt(true, true)
-  if babushkaCat.exclamationAniPlayer != null:
-    babushkaCat.exclamationAniPlayer.play("exclaim")
+  if babushkaCat.get_ref().exclamationAniPlayer != null:
+    babushkaCat.get_ref().exclamationAniPlayer.play("exclaim")
   gameCamera.can_i_move = true
   if cameraTarget != null:
     cameraTarget.queue_free()
@@ -197,11 +197,11 @@ func startGame(saveGameIndex):
   secretGlitchyNPC3.glitchOut()
   if was_intro_cutscene_skipped == 2: return
   levelTiles.randomize_num = 3
-  babushkaCat.tryHideActiveInteractPrompt()
-  babushkaCat.mySprite.flip_h = true
-  babushkaCat.mySprite.should_randomize_frame_delay = false
-  babushkaCat.mySprite.frame_delay = 0.1
-  babushkaCat.override_press_move_right = true
+  babushkaCat.get_ref().tryHideActiveInteractPrompt()
+  babushkaCat.get_ref().mySprite.flip_h = true
+  babushkaCat.get_ref().mySprite.should_randomize_frame_delay = false
+  babushkaCat.get_ref().mySprite.frame_delay = 0.1
+  babushkaCat.get_ref().override_press_move_right = true
   player.mySprite.flip_h = not player.mySprite.flip_h
   eventSound1.play()
   yield(get_tree().create_timer(0.2), "timeout")
@@ -277,7 +277,9 @@ onready var menuText = get_node("../../UILayer/MainMenu/MenuText")
 onready var pressCText = get_node("../../UILayer/MainMenu/PressC")
 onready var deleteConfirmationLayer = get_node("../../UILayer/MainMenu/DeleteConfirmationLayer")
 onready var deleteConfirmationLayerText =  get_node("../../UILayer/MainMenu/DeleteConfirmationLayer/PopupRect/ColorRect/ColorRect/RichTextLabel")
-onready var skipText = get_node("../../UILayer/SkipText")
+onready var skipPrompt = get_node("../../UILayer/SkipPrompt")
+var hideSkipPromptTimer = 0
+var hideSkipPromptTimeLimit = 15
 
 export var camera_size = 30
 var mainMenuPromptIndex = 0
@@ -349,12 +351,13 @@ func _process(delta):
                     uiLayer.add_child(optionsMenuPrompt)
                     optionsMenuPrompt.rect_position.y = 16
                 pressCText.bbcode_text = tr("UI.Tutorial.InputPrompt.1") % [global.getInputText("sub_action_button"), global.getInputText("jump_button"), global.getInputText("ui_left"), global.getInputText("ui_right")]
-                pressCText.visible = (global.activeInteractor == null and not global.isPauseMenuOpen)
+                pressCText.visible = (global.activeInteractor == null and not global.isPauseMenuOpen and not global.shouldRenderAsCinematic)
                 optionsMenuPrompt.bbcode_text = tr("UI.MainMenu.1") % global.getInputText("ui_start")
                 optionsMenuPrompt.visible = pressCText.visible
             else:
                 gameCamera.initial_size = gameCamera.initial_size + (15 - gameCamera.initial_size) * (delta * 2)
                 gameCamera.zoomed_size = gameCamera.initial_size
+                processSkipPrompt(delta)
             return
 
     if global.isPauseMenuOpen or global.has_started_game:
@@ -415,6 +418,63 @@ func _process(delta):
 # @override
 # func processPauseMenu():
 #     pass
+
+func processSkipPrompt(delta):
+    var which_input_to_skip = "popup_menu"
+    skipPrompt.bbcode_text = tr("UI.MainMenu.3") % global.getInputText(which_input_to_skip)
+    if (
+        Input.is_action_just_pressed("ui_right") or
+        Input.is_action_just_pressed("ui_left") or
+        Input.is_action_just_pressed("ui_up") or
+        Input.is_action_just_pressed("ui_down") or
+        Input.is_action_just_pressed("jump_button") or
+        Input.is_action_just_pressed("sub_action_button") or
+        Input.is_action_just_pressed("alt_action_button") or
+        Input.is_action_just_pressed("left_button") or
+        Input.is_action_just_pressed("restart_key") or 
+        Input.is_action_just_pressed("ui_right") or
+        Input.is_action_just_pressed("open_map") or
+        Input.is_action_just_pressed("ui_cancel") or
+        Input.is_action_just_pressed("ui_cancel_controller") or
+        Input.is_action_just_pressed("ui_start")
+    ) and not Input.is_action_just_pressed(which_input_to_skip):
+        skipPrompt.visible = true
+        hideSkipPromptTimer = 0
+    if not skipPrompt.visible:
+        if Input.is_action_just_pressed(which_input_to_skip):
+            skipPrompt.visible = true
+            hideSkipPromptTimer = 0
+    else:
+        if Input.is_action_just_pressed(which_input_to_skip):
+            skipPrompt.visible = false
+            was_intro_cutscene_skipped = 2
+            player.grav = 28
+            global.shouldRenderAsCinematic = false
+            player.pauseInput = false
+            global.has_really_started_game = true
+            player.textBox.override_target_origin = dialogPosition.global_transform.origin
+            player.sayThis(tr("Dialog.Player.1"))
+            levelTiles.randomize_num = 3
+            if musicPlayer.currentlyPlayingTheme != null:
+                musicPlayer.stopAll()
+                eventSoundWakeup.play()
+            if babushkaCat.get_ref():
+                if not babushkaCat.get_ref().override_press_move_right:
+                    babushkaCat.get_ref().mySprite.updateBaseFrame(2, 2)
+                    # babushkaCat.tryShowInteractPrompt(true, true)
+                    if babushkaCat.get_ref().exclamationAniPlayer != null:
+                        babushkaCat.get_ref().exclamationAniPlayer.play("exclaim")
+                    babushkaCat.get_ref().mySprite.flip_h = true
+                    babushkaCat.get_ref().mySprite.should_randomize_frame_delay = false
+                    babushkaCat.get_ref().mySprite.frame_delay = 0.1
+                    babushkaCat.get_ref().override_press_move_right = true
+                # yield(get_tree().create_timer(1.0), "timeout")
+                # if babushkaCat.get_ref(): babushkaCat.get_ref().glitchOut()
+        else:
+            hideSkipPromptTimer += (delta*11)
+            if hideSkipPromptTimer >= hideSkipPromptTimeLimit:
+                hideSkipPromptTimer = 0
+                skipPrompt.visible = false
 
 func normalizeMainMenuPromptIndex(change):
     mainMenuPromptIndex += change

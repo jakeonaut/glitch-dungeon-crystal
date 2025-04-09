@@ -515,7 +515,7 @@ func processSoundLogic(_delta):
 
 var quitToMainOptionIndex = 0
 func processQuitToMainLogic(_delta):
-  var quitToMainOptions = [tr("UI.Yes"), tr("UI.Cancel")]
+  var quitToMainOptions = [tr("UI.Confirmation"), tr("UI.Cancel")]
   if global.isOnMainMenu:
     pauseTitleText.bbcode_text = tr("UI.InputMenu.13_1") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")] # "Really quit?\n" + global.getInputText("menu_confirm") + " to confirm, " + global.getInputText("menu_cancel") + " to cancel"
   else:

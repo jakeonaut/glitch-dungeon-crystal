@@ -2917,22 +2917,6 @@ transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.52
 [node name="Camera" parent="UILayer/GlitchStatusRect/Viewport" index="1"]
 current = true
 
-[node name="SkipText" type="RichTextLabel" parent="UILayer"]
-visible = false
-margin_left = 320.0
-margin_top = 470.0
-margin_right = 636.0
-margin_bottom = 571.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 3
-theme = ExtResource( 51 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "press [font=res://DarkInputFont_small.tres]x[/font] to start"
-text = "press x to start"
-scroll_active = false
-
 [node name="MainMenu" type="Control" parent="UILayer"]
 margin_top = -45.0
 
@@ -3133,6 +3117,21 @@ texture = ExtResource( 49 )
 margin_right = 640.0
 margin_bottom = 512.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="SkipPrompt" type="RichTextLabel" parent="UILayer"]
+visible = false
+margin_left = 303.0
+margin_top = 472.0
+margin_right = 794.0
+margin_bottom = 571.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 40 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "Press [font=res://DarkInputFont_small.tres]R[/font] for OPTIONS"
+text = "Press R for OPTIONS"
+scroll_active = false
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 62 )]
 

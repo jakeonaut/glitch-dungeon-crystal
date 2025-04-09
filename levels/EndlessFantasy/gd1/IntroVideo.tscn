@@ -158,8 +158,6 @@ texture = ExtResource( 13 )
 [node name="AnimationPlayer" parent="Viewport/level/Player" index="6"]
 autoplay = "sweepFloor"
 
-[node name="AngelZoneLevelDoor" parent="Viewport/level/Player" index="16"]
-
 [node name="Door" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23.1985, 0 )
 path = "res://levels/EndlessFantasy/gd1/MainMenu.tscn"
