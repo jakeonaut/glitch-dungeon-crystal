@@ -60,7 +60,8 @@ func _process(_delta):
                                     (player_x - 1 < area_x and player_x + 1 > area_x)
         can_activate = can_activate and is_player_facing_area
 
-    if Input.is_action_just_pressed("enter_door"):
+    if (global.userSettings["doorDir"] > 0 and Input.is_action_just_pressed("ui_up")) or \
+       (global.userSettings["doorDir"] < 0 and Input.is_action_just_pressed("ui_down")):
         # short circuit to textbox if one exists
         if global.activeInteractor != null and is_instance_valid(global.activeInteractor):
             if global.activeInteractor.is_in_group("door_textbox") and nearest_area != null and nearest_area.is_in_group("door"):

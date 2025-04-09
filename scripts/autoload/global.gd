@@ -439,6 +439,7 @@ func resetUserSettings():
     userSettings["spellAssist"] = false
     userSettings["glyphType"] = GlyphType.XBOX
     userSettings["locale"] = normalizeLocale(OS.get_locale_language())
+    userSettings["doorDir"] = -1
 
 func changeLocale(locale, saveSettings = true):
     TranslationServer.set_locale(locale)
@@ -976,7 +977,7 @@ func initializeControlsConfig():
     { "input_action": "ui_left" },
     { "input_action": "ui_right" },
     { "input_action": "ui_down" },
-    { "input_action": "enter_door" },
+    { "input_action": "enter_door" }, # don't delete, idk if it will mess up savedUserSettings -_-
     { "input_action": "ui_up" },
     { "input_action": "jump_button" },
     { "input_action": "sub_action_button" },
@@ -1011,9 +1012,9 @@ func initializeControlsConfig():
             control_config["axis2"] = remembered_config.axis2
             control_config["axis2_value"] = remembered_config.axis2_value
       # make sure its set to default if it was erased from memory
-      if not control_config.has("key_code") or control_config["key_code"] == null:
+      if not control_config.has("key_code") or control_config["key_code"] == null and not control_config.input_action == "enter_door":
         control_config["key_code"] = global.getKeyCode(control_config.input_action)
-    # don't wanna reset if user unbinded joystick axis soo... if you mess with the config it's on you!!!
+    # don't wanna reset if user unbinded joystick axis soo... if you mess with the config save file it's on you!!!
     #   if not control_config.has("button_index") or control_config["button_index"] == null:
     #     control_config["button_index"] = global.getButtonIndex(control_config.input_action)
     #   if not control_config.has("axis") or not control_config.has("axis_value"):
@@ -1129,43 +1130,33 @@ func getEnterDoorDirection():
                 return -1
             if inputEvent.button_index == JOY_DPAD_UP:
                 return 1
+    if userSettings.has("doorDir"):
+        return userSettings["doorDir"]
     return -1
 
 func toggleEnterDoorDirection():
     var dir = getEnterDoorDirection()
+    if dir == 1:
+        userSettings["doorDir"] = -1
+    elif dir == -1:
+        userSettings["doorDir"] = 1
 
-    var input_action = "enter_door"
+    # try to erase "enter_door" config from user settings. we hate it!!!!!
     var control_index = -1
     for i in range(len(global.controlsConfig)):
-        if global.controlsConfig[i]["input_action"] == input_action:
+        if global.controlsConfig[i]["input_action"] == "enter_door":
             control_index = i
             break
-    if dir == 1:
-        setKeyCode(input_action, KEY_DOWN)
-        setButtonIndex(input_action, JOY_DPAD_DOWN, true)
-        setJoystickAxis(input_action, JOY_AXIS_1, -1.0, true, false)
-        setJoystickAxis(input_action, JOY_AXIS_3, -1.0, false, false)
-        if control_index >= 0:
-            global.controlsConfig[control_index].key_code = KEY_DOWN
-            global.controlsConfig[control_index].button_index = JOY_DPAD_DOWN
-            global.controlsConfig[control_index].axis = JOY_AXIS_1
-            global.controlsConfig[control_index].axis_value = -1.0
-            global.controlsConfig[control_index].axis2 = JOY_AXIS_3
-            global.controlsConfig[control_index].axis2_value = -1.0
-            global.userSettings["controls_config"] = global.controlsConfig
-    elif dir == -1:
-        setKeyCode(input_action, KEY_UP)
-        setButtonIndex(input_action, JOY_DPAD_UP, true)
-        setJoystickAxis(input_action, JOY_AXIS_1, 1.0, true, false)
-        setJoystickAxis(input_action, JOY_AXIS_3, 1.0, false, false)
-        if control_index >= 0:
-            global.controlsConfig[control_index].key_code = KEY_UP
-            global.controlsConfig[control_index].button_index = JOY_DPAD_UP
-            global.controlsConfig[control_index].axis = JOY_AXIS_1
-            global.controlsConfig[control_index].axis_value = 1.0
-            global.controlsConfig[control_index].axis2 = JOY_AXIS_3
-            global.controlsConfig[control_index].axis2_value = 1.0
-            global.userSettings["controls_config"] = global.controlsConfig
+    if control_index >= 0 and global.controlsConfig[control_index].has("key_code"):
+        InputMap.load_from_globals() # reset ALL input_actions to default...
+        global.controlsConfig[control_index].erase("key_code")
+        global.controlsConfig[control_index].erase("button_index")
+        global.controlsConfig[control_index].erase("axis")
+        global.controlsConfig[control_index].erase("axis_value")
+        global.controlsConfig[control_index].erase("axis2")
+        global.controlsConfig[control_index].erase("axis2_value")
+        global.userSettings["controls_config"] = global.controlsConfig
+        global.initializeControlsConfig()
 
 func isControllerConnected():
     return Input.get_connected_joypads().size() > 0
@@ -1244,8 +1235,9 @@ func normalizeLoadedMemory():
     global.memory["priestess"] = 0
 
 func normalizeLoadedUserSettings():
-    # global.userSettings
-    pass
+    # should eventually normalize so that this is a no-op.
+    # but we want to ensure this is populated from the last saved source
+    userSettings["doorDir"] = getEnterDoorDirection()
     
 func getNextGlitch(glitch_form):
     if glitch_form == global.GlitchForm.NORMAL: return global.GlitchForm.FEATHER
