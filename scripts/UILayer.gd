@@ -243,7 +243,7 @@ func _process(delta):
   miniCrystalCubeRect.visible = false
 
   get_node("EquipmentRect").visible = global.memory.has("spellbookPage") and not global.isPauseMenuOpen
-  glitchSpriteContainer.visible = (global.memory["hasEverTouchedObelisk"] or level.player.glitch_form != global.GlitchForm.NORMAL) and not global.memory.has("spellbookPage") and not global.isPauseMenuOpen
+  glitchSpriteContainer.visible = (global.memory["hasEverTouchedObelisk"] or level.player.glitch_form != global.GlitchForm.NORMAL) and not global.memory.has("spellbookPage") and not global.isPauseMenuOpen and not global.isOnMainMenu
   # tryLerpSpriteFromCenter(get_node("GlitchSprite"), delta, Vector2(0, 1))
   if savingTextureRect != null and savingTextureRect.texture == null and savingViewport != null:
     savingTextureRect.texture = savingViewport.get_texture()

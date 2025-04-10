@@ -112,6 +112,7 @@ func passiveActivate(_delta, is_player):
     frog.queueGulpAnimation()
   
 func otherPassiveActivate(_delta, gameMover):
+  return # TODO(jaketrower): fix this later?
   if gameMover.is_extra_bouncy:
     return
   if not hooked:

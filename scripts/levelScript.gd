@@ -331,6 +331,8 @@ func displayMessageText(message):
   uiLayer.displayMessageText(message)
 
 func displaySpellMessageText(message):
+  if global.isOnMainMenu:
+    return
   uiLayer.displaySpellMessageText(message)
 
 func getLevelManagerCoords():

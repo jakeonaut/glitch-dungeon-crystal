@@ -26,6 +26,8 @@ func setUpRoomInitializationOverride():
     epilepsyWarning.visible = true
     epilepsyWarningText.bbcode_text = tr("UI.Photosensitivity.Warning")
     has_finished_initial_initialization = true
+    transition.colorRect.rect_position = Vector2(0, 0)
+    transition.colorRect.rect_size = Vector2(1920, 1080)
 
 var was_playing = false
 # @override

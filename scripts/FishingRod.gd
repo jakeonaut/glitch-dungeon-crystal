@@ -62,6 +62,7 @@ func restorePlayer(_got_to_top):
   gameMover.linear_velocity.x = 0
   gameMover.lv.x = 0
   gameMover.pauseAnimation = false
+  global.pauseGame = false
   if gameMover.physics_state == gameMover.PhysicsState.GLITCH_DYING:
     gameMover.vv = 0
     gameMover.linear_velocity.y = 0

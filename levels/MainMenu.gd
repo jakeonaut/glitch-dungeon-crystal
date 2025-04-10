@@ -78,6 +78,7 @@ func startGame(saveGameIndex):
   global.shouldRenderAsCinematic = true
   uiLayer.statsTitleRect.visible = false
   player.pauseInput = true
+  player.applyGlitch(global.GlitchForm.NORMAL, true)
   uiLayer.glitchSprite.visible = false
   uiLayer.get_node("GlitchStatusRect").visible = false
   if global.memory["demo_mode"] > 0:
@@ -259,7 +260,12 @@ var hideSkipPromptTimeLimit = 15
 export var camera_size = 30
 var mainMenuPromptIndex = 0
 var updateMenuText = true
+var has_reset_transition = false
 func _process(delta):
+    if not transition.aniPlayer.is_playing() and not has_reset_transition:
+        transition.colorRect.rect_position = Vector2(320, 28)
+        transition.colorRect.rect_size = Vector2(1280, 1024)
+        has_reset_transition = true
     if mainMenuState == MainMenuState.TRY_DELETE_FILE:
         deleteConfirmationLayer.visible = true
         if deleteConfirmationLayerText.bbcode_text == "":
@@ -333,6 +339,13 @@ func _process(delta):
             uiLayer.pauseMenu.menuMoveSound.play()
             normalizeMainMenuPromptIndex(-1)
             updateMenuText = true
+
+        if mainMenuPromptIndex == 0:
+            player.applyGlitch(global.GlitchForm.NORMAL, true)
+        if mainMenuPromptIndex == 1:
+            player.applyGlitch(global.GlitchForm.FEATHER, true)
+        if mainMenuPromptIndex == 2:
+            player.applyGlitch(global.GlitchForm.FLOOR, true)
 
         selectPrompt.rect_position.y = 354.5 + (mainMenuPromptIndex*55)
         if updateMenuText:

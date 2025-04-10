@@ -1036,6 +1036,7 @@ func processGlitchHurtRecovery(delta):
       if glitch_death_timer >= 40:
         musicPlayer.changeSongPitch(musicPlayer.default_song_pitch)
         level.glitchScreenEffect.visible = false
+        global.pauseGame = false
         should_turn_on_glitch_screen_effects = false
         glitch_death_timer = 0
         if physics_state == PhysicsState.GLITCH_RECOVERY:
