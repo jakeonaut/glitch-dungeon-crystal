@@ -253,7 +253,6 @@ var another_start_game_variable = false
 var spellCastPauseIndex = null
 var correct_ritual = ["ui_down", "ui_down", "ui_down", "restart_key"]
 var has_been_baba_yaga_cursed = false
-var has_ever_seen_epilepsy_warning = false
 var has_revealed_an_angler_fish = false
 
 func _ready():
@@ -282,7 +281,6 @@ func _ready():
     if angelWarping: if justAngelWarped: pass
     if has_been_baba_yaga_cursed: pass
     if malware_infected: pass
-    if has_ever_seen_epilepsy_warning: pass
 
     resetMemory()
     resetUserSettings()

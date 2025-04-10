@@ -1,7 +1,5 @@
 extends "../../../scripts/levelScript.gd"
 
-onready var bigFishNPC = get_node("BigFishNPC")
-
 # @override
 func setUpRoomInitializationOverride():
   var roomPath = global.memory["roomPath"] if global.memory.has("roomPath") else null

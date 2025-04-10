@@ -11,6 +11,7 @@ var glitchMusicNoteRes = preload("res://sceneObjects/Enemies/GlitchMusicNote.tsc
 onready var noteSpawner = get_node("SpriteContainer/Sprite3D/NoteSpawner")
 onready var eyeSpawner = get_node("SpriteContainer/EyeSprite3D/EyeSpawner")
 var weakEyeRes = preload("res://sceneObjects/Enemies/WeakEye.tscn")
+var nullificationArea = preload("res://sceneObjects/SpellsTreasureCollectables/NullificationArea.tscn")
 var babaWitchRes = preload("res://sceneObjects/Enemies/Boss/BabaWitch.tscn")
 var noteRefArray = []
 var singing_counter = 0
@@ -20,7 +21,7 @@ onready var cubeCrystal = weakref(get_node("CubeCrystal"))
 
 var num_hits = 0
 var MAX_NUM_HITS = 3
-var num_granny_hits = 0
+var num_granny_hits = 3
 var MAX_GRANNY_HITS = 3
 
 enum BossPhase {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=200 format=2]
+[gd_scene load_steps=196 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/player_base_palette.png" type="Texture" id=2]
@@ -37,7 +37,6 @@
 [ext_resource path="res://assets/sounds/assets_sfx_jumpcartoon.wav" type="AudioStream" id=35]
 [ext_resource path="res://assets/sounds/eb_bell.wav" type="AudioStream" id=36]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Laugh3.wav" type="AudioStream" id=37]
-[ext_resource path="res://assets/fonts/VGATypewriterSf.ttf" type="DynamicFontData" id=38]
 [ext_resource path="res://assets/sounds/glitchMoth.wav" type="AudioStream" id=39]
 [ext_resource path="res://uiTutorialFont.tres" type="Theme" id=40]
 [ext_resource path="res://assets/sounds/wakeup.wav" type="AudioStream" id=41]
@@ -48,7 +47,6 @@
 [ext_resource path="res://canvas.png" type="Texture" id=46]
 [ext_resource path="res://assets/palettes/commodore64-1x.png" type="Texture" id=47]
 [ext_resource path="res://icon.png" type="Texture" id=48]
-[ext_resource path="res://assets/sprites2D/caution.png" type="Texture" id=49]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=50]
 [ext_resource path="res://levels/common/UITheme_real_spaced.tres" type="Theme" id=51]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=52]
@@ -2226,16 +2224,6 @@ surfaces/0 = {
 
 [sub_resource type="CanvasItemMaterial" id=191]
 
-[sub_resource type="DynamicFont" id=277]
-size = 36
-outline_size = 1
-outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-extra_spacing_space = 1
-font_data = ExtResource( 38 )
-
-[sub_resource type="Theme" id=278]
-default_font = SubResource( 277 )
-
 [node name="Game" type="Spatial"]
 
 [node name="Viewport" parent="." instance=ExtResource( 54 )]
@@ -2918,6 +2906,7 @@ transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.52
 current = true
 
 [node name="MainMenu" type="Control" parent="UILayer"]
+visible = false
 margin_top = -45.0
 
 [node name="ColorRect" type="ColorRect" parent="UILayer/MainMenu"]
@@ -3078,45 +3067,6 @@ text = "Really Delete \"File 1\"?
                       x Confirm
                       z Cancel"
 scroll_active = false
-
-[node name="EpilepsyWarning" type="ColorRect" parent="UILayer"]
-visible = false
-margin_right = 640.0
-margin_bottom = 512.0
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="Text" type="RichTextLabel" parent="UILayer/EpilepsyWarning"]
-margin_left = 114.0
-margin_top = 110.0
-margin_right = 536.0
-margin_bottom = 422.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 3
-theme = SubResource( 278 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "[center]WARNING: 
-
-
-
-This game includes flashing that may potentially trigger seizures for people with photosensitive epilepsy. [/center]"
-text = "WARNING: 
-
-
-
-This game includes flashing that may potentially trigger seizures for people with photosensitive epilepsy. "
-scroll_active = false
-
-[node name="Sprite" type="Sprite" parent="UILayer/EpilepsyWarning"]
-position = Vector2( 312, 194 )
-scale = Vector2( 8, 8 )
-texture = ExtResource( 49 )
-
-[node name="Coverup" type="ColorRect" parent="UILayer/EpilepsyWarning"]
-margin_right = 640.0
-margin_bottom = 512.0
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="SkipPrompt" type="RichTextLabel" parent="UILayer"]
 visible = false

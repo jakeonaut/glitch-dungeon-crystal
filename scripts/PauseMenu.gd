@@ -388,12 +388,12 @@ func processLocaleLogic(_delta):
   if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     shouldUpdateMenuText = true
     var localeCode = localeOptions[localeOptionIndex].code
-    global.changeLocale(localeCode)
-  elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
-    global.changeLocale(global.userSettings["locale"], false)
+    global.changeLocale(localeCode, false)
     global.resetControlsConfigLabels()
-    pauseMenuState = PauseMenuState.NORMAL
+  elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
     shouldUpdateMenuText = true
+    pauseMenuState = PauseMenuState.NORMAL
+    # global.changeLocale(global.userSettings["locale"], false)
 
 onready var colorblindPlayers = get_node("ColorblindPlayers")
 onready var colorblindHats = get_node("ColorblindPlayers/ColorblindHats")
@@ -1063,14 +1063,12 @@ func tryDrawMap():
   map_cricketSoulSprite.visible = false
   map_fishSoulSprite.visible = false
   var mapGrid = transition.mapManager.gimmeMapGrid()
-  var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
   for i in range(MAP_HEIGHT):
     for j in range(MAP_WIDTH):
       var spriteIndex = (j + ((MAP_HEIGHT-1-i)*MAP_WIDTH)) + 1
       var spriteName = MAP_SPRITE_PREFIX + str(spriteIndex)
       var sprite = mapRect.get_node(spriteName) if mapRect.has_node(spriteName) else null
       if sprite == null:
-        print("DEBUG: " + spriteName + " doesn't exist")
         continue
       if not mapGrid.has(i) or not mapGrid[i].has(j):
         sprite.frame = 0

@@ -1,6 +1,7 @@
 keys,en,zh_CN,ru,pt_BR,fr
 TITLE,Babushka's Glitch Dungeon Crystal,"老奶的故障地牢大冒险",Babushka's Glitch Dungeon Crystal,A Masmorra Glitchada da Babushka,Babushka's Glitch Dungeon Crystal
 STEAM.ShortDescription,"Hi so much! You are a little old lady who needs to clean up a big magical cellar. Learn colorful mind-bending spells, or just hit stuff with your broom.",扮演一位老奶奶，清理一个巨大的魔法地窖吧！你可以选择学习复杂多样的咒语，也可以直接抡起扫帚开干！,"Примерьте на себя роль старушки, которой нужно навести порядок в странном подвале. Используйте завораживающие заклинания, меняющие реальность, и прибирайтесь своей верной метлой.",Uma adorável vovozinha (você!) precisa fazer uma bela faxina em seu porão mágico. Aprenda feitiços coloridos e esquisitos que alteram a realidade ou simplesmente saia distribuindo vassouradas por aí!,"hi"
+UI.Photosensitivity.Warning,"[center]WARNING:\n\nThis game includes flashing that may potentially trigger seizures for people with photosensitive epilepsy. [/center]","[center]警告：\n\n本游戏包含闪光，可能会引发敏感人群出现癫痫症状。[/center]","[center]ВНИМАНИЕ!\n\nВ игре присутствуют сцены мерцания, которые могут вызвать судороги у людей с фоточувствительной эпилепсией. [/center]","[center]ATENÇÃO:\n\nEste jogo contém luzes piscantes que podem causar convulsões em pessoas com epilepsia fotossensível.[/center]","[center]ATTENTION:\n\nCe jeu contient des scènes pouvant potentiellement causer une crise d'épilepsie. [/center]"
 UI.GlitchSpell.1,Feather Fall,一飞冲天,Пёрышко,Sopro de Pena,Poids Plume
 UI.GlitchSpell.2,Air Walk,空中漫步,Лёгкость,Passeio Etéreo,Marche Aérienne
 UI.GlitchSpell.3,Ladder,拾级而上,Лестница,Trilha Impossível,Echelle
@@ -12,8 +13,7 @@ UI.MainMenu.2_2,"File ",文件,"Файл ","Jogo ","Fichier "
 UI.MainMenu.3,press %s to start,按 %s 开始,"Нажмите %s, чтобы начать",%s iniciar,Appuyez sur %s pour commencer
 UI.MainMenu.4,%s: delete file,%s：删除文件,%s: удалить файл,%s apagar,%s: supprimer le fichier
 UI.MainMenu.5,"Really Delete [wave]""File %s""[/wave]?\n                      %s Confirm\n                      %s Cancel","确认删除 ""文件 %s ""吗？\n                  %s 确认\n                  %s 取消","Точно удалить «Файл %s»?\n              %s Подтвердить\n              %s Отмена","apagar ""Jogo %s""?\n                %s Confirmar\n                %s Cancelar","Vraiment Supprimer %s?\n                %s Confirmer\n                %s annuler"
-UI.PauseMenu.0,"%s to select, %s to resume ","按%s选择，按%s继续","%s для выбора, %s для отмены ",%s selecionar %s voltar,"%s: sélectionner, %s: reprendre
-"
+UI.PauseMenu.0,"%s to select, %s to resume ","按%s选择，按%s继续","%s для выбора, %s для отмены ",%s selecionar %s voltar,"%s: sélectionner, %s: reprendre"
 UI.PauseMenu.1,resume,继续,Вернуться,Voltar,"reprendre"
 UI.PauseMenu.2,Input,操作方法,Управление,Controles,"Saisie"
 UI.InputMenu.1,Keyboard,键盘,Клавиатура,Teclado,"Clavier"
@@ -33,7 +33,7 @@ UI.InputMenu.Action.8,next spell,下一个咒语,Следующее заклин
 UI.InputMenu.Action.9,prev spell,上一个咒语,Предыдущее заклинание,feitiço anterior,"dernier sort"
 UI.InputMenu.Action.9_0,spell %s,一个咒语%s,заклинание %s,feitiço %s,"sort %s"
 UI.InputMenu.Action.10,open map,打开地图,Открыть карту,abrir mapa,"ouvrir la carte"
-UI.InputMenu.13_0,"press %s to select, %s to go back.","按%s选择，按%s返回","Нажмите %s для выбора,\n%s для возвращения.","aperte %s escolher\n%s voltar.","%s sélectionner, %s retourner"
+UI.InputMenu.13_0,"press %s to select, %s to go back.","按%s选择，按%s返回","Нажмите %s для выбора,\n%s для возвращения.","aperte %s escolher, %s voltar.","%s sélectionner, %s retourner"
 UI.InputMenu.13_1,"Really quit?\npress %s to select, %s to go back.","真的退出吗？\n按%s选择，按%s返回","Действительно уйти?\nНажмите %s для выбора,\n%s для возвращения.","Realmente desistir?\naperte %s escolher %s voltar.","Tu veux vraiment arrêter ?\n%s sélectionner, %s retourner"
 UI.InputMenu.13_2,"unsaved progress will be lost.\npress %s to select, %s to go back.","未保存的进度将会丢失。\n按%s选择，按%s返回","Несохраненный прогресс будет утерян.\nНажмите %s для выбора,\n%s для возвращения.","o progresso não salvo será perdido.\naperte %s escolher %s voltar.","les progrès non sauvegardés\nseront perdus\n%s sélectionner, %s retourner"
 UI.InputMenu.13,"press %s to select, %s to go back\nhold %s: reset bindings","按%s选择，按%s返回\n长按%s恢复默认设置","Нажмите %s для выбора,\n%s для возвращения.\nУдерживайте %s для сброса настроек","%s selecionar %s voltar\nsegure %s para redefinir","%s sélectionner, %s retourner\ngardez %s appuyé pour\nréinitialiser les saisies."

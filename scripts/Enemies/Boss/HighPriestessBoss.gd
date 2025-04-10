@@ -33,7 +33,7 @@ var has_animated_attack = false
 
 var num_hits = 0
 var MAX_NUM_HITS = 6
-var num_granny_hits = 0
+var num_granny_hits = 3
 var MAX_GRANNY_HITS = 3
 
 enum BossPhase {

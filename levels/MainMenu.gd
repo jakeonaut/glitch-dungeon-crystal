@@ -10,32 +10,13 @@ onready var deleteSound = get_node("DeleteSound")
 onready var reliefSound = get_node("ReliefSound")
 onready var bellSound = get_node("BellSound")
 
-var epilepsy_fade_timer = 0
-var EPILEPSY_SHOW_TIME_LIMIT = 120
-var epilepsy_cover_opacity = 1
 enum MainMenuState {
-    SHOWING_EPILEPSY_WARNING,
-    HIDING_EPILEPSY_WARNING,
     MAIN_MENU,
     TRY_DELETE_FILE,
     MAIN_MENU_TRY_QUIT_GAME,
     NORMAL_GAMEPLAY,
 }
-var mainMenuState = MainMenuState.SHOWING_EPILEPSY_WARNING
-onready var epilepsyWarning = get_node("../../UILayer/EpilepsyWarning")
-onready var epilepsyWarningCoverup = get_node("../../UILayer/EpilepsyWarning/Coverup")
-onready var epilepsyWarningSprite = get_node("../../UILayer/EpilepsyWarning/Sprite")
-onready var epilepsyWarningText = get_node("../../UILayer/EpilepsyWarning/Text")
-func tryInitializeFromDebug():
-  if global.memory["initialized_from_debug"]:
-    epilepsyWarning.visible = false
-    mainMenuState = MainMenuState.NORMAL_GAMEPLAY
-  elif global.has_ever_seen_epilepsy_warning:
-    mainMenuState = MainMenuState.MAIN_MENU
-    epilepsyWarning.visible = false
-  else:
-    mainMenuState = MainMenuState.SHOWING_EPILEPSY_WARNING
-    epilepsyWarning.visible = true
+var mainMenuState = MainMenuState.MAIN_MENU
 
 func setUpRoomInitializationOverride():
     player.mySprite.material_override.set_shader_param("black_offset", 0)
@@ -45,14 +26,8 @@ func setUpRoomInitializationOverride():
         player.pauseInput = true
         show_dither_effect = false
         show_crt_effect = true
-        if global.has_ever_seen_epilepsy_warning:
-            mainMenuState = MainMenuState.MAIN_MENU
-            epilepsyWarning.visible = false
-        else:
-            mainMenuState = MainMenuState.SHOWING_EPILEPSY_WARNING
-            epilepsyWarning.visible = true
+        mainMenuState = MainMenuState.MAIN_MENU
     else:
-        epilepsyWarning.visible = false
         mainMenuState = MainMenuState.NORMAL_GAMEPLAY
         logoSprite.visible = false
         overlayRect.visible = false
@@ -286,7 +261,6 @@ var mainMenuPromptIndex = 0
 var updateMenuText = true
 func _process(delta):
     if mainMenuState == MainMenuState.TRY_DELETE_FILE:
-        epilepsyWarning.visible = false
         deleteConfirmationLayer.visible = true
         if deleteConfirmationLayerText.bbcode_text == "":
             deleteConfirmationLayerText.bbcode_text = tr("UI.MainMenu.5") % [str(mainMenuPromptIndex + 1), global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
@@ -306,35 +280,7 @@ func _process(delta):
     deleteConfirmationLayer.visible = false
     deleteConfirmationLayerText.bbcode_text = ""
 
-    if mainMenuState == MainMenuState.SHOWING_EPILEPSY_WARNING or \
-       mainMenuState == MainMenuState.HIDING_EPILEPSY_WARNING:
-        if mainMenuState == MainMenuState.SHOWING_EPILEPSY_WARNING:
-            global.has_ever_seen_epilepsy_warning = true
-            epilepsy_cover_opacity -= (delta)
-            if epilepsy_cover_opacity < 0:
-                epilepsy_cover_opacity = 0
-                epilepsy_fade_timer += (delta*11)
-                if epilepsy_fade_timer >= EPILEPSY_SHOW_TIME_LIMIT or (
-                    Input.is_action_just_pressed("sub_action_button") or \
-                    Input.is_action_just_pressed("jump_button") or \
-                    Input.is_action_just_pressed("ui_start") or \
-                    (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))
-                ):
-                    mainMenuState = MainMenuState.HIDING_EPILEPSY_WARNING
-                    transition.aniPlayer.stop()
-                    transition.aniPlayer.play("long_fade_no_change")
-        elif mainMenuState == MainMenuState.HIDING_EPILEPSY_WARNING:
-            epilepsy_cover_opacity += (delta)
-            if epilepsy_cover_opacity >= 1:
-                epilepsy_cover_opacity = 1
-                transition.reverse_fade()
-                epilepsyWarning.visible = false
-                mainMenuState = MainMenuState.MAIN_MENU
-        epilepsyWarningCoverup.color = Color(0, 0, 0, epilepsy_cover_opacity)
-        return
-
-    elif mainMenuState == MainMenuState.NORMAL_GAMEPLAY:
-        epilepsyWarning.visible = false
+    if mainMenuState == MainMenuState.NORMAL_GAMEPLAY:
         if global.has_started_game and not global.isRespawning:
             player.camera_y_offset = 5
             if global.has_really_started_game:
@@ -365,7 +311,6 @@ func _process(delta):
         return
 
     if mainMenuState == MainMenuState.MAIN_MENU:
-        epilepsyWarning.visible = false
         player.camera_y_offset = -20
         gameCamera.initial_size = camera_size
         gameCamera.zoomed_size = camera_size

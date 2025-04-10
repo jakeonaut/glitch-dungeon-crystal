@@ -5930,6 +5930,7 @@ visible = false
 [node name="GlitchMoleCricket" parent="Viewport/level" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.23293, -19.705, 0 )
 permanently_alter_tiles = true
+keep_spawning_anyway = true
 
 [node name="Flypath" parent="Viewport/level" instance=ExtResource( 37 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -29, 1 )
@@ -6232,7 +6233,7 @@ vframes = 6
 frame = 27
 
 [node name="BabaShortcutDoor2" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.75965, -28.8076, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.75965, -31.8076, 0 )
 visible = false
 script = ExtResource( 44 )
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/BabaYagaBossRoom.tscn"
@@ -6240,7 +6241,7 @@ memory_str = "babaShortcut"
 starting_glitch_type = ""
 
 [node name="landing" parent="Viewport/level/BabaShortcutDoor2" index="5"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.7, 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.7, 1 )
 
 [node name="AnimationPlayer" parent="Viewport/level/BabaShortcutDoor2" index="6"]
 anims/RESET = SubResource( 386 )

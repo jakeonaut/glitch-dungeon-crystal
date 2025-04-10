@@ -4599,7 +4599,7 @@ bus = "Sfx"
 
 [node name="GnashSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 37 )
-volume_db = -22.0
+volume_db = -15.0
 bus = "Sfx"
 
 [node name="WiggleSound" type="AudioStreamPlayer" parent="Sounds"]
@@ -4610,7 +4610,6 @@ bus = "Sfx"
 
 [node name="ScreamSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 24 )
-volume_db = -8.0
 pitch_scale = 1.2
 bus = "Sfx"
 

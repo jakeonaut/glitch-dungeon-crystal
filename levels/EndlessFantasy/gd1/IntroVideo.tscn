@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/palettes/bubblegum-16-1x.png" type="Texture" id=1]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=2]
@@ -19,6 +19,8 @@
 [ext_resource path="res://grandma.ogv" type="VideoStream" id=17]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=18]
 [ext_resource path="res://pauseMenuTheme.tres" type="Theme" id=19]
+[ext_resource path="res://assets/sprites2D/caution.png" type="Texture" id=20]
+[ext_resource path="res://uiTutorialFont.tres" type="Theme" id=21]
 
 [sub_resource type="ViewportTexture" id=240]
 viewport_path = NodePath("Viewport")
@@ -178,7 +180,6 @@ margin_right = 1920.0
 margin_bottom = 1080.0
 stream = ExtResource( 17 )
 volume_db = -10.0
-autoplay = true
 bus = "Sfx"
 
 [node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 16 )]
@@ -210,7 +211,36 @@ text = "Press R for OPTIONS"
 scroll_active = false
 
 [node name="UILayer" parent="." instance=ExtResource( 14 )]
-visible = false
+
+[node name="EpilepsyWarning" type="ColorRect" parent="UILayer"]
+margin_right = 640.0
+margin_bottom = 512.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="Text" type="RichTextLabel" parent="UILayer/EpilepsyWarning"]
+margin_left = 114.0
+margin_top = 185.0
+margin_right = 536.0
+margin_bottom = 497.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource( 21 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "UI.Photosensitivity.Warning"
+text = "UI.Photosensitivity.Warning"
+scroll_active = false
+
+[node name="Sprite" type="Sprite" parent="UILayer/EpilepsyWarning"]
+position = Vector2( 312, 131 )
+scale = Vector2( 8, 8 )
+texture = ExtResource( 20 )
+
+[node name="Coverup" type="ColorRect" parent="UILayer/EpilepsyWarning"]
+margin_right = 640.0
+margin_bottom = 512.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 16 )]
 

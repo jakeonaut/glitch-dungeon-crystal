@@ -235,9 +235,6 @@ func conductFromScenePath(path):
         tryToPlay(titleThemePlayer)
     elif path.find("EndCredits") > 0:
         tryToPlay(realizationThemePlayer)
-        changeSongPitch(0.8)
-        default_song_pitch = 0.8
-        return
     elif path.find("005DebugTown") > 0:
         tryToPlay(dungeonThemePlayer)
     elif path.find("001Your") > 0  or path.find("gd1"):

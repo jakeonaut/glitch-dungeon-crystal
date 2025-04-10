@@ -3141,6 +3141,18 @@ tracks/26/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/27/type = "value"
+tracks/27/path = NodePath("SpriteContainer/EyeSprite3D:visible")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
 
 [sub_resource type="Animation" id=10]
 resource_name = "hibernate"
@@ -3836,6 +3848,18 @@ tracks/13/keys = {
 "args": [ 0.0 ],
 "method": "play"
 } ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("SpriteContainer/EyeSprite3D:visible")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=40]
@@ -4544,6 +4568,18 @@ tracks/15/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("SpriteContainer/EyeSprite3D:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=6]

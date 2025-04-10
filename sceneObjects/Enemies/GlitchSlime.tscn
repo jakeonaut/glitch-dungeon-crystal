@@ -677,32 +677,32 @@ shape = SubResource( 2 )
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 4 )
 volume_db = -5.0
+bus = "Sfx"
 
 [node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 5 )
 volume_db = -15.0
+bus = "Sfx"
 
 [node name="FlapWingSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 20 )
 volume_db = -30.0
 pitch_scale = 2.0
+bus = "Sfx"
 
 [node name="ThudSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 19 )
 volume_db = -30.0
 pitch_scale = 1.25
+bus = "Sfx"
 
 [node name="StartEvolveSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 6 )
 volume_db = -10.0
 pitch_scale = 0.5
+bus = "Sfx"
 
 [node name="ScoochSound1" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = ExtResource( 13 )
@@ -721,10 +721,10 @@ max_distance = 20.0
 out_of_range_mode = 1
 
 [node name="HeartSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 18 )
 volume_db = -34.0
 pitch_scale = 1.2
+bus = "Sfx"
 
 [node name="DieAnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "default"

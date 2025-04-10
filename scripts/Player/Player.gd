@@ -409,13 +409,6 @@ func _process(delta):
   # is_turn_based = malware_infected and not physics_state == PhysicsState.BEING_TOSSED
   should_always_stop_walking_immediately = malware_infected
 
-  if is_playing_mini_cutscene:
-    if Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("popup_menu"):
-      aniPlayer.stop()
-      aniPlayer.clear_queue()
-      aniPlayer.play("fall")
-      finishCutsceneIntroAni()
-
   if glitch_form == global.GlitchForm.INVISIBLE and global.memory["broom"]:
     global.memory["broom"] = false
   processSpriteRenderLogic(delta)
@@ -592,6 +585,9 @@ func _process(delta):
       glitch_tickle_timer = 0
       mySprite.get_material_override().set_shader_param("enable_glitch", false)
       mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
+      mySprite.material_override.set_shader_param("time_influence", 3)
+      mySprite.material_override.set_shader_param("y_div", 2.3)
+      mySprite.material_override.set_shader_param("normal_offset", .02)
   
   processPoisonWaterLogic(delta)
   if pressingJump():
@@ -896,6 +892,8 @@ func tryDieToOffscreenCamera(_delta):
             lv.y *= 2
             vv *= 2
             linear_velocity.y *= 2
+        else:
+          glitchTickle()
         global.roomEdgeVector = null
         return
 
@@ -1849,7 +1847,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
 
   var whichBoss = level.getBoss()
   if whichBoss != null and whichBoss.getMyVariable() > 0:
-    whichBoss.num_granny_hits += 1
+    whichBoss.num_granny_hits -= 1
     global.incrementLevelZoneDeaths()
     level.glitchScreenEffect.visible = global.userSettings["canGlitchScreen"]
   else:
@@ -1880,7 +1878,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     nesting_doll_state = global.NestingDoll.GRANDMA
     updateNestingDoll(nesting_doll_state)
     global.pauseMoveInput = false
-  elif global.memory["hp"] <= 0 or should_immediately_die or (whichBoss != null and whichBoss.num_granny_hits == whichBoss.MAX_GRANNY_HITS):
+  elif global.memory["hp"] <= 0 or should_immediately_die or (whichBoss != null and whichBoss.num_granny_hits == 0):
     if summonedBroom:
       broomStop()
     summonFallenBroom(false, true, false)
@@ -2164,7 +2162,6 @@ func processBroomLogic(delta):
 func sneezeCloud():
   summonSmokeClouds(1, false, true, 1)
 
-var is_playing_mini_cutscene = false
 func startCutsceneIntroAni(aniName):
   pauseAnimation = true
   pauseInput = true
@@ -2176,10 +2173,8 @@ func startCutsceneIntroAni(aniName):
   aniPlayer.stop()
   aniPlayer.clear_queue()
   aniPlayer.play(aniName)
-  is_playing_mini_cutscene = true
 
 func finishCutsceneIntroAni():
-  is_playing_mini_cutscene = false
   pauseAnimation = false
   pauseInput = false
   pauseSelf = false

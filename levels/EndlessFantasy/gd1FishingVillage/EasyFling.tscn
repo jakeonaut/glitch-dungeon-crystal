@@ -4969,8 +4969,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.3365, -2.95006, 0 )
 
 [node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.47, -0.9, 0 )
-grav = 0
 glitch_form = 1
+only_activate_in_range = false
 sprite_offset_y = 0.13
 is_static = true
 is_licker = true
@@ -5191,7 +5191,6 @@ shape = SubResource( 87 )
 
 [node name="BasicFrogEnemy3" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 16.924, 0 )
-grav = 0
 is_static = true
 is_licker = true
 is_bubble_spitter = true
@@ -5233,7 +5232,6 @@ anims/wakeup = SubResource( 110 )
 
 [node name="BasicFrogEnemy4" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 19.1701, 0 )
-grav = 0
 is_static = true
 is_licker = true
 

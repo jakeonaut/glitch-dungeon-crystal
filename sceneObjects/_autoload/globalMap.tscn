@@ -1,18 +1,9 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://sceneObjects/_autoload/globalMap.gd" type="Script" id=1]
-[ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=2]
 [ext_resource path="res://sceneObjects/LevelManagerSprite.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=4]
-[ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=5]
-[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=6]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=7]
-[ext_resource path="res://assets/palettes/green_glitch_palette.png" type="Texture" id=8]
-[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=9]
 [ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=10]
-[ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=11]
-[ext_resource path="res://assets/palettes/black_palette.png" type="Texture" id=12]
-[ext_resource path="res://assets/palettes/pastoral_palette.png" type="Texture" id=13]
 [ext_resource path="res://assets/sprites/babaYagaHouse.png" type="Texture" id=14]
 [ext_resource path="res://assets/sprites/anglerFishBoss.png" type="Texture" id=15]
 [ext_resource path="res://assets/sprites/highpriestessgoddess.png" type="Texture" id=16]
@@ -20,13 +11,10 @@
 [ext_resource path="res://assets/sprites/angleDangleSheet.png" type="Texture" id=18]
 [ext_resource path="res://assets/sprites/babyAnglerFish.png" type="Texture" id=19]
 [ext_resource path="res://assets/sprites/anglerFishTail.png" type="Texture" id=20]
-[ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=21]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=22]
 [ext_resource path="res://assets/sprites/babaYagaBoss.png" type="Texture" id=23]
 [ext_resource path="res://assets/sprites/god_head.png" type="Texture" id=24]
 [ext_resource path="res://assets/sprites/babaYagaBossEye.png" type="Texture" id=25]
-[ext_resource path="res://assets/palettes/tidepool_palette.png" type="Texture" id=26]
-[ext_resource path="res://assets/palettes/player_red_palette.png" type="Texture" id=27]
 
 [sub_resource type="ShaderMaterial" id=39]
 shader = ExtResource( 7 )
@@ -60,9 +48,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 2 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 27 )
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
@@ -96,9 +81,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 2 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 8 )
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 7 )
@@ -132,9 +114,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 2 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 5 )
 
 [sub_resource type="ShaderMaterial" id=16]
 shader = ExtResource( 7 )
@@ -168,9 +147,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 2 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 9 )
 
 [sub_resource type="ShaderMaterial" id=19]
 shader = ExtResource( 7 )
@@ -204,9 +180,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 2 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 11 )
 
 [sub_resource type="ShaderMaterial" id=20]
 shader = ExtResource( 7 )
@@ -240,9 +213,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 2 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 12 )
 
 [sub_resource type="ShaderMaterial" id=9]
 shader = ExtResource( 7 )
@@ -276,9 +246,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 2 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 4 )
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 7 )
@@ -312,9 +279,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 2 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 9 )
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 7 )
@@ -348,9 +312,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 2 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 9 )
 
 [sub_resource type="ShaderMaterial" id=28]
 shader = ExtResource( 7 )
@@ -384,9 +345,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 10 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 5 )
 
 [sub_resource type="ShaderMaterial" id=24]
 shader = ExtResource( 7 )
@@ -420,9 +378,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 15 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 5 )
 
 [sub_resource type="ShaderMaterial" id=37]
 shader = ExtResource( 7 )
@@ -456,9 +411,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 2 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 26 )
 
 [sub_resource type="ShaderMaterial" id=27]
 shader = ExtResource( 7 )
@@ -492,9 +444,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 14 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 13 )
 
 [sub_resource type="ShaderMaterial" id=29]
 shader = ExtResource( 7 )
@@ -528,9 +477,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 23 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 21 )
 
 [sub_resource type="ShaderMaterial" id=30]
 shader = ExtResource( 7 )
@@ -564,9 +510,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 25 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 21 )
 
 [sub_resource type="ShaderMaterial" id=34]
 shader = ExtResource( 7 )
@@ -600,9 +543,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 2 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 26 )
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 7 )
@@ -636,9 +576,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 2 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 11 )
 
 [sub_resource type="ShaderMaterial" id=8]
 shader = ExtResource( 7 )
@@ -672,9 +609,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 2 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 5 )
 
 [sub_resource type="ShaderMaterial" id=15]
 shader = ExtResource( 7 )
@@ -708,9 +642,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 2 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 11 )
 
 [sub_resource type="ShaderMaterial" id=32]
 shader = ExtResource( 7 )
@@ -744,9 +675,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 10 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 11 )
 
 [sub_resource type="ShaderMaterial" id=33]
 shader = ExtResource( 7 )
@@ -780,9 +708,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 17 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 5 )
 
 [sub_resource type="ShaderMaterial" id=26]
 shader = ExtResource( 7 )
@@ -816,9 +741,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 16 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 5 )
 
 [sub_resource type="ShaderMaterial" id=38]
 shader = ExtResource( 7 )
@@ -852,9 +774,6 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 24 )
-shader_param/base_palette = ExtResource( 6 )
-shader_param/target_palette = ExtResource( 9 )
 
 [node name="globalMap" type="Spatial"]
 script = ExtResource( 1 )

@@ -899,6 +899,7 @@ func getBoss():
 var animate_life_timer = 0
 var animate_life_time_limit = 5
 var num_visible_boss_lives = 0
+var health_cheat_code_counter = 0
 func processBossHealth(delta):
   var whichBoss = getBoss()
   if whichBoss == null or whichBoss.getMyVariable() == 0:
@@ -907,17 +908,33 @@ func processBossHealth(delta):
 
   animate_life_timer += (delta*11)
   uiLayer.livesRect.visible = true
+  if health_cheat_code_counter < 3:
+    if Input.is_action_just_pressed("health_cheat_code"):
+      health_cheat_code_counter += 1
+    if health_cheat_code_counter >= 3:
+      whichBoss.MAX_GRANNY_HITS = 6
+      whichBoss.num_granny_hits += 3
+      global.lifeUISound2.play()
   # a bit esoteric logic given that we're hard coding it
 
   if animate_life_timer >= animate_life_time_limit*1 and animate_life_timer < animate_life_time_limit*4 and not uiLayer.grannyLifeSprite1.visible:
     global.lifeUISound.play()
-  uiLayer.grannyLifeSprite1.visible = whichBoss.num_granny_hits < whichBoss.MAX_GRANNY_HITS and (animate_life_timer >= animate_life_time_limit*1)
+  uiLayer.grannyLifeSprite1.visible = whichBoss.num_granny_hits >= 1 and (animate_life_timer >= animate_life_time_limit*1)
   if animate_life_timer >= animate_life_time_limit*2 and animate_life_timer < animate_life_time_limit*4 and not uiLayer.grannyLifeSprite2.visible:
     global.lifeUISound.play()
-  uiLayer.grannyLifeSprite2.visible = whichBoss.num_granny_hits <= 1 and (animate_life_timer >= animate_life_time_limit*2)
+  uiLayer.grannyLifeSprite2.visible = whichBoss.num_granny_hits >= 2 and (animate_life_timer >= animate_life_time_limit*2)
   if animate_life_timer >= animate_life_time_limit*3 and animate_life_timer < animate_life_time_limit*4 and not uiLayer.grannyLifeSprite3.visible:
     global.lifeUISound.play()
-  uiLayer.grannyLifeSprite3.visible = whichBoss.num_granny_hits == 0 and (animate_life_timer >= animate_life_time_limit*3)
+  uiLayer.grannyLifeSprite3.visible = whichBoss.num_granny_hits >= 3 and (animate_life_timer >= animate_life_time_limit*3)
+  if health_cheat_code_counter < 3:
+    uiLayer.grannyLifeSprite4.visible = false
+    uiLayer.grannyLifeSprite5.visible = false
+    uiLayer.grannyLifeSprite6.visible = false
+  else:
+    uiLayer.grannyLifeSprite4.visible = whichBoss.num_granny_hits >= 4
+    uiLayer.grannyLifeSprite5.visible = whichBoss.num_granny_hits >= 5
+    uiLayer.grannyLifeSprite6.visible = whichBoss.num_granny_hits >= 6
+
   # a bit esoteric logic given that we're hard coding it
   if whichBoss.MAX_NUM_HITS == 6:
     if animate_life_timer >= animate_life_time_limit*4 and animate_life_timer < animate_life_time_limit*20 and not uiLayer.bossLifeSprite1.visible:

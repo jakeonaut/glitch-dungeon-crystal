@@ -336,8 +336,8 @@ func changeSpriteColorPalette(palette):
   chickenSprite.material_override.set_shader_param("target_palette", palette)
   # broomSpriteVisible.material_override.set_shader_param("target_palette", palette)
 
-func enemyPushMe(delta, origin):
-  if glitch_form != global.GlitchForm.INVISIBLE:
+func enemyPushMe(delta, origin, enemy_glitch_form):
+  if glitch_form != global.GlitchForm.INVISIBLE or (glitch_form != global.GlitchForm.INVISIBLE and enemy_glitch_form == global.GlitchForm.INVISIBLE):
     return
 
   var multiplier = 5
@@ -962,6 +962,9 @@ func glitchTickle(play_sound = true):
   mySprite.material_override.set_shader_param("enable_remove_skin_tone", true)
   mySprite.material_override.set_shader_param("shake_power", 0.01)
   mySprite.material_override.set_shader_param("shake_color_rate", 0.01)
+  mySprite.material_override.set_shader_param("time_influence", 30)
+  mySprite.material_override.set_shader_param("y_div", 2.0)
+  mySprite.material_override.set_shader_param("normal_offset", 0.15)
   if play_sound:
     if malware_infected:
       malwareSound.play()

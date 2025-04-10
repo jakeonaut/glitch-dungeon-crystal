@@ -1943,6 +1943,33 @@ hframes = 16
 vframes = 16
 frame = 62
 
+[node name="LifeSprite4" type="Sprite" parent="LivesRect"]
+material = SubResource( 17217 )
+position = Vector2( 104, 21 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 35 )
+hframes = 16
+vframes = 16
+frame = 62
+
+[node name="LifeSprite5" type="Sprite" parent="LivesRect"]
+material = SubResource( 17217 )
+position = Vector2( 132, 21 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 35 )
+hframes = 16
+vframes = 16
+frame = 62
+
+[node name="LifeSprite6" type="Sprite" parent="LivesRect"]
+material = SubResource( 17217 )
+position = Vector2( 160, 21 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 35 )
+hframes = 16
+vframes = 16
+frame = 62
+
 [node name="BossLifeSprite" type="Sprite" parent="LivesRect"]
 material = SubResource( 17218 )
 position = Vector2( 22, 48.5 )

@@ -360,8 +360,8 @@ func getSmacked(broom_origin = null, silently = false):
     notDieSound.play()
   # stop the lick
   if is_licker and tongueAniPlayer != null:
-    if can_licker_be_flipped:
-      mySprite.flip_h = not mySprite.flip_h
+    # if can_licker_be_flipped:
+    mySprite.flip_h = not mySprite.flip_h
     tongueAniPlayer.stop()
     tongueAniPlayer.clear_queue()
     if gulpin:

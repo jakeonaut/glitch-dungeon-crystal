@@ -510,6 +510,8 @@ func processGlitchFormGlitchiness():
         mySprite.flip_h = level.player.global_transform.origin.x < self.global_transform.origin.x
         if level.player.glitch_form == glitch_form and smallInteractionArea != null and not smallInteractionArea.is_in_group("enemies"):
             mySprite.material_override.set_shader_param("opacity", 1.0)
+            if myOtherSprite:
+                myOtherSprite.material_override.set_shader_param("opacity", 1.0)
             mySprite.material_override.set_shader_param("enable_glitch", true)
             mySprite.material_override.set_shader_param("enable_palette_cycle", false)
             mySprite.global_transform.origin.z = 1
@@ -519,7 +521,9 @@ func processGlitchFormGlitchiness():
                 spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y + 1.7
                 spellbookGlitchSprite.material_override.set_shader_param("enable_palette_cycle", false)
         elif level.player.glitch_form != glitch_form and smallInteractionArea != null and smallInteractionArea.is_in_group("enemies"):
-            mySprite.material_override.set_shader_param("opacity", 0.05)
+            mySprite.material_override.set_shader_param("opacity", 0.05 if not kill_invis else 0.5)
+            if myOtherSprite:
+                myOtherSprite.material_override.set_shader_param("opacity", 0.5)
             mySprite.material_override.set_shader_param("enable_glitch", false)
             mySprite.material_override.set_shader_param("enable_palette_cycle", true)
             mySprite.global_transform.origin.z = 0
