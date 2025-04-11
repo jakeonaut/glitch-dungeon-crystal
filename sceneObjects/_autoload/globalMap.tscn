@@ -1,8 +1,7 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://sceneObjects/_autoload/globalMap.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/LevelManagerSprite.tscn" type="PackedScene" id=3]
-[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=7]
 [ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=10]
 [ext_resource path="res://assets/sprites/babaYagaHouse.png" type="Texture" id=14]
 [ext_resource path="res://assets/sprites/anglerFishBoss.png" type="Texture" id=15]
@@ -15,765 +14,6 @@
 [ext_resource path="res://assets/sprites/babaYagaBoss.png" type="Texture" id=23]
 [ext_resource path="res://assets/sprites/god_head.png" type="Texture" id=24]
 [ext_resource path="res://assets/sprites/babaYagaBossEye.png" type="Texture" id=25]
-
-[sub_resource type="ShaderMaterial" id=39]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=16]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.001
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = true
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=19]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=20]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=9]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = true
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=5]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.001
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = true
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 2.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=6]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=28]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.01
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=24]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.01
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=37]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=27]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.01
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = true
-shader_param/enable_color_glitch = false
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=29]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.001
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.001
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=30]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=34]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.01
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = true
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=7]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=8]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=15]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.01
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = true
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=32]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.01
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=33]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.01
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=26]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = true
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-
-[sub_resource type="ShaderMaterial" id=38]
-shader = ExtResource( 7 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 0.5
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 2
-shader_param/black_offset = 0
-shader_param/enable_glitch = true
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = true
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = true
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
 
 [node name="globalMap" type="Spatial"]
 script = ExtResource( 1 )
@@ -809,7 +49,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4, 0 )
 
 [node name="IntroVideo" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4, 0 )
-material_override = SubResource( 39 )
+material_override = null
 frame = 26
 path = "res://levels/EndlessFantasy/gd1/IntroVideo.tscn"
 can_nav_left = false
@@ -820,6 +60,7 @@ hide_me_from_map = true
 
 [node name="0_0" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 0 )
+material_override = null
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn"
 can_nav_right = false
@@ -827,7 +68,7 @@ can_nav_down = false
 
 [node name="GreenGlitchIntro" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 0 )
-material_override = SubResource( 1 )
+material_override = null
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000GreenGlitchIntro.tscn"
 can_nav_left = false
@@ -836,7 +77,7 @@ can_nav_down = false
 
 [node name="GreenGlitchFinale" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -1, 0 )
-material_override = SubResource( 1 )
+material_override = null
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/001GreenGlitchFinale.tscn"
 can_nav_right = false
@@ -845,7 +86,7 @@ can_nav_down = false
 
 [node name="RedGlitchIntro" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0 )
-material_override = SubResource( 2 )
+material_override = null
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000RedGlitchIntro.tscn"
 can_nav_left = false
@@ -854,7 +95,7 @@ can_nav_down = false
 
 [node name="RedGlitchMiddle" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0 )
-material_override = SubResource( 2 )
+material_override = null
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000RedGlitchMiddle.tscn"
 can_nav_up = false
@@ -862,7 +103,7 @@ can_nav_down = false
 
 [node name="RedGlitchFinale" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0 )
-material_override = SubResource( 2 )
+material_override = null
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/001RedGlitchFinale.tscn"
 can_nav_right = false
@@ -871,7 +112,7 @@ can_nav_down = false
 
 [node name="StoryHook" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 0 )
-material_override = SubResource( 16 )
+material_override = null
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/StoryHook.tscn"
 can_nav_left = false
@@ -881,6 +122,7 @@ can_nav_down = false
 
 [node name="NullificationPurgatory" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 0 )
+material_override = null
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/DebugTown_NullificationPurgatory.tscn"
 can_nav_left = false
@@ -890,6 +132,7 @@ can_nav_down = false
 
 [node name="NullifyIntro" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0 )
+material_override = null
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000_000_NullifyIntro.tscn"
 can_nav_left = false
@@ -899,7 +142,7 @@ can_nav_down = false
 
 [node name="LadderIntro" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 0 )
-material_override = SubResource( 19 )
+material_override = null
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/LadderIntro.tscn"
 can_nav_left = false
@@ -909,7 +152,7 @@ can_nav_down = false
 
 [node name="GhostIntro" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
-material_override = SubResource( 20 )
+material_override = null
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/tutorial_GhostIntro.tscn"
 can_nav_left = false
@@ -919,13 +162,14 @@ can_nav_down = false
 
 [node name="0_1Haven" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 0, 0, 0 )
-material_override = SubResource( 9 )
+material_override = null
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
 has_angel_statue = true
 
 [node name="entrance_to_tower" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+material_override = null
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/entrance_to_tower.tscn"
 can_nav_left = false
@@ -935,7 +179,7 @@ can_nav_down = false
 
 [node name="EndCredits" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5, 0 )
-material_override = SubResource( 39 )
+material_override = null
 frame = 26
 path = "res://levels/EndlessFantasy/gd1/EndCredits.tscn"
 can_nav_left = false
@@ -949,18 +193,21 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 0 )
 
 [node name="FishingVillageEntrance" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0 )
+material_override = null
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/_0_0_FishingVillageEntrance.tscn"
 can_nav_down = false
 
 [node name="FishingVillageIntro" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 0 )
+material_override = null
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn"
 can_nav_down = false
 
 [node name="FishHooksMinimum" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0 )
+material_override = null
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/002FishingHooksMinimum.tscn"
 can_nav_right = false
@@ -970,6 +217,7 @@ kill_after_glitch = true
 
 [node name="GlitchFishersPuzzle" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 0 )
+material_override = null
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/003GlitchFishersPuzzle.tscn"
 can_nav_left = false
@@ -979,7 +227,7 @@ can_nav_down = false
 
 [node name="GrubAmbush" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 0 )
-material_override = SubResource( 5 )
+material_override = null
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/GrubAmbush.tscn"
 can_nav_left = false
@@ -989,6 +237,7 @@ has_fish_memory = true
 
 [node name="RightsideTunnel" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, 0 )
+material_override = null
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/004RightsideTunnel.tscn"
 can_nav_left = false
@@ -999,7 +248,7 @@ kill_after_glitch = true
 
 [node name="EasyFling" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3, 0 )
-material_override = SubResource( 6 )
+material_override = null
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/EasyFling.tscn"
 can_nav_left = false
@@ -1010,7 +259,7 @@ kill_after_glitch = true
 
 [node name="GlitchFishersHard" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 6, 4, 0 )
-material_override = SubResource( 6 )
+material_override = null
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/003pt5GlitchFishersHard.tscn"
 can_nav_left = false
@@ -1020,7 +269,7 @@ kill_after_glitch = true
 
 [node name="FrogBossHaven" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 6, 5, 1 )
-material_override = SubResource( 28 )
+material_override = null
 texture = ExtResource( 10 )
 vframes = 16
 frame = 63
@@ -1032,7 +281,7 @@ kill_after_glitch = true
 
 [node name="AnglerFishBossRoom" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 5, -1 )
-material_override = SubResource( 24 )
+material_override = null
 offset = Vector2( 20, 0 )
 pixel_size = 0.04
 texture = ExtResource( 15 )
@@ -1071,7 +320,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 7, 0 )
 
 [node name="LostWoods3" parent="ToxicJungle" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -3, 0 )
-material_override = SubResource( 37 )
+material_override = null
 frame = 38
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods3.tscn"
 can_nav_left = false
@@ -1080,7 +329,7 @@ can_nav_down = false
 
 [node name="PoisonShroomCove" parent="ToxicJungle" instance=ExtResource( 3 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, -2, -4, 0 )
-material_override = SubResource( 37 )
+material_override = null
 frame = 38
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/001PoisonShroomCove.tscn"
 can_nav_left = false
@@ -1091,7 +340,7 @@ kill_after_glitch = true
 
 [node name="LostWoods2" parent="ToxicJungle" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -5, 0 )
-material_override = SubResource( 37 )
+material_override = null
 frame = 38
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods2.tscn"
 can_nav_left = false
@@ -1102,7 +351,7 @@ kill_after_glitch = true
 
 [node name="LostWoods4" parent="ToxicJungle" instance=ExtResource( 3 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, -3, -4, 0 )
-material_override = SubResource( 37 )
+material_override = null
 flip_h = true
 frame = 38
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods4.tscn"
@@ -1113,7 +362,7 @@ can_nav_down = false
 
 [node name="LostWoods1" parent="ToxicJungle" instance=ExtResource( 3 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -4, -5, 0 )
-material_override = SubResource( 37 )
+material_override = null
 frame = 38
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods1.tscn"
 can_nav_left = false
@@ -1124,7 +373,7 @@ kill_after_glitch = true
 
 [node name="InvisRoom" parent="ToxicJungle" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -6, 0 )
-material_override = SubResource( 37 )
+material_override = null
 frame = 38
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/002InvisRoom.tscn"
 can_nav_left = false
@@ -1135,7 +384,7 @@ kill_after_glitch = true
 
 [node name="InvisIntro" parent="ToxicJungle" instance=ExtResource( 3 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, -3, -6, 0 )
-material_override = SubResource( 37 )
+material_override = null
 frame = 38
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/InvisIntro.tscn"
 can_nav_left = false
@@ -1145,7 +394,7 @@ can_nav_down = false
 
 [node name="MushroomCave" parent="ToxicJungle" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -7, 0 )
-material_override = SubResource( 37 )
+material_override = null
 frame = 38
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/003MushroomCave.tscn"
 can_nav_left = false
@@ -1156,7 +405,7 @@ kill_after_glitch = true
 
 [node name="SafariZone" parent="ToxicJungle" instance=ExtResource( 3 )]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, -5, -7, 0 )
-material_override = SubResource( 37 )
+material_override = null
 frame = 38
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/006SafariZone.tscn"
 can_nav_left = false
@@ -1166,7 +415,7 @@ can_nav_down = false
 
 [node name="CrystalHaven" parent="ToxicJungle" instance=ExtResource( 3 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, -6, -7, 0 )
-material_override = SubResource( 37 )
+material_override = null
 frame = 38
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/007CrystalHaven.tscn"
 can_nav_left = false
@@ -1176,7 +425,7 @@ can_nav_down = false
 
 [node name="BabaYagaBossRoom" parent="ToxicJungle" instance=ExtResource( 3 )]
 transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -6, -6, -1 )
-material_override = SubResource( 27 )
+material_override = null
 offset = Vector2( 0, 24 )
 pixel_size = 0.03
 texture = ExtResource( 14 )
@@ -1191,7 +440,6 @@ has_angel_statue = true
 
 [node name="Sprite3D" type="Sprite3D" parent="ToxicJungle/BabaYagaBossRoom"]
 transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, -0.004, 1 )
-material_override = SubResource( 29 )
 pixel_size = 0.12
 texture = ExtResource( 23 )
 hframes = 4
@@ -1204,7 +452,6 @@ overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png
 
 [node name="EyeSprite3D" type="Sprite3D" parent="ToxicJungle/BabaYagaBossRoom"]
 transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, -0.004, 1 )
-material_override = SubResource( 30 )
 pixel_size = 0.12
 texture = ExtResource( 25 )
 hframes = 4
@@ -1217,7 +464,7 @@ overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png
 
 [node name="TeleportDoorMaze" parent="ToxicJungle" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -5, 0 )
-material_override = SubResource( 34 )
+material_override = null
 frame = 38
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/TeleportDoorMaze.tscn"
 can_nav_left = false
@@ -1228,6 +475,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 0 )
 
 [node name="FallFromGrace_Freefall" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2, 0 )
+material_override = null
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/FallFromGrace_Freefall.tscn"
 can_nav_left = false
@@ -1235,6 +483,7 @@ can_nav_right = false
 
 [node name="FallFromGrace" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0 )
+material_override = null
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/FallFromGrace.tscn"
 can_nav_left = false
@@ -1243,6 +492,7 @@ can_nav_down = false
 
 [node name="000Start" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
+material_override = null
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
 can_nav_left = false
@@ -1250,7 +500,7 @@ can_nav_up = false
 
 [node name="DustyCricketIntro" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0 )
-material_override = SubResource( 7 )
+material_override = null
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000DustyCricketIntro.tscn"
 can_nav_up = false
@@ -1258,6 +508,7 @@ can_nav_down = false
 
 [node name="DustyCricketIntro_old" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0 )
+material_override = null
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000DustyCricketIntro_old.tscn"
 can_nav_left = false
@@ -1267,13 +518,14 @@ has_phishing_key = true
 
 [node name="RedHallway" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
-material_override = SubResource( 8 )
+material_override = null
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/000RedTunnelHallway.tscn"
 can_nav_right = false
 
 [node name="DustFreefall" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1.5, 0, 0, 0, 1, 3, -1, 0 )
+material_override = null
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/006DustFreefall.tscn"
 can_nav_right = false
@@ -1282,7 +534,7 @@ can_nav_down = false
 
 [node name="ExcavationRoom" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0 )
-material_override = SubResource( 15 )
+material_override = null
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/ExcavationRoom.tscn"
 can_nav_left = false
@@ -1292,6 +544,7 @@ has_mole_memory = true
 
 [node name="CricketCaveHub1" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1, 0 )
+material_override = null
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/005_CricketCaveHub1.tscn"
 can_nav_left = false
@@ -1299,6 +552,7 @@ can_nav_down = false
 
 [node name="005TidepoolCaves" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 0 )
+material_override = null
 frame = 78
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/005_TidepoolCaves.tscn"
 can_nav_left = false
@@ -1308,7 +562,7 @@ can_nav_down = false
 
 [node name="DustyHoppers" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 3, 0, 0 )
-material_override = SubResource( 32 )
+material_override = null
 texture = ExtResource( 10 )
 vframes = 16
 frame = 48
@@ -1320,7 +574,7 @@ can_nav_down = false
 
 [node name="DoguBossRoom" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1.5, 4, 0, -1 )
-material_override = SubResource( 33 )
+material_override = null
 offset = Vector2( 0, 50 )
 pixel_size = 0.03
 texture = ExtResource( 17 )
@@ -1338,6 +592,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 
 [node name="000Start" parent="CrystalTower" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 7, 0 )
+material_override = null
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/000_Start.tscn"
 can_nav_left = false
@@ -1345,6 +600,7 @@ can_nav_right = false
 
 [node name="ReverseEasyFling" parent="CrystalTower" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 8, 0 )
+material_override = null
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/ReverseEasyFling.tscn"
 can_nav_left = false
@@ -1352,6 +608,7 @@ can_nav_right = false
 
 [node name="PastoralTowerHub" parent="CrystalTower" instance=ExtResource( 3 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 5, 9, 0 )
+material_override = null
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/PastoralTowerHub.tscn"
 can_nav_left = false
@@ -1361,6 +618,7 @@ can_nav_down = false
 
 [node name="LockedRoom2" parent="CrystalTower" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 9, 0 )
+material_override = null
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/LockedRoom2.tscn"
 can_nav_left = false
@@ -1370,6 +628,7 @@ can_nav_down = false
 
 [node name="LongGlitchyHallway" parent="CrystalTower" instance=ExtResource( 3 )]
 transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1, 6, 9, 0 )
+material_override = null
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/LongGlitchyHallway.tscn"
 can_nav_left = false
@@ -1379,6 +638,7 @@ can_nav_down = false
 
 [node name="TowerToSacredDoors" parent="CrystalTower" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 10, 0 )
+material_override = null
 frame = 8
 path = "res://levels/EndlessFantasy/gd1CrystalTower/002TowerToSacredDoors.tscn"
 can_nav_left = false
@@ -1388,6 +648,7 @@ can_nav_down = false
 
 [node name="preBossRoom" parent="CrystalTower" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 11, 0 )
+material_override = null
 frame = 26
 path = "res://levels/EndlessFantasy/gd1CrystalTower/preBossRoom.tscn"
 can_nav_left = false
@@ -1396,7 +657,7 @@ can_nav_down = false
 
 [node name="BossLevel" parent="CrystalTower" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 11, -1 )
-material_override = SubResource( 26 )
+material_override = null
 offset = Vector2( -10, -20 )
 texture = ExtResource( 16 )
 hframes = 4
@@ -1409,7 +670,7 @@ has_angel_statue = true
 
 [node name="PrimordialOoze" parent="CrystalTower" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 0 )
-material_override = SubResource( 38 )
+material_override = null
 pixel_size = 0.1
 texture = ExtResource( 24 )
 hframes = 6

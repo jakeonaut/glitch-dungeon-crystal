@@ -348,8 +348,7 @@ is_infected = true
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2182, 10.0596, 0 )
 grav = 0
-bbText = "•thanks for cleaning up
-the riff raff."
+bbText = "NPC.Fisherman.13"
 glitchedBbText = "•i'm scared."
 can_move = false
 can_camera_zoom = false

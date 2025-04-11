@@ -59,6 +59,14 @@ onready var croneNPC = get_node("CroneNPC")
 onready var cowNPC = get_node("NPC2")
 onready var door2 = get_node("Door2")
 onready var logoSprite = get_node("../../Viewport2/CanvasLayer/LogoSprite")
+var logoTex2 = preload("res://assets/sprites/logo2.png")
+var logoTex3 = preload("res://assets/sprites/logo3.png")
+var logo_default_pos = Vector2(308, 750)
+var logo_min_pos = Vector2(308, 154)
+var logo_max_pos = Vector2(980, 816)
+var logo_dir = Vector2(2, 2)
+var logo_timer = 0
+var logo_time_limit = 120
 onready var overlayRect = get_node("OverlayRect")
 onready var glitchEnemy6 = get_node("GlitchEnemy6")
 onready var colorRect = get_node("../../UILayer/MainMenu/ColorRect")
@@ -335,10 +343,40 @@ func _process(delta):
             uiLayer.pauseMenu.menuMoveSound.play()
             normalizeMainMenuPromptIndex(1)
             updateMenuText = true
+            if logo_timer < logo_time_limit:
+                logo_timer = 0
         elif Input.is_action_just_pressed("menu_up"):
             uiLayer.pauseMenu.menuMoveSound.play()
             normalizeMainMenuPromptIndex(-1)
             updateMenuText = true
+            if logo_timer < logo_time_limit:
+                logo_timer = 0
+        else:
+            logo_timer += (delta*11)
+            if logo_timer >= logo_time_limit:
+                logoSprite.position += logo_dir
+                var should_toggle_color = false
+                if logoSprite.position.x >= logo_max_pos.x:
+                    logoSprite.position.x = logo_max_pos.x
+                    logo_dir.x *= -1
+                    should_toggle_color = true
+                elif logoSprite.position.x <= logo_min_pos.x:
+                    logoSprite.position.x = logo_min_pos.x
+                    logo_dir.x *= -1
+                    should_toggle_color = true
+                if logoSprite.position.y >= logo_max_pos.y:
+                    logoSprite.position.y = logo_max_pos.y
+                    logo_dir.y *= -1
+                    should_toggle_color = true
+                if logoSprite.position.y <= logo_min_pos.y:
+                    logoSprite.position.y = logo_min_pos.y
+                    logo_dir.y *= -1
+                    should_toggle_color = true
+                if should_toggle_color:
+                    if logoSprite.texture == logoTex2:
+                        logoSprite.texture = logoTex3
+                    else:
+                        logoSprite.texture = logoTex2
 
         if mainMenuPromptIndex == 0:
             player.applyGlitch(global.GlitchForm.NORMAL, true)
@@ -353,7 +391,7 @@ func _process(delta):
             for i in range(global.save_game_files.size()):
                 if i != 0: menuText.bbcode_text += "\n"
 
-                var fileText = (tr("UI.MainMenu.2") + str(i+1)) if global.doesSaveGameExist(i) else ("[color=gray]" + tr("UI.MainMenu.2_2") + str(i+1) + "[/color]")
+                var fileText = (tr("UI.MainMenu.2") + str(i+1)) if global.doesSaveGameExist(i) else ("[color=gray]" + tr("UI.MainMenu.2") + str(i+1) + "[/color]")
                 if mainMenuPromptIndex == i:
                     menuText.bbcode_text += "[wave]" + fileText + "[/wave]"
                 else:

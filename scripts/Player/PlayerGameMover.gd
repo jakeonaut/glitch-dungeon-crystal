@@ -97,6 +97,8 @@ var holding_down_timer = 0
 var holding_down_time_limit = 5
 var holding_up_timer = 0
 var holding_up_time_limit = 5
+var stupid_joystick_up_memory = false
+var stupid_joystick_down_memory = false
 func _process(delta):
   # weird failsafe
   global_transform.origin.z = 0
@@ -384,20 +386,131 @@ func isTextboxPausingMe():
   return global.activeInteractor != null and global.activeInteractor.showYesNoOptions
 
 # @override
-func justPressedDown():
-  return Input.is_action_just_pressed("ui_down") and not pauseInput and not isTextboxPausingMe()
-
-# @override
 func pressingDown():
-  return Input.is_action_pressed("ui_down") and not pauseInput and not isTextboxPausingMe()
+  var pressingDownButton = Input.is_action_pressed("ui_down") or (
+    global.userSettings["use_joystick"] > 0 and (
+      Input.get_joy_axis(0, JOY_AXIS_1) > global.getDeadzone() or # vertical leftstick
+      Input.get_joy_axis(0, JOY_AXIS_3) > global.getDeadzone() # verical rightstick
+    )
+  )
+  return pressingDownButton and not pauseInput and not isTextboxPausingMe()
 
 # @override
 func pressingMoveDown():
-  return Input.is_action_pressed("ui_down") and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()
+  var pressingDownButton = Input.is_action_pressed("ui_down") or (
+    global.userSettings["use_joystick"] > 0 and (
+      Input.get_joy_axis(0, JOY_AXIS_1) > global.getDeadzone() or # vertical leftstick
+      Input.get_joy_axis(0, JOY_AXIS_3) > global.getDeadzone() # vertical rightstick
+    )
+  )
+  return pressingDownButton and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()
 
 # @override
 func pressingMoveUp():
-  return Input.is_action_pressed("ui_up") and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()
+  var pressingUpButton = Input.is_action_pressed("ui_up") or (
+    global.userSettings["use_joystick"] > 0 and (
+      Input.get_joy_axis(0, JOY_AXIS_1) < -global.getDeadzone() or # vertical leftstick
+      Input.get_joy_axis(0, JOY_AXIS_3) < -global.getDeadzone() # vertical rightstick
+    )
+  )
+  return pressingUpButton and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()
+
+var override_stop_left_input = false
+# @override
+func pressingMoveLeft():
+  if override_stop_left_input or physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
+    return false
+  var am_paused = pauseInput or isTextboxPausingMe()
+
+  var pressingLeftButton = Input.is_action_pressed("ui_left") or (
+    global.userSettings["use_joystick"] > 0 and (
+      Input.get_joy_axis(0, JOY_AXIS_0) < -global.getDeadzone() or # horizontal leftstick
+      Input.get_joy_axis(0, JOY_AXIS_2) < -global.getDeadzone() # horizontal rightstick
+    )
+  )
+  var pressingRightButton = Input.is_action_pressed("ui_right") or (
+    global.userSettings["use_joystick"] > 0 and (
+      Input.get_joy_axis(0, JOY_AXIS_0) > global.getDeadzone() or # horizontal leftstick
+      Input.get_joy_axis(0, JOY_AXIS_2) > global.getDeadzone() # horizontal rightstick
+    )
+  )
+
+  if malware_infected:
+    return pressingRightButton and not am_paused
+  if is_mushroom_infected:
+    return mushroom_infection_direction == -1 and not am_paused
+  var is_pressing_move_left = .pressingMoveLeft() or (pressingLeftButton and not am_paused)
+  return is_pressing_move_left
+
+var override_stop_right_input = false
+# @override
+func pressingMoveRight():
+  if override_stop_right_input or physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
+    return false
+  var am_paused =  pauseInput or isTextboxPausingMe()
+
+  var pressingLeftButton = Input.is_action_pressed("ui_left") or (
+    global.userSettings["use_joystick"] > 0 and (
+      Input.get_joy_axis(0, JOY_AXIS_0) < -global.getDeadzone() or # horizontal leftstick
+      Input.get_joy_axis(0, JOY_AXIS_2) < -global.getDeadzone() # horizontal rightstick
+    )
+  )
+  var pressingRightButton = Input.is_action_pressed("ui_right") or (
+    global.userSettings["use_joystick"] > 0 and (
+      Input.get_joy_axis(0, JOY_AXIS_0) > global.getDeadzone() or # horizontal leftstick
+      Input.get_joy_axis(0, JOY_AXIS_2) > global.getDeadzone() # horizontal rightstick
+    )
+  )
+
+  if malware_infected:
+    return pressingLeftButton and not am_paused
+  if is_mushroom_infected:
+    return mushroom_infection_direction == 1 and not am_paused
+  var is_pressing_move_right = .pressingMoveRight() or (pressingRightButton and not am_paused)
+  return is_pressing_move_right
+
+func justPressedEnterDoor():
+  var pressingUpAxis = (
+    global.userSettings["use_joystick"] > 0 and (
+      Input.get_joy_axis(0, JOY_AXIS_1) < -global.getDeadzone() or # vertical leftstick
+      Input.get_joy_axis(0, JOY_AXIS_3) < -global.getDeadzone() # vertical rightstick
+    )
+  )
+  var pressingDownAxis = (
+    global.userSettings["use_joystick"] > 0 and (
+      Input.get_joy_axis(0, JOY_AXIS_1) > global.getDeadzone() or # vertical leftstick
+      Input.get_joy_axis(0, JOY_AXIS_3) > global.getDeadzone() # verical rightstick
+    )
+  )
+
+  var just_pressed_enter_door = (
+    (global.userSettings["doorDir"] > 0 and (Input.is_action_just_pressed("ui_up") or (pressingUpAxis and not stupid_joystick_up_memory))) or
+    (global.userSettings["doorDir"] < 0 and (Input.is_action_just_pressed("ui_down") or (pressingDownAxis and not stupid_joystick_down_memory)))
+  )
+
+  stupid_joystick_up_memory = pressingUpAxis
+  stupid_joystick_down_memory = pressingDownAxis
+
+  return just_pressed_enter_door
+
+
+# mostly used for turn based input, so not as important?
+# @override
+func justPressedDown():
+  var justPressedDownButton = Input.is_action_just_pressed("ui_down")
+  return justPressedDownButton and not pauseInput and not isTextboxPausingMe()
+# these next two are also turn based movement...
+# @override
+func justPressedMoveLeft():
+  # if malware_infected:
+  #   return pressingMoveLeft() and Input.is_action_just_pressed("ui_right")
+  return pressingMoveLeft() and Input.is_action_just_pressed("ui_left")
+
+# @override
+func justPressedMoveRight():
+  # if malware_infected:
+  #   return pressingMoveRight() and Input.is_action_just_pressed("ui_left")
+  return pressingMoveRight() and Input.is_action_just_pressed("ui_right")
 
 # @override
 func justPressedJump():
@@ -407,6 +520,8 @@ func justPressedJump():
     return should_magic_jump or ((pressingMoveRight() or pressingMoveLeft()) and truly_on_ground) or Input.is_action_just_pressed("jump_button")
   # if is_mushroom_infected:
   #   return false
+  if Input.is_action_just_pressed("talk_button") and global.activeInteractor != null:
+    return should_magic_jump
   return (Input.is_action_just_pressed("jump_button") and (not pauseInput or has_sweeped_glitch) and not isTextboxPausingMe()) or should_magic_jump
   
 # @override
@@ -582,44 +697,6 @@ func actuallyApplyJump(play_sound = true):
   #   has_just_jumped_timer = 0
   # else:
   .actuallyApplyJump(play_sound)
-  
-var override_stop_left_input = false
-# @override
-func pressingMoveLeft():
-  if override_stop_left_input or physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
-    return false
-  var am_paused = pauseInput or isTextboxPausingMe()
-  if malware_infected:
-    return Input.is_action_pressed("ui_right") and not am_paused
-  if is_mushroom_infected:
-    return mushroom_infection_direction == -1 and not am_paused
-  var is_pressing_move_left = .pressingMoveLeft() or (Input.is_action_pressed("ui_left") and not am_paused)
-  return is_pressing_move_left
-
-var override_stop_right_input = false
-# @override
-func pressingMoveRight():
-  if override_stop_right_input or physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
-    return false
-  var am_paused =  pauseInput or isTextboxPausingMe()
-  if malware_infected:
-    return Input.is_action_pressed("ui_left") and not am_paused
-  if is_mushroom_infected:
-    return mushroom_infection_direction == 1 and not am_paused
-  var is_pressing_move_right = .pressingMoveRight() or (Input.is_action_pressed("ui_right") and not am_paused)
-  return is_pressing_move_right
-
-# @override
-func justPressedMoveLeft():
-  # if malware_infected:
-  #   return pressingMoveLeft() and Input.is_action_just_pressed("ui_right")
-  return pressingMoveLeft() and Input.is_action_just_pressed("ui_left")
-
-# @override
-func justPressedMoveRight():
-  # if malware_infected:
-  #   return pressingMoveRight() and Input.is_action_just_pressed("ui_left")
-  return pressingMoveRight() and Input.is_action_just_pressed("ui_right")
 
 func magicJump():
   has_used_magic_lantern = true

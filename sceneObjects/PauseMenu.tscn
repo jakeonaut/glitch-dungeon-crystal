@@ -2274,7 +2274,14 @@ bbcode_text = "[font=res://DarkInputFont_smallCondensed.tres]V[/font]"
 text = "V"
 scroll_active = false
 
-[node name="EnterDoorPrompt" type="Sprite" parent="SecretButtonText"]
+[node name="EnterDoorSprite" type="Control" parent="."]
+visible = false
+margin_left = 5.0
+margin_top = -160.0
+margin_right = 45.0
+margin_bottom = -120.0
+
+[node name="EnterDoorPrompt" type="Sprite" parent="EnterDoorSprite"]
 material = SubResource( 62 )
 position = Vector2( 563, 350 )
 scale = Vector2( 3, 3 )
@@ -2285,7 +2292,7 @@ frame = 20
 script = ExtResource( 13 )
 max_frames = 1
 
-[node name="EnterDoorPrompt2" type="Sprite" parent="SecretButtonText"]
+[node name="EnterDoorPrompt2" type="Sprite" parent="EnterDoorSprite"]
 material = SubResource( 62 )
 position = Vector2( 568, 408 )
 scale = Vector2( 3, 3 )

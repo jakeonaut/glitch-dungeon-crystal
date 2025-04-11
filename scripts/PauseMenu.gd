@@ -57,7 +57,8 @@ onready var secretLeftButtonText = get_node("SecretButtonText/LeftButton")
 onready var secretRightButtonText = get_node("SecretButtonText/RightButton")
 onready var secretTopButtonText = get_node("SecretButtonText/TopButton")
 onready var secretBottomButtonText = get_node("SecretButtonText/BottomButton")
-onready var enterDoorPrompt = get_node("SecretButtonText/EnterDoorPrompt")
+onready var enterDoorSprite = get_node("EnterDoorSprite")
+onready var enterDoorPrompt = get_node("EnterDoorSprite/EnterDoorPrompt")
 
 # INPUT MENU
 onready var inputMenu = get_node("InputMenu")
@@ -82,6 +83,7 @@ enum PauseMenuState {
   SOUND,
   TOP_INPUT,
   KEYBOARD_INPUT,
+  CONTROLLER_OPTIONS,
   CONTROLLER_INPUT,
   QUIT_TO_MAIN,
   TEMP,
@@ -216,10 +218,22 @@ func _process(delta):
     largerPopup.visible = false
     normalMenu.visible = true
     cursorSprite.visible = true
-    secretButtonText.visible = true
+    enterDoorSprite.visible = true
     processTopInputLogic(delta)
   else:
+    enterDoorSprite.visible = false
+    topInputOptionIndex = 0
+
+  if pauseMenuState == PauseMenuState.CONTROLLER_OPTIONS:
+    pauseTitleRect.visible = true
+    largerPopup.visible = false
+    normalMenu.visible = true
+    cursorSprite.visible = true
+    secretButtonText.visible = true
+    processControllerOptionsLogic(delta)
+  else:
     secretButtonText.visible = false
+    controllerOptionsOptionIndex = 0
 
   if pauseMenuState == PauseMenuState.KEYBOARD_INPUT or pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
     pauseTitleRect.visible = true
@@ -1225,7 +1239,7 @@ func setGlitchSprite(sprite, glitch):
 
 var topInputOptionIndex = 0
 func processTopInputLogic(_delta):
-  var topInputOptions = [tr("UI.InputMenu.1"), tr("UI.InputMenu.2"), tr("UI.InputMenu.3"), tr("UI.InputMenu.Action.3_0")]
+  var topInputOptions = [tr("UI.InputMenu.1"), tr("UI.InputMenu.2"), tr("UI.InputMenu.Action.3_0")]
   pauseTitleText.bbcode_text = tr("UI.InputMenu.13_0") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
 
   if shouldUpdateMenuText:
@@ -1240,10 +1254,6 @@ func processTopInputLogic(_delta):
     normalMenuText.bbcode_text = text
     shouldUpdateMenuText = false
 
-  secretLeftButtonText.bbcode_text = "[font=res://DarkInputExtraFont.tres]" + global.getButtonIndexStr(JOY_XBOX_X, global.userSettings["glyphType"]) + "[/font]"
-  secretRightButtonText.bbcode_text = "[font=res://DarkInputExtraFont.tres]" + global.getButtonIndexStr(JOY_XBOX_B, global.userSettings["glyphType"]) + "[/font]"
-  secretTopButtonText.bbcode_text = "[font=res://DarkInputExtraFont.tres]" + global.getButtonIndexStr(JOY_XBOX_Y, global.userSettings["glyphType"]) + "[/font]"
-  secretBottomButtonText.bbcode_text = "[font=res://DarkInputExtraFont.tres]" + global.getButtonIndexStr(JOY_XBOX_A, global.userSettings["glyphType"]) + "[/font]"
   enterDoorPrompt.flip_v = global.getEnterDoorDirection() > 0
 
   if Input.is_action_just_pressed("menu_down"):
@@ -1264,15 +1274,67 @@ func processTopInputLogic(_delta):
       pauseMenuState = PauseMenuState.KEYBOARD_INPUT
     elif topInputOptionIndex == 1:
       yield(get_tree().create_timer(0.1), "timeout")
-      pauseMenuState = PauseMenuState.CONTROLLER_INPUT
+      pauseMenuState = PauseMenuState.CONTROLLER_OPTIONS
+      shouldUpdateMenuText = true
     elif topInputOptionIndex == 2:
-      global.toggleGlyphType()
-      global.saveUserSettings()
-    elif topInputOptionIndex == 3:
       global.toggleEnterDoorDirection()
       global.saveUserSettings()
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
     pauseMenuState = PauseMenuState.NORMAL
+    shouldUpdateMenuText = true
+
+var controllerOptionsOptionIndex = 0
+func processControllerOptionsLogic(_delta):
+  var controllerOptionsOptions = [tr("UI.InputMenu.3"), tr("UI.InputMenu.5"), tr("UI.InputMenu.4")]
+  pauseTitleText.bbcode_text = tr("UI.InputMenu.13_0") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
+
+  if shouldUpdateMenuText:
+    var text = ""
+    for i in range(len(controllerOptionsOptions)):
+      var option = controllerOptionsOptions[i]
+      var option_addition = ""
+      if i == 1:
+        option_addition = tr("UI.GraphicsMenu.OFF") if global.userSettings["use_joystick"] < 0 else tr("UI.GraphicsMenu.ON")
+
+      if i == controllerOptionsOptionIndex:
+        text += "[wave]" + str(option) + option_addition + "[/wave]\n" 
+      else:
+        text += "[color=gray]" + str(option) + option_addition + "[/color]\n" 
+    normalMenuText.bbcode_text = text
+    shouldUpdateMenuText = false
+
+  secretLeftButtonText.bbcode_text = "[font=res://DarkInputExtraFont.tres]" + global.getButtonIndexStr(JOY_XBOX_X, global.userSettings["glyphType"]) + "[/font]"
+  secretRightButtonText.bbcode_text = "[font=res://DarkInputExtraFont.tres]" + global.getButtonIndexStr(JOY_XBOX_B, global.userSettings["glyphType"]) + "[/font]"
+  secretTopButtonText.bbcode_text = "[font=res://DarkInputExtraFont.tres]" + global.getButtonIndexStr(JOY_XBOX_Y, global.userSettings["glyphType"]) + "[/font]"
+  secretBottomButtonText.bbcode_text = "[font=res://DarkInputExtraFont.tres]" + global.getButtonIndexStr(JOY_XBOX_A, global.userSettings["glyphType"]) + "[/font]"
+  enterDoorPrompt.flip_v = global.getEnterDoorDirection() > 0
+
+  if Input.is_action_just_pressed("menu_down"):
+    controllerOptionsOptionIndex += 1
+    shouldUpdateMenuText = true
+  elif Input.is_action_just_pressed("menu_up"):
+    controllerOptionsOptionIndex -= 1
+    shouldUpdateMenuText = true
+  if controllerOptionsOptionIndex < 0:
+    controllerOptionsOptionIndex = len(controllerOptionsOptions) - 1
+  elif controllerOptionsOptionIndex >= len(controllerOptionsOptions):
+    controllerOptionsOptionIndex = 0
+  repositionCursorSprite(controllerOptionsOptionIndex)
+
+  if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
+    if controllerOptionsOptionIndex == 0:
+      yield(get_tree().create_timer(0.1), "timeout")
+      pauseMenuState = PauseMenuState.CONTROLLER_INPUT
+    elif controllerOptionsOptionIndex == 1:
+      global.userSettings["use_joystick"] *= -1
+      global.saveUserSettings()
+      shouldUpdateMenuText = true
+    elif controllerOptionsOptionIndex == 2:
+      global.toggleGlyphType()
+      global.saveUserSettings()
+  elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
+    pauseMenuState = PauseMenuState.TOP_INPUT
+    topInputOptionIndex = 1
     shouldUpdateMenuText = true
 
 func getVisibleControlsConfig():
@@ -1298,7 +1360,10 @@ func processControlsLogic(_delta):
   var tempControlsConfig = getVisibleControlsConfig()
 
   if global.is_reading_input:
-    pauseTitleText.bbcode_text = tr("UI.InputMenu.14") % str(tempControlsConfig[control_index].label_str)
+    if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
+      pauseTitleText.bbcode_text = tr("UI.InputMenu.14") % str(tempControlsConfig[control_index].label_str)
+    elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
+      pauseTitleText.bbcode_text = tr("UI.InputMenu.14_2") % str(tempControlsConfig[control_index].label_str)
   else:
     if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
       pauseTitleText.bbcode_text = tr("UI.InputMenu.13") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel"), "[font=res://DarkInputFont_small.tres]B[/font]"]
@@ -1357,7 +1422,7 @@ func processControlsLogic(_delta):
       last_control_index = -1
     elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
       yield(get_tree().create_timer(0.1), "timeout")
-      pauseMenuState = PauseMenuState.TOP_INPUT
+      pauseMenuState = PauseMenuState.CONTROLLER_OPTIONS if pauseMenuState == PauseMenuState.CONTROLLER_INPUT else PauseMenuState.TOP_INPUT
       shouldUpdateMenuText = true
 
   var showCondensedMenu = true

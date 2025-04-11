@@ -214,7 +214,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.77731, 2.43624, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 9, 0 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 0 )
 grav = 0
 bbText = "NPC.Tutorial.13"
 

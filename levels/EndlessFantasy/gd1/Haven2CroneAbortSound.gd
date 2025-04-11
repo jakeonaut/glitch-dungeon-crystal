@@ -14,10 +14,9 @@ func activateScript():
   var num_cubes = global.getThingFromAllLevelZonez("num_mini_crystal_cubes")
 
   if global.memory["crone"] == 0:
-    if not textBox.showYesNoOptions or not textBox.selectedYesNoOption:
-        return
     global.memory["crone"] = 1
     yield(get_tree().create_timer(0.1), "timeout")
+    NPC.showYesNoOptions = true
     NPC.activate(true)
   elif global.memory["crone"] == 1 and global.memory["broomerang"] < 1:
     if global.memory["broomerang"] < 1 and textBox.selectedYesNoOption:

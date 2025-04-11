@@ -427,6 +427,8 @@ func resetUserSettings():
     userSettings = {}
 
     # settings?
+    userSettings["use_joystick"] = 1
+    userSettings["deadzone_real"] = 50 # out of 100. can't figure out floats...
     userSettings["show_crt_effect"] = true
     userSettings["show_palette_swap_color_blind_filter"] = false
     userSettings["canGlitchScreen"] = true
@@ -438,6 +440,9 @@ func resetUserSettings():
     userSettings["glyphType"] = GlyphType.XBOX
     userSettings["locale"] = normalizeLocale(OS.get_locale_language())
     userSettings["doorDir"] = -1
+
+func getDeadzone():
+    return float(float(userSettings["deadzone_real"]) / 100.0)
 
 func changeLocale(locale, saveSettings = true):
     TranslationServer.set_locale(locale)
@@ -772,9 +777,9 @@ func _input(ev):
         if ev is InputEventJoypadButton and ev.pressed:
             last_read_input = ev.button_index
         # why ev.axis < 4 ? so we don't count left / right analog trigger...
-        if ev is InputEventJoypadMotion and ev.axis < 4 and \
-           (ev.axis_value > GLOBAL_DEADZONE or ev.axis_value < -GLOBAL_DEADZONE):
-            last_read_joystick_input = [ev.axis, 1 if ev.axis_value > 0 else -1]
+        # if ev is InputEventJoypadMotion and ev.axis < 4 and \
+        #    (ev.axis_value > GLOBAL_DEADZONE or ev.axis_value < -GLOBAL_DEADZONE):
+        #     last_read_joystick_input = [ev.axis, 1 if ev.axis_value > 0 else -1]
 
 func getJoystickAxisStr(axis, axis_value, useSpecialChar = true):
     if axis == JOY_AXIS_0:
@@ -1002,13 +1007,10 @@ func initializeControlsConfig():
             global.setButtonIndex(control_config.input_action, remembered_config["button_index"], false)
             control_config["button_index"] = remembered_config["button_index"]
           if remembered_config.has("axis") and remembered_config.has("axis_value") and remembered_config["axis"] != null and remembered_config["axis_value"] != null:
-            global.setJoystickAxis(control_config.input_action, remembered_config.axis, remembered_config.axis_value, false, false)
-            control_config["axis"] = remembered_config.axis
-            control_config["axis_value"] = remembered_config.axis_value
-          if remembered_config.has("axis2") and remembered_config.has("axis2_value") and remembered_config["axis2"] != null and remembered_config["axis2_value"] != null:
-            global.setJoystickAxis(control_config.input_action, remembered_config.axis2, remembered_config.axis2_value, false, false)
-            control_config["axis2"] = remembered_config.axis2
-            control_config["axis2_value"] = remembered_config.axis2_value
+            global.userSettings["use_joystick"] = 1 + remembered_config.axis
+            # global.setJoystickAxis(control_config.input_action, remembered_config.axis, remembered_config.axis_value, false, false)
+            # control_config["axis"] = remembered_config.axis
+            # control_config["axis_value"] = remembered_config.axis_value
       # make sure its set to default if it was erased from memory
       if not control_config.has("key_code") or control_config["key_code"] == null and not control_config.input_action == "enter_door":
         control_config["key_code"] = global.getKeyCode(control_config.input_action)
@@ -1138,23 +1140,6 @@ func toggleEnterDoorDirection():
         userSettings["doorDir"] = -1
     elif dir == -1:
         userSettings["doorDir"] = 1
-
-    # try to erase "enter_door" config from user settings. we hate it!!!!!
-    var control_index = -1
-    for i in range(len(global.controlsConfig)):
-        if global.controlsConfig[i]["input_action"] == "enter_door":
-            control_index = i
-            break
-    if control_index >= 0 and global.controlsConfig[control_index].has("key_code"):
-        InputMap.load_from_globals() # reset ALL input_actions to default...
-        global.controlsConfig[control_index].erase("key_code")
-        global.controlsConfig[control_index].erase("button_index")
-        global.controlsConfig[control_index].erase("axis")
-        global.controlsConfig[control_index].erase("axis_value")
-        global.controlsConfig[control_index].erase("axis2")
-        global.controlsConfig[control_index].erase("axis2_value")
-        global.userSettings["controls_config"] = global.controlsConfig
-        global.initializeControlsConfig()
 
 func isControllerConnected():
     return Input.get_connected_joypads().size() > 0
