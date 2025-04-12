@@ -59,6 +59,7 @@ var NES_palette = preload("res://assets/palettes/NES_base_palette.png")
 var NES_broom_palette = preload("res://assets/palettes/NES_base_broom_palette.png")
 
 onready var lifeUISound = get_node("LifeUISound")
+onready var lifeUISound2 = get_node("LifeUISound2")
 onready var doorSound = get_node("DoorSound")
 onready var glitchedDoorSound = get_node("GlitchedDoorSound")
 onready var gustSound = get_node("GustSound")
@@ -400,9 +401,9 @@ func resetMemory():
 var allLocales = {
     "en": { "code": "en", "stopPosition": 350, "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed.tres]English[/font]" },
     "zh_CN": { "code": "zh_CN", "stopPosition": 339, "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_zh_CN.tres]简体字[/font]" }, 
-    "ru": { "code": "ru", "stopPosition": 359, "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Pусский[/font]" },
-    "pt_BR": { "code": "pt_BR", "stopPosition": 344, "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Português[/font]" },
-    "fr": { "code": "fr", "stopPosition": 350, "supported": false, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Français[/font]" },
+    "ru": { "code": "ru", "stopPosition": 320, "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Pусский[/font]" },
+    "pt_BR": { "code": "pt_BR", "stopPosition": 320, "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Português[/font]" },
+    "fr": { "code": "fr", "stopPosition": 320, "supported": false, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Français[/font]" },
 }
 func getSupportedLocalesArray():
     var supportedLocales = []

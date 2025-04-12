@@ -187,7 +187,7 @@ script = ExtResource( 12 )
 [node name="TextPrompt" type="RichTextLabel" parent="TextBox/TextCanvasLayer/Container/YesButton"]
 margin_left = 25.0
 margin_top = -6.0
-margin_right = 145.0
+margin_right = 236.0
 margin_bottom = 46.0
 rect_pivot_offset = Vector2( -511, -189 )
 rect_clip_content = false
@@ -196,7 +196,7 @@ size_flags_vertical = 0
 theme = ExtResource( 4 )
 custom_colors/default_color = Color( 0.796078, 0.835294, 0.917647, 1 )
 bbcode_enabled = true
-bbcode_text = "[center]yes[/center]"
+bbcode_text = "yes"
 tab_size = 2
 text = "yes"
 scroll_active = false
@@ -221,7 +221,7 @@ script = ExtResource( 12 )
 [node name="TextPrompt" type="RichTextLabel" parent="TextBox/TextCanvasLayer/Container/NoButton"]
 margin_left = 25.0
 margin_top = -2.0
-margin_right = 125.0
+margin_right = 222.0
 margin_bottom = 50.0
 rect_pivot_offset = Vector2( -511, -189 )
 rect_clip_content = false
@@ -230,7 +230,7 @@ size_flags_vertical = 0
 theme = ExtResource( 4 )
 custom_colors/default_color = Color( 0.796078, 0.835294, 0.917647, 1 )
 bbcode_enabled = true
-bbcode_text = "[center]no[/center]"
+bbcode_text = "no"
 tab_size = 2
 text = "no"
 scroll_active = false
@@ -304,36 +304,36 @@ scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 10 )
 
 [node name="DialogStartSound" type="AudioStreamPlayer" parent="TextBox"]
-bus="Sfx"
 volume_db = -15.0
+bus = "Sfx"
 script = ExtResource( 6 )
 
 [node name="DialogSound" type="AudioStreamPlayer" parent="TextBox"]
-bus="Sfx"
 stream = ExtResource( 5 )
 volume_db = -20.0
 pitch_scale = 0.7
+bus = "Sfx"
 script = ExtResource( 6 )
 
 [node name="NextDialogSound" type="AudioStreamPlayer" parent="TextBox"]
-bus="Sfx"
 volume_db = -20.0
+bus = "Sfx"
 script = ExtResource( 6 )
 
 [node name="AbortSound" type="AudioStreamPlayer" parent="TextBox"]
-bus="Sfx"
 stream = ExtResource( 5 )
 volume_db = -20.0
+bus = "Sfx"
 script = ExtResource( 6 )
 
 [node name="BroomSelectSound" type="AudioStreamPlayer" parent="TextBox"]
-bus="Sfx"
 stream = ExtResource( 17 )
 volume_db = -8.0
 pitch_scale = 0.9
+bus = "Sfx"
 
 [node name="BroomConfirmSound" type="AudioStreamPlayer" parent="TextBox"]
-bus="Sfx"
 stream = ExtResource( 18 )
 volume_db = -5.0
 pitch_scale = 0.9
+bus = "Sfx"

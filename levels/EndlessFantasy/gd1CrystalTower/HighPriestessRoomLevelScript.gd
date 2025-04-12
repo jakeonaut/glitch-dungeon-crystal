@@ -369,7 +369,7 @@ func unhideHighPriestess():
   #   crystalGeode5.get_ref().queue_free()
   global.memory["priestess"] = 1
   musicPlayer.stopAll()
-  musicPlayer.tryToPlay(musicPlayer.bossThemePlayer)
+  musicPlayer.tryToPlay(musicPlayer.boss2ThemePlayer)
   global.memory["priestess"] = 1
   levelTiles.randomize_num = 1
   # global.memory.erase("spellbookPage")

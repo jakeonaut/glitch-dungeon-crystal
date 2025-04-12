@@ -2493,13 +2493,13 @@ text = "no"
 scroll_active = false
 
 [node name="BetaBuildLabel" type="RichTextLabel" parent="."]
-margin_left = 600.0
+margin_left = 630.0
 margin_top = 490.0
-margin_right = 852.0
+margin_right = 882.0
 margin_bottom = 544.0
 rect_clip_content = false
 theme = SubResource( 17223 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "[right]ver-3.0.1.1[/right]"
-text = "ver-3.0.1.1"
+bbcode_text = "[right]ver-3.0.2.3[/right]"
+text = "ver-3.0.2.3"

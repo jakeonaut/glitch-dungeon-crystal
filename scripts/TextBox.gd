@@ -231,11 +231,11 @@ func _process(delta):
         yesButtonCursor.visible = selectedYesNoOption
         noButtonCursor.visible = not selectedYesNoOption
         if selectedYesNoOption:
-          yesButtonText.bbcode_text = "[center][wave]yes[/wave][/center]"
-          noButtonText.bbcode_text = "[center]no.[/center]"
+          yesButtonText.bbcode_text = "[wave]" + tr("UI.Yes") + "[/wave]"
+          noButtonText.bbcode_text = "" + tr("UI.No") + ""
         else:
-          yesButtonText.bbcode_text = "[center]yes[/center]"
-          noButtonText.bbcode_text = "[center][wave]no.[/wave][/center]"
+          yesButtonText.bbcode_text = "" + tr("UI.Yes") + ""
+          noButtonText.bbcode_text = "[wave]" + tr("UI.No") + "[/wave]"
       else:
         yesButton.visible = false
         noButton.visible = false

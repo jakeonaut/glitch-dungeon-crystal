@@ -1468,11 +1468,11 @@ func processPopupRenderLogic(delta):
     popupTimer += (delta*11)
     if global.isPauseMenuOpen:
       if popupTimer < 5:
-        popupText.text = "reset bindings\n ... 3"
+        popupText.text = tr("UI.InputMenu.15_3")
       elif popupTimer < 10:
-        popupText.text = "reset bindings\n ... 3 ... 2"
+        popupText.text = tr("UI.InputMenu.15_2")
       elif popupTimer < 15:
-        popupText.text = "reset bindings\n ... 3 ... 2 ... 1!"
+        popupText.text = tr("UI.InputMenu.15")
       if popupTimer >= popupTimeLimit:
         global.resetKeyBindings()
         level.saveUserSettings()
@@ -1485,11 +1485,11 @@ func processPopupRenderLogic(delta):
     popupTimer += (delta*11)
     if global.isPauseMenuOpen:
       if popupTimer < 5:
-        popupText.text = "reset bindings\n ... 3"
+        popupText.text = tr("UI.InputMenu.15_3")
       elif popupTimer < 10:
-        popupText.text = "reset bindings\n ... 3 ... 2"
+        popupText.text = tr("UI.InputMenu.15_2")
       elif popupTimer < 15:
-        popupText.text = "reset bindings\n ... 3 ... 2 ... 1!"
+        popupText.text = tr("UI.InputMenu.15")
       if popupTimer >= popupTimeLimit:
         global.resetControllerBindings()
         level.saveUserSettings()

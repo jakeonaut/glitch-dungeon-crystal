@@ -453,6 +453,10 @@ func processSkipPrompt(delta):
             player.textBox.override_target_origin = dialogPosition.global_transform.origin
             player.sayThis(tr("Dialog.Player.1"))
             levelTiles.randomize_num = 3
+            gameCamera.can_i_move = true
+            if cameraTarget != null:
+                cameraTarget.queue_free()
+                cameraTarget = null
             if musicPlayer.currentlyPlayingTheme != null:
                 musicPlayer.stopAll()
                 eventSoundWakeup.play()
