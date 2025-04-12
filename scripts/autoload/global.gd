@@ -400,7 +400,7 @@ func resetMemory():
 var allLocales = {
     "en": { "code": "en", "stopPosition": 350, "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed.tres]English[/font]" },
     "zh_CN": { "code": "zh_CN", "stopPosition": 339, "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_zh_CN.tres]简体字[/font]" }, 
-    "ru": { "code": "ru", "stopPosition": 359, "supported": false, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Pусский[/font]" },
+    "ru": { "code": "ru", "stopPosition": 359, "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Pусский[/font]" },
     "pt_BR": { "code": "pt_BR", "stopPosition": 344, "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Português[/font]" },
     "fr": { "code": "fr", "stopPosition": 350, "supported": false, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Français[/font]" },
 }

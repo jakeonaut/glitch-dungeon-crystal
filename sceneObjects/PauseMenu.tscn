@@ -2493,9 +2493,9 @@ text = "no"
 scroll_active = false
 
 [node name="BetaBuildLabel" type="RichTextLabel" parent="."]
-margin_left = 450.0
+margin_left = 600.0
 margin_top = 490.0
-margin_right = 702.0
+margin_right = 852.0
 margin_bottom = 544.0
 rect_clip_content = false
 theme = SubResource( 17223 )
