@@ -96,10 +96,11 @@ func passiveActivate(_delta, is_player):
   if is_player:
     getSmacked()
     if is_evil:
-      if level.player.malware_infected:
-        level.player.malwareCured()
-      else:
-        level.player.malwareCorruptMe()
+      pass
+      # if level.player.malware_infected:
+      #   level.player.malwareCured()
+      # else:
+      #   level.player.malwareCorruptMe()
     else:
       level.player.gravitySound.pitch_scale = rand_range(0.8, 1.2)
       level.player.gravitySound.play()
