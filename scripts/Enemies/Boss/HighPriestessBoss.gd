@@ -140,7 +140,7 @@ func yaBeatMe():
     global.shouldRenderAsCinematic = true
     global.pauseGame = true
     level.triggerCroneDefeatedDialog()
-    Steam.set_achievement("PRIESTESS_BOSS")
+    if global.demo_mode <= 0: Steam.set_achievement("PRIESTESS_BOSS")
 
 func randomExplosion():
     level.summonSmokeClouds(Vector3(

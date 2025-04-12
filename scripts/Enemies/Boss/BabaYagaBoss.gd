@@ -86,7 +86,7 @@ func getHurt():
         global.pauseMoveInput = true
         global.pauseGame = true
         global.shouldRenderAsCinematic = true
-        Steam.set_achievement("BABA_BOSS")
+        if global.demo_mode <= 0: Steam.set_achievement("BABA_BOSS")
         return
     if num_hits >= 2 and boss_phase_should_crash == 0 and not has_crashed:
         boss_phase_should_crash = 1

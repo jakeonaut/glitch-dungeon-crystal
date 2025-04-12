@@ -11,7 +11,7 @@ var hideHoldToQuitTimeLimit = 20
 # @override
 func setUpRoomInitializationOverride():
     endCreditsLabel.text = tr("EndCredits.FULL")
-    Steam.set_achievement("GRANDMA_WIN")
+    if global.demo_mode <= 0: Steam.set_achievement("GRANDMA_WIN")
 
 # @override
 func _process(delta):

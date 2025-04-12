@@ -11,6 +11,9 @@ onready var anglerShortcut = get_node("AnglerShortcutDoor")
 onready var babaShortcut = get_node("BabaShortcutDoor")
 onready var claydolShortcut = get_node("ClaydolShortcutDoor")
 
+onready var glitchEnemy = get_node("GlitchEnemy")
+onready var glitchEnemy2 = get_node("GlitchEnemy2")
+
 # @override
 func setUpRoomInitializationOverride():
   if not global.memory.has("anglerShortcut") or not global.memory["anglerShortcut"]:
@@ -26,21 +29,9 @@ func setUpRoomInitializationOverride():
   else:
     claydolShortcut.visible = true
 
-  if global.memory["demo_mode"] > 0:
-    door3.key_type = global.KeyItem.DEMO
-    if global.memory.has(self.getShortLevelName()) and global.memory[self.getShortLevelName()] != null:
-      global.memory[self.getShortLevelName()].erase("Door3")
-    door3.is_locked = true
-    door3.animationPlayer.stop()
-    door3.animationPlayer.clear_queue()
-    door3.queueLockAnimation()
-    door5.key_type = global.KeyItem.DEMO
-    if global.memory.has(self.getShortLevelName()) and global.memory[self.getShortLevelName()] != null:
-      global.memory[self.getShortLevelName()].erase("Door5")
-    door5.is_locked = true
-    door5.animationPlayer.stop()
-    door5.animationPlayer.clear_queue()
-    door5.queueLockAnimation()
+  if global.demo_mode <= 0:
+    glitchEnemy.queue_free()
+    glitchEnemy2.queue_free()
 
   if global.memory["clean_crystals"] >= 4:
     broomUpgradeCrone.queue_free()

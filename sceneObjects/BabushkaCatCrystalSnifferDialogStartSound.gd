@@ -15,10 +15,7 @@ func activateScript():
     global.setLevelZoneThing("babushkaCatSniffed", 1)
     if global.getLevelZoneThing("crystal_geode"):
       var newText = "*mewmew*\n(...you've already awoken the\n[color=#0798bf]Crystal[/color] in this zone!)"
-      if global.memory["demo_mode"] >= 2:
-        pass
-      else:
-        newText += "\n*sniff* (but is someone else in that place?)"
+      newText += "\n*sniff* (but is someone else in that place?)"
         
       
       textBox.text_final = newText

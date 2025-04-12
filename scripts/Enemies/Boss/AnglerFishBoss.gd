@@ -549,7 +549,7 @@ func defeatMe():
     secretAniPlayer.queue("defeated")
     global.pauseGame = true
     global.shouldRenderAsCinematic = true
-    Steam.set_achievement("ANGLER_BOSS")
+    if global.demo_mode <= 0: Steam.set_achievement("ANGLER_BOSS")
 
 func okayImDead():
     if global.memory["angler_seaman_boss"] < 2:

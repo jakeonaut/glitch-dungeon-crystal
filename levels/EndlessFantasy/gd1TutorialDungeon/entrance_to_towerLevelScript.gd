@@ -4,9 +4,9 @@ onready var door2 = get_node("Door2")
 
 # @override
 func setUpRoomInitializationOverride():
-  if global.memory["demo_mode"] > 0:
-    door2.num_keys_unlock = 2
-    door2.path = "res://levels/EndlessFantasy/gd1/00000EndOfDemo.tscn"
+  # if global.demo_mode > 0:
+  #   door2.num_keys_unlock = 2
+  #   door2.path = "res://levels/EndlessFantasy/gd1/00000EndOfDemo.tscn"
 
   var babushkaCatFollower = self.get_node("PetBabushkaCatFollower") if self.has_node("PetBabushkaCatFollower") else null
   if global.memory["babushka_cat_story_hook"] == 1 and babushkaCatFollower != null:

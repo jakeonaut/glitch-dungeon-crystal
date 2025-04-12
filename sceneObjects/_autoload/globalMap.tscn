@@ -188,6 +188,17 @@ can_nav_up = false
 can_nav_down = false
 hide_me_from_map = true
 
+[node name="EndOfDemo" parent="TutorialDungeon" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 5, 0 )
+material_override = null
+frame = 54
+path = "res://levels/EndlessFantasy/gd1/00000EndOfDemo.tscn"
+can_nav_left = false
+can_nav_right = false
+can_nav_up = false
+can_nav_down = false
+hide_me_from_map = true
+
 [node name="FishingVillage" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 0 )
 

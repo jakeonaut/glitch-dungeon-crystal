@@ -7,7 +7,7 @@ func _ready():
 
 var has_grid_been_constructed = false
 func constructMapGrid():
-  if global.memory["demo_mode"] > 0:
+  if global.demo_mode > 0:
     var children = get_children()
     for i in range(len(children) - 1, -1, -1):
       var child_name = children[i].name

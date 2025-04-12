@@ -559,7 +559,7 @@ func yaBeatMe():
     secretAniPlayer.queue("defeated")
     global.pauseGame = true
     global.shouldRenderAsCinematic = true
-    Steam.set_achievement("CLAYDOL_BOSS")
+    if global.demo_mode <= 0: Steam.set_achievement("CLAYDOL_BOSS")
 
 var crystalGeodeRes = preload("res://sceneObjects/CrystalGeode2.tscn")
 func okayImDead():

@@ -198,6 +198,9 @@ var activeThrowableObject = null
 var activeThrowableObjectPath = null
 var activeSavePoint = null
 
+var demo_mode = 0
+var display_mode = 0
+
 var isEndOfGame = false
 var isRespawning = false
 var isEnteringRoom = false
@@ -325,7 +328,6 @@ func resetMemory():
     memory["level_zonez"] = []
 
     # ==============================================
-    memory["demo_mode"] = 0
     # if you've beaten the final boss
     memory["clean_crystals"] = 0
     memory["priestess"] = 0
@@ -531,7 +533,7 @@ func _process(delta):
 
 func tryGiveMemoryAchievement():
   if global.memory["zora_flippers"] > 0 and global.memory["mole_cricket"] > 0 and global.memory["mushroom_soul"] > 0:
-    Steam.set_achievement("MEMORIES")
+    if global.demo_mode <= 0: Steam.set_achievement("MEMORIES")
 
 var SACRED_LEVEL_NAME = "res://levels/EndlessFantasy"
 var MINI_SACRED_LEVEL_NAME = "EndlessFantasy"
@@ -697,18 +699,19 @@ func loadGame(saveGameIndex):
             global.memory["level_zonez"].push_back(currLevelZone)
 
     # do some achievement backloading
-    if global.memory["priestess"] >= 2:
-        Steam.set_achievement("PRIESTESS_BOSS")
-    if global.memory["baba_yaga_boss"] >= 2:
-        Steam.set_achievement("BABA_BOSS")
-    if global.memory["dogu_matryoshka_boss"] >= 2:
-        Steam.set_achievement("CLAYDOL_BOSS")
-    if global.memory["angler_seaman_boss"] >= 2:
-        Steam.set_achievement("ANGLER_BOSS")
-    if global.memory["broomerang"] >= 1:
-        Steam.set_achievement("BROOMERANG")
-    if global.getThingFromAllLevelZonez("angelEgg") >= 1:
-        Steam.set_achievement("ANGEL_EGG_FIRST")
+    if global.demo_mode <= 0: 
+        if global.memory["priestess"] >= 2:
+            Steam.set_achievement("PRIESTESS_BOSS")
+        if global.memory["baba_yaga_boss"] >= 2:
+            Steam.set_achievement("BABA_BOSS")
+        if global.memory["dogu_matryoshka_boss"] >= 2:
+            Steam.set_achievement("CLAYDOL_BOSS")
+        if global.memory["angler_seaman_boss"] >= 2:
+            Steam.set_achievement("ANGLER_BOSS")
+        if global.memory["broomerang"] >= 1:
+            Steam.set_achievement("BROOMERANG")
+        if global.getThingFromAllLevelZonez("angelEgg") >= 1:
+            Steam.set_achievement("ANGEL_EGG_FIRST")
 
     # reset boss flags from 1 to 0 if we are loading, so we can start the opening cinematic again for all of them.
     # if the boss flag is 2 already, it means you've beat them, so don't reset

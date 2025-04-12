@@ -19,7 +19,7 @@ func activateScript():
     egg.queue_free()
     level.player.aniPlayer.play("stand")
     # level.player.sayThis("what the hell is this?", 3.0)
-    Steam.set_achievement("ANGEL_EGG_FIRST")
+    if global.demo_mode <= 0: Steam.set_achievement("ANGEL_EGG_FIRST")
 
 func isActive(_debug=false):
     return true

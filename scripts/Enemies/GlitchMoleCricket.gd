@@ -47,7 +47,7 @@ func getFakeLevelTiles():
 
 export var keep_spawning_anyway = false
 func _ready():
-    if getMyStaticLevelZoneVar() and not keep_spawning_anyway:
+    if global.demo_mode > 0 or (getMyStaticLevelZoneVar() and not keep_spawning_anyway):
         visible = false
         queue_free()
         return

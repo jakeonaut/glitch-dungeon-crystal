@@ -10,3 +10,6 @@ func _ready():
         visible = true
     else:
         visible = false
+
+    if global.demo_mode:
+        self.path = "res://levels/EndlessFantasy/gd1/00000EndOfDemo.tscn"

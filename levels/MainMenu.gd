@@ -59,6 +59,7 @@ onready var croneNPC = get_node("CroneNPC")
 onready var cowNPC = get_node("NPC2")
 onready var door2 = get_node("Door2")
 onready var logoSprite = get_node("../../Viewport2/CanvasLayer/LogoSprite")
+onready var demoSprite = get_node("../../Viewport2/CanvasLayer/LogoSprite/DemoSprite")
 var logoTex2 = preload("res://assets/sprites/logo2.png")
 var logoTex3 = preload("res://assets/sprites/logo3.png")
 var logo_default_pos = Vector2(308, 750)
@@ -89,7 +90,7 @@ func startGame(saveGameIndex):
   player.applyGlitch(global.GlitchForm.NORMAL, true)
   uiLayer.glitchSprite.visible = false
   uiLayer.get_node("GlitchStatusRect").visible = false
-  if global.memory["demo_mode"] > 0:
+  if global.display_mode > 0:
     global.has_started_game = true
     global.has_really_started_game = true
     global.pauseGame = false
@@ -325,6 +326,7 @@ func _process(delta):
         return
 
     if mainMenuState == MainMenuState.MAIN_MENU:
+        demoSprite.visible = global.demo_mode > 0
         player.camera_y_offset = -20
         gameCamera.initial_size = camera_size
         gameCamera.zoomed_size = camera_size

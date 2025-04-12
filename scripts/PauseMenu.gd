@@ -269,7 +269,7 @@ func _process(delta):
     inventoryOptionIndex = 0
     inventoryOptionIndexX = 0
 
-  if Input.is_action_just_pressed("dev_demo_reset") and global.memory["demo_mode"] > 0:
+  if Input.is_action_just_pressed("dev_demo_reset") and global.demo_mode > 0:
     global.has_started_game = true
     global.has_really_started_game = true
     global.memory.erase("roomPath")
@@ -310,15 +310,9 @@ func processNormalLogic(_delta):
     for i in range(len(normalMenuOptions)):
       var option = normalMenuOptions[i]
       if i == normalOptionIndex:
-        if global.memory["demo_mode"] >= 2:
-          text += "[wave]" + str(option) + "[/wave]\n" 
-        else:
-          text += "[wave]" + str(option) + "[/wave]\n" 
+        text += "[wave]" + str(option) + "[/wave]\n" 
       else:
-        if global.memory["demo_mode"] >= 2:
-          text += "[color=gray]" + str(option) + "[/color]\n" 
-        else:
-          text += "[color=gray]" + str(option) + "[/color]\n" 
+        text += "[color=gray]" + str(option) + "[/color]\n" 
     normalMenuText.bbcode_text = text
     shouldUpdateMenuText = false
 

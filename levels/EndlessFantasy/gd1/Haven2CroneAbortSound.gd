@@ -25,7 +25,7 @@ func activateScript():
         global.memory["broomerang"] = 1
         level.player.sayThis(tr("NPC.Crone.6"))
         global.memory["crone"] = 3 # not two... skip the bag for now...
-        Steam.set_achievement("BROOMERANG")
+        if global.demo_mode <= 0: Steam.set_achievement("BROOMERANG")
       else:
         level.player.errorSound.play()
         level.player.sayThis(tr("NPC.Crone.5") % str(global.NUM_GEMS_FOR_BROOMERANG - num_cubes))

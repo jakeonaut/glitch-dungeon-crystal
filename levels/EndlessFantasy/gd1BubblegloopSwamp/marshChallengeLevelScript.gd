@@ -4,7 +4,7 @@ onready var door2 = get_node("Door2")
 
 # @override
 func setUpRoomInitializationOverride():
-  if global.memory["demo_mode"] > 0:
+  if global.demo_mode > 0:
     door2.num_keys_unlock = 999
     door2.key_type = global.KeyItem.DEMO
     if global.memory.has(self.getShortLevelName()):

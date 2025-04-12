@@ -360,7 +360,7 @@ func activate(is_player):
           lockedSound.play()
           npc.activate(is_player)
       elif key_type == global.KeyItem.DEMO:
-        var has_special_key = global.memory["demo_mode"] == 0
+        var has_special_key = global.demo_mode == 0
         if has_special_key:
           # npc.textBoxContainer.bbText = "•you are worthy"
           # npc.textBoxContainer.setVars()
