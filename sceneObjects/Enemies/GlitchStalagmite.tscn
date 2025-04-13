@@ -1,16 +1,17 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=25 format=2]
 
+[ext_resource path="res://assets/sprites/objects_3d.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
 [ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=3]
 [ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=4]
+[ext_resource path="res://assets/sounds/464910__plasterbrain__sonic-skid.wav" type="AudioStream" id=5]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=6]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=7]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=8]
-[ext_resource path="res://assets/sounds/151RetroMonsters/startEvolve.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Frog.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Pain7.wav" type="AudioStream" id=10]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=12]
 [ext_resource path="res://assets/sounds/Link - Bomb Deploy.wav" type="AudioStream" id=13]
-[ext_resource path="res://assets/sounds/Octopus.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/sounds/assets_sfx_wingflap.wav" type="AudioStream" id=15]
 [ext_resource path="res://assets/glitch_sheet.png" type="Texture" id=16]
 [ext_resource path="res://assets/sounds/bump.wav" type="AudioStream" id=17]
@@ -93,6 +94,10 @@ shader_param/target_palette = ExtResource( 2 )
 height = 1.6
 radius = 0.8
 
+[sub_resource type="CylinderShape" id=25]
+height = 1.6
+radius = 0.8
+
 [sub_resource type="Animation" id=22]
 length = 0.001
 tracks/0/type = "value"
@@ -117,7 +122,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ true ]
+"values": [ false ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite3D2:frame")
@@ -263,9 +268,70 @@ tracks/13/keys = {
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
 }
+tracks/14/type = "value"
+tracks/14/path = NodePath("Sprite3D4:visible")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("TargetSprite:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("Sounds/StartEvolveSound:playing")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("Sounds/EvolveSound:playing")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("SmallInteractionArea/CollisionShape:disabled")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=23]
 resource_name = "growth"
+length = 1.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite3D:visible")
 tracks/0/interp = 1
@@ -434,6 +500,93 @@ tracks/13/keys = {
 "update": 1,
 "values": [ Vector3( 0, 3.21124e-08, 0.734645 ), Vector3( 0, 2.14082e-08, 0.489763 ), Vector3( 0, 1.07041e-08, 0.244882 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, -0.3 ), Vector3( 0, 0, -1 ), Vector3( 0, -8.74228e-08, -3 ) ]
 }
+tracks/14/type = "value"
+tracks/14/path = NodePath("Sounds/EvolveSound:playing")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("Sprite3D4:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("TargetSprite:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("SmallInteractionArea/CollisionShape:disabled")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "warning"
+tracks/0/type = "value"
+tracks/0/path = NodePath("TargetSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sounds/StartEvolveSound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SmallInteractionArea/CollisionShape:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [node name="GlitchStalagmite" type="Spatial"]
 
@@ -452,6 +605,7 @@ max_frames = 6
 
 [node name="Sprite3D2" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11 )
+visible = false
 material_override = SubResource( 21 )
 pixel_size = 0.12
 texture = ExtResource( 4 )
@@ -477,6 +631,7 @@ max_frames = 4
 
 [node name="Sprite3D4" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.13405, 11 )
+visible = false
 material_override = SubResource( 21 )
 pixel_size = 0.0626
 texture = ExtResource( 4 )
@@ -487,8 +642,20 @@ script = ExtResource( 6 )
 frame_delay = 0.3
 max_frames = 4
 
+[node name="TargetSprite" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.180011, 11 )
+pixel_size = 0.125
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 5
+frame = 20
+script = ExtResource( 6 )
+frame_delay = 0.3
+max_frames = 4
+
 [node name="InteractionArea" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+visible = false
 script = ExtResource( 12 )
 
 [node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
@@ -501,37 +668,38 @@ script = ExtResource( 8 )
 
 [node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 25 )
+disabled = true
 
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 10 )
 volume_db = -5.0
+bus = "Sfx"
 
 [node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
-stream = ExtResource( 14 )
-volume_db = -15.0
+stream = ExtResource( 9 )
+volume_db = -10.0
+pitch_scale = 1.1
+bus = "Sfx"
 
 [node name="FlapWingSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 15 )
 volume_db = -30.0
 pitch_scale = 2.0
+bus = "Sfx"
 
 [node name="ThudSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 17 )
 volume_db = -30.0
 pitch_scale = 1.25
+bus = "Sfx"
 
 [node name="StartEvolveSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
-stream = ExtResource( 9 )
-volume_db = -10.0
-pitch_scale = 0.5
+stream = ExtResource( 5 )
+volume_db = -20.0
+bus = "Sfx"
 
 [node name="ScoochSound1" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = ExtResource( 18 )
@@ -550,11 +718,12 @@ max_distance = 20.0
 out_of_range_mode = 1
 
 [node name="HeartSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 13 )
 volume_db = -34.0
 pitch_scale = 1.2
+bus = "Sfx"
 
 [node name="SecretAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 22 )
 anims/growth = SubResource( 23 )
+anims/warning = SubResource( 24 )

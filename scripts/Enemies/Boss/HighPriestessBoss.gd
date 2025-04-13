@@ -6,6 +6,7 @@ var spawnPriestessGlitchEffectRes = preload("res://sceneObjects/SpawnPriestessGl
 var glitchEnemyRes = preload("res://sceneObjects/Enemies/GlitchEnemy.tscn")
 var fallenAngelRes = preload("res://sceneObjects/Enemies/FallenAngel.tscn")
 var basicFrogEnemyRes = preload("res://sceneObjects/Enemies/BasicFrogEnemy.tscn")
+var stalagmiteRes = preload("res://sceneObjects/Enemies/GlitchStalagmite.tscn")
 var savePointRes = preload("res://sceneObjects/SavePoint.tscn")
 
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
@@ -119,7 +120,7 @@ func getHurt():
         yaBeatMe()
     else:
         yield(get_tree().create_timer(1.0), "timeout")
-        level.glitchNextGrandmaStatue(global.GlitchForm.FEATHER if num_hits == 2 else global.GlitchForm.FLOOR)
+        level.glitchNextGrandmaStatue(global.GlitchForm.FEATHER if num_hits == 3 else global.GlitchForm.FLOOR)
 
 func killTheBullets():
     var glitchBullets = get_tree().get_nodes_in_group("enemies")

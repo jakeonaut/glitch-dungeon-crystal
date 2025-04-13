@@ -2493,10 +2493,11 @@ text = "no"
 scroll_active = false
 
 [node name="BetaBuildLabel" type="RichTextLabel" parent="."]
-margin_left = 630.0
-margin_top = 490.0
-margin_right = 882.0
-margin_bottom = 544.0
+margin_left = 740.0
+margin_top = 500.0
+margin_right = 992.0
+margin_bottom = 554.0
+rect_scale = Vector2( 0.5, 0.5 )
 rect_clip_content = false
 theme = SubResource( 17223 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )

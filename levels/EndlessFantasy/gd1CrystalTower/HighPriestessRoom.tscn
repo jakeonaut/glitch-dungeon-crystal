@@ -2497,6 +2497,43 @@ texture = ExtResource( 2 )
 hframes = 2
 vframes = 2
 
+[node name="stalagtiteLandings" type="Spatial" parent="Viewport/level"]
+
+[node name="landing2" type="Sprite3D" parent="Viewport/level/stalagtiteLandings" groups=["priestess_landing_hard"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -4.1, 1 )
+pixel_size = 0.12
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 2
+
+[node name="landing3" type="Sprite3D" parent="Viewport/level/stalagtiteLandings" groups=["priestess_landing_hard"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, -3, 1 )
+pixel_size = 0.12
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 2
+
+[node name="landing4" type="Sprite3D" parent="Viewport/level/stalagtiteLandings" groups=["priestess_landing_hard"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -4, 1 )
+pixel_size = 0.12
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 2
+
+[node name="landing5" type="Sprite3D" parent="Viewport/level/stalagtiteLandings" groups=["priestess_landing_hard"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.4, -3, 1 )
+pixel_size = 0.12
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 2
+
+[node name="landing6" type="Sprite3D" parent="Viewport/level/stalagtiteLandings" groups=["priestess_landing_hard"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.1, -4, 1 )
+pixel_size = 0.12
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 2
+
 [node name="fallenAngelLandings" type="Spatial" parent="Viewport/level"]
 visible = false
 
@@ -2659,16 +2696,17 @@ shape = SubResource( 142 )
 [node name="GrandmaStatue5" parent="Viewport/level/GrandmaStatues" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 7, 0 )
 
-[node name="GrandmaStatue4" parent="Viewport/level/GrandmaStatues" instance=ExtResource( 28 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 10.4493, 0 )
+[node name="GrandmaStatue4" parent="Viewport/level" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6, 10.4493, 0 )
+grav = 0
 is_extra_life = true
 max_dist_to_player = 999
 
-[node name="Sprite3D" parent="Viewport/level/GrandmaStatues/GrandmaStatue4" index="1"]
+[node name="Sprite3D" parent="Viewport/level/GrandmaStatue4" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 flip_h = false
 
-[node name="CollisionShape" parent="Viewport/level/GrandmaStatues/GrandmaStatue4/FallthroughSolid" index="0"]
+[node name="CollisionShape" parent="Viewport/level/GrandmaStatue4/FallthroughSolid" index="0"]
 shape = SubResource( 142 )
 
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 40 )]
@@ -2985,7 +3023,7 @@ material = SubResource( 322 )
 [editable path="Viewport/level/CroneNPCDefeated"]
 [editable path="Viewport/level/CroneNPCDefeated/NPC TextBox"]
 [editable path="Viewport/level/GrandmaStatues/GrandmaStatue3"]
-[editable path="Viewport/level/GrandmaStatues/GrandmaStatue4"]
+[editable path="Viewport/level/GrandmaStatue4"]
 [editable path="Viewport/level/ParallaxBackground"]
 [editable path="Viewport/level/ElderTadpoleNPC"]
 [editable path="Viewport/level/ElderTadpoleNPC/NPC TextBox"]

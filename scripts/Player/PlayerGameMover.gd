@@ -435,7 +435,7 @@ func pressingMoveLeft():
     )
   )
 
-  if malware_infected:
+  if grav < 0:
     return pressingRightButton and not am_paused
   if is_mushroom_infected:
     return mushroom_infection_direction == -1 and not am_paused
@@ -462,7 +462,7 @@ func pressingMoveRight():
     )
   )
 
-  if malware_infected:
+  if grav < 0:
     return pressingLeftButton and not am_paused
   if is_mushroom_infected:
     return mushroom_infection_direction == 1 and not am_paused

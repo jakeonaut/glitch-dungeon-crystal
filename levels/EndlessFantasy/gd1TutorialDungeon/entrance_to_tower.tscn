@@ -367,7 +367,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -40.4, 10.9502, 0 )
 mesh = SubResource( 294 )
 
 [node name="MeshInstance2" parent="Viewport/level/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.331, 5.26765, 0 )

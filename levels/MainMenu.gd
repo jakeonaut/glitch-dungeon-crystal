@@ -449,6 +449,8 @@ func processSkipPrompt(delta):
             player.grav = 28
             global.shouldRenderAsCinematic = false
             player.pauseInput = false
+            player.override_press_move_left = false
+            player.override_press_move_right = false
             global.has_really_started_game = true
             player.textBox.override_target_origin = dialogPosition.global_transform.origin
             player.sayThis(tr("Dialog.Player.1"))

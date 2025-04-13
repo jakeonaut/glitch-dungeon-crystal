@@ -2973,7 +2973,7 @@ text = "x"
 [node name="MenuText" type="RichTextLabel" parent="UILayer/MainMenu"]
 margin_left = 319.0
 margin_top = 351.0
-margin_right = 494.0
+margin_right = 539.0
 margin_bottom = 517.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -3072,6 +3072,7 @@ margin_right = 394.0
 margin_bottom = 115.0
 grow_horizontal = 2
 grow_vertical = 2
+rect_clip_content = false
 theme = ExtResource( 24 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true

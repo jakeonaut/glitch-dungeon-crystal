@@ -72,5 +72,7 @@ func processDeath():
 func reenemize(is_weak = false):
   if smallInteractionArea != null and not smallInteractionArea.is_in_group("enemies"):
     smallInteractionArea.add_to_group("enemies")
-  if smallInteractionArea != null and is_weak and not smallInteractionArea.is_in_group("nonviolent_enemies"):
-    smallInteractionArea.add_to_group("nonviolent_enemies")
+  if smallInteractionArea != null and is_weak and not smallInteractionArea.is_in_group("weak_enemies"):
+    smallInteractionArea.add_to_group("weak_enemies")
+  # if smallInteractionArea != null and is_weak and not smallInteractionArea.is_in_group("nonviolent_enemies"):
+  #   smallInteractionArea.add_to_group("nonviolent_enemies")
