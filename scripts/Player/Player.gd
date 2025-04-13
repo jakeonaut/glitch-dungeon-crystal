@@ -884,6 +884,9 @@ func tryDieToOffscreenCamera(_delta):
           global_transform.origin.y = getGameCamera().botmost_y - DEATH_MARGIN
 
         if level.weird_pacman_wrapping:
+          just_pacman_flipped = true
+          was_walk_direction_flipped = shouldFlipWalkingDirection()
+          just_pacman_flipped_timer = 0
           gravitySound.pitch_scale = rand_range(0.8, 1.2)
           gravitySound.play()
           glitchTickle()
@@ -1508,11 +1511,11 @@ func processMoleLogic(delta):
       feather_jump_timer = feather_jump_time_limit if glitch_form == global.GlitchForm.FLOOR else feather_jump_time_limit / 2
       jump_press_timer = jump_press_time_limit / 2
       on_ground = true
-    elif glitch_form == global.GlitchForm.INVISIBLE and dig_direction != null:
-      if dig_direction.x > 0 and pressingMoveRight():
-        processMoleDigTimer(Vector3(2, 0, 0))
-      if dig_direction.x < 0 and pressingMoveLeft():
-        processMoleDigTimer(Vector3(-2, 0, 0))
+    # elif glitch_form == global.GlitchForm.INVISIBLE and dig_direction != null:
+    #   if dig_direction.x > 0 and pressingMoveRight():
+    #     processMoleDigTimer(Vector3(2, 0, 0))
+    #   if dig_direction.x < 0 and pressingMoveLeft():
+    #     processMoleDigTimer(Vector3(-2, 0, 0))
   elif transformation == TransformationState.UNDERGROUND_RETURNING:
     override_camera_y = global_transform.origin.y
     dig_below_timer = 0

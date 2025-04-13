@@ -202,9 +202,6 @@ func startGulp():
       else:
         if lickedGameMover.has_method("normalizePlayerTransformation"):
           lickedGameMover.normalizePlayerTransformation()
-        if lickedGameMover == level.player:
-          if glitch_form != global.GlitchForm.NORMAL:
-            level.player.applyObeliskGlitch(self.glitch_form)
         lickedGameMover.physics_state = lickedGameMover.PhysicsState.IGNORE_PHYSICS
       
     notDieSound.play()
@@ -226,6 +223,8 @@ func spitOut():
         lickedGameMover.global_transform.origin.x += SPIT_OFFSET.x * 2
   notDieSound.play()
   gulpin = false
+  if lickedGameMover == level.player and glitch_form != global.GlitchForm.NORMAL:
+    level.player.applyObeliskGlitch(self.glitch_form)
   if lickedGameMover != null:
     lickedGameMover.visible = true
     lickedGameMover.on_ground = true

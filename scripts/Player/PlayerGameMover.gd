@@ -102,6 +102,11 @@ var stupid_joystick_down_memory = false
 func _process(delta):
   # weird failsafe
   global_transform.origin.z = 0
+  if just_pacman_flipped:
+    just_pacman_flipped_timer += (delta*11)
+    if just_pacman_flipped_timer >= just_pacman_flipped_time_limit:
+      just_pacman_flipped_timer = 0
+      just_pacman_flipped = false
 
   if should_big_bump and not physics_state == PhysicsState.BEING_TOSSED:
     should_big_bump = false
@@ -204,8 +209,7 @@ func _process(delta):
       if getLevelTiles().isTileSpikes(tile_type):
         areAnyTilesBelowMeSpikes = true
         break
-  if pressingDown() and on_ground and (glitch_form == global.GlitchForm.LADDER or (
-                                        glitch_form == global.GlitchForm.INVISIBLE and areAnyTilesBelowMeSpikes)):
+  if pressingDown() and on_ground: # and (glitch_form != global.GlitchForm.INVISIBLE or (glitch_form == global.GlitchForm.INVISIBLE and areAnyTilesBelowMeSpikes)):
     processMoleDigTimer(Vector3(0, -2, 0))
     
 
@@ -415,6 +419,15 @@ func pressingMoveUp():
   )
   return pressingUpButton and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()
 
+var just_pacman_flipped = false
+var just_pacman_flipped_timer = 0
+var just_pacman_flipped_time_limit = 5
+var was_walk_direction_flipped = false
+func shouldFlipWalkingDirection():
+  if just_pacman_flipped:
+    return was_walk_direction_flipped
+  return (grav < 0 and not transformation == TransformationState.BUBBLE) or malware_infected
+
 var override_stop_left_input = false
 # @override
 func pressingMoveLeft():
@@ -435,7 +448,7 @@ func pressingMoveLeft():
     )
   )
 
-  if grav < 0:
+  if shouldFlipWalkingDirection():
     return pressingRightButton and not am_paused
   if is_mushroom_infected:
     return mushroom_infection_direction == -1 and not am_paused
@@ -462,7 +475,7 @@ func pressingMoveRight():
     )
   )
 
-  if grav < 0:
+  if shouldFlipWalkingDirection():
     return pressingLeftButton and not am_paused
   if is_mushroom_infected:
     return mushroom_infection_direction == 1 and not am_paused
@@ -572,12 +585,10 @@ func collideWithWall(local_lv):
         touching_fragile_solid = true
       if not touching_spikes and getLevelTiles().isTileSpikes(tile_type):
         touching_spikes = true
-    if on_ground and not touching_fragile_solid and not pressingJump() and (glitch_form == global.GlitchForm.FLOOR or (
-      glitch_form == global.GlitchForm.INVISIBLE and touching_spikes
-    )):
-      processMoleDigTimer(Vector3(-2, 0, 0))
-    else:
-      dig_timer = 0
+    # if on_ground and not touching_fragile_solid and not pressingJump(): # and (glitch_form == global.GlitchForm.FLOOR or (glitch_form == global.GlitchForm.INVISIBLE and touching_spikes)):
+    #   processMoleDigTimer(Vector3(-2, 0, 0))
+    # else:
+    #   dig_timer = 0
   if pressingMoveRight():
     var rightTiles = getTilesRightOf(getLevelTiles(), tile_buffer, glitch_form == global.GlitchForm.INVISIBLE)
     var touching_fragile_solid = false
@@ -591,12 +602,12 @@ func collideWithWall(local_lv):
         touching_fragile_solid = true
       if not touching_spikes and getLevelTiles().isTileSpikes(tile_type):
         touching_spikes = true
-    if on_ground and not touching_fragile_solid and not pressingJump() and (glitch_form == global.GlitchForm.FLOOR or (
-      glitch_form == global.GlitchForm.INVISIBLE and touching_spikes
-    )):
-      processMoleDigTimer(Vector3(2, 0, 0))
-    else:
-      dig_timer = 0
+    # if on_ground and not touching_fragile_solid and not pressingJump() and (glitch_form == global.GlitchForm.FLOOR or (
+    #   glitch_form == global.GlitchForm.INVISIBLE and touching_spikes
+    # )):
+    #   processMoleDigTimer(Vector3(2, 0, 0))
+    # else:
+    #   dig_timer = 0
 
 onready var digSound = get_node("Sounds/DigSound")
 func processMoleDigTimer(digDirection):
