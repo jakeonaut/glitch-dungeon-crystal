@@ -111,11 +111,45 @@ func fallthroughCollisionActivate(possible_game_mover):
     if possible_game_mover == level.player:
         pass
 
+var time_influence = 35
+var y_div = 2.3
+var normal_offset = .15
+var is_smacked = false
+var smack_timer = 0
+var smack_time_limit = 10
+var smack_recovery_time_limit = 12
+onready var sillySound = get_node("Sounds/SillySound")
 func getSmacked(_broom_origin = null):
-    pass
+    if boss_phase == BossPhase.DEFEATED or boss_phase == BossPhase.HURT:
+        return false
+
+    if is_smacked:
+        return false
+
+    sillySound.play()
+    mySprite.material_override.set_shader_param("time_influence", time_influence)
+    mySprite.material_override.set_shader_param("y_div", y_div)
+    mySprite.material_override.set_shader_param("normal_offset", normal_offset)
+    
+    smack_timer = 0
+    is_smacked = true
+    return true
+
+var glitch_form = global.GlitchForm.NORMAL
+func unsmack():
+    mySprite.material_override.set_shader_param("time_influence", 16)
+    mySprite.material_override.set_shader_param("y_div", 2.3)
+    mySprite.material_override.set_shader_param("normal_offset", .02)
     
 
 func _process(delta):
+    if is_smacked:
+        smack_timer += (delta * 22)
+    if smack_timer >= smack_time_limit:
+        unsmack()
+    if smack_timer >= smack_recovery_time_limit:
+        is_smacked = false
+
     # need to be before global.pauseGame check so we can unpause
     if boss_phase == BossPhase.ASLEEP:
         if cubeCrystal.get_ref() != null and cubeCrystal.get_ref().meshInstance1.visible:

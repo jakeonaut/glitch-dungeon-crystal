@@ -447,7 +447,7 @@ var override_stop_right_input = false
 func pressingMoveRight():
   if override_stop_right_input or physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
-  var am_paused =  pauseInput or isTextboxPausingMe()
+  var am_paused = pauseInput or isTextboxPausingMe()
 
   var pressingLeftButton = Input.is_action_pressed("ui_left") or (
     global.userSettings["use_joystick"] > 0 and (

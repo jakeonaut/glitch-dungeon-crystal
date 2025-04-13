@@ -486,13 +486,15 @@ func tryDieToOffscreenCamera(_delta):
 
 # var bubbleHP = 5 # should slowly "glitch" the crystal and then corrupt him??
 # @override
+onready var sillySound = get_node("Sounds/SillySound")
 func getSmacked(broom_origin = null, silently = false):
-    if boss_phase == BossPhase.DEFEATED or boss_phase == BossPhase.HURT:
+    if boss_phase == BossPhase.DEFEATED or boss_phase == BossPhase.HURT or boss_phase == BossPhase.CHARGING or boss_phase == BossPhase.CHARGING_BACKWARDS:
         return false
 
     if boss_phase == BossPhase.LYING_IN_WAIT or boss_phase == BossPhase.EAT_IT:
         return false
 
+    sillySound.play()
     # if boss_phase == BossPhase.STUN_FALL or boss_phase == BossPhase.STUN_IDLE:
     time_influence = 35
     y_div = 5

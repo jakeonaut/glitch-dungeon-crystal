@@ -298,10 +298,13 @@ func unsmack():
     .unsmack()
     smack_time_limit = 10
 
+onready var sillySound = get_node("Sounds/SillySound")
 func getSmacked(broom_origin = null, silently = false):
     should_modify_glitch_shader_vars = false
     if is_smacked or boss_phase == BossPhase.DRILL_DREIDEL_SPIN or boss_phase == BossPhase.DIZZY:
         return false
+
+    sillySound.play()
 
     if boss_phase == BossPhase.ASLEEP:
         global_transform.origin.y += 1

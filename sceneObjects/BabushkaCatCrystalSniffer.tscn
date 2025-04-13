@@ -151,7 +151,7 @@ shader_param/target_palette = ExtResource( 9 )
 [node name="BabushkaCat" type="Spatial" groups=["npc"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9649, 0.0413837, 0 )
 script = ExtResource( 3 )
-bbText = "See BabushkaCatCrystalSnifferDialogStartSound."
+bbText = "NPC.BabushkaCat.1"
 smackedBbText = "NPC.BabushkaCat.4"
 dont_recolor_me = true
 

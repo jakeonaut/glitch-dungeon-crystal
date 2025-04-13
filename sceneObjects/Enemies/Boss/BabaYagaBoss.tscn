@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=2]
+[gd_scene load_steps=85 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=2]
@@ -35,6 +35,7 @@
 [ext_resource path="res://sceneObjects/CrystalGeode2.tscn" type="PackedScene" id=33]
 [ext_resource path="res://materials/CrystalGeode2.tres" type="Material" id=34]
 [ext_resource path="res://assets/mini_mushroom.png" type="Texture" id=35]
+[ext_resource path="res://assets/DELETEME/horn.wav" type="AudioStream" id=36]
 
 [sub_resource type="ArrayMesh" id=93]
 surfaces/0 = {
@@ -5379,6 +5380,11 @@ bus = "Sfx"
 stream = ExtResource( 30 )
 volume_db = -22.0
 pitch_scale = 0.9
+bus = "Sfx"
+
+[node name="SillySound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 36 )
+volume_db = -25.0
 bus = "Sfx"
 
 [node name="CubeCrystal" parent="." instance=ExtResource( 33 )]

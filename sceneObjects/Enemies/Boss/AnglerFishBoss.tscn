@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=2]
+[gd_scene load_steps=102 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -38,6 +38,7 @@
 [ext_resource path="res://assets/sounds/cicada.wav" type="AudioStream" id=36]
 [ext_resource path="res://assets/sounds/eb_bite.wav" type="AudioStream" id=37]
 [ext_resource path="res://assets/sounds/eba_swimming8.wav" type="AudioStream" id=38]
+[ext_resource path="res://assets/DELETEME/horn.wav" type="AudioStream" id=39]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -4646,6 +4647,11 @@ bus = "Sfx"
 stream = ExtResource( 20 )
 volume_db = -10.0
 pitch_scale = 0.5
+bus = "Sfx"
+
+[node name="SillySound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 39 )
+volume_db = -25.0
 bus = "Sfx"
 
 [node name="Crystals" type="Spatial" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://assets/sounds/pop.wav" type="AudioStream" id=22]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Dragon.wav" type="AudioStream" id=23]
 [ext_resource path="res://assets/sprites/doguBossArms.png" type="Texture" id=24]
+[ext_resource path="res://assets/DELETEME/horn.wav" type="AudioStream" id=25]
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 1 )
@@ -4591,6 +4592,11 @@ bus = "Sfx"
 stream = ExtResource( 23 )
 volume_db = -2.0
 pitch_scale = 0.9
+bus = "Sfx"
+
+[node name="SillySound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 25 )
+volume_db = -25.0
 bus = "Sfx"
 
 [node name="SecretAnimationPlayer" type="AnimationPlayer" parent="."]
