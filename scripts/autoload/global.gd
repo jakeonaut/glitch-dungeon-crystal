@@ -399,11 +399,13 @@ func resetMemory():
     memory["blue_mode"] = false
 
 var allLocales = {
-    "en": { "code": "en", "stopPosition": 350, "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed.tres]English[/font]" },
-    "zh_CN": { "code": "zh_CN", "stopPosition": 339, "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_zh_CN.tres]简体字[/font]" }, 
-    "ru": { "code": "ru", "stopPosition": 320, "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Pусский[/font]" },
-    "pt_BR": { "code": "pt_BR", "stopPosition": 320, "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Português[/font]" },
-    "fr": { "code": "fr", "stopPosition": 320, "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Français[/font]" },
+    "en": { "code": "en", "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed.tres]English[/font]" },
+    "zh_CN": { "code": "zh_CN", "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_zh_CN.tres]简体字[/font]" }, 
+    "ru": { "code": "ru", "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Pусский[/font]" },
+    "pt_BR": { "code": "pt_BR", "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Português[/font]" },
+    "fr": { "code": "fr", "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Français[/font]" },
+    "ja": { "code": "ja", "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ja.tres]日本語[/font]" },
+    "es": { "code": "es", "supported": false, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Español[/font]" },
 }
 func getSupportedLocalesArray():
     var supportedLocales = []

@@ -455,7 +455,7 @@ translation_remaps={
 "res://pauseMenuThemeInputCondensed.tres": PoolStringArray( "res://pauseMenuThemeInputCondensed_ru.tres:ru", "res://pauseMenuThemeInputCondensed_ru.tres:pt_BR", "res://pauseMenuThemeInputCondensed_zh_CN.tres:zh_CN", "res://pauseMenuThemeInputCondensed_ru.tres:fr" ),
 "res://uiTutorialFont.tres": PoolStringArray( "res://uiTutorialFont_zh_CN.tres:zh_CN", "res://uiTutorialFont_ru.tres:ru", "res://uiTutorialFont_ru.tres:pt_BR", "res://uiTutorialFont_ru.tres:fr" )
 }
-locale_filter=[ 0, [ "en", "es", "fr", "pt_BR", "ru", "zh_CN" ] ]
+locale_filter=[ 0, [ "en", "es", "fr", "ja", "pt_BR", "ru", "zh_CN"] ]
 
 [physics]
 

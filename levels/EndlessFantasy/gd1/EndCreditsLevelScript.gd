@@ -10,15 +10,15 @@ var hideHoldToQuitTimeLimit = 20
 
 # @override
 func setUpRoomInitializationOverride():
-    endCreditsLabel.text = tr("EndCredits.FULL")
+    # endCreditsLabel.text = tr("EndCredits.FULL")
     if global.demo_mode <= 0: Steam.set_achievement("GRANDMA_WIN")
 
+var STOP_POSITION = 370
 # @override
 func _process(delta):
-    var locale = TranslationServer.get_locale()
-    var stopPosition = global.allLocales[locale].stopPosition
-    if endCreditsLabel.global_transform.origin.y >= stopPosition:
-        endCreditsLabel.global_transform.origin.y = stopPosition
+    # var locale = TranslationServer.get_locale()
+    if endCreditsLabel.global_transform.origin.y >= STOP_POSITION:
+        endCreditsLabel.global_transform.origin.y = STOP_POSITION
     else:
         endCreditsLabel.global_transform.origin.y += (delta*2)
         if Input.is_action_pressed("popup_menu"):
