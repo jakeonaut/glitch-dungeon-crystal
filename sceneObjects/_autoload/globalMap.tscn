@@ -258,7 +258,7 @@ can_nav_down = false
 kill_after_glitch = true
 
 [node name="EasyFling" parent="FishingVillage" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3, 0 )
 material_override = null
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/EasyFling.tscn"
@@ -584,7 +584,7 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="DoguBossRoom" parent="CricketCaves" instance=ExtResource( 3 )]
-transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1.5, 4, 0, -1 )
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1.5, 4, -1, -1 )
 material_override = null
 offset = Vector2( 0, 50 )
 pixel_size = 0.03

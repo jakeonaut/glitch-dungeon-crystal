@@ -184,7 +184,10 @@ func conductFromScenePath(path):
         changeSongPitch(1.0)
         default_song_pitch = 1.0
     elif path.find("0_1Haven") > 0:
-        tryToPlay(croneThemePlayer)
+        if global.memory["clean_crystals"] >= 4:
+            tryToPlay(windPlayer)
+        else:
+            tryToPlay(croneThemePlayer)
     elif path.find("gd1ToxicJungle") > 0:
         tryToPlay(suburbThemePlayer)
     elif path.find("gd1ShiftingSandLand") > 0:
