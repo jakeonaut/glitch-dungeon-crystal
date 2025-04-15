@@ -9,10 +9,10 @@ UI.GlitchSpell.4,Ghost,隐身术,Призрак,Forma Fantasma,Fantôme,ゴー�
 UI.MainMenu.0,Choose language,选择语言,Выберите язык,Escolha o idioma,Choisissez un langage,言語選択,Elige tu idioma
 UI.MainMenu.1,Press %s for Options.,"按 %s 打开选项","Нажмите %s чтобы открыть настройки","%s opções","Appuyez sur %s pour les Options.",%s でオプションを開ける,Pulsa %s para opciones
 UI.MainMenu.2,"File ",文件 ,"Файл ","Jogo ","Fichier",ファイル,Juego
-UI.MainMenu.3,press %s to start,按 %s 开始,"%s чтобы начать",%s iniciar,%s pour commencer,%s で開始,Pulsa %s para iniciar! 
+UI.MainMenu.3,press %s to start,按 %s 开始,"%s чтобы начать",%s iniciar,%s pour commencer,%s で開始,%s para iniciar! 
 UI.MainMenu.4,%s: delete file,%s：删除文件,%s: удалить,%s apagar,%s: supprimer,%s : ファイル削除,%s: borrar archivo
 UI.MainMenu.5,"Really Delete [wave]File %s[/wave]?\n                      %s Confirm\n                      %s Cancel","确认删除  文件 %s 吗？\n                  %s 确认\n                  %s 取消","Точно удалить\n«Файл %s»?\n%s Да %s Нет","apagar Jogo %s?\n    %s Confirmar\n    %s Cancelar","Vraiment Supprimer %s?\n    %s Confirmer\n    %s annuler","本当に [wave]\"ファイルを削除する？ %s\"[/wave]?\n                      %s 確定\n                      %s キャンセル","Realmente Borrar [wave]\"Archivo %s\"[/wave]?                                                                          %s Confirmar\n    %s Cancelar"
-UI.PauseMenu.0,"%s to select, %s to resume ","按%s选择，按%s继续","%s выбора, %s отмены","%s selecionar, %s voltar","%s: sélectionner, %s: reprendre","%s で選択, %s で再開","%s para seleccionar, %s para retomar"
+UI.PauseMenu.0,"%s to select, %s to resume ","按%s选择，按%s继续","%s выбора, %s отмены","%s selecionar, %s voltar","%s: sélectionner, %s: reprendre","%s で選択, %s で再開","%s seleccionar, %s retomar"
 UI.PauseMenu.1,resume,继续,Вернуться,Voltar,"reprendre",再開,retomar
 UI.PauseMenu.2,Input,操作方法,Управление,Controles,"Saisie",インプット,Controles
 UI.InputMenu.1,Keyboard,键盘,Клавиатура,Teclado,"Clavier",キーボード,Teclado
@@ -20,9 +20,9 @@ UI.InputMenu.2,Controller,手柄,Контроллер,Controle,"Manette",コン�
 UI.InputMenu.3,Button mapping,按钮,кнопки,botões,"Boutons",ボタン,Mapeo de Botones
 UI.InputMenu.4,glyph type,按钮字形,Глифове,glifos,"glyphes",ボタングリフ：,Glifo de botón
 UI.InputMenu.5,joystick?: ,启用操纵杆？： ,джойстик?: ,joystick?: ,joystick ?: ,アナログ？：,análoga?:
-UI.InputMenu.Action.1,move left,向左,Влево,esquerda,"gauche",左に移動,mover a la izquierda
-UI.Tutorial.InputPrompt.1,"%s to Sweep. %s to Jump. %s%s to walk..","%s 扫帚。%s 跳跃。%s%s 向左向右","%s Метла. %s Прыжок. %s%s ходить","%s vassourada %s pular %s%s andar","%s balayer, %s sauter, %s%s mouvement",%s で掃く。 %s でジャンプ。 %s%s で歩く。,%s para Barrer. %s para Saltar. %s%s para caminar..
-UI.InputMenu.Action.2,move right,向右,Вправо,direita,"droite",右に移動,moverse a la derecha
+UI.InputMenu.Action.1,move left,向左,Влево,esquerda,"gauche",左に移動,izquierda
+UI.Tutorial.InputPrompt.1,"%s to Sweep. %s to Jump. %s%s to walk..","%s 扫帚。%s 跳跃。%s%s 向左向右","%s Метла. %s Прыжок. %s%s ходить","%s vassourada %s pular %s%s andar","%s balayer, %s sauter, %s%s mouvement",%s で掃く。 %s でジャンプ。 %s%s で歩く。,%s Barrer. %s Saltar. %s%s caminar..
+UI.InputMenu.Action.2,move right,向右,Вправо,direita,"droite",右に移動,derecha
 UI.InputMenu.Action.3,down,向下,Вниз,baixo,"haut",下,Bajo
 UI.InputMenu.Action.3_0,enter door,进门,войти дверь,entre porta,prendre une porte,ドアを開く,entrar por la puerta
 UI.InputMenu.Action.4,up,向上,Вверх,cima,"bas",上,Arriba
@@ -32,12 +32,12 @@ UI.InputMenu.Action.6_0,"talk","讲话","разговаривать","falar","pa
 UI.InputMenu.Action.7,Return to save.,回到上一个存档点,«Вернуться»,último checkpoint,"Retour à sauvegarde.",セーブに戻る,Volver al Checkpoint
 UI.InputMenu.Action.8,next spell,下一个咒语,Следующее заклинание,próximo feitiço,"prochain sort",次の魔法,próximo hechizo
 UI.InputMenu.Action.9,prev spell,上一个咒语,Предыдущее заклинание,feitiço anterior,"dernier sort",前の魔法,hechizo anterior
-UI.InputMenu.Action.9_0,spell %s,一个咒语%s,заклинание %s,feitiço %s,"sort %s",魔法 ％s,hechizo %s
+UI.InputMenu.Action.9_0,spell %s,一个咒语%s,заклинание %s,feitiço %s,"sort %s",魔法 %s,hechizo %s
 UI.InputMenu.Action.10,open map,打开地图,Открыть карту,abrir mapa,"ouvrir la carte",マップを開く,abrir mapa
 UI.InputMenu.13_0,"press %s to select, %s to go back.","按%s选择，按%s返回","%s выбора, %s возвращения.","%s escolher, %s voltar.","%s sélectionner, %s retour",%s 選択、 %s 戻る,"pulsa %s eligir, %s regresar."
-UI.InputMenu.13_1,"Really quit?\npress %s to select, %s to go back.","真的退出吗？\n按%s选择，按%s返回","Действительно уйти?\n%s выбора, %s возвращения.","Realmente desistir?\n%s escolher, %s voltar.","Tu veux vraiment arrêter ?\n%s sélectionner, %s retour",本当にやめる？\n %s 選択、 %s 戻る。,"Realmente salir?\nPresione %s para seleccionar, %s para volver."
-UI.InputMenu.13_2,"unsaved progress will be lost.\npress %s to select, %s to go back.","未保存的进度将会丢失。\n按%s选择，按%s返回","Несохраненный прогресс будет утерян.\n%s выбора, %s возвращения.","o progresso não salvo será perdido.\naperte %s escolher %s voltar.","les progrès non sauvegardés seront perdus\n%s sélectionner, %s retour",セーブしてないプログレスは消えてしまいます。\n %s 選択、 %s 戻る。,"Se perderá el progreso no guardado.\nPresione %s para seleccionar, %s para volver."
-UI.InputMenu.13,"press %s to select, %s to go back\nhold %s: reset bindings","按%s选择，按%s返回\n长按%s恢复默认设置","%s выбора, %s возвращения.\nУдерживайте %s сброса настроек","%s selecionar %s voltar\nsegure %s para redefinir","%s sélectionner, %s retour\ngardez %s réinitialiser les saisies.", %s 選択、 %s 戻る。\n %s 長押し：バインドをリセット,"pulsa %s para seleccionar, %s para retroceder\nmantener pulsado %s: restablecer controles"
+UI.InputMenu.13_1,"Really quit?\npress %s to select, %s to go back.","真的退出吗？\n按%s选择，按%s返回","Действительно уйти?\n%s выбора, %s возвращения.","Realmente desistir?\n%s escolher, %s voltar.","Tu veux vraiment arrêter ?\n%s sélectionner, %s retour",本当にやめる？\n %s 選択、 %s 戻る。,"Realmente salir?\n%s seleccionar, %s volver."
+UI.InputMenu.13_2,"unsaved progress will be lost.\npress %s to select, %s to go back.","未保存的进度将会丢失。\n按%s选择，按%s返回","Несохраненный прогресс будет утерян.\n%s выбора, %s возвращения.","o progresso não salvo será perdido.\naperte %s escolher %s voltar.","les progrès non sauvegardés seront perdus\n%s sélectionner, %s retour",セーブしてないプログレスは消えてしまいます。\n %s 選択、 %s 戻る。,"Se perderá el progreso no guardado.\n%s seleccionar, %s volver."
+UI.InputMenu.13,"press %s to select, %s to go back\nhold %s: reset bindings","按%s选择，按%s返回\n长按%s恢复默认设置","%s выбора, %s возвращения.\nУдерживайте %s сброса настроек","%s selecionar %s voltar\nsegure %s para redefinir","%s sélectionner, %s retour\ngardez %s réinitialiser les saisies.", %s 選択、 %s 戻る。\n %s 長押し：バインドをリセット,"%s seleccionar, %s retroceder\nmantener pulsado %s: restablecer controles"
 UI.InputMenu.14,"press key to set %s",按键设定%s,Задайте кнопку\nдля действия %s,"aperte para definir %s","appuyez sur la touche\nchoisie pour: %s",キー選択して %s を設定する,pulse la tecla para fijar %s
 UI.InputMenu.14_2,"press button to set %s",按钮设定%s,Задайте клавиатура\nдля действия %s,"aperte para definir %s","appuyez sur la bouton\nchoisie pour: %s",ボタン選択して %s を設定する,"\"pulse el botón para fijar %s\""
 UI.InputMenu.15,"reset bindings\n...3 ...2 ...1!","恢复默认设置中\n…3…2…1！","Сброс настроек\n3... 2... 1!","redefinindo controles\n...3 ...2 ...1!","réinitialisation des saisies\n...3 ...2 ...1!",バインドのリセットまで\n...3 ...2 ...1!,restableciendo controles\n...3 ...2 ...1!
@@ -50,7 +50,7 @@ UI.GraphicsMenu.1,CRT Filter: ,显像管滤波器： ,ЭЛТ-фильтр: ,Filt
 UI.GraphicsMenu.2,Glitch Screen: ,闪屏： ,Глитч-эффекты: ,Efeito Glitch: ,"Ecran Glitch: ",グリッチ画面：,Efecto de Bugs:
 UI.GraphicsMenu.3,Color Blind: ,色盲模式： ,Дальтонизм: ,Modo Daltônico: ,"Daltonisme: ",色盲：,Para Daltonicos:
 UI.GraphicsMenu.4,Fullscreen: ,全屏： ,Весь экран: ,Tela Cheia: ,"Plein Ecran: ",フルスクリーン：,Pantalla Completa:
-UI.PauseMenu.4,Sound,声音,Звук,Som,"Son",音声,Sonido:
+UI.PauseMenu.4,Sound,声音,Звук,Som,"Son",音声,Sonido
 UI.SoundMenu.1,"Music: ",音乐音量： ,"Музыка: ","Música: ","Musique: ",音楽: ,Música:
 UI.SoundMenu.2,"SFX: ",音效音量： ,"Эффекты: ","Som: ","Sons: ",SFX: ,Efectos Sonoros:
 UI.SoundMenu.3,Music Glitches: ,故障音效： ,Глитч-музыка: ,Glitch Musical: ,"Glitch Musicaux: ",音楽グリッチ:,Música Bugeada:
@@ -62,7 +62,7 @@ UI.Confirmation,Confirm,确认,Подтвердить,Confirmar,"Confirmer",確�
 UI.Cancel,cancel,取消,Отмена,Cancelar,"annuler",キャンセル,Cancelar
 UI.Yes,Yes,Yes,Да,Sim,"Oui",はい,Si
 UI.No,No,No,Нет,Não,"Non",いいえ,No
-Dialog.Player.1,"now, now,\nwhere did that cat go?","唉,那只猫又跑哪里去啦？",Куда эта кошка\nзапропастилась?,"ô meu deus,\ncadê aquele gato danado?","et maintenant, où est donc\nparti ce chat?",さてさて、\n猫はどこにいるのかな？,A ver... /ndónde se ha metido ese gato?
+Dialog.Player.1,"now, now,\nwhere did that cat go?","唉,那只猫又跑哪里去啦？",Куда эта кошка\nзапропастилась?,"ô meu deus,\ncadê aquele gato danado?","et maintenant, où est donc\nparti ce chat?",さてさて、\n猫はどこにいるのかな？,A ver... \ndónde se ha metido ese gato?
 Dialog.Player.2,"•i don't remember having a\nbasement.. but what a mess!\nlet's sweep up that dust",我怎么不记得家里有个地窖…\n不过这也太乱了！\n还是先把这里打扫干净再说！,"Не помню, чтобы у меня\nбыл подвал... Какой бардак!\nНадо бы тут подмести.","ué, desde quando tem um\nporão aqui? que bagunça...","je ne me souviens pas avoir\nun sous-sol... mais quel bazar!\nallons balayer cette poussière",•地下室なんてあったんだ \n・・・ かなり汚いね！\n掃除しないと！,-No recuerdo haber tenido un \nsótano... pero qué desastre!\nVamos a barrer ese polvo.
 NPC.Cow.1,moo!!\n(cut that out),哞！！\n（闹够了没有）,Му-у!\n(Хватит.),muuu!\n(para com isso).,"meuh!!\n(arrête ça)",モー！\n(やめて),muuu!\n(Basta ya!)
 NPC.Door.1,"locked, needs %s keys",这里是锁着的。还需要%s把钥匙。,Заперто. Нужно ключей: %s.,trancada. precisa de %s chaves.,"Verrouillé, nécessite %s clefs",鍵がかかってる、%s 鍵が必要だ,"bloqueado, necesita %s llaves..."

@@ -189,7 +189,7 @@ can_nav_down = false
 hide_me_from_map = true
 
 [node name="EndOfDemo" parent="TutorialDungeon" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 6, 0 )
 material_override = null
 frame = 54
 path = "res://levels/EndlessFantasy/gd1/00000EndOfDemo.tscn"
@@ -258,7 +258,7 @@ can_nav_down = false
 kill_after_glitch = true
 
 [node name="EasyFling" parent="FishingVillage" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 0 )
 material_override = null
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/EasyFling.tscn"
@@ -269,7 +269,7 @@ can_nav_down = false
 kill_after_glitch = true
 
 [node name="GlitchFishersHard" parent="FishingVillage" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 6, 4, 0 )
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 5, 4, 0 )
 material_override = null
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/003pt5GlitchFishersHard.tscn"
@@ -279,7 +279,7 @@ can_nav_down = false
 kill_after_glitch = true
 
 [node name="FrogBossHaven" parent="FishingVillage" instance=ExtResource( 3 )]
-transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 6, 5, 1 )
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 5, 5, 1 )
 material_override = null
 texture = ExtResource( 10 )
 vframes = 16
@@ -291,7 +291,7 @@ can_nav_up = false
 kill_after_glitch = true
 
 [node name="AnglerFishBossRoom" parent="FishingVillage" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 5, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 5, -1 )
 material_override = null
 offset = Vector2( 20, 0 )
 pixel_size = 0.04

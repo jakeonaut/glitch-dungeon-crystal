@@ -253,7 +253,7 @@ func _process(delta):
     spellsLabelText.bbcode_text = tr("UI.Inventory.2")
     equipLabelText.bbcode_text = tr("UI.Inventory.4")
     soulLabelText.bbcode_text = tr("UI.Inventory.8")
-    keyLabelText.bbcode_text = tr("UI.Inventory.9")
+    keyLabelText.bbcode_text = "[center]" + tr("UI.Inventory.9") + "[/center]"
     keysText.bbcode_text = tr("UI.Inventory.10")
     shardsText.bbcode_text = tr("NPC.Crystal.7")
     largerPopup.visible = true

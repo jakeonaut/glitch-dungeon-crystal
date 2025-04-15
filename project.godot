@@ -442,20 +442,20 @@ locale/locale_filter_mode=1
 [locale]
 
 test="zh_CN"
-translations=PoolStringArray( "res://dialogUiLocalization.en.translation", "res://dialogUiLocalization.pt_BR.translation", "res://dialogUiLocalization.ru.translation", "res://dialogUiLocalization.zh_CN.translation", "res://dialogUiLocalization.fr.translation" )
+translations=PoolStringArray( "res://dialogUiLocalization.en.translation", "res://dialogUiLocalization.pt_BR.translation", "res://dialogUiLocalization.ru.translation", "res://dialogUiLocalization.zh_CN.translation", "res://dialogUiLocalization.fr.translation", "res://dialogUiLocalization.ja.translation", "res://dialogUiLocalization.es.translation" )
 translation_remaps={
-"res://YosterFontBig.tres": PoolStringArray( "res://dialogBodyFontTheme_zh_CN.tres:zh_CN", "res://YosterFontBig_ru.tres:ru", "res://YosterFontBig_ru.tres:pt_BR", "res://YosterFontBig_ru.tres:fr" ),
-"res://dialogBodyFontTheme.tres": PoolStringArray( "res://dialogBodyFontTheme_zh_CN.tres:zh_CN", "res://dialogBodyFontTheme_ru.tres:ru", "res://dialogBodyFontTheme_ru.tres:pt_BR", "res://dialogBodyFontTheme_ru.tres:fr" ),
-"res://levels/common/FancyText.tres": PoolStringArray( "res://levels/common/FancyText_zh_CN.tres:zh_CN", "res://levels/common/FancyText_ru.tres:ru", "res://levels/common/FancyText_ru.tres:pt_BR", "res://levels/common/FancyText_ru.tres:fr" ),
-"res://levels/common/UITheme_real.tres": PoolStringArray( "res://levels/common/UITheme_real_zh_CN.tres:zh_CN", "res://levels/common/UITheme_real_ru.tres:ru", "res://levels/common/UITheme_real_ru.tres:pt_BR", "res://levels/common/UITheme_real_ru.tres:fr" ),
-"res://levels/common/UITheme_real_spaced.tres": PoolStringArray( "res://levels/common/UITheme_real_spaced_zh_CN.tres:zh_CN", "res://levels/common/UITheme_real_spaced_ru.tres:ru", "res://levels/common/UITheme_real_spaced_ru.tres:pt_BR", "res://levels/common/UITheme_real_spaced_ru.tres:fr" ),
-"res://levels/common/UITheme_small.tres": PoolStringArray( "res://levels/common/UITheme_small_zh_CN.tres:zh_CN" ),
-"res://levels/common/dialogBodyFont_Font.tres": PoolStringArray( "res://levels/common/dialogBodyFont_ru_Font.tres:fr", "res://levels/common/dialogBodyFont_ru_Font.tres:ru", "res://levels/common/dialogBodyFont_ru_Font.tres:pt_BR", "res://levels/common/dialogBodyFont_zh_CN_Font.tres:zh_CN" ),
-"res://pauseMenuTheme.tres": PoolStringArray( "res://pauseMenuTheme_zh_CN.tres:zh_CN", "res://pauseMenuTheme_ru.tres:ru", "res://pauseMenuTheme_ru.tres:pt_BR", "res://pauseMenuTheme_ru.tres:fr" ),
-"res://pauseMenuThemeInputCondensed.tres": PoolStringArray( "res://pauseMenuThemeInputCondensed_ru.tres:ru", "res://pauseMenuThemeInputCondensed_ru.tres:pt_BR", "res://pauseMenuThemeInputCondensed_zh_CN.tres:zh_CN", "res://pauseMenuThemeInputCondensed_ru.tres:fr" ),
-"res://uiTutorialFont.tres": PoolStringArray( "res://uiTutorialFont_zh_CN.tres:zh_CN", "res://uiTutorialFont_ru.tres:ru", "res://uiTutorialFont_ru.tres:pt_BR", "res://uiTutorialFont_ru.tres:fr" )
+"res://YosterFontBig.tres": PoolStringArray( "res://dialogBodyFontTheme_zh_CN.tres:zh_CN", "res://dialogBodyFontTheme_ja.tres:ja", "res://YosterFontBig_ru.tres:ru", "res://YosterFontBig_ru.tres:pt_BR", "res://YosterFontBig_ru.tres:es", "res://YosterFontBig_ru.tres:fr" ),
+"res://dialogBodyFontTheme.tres": PoolStringArray( "res://dialogBodyFontTheme_zh_CN.tres:zh_CN", "res://dialogBodyFontTheme_ja.tres:ja", "res://dialogBodyFontTheme_ru.tres:ru", "res://dialogBodyFontTheme_ru.tres:pt_BR", "res://dialogBodyFontTheme_ru.tres:es", "res://dialogBodyFontTheme_ru.tres:fr" ),
+"res://levels/common/FancyText.tres": PoolStringArray( "res://levels/common/FancyText_zh_CN.tres:zh_CN", "res://levels/common/FancyText_ja.tres:ja", "res://levels/common/FancyText_ru.tres:ru", "res://levels/common/FancyText_ru.tres:pt_BR", "res://levels/common/FancyText_ru.tres:es", "res://levels/common/FancyText_ru.tres:fr" ),
+"res://levels/common/UITheme_real.tres": PoolStringArray( "res://levels/common/UITheme_real_zh_CN.tres:zh_CN", "res://levels/common/UITheme_real_ja.tres:ja", "res://levels/common/UITheme_real_ru.tres:ru", "res://levels/common/UITheme_real_ru.tres:pt_BR", "res://levels/common/UITheme_real_ru.tres:es", "res://levels/common/UITheme_real_ru.tres:fr" ),
+"res://levels/common/UITheme_real_spaced.tres": PoolStringArray( "res://levels/common/UITheme_real_spaced_zh_CN.tres:zh_CN", "res://levels/common/UITheme_real_spaced_ja.tres:ja", "res://levels/common/UITheme_real_spaced_ru.tres:ru", "res://levels/common/UITheme_real_spaced_ru.tres:pt_BR", "res://levels/common/UITheme_real_spaced_ru.tres:es", "res://levels/common/UITheme_real_spaced_ru.tres:fr" ),
+"res://levels/common/UITheme_small.tres": PoolStringArray( "res://levels/common/UITheme_small_zh_CN.tres:zh_CN", "res://levels/common/UITheme_small_ja.tres:ja" ),
+"res://levels/common/dialogBodyFont_Font.tres": PoolStringArray( "res://levels/common/dialogBodyFont_ru_Font.tres:fr", "res://levels/common/dialogBodyFont_ru_Font.tres:ru", "res://levels/common/dialogBodyFont_ru_Font.tres:pt_BR", "res://levels/common/dialogBodyFont_ru_Font.tres:es", "res://levels/common/dialogBodyFont_zh_CN_Font.tres:zh_CN", "res://levels/common/dialogBodyFont_ja_Font.tres:ja" ),
+"res://pauseMenuTheme.tres": PoolStringArray( "res://pauseMenuTheme_zh_CN.tres:zh_CN", "res://pauseMenuTheme_ja.tres:ja", "res://pauseMenuTheme_ru.tres:ru", "res://pauseMenuTheme_ru.tres:pt_BR", "res://pauseMenuTheme_ru.tres:es", "res://pauseMenuTheme_ru.tres:fr" ),
+"res://pauseMenuThemeInputCondensed.tres": PoolStringArray( "res://pauseMenuThemeInputCondensed_ru.tres:ru", "res://pauseMenuThemeInputCondensed_ru.tres:pt_BR", "res://pauseMenuThemeInputCondensed_ru.tres:es", "res://pauseMenuThemeInputCondensed_zh_CN.tres:zh_CN", "res://pauseMenuThemeInputCondensed_ja.tres:ja", "res://pauseMenuThemeInputCondensed_ru.tres:fr" ),
+"res://uiTutorialFont.tres": PoolStringArray( "res://uiTutorialFont_zh_CN.tres:zh_CN", "res://uiTutorialFont_ja.tres:ja", "res://uiTutorialFont_ru.tres:ru", "res://uiTutorialFont_ru.tres:pt_BR", "res://uiTutorialFont_ru.tres:es", "res://uiTutorialFont_ru.tres:fr" )
 }
-locale_filter=[ 0, [ "en", "es", "fr", "ja", "pt_BR", "ru", "zh_CN"] ]
+locale_filter=[ 0, [ "en", "es", "fr", "ja", "pt_BR", "ru", "zh_CN" ] ]
 
 [physics]
 

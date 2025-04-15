@@ -39,7 +39,7 @@ func _process(delta):
   if not can_deactivate_fan:
     mySprite.material_override.set_shader_param("target_palette", smacked_palette)
     notDieSound.pitch_scale = 0.5
-  behavior_walking = not is_fan_spinning
+  # behavior_walking = not is_fan_spinning
 
   if chicken_state == ChickenState.IDLE:
     if is_fan_spinning:

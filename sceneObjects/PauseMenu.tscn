@@ -386,7 +386,6 @@ margin_right = 634.0
 margin_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_clip_content = true
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="ColorRect" type="ColorRect" parent="InventoryRect/ShardsRect"]
@@ -581,13 +580,13 @@ vframes = 5
 frame = 23
 
 [node name="KeyLabel" type="RichTextLabel" parent="InventoryRect"]
-margin_left = 107.0
+margin_left = 33.0
 margin_top = 231.0
-margin_right = 332.0
+margin_right = 354.0
 margin_bottom = 287.0
 theme = ExtResource( 8 )
 bbcode_enabled = true
-bbcode_text = "--key items--"
+bbcode_text = "[center]--key items--[/center]"
 text = "--key items--"
 scroll_active = false
 

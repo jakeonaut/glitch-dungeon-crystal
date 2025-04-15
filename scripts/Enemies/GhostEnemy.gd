@@ -64,6 +64,7 @@ func _process(delta):
     global_transform.origin.y += 5
     mySprite.flip_h = (level.player.global_transform.origin.x < global_transform.origin.x)
     mySprite.material_override.set_shader_param("opacity", 0)
+    my_opacity = 0
     if scared_timer >= scared_time_limit:
       hauntSound.play()
   elif my_opacity < 0.9:

@@ -511,6 +511,7 @@ func spawnGhostEnemy():
     ghostEnemy.global_transform.origin.x = self.global_transform.origin.x
     ghostEnemy.global_transform.origin.y = self.global_transform.origin.y
     ghostEnemy.scared_time_limit = 60
+    ghostEnemy.scared_timer = ghostEnemy.scared_time_limit - 10
     ghostEnemies.push_back(weakref(ghostEnemy))
     return ghostEnemy
     

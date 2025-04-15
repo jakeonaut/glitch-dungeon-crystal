@@ -404,8 +404,8 @@ var allLocales = {
     "ru": { "code": "ru", "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Pусский[/font]" },
     "pt_BR": { "code": "pt_BR", "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Português[/font]" },
     "fr": { "code": "fr", "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Français[/font]" },
-    "ja": { "code": "ja", "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ja.tres]日本語[/font]" },
-    "es": { "code": "es", "supported": false, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Español[/font]" },
+    "ja": { "code": "ja", "supported": false, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ja.tres]日本語[/font]" },
+    "es": { "code": "es", "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Español[/font]" },
 }
 func getSupportedLocalesArray():
     var supportedLocales = []
