@@ -1703,6 +1703,18 @@ tracks/10/keys = {
 "update": 0,
 "values": [ 0.125 ]
 }
+tracks/11/type = "value"
+tracks/11/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/offset")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
 
 [sub_resource type="Animation" id=142]
 resource_name = "degauss"
@@ -1849,6 +1861,18 @@ tracks/11/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.18, 0.125 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/offset")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
 }
 
 [sub_resource type="BoxShape" id=147]

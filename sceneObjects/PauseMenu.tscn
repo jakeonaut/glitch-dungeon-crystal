@@ -209,9 +209,9 @@ margin_bottom = 522.0
 
 [node name="ScrollContainer" type="Control" parent="InputMenu"]
 margin_left = 124.0
-margin_top = 70.0
+margin_top = 50.0
 margin_right = 639.0
-margin_bottom = 514.0
+margin_bottom = 494.0
 rect_pivot_offset = Vector2( -511, -189 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -224,6 +224,7 @@ margin_bottom = 399.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( -745, -223 )
+rect_clip_content = false
 theme = ExtResource( 4 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
@@ -2169,9 +2170,9 @@ scroll_active = false
 [node name="PauseTitleRect" type="ColorRect" parent="."]
 visible = false
 margin_left = 164.0
-margin_top = 400.0
+margin_top = 470.0
 margin_right = 636.0
-margin_bottom = 484.0
+margin_bottom = 554.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
@@ -2492,7 +2493,6 @@ text = "no"
 scroll_active = false
 
 [node name="BetaBuildLabel" type="RichTextLabel" parent="."]
-visible = false
 margin_left = 740.0
 margin_top = 500.0
 margin_right = 992.0
@@ -2502,5 +2502,5 @@ rect_clip_content = false
 theme = SubResource( 17223 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "[right]ver-3.0.2.3[/right]"
-text = "ver-3.0.2.3"
+bbcode_text = "[right]ver-3.0.3.3[/right]"
+text = "ver-3.0.3.3"

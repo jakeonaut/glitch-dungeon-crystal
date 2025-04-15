@@ -1,13 +1,13 @@
 extends AudioStreamPlayer
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
-onready var textBox = get_node("..")
 onready var crystalGeode2 = get_node("../../../..")
 
 func _ready():
   pass
 
 func activateScript():
+  var textBox = get_node("..")
   if global.memory["crone"] == 0:
     return
   # elif global.memory["crone"] == 2:
@@ -24,6 +24,9 @@ func activateScript():
     textBox.showYesNoOptions = true
   else:
     var text = tr("NPC.Crone.7")
+    if global.memory["clean_crystals"] >= 4:
+      text = tr("NPC.Elder.6")
+    
     textBox.text_final = text
     textBox.textNode.bbcode_text = text
     textBox.showYesNoOptions = false

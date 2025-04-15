@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=2]
+[gd_scene load_steps=125 format=2]
 
 [ext_resource path="res://sceneObjects/Enemies/BasicFrogEnemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -23,7 +23,6 @@
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/Lilypad.tscn" type="PackedScene" id=23]
-[ext_resource path="res://sceneObjects/SwampBubbleSpawn.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sceneObjects/BigNPC.tscn" type="PackedScene" id=25]
 [ext_resource path="res://sceneObjects/Enemies/TadpoleEnemy.tscn" type="PackedScene" id=26]
 [ext_resource path="res://sceneObjects/WaterCubes/WaterCube.tscn" type="PackedScene" id=27]
@@ -3040,9 +3039,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42, -13, -4 )
 [node name="WaterCube20" parent="Viewport/level/WaterCubes" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 70, -21, -4 )
 
-[node name="WaterCube21" parent="Viewport/level/WaterCubes" instance=ExtResource( 27 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, -21, -4 )
-
 [node name="WaterCube24" parent="Viewport/level/WaterCubes" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, -27, -4 )
 
@@ -3055,49 +3051,49 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 66, -8, -4 )
 [node name="FloodedWaterCubes" type="Spatial" parent="Viewport/level"]
 
 [node name="WaterCube" parent="Viewport/level/FloodedWaterCubes" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, -32, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, -33, -4 )
 
 [node name="WaterCube2" parent="Viewport/level/FloodedWaterCubes" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, -32, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, -33, -4 )
 
 [node name="WaterCube3" parent="Viewport/level/FloodedWaterCubes" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, -32, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, -33, -4 )
 
 [node name="WaterCube4" parent="Viewport/level/FloodedWaterCubes" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33, -32, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33, -33, -4 )
 
 [node name="WaterCube5" parent="Viewport/level/FloodedWaterCubes" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37, -32, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37, -33, -4 )
 
 [node name="WaterCube6" parent="Viewport/level/FloodedWaterCubes" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41, -32, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41, -33, -4 )
 
 [node name="WaterCube7" parent="Viewport/level/FloodedWaterCubes" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, -32, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, -33, -4 )
 
 [node name="WaterCube8" parent="Viewport/level/FloodedWaterCubes" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49, -32, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49, -33, -4 )
 
 [node name="WaterCube9" parent="Viewport/level/FloodedWaterCubes" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53, -32, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53, -33, -4 )
 
 [node name="WaterCube10" parent="Viewport/level/FloodedWaterCubes" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 57, -32, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 57, -33, -4 )
 
 [node name="WaterCube11" parent="Viewport/level/FloodedWaterCubes" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 61, -32, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 61, -33, -4 )
 
 [node name="WaterCube12" parent="Viewport/level/FloodedWaterCubes" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65, -32, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65, -33, -4 )
 
 [node name="WaterCube13" parent="Viewport/level/FloodedWaterCubes" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 69, -32, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 69, -33, -4 )
 
 [node name="WaterCube14" parent="Viewport/level/FloodedWaterCubes" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 73, -32, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 73, -33, -4 )
 
 [node name="WaterCube15" parent="Viewport/level/FloodedWaterCubes" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 77, -32, -4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 77, -33, -4 )
 
 [node name="Fishies" type="Spatial" parent="Viewport/level"]
 
@@ -3437,7 +3433,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 63, -29.6433, 0 )
 is_extra_life = true
 
 [node name="GrandmaStatue8" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46, -21, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46, -19, 0 )
 is_extra_life = true
 
 [node name="GrandmaStatue3" parent="Viewport/level" instance=ExtResource( 19 )]
@@ -3462,26 +3458,11 @@ flip_h = false
 [node name="CollisionShape" parent="Viewport/level/GrandmaStatue2/FallthroughSolid" index="0"]
 shape = SubResource( 53 )
 
-[node name="GrandmaStatue5" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37, -20, 0 )
-is_extra_life = true
-
-[node name="Sprite3D" parent="Viewport/level/GrandmaStatue5" index="1"]
-flip_h = false
-
-[node name="CollisionShape" parent="Viewport/level/GrandmaStatue5/FallthroughSolid" index="0"]
-shape = SubResource( 53 )
-
 [node name="Lilpad16" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 49, -28, -1 )
 
 [node name="Lilpad17" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 45, -29, -1 )
-
-[node name="SwampBubbleSpawn" parent="Viewport/level" instance=ExtResource( 24 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, -20, 0 )
-spawned_object_path = ""
-has_spawned = true
 
 [node name="BigFishNPC" type="Spatial" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, -20, 0 )
@@ -3529,7 +3510,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 67, -30, 0 )
 only_activate_in_range = false
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 28 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45.7818, -18.3618, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45.7818, -16.3618, 0 )
 grav = 0
 can_move = false
 can_camera_zoom = false
@@ -3564,7 +3545,7 @@ anims/RESET = SubResource( 64 )
 anims/exclaim = SubResource( 65 )
 
 [node name="FishingRod" parent="Viewport/level" instance=ExtResource( 29 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47.7, -18.0214, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47.7, -16.0214, 0 )
 
 [node name="HookInteractionArea" parent="Viewport/level/FishingRod" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.3, 0 )
@@ -3797,7 +3778,6 @@ transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.52
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/BasicFrogEnemy"]
 [editable path="Viewport/level/GrandmaStatue2"]
-[editable path="Viewport/level/GrandmaStatue5"]
 [editable path="Viewport/level/BigFishNPC/MimicNPC"]
 [editable path="Viewport/level/BigFishNPC/MimicNPC/NPC TextBox"]
 [editable path="Viewport/level/BigFishNPC/TreasureSpellCollectable"]

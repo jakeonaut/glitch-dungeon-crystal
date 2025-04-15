@@ -2610,11 +2610,11 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
     fallenBroom.walk_speed *= (2.0 if pressingRun() else 1.5)
     fallenBroom.get_node("BroomSound").play()
     var x_direction = 0
-    if Input.is_action_pressed("ui_left"):
+    if rawPressingMoveLeft():
       x_direction = -1
-    elif Input.is_action_pressed("ui_right"):
+    elif rawPressingMoveRight():
       x_direction = 1
-    if Input.is_action_pressed("ui_up"):
+    if rawPressingMoveUp():
       fallenBroom.walk_speed *= .7
       fallenBroom.walk_direction = Vector2(x_direction, 1)
       fallenBroom.just_pressed_jump = true
@@ -2622,7 +2622,7 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
       fallenBroom.grav = 0
       fallenBroom.jump_force = 12.0 if x_direction == 0 else 12 * .7
       fallenBroom.thrown_direction.y = 1
-    elif Input.is_action_pressed("ui_down"):
+    elif rawPressingMoveDown():
       fallenBroom.walk_speed *= .7
       fallenBroom.walk_direction = Vector2(x_direction, -1)
       fallenBroom.grav = 600

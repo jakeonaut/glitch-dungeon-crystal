@@ -279,7 +279,7 @@ func _process(delta):
     global.currLevelZone = null
     transition.long_fade_to("res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn")
 
-  pauseTitleRect.rect_position = Vector2(164, 420)
+  pauseTitleRect.rect_position = Vector2(164, 440) if pauseMenuState == PauseMenuState.KEYBOARD_INPUT or pauseMenuState == PauseMenuState.CONTROLLER_INPUT else Vector2(164, 420)
 
 func repositionCursorSprite(index):
   cursorSprite.position.x = 110
@@ -293,7 +293,7 @@ func repositionInputCursorSprite(index, _showCondensedMenu):
   cursorSprite.scale = Vector2(3, 3)
   cursorSprite.position.x = 100
   #if showCondensedMenu:
-  cursorSprite.position.y = 35 + (31*index)
+  cursorSprite.position.y = 15 + (31*index)
   #else:
   #  cursorSprite.position.y = 114 + (44*index)
 
@@ -1343,7 +1343,7 @@ func getVisibleControlsConfig():
       continue
     if ia == "enter_door":
       continue
-    if ia == "spell_1" or ia == "spell_2" or ia == "spell_3" or ia == "spell_4":
+    if (ia == "spell_1" or ia == "spell_2" or ia == "spell_3" or ia == "spell_4") and (pauseMenuState == PauseMenuState.CONTROLLER_INPUT or not global.memory["glitched_grimoire"]):
       continue
     visibleControlsConfig.push_back(controlConfig)
   return visibleControlsConfig

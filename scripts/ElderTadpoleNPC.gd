@@ -19,6 +19,8 @@ func _ready():
   processLevelZone()
 
 var have_i_processed = false
+var haven2CroneDialogStartSoundScriptRes = preload("res://levels/EndlessFantasy/gd1/Haven2CroneDialogStartSound.gd")
+var haven2CroneAbortSoundScriptRes = preload("res://levels/EndlessFantasy/gd1/Haven2CroneAbortSound.gd")
 func processLevelZone():
   var levelZoneName = global.currLevelZone
   if levelZoneName == "gd1GrandmaVillage" or levelZoneName == "gd1PrimordialOoze":
@@ -39,6 +41,10 @@ func processLevelZone():
         self.textBox.textNode.bbcode_text = finalText
         self.textBox.dialogStartSound.volume_db = -15
         self.textBox.dialogStartSound.stream = npcSleepSfxRes
+      if global.memory["clean_crystals"] >= 4:
+        self.textBox.dialogStartSound.script = haven2CroneDialogStartSoundScriptRes
+        self.textBox.abortSound.script = haven2CroneAbortSoundScriptRes
+        global.memory["crone"] = 1
     "gd1FishingVillage":
       memoryVarName = "angler_seaman_boss"
       can_smack_back = false

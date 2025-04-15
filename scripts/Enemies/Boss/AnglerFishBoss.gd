@@ -198,7 +198,7 @@ func _process(delta):
                 secretAniPlayer.play("stunFall")
                 tryToStartWeakPointDetachment()
                 getSmacked()
-            elif global_transform.origin.x < 14:
+            elif global_transform.origin.x < 13:
                 how_many_final_charges += 1
                 boss_phase = BossPhase.CHARGING_BACKWARDS    
                 self.global_transform.origin.y = level.player.global_transform.origin.y
@@ -211,6 +211,10 @@ func _process(delta):
     elif boss_phase == BossPhase.CHARGING_BACKWARDS:
         behavior_walking = true
         walk_direction.x = 1
+        if global_transform.origin.y - 2 > level.player.global_transform.origin.y:
+            global_transform.origin.y -= delta
+        elif global_transform.origin.y + 2 < level.player.global_transform.origin.y:
+            global_transform.origin.y += delta
         if global_transform.origin.x >= 66:
             if how_many_final_charges >= num_hits:
                 behavior_walking = false
@@ -406,7 +410,7 @@ func startBossFight():
     level.gameCamera.zoomed_size = 30
 
 func barfRandomSnail():
-    if num_hits*2 <= basicFrogEnemies.size():
+    if basicFrogEnemies.size() >= num_hits*num_hits:
         return
 
     var basicFrogEnemy = basicFrogEnemyRes.instance()

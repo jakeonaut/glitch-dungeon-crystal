@@ -29,7 +29,7 @@ UI.InputMenu.Action.4,up,向上,Вверх,cima,"bas",上,Arriba
 UI.InputMenu.Action.5,jump,跳跃,Прыжок,pular,"sauter",ジャンプ,Saltar
 UI.InputMenu.Action.6,sweep broom,扫帚,Метла,vassourada,"balayer",ほうきを掃く,Barredada
 UI.InputMenu.Action.6_0,"talk","讲话","разговаривать","falar","parler",話す,Hablar
-UI.InputMenu.Action.7,Return to save.,回到上一个存档点,«Вернуться»,último checkpoint,"Retour à sauvegarde.",セーブに戻る,Volver al Checkpoint
+UI.InputMenu.Action.7,Return to save.,回到上一个存档点,«Вернуться»,último checkpoint,"Retour à sauvegarde.",セーブに戻る,Volver
 UI.InputMenu.Action.8,next spell,下一个咒语,Следующее заклинание,próximo feitiço,"prochain sort",次の魔法,próximo hechizo
 UI.InputMenu.Action.9,prev spell,上一个咒语,Предыдущее заклинание,feitiço anterior,"dernier sort",前の魔法,hechizo anterior
 UI.InputMenu.Action.9_0,spell %s,一个咒语%s,заклинание %s,feitiço %s,"sort %s",魔法 %s,hechizo %s
@@ -37,7 +37,7 @@ UI.InputMenu.Action.10,open map,打开地图,Открыть карту,abrir map
 UI.InputMenu.13_0,"press %s to select, %s to go back.","按%s选择，按%s返回","%s выбора, %s возвращения.","%s escolher, %s voltar.","%s sélectionner, %s retour",%s 選択、 %s 戻る,"pulsa %s eligir, %s regresar."
 UI.InputMenu.13_1,"Really quit?\npress %s to select, %s to go back.","真的退出吗？\n按%s选择，按%s返回","Действительно уйти?\n%s выбора, %s возвращения.","Realmente desistir?\n%s escolher, %s voltar.","Tu veux vraiment arrêter ?\n%s sélectionner, %s retour",本当にやめる？\n %s 選択、 %s 戻る。,"Realmente salir?\n%s seleccionar, %s volver."
 UI.InputMenu.13_2,"unsaved progress will be lost.\npress %s to select, %s to go back.","未保存的进度将会丢失。\n按%s选择，按%s返回","Несохраненный прогресс будет утерян.\n%s выбора, %s возвращения.","o progresso não salvo será perdido.\naperte %s escolher %s voltar.","les progrès non sauvegardés seront perdus\n%s sélectionner, %s retour",セーブしてないプログレスは消えてしまいます。\n %s 選択、 %s 戻る。,"Se perderá el progreso no guardado.\n%s seleccionar, %s volver."
-UI.InputMenu.13,"press %s to select, %s to go back\nhold %s: reset bindings","按%s选择，按%s返回\n长按%s恢复默认设置","%s выбора, %s возвращения.\nУдерживайте %s сброса настроек","%s selecionar %s voltar\nsegure %s para redefinir","%s sélectionner, %s retour\ngardez %s réinitialiser les saisies.", %s 選択、 %s 戻る。\n %s 長押し：バインドをリセット,"%s seleccionar, %s retroceder\nmantener pulsado %s: restablecer controles"
+UI.InputMenu.13,"press %s to select, %s to go back\nhold %s: reset bindings","按%s选择，按%s返回\n长按%s恢复默认设置","%s выбора, %s возвращения.\nУдерживайте %s сброса настроек","%s selecionar %s voltar\nsegure %s para redefinir","%s sélectionner, %s retour\ngardez %s réinitialiser les saisies.", %s 選択、 %s 戻る。\n %s 長押し：バインドをリセット,"%s seleccionar, %s retroceder\npulsado %s: restablecer controles"
 UI.InputMenu.14,"press key to set %s",按键设定%s,Задайте кнопку\nдля действия %s,"aperte para definir %s","appuyez sur la touche\nchoisie pour: %s",キー選択して %s を設定する,pulse la tecla para fijar %s
 UI.InputMenu.14_2,"press button to set %s",按钮设定%s,Задайте клавиатура\nдля действия %s,"aperte para definir %s","appuyez sur la bouton\nchoisie pour: %s",ボタン選択して %s を設定する,"\"pulse el botón para fijar %s\""
 UI.InputMenu.15,"reset bindings\n...3 ...2 ...1!","恢复默认设置中\n…3…2…1！","Сброс настроек\n3... 2... 1!","redefinindo controles\n...3 ...2 ...1!","réinitialisation des saisies\n...3 ...2 ...1!",バインドのリセットまで\n...3 ...2 ...1!,restableciendo controles\n...3 ...2 ...1!

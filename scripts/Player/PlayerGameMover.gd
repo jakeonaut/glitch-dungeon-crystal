@@ -174,23 +174,24 @@ func _process(delta):
     cameraTarget.transform.origin.x = camera_target_origin_x_target
   if override_camera_y == null:
     cameraTarget.global_transform.origin.y = camera_target_y_pos + camera_y_offset
-    if pressingMoveUp() and on_ground:
-      if holding_up_timer < holding_up_time_limit:
-        holding_up_timer += (delta*11)
-    else:
-      if not (holding_up_timer >= holding_up_time_limit and pressingMoveUp()):
-        holding_up_timer = 0
-      if pressingDown() and on_ground:
-        if holding_down_timer < holding_down_time_limit:
-          holding_down_timer += (delta*11)
+    if not global.pauseGame:
+      if pressingMoveUp() and on_ground:
+        if holding_up_timer < holding_up_time_limit:
+          holding_up_timer += (delta*11)
       else:
-        if not (holding_down_timer >= holding_down_time_limit and pressingDown()):
-          holding_down_timer = 0
+        if not (holding_up_timer >= holding_up_time_limit and pressingMoveUp()):
+          holding_up_timer = 0
+        if pressingDown() and on_ground:
+          if holding_down_timer < holding_down_time_limit:
+            holding_down_timer += (delta*11)
+        else:
+          if not (holding_down_timer >= holding_down_time_limit and pressingDown()):
+            holding_down_timer = 0
 
-    if holding_up_timer >= holding_up_time_limit:
-      cameraTarget.global_transform.origin.y += 10
-    elif holding_down_timer >= holding_down_time_limit:
-      cameraTarget.global_transform.origin.y -= 10
+      if holding_up_timer >= holding_up_time_limit:
+        cameraTarget.global_transform.origin.y += 10
+      elif holding_down_timer >= holding_down_time_limit:
+        cameraTarget.global_transform.origin.y -= 10
   else:
     cameraTarget.global_transform.origin.y = override_camera_y
 
@@ -389,34 +390,33 @@ func landed():
 func isTextboxPausingMe():
   return global.activeInteractor != null and global.activeInteractor.showYesNoOptions
 
-# @override
-func pressingDown():
-  var pressingDownButton = Input.is_action_pressed("ui_down") or (
-    global.userSettings["use_joystick"] > 0 and (
-      Input.get_joy_axis(0, JOY_AXIS_1) > global.getDeadzone() or # vertical leftstick
-      Input.get_joy_axis(0, JOY_AXIS_3) > global.getDeadzone() # verical rightstick
-    )
-  )
-  return pressingDownButton and not pauseInput and not isTextboxPausingMe()
-
-# @override
-func pressingMoveDown():
-  var pressingDownButton = Input.is_action_pressed("ui_down") or (
+func rawPressingMoveDown():
+  return Input.is_action_pressed("ui_down") or (
     global.userSettings["use_joystick"] > 0 and (
       Input.get_joy_axis(0, JOY_AXIS_1) > global.getDeadzone() or # vertical leftstick
       Input.get_joy_axis(0, JOY_AXIS_3) > global.getDeadzone() # vertical rightstick
     )
   )
-  return pressingDownButton and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()
+# @override
+func pressingDown():
+  var pressingDownButton = rawPressingMoveDown()
+  return pressingDownButton and not pauseInput and not isTextboxPausingMe()
 
 # @override
-func pressingMoveUp():
-  var pressingUpButton = Input.is_action_pressed("ui_up") or (
+func pressingMoveDown():
+  var pressingDownButton = rawPressingMoveDown()
+  return pressingDownButton and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()
+
+func rawPressingMoveUp():
+  return Input.is_action_pressed("ui_up") or (
     global.userSettings["use_joystick"] > 0 and (
       Input.get_joy_axis(0, JOY_AXIS_1) < -global.getDeadzone() or # vertical leftstick
       Input.get_joy_axis(0, JOY_AXIS_3) < -global.getDeadzone() # vertical rightstick
     )
   )
+# @override
+func pressingMoveUp():
+  var pressingUpButton = rawPressingMoveUp()
   return pressingUpButton and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()
 
 var just_pacman_flipped = false
@@ -429,24 +429,28 @@ func shouldFlipWalkingDirection():
   return (grav < 0 and not transformation == TransformationState.BUBBLE) or malware_infected
 
 var override_stop_left_input = false
+func rawPressingMoveLeft():
+  return Input.is_action_pressed("ui_left") or (
+    global.userSettings["use_joystick"] > 0 and (
+      Input.get_joy_axis(0, JOY_AXIS_0) < -global.getDeadzone() or # horizontal leftstick
+      Input.get_joy_axis(0, JOY_AXIS_2) < -global.getDeadzone() # horizontal rightstick
+    )
+  )
+func rawPressingMoveRight():
+  return Input.is_action_pressed("ui_right") or (
+    global.userSettings["use_joystick"] > 0 and (
+      Input.get_joy_axis(0, JOY_AXIS_0) > global.getDeadzone() or # horizontal leftstick
+      Input.get_joy_axis(0, JOY_AXIS_2) > global.getDeadzone() # horizontal rightstick
+    )
+  )
 # @override
 func pressingMoveLeft():
   if override_stop_left_input or physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
   var am_paused = pauseInput or isTextboxPausingMe()
 
-  var pressingLeftButton = Input.is_action_pressed("ui_left") or (
-    global.userSettings["use_joystick"] > 0 and (
-      Input.get_joy_axis(0, JOY_AXIS_0) < -global.getDeadzone() or # horizontal leftstick
-      Input.get_joy_axis(0, JOY_AXIS_2) < -global.getDeadzone() # horizontal rightstick
-    )
-  )
-  var pressingRightButton = Input.is_action_pressed("ui_right") or (
-    global.userSettings["use_joystick"] > 0 and (
-      Input.get_joy_axis(0, JOY_AXIS_0) > global.getDeadzone() or # horizontal leftstick
-      Input.get_joy_axis(0, JOY_AXIS_2) > global.getDeadzone() # horizontal rightstick
-    )
-  )
+  var pressingLeftButton = rawPressingMoveLeft()
+  var pressingRightButton = rawPressingMoveRight()
 
   if shouldFlipWalkingDirection():
     return pressingRightButton and not am_paused
@@ -462,18 +466,8 @@ func pressingMoveRight():
     return false
   var am_paused = pauseInput or isTextboxPausingMe()
 
-  var pressingLeftButton = Input.is_action_pressed("ui_left") or (
-    global.userSettings["use_joystick"] > 0 and (
-      Input.get_joy_axis(0, JOY_AXIS_0) < -global.getDeadzone() or # horizontal leftstick
-      Input.get_joy_axis(0, JOY_AXIS_2) < -global.getDeadzone() # horizontal rightstick
-    )
-  )
-  var pressingRightButton = Input.is_action_pressed("ui_right") or (
-    global.userSettings["use_joystick"] > 0 and (
-      Input.get_joy_axis(0, JOY_AXIS_0) > global.getDeadzone() or # horizontal leftstick
-      Input.get_joy_axis(0, JOY_AXIS_2) > global.getDeadzone() # horizontal rightstick
-    )
-  )
+  var pressingLeftButton = rawPressingMoveLeft()
+  var pressingRightButton = rawPressingMoveRight()
 
   if shouldFlipWalkingDirection():
     return pressingLeftButton and not am_paused
@@ -611,7 +605,7 @@ func collideWithWall(local_lv):
 
 onready var digSound = get_node("Sounds/DigSound")
 func processMoleDigTimer(digDirection):
-  if global.memory["mole_cricket"] == 0 or not global.mole_cricket_enabled:
+  if global.memory["mole_cricket"] == 0 or not global.mole_cricket_enabled or global.pauseGame:
     dig_timer = 0
     return
 

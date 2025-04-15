@@ -102,6 +102,7 @@ func _process(delta):
       mySprite.get_material_override().set_shader_param("time_influence", 21.644)
       mySprite.get_material_override().set_shader_param("shake_color_rate", 0.625)
       mySprite.get_material_override().set_shader_param("target_palette", global.rgb_palette)
+      mySprite.get_material_override().set_shader_param("offset", 1)
     if tileSpikes:
       tileSpikes.visible = true
     if not smallInteractionArea.is_in_group("weak_enemies"):

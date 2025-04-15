@@ -1,13 +1,12 @@
 extends AudioStreamPlayer
 
-onready var level = get_tree().get_root().get_node("Game/Viewport/level")
-onready var textBox = get_node("..")
-onready var NPC = get_node("../../..")
-
 func _ready():
   pass
 
 func activateScript():
+  var level = get_tree().get_root().get_node("Game/Viewport/level")
+  var textBox = get_node("..")
+  var NPC = textBox.textboxParent.get_ref()
   if textBox.was_smacked:
     return
 
