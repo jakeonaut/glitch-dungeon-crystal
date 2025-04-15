@@ -2493,6 +2493,7 @@ text = "no"
 scroll_active = false
 
 [node name="BetaBuildLabel" type="RichTextLabel" parent="."]
+visible = false
 margin_left = 740.0
 margin_top = 500.0
 margin_right = 992.0

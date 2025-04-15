@@ -24,7 +24,7 @@ UI.InputMenu.Action.1,move left,向左,Влево,esquerda,"gauche"
 UI.Tutorial.InputPrompt.1,"%s to Sweep. %s to Jump. %s%s to walk..","%s 扫帚。%s 跳跃。%s%s 向左向右","%s Метла. %s Прыжок. %s%s ходить","%s vassourada %s pular %s%s andar","%s balayer, %s sauter, %s%s mouvement"
 UI.InputMenu.Action.2,move right,向右,Вправо,direita,"droite"
 UI.InputMenu.Action.3,down,向下,Вниз,baixo,"haut"
-UI.InputMenu.Action.3_0,enter door, "进门", "войти дверь", "entre porta", "entrer porte"
+UI.InputMenu.Action.3_0,enter door, "进门", "войти дверь", "entre porta","prendre une porte"
 UI.InputMenu.Action.4,up,向上,Вверх,cima,"bas"
 UI.InputMenu.Action.5,jump,跳跃,Прыжок,pular,"sauter"
 UI.InputMenu.Action.6,sweep broom,扫帚,Метла,vassourada,"balayer"
@@ -34,10 +34,10 @@ UI.InputMenu.Action.8,next spell,下一个咒语,Следующее заклин
 UI.InputMenu.Action.9,prev spell,上一个咒语,Предыдущее заклинание,feitiço anterior,"dernier sort"
 UI.InputMenu.Action.9_0,spell %s,一个咒语%s,заклинание %s,feitiço %s,"sort %s"
 UI.InputMenu.Action.10,open map,打开地图,Открыть карту,abrir mapa,"ouvrir la carte"
-UI.InputMenu.13_0,"press %s to select, %s to go back.","按%s选择，按%s返回","%s выбора, %s возвращения.","%s escolher, %s voltar.","%s sélectionner, %s retourner"
-UI.InputMenu.13_1,"Really quit?\npress %s to select, %s to go back.","真的退出吗？\n按%s选择，按%s返回","Действительно уйти?\n%s выбора, %s возвращения.","Realmente desistir?\n%s escolher, %s voltar.","Tu veux vraiment arrêter ?\n%s sélectionner, %s retourner"
-UI.InputMenu.13_2,"unsaved progress will be lost.\npress %s to select, %s to go back.","未保存的进度将会丢失。\n按%s选择，按%s返回","Несохраненный прогресс будет утерян.\n%s выбора, %s возвращения.","o progresso não salvo será perdido.\naperte %s escolher %s voltar.","les progrès non sauvegardés seront perdus\n%s sélectionner, %s retourner"
-UI.InputMenu.13,"press %s to select, %s to go back\nhold %s: reset bindings","按%s选择，按%s返回\n长按%s恢复默认设置","%s выбора, %s возвращения.\nУдерживайте %s сброса настроек","%s selecionar %s voltar\nsegure %s para redefinir","%s sélectionner, %s retourner\ngardez %s réinitialiser les saisies."
+UI.InputMenu.13_0,"press %s to select, %s to go back.","按%s选择，按%s返回","%s выбора, %s возвращения.","%s escolher, %s voltar.","%s sélectionner, %s retour"
+UI.InputMenu.13_1,"Really quit?\npress %s to select, %s to go back.","真的退出吗？\n按%s选择，按%s返回","Действительно уйти?\n%s выбора, %s возвращения.","Realmente desistir?\n%s escolher, %s voltar.","Tu veux vraiment arrêter ?\n%s sélectionner, %s retour"
+UI.InputMenu.13_2,"unsaved progress will be lost.\npress %s to select, %s to go back.","未保存的进度将会丢失。\n按%s选择，按%s返回","Несохраненный прогресс будет утерян.\n%s выбора, %s возвращения.","o progresso não salvo será perdido.\naperte %s escolher %s voltar.","les progrès non sauvegardés seront perdus\n%s sélectionner, %s retour"
+UI.InputMenu.13,"press %s to select, %s to go back\nhold %s: reset bindings","按%s选择，按%s返回\n长按%s恢复默认设置","%s выбора, %s возвращения.\nУдерживайте %s сброса настроек","%s selecionar %s voltar\nsegure %s para redefinir","%s sélectionner, %s retour\ngardez %s réinitialiser les saisies."
 UI.InputMenu.14,"press key to set %s",按键设定%s,Задайте кнопку\nдля действия %s,"aperte para definir %s","appuyez sur la touche\nchoisie pour: %s"
 UI.InputMenu.14_2,"press button to set %s",按钮设定%s,Задайте клавиатура\nдля действия %s,"aperte para definir %s","appuyez sur la bouton\nchoisie pour: %s"
 UI.InputMenu.15,"reset bindings\n...3 ...2 ...1!","恢复默认设置中\n…3…2…1！","Сброс настроек\n3... 2... 1!","redefinindo controles\n...3 ...2 ...1!","réinitialisation des saisies\n...3 ...2 ...1!"
@@ -71,10 +71,10 @@ NPC.Crone.1_2,"•I think the crystals are ahead\nbut I can't get past this door
 NPC.Crone.1_3,"•Ah! great work.\nI'll meet you on ahead","啊!很棒的工作\n我会在前面遇见你","Ах! отличная работа.\nЯ встречу тебя впереди","ah, que maravilha!\nte encontro mais adiante,\nquerida!","Ah ! Excellent travail. \nÀ bientôt."
 NPC.Crone.2,don't test me hag,老太婆！你再抽我试试？,"Не испытывай меня, старая ты мымра.","não teste minha paciência, velha coroca.","ne me provoque pas mégère"
 NPC.Tutorial.0,touch magic pillar to learn:,触摸魔法柱习得：,"Коснитесь волшебной колонны, чтобы изучить:",toque no pilar mágico para aprender:,"touchez pilier magique apprendre:"
-NPC.Tutorial.1,"touch magic pillar to learn\n[color=#00ff00]Feather Fall[/color] spell: jump high\nby holding jump button",[color=#00ff00]一飞冲天[/color]：长按跳跃键高跳,"[color=#00ff00]Пёрышко[/color] – удерживайте кнопку прыжка, чтобы прыгнуть выше.",[color=#00ff00]Sopro de Pena[/color]: pule mais alto\nsegurando o botão de pulo.,"touchez pilier magique\napprendre: [color=#00ff00]Poids Plume:[/color]\nsautez plus haut\nen maintenant le bouton\nsaut appuyé"
+NPC.Tutorial.1,"touch magic pillar to learn\n[color=#00ff00]Feather Fall[/color] spell: jump high\nby holding jump button",[color=#00ff00]一飞冲天[/color]：长按跳跃键高跳,"[color=#00ff00]Пёрышко[/color] – удерживайте кнопку прыжка, чтобы прыгнуть выше.",[color=#00ff00]Sopro de Pena[/color]: pule mais alto\nsegurando o botão de pulo.,"touchez le pilier pour apprendre:\n[color=#00ff00]Poids Plume:[/color] sautez plus haut\nen maintenant bouton saut"
 NPC.Tutorial.2,"you can also hold\n[color=#00ff00]jump[/color]\nbutton\nto float gracefully",长按跳跃键优雅漂浮。\n实在太优雅了！,"Ещё, если удерживать\nкнопку прыжка, вы можете\nпарить в воздухе.",você também pode segurar\no botão de pulo no ar\npara planar graciosamente.,"vous pouvez aussi gracieusement\nléviter en gardant le bouton\nsaut appuyé"
 NPC.Tutorial.3,are you stuck?\npress %s to Return,卡住了吗？\n按%s返回,"Не знаете, куда идти?\nНажмите %s, чтобы «вернуться».",está presa?\naperte %s para retornar.,"mémé est coincée?\nappuyez sur %s pour Retourner"
-NPC.Tutorial.4,"•touch magic pillar to learn\nthe [color=#ff0000]Air Walk[/color] spell:\nwalk without falling down",[color=#ff0000]空中漫步[/color]：在空中漂浮移动,"[color=#ff0000]Лёгкость[/color] – ходите по\nвоздуху, не падая вниз.",[color=#ff0000]Passeio Etéreo[/color]: ande pelo\nar sem cair.,"touchez pilier magique\napprendre: [color=#ff0000]Marche Aérienne:[/color]\ncontinuez à marcher\nsans tomber"
+NPC.Tutorial.4,"•touch magic pillar to learn\nthe [color=#ff0000]Air Walk[/color] spell:\nwalk without falling down",[color=#ff0000]空中漫步[/color]：在空中漂浮移动,"[color=#ff0000]Лёгкость[/color] – ходите по\nвоздуху, не падая вниз.",[color=#ff0000]Passeio Etéreo[/color]: ande pelo\nar sem cair.,"touchez le pilier pour apprendre:\n[color=#ff0000]Marche Aérienne:[/color] continuez\nà marcher sans tomber"
 NPC.Tutorial.5,"•some glitches are\nun-sweepable.\ni know this",有些故障就是没法打扫干净。\n我知道的。,Некоторые глитчи\nнельзя убрать.\nПоверьте на слово.,alguns glitches não\npodem ser varridos.\ndisso eu sei.,"certains glitchs sont\ninbalayables.\noui je sais."
 NPC.Tutorial.5_2,"•i am also\nun-sweepable.\ni know this.",我也无法被清除。\n我知道。,Я также удалить невозможно.\nПоверьте на слово.,Eu também não\nposso ser varrido.\ndisso eu sei.,"je suis aussi inbalayables\noui je sais."
 NPC.Tutorial.6,"sometimes, you must go\nbackwards to progress.\nGlitches can help you.",有时以退为进也是良策。\n故障也会有用处的。,"Иногда нужно пойти назад,\nчтобы продвинуться вперёд.\nГлитчи в этом помогут.",às vezes você precisa voltar\npara poder seguir em frente.\nglitches podem te ajudar.,"des fois, il faut revenir en\narrière pour avancer. Les\nglitch peuvent vous aider"
@@ -100,14 +100,14 @@ NPC.BabushkaCat.1,*meow* *prrrr*,喵~咕噜咕噜~,*мяу* *мур-р*,*miau* *
 NPC.BabushkaCat.1_2,*me-OW!*,喵！！,*мяу!!*,*miau!!*,*miou!!!*
 Dialog.Player.3,oh hello dearie,哎呀~咪咪,"О, здравствуй!","oi, fofura.",tiens bonjour très chère
 NPC.Tutorial.7,"with the Grimoire:\npress %s to switch\nbetween spells","使用魔法书：\n按%s切换咒语","С «Гримуаром»:\nнажмите %s, чтобы\nсменить заклинание.","com o Grimório:\naperte %s para\ntrocar de feitiço",avec le Grimoire: appuyez\nsur %s pour changer de sort
-NPC.Tutorial.8,try swapping and jumping\nat the same time!,尝试同时交换和跳跃！,Попробуй сменить заклинание\nи прыгнуть одновременно!,tente trocar feitiços\nenquanto pula!,essayez de changer\nde sort en sautant!
+NPC.Tutorial.8,try jumping and swapping\nat the same time!,尝试同时交换和跳跃！,Попробуй сменить заклинание\nи прыгнуть одновременно!,tente trocar feitiços\nenquanto pula!,essayez de changer\nde sort en sautant!
 NPC.Tutorial.9,hi..\n•because you're [color=red]old[/color]: you'll only\nremember 2 spells at a time,那个…年纪大了，\n你一次只能记住两个咒语咯,Вряд ли вы запомните\nбольше двух заклинаний.\nВозраст сказывается.,"oi...\ncomo a senhora está bem velhinha,\nsó consegue se lembrar de\n2 feitiços de cada vez",bonjour... puisque vous êtes vieille:\nvous ne vous souviendrez que\nde 2 sorts à la fois
 Dialog.Player.4,harumph!!,什么玩意儿！！,Ой-ой-ой!,hunf!!,saperlipopette!!
 NPC.Tutorial.10,did you notice?\nthe spell you forget\nis the one you had active. i\nthought that was interesting.,发现了吗？\n你忘记的咒语就是你激活的那个。\n这可太有意思了。,А вы заметили?\nВы забываете именно\nактивное заклинание.\nЭто любопытно.,"viu? a senhora\nesquece justo o feitiço\nque estava usando.\ncurioso, não?",avez-vous remarqué?\nle sort que vous avez oublié\nest celui qui était actif.\nj'ai pensé cela intéressant
 NPC.Tutorial.11,"you were here once\nbefore, weren't you?",你之前来过这，对吗？,Вы ведь уже\nздесь были?,"você já esteve aqui antes,\nnão é mesmo?","vous avez été ici auparavant,\nn'est-ce pas?"
 NPC.Tutorial.12,[color=blue]holy aura[/color]\nmakes you forget...,圣洁光环会让你忘记…,Святая аура\nстирает память...,a aura sagrada faz\na gente esquecer...,[color=blue]l'aura bénie[/color] vous fait oublier...
 NPC.Tutorial.13,"when you're red, you \ncan walk on air.. try \nnot to jump at first!\nthat's all i'll say about that","当你是红色的时候，\n你可以在空中行走…\n但是别先跳跃！","Когда вы светитесь красным,\nто можете ходить по воздуху!\nТолько не надо прыгать...","quando você ficar vermelha,\nvai poder andar no ar...\ncuidado com os pulos!","quand vous êtes rouge,\nvous pouvez marcher sur l'air...\nessayez de ne pas sauter!"
-HolyAura.Display,"you forgot","你忘记","стереть память","esqueceu",tu as oublié
+HolyAura.Display,"you forgot","你忘记","стереть память","esqueceu",vous avez oublié
 NPC.GhostGirl.1,don't forget about me.\ndon't forget who you were.,别忘了我，\n也别忘了你自己是谁。,"Не забывай меня,\nне забывай себя.",não se esqueça de mim.\nnão se esqueça de\nquem você já foi.,ne m'oubliez pas.\nn'oubliez pas qui vous étiez.
 NPC.Crone.3,"•you awoke a crystal elder!\n•you seem to have\nsome [color=red]hag magic[/color]... I can \nenchant your broom with shards",你唤醒了一位水晶长老！\n看来您这位老太太有点意思…\n我可以用碎片\n给你的魔法施加点法术。,"Ты разбудила «старуха»!\nПохоже, у тебя есть\nдар мымровой магии...\nЯ могу зачаровать твою\nметлу с помощью осколков.",você despertou uma anciã de cristal!\nvejo que tem um pouco de\nmagia de bruxa em você...\nposso encantar sua vassoura\ncom fragmentos.,"vous avez réveillé un aîné-cristal!\nvous semblez avoir une sorte de\nmémé-magie... je peux enchanter\nvotre balai avec vos fragments"
 NPC.Crone.4,"•trade %s shards for\n[color=red]BROOMERANG[/color]?",用 %s 个魔法碎片交换\n回旋扫帚？,Потратить %s\nосколков на МЕТЛОРАНГ?,quer trocar %s\nfragmentos pela VASSOURANGUE?,"échanger %s fragments\ncontre un BALAIRANG?"
@@ -125,7 +125,7 @@ NPC.Crystal.5,"jumps: ","扫帚攻击： ","Прыжков: ","pulos: ","sauts: 
 NPC.Crystal.6,"love: ","LOVE: ","Любви: ","amor: ","amour: "
 NPC.Crystal.7,"shards: ","个碎片： ","осколков: ","fragmentos: ","fragments: "
 NPC.Crystal.8,"clean dust: ","灰尘打扫： ","Глитч-чистый: ","sujeira: ","poussière: "
-NPC.Crystal.9,"time aged: ","时间变老： ","время: ","tempo velhinha: ","vieilli temps: "
+NPC.Crystal.9,"time aged: ","时间变老： ","время: ","tempo velhinha: ","vous avez âgé de: "
 NPC.Crystal.NULL,NULL,NULL,ноль,NULL,NULL
 NPC.Crystal.Final,press %s to continue,按%s继续,"%s продолжить",%s continuar.,"%s continuer"
 NPC.Elder.1,"•zzz\n(well, she's still asleep...\ncan you wake her?)",呼呼\n（啊，她还在睡着呢…\n你能把她叫醒吗？）,"Хр-р...\n(Она ещё спит...\nМожет, разбудить?)",zzz\n(ela ainda está dormindo...\nvocê pode acordar ela?).,"zzz\n(eh bien, elle dort toujours...\npouvez vous la réveiller?)"

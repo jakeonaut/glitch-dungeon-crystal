@@ -116,6 +116,8 @@ func _ready():
 
 func _process(delta):
   # super._process(delta) implicit
+  if global.pauseGame:
+    tryHideActiveInteractPrompt()
 
   which_side_is_player_on = level.player.global_transform.origin.x > global_transform.origin.x
   if floating_text:

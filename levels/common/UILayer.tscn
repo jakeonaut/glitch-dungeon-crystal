@@ -1118,7 +1118,7 @@ mesh = SubResource( 17226 )
 script = ExtResource( 30 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 material_override = SubResource( 17211 )
 mesh = SubResource( 17 )
 
@@ -1841,9 +1841,9 @@ scroll_active = false
 
 [node name="TimeHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
 visible = false
-margin_left = 276.0
+margin_left = 239.0
 margin_top = 365.0
-margin_right = 587.0
+margin_right = 575.0
 margin_bottom = 407.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -1856,6 +1856,7 @@ text = "time aged: 30 minutes"
 scroll_active = false
 
 [node name="PressEnterLabel" type="RichTextLabel" parent="EndOfLevel"]
+visible = false
 margin_left = 173.5
 margin_top = 433.0
 margin_right = 556.5

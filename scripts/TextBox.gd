@@ -338,7 +338,7 @@ func resetPrompts():
 
 var is_interact_prompt = false
 func showInteractPrompt(is_comic_alert = false): 
-  if global.activeInteractor == self:
+  if global.activeInteractor == self or global.pauseGame:
     return
     
   var sweep_button_text = global.getLargeInputText("talk_button")
