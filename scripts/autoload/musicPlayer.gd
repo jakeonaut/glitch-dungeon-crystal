@@ -139,6 +139,8 @@ func stopAll():
 var did_play_treasure_jingle = false
 var restartPlayingTheme = null
 func playTreasureJingle(volume_db):
+    if global.userSettings["stopAllSfx"]:
+        return
     restartPlayingTheme = currentlyPlayingTheme
     stopAll()
     did_play_treasure_jingle = true
@@ -147,6 +149,8 @@ func playTreasureJingle(volume_db):
 
 var did_play_defeat_boss_jingle = false
 func playDefeatBossJingle():
+    if global.userSettings["stopAllSfx"]:
+        return
     # print("defeat boss jingle")
     restartPlayingTheme = currentlyPlayingTheme
     stopAll()

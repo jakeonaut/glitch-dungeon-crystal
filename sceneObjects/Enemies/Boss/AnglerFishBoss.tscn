@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=2]
+[gd_scene load_steps=105 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -40,6 +40,7 @@
 [ext_resource path="res://assets/sounds/eba_swimming8.wav" type="AudioStream" id=38]
 [ext_resource path="res://assets/DELETEME/horn.wav" type="AudioStream" id=39]
 [ext_resource path="res://assets/sounds/Octopus.wav" type="AudioStream" id=40]
+[ext_resource path="res://sceneObjects/AreaContainer.gd" type="Script" id=41]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -1184,7 +1185,7 @@ tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 0.05 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
@@ -1593,8 +1594,8 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="CylinderShape" id=169]
-height = 1.6
+[sub_resource type="BoxShape" id=167]
+extents = Vector3( 1, 0.8, 10 )
 
 [sub_resource type="Animation" id=48]
 resource_name = "2secondPause"
@@ -4427,7 +4428,7 @@ extents = Vector3( 4, 2, 1 )
 [sub_resource type="BoxShape" id=26]
 extents = Vector3( 4, 2.52322, 1 )
 
-[sub_resource type="ArrayMesh" id=170]
+[sub_resource type="ArrayMesh" id=168]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -4440,7 +4441,7 @@ surfaces/0 = {
 "vertex_count": 8
 }
 
-[sub_resource type="ArrayMesh" id=171]
+[sub_resource type="ArrayMesh" id=169]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -4579,6 +4580,7 @@ anims/turnRightToLeft = SubResource( 43 )
 
 [node name="WeakEye" type="Spatial" parent="WeakPointContainer"]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.993174, 0 )
+script = ExtResource( 41 )
 
 [node name="Sprite3D" type="Sprite3D" parent="WeakPointContainer/WeakEye"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
@@ -4664,13 +4666,13 @@ stream = ExtResource( 35 )
 volume_db = -15.0
 bus = "Sfx"
 
-[node name="SmallInteractionArea" type="Area" parent="WeakPointContainer/WeakEye"]
+[node name="SmallInteractionArea" type="Area" parent="WeakPointContainer/WeakEye" groups=["enemies"]]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -2 )
 script = ExtResource( 16 )
 
 [node name="CollisionShape" type="CollisionShape" parent="WeakPointContainer/WeakEye/SmallInteractionArea"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
-shape = SubResource( 169 )
+shape = SubResource( 167 )
 disabled = true
 
 [node name="WeakPointTarget" type="Spatial" parent="."]
@@ -4806,11 +4808,11 @@ transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="CubeCrystal/CubeContainer" index="0"]
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
-mesh = SubResource( 170 )
+mesh = SubResource( 168 )
 
 [node name="MeshInstance3" parent="CubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707106, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
-mesh = SubResource( 171 )
+transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
+mesh = SubResource( 169 )
 
 [node name="MeshInstance2" parent="CubeCrystal/CubeContainer" index="2"]
 transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )

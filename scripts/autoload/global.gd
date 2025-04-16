@@ -201,6 +201,7 @@ var activeSavePoint = null
 
 var demo_mode = 0
 var display_mode = 0
+var dlc_mode = 0
 
 var isEndOfGame = false
 var isRespawning = false

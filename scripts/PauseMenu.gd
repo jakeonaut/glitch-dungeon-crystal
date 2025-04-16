@@ -154,7 +154,8 @@ func _process(delta):
     return
   if not popupRectCanvasLayer.visible:
     popupRectCanvasLayer.visible = true
-  # popupRect.rect_position = Vector2(100, 250)
+  popupRectCanvasLayer.scale = Vector2(2.5, 2.5)
+  popupRect.rect_position = Vector2(150, 150)
   # popupRect.rect_size = Vector2(400, 60)
 
   if Input.is_action_just_pressed("menu_down"):
@@ -251,7 +252,7 @@ func _process(delta):
   if pauseMenuState == PauseMenuState.INVENTORY:
     inventoryPauseTitleText.bbcode_text = tr("UI.Inventory.1")
     spellsLabelText.bbcode_text = tr("UI.Inventory.2")
-    equipLabelText.bbcode_text = tr("UI.Inventory.4")
+    equipLabelText.bbcode_text = "[center]" + tr("UI.Inventory.4") + "[/center]"
     soulLabelText.bbcode_text = tr("UI.Inventory.8")
     keyLabelText.bbcode_text = "[center]" + tr("UI.Inventory.9") + "[/center]"
     keysText.bbcode_text = tr("UI.Inventory.10")
@@ -585,7 +586,7 @@ func processInventoryLogic(delta):
   var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
   var angelStatueArrValue = angelStatues[getAngelStatueIndex()] if angelStatues.size() > 0 else null
   if (inventoryOptionIndex == 4 or angelStatueToTeleportTo != null) and angelStatueArrValue != null:
-    pauseTitleText.bbcode_text = str(angelStatueArrValue[0]) + "\n" + global.getInputText("menu_confirm") + " to teleport, " + global.getInputText("menu_cancel") + " to cancel"
+    pauseTitleText.bbcode_text = str(angelStatueArrValue[0]) + "\n" + global.getInputText("menu_confirm") + tr("NPC.AngelStatue.1") + global.getInputText("menu_cancel") + tr("UI.No")
   else:
     pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " " + tr("UI.Confirmation") + ", " + global.getInputText("menu_cancel") + " " + tr("UI.PauseMenu.1")
     # pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to resume\n" + global.getInputText("menu_left") + " " + global.getInputText("menu_right") + " " + global.getInputText("menu_up") + " " + global.getInputText("menu_down")
@@ -731,8 +732,10 @@ func processInventoryLogic(delta):
       elif inventoryOptionIndexX == 1:
         popupText.text = tr("UI.Inventory.6")
       elif inventoryOptionIndexX == 2:
-        popupText.text = "pet follower\nin progress..."
+        popupText.bbcode_text = tr("NPC.Treasure.1") % global.getInputText("restart_key")
       elif inventoryOptionIndexX == 3:
+        popupText.text = "pet follower\nin progress..."
+      elif inventoryOptionIndexX == 4:
         popupText.text = "an enchanted bag\nlets you take another hit"
     elif inventoryOptionIndex == 2:
       popupRect.visible = not popupRect.visible
@@ -790,7 +793,18 @@ func processInventoryLogic(delta):
         popupYesNoOptions = false
         if popupRect.visible:
           angelStatueToTeleportTo = angelStatueArrValue
-        popupText.text = "teleport to " + levelZoneName + "?"
+        var localizedLevelZoneName = tr("LevelName.1")
+        if "tadpole" in levelZoneName:
+          localizedLevelZoneName = tr("LevelName.2")
+        elif "spore" in levelZoneName:
+          localizedLevelZoneName = tr("LevelName.3")
+        elif "cricket" in levelZoneName:
+          localizedLevelZoneName = tr("LevelName.4")
+        elif "elder" in levelZoneName:
+          localizedLevelZoneName = tr("LevelName.5")
+        elif "primordial" in levelZoneName:
+          localizedLevelZoneName = tr("LevelName.6")
+        popupText.text = tr("NPC.AngelStatue.1") + "\n" + localizedLevelZoneName
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     angelStatueToTeleportTo = null
     if popupRect.visible:
@@ -855,7 +869,7 @@ func normalizeInventoryOptionIndex(y, x):
   if inventoryOptionIndex == 1:
     inventoryOptionIndexX += x
     if x >= 0:
-      if inventoryOptionIndexX > 1: # (inventoryOptionIndexX == 3 and not bagSprite.visible) or inventoryOptionIndexX > 3:
+      if inventoryOptionIndexX > (2 if returnSprite.visible else 1): # (inventoryOptionIndexX == 3 and not bagSprite.visible) or inventoryOptionIndexX > 3:
         if hasAngelFlute:
           inventoryOptionIndex = 4
           menuConfirmSound.play()
@@ -867,7 +881,7 @@ func normalizeInventoryOptionIndex(y, x):
           inventoryOptionIndexX = 0
     elif x < 0:
       if inventoryOptionIndexX < 0:
-        inventoryOptionIndexX = 1 # 3 if bagSprite.visible else 2
+        inventoryOptionIndexX = 2 if returnSprite.visible else 1
       
   if inventoryOptionIndex == 2:
     inventoryOptionIndexX += x
@@ -949,6 +963,7 @@ onready var grimoireSprite = get_node("InventoryRect/GrimoireSprite")
 onready var forgetMeNotSprite = get_node("InventoryRect/FlowerSprite")
 onready var bagSprite = get_node("InventoryRect/BagSprite")
 onready var petSprite = get_node("InventoryRect/PetSprite")
+onready var returnSprite = get_node("InventoryRect/ReturnSprite")
 # onready var bagLabel = get_node("InventoryRect/BagLabel")
 onready var soulSprite1 = get_node("InventoryRect/SoulSprite1")
 onready var soulSprite2 = get_node("InventoryRect/SoulSprite2")
@@ -964,13 +979,13 @@ func processInventoryRender(_delta):
   if inventoryOptionIndex == 0:
     invSelectionSprite.position = Vector2(99, 51)
   elif inventoryOptionIndex == 1:
-    invSelectionSprite.position.y = 121
+    invSelectionSprite.position.y = 122
     if inventoryOptionIndexX == 0:
-      invSelectionSprite.position.x = 158
+      invSelectionSprite.position.x = 94
     elif inventoryOptionIndexX == 1:
-      invSelectionSprite.position.x = 213
-    # elif inventoryOptionIndexX == 2:
-    #   invSelectionSprite.position.x = 209
+      invSelectionSprite.position.x = 150
+    elif inventoryOptionIndexX == 2:
+      invSelectionSprite.position.x = 209
     # elif inventoryOptionIndexX == 3:
     #   invSelectionSprite.position.x = 265
   elif inventoryOptionIndex == 2:
@@ -984,11 +999,11 @@ func processInventoryRender(_delta):
   elif inventoryOptionIndex == 3:
     invSelectionSprite.position.y = 287
     if inventoryOptionIndexX == 0:
-      invSelectionSprite.position.x = 112
+      invSelectionSprite.position.x = 106
     elif inventoryOptionIndexX == 1:
-      invSelectionSprite.position.x = 166
+      invSelectionSprite.position.x = 163
     elif inventoryOptionIndexX == 2:
-      invSelectionSprite.position.x = 223
+      invSelectionSprite.position.x = 219
     elif inventoryOptionIndexX == 3:
       invSelectionSprite.position.x = 280
 
@@ -1029,6 +1044,7 @@ func processInventoryRender(_delta):
     glitchRect4.visible = false
 
   bagSprite.visible = global.memory["hp"] > 1
+  returnSprite.visible = global.memory["can_force_respawn"]
   petSprite.visible = false
 
   soulSprite1.visible = global.memory["zora_flippers"]
