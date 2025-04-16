@@ -89,7 +89,6 @@ func _ready():
         miniCubeCrystal.addPlusSprite()
         miniCubeCrystal.queue_free()
         can_spawn_mini_crystal = false
-
     
     if my_up_vector.y <= 0:
         grav = 0

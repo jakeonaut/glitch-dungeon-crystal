@@ -72,6 +72,13 @@ func getHurt():
     noteRefArray = []
     am_i_hurt = true
     num_hits += 1
+    if cubeCrystal.get_ref() != null:
+        if num_hits == 1:
+            cubeCrystal.get_ref().getHitSound.play()
+        elif num_hits == 2:
+            cubeCrystal.get_ref().getHitSound2.play()
+        elif num_hits == 3:
+            cubeCrystal.get_ref().getHitSound3.play()
     RUN_COUNT_MAX += 1
     if num_hits >= MAX_NUM_HITS:
         level.saveTheGame()

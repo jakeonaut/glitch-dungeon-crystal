@@ -165,7 +165,7 @@ bus = "Music"
 stream = ExtResource( 20 )
 volume_db = -20.0
 pitch_scale = 1.5
-bus = "Music"
+bus = "Sfx"
 
 [node name="DefeatBossJingle" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 16 )

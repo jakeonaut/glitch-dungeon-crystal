@@ -379,6 +379,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.21877, -1 )
 
 [node name="Mimic" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0677, 9.71043, 0 )
+num_gems_needed = 25
 trade_item = "NPC.MimicTreasure.1"
 
 [node name="CollisionShape" parent="Viewport/level/Mimic/SmallInteractionArea" index="0"]

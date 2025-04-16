@@ -158,6 +158,7 @@ func _process(delta):
   # TODO(jaketrower): This value "0.12" should actually somehow be calculated based on the camera's size
   # var pixelCameraSize = 0.125
   realCamera.size = self.size
+  # realCamera.projection = 
   # realCamera.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelCameraSize)
   # realCamera.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelCameraSize)   
 

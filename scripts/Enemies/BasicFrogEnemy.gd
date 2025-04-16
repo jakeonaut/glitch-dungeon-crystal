@@ -355,7 +355,7 @@ func getSmacked(broom_origin = null, silently = false):
   .getSmacked(broom_origin, silently)
   if is_infected:
     ouchies(broom_origin)
-  if notDieSound and not notDieSound.is_playing():
+  if notDieSound and not notDieSound.is_playing() and not silently:
     notDieSound.pitch_scale = rand_range(0.8, 1.2)
     notDieSound.play()
   # stop the lick

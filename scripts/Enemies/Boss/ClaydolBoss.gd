@@ -15,7 +15,7 @@ var MAX_GRANNY_HITS = 3
 
 var dreidel_timer = 0
 var dreidel_time_limit = 60
-var dreidel_charge_time_limit = 15
+var dreidel_charge_time_limit = 8
 var dizzy_timer = 0
 var dizzy_time_limit = 120
 var smokeCloudTimer = 0
@@ -545,6 +545,13 @@ func getHurt():
     secretAniPlayer.play("gotHurt")
     fallingRockTimeLimit /= 2
     num_hits += 1
+    if cubeCrystal.get_ref() != null:
+        if num_hits == 1:
+            cubeCrystal.get_ref().getHitSound.play()
+        elif num_hits == 2:
+            cubeCrystal.get_ref().getHitSound2.play()
+        elif num_hits == 3:
+            cubeCrystal.get_ref().getHitSound3.play()
     if num_hits >= MAX_NUM_HITS:
         yaBeatMe()
     else:

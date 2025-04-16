@@ -413,6 +413,8 @@ func barfRandomSnail():
     if basicFrogEnemies.size() >= num_hits*num_hits:
         return
 
+    if not barfSound.is_playing():
+        barfSound.play()
     var basicFrogEnemy = basicFrogEnemyRes.instance()
     basicFrogEnemy.is_infected = true
     level.add_child(basicFrogEnemy)
@@ -428,6 +430,7 @@ func barfRandomSnail():
     basicFrogEnemy.behavior_jumping = true
     basicFrogEnemy.walk_direction.x = -1
     basicFrogEnemy.override_am_i_in_range_of_player = true
+    basicFrogEnemy.get_node("Sounds/NotDieSound").play()
     basicFrogEnemies.push_back(weakref(basicFrogEnemy))
 
 func teleportToPrey():
@@ -516,7 +519,7 @@ func getSmacked(broom_origin = null, silently = false):
     # weakPointAniPlayer.play("chompDown")
     # return false
     
-
+onready var barfSound = get_node("Sounds/BarfSound")
 func tryToStartWeakPointDetachment():
     # if num_hits <= 0:
     if weakPointAniPlayer.assigned_animation != "ouchies" and weakPointAniPlayer.assigned_animation != "stunIdleAttached":
@@ -565,7 +568,7 @@ func okayImDead():
         level.summonSmokeClouds(level.door.global_transform.origin, 2, true, true)
     for basicFrogEnemyRef in basicFrogEnemies:
         if basicFrogEnemyRef.get_ref():
-            basicFrogEnemyRef.get_ref().getSmacked()
+            basicFrogEnemyRef.get_ref().getSmacked(null, true)
     global.pauseGame = false
     global.shouldRenderAsCinematic = false
 

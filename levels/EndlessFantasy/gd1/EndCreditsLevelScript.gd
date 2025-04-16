@@ -13,7 +13,7 @@ func setUpRoomInitializationOverride():
     # endCreditsLabel.text = tr("EndCredits.FULL")
     if global.demo_mode <= 0: Steam.set_achievement("GRANDMA_WIN")
 
-var STOP_POSITION = 370
+var STOP_POSITION = 400
 # @override
 func _process(delta):
     # var locale = TranslationServer.get_locale()
