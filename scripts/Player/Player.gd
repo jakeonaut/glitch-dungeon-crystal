@@ -358,10 +358,10 @@ func canSwim():
   return transformation == TransformationState.FISHY
   
 func isWalkingIntoWall():
-  # if summonedBroom != null:
-  #   return was_walking_into_wall
-  # else:
-  return .isWalkingIntoWall() # super
+  if summonedBroom != null:
+    return was_walking_into_wall
+  else:
+    return .isWalkingIntoWall() # super
 
 var hideSmallTextboxTimer = null
 func sayThis(message, time_to_clear = 0.0):

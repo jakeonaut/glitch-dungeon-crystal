@@ -458,7 +458,7 @@ func createG(delta):
       g = Vector3(0, -grav/1.5, 0)
   else:
     if pressingDown() or glitch_form == global.GlitchForm.LADDER:
-      g = Vector3(0, -grav*2, 0)
+      g = Vector3(0, -grav*1.25, 0)
     else:
       g = Vector3(0, -grav, 0)
       
@@ -490,7 +490,7 @@ func applyTerminalVelocity(_delta):
     else:
       terminal_vel = true_terminal_vel / 2
   elif glitch_form == global.GlitchForm.LADDER:
-    terminal_vel = true_terminal_vel * 1.5
+    terminal_vel = true_terminal_vel * 1.25
   # elif glitch_form == global.GlitchForm.LADDER and not on_ground and not isWalkingIntoWall():
   #   terminal_vel = true_terminal_vel * 1.5
   else:
