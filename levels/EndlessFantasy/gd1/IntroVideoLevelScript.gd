@@ -94,15 +94,15 @@ func _process(delta):
             Input.is_action_just_pressed("ui_cancel") or
             Input.is_action_just_pressed("ui_cancel_controller") or
             Input.is_action_just_pressed("ui_start")
-        ) and not Input.is_action_just_pressed(which_input_to_skip):
+        ) and not Input.is_action_just_pressed(which_input_to_skip) and not Input.is_action_just_pressed("toggle_fullscreen"):
             skipPrompt.visible = true
             hideSkipPromptTimer = 0
         if not skipPrompt.visible:
-            if Input.is_action_just_pressed(which_input_to_skip):
+            if Input.is_action_just_pressed(which_input_to_skip) and not Input.is_action_just_pressed("toggle_fullscreen"):
                 skipPrompt.visible = true
                 hideSkipPromptTimer = 0
         else:
-            if Input.is_action_just_pressed(which_input_to_skip):
+            if Input.is_action_just_pressed(which_input_to_skip) and not Input.is_action_just_pressed("toggle_fullscreen"):
                 was_playing = true
                 videoPlayer.stop()
             else:

@@ -340,7 +340,7 @@ func processNormalLogic(_delta):
         global.isPauseMenuOpen = false
         global.pauseGame = false
         getPlayer().unpauseSound.play()
-        level.restartMusic()  
+        level.restartMusic()
     elif normalOptionIndex == 1:
       yield(get_tree().create_timer(0.1), "timeout")
       pauseMenuState = PauseMenuState.TOP_INPUT
@@ -371,7 +371,7 @@ func processLocaleLogic(_delta):
 
   var localeOptions = global.getSupportedLocalesArray()
   if shouldUpdateMenuText:
-    var text = "[font=res://unlocalized/pauseMenuFontCondensed.tres]"
+    var text = "[font=res://unlocalized/EndCreditsFont_condensed.tres]"
     for i in range(len(localeOptions)):
       var option = localeOptions[i].label
       if i == localeOptionIndex:

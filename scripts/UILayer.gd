@@ -409,7 +409,7 @@ func processHiscoreRenderLogic(delta):
     var optional_second_zero = "" if seconds >= 10 else "0"
     var time_aged_formatted = str(hours) + ":" + optional_minute_zero + str(minutes) + ":" + optional_second_zero + str(seconds)
 
-    timeHiscoreLabel.bbcode_text = "[right]" + tr("NPC.Crystal.9") + time_aged_formatted + "[/right]"
+    timeHiscoreLabel.bbcode_text = "[right]" + tr("NPC.Crystal.9") + "\n" + time_aged_formatted + "[/right]"
 
   hiscoreTimer += (delta*11)
   if hiscoreTimer >= hiscoreTimeLimit:

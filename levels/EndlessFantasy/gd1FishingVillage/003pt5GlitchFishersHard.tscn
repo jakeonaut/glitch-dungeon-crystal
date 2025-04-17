@@ -1,15 +1,19 @@
-[gd_scene load_steps=99 format=2]
+[gd_scene load_steps=104 format=2]
 
 [ext_resource path="res://sceneObjects/Enemies/BasicFrogEnemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=2]
+[ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=3]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=4]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=5]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=6]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=7]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=8]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=9]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=10]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=11]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=13]
+[ext_resource path="res://assets/sprites/Toad_Dude_smaller.png" type="Texture" id=14]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=17]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=19]
@@ -752,11 +756,47 @@ extents = Vector3( 1, 0.8, 1.3 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[sub_resource type="BoxShape" id=123]
+[sub_resource type="ShaderMaterial" id=172]
+shader = ExtResource( 8 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 14 )
+shader_param/base_palette = ExtResource( 6 )
+shader_param/target_palette = ExtResource( 3 )
+
+[sub_resource type="BoxShape" id=173]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.24, 1 )
 
-[sub_resource type="Animation" id=147]
+[sub_resource type="Animation" id=174]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
@@ -999,7 +1039,7 @@ tracks/19/keys = {
 "values": [ Vector3( 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=148]
+[sub_resource type="Animation" id=175]
 resource_name = "gulpIdle"
 length = 1.4
 tracks/0/type = "value"
@@ -1009,10 +1049,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.9, 1, 1.1, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.9, 1, 1.1, 1.2, 1.6, 1.7, 1.8, 1.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 7, 8, 7, 8, 7, 8, 7, 8, 7 ]
+"values": [ 7, 8, 7, 8, 7, 8, 7, 8, 7, 8, 7, 8, 7 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:should_animate")
@@ -1041,7 +1081,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=149]
+[sub_resource type="Animation" id=176]
 resource_name = "lick"
 length = 0.5
 step = 0.025
@@ -1298,11 +1338,11 @@ tracks/20/keys = {
 "values": [ Vector3( 1, 1, 1 ), Vector3( 0.5, 0.5, 0.5 ) ]
 }
 
-[sub_resource type="Animation" id=150]
+[sub_resource type="Animation" id=177]
 resource_name = "lickIdle"
 length = 0.05
 
-[sub_resource type="Animation" id=151]
+[sub_resource type="Animation" id=178]
 resource_name = "lickRight"
 length = 0.5
 step = 0.025
@@ -1559,7 +1599,7 @@ tracks/20/keys = {
 "values": [ Vector3( 1, 1, 1 ), Vector3( 0.5, 0.5, 0.5 ) ]
 }
 
-[sub_resource type="Animation" id=152]
+[sub_resource type="Animation" id=179]
 resource_name = "lickSudden"
 length = 0.5
 step = 0.025
@@ -1804,7 +1844,7 @@ tracks/19/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=153]
+[sub_resource type="Animation" id=180]
 resource_name = "lickSuddenRight"
 length = 0.5
 step = 0.025
@@ -2049,7 +2089,7 @@ tracks/19/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=154]
+[sub_resource type="Animation" id=181]
 resource_name = "spitOut"
 step = 0.01
 tracks/0/type = "value"
@@ -2091,7 +2131,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=155]
+[sub_resource type="Animation" id=182]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
@@ -2225,8 +2265,20 @@ tracks/10/keys = {
 "update": 0,
 "values": [ 0.125 ]
 }
+tracks/11/type = "value"
+tracks/11/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/offset")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
 
-[sub_resource type="Animation" id=156]
+[sub_resource type="Animation" id=183]
 resource_name = "degauss"
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
@@ -2372,8 +2424,20 @@ tracks/11/keys = {
 "update": 0,
 "values": [ 0.18, 0.125 ]
 }
+tracks/12/type = "value"
+tracks/12/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:material_override:shader_param/offset")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
 
-[sub_resource type="Animation" id=157]
+[sub_resource type="Animation" id=184]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
@@ -2400,7 +2464,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0.8 ) ]
 }
 
-[sub_resource type="Animation" id=158]
+[sub_resource type="Animation" id=185]
 resource_name = "broomSmackGlitch"
 length = 0.4
 step = 0.01
@@ -2429,7 +2493,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.015, 0.8 ), Vector3( 0, -0.224, 0.8 ), Vector3( 0, -0.489, 0.8 ), Vector3( 0, -0.021, 0.8 ), Vector3( 0, 0.19, 0.8 ), Vector3( 0, -0.021, 0.8 ), Vector3( 0, -0.224, 0.8 ), Vector3( 0, 0, 0.8 ) ]
 }
 
-[sub_resource type="Animation" id=159]
+[sub_resource type="Animation" id=186]
 resource_name = "bumpBotLeft"
 length = 0.4
 tracks/0/type = "value"
@@ -2457,7 +2521,7 @@ tracks/1/keys = {
 "values": [ Vector3( 1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=160]
+[sub_resource type="Animation" id=187]
 resource_name = "bumpBotRight"
 length = 0.4
 tracks/0/type = "value"
@@ -2485,7 +2549,7 @@ tracks/1/keys = {
 "values": [ Vector3( 1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=161]
+[sub_resource type="Animation" id=188]
 resource_name = "bumpCeil"
 length = 0.6
 tracks/0/type = "value"
@@ -2513,7 +2577,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0.086, 0.8 ), Vector3( 0, 0, 0.8 ) ]
 }
 
-[sub_resource type="Animation" id=162]
+[sub_resource type="Animation" id=189]
 resource_name = "bumpLeft"
 length = 0.4
 tracks/0/type = "value"
@@ -2541,7 +2605,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=163]
+[sub_resource type="Animation" id=190]
 resource_name = "bumpRight"
 length = 0.4
 tracks/0/type = "value"
@@ -2569,7 +2633,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=164]
+[sub_resource type="Animation" id=191]
 resource_name = "fallFlat"
 step = 0.05
 tracks/0/type = "value"
@@ -2597,7 +2661,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.015, 0.8 ), Vector3( 0, -0.276, 0.8 ), Vector3( 0, -0.489, 0.8 ), Vector3( 0, -0.021, 0.8 ) ]
 }
 
-[sub_resource type="Animation" id=165]
+[sub_resource type="Animation" id=192]
 length = 0.06
 step = 0.03
 tracks/0/type = "value"
@@ -2625,7 +2689,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.127, 0.8 ) ]
 }
 
-[sub_resource type="Animation" id=166]
+[sub_resource type="Animation" id=193]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
@@ -2652,7 +2716,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0.9, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=167]
+[sub_resource type="Animation" id=194]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
@@ -2679,7 +2743,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, -0.255, 0.8 ), Vector3( 0, 0, 0.8 ) ]
 }
 
-[sub_resource type="Animation" id=168]
+[sub_resource type="Animation" id=195]
 resource_name = "landSoft"
 length = 0.6
 tracks/0/type = "value"
@@ -2707,7 +2771,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, -0.153, 0.8 ), Vector3( 0, 0, 0.8 ) ]
 }
 
-[sub_resource type="Animation" id=169]
+[sub_resource type="Animation" id=196]
 resource_name = "wakeup"
 length = 1.5
 tracks/0/type = "value"
@@ -3253,48 +3317,6 @@ shape = SubResource( 121 )
 [node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
 shape = SubResource( 122 )
 
-[node name="BasicFrogEnemy4" parent="Viewport/level" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.7445, 17.812, 0 )
-grav = 0
-is_static = true
-is_licker = true
-is_bubble_spitter = true
-
-[node name="Sprite3D" parent="Viewport/level/BasicFrogEnemy4/SpriteContainer/InnerSpriteContainer" index="0"]
-flip_h = false
-
-[node name="CollisionShape" parent="Viewport/level/BasicFrogEnemy4/FallthroughSolid" index="0"]
-shape = SubResource( 123 )
-
-[node name="TongueAnimationPlayer" parent="Viewport/level/BasicFrogEnemy4" index="12"]
-anims/RESET = SubResource( 147 )
-anims/gulpIdle = SubResource( 148 )
-anims/lick = SubResource( 149 )
-anims/lickIdle = SubResource( 150 )
-anims/lickRight = SubResource( 151 )
-anims/lickSudden = SubResource( 152 )
-anims/lickSuddenRight = SubResource( 153 )
-anims/spitOut = SubResource( 154 )
-
-[node name="DegaussAnimationPlayer" parent="Viewport/level/BasicFrogEnemy4" index="13"]
-anims/RESET = SubResource( 155 )
-anims/degauss = SubResource( 156 )
-
-[node name="BounceAnimationPlayer" parent="Viewport/level/BasicFrogEnemy4" index="15"]
-anims/RESET = SubResource( 157 )
-anims/broomSmackGlitch = SubResource( 158 )
-anims/bumpBotLeft = SubResource( 159 )
-anims/bumpBotRight = SubResource( 160 )
-anims/bumpCeil = SubResource( 161 )
-anims/bumpLeft = SubResource( 162 )
-anims/bumpRight = SubResource( 163 )
-anims/fallFlat = SubResource( 164 )
-anims/jumpSquat = SubResource( 165 )
-anims/jumpStart = SubResource( 166 )
-anims/land = SubResource( 167 )
-anims/landSoft = SubResource( 168 )
-anims/wakeup = SubResource( 169 )
-
 [node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 34 )]
 
 [node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 1 )]
@@ -3302,6 +3324,51 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44, -0.201573, 0 )
 is_static = true
 is_licker = true
 is_bubble_spitter = true
+
+[node name="BasicFrogEnemy2" parent="Viewport/level" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.1679, 17.6655, 0 )
+glitch_form = 1
+only_activate_in_range = false
+sprite_offset_y = 0.13
+is_static = true
+is_licker = true
+can_licker_be_flipped = false
+
+[node name="Sprite3D" parent="Viewport/level/BasicFrogEnemy2/SpriteContainer/InnerSpriteContainer" index="0"]
+material_override = SubResource( 172 )
+flip_h = false
+
+[node name="CollisionShape" parent="Viewport/level/BasicFrogEnemy2/FallthroughSolid" index="0"]
+shape = SubResource( 173 )
+
+[node name="TongueAnimationPlayer" parent="Viewport/level/BasicFrogEnemy2" index="12"]
+anims/RESET = SubResource( 174 )
+anims/gulpIdle = SubResource( 175 )
+anims/lick = SubResource( 176 )
+anims/lickIdle = SubResource( 177 )
+anims/lickRight = SubResource( 178 )
+anims/lickSudden = SubResource( 179 )
+anims/lickSuddenRight = SubResource( 180 )
+anims/spitOut = SubResource( 181 )
+
+[node name="DegaussAnimationPlayer" parent="Viewport/level/BasicFrogEnemy2" index="13"]
+anims/RESET = SubResource( 182 )
+anims/degauss = SubResource( 183 )
+
+[node name="BounceAnimationPlayer" parent="Viewport/level/BasicFrogEnemy2" index="15"]
+anims/RESET = SubResource( 184 )
+anims/broomSmackGlitch = SubResource( 185 )
+anims/bumpBotLeft = SubResource( 186 )
+anims/bumpBotRight = SubResource( 187 )
+anims/bumpCeil = SubResource( 188 )
+anims/bumpLeft = SubResource( 189 )
+anims/bumpRight = SubResource( 190 )
+anims/fallFlat = SubResource( 191 )
+anims/jumpSquat = SubResource( 192 )
+anims/jumpStart = SubResource( 193 )
+anims/land = SubResource( 194 )
+anims/landSoft = SubResource( 195 )
+anims/wakeup = SubResource( 196 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 20 )]
 
@@ -3346,6 +3413,6 @@ flip_v = true
 [editable path="Viewport/level/FishingRod4"]
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
-[editable path="Viewport/level/BasicFrogEnemy4"]
+[editable path="Viewport/level/BasicFrogEnemy2"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

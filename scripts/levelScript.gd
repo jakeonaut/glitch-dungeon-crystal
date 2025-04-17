@@ -260,6 +260,9 @@ func _process(delta):
   processGrandmaStatueSavePoints()
   processBossHealth(delta)
 
+func canOpenPauseMenu():
+  return true
+
 func processPauseMenu():
   if player.isItWeird() or player.isItKindaWeird():
     return
@@ -273,7 +276,7 @@ func processPauseMenu():
       player.unpauseSound.play()
       restartMusic()
   else:
-    if not global.isPauseMenuOpen and global.activeInteractor == null:
+    if not global.isPauseMenuOpen and global.activeInteractor == null and canOpenPauseMenu():
       if Input.is_action_just_pressed("ui_start"):
         yield(get_tree().create_timer(0.1), "timeout")
         glitchScreenEffect.visible = false

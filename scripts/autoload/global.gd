@@ -400,13 +400,13 @@ func resetMemory():
     memory["blue_mode"] = false
 
 var allLocales = {
-    "en": { "code": "en", "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed.tres]English[/font]" },
-    "zh_CN": { "code": "zh_CN", "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_zh_CN.tres]简体字[/font]" }, 
-    "ru": { "code": "ru", "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Pусский[/font]" },
-    "pt_BR": { "code": "pt_BR", "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Português[/font]" },
-    "fr": { "code": "fr", "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Français[/font]" },
-    "ja": { "code": "ja", "supported": false, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ja.tres]日本語[/font]" },
-    "es": { "code": "es", "supported": true, "label": "[font=res://unlocalized/pauseMenuFontCondensed_ru.tres]Español[/font]" },
+    "en": { "code": "en", "supported": true, "label": "English" },
+    "zh_CN": { "code": "zh_CN", "supported": true, "label": "简体字" }, 
+    "ru": { "code": "ru", "supported": true, "label": "Pусский" },
+    "pt_BR": { "code": "pt_BR", "supported": true, "label": "Português" },
+    "fr": { "code": "fr", "supported": true, "label": "Français" },
+    "ja": { "code": "ja", "supported": true, "label": "日本語" },
+    "es": { "code": "es", "supported": true, "label": "Español" },
 }
 func getSupportedLocalesArray():
     var supportedLocales = []

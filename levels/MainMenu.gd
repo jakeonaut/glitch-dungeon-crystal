@@ -67,7 +67,7 @@ var logo_min_pos = Vector2(308, 154)
 var logo_max_pos = Vector2(980, 816)
 var logo_dir = Vector2(2, 2)
 var logo_timer = 0
-var logo_time_limit = 120
+var logo_time_limit = 360
 onready var overlayRect = get_node("OverlayRect")
 onready var glitchEnemy6 = get_node("GlitchEnemy6")
 onready var colorRect = get_node("../../UILayer/MainMenu/ColorRect")
@@ -266,6 +266,10 @@ onready var skipPrompt = get_node("../../UILayer/SkipPrompt")
 var hideSkipPromptTimer = 0
 var hideSkipPromptTimeLimit = 15
 
+# @override
+func canOpenPauseMenu():
+  return mainMenuState != MainMenuState.TRY_DELETE_FILE
+
 export var camera_size = 30
 var mainMenuPromptIndex = 0
 var updateMenuText = true
@@ -285,10 +289,11 @@ func _process(delta):
             mainMenuState = MainMenuState.MAIN_MENU
             deleteSound.play()
             updateMenuText = true
-        elif Input.is_action_just_pressed("menu_cancel"):
-            mainMenuState = MainMenuState.MAIN_MENU
+        elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
             reliefSound.play()
             broomSound.play()
+            yield(get_tree().create_timer(0.15), "timeout")
+            mainMenuState = MainMenuState.MAIN_MENU
         elif Input.is_action_just_pressed("menu_delete"):
             noBroomSound.play()
         return
@@ -490,6 +495,8 @@ func normalizeMainMenuPromptIndex(change):
 var has_ever_started_music = false
 # @override
 func playMenuMusic():
+    if not musicPlayer.currentlyPlayingTheme:
+        musicPlayer.conductFromScenePath(getLevelName())
     # musicPlayer.tryToPlay(musicPlayer.restZonePlayer)
     pass
     
