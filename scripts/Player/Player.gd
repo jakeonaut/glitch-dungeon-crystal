@@ -427,6 +427,8 @@ func _process(delta):
 
   if Input.is_action_just_pressed("toggle_fullscreen"):
     OS.window_fullscreen = !OS.window_fullscreen
+    global.userSettings["fullscreen"] = OS.window_fullscreen
+    level.saveUserSettings()
     level.uiLayer.pauseMenu.shouldUpdateMenuText = true
   var can_respawn_out_of_pause = not global.pauseGame or (global.activeInteractor != null and not global.shouldRenderAsCinematic)
   if not isItWeird() and not isItKindaWeird() and global.memory["can_force_respawn"] and Input.is_action_just_pressed("restart_key") and not global.isPauseMenuOpen and can_respawn_out_of_pause and ritual_state_index < len(global.correct_ritual)-1:

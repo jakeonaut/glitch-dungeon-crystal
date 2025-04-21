@@ -98,6 +98,8 @@ func _ready():
   set_process(true)
 
 func _process(delta):
+  if player == null: getPlayer()
+  
   if Input.is_action_pressed("open_map") and global.memory["has_map_item"] and not global.isOnMainMenu and not global.isPauseMenuOpen and global.activeInteractor == null and not global.shouldRenderAsCinematic:
     self.visible = true
     if not has_drawn_map:
@@ -158,9 +160,9 @@ func _process(delta):
   popupRect.rect_position = Vector2(150, 150)
   # popupRect.rect_size = Vector2(400, 60)
 
-  if Input.is_action_just_pressed("menu_down"):
+  if player.justPressedMenuDown():
     menuMoveSound.play()
-  elif Input.is_action_just_pressed("menu_up"):
+  elif player.justPressedMenuUp():
     menuMoveSound.play()
 
   if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
@@ -317,10 +319,10 @@ func processNormalLogic(_delta):
     normalMenuText.bbcode_text = text
     shouldUpdateMenuText = false
 
-  if Input.is_action_just_pressed("menu_down"):
+  if player.justPressedMenuDown():
     normalOptionIndex += 1
     shouldUpdateMenuText = true
-  elif Input.is_action_just_pressed("menu_up"):
+  elif player.justPressedMenuUp():
     normalOptionIndex -= 1
     shouldUpdateMenuText = true
   if normalOptionIndex < 0:
@@ -381,10 +383,10 @@ func processLocaleLogic(_delta):
     normalMenuText.bbcode_text = text + "[/font]"
     shouldUpdateMenuText = false
 
-  if Input.is_action_just_pressed("menu_down"):
+  if player.justPressedMenuDown():
     localeOptionIndex += 1
     shouldUpdateMenuText = true
-  elif Input.is_action_just_pressed("menu_up"):
+  elif player.justPressedMenuUp():
     localeOptionIndex -= 1
     shouldUpdateMenuText = true
   if localeOptionIndex < 0:
@@ -427,10 +429,10 @@ func processGraphicsLogic(_delta):
     normalMenuText.bbcode_text = text
     shouldUpdateMenuText = false
 
-  if Input.is_action_just_pressed("menu_down"):
+  if player.justPressedMenuDown():
     graphicsOptionIndex += 1
     shouldUpdateMenuText = true
-  elif Input.is_action_just_pressed("menu_up"):
+  elif player.justPressedMenuUp():
     graphicsOptionIndex -= 1
     shouldUpdateMenuText = true
   if graphicsOptionIndex < 0:
@@ -450,6 +452,7 @@ func processGraphicsLogic(_delta):
       global.userSettings["colorblindMode"] = not global.userSettings["colorblindMode"]
     elif graphicsOptionIndex == 3:
       OS.window_fullscreen = not OS.window_fullscreen
+      global.userSettings["fullscreen"] = OS.window_fullscreen
     level.saveUserSettings()
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
     pauseMenuState = PauseMenuState.NORMAL
@@ -488,10 +491,10 @@ func processSoundLogic(_delta):
     normalMenuText.bbcode_text = text
     shouldUpdateMenuText = false
 
-  if Input.is_action_just_pressed("menu_down"):
+  if player.justPressedMenuDown():
     soundOptionIndex += 1
     shouldUpdateMenuText = true
-  elif Input.is_action_just_pressed("menu_up"):
+  elif player.justPressedMenuUp():
     soundOptionIndex -= 1
     shouldUpdateMenuText = true
   if soundOptionIndex < 0:
@@ -541,10 +544,10 @@ func processQuitToMainLogic(_delta):
     normalMenuText.bbcode_text = text
     shouldUpdateMenuText = false
 
-  if Input.is_action_just_pressed("menu_down"):
+  if player.justPressedMenuDown():
     quitToMainOptionIndex += 1
     shouldUpdateMenuText = true
-  elif Input.is_action_just_pressed("menu_up"):
+  elif player.justPressedMenuUp():
     quitToMainOptionIndex -= 1
     shouldUpdateMenuText = true
   if quitToMainOptionIndex < 0:
@@ -606,7 +609,7 @@ func processInventoryLogic(delta):
     popupYesCursor.visible = popupYesNoOptions
     popupNoCursor.visible = not popupYesNoOptions
     if shouldShowPopupYesNoOptions:
-      if Input.is_action_just_pressed("menu_right") or Input.is_action_just_pressed("menu_left"):
+      if player.justPressedMenuRight() or player.justPressedMenuLeft():
         popupYesNoOptions = not popupYesNoOptions
   else:
     popupYesCursor.visible = false
@@ -619,10 +622,10 @@ func processInventoryLogic(delta):
     if not global.memory.has("spellbookPage"):
       inventoryOptionIndex = 1
       return
-    if Input.is_action_just_pressed("menu_right"):
+    if player.justPressedMenuRight():
       inventoryOptionIndexX += 1
       menuMoveSound.play()
-    elif Input.is_action_just_pressed("menu_left"):
+    elif player.justPressedMenuLeft():
       inventoryOptionIndexX -= 1
       menuMoveSound.play()
     if inventoryOptionIndexX < 0:
@@ -659,18 +662,18 @@ func processInventoryLogic(delta):
       
   var isOnMap = inventoryOptionIndex == 4
   if (selectedGlitchSprite < 0 or spellbookSize == 0) and not popupRect.visible and not isOnMap:
-    if Input.is_action_just_pressed("menu_up"):
+    if player.justPressedMenuUp():
       normalizeInventoryOptionIndex(-1, 0)
-    if Input.is_action_just_pressed("menu_down"):
+    if player.justPressedMenuDown():
       normalizeInventoryOptionIndex(1, 0)
 
   if inventoryOptionIndex != 0 and not popupRect.visible:
-    if Input.is_action_just_pressed("menu_right") or (Input.is_action_just_pressed("menu_down") and isOnMap):
+    if player.justPressedMenuRight() or (player.justPressedMenuDown() and isOnMap):
       mapCursorSprite.restart()
       mapCursorSprite2.restart()
       normalizeInventoryOptionIndex(0, 1)
       menuMoveSound.play()
-    elif Input.is_action_just_pressed("menu_left") or (Input.is_action_just_pressed("menu_up") and isOnMap):
+    elif player.justPressedMenuLeft() or (player.justPressedMenuUp() and isOnMap):
       mapCursorSprite.restart()
       mapCursorSprite2.restart()
       normalizeInventoryOptionIndex(0, -1)
@@ -1266,10 +1269,10 @@ func processTopInputLogic(_delta):
 
   enterDoorPrompt.flip_v = global.getEnterDoorDirection() > 0
 
-  if Input.is_action_just_pressed("menu_down"):
+  if player.justPressedMenuDown():
     topInputOptionIndex += 1
     shouldUpdateMenuText = true
-  elif Input.is_action_just_pressed("menu_up"):
+  elif player.justPressedMenuUp():
     topInputOptionIndex -= 1
     shouldUpdateMenuText = true
   if topInputOptionIndex < 0:
@@ -1319,10 +1322,10 @@ func processControllerOptionsLogic(_delta):
   secretBottomButtonText.bbcode_text = "[font=res://DarkInputExtraFont.tres]" + global.getButtonIndexStr(JOY_XBOX_A, global.userSettings["glyphType"]) + "[/font]"
   enterDoorPrompt.flip_v = global.getEnterDoorDirection() > 0
 
-  if Input.is_action_just_pressed("menu_down"):
+  if player.justPressedMenuDown():
     controllerOptionsOptionIndex += 1
     shouldUpdateMenuText = true
-  elif Input.is_action_just_pressed("menu_up"):
+  elif player.justPressedMenuUp():
     controllerOptionsOptionIndex -= 1
     shouldUpdateMenuText = true
   if controllerOptionsOptionIndex < 0:
@@ -1417,9 +1420,9 @@ func processControlsLogic(_delta):
       level.saveUserSettings()
     return
   else:
-    if Input.is_action_just_pressed("menu_down"):
+    if player.justPressedMenuDown():
       control_index += 1
-    elif Input.is_action_just_pressed("menu_up"):
+    elif player.justPressedMenuUp():
       control_index -= 1
     if (Input.is_action_just_pressed("menu_confirm") or Input.is_action_just_pressed("popup_menu")) and not Input.is_action_pressed("ui_cancel") and not Input.is_action_pressed("toggle_fullscreen"):
       global.is_reading_input = true

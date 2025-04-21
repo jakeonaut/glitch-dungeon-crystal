@@ -290,6 +290,7 @@ func _ready():
     resetMemory()
     resetUserSettings()
     loadUserSettings()
+    OS.window_fullscreen = userSettings["fullscreen"]
     changeLocale(userSettings["locale"], false)
     global.initializeControlsConfig()
     global.hasInitializedControlsConfig = true
@@ -446,6 +447,7 @@ func resetUserSettings():
     userSettings["glyphType"] = GlyphType.XBOX
     userSettings["locale"] = normalizeLocale(OS.get_locale_language())
     userSettings["doorDir"] = -1
+    userSettings["fullscreen"] = true
 
 func getDeadzone():
     return float(float(userSettings["deadzone_real"]) / 100.0)
@@ -1551,13 +1553,17 @@ func incrementLevelZoneTotalGlitchTiles(amt):
     incrementLevelZoneThing("total_num_glitch_tiles", amt)
 
 func updateLevelZoneTime():
+    if not global.has_started_game: return
     var startTime = getLevelZoneThing("start_time")
     if startTime == null:
         return
     var currTime = Time.get_unix_time_from_system()
+    print("add " + str(currTime - startTime) + " to " + str(currLevelZone))
     incrementLevelZoneTime(currTime - startTime)
     setLevelZoneThing("start_time", null)
 func setLevelZoneStartTime():
+    if not global.has_started_game: return
+    print("set " + str(currLevelZone) + " start time to " + str(Time.get_unix_time_from_system()))
     setLevelZoneThing("start_time", Time.get_unix_time_from_system())
 
 func incrementLevelZoneTime(amt):

@@ -244,6 +244,7 @@ func change_scene():
   global.malware_infected = false # current_scene.get_node("Viewport/level").player.malware_infected
 
   if self.path != "":
+    global.updateLevelZoneTime()
     root.remove_child(current_scene)
     current_scene.queue_free()
     var loadedRoomResource = load(self.path)

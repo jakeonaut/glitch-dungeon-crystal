@@ -2886,10 +2886,8 @@ material = SubResource( 230 )
 visible = true
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
-margin_left = 320.0
-margin_top = 28.0
-margin_right = 1600.0
-margin_bottom = 1052.0
+margin_right = 1280.0
+margin_bottom = 1024.0
 texture = SubResource( 70 )
 flip_v = true
 

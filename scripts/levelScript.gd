@@ -82,7 +82,7 @@ func _ready_impl():
   # if not "0_1Haven" in self.getLevelName() and not global.memory["glitch_world"]:
   #   self.purifyAllFragileBrickSolids(false)
 
-  if not global.memory.has("roomPath") and not "MainMenu" in self.getLevelName():
+  if not global.memory.has("roomPath") and not "MainMenu" in self.getLevelName() and not "IntroVideo" in self.getLevelName():
     global.has_started_game = true
     global.has_really_started_game = true
     if not "0_0" in self.getLevelName() or "Fish" in self.getLevelName():
@@ -159,7 +159,6 @@ func _ready_impl():
       flipGravity(-1)
   
   tryToRespawn()
-  global.updateLevelZoneTime()
   global.tryInitializeLevelZone(self.getLevelZoneName())
   if global.memory["currLevelZone"] != global.currLevelZone and not global.memory["glitch_world"]:
     uiLayer.setDisplayTitle(global.getDisplayTitle(self.getLevelZoneName()))
@@ -191,11 +190,13 @@ func _ready_impl():
   global.setHaveIBeenToLevel(self)
   global.setLevelZoneStartTime()
 
+var hasGameFrameBackground = false
 func tryToAddGameFrameBackground():
   var gameTree = get_tree().get_root().get_node("Game")
   if not gameTree.has_node("GameFrameBackground"):
     var newGameBackground = gameFrameBackgroundRes.instance()
     gameTree.add_child_below_node(viewport2or3, newGameBackground)
+  hasGameFrameBackground = true
 
 func randomizeARandomGameFrameBgSprite():
   var gameTree = get_tree().get_root().get_node("Game")

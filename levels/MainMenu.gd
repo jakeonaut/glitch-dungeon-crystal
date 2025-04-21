@@ -84,6 +84,7 @@ func startGame(saveGameIndex):
   global.resetMemory()
   global.okay_really_really_started_game = false
   global.has_started_game = true
+  global.setLevelZoneStartTime()
   global.shouldRenderAsCinematic = true
   uiLayer.statsTitleRect.visible = false
   player.pauseInput = true
@@ -243,6 +244,7 @@ func loadGame(saveGameIndex):
         global.has_really_started_game = true
         global.okay_really_really_started_game = true
         global.isRespawning = true
+        global.setLevelZoneThing("start_time", null)
         if global.memory.has("savedRoomPath") or global.memory.has("roomPath"):
             var roomPath = global.memory["savedRoomPath"] if global.memory.has("savedRoomPath") else global.memory["roomPath"]
             global.isEnteringRoom = true
@@ -331,6 +333,8 @@ func _process(delta):
         return
 
     if mainMenuState == MainMenuState.MAIN_MENU:
+        global.spellCastPauseIndex = 0
+        player.spellCastPauseIndex = 0
         demoSprite.visible = global.demo_mode > 0
         player.camera_y_offset = -20
         gameCamera.initial_size = camera_size
@@ -346,13 +350,13 @@ func _process(delta):
         optionsMenuPrompt.bbcode_text = tr("UI.MainMenu.1") % global.getInputText("ui_start")
         selectTextPrompt.bbcode_text = global.getInputText("menu_confirm")
 
-        if Input.is_action_just_pressed("menu_down"):
+        if player.justPressedMenuDown():
             uiLayer.pauseMenu.menuMoveSound.play()
             normalizeMainMenuPromptIndex(1)
             updateMenuText = true
             if logo_timer < logo_time_limit:
                 logo_timer = 0
-        elif Input.is_action_just_pressed("menu_up"):
+        elif player.justPressedMenuUp():
             uiLayer.pauseMenu.menuMoveSound.play()
             normalizeMainMenuPromptIndex(-1)
             updateMenuText = true

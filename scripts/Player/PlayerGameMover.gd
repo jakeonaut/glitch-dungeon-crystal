@@ -97,8 +97,8 @@ var holding_down_timer = 0
 var holding_down_time_limit = 5
 var holding_up_timer = 0
 var holding_up_time_limit = 5
-var stupid_joystick_up_memory = false
-var stupid_joystick_down_memory = false
+var stupid_joystick_memory = [false, false, false, false] # lb, rb, tb ,bb
+var just_pressed_joystick = [false, false, false, false] # lb, rb, tb , bb
 func _process(delta):
   # weird failsafe
   global_transform.origin.z = 0
@@ -212,7 +212,20 @@ func _process(delta):
         break
   if pressingDown() and on_ground: # and (glitch_form != global.GlitchForm.INVISIBLE or (glitch_form == global.GlitchForm.INVISIBLE and areAnyTilesBelowMeSpikes)):
     processMoleDigTimer(Vector3(0, -2, 0))
-    
+
+  just_pressed_joystick = [
+    rawPressingAnalogLeft() and not stupid_joystick_memory[0],
+    rawPressingAnalogRight() and not stupid_joystick_memory[1],
+    rawPressingAnalogUp() and not stupid_joystick_memory[2],
+    rawPressingAnalogDown() and not stupid_joystick_memory[3]
+  ]
+  stupid_joystick_memory = [
+    rawPressingAnalogLeft(),
+    rawPressingAnalogRight(),
+    rawPressingAnalogUp(),
+    rawPressingAnalogDown()
+  ]
+  
 
     
 onready var tileCollisionShape = get_node("TileArea/CollisionShape")
@@ -390,13 +403,15 @@ func landed():
 func isTextboxPausingMe():
   return global.activeInteractor != null and global.activeInteractor.showYesNoOptions
 
-func rawPressingMoveDown():
-  return Input.is_action_pressed("ui_down") or (
-    global.userSettings["use_joystick"] > 0 and (
-      Input.get_joy_axis(0, JOY_AXIS_1) > global.getDeadzone() or # vertical leftstick
-      Input.get_joy_axis(0, JOY_AXIS_3) > global.getDeadzone() # vertical rightstick
-    )
+func rawJustPressedAnalogDown():
+  return just_pressed_joystick[3]
+func rawPressingAnalogDown():
+  return global.userSettings["use_joystick"] > 0 and (
+    Input.get_joy_axis(0, JOY_AXIS_1) > global.getDeadzone() or # vertical leftstick
+    Input.get_joy_axis(0, JOY_AXIS_3) > global.getDeadzone() # vertical rightstick
   )
+func rawPressingMoveDown():
+  return Input.is_action_pressed("ui_down") or rawPressingAnalogDown()
 # @override
 func pressingDown():
   var pressingDownButton = rawPressingMoveDown()
@@ -407,13 +422,15 @@ func pressingMoveDown():
   var pressingDownButton = rawPressingMoveDown()
   return pressingDownButton and (not pauseInput or summonedBroom != null) and not isTextboxPausingMe()
 
-func rawPressingMoveUp():
-  return Input.is_action_pressed("ui_up") or (
-    global.userSettings["use_joystick"] > 0 and (
-      Input.get_joy_axis(0, JOY_AXIS_1) < -global.getDeadzone() or # vertical leftstick
-      Input.get_joy_axis(0, JOY_AXIS_3) < -global.getDeadzone() # vertical rightstick
-    )
+func rawJustPressedAnalogUp():
+  return just_pressed_joystick[2]
+func rawPressingAnalogUp():
+  return global.userSettings["use_joystick"] > 0 and (
+    Input.get_joy_axis(0, JOY_AXIS_1) < -global.getDeadzone() or # vertical leftstick
+    Input.get_joy_axis(0, JOY_AXIS_3) < -global.getDeadzone() # vertical rightstick
   )
+func rawPressingMoveUp():
+  return Input.is_action_pressed("ui_up") or rawPressingAnalogUp()
 # @override
 func pressingMoveUp():
   var pressingUpButton = rawPressingMoveUp()
@@ -429,20 +446,24 @@ func shouldFlipWalkingDirection():
   return (grav < 0 and not transformation == TransformationState.BUBBLE) or malware_infected
 
 var override_stop_left_input = false
+func rawJustPressedAnalogLeft():
+  return just_pressed_joystick[0]
+func rawPressingAnalogLeft():
+  return global.userSettings["use_joystick"] > 0 and (
+    Input.get_joy_axis(0, JOY_AXIS_0) < -global.getDeadzone() or # horizontal leftstick
+    Input.get_joy_axis(0, JOY_AXIS_2) < -global.getDeadzone() # horizontal rightstick
+  )
+func rawJustPressedAnalogRight():
+  return just_pressed_joystick[1]
 func rawPressingMoveLeft():
-  return Input.is_action_pressed("ui_left") or (
-    global.userSettings["use_joystick"] > 0 and (
-      Input.get_joy_axis(0, JOY_AXIS_0) < -global.getDeadzone() or # horizontal leftstick
-      Input.get_joy_axis(0, JOY_AXIS_2) < -global.getDeadzone() # horizontal rightstick
-    )
+  return Input.is_action_pressed("ui_left") or rawPressingAnalogLeft()
+func rawPressingAnalogRight():
+  return global.userSettings["use_joystick"] > 0 and (
+    Input.get_joy_axis(0, JOY_AXIS_0) > global.getDeadzone() or # horizontal leftstick
+    Input.get_joy_axis(0, JOY_AXIS_2) > global.getDeadzone() # horizontal rightstick
   )
 func rawPressingMoveRight():
-  return Input.is_action_pressed("ui_right") or (
-    global.userSettings["use_joystick"] > 0 and (
-      Input.get_joy_axis(0, JOY_AXIS_0) > global.getDeadzone() or # horizontal leftstick
-      Input.get_joy_axis(0, JOY_AXIS_2) > global.getDeadzone() # horizontal rightstick
-    )
-  )
+  return Input.is_action_pressed("ui_right") or rawPressingAnalogRight()
 # @override
 func pressingMoveLeft():
   if override_stop_left_input or physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
@@ -477,47 +498,38 @@ func pressingMoveRight():
   return is_pressing_move_right
 
 func justPressedEnterDoor():
-  var pressingUpAxis = (
-    global.userSettings["use_joystick"] > 0 and (
-      Input.get_joy_axis(0, JOY_AXIS_1) < -global.getDeadzone() or # vertical leftstick
-      Input.get_joy_axis(0, JOY_AXIS_3) < -global.getDeadzone() # vertical rightstick
-    )
+  return (
+    (global.userSettings["doorDir"] > 0 and (Input.is_action_just_pressed("ui_up") or just_pressed_joystick[2])) or
+    (global.userSettings["doorDir"] < 0 and (Input.is_action_just_pressed("ui_down") or just_pressed_joystick[3]))
   )
-  var pressingDownAxis = (
-    global.userSettings["use_joystick"] > 0 and (
-      Input.get_joy_axis(0, JOY_AXIS_1) > global.getDeadzone() or # vertical leftstick
-      Input.get_joy_axis(0, JOY_AXIS_3) > global.getDeadzone() # verical rightstick
-    )
-  )
-
-  var just_pressed_enter_door = (
-    (global.userSettings["doorDir"] > 0 and (Input.is_action_just_pressed("ui_up") or (pressingUpAxis and not stupid_joystick_up_memory))) or
-    (global.userSettings["doorDir"] < 0 and (Input.is_action_just_pressed("ui_down") or (pressingDownAxis and not stupid_joystick_down_memory)))
-  )
-
-  stupid_joystick_up_memory = pressingUpAxis
-  stupid_joystick_down_memory = pressingDownAxis
-
-  return just_pressed_enter_door
-
 
 # mostly used for turn based input, so not as important?
 # @override
 func justPressedDown():
-  var justPressedDownButton = Input.is_action_just_pressed("ui_down")
+  var justPressedDownButton = Input.is_action_just_pressed("ui_down") or rawJustPressedAnalogDown()
   return justPressedDownButton and not pauseInput and not isTextboxPausingMe()
 # these next two are also turn based movement...
 # @override
 func justPressedMoveLeft():
   # if malware_infected:
   #   return pressingMoveLeft() and Input.is_action_just_pressed("ui_right")
-  return pressingMoveLeft() and Input.is_action_just_pressed("ui_left")
+  return pressingMoveLeft() and (Input.is_action_just_pressed("ui_left") or rawJustPressedAnalogLeft())
 
 # @override
 func justPressedMoveRight():
   # if malware_infected:
   #   return pressingMoveRight() and Input.is_action_just_pressed("ui_left")
-  return pressingMoveRight() and Input.is_action_just_pressed("ui_right")
+  return pressingMoveRight() and (Input.is_action_just_pressed("ui_right") or rawJustPressedAnalogRight())
+
+func justPressedMenuUp():
+  return rawJustPressedAnalogUp() or Input.is_action_just_pressed("menu_up")
+func justPressedMenuDown():
+  return rawJustPressedAnalogDown() or Input.is_action_just_pressed("menu_down")
+func justPressedMenuLeft():
+  return rawJustPressedAnalogLeft() or Input.is_action_just_pressed("menu_left")
+func justPressedMenuRight():
+  return rawJustPressedAnalogRight() or Input.is_action_just_pressed("menu_right")
+  
 
 # @override
 func justPressedJump():

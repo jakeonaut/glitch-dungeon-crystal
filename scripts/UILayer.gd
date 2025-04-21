@@ -118,6 +118,9 @@ onready var bossLifeSprite6 = get_node("LivesRect/BossLifeSprite6")
 onready var bossTextLabel = get_node("LivesRect/BossTextLabel")
 
 func _process(delta):
+  if not level or not level.hasGameFrameBackground:
+    return
+
   textBoxes.visible = not global.isPauseMenuOpen
   pauseMenu.visible = global.isPauseMenuOpen
   processCutsceneRenderLogic(delta)
@@ -463,7 +466,7 @@ func processHiscoreRenderLogic(delta):
       if stupidTimeAgedStartTimeTemp == null:
         stupidTimeAgedStartTimeTemp = global.getLevelZoneThing("start_time")
         global.updateLevelZoneTime()
-        global.setLevelZoneThing("start_time", null)
+        global.setLevelZoneStartTime()
       timeHiscoreLabel.visible = true
       timeHiscoreLabel.bbcode_text = ""
       hiscoreDisplayIndex += 1
