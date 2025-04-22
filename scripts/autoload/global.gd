@@ -408,6 +408,8 @@ var allLocales = {
     "fr": { "code": "fr", "supported": true, "label": "Français" },
     "ja": { "code": "ja", "supported": true, "label": "日本語" },
     "es": { "code": "es", "supported": true, "label": "Español" },
+    "it": { "code": "it", "supported": true, "label": "Italiano" },
+    "pl": { "code": "pl", "supported": true, "label": "Polski" },
 }
 func getSupportedLocalesArray():
     var supportedLocales = []
