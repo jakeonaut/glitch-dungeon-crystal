@@ -12,6 +12,7 @@ onready var basicTadpoleEnemy4 = get_node("BasicTadpoleEnemy4")
 onready var npc = get_node("NPC")
 onready var npc2 = get_node("NPC2")
 onready var npc3 = get_node("NPC3")
+var should_process_npcs = true
 
 onready var fishies = get_node("Fishies")
 onready var floodedWaterCubes = get_node("FloodedWaterCubes")
@@ -33,6 +34,10 @@ func setUpRoomInitializationOverride():
     if global.memory["angler_seaman_boss"] >= 3:
         anglerFishBoss.queue_free()
         fishies.queue_free()
+        should_process_npcs = false
+        npc.queue_free()
+        npc2.queue_free()
+        npc3.queue_free()
         yield(get_tree().create_timer(0.5), "timeout")
         summonSmokeClouds(shortcutDoor.global_transform.origin, 2, true, true)
         shortcutDoor.visible = true
@@ -50,9 +55,10 @@ func setUpRoomInitializationOverride():
             door.visible = false
 
 func _process(_delta):
-    processNPCSprite(npc)
-    processNPCSprite(npc2)
-    processNPCSprite(npc3)
+    if should_process_npcs:
+        processNPCSprite(npc)
+        processNPCSprite(npc2)
+        processNPCSprite(npc3)
     # if global.memory["angler_seaman_boss"] >= 2:
     #     dreamOfDeceit.visible = true
     #     dreamOfDeceit.grav = 60

@@ -52,7 +52,7 @@ var ghostEnemyRes = preload("res://sceneObjects/Enemies/GhostEnemy.tscn")
 var fallingRockTimer = 0
 var fallingRockTimeLimit = 10
 var big_rock_counter = 0
-var big_rock_count_max = 3
+var big_rock_count_max = 2
 var myBigRock = null
 
 func _ready():
@@ -361,6 +361,8 @@ func landed():
     if boss_phase == BossPhase.JUMP and not behavior_should_drill:
         spawnFallingRock(level.player.global_transform.origin.x)
         behavior_walking = false
+        if num_hits == MAX_NUM_HITS - 1:
+            spawnGhostEnemy()
         boss_phase = BossPhase.IDLE_STOMP
         secretAniPlayer.stop()
         secretAniPlayer.clear_queue()

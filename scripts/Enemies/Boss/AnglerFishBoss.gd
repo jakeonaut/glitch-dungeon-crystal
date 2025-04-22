@@ -177,6 +177,7 @@ func _process(delta):
             chargeSound.play()
     elif boss_phase == BossPhase.CHARGING:
         behavior_walking = true
+        walk_speed = 24
         walk_direction.x = -1
         if global_transform.origin.y - 2 > level.player.global_transform.origin.y:
             global_transform.origin.y -= delta*2
@@ -209,6 +210,7 @@ func _process(delta):
                 mySprite.translation.z = 2 # from -2
                 chargeSound.play()
     elif boss_phase == BossPhase.CHARGING_BACKWARDS:
+        walk_speed = 36
         behavior_walking = true
         walk_direction.x = 1
         if global_transform.origin.y - 2 > level.player.global_transform.origin.y:

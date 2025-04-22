@@ -1503,9 +1503,7 @@ func processMoleLogic(delta):
       dig_smoke_timer = 0
       summonSmokeClouds(1)
     moleSprite.flip_h = mySprite.flip_h
-    if dig_direction == null or (dig_direction.y > 0 and not on_ceiling and was_on_ceiling) or \
-       (dig_direction.x > 0 and not pressingMoveRight()) or (dig_direction.x < 0 and not pressingMoveLeft()) or \
-       (dig_direction.y < 0 and not pressingMoveDown()) or (dig_direction.x != 0 and (pressingJump() or pressingDown())):
+    if dig_direction == null or (dig_direction.y >= 0) or not pressingDown():
       getMoleCured()
       dig_timer = 0
       was_just_on_ground_timer = 0
@@ -1526,7 +1524,7 @@ func processMoleLogic(delta):
     fastStepSound.volume_db = -8
     if not fastStepSound.is_playing():
       fastStepSound.play()
-    var solidTilesToCheck = getTilesAbove(getLevelTiles())
+    var solidTilesToCheck = getTilesBelow(getLevelTiles())
     if dig_direction != null and dig_direction.x > 0:
       solidTilesToCheck = getTilesRightOf(getLevelTiles())
     elif dig_direction != null and dig_direction.x < 0:
@@ -1543,7 +1541,7 @@ func processMoleLogic(delta):
       bumpSound.play()
       fastStepSound.stop()
       getSmacked()
-      smack_timer = -8
+      smack_timer = -4
       transformation = TransformationState.UNDERGROUND
       global_transform.origin -= dig_direction / 2.0
     elif checkSolidTilesOnMe():
@@ -1663,13 +1661,13 @@ func collideWithCeiling(local_lv):
     # (dig_timer == 0 and (pressingMoveLeft() or pressingMoveRight())) or 
     areAnyTilesAboveMeFragileBrickSolid or
     (transformation != TransformationState.NORMAL and transformation != TransformationState.MOLE_DIGGING)
-    or (glitch_form != global.GlitchForm.FEATHER and not (glitch_form == global.GlitchForm.INVISIBLE and areAnyTilesAboveMeSpikes))
+    or (glitch_form != global.GlitchForm.INVISIBLE and areAnyTilesAboveMeSpikes)
   ):
     local_lv.y = 0
     getMoleCured()
     return local_lv
   local_lv.y = 0
-  processMoleDigTimer(Vector3(0, 2, 0))
+  # processMoleDigTimer(Vector3(0, 2, 0))
   return local_lv
 
 func getMoleCured():
@@ -2518,7 +2516,7 @@ func processPoisonWaterLogic(_delta):
 var has_landed_since_recovering = true
 # @override
 func landed():
-  if dig_direction == null or not dig_direction.y <= 0 or not ((glitch_form == global.GlitchForm.LADDER or glitch_form == global.GlitchForm.INVISIBLE) and pressingDown()):
+  if dig_direction == null or not dig_direction.y <= 0 or not pressingDown():
     dig_timer = 0
   .landed()
   if not (is_mushroom_infected or is_mushroom_prefected):
