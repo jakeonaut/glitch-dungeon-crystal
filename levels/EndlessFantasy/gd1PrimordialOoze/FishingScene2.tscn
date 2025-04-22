@@ -20,7 +20,7 @@
 [ext_resource path="res://assets/miniAdventures.png" type="Texture" id=18]
 [ext_resource path="res://assets/palettes/swamp_water_palette.png" type="Texture" id=19]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=20]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishKey.tscn" type="PackedScene" id=21]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=21]
 [ext_resource path="res://sceneObjects/Waterfall.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=23]
 [ext_resource path="res://sceneObjects/Enemies/CorruptFisherman.tscn" type="PackedScene" id=24]
@@ -3079,15 +3079,15 @@ glitch_form = 4
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 12, 0 )
 
-[node name="FishKey" parent="Viewport/level" instance=ExtResource( 21 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 35.0968, 21.2681, 0 )
-grav = 0
-
 [node name="AnglerFishBossNPC" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 45, 19, 0 )
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, -4.14977, 0 )
+bbText = "NPC.Secret.1"
+
+[node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 38, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 20 )]
 

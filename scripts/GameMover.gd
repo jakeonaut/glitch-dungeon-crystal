@@ -982,7 +982,7 @@ const PROJECTION_ORTHOGONAL = 1
 var was_running = false
 var horizontal_multiplier = 1
 var horizontal_addition = 0
-var is_sprite_flipped = false
+export var is_sprite_flipped = false
 var should_always_stop_walking_immediately = false
 func processHorizontalInputs(delta):
   if is_climbing_ladder: return
@@ -1687,7 +1687,7 @@ func updateFacing(local_dir):
 
 func isRectColliding(lb1, tb1, rb1, bb1, lb2, tb2, rb2, bb2, debug_ = false):
   if debug_:
-    print(str(tb2) + ", " + str(bb1))
+    print(str(tb2) + ", " + str(bb1) + ", " + str(bb2) + ", " + str(tb1))
     print("\tisRectColliding: " + str(lb2 <= rb1) + ", " + str(rb2 >= lb1) + ", " + str(tb2 >= bb1) + ", " + str(bb2 <= tb1))
   if lb2 <= rb1 and rb2 >= lb1 and tb2 >= bb1 and bb2 <= tb1:
     return true

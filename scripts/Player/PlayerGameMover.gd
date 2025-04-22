@@ -437,7 +437,7 @@ func pressingMoveUp():
 
 var just_pacman_flipped = false
 var just_pacman_flipped_timer = 0
-var just_pacman_flipped_time_limit = 5
+var just_pacman_flipped_time_limit = 0
 var was_walk_direction_flipped = false
 func shouldFlipWalkingDirection():
   if just_pacman_flipped:
@@ -949,7 +949,7 @@ var has_mushroom_double_jumped = false
 var mush_carcasses = []
 var max_num_mush_carcasses = 3
 var chicken_jumps = 0
-var MAX_CHICKEN_JUMPS = 6
+var MAX_CHICKEN_JUMPS = 7
 func processJumpInputs(delta):
   if transformation == TransformationState.CHICKEN:
     was_just_on_ground_timer = -8

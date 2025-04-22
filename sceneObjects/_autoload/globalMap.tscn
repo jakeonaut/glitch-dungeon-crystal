@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://sceneObjects/_autoload/globalMap.gd" type="Script" id=1]
+[ext_resource path="res://assets/Chara_sheet.png" type="Texture" id=2]
 [ext_resource path="res://sceneObjects/LevelManagerSprite.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=10]
 [ext_resource path="res://assets/sprites/babaYagaHouse.png" type="Texture" id=14]
@@ -176,6 +177,16 @@ can_nav_left = false
 can_nav_right = false
 can_nav_down = false
 
+[node name="ChickenRoomSecret" parent="TutorialDungeon" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2, 0 )
+material_override = null
+frame = 45
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/ChickenRoomSecret.tscn"
+can_nav_left = false
+can_nav_right = false
+can_nav_up = false
+hide_me_from_map = true
+
 [node name="EndCredits" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5, 0 )
 material_override = null
@@ -207,6 +218,15 @@ material_override = null
 frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/_0_0_FishingVillageEntrance.tscn"
 can_nav_down = false
+
+[node name="WaterfallSecretRoom" parent="FishingVillage" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, 0 )
+material_override = null
+frame = 20
+path = "res://levels/EndlessFantasy/gd1FishingVillage/WaterfallSecretRoom.tscn"
+can_nav_left = false
+can_nav_up = false
+hide_me_from_map = true
 
 [node name="FishingVillageIntro" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 0 )
@@ -280,9 +300,7 @@ kill_after_glitch = true
 [node name="FrogBossHaven" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 5, 5, 1 )
 material_override = null
-texture = ExtResource( 10 )
-vframes = 16
-frame = 63
+frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
 can_nav_left = false
 can_nav_right = false
@@ -666,7 +684,7 @@ can_nav_up = false
 can_nav_down = false
 
 [node name="BossLevel" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 11, -1 )
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1, 6, 11, -1 )
 material_override = null
 offset = Vector2( -10, -20 )
 texture = ExtResource( 16 )
@@ -704,3 +722,28 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4, 0 )
 
 [node name="PrimordialOoze" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
+
+[node name="FishingScene2" parent="PrimordialOoze" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 1 )
+material_override = null
+texture = ExtResource( 2 )
+hframes = 13
+vframes = 7
+frame = 56
+path = "res://levels/EndlessFantasy/gd1PrimordialOoze/FishingScene2.tscn"
+can_nav_left = false
+can_nav_right = false
+can_nav_up = false
+kill_after_glitch = true
+
+[node name="LeakyGroundwater" parent="PrimordialOoze" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 5, 1 )
+material_override = null
+texture = ExtResource( 2 )
+hframes = 13
+vframes = 7
+frame = 56
+path = "res://levels/EndlessFantasy/gd1PrimordialOoze/LeakyGroundwater.tscn"
+can_nav_left = false
+can_nav_right = false
+kill_after_glitch = true

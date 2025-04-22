@@ -236,10 +236,14 @@ func getSmacked(broom_origin = null, _silently = false):
   elif broom_origin.x > global_transform.origin.x:
     should_move_left = true
 
-  # if should_move_left:
-  #   global_transform.origin.x -= 1
-  # elif should_move_right:
-  #   global_transform.origin.x += 1
+  if should_move_left:
+    should_collide_horizontally = true
+    handleCollisionsAndMove(Vector3(-1, 0, 0), 1)
+    should_collide_horizontally = false
+  elif should_move_right:
+    should_collide_horizontally = true
+    handleCollisionsAndMove(Vector3(1, 0, 0), 1)
+    should_collide_horizontally = false
   # tryApplyMyGlitch()
 
 func passiveActivate(_delta, _is_player):

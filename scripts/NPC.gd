@@ -257,6 +257,8 @@ func passiveActivate(delta, is_player):
     return
   if can_move and level.player.global_transform.origin.y < self.global_transform.origin.y + 0.5:
     mySprite.flip_h = which_side_is_player_on
+    if is_sprite_flipped:
+      mySprite.flip_h = not mySprite.flip_h
   
 
   if not visible and can_activate:

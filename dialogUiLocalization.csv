@@ -231,3 +231,5 @@ NPC.Crone.9,"ah, I'm so tired..\nwhy can't I just sleep",唉，好累啊…\n要
 Dialog.Player.6,what a long day..\ni should warm up some stew.,总算搞完了…\n我得去把菜热上了,Ну и денёк выдался.\nРазогрею-ка я\nчего-нибудь поесть.,que dia longo...\nmereço uma sopinha.,"quelle longue journée..\nje devrais réchauffer\nun ragoût.",今日は長かったな・・・\nシチューでも食べようかな。,Qué día tan largo... \nme merezco un poco de sopita.,Che giornata lunga..\nDovrei scaldare un po' di stufato.,co za długi dzień...\npowinnam podgrzać trochę gulaszu.
 EndCredits.0,END,终,КОНЕЦ,FIM,FIN,おわり,FIN,FINE,KONIEC
 EndCredits.0_1,END OF DEMO\nthanks for playing!,演示终\n谢谢你玩我的游戏,КОНЕЦ ДЕМО\nСпасибо за игру!,FIM DA DEMO\nobrigado por jogar!,FIN DE LA DÉMO\nmerci d'avoir joué !,プレイしてくれてありがとうございます！,Gracias por jugar! ,Grazie per avere giocato!,dzięki za grę!
+Question.Mark,???,？？？,"???",???,"???",???,???,"???",???
+NPC.Secret.5,"so, they got you too?",我给你钱，你得替我保密！,"Все знают, что это секрет.",é um segredo para todos.,"c'est un secret\npour tout le monde",秘密ね？,És un secreto para todos.,È un segreto per tutti,to tajemnica dla wszystkich

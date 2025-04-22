@@ -877,10 +877,17 @@ func tryDieToOffscreenCamera(_delta):
       global.memory.erase("prevXDiff")
       if level.pacman_wrapping and not passive_door:
         DEATH_MARGIN = -1
+        just_pacman_flipped_timer = 0
+        was_walk_direction_flipped = shouldFlipWalkingDirection()
+        print("was_walk_dir_flipped: " + str(was_walk_direction_flipped))
         if global.roomEdgeVector == Vector3(1, 0, 0):
           global_transform.origin.x = getGameCamera().leftmost_x - DEATH_MARGIN
+          if pressingMoveRight() or pressingMoveLeft():
+            just_pacman_flipped_timer = -10
         if global.roomEdgeVector == Vector3(-1, 0, 0):
           global_transform.origin.x = getGameCamera().rightmost_x + DEATH_MARGIN
+          if pressingMoveLeft() or pressingMoveRight():
+            just_pacman_flipped_timer = -10
         if global.roomEdgeVector == Vector3(0, -1, 0):
           global_transform.origin.y = getGameCamera().topmost_y + DEATH_MARGIN
         if global.roomEdgeVector == Vector3(0, 1, 0):
@@ -888,8 +895,6 @@ func tryDieToOffscreenCamera(_delta):
 
         if level.weird_pacman_wrapping:
           just_pacman_flipped = true
-          was_walk_direction_flipped = shouldFlipWalkingDirection()
-          just_pacman_flipped_timer = 0
           gravitySound.pitch_scale = rand_range(0.8, 1.2)
           gravitySound.play()
           glitchTickle()

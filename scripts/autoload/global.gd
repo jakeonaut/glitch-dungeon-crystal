@@ -588,7 +588,7 @@ func getDisplayTitle(levelZoneName, gd1TutorialName = "???"):
         "gd1AbstractSuburbs":
             return "yaga village"
         "gd1GrandmaVillage":
-            return tr("LevelName.6")
+            return tr("Question.Mark")
         "gd1PrimordialOoze":
             return tr("LevelName.6")
         _:
@@ -1264,7 +1264,7 @@ func strip_bbcode(source):
 # and we don't want it in gameMover because it makes InteractionAreas do more checks to see if they
 # are the child of a GameMover....
 # anyways this way works even though global is bad :)
-func doFallthroughObjectCollision(gameMover, area):
+func doFallthroughObjectCollision(gameMover, area, debug = false):
     var areaShape = area.get_node("CollisionShape")
     var ax = areaShape.global_transform.origin.x
     var ay = areaShape.global_transform.origin.y
@@ -1297,22 +1297,23 @@ func doFallthroughObjectCollision(gameMover, area):
     var bb = gameMover.bb
 
     var lv = gameMover.linear_velocity.y
-    var diff = -0.12
+    var tb_diff = 0
+    var bb_diff = -0.12
     if gameMover.grav < 0:
         lv *= -1
-        diff *= -1
-        var temp = atb
-        atb = abb
-        abb = temp
-
-        temp = tb
+        tb_diff = -bb_diff
+        bb_diff = 0
+        var temp = tb
         tb = bb
         bb = temp
 
     var truly_on_ground_memory = gameMover.truly_on_ground
+    if debug:
+        print("lv: " + str(lv))
+        print(str(ay) + ", " + str(abb) + ", " + str(atb) + ", :: " + str(y) + ", " + str(bb) + ", " + str(tb))
     if gameMover.isRectColliding(
         ax + alb, ay + atb, ax + arb, ay + abb,
-        x + lb, y + bb, x + rb, y + bb + diff
+        x + lb, y + bb + tb_diff, x + rb, y + bb + bb_diff, debug
     ) and (lv < 0 or (lv == 0 and gameMover.glitch_form == global.GlitchForm.FLOOR)):
         gameMover.was_fallthrough_area_collision_triggered = true
         gameMover.fallthrough_area_collision_y = ay + atb - bb
@@ -1333,7 +1334,7 @@ func doFallthroughObjectCollision(gameMover, area):
     if gameMover.was_fallthrough_area_collision_triggered and \
         gameMover.isRectColliding(
             ax + alb, ay + atb, ax + arb, ay + abb,
-            x + lb, y + bb, x + rb, y + bb + diff
+            x + lb, y + bb + tb_diff, x + rb, y + bb + bb_diff
         ):
         gameMover.on_ground = true
         gameMover.truly_on_ground = true

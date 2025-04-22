@@ -451,8 +451,12 @@ func actuallyUnlockAndEnterDoor():
 
 
 export var is_sneaky = false
+export var only_active_if_chicken = false
 func passiveActivate(_delta, is_player):
-  if is_sneaky and is_passive and is_player:
+  if is_sneaky and is_passive and is_player and (
+    not only_active_if_chicken or
+    only_active_if_chicken and getPlayer().transformation == getPlayer().TransformationState.CHICKEN
+  ):
     goThroughDoor()
     
 func justStopPassiveActivate():

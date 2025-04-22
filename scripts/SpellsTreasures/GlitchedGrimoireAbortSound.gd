@@ -26,7 +26,7 @@ func activateScript():
   
   #if level.has_node("NPC"):
   #    level.get_node("NPC").textBox.text_final = "•wow you got it......i bet all\nkinds of new paths will open up\nfor you now in swamp home......\n•i could never cast spells\nlike you can... i'm just\na lowly frog wizard."
-  level.saveTheGame()
+  # level.saveTheGame()
 
 func preActivateScript():
   # global.memory["forget_me_not"] = true
