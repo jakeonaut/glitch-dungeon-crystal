@@ -1,17 +1,18 @@
 keys,en,zh_CN,ru,pt_BR,fr,ja,es
 TITLE,Babushka's Glitch Dungeon Crystal,"老奶的故障地牢大冒险",Babushka's Glitch Dungeon Crystal,A Masmorra Glitchada da Babushka,Babushka's Glitch Dungeon Crystal,バブシカのグリッチ　ダンジョンクリスタル,La Mazmorra Bugeada de Babushka
-STEAM.ShortDescription,"Hi so much! You are a little old lady who needs to clean up a big magical cellar. Learn colorful mind-bending spells, or just hit stuff with your broom.",扮演一位老奶奶，清理一个巨大的魔法地窖吧！你可以选择学习复杂多样的咒语，也可以直接抡起扫帚开干！,"Примерьте на себя роль старушки, которой нужно навести порядок в странном подвале. Используйте завораживающие заклинания, меняющие реальность, и прибирайтесь своей верной метлой.",Uma adorável vovozinha (você!) precisa fazer uma bela faxina em seu porão mágico. Aprenda feitiços coloridos e esquisitos que alteram a realidade ou simplesmente saia distribuindo vassouradas por aí!,"hi",こんにちは！あなたは大きな魔法のセラーを掃除しないといけない老婆。カラフルで難しい魔法を習得して、いろんな物をほうきでたたいてみよう。,Una tierna abuelita (tu!) necesita hacer una buena limpieza en su sótano mágico. Aprende hechizos coloridos y raros que alteran la realidad o simplemente sal a repartir escobazos por ahí!
-UI.Photosensitivity.Warning,"[center]WARNING:\n\nThis game includes flashing that may potentially trigger seizures for people with photosensitive epilepsy. [/center]","[center]警告：\n\n本游戏包含闪光，可能会引发敏感人群出现癫痫症状。[/center]","[center]ВНИМАНИЕ!\n\nВ игре присутствуют сцены мерцания, которые могут вызвать судороги у людей с фоточувствительной эпилепсией. [/center]","[center]ATENÇÃO:\n\nEste jogo contém luzes piscantes que podem causar convulsões em pessoas com epilepsia fotossensível.[/center]","[center]ATTENTION:\n\nCe jeu contient des scènes pouvant potentiellement causer une crise d'épilepsie. [/center]",[center]このゲームに点滅する光など、一部の視覚的映像を見た時にけいれん発作を起こす方がいます。 [/center],[center]ADVERTENCIA: Este juego incluye luces parpadeantes que podrían desencadenar convulsiones en personas con epilepsia fotosensible.[/center]
+STEAM.ShortDescription,"Hi so much! You are a little old lady who needs to clean up a big magical cellar. Learn colorful mind-bending spells, or just hit stuff with your broom.",扮演一位老奶奶，清理一个巨大的魔法地窖吧！你可以选择学习复杂多样的咒语，也可以直接抡起扫帚开干！,"Примерьте на себя роль старушки, которой нужно навести порядок в странном подвале. Используйте завораживающие заклинания, меняющие реальность, и прибирайтесь своей верной метлой.",Uma adorável vovozinha (você!) precisa fazer uma bela faxina em seu porão mágico. Aprenda feitiços coloridos e esquisitos que alteram a realidade ou simplesmente saia distribuindo vassouradas por aí!,"Beaucoup de bonjours! Vous êtes une petite vieille dame qui part nettoyer son grand caveau magique. Apprenez des sorts fabuleux, ou bien frappez des choses de votre balai.",こんにちは！あなたは大きな魔法のセラーを掃除しないといけない老婆。カラフルで難しい魔法を習得して、いろんな物をほうきでたたいてみよう。,Una tierna abuelita (tu!) necesita hacer una buena limpieza en su sótano mágico. Aprende hechizos coloridos y raros que alteran la realidad o simplemente sal a repartir escobazos por ahí!
+UI.Photosensitivity.Warning,"[center]WARNING:\n\nThis game includes flashing that may potentially trigger seizures for people with photosensitive epilepsy. [/center]","[center]警告：\n\n本游戏包含闪光，可能会引发敏感人群出现癫痫症状。[/center]","[center]ВНИМАНИЕ!\n\nВ игре присутствуют сцены мерцания, которые могут вызвать судороги у людей с фоточувствительной эпилепсией. [/center]","[center]ATENÇÃO:\n\nEste jogo contém luzes piscantes que podem causar convulsões em pessoas com epilepsia fotossensível.[/center]","[center]ATTENTION:\n\nCe jeu contient des scènes pouvant potentiellement causer des crises chez les personnes photosensibles ou souffrantes d'épilepsie.
+ [/center]",[center]このゲームに点滅する光など、一部の視覚的映像を見た時にけいれん発作を起こす方がいます。 [/center],[center]ADVERTENCIA: Este juego incluye luces parpadeantes que podrían desencadenar convulsiones en personas con epilepsia fotosensible.[/center]
 UI.GlitchSpell.1,Feather Fall,一飞冲天,Пёрышко,Sopro de Pena,Poids Plume,フェザー・フォール,Caída emplumada
 UI.GlitchSpell.2,Air Walk,空中漫步,Лёгкость,Passeio Etéreo,Marche Aérienne,エア・ウォーク,Paso Suspendido
-UI.GlitchSpell.3,Ladder,拾级而上,Лестница,Trilha Impossível,Echelle,はしご,Trepamuros
+UI.GlitchSpell.3,Ladder,拾级而上,Лестница,Trilha Impossível,Échelle,はしご,Trepamuros
 UI.GlitchSpell.4,Ghost,隐身术,Призрак,Forma Fantasma,Fantôme,ゴースト,Velo Incorpóreo
-UI.MainMenu.0,Choose language,选择语言,Выберите язык,Escolha o idioma,Choisir la langue,言語選択,Elige tu idioma
+UI.MainMenu.0,Choose language,选择语言,Выберите язык,Escolha o idioma,Changer de langue,言語選択,Elige tu idioma
 UI.MainMenu.1,Press %s for Options.,"按 %s 打开选项","Нажмите %s чтобы открыть настройки","%s opções","Appuyez sur %s pour les Options.",%s でオプションを開く,Pulsa %s para opciones
 UI.MainMenu.2,"File ",文件 ,"Файл ","Jogo ","Fichier",ファイル,Juego
 UI.MainMenu.3,press %s to start,按 %s 开始,"%s чтобы начать",%s iniciar,%s pour commencer,%s 開始,%s para iniciar! 
 UI.MainMenu.4,%s: delete file,%s：删除文件,%s: удалить,%s apagar,%s: supprimer,%s : ファイル削除,%s: borrar archivo
-UI.MainMenu.5,"Really Delete [wave]File %s[/wave]?\n                      %s Confirm\n                      %s Cancel","确认删除  文件 %s 吗？\n                  %s 确认\n                  %s 取消","Точно удалить\n«Файл %s»?\n%s Да %s Нет","apagar Jogo %s?\n    %s Confirmar\n    %s Cancelar","Vraiment Supprimer %s?\n    %s Confirmer\n    %s annuler","本当に [wave]ファイルを削除する？ %s[/wave]?\n               %s 確定\n               %s キャンセル","Realmente Borrar [wave]\"Archivo %s\"[/wave]?                                                                          %s Confirmar\n    %s Cancelar"
+UI.MainMenu.5,"Really Delete [wave]File %s[/wave]?\n                      %s Confirm\n                      %s Cancel","确认删除  文件 %s 吗？\n                  %s 确认\n                  %s 取消","Точно удалить\n«Файл %s»?\n%s Да %s Нет","apagar Jogo %s?\n    %s Confirmar\n    %s Cancelar","Vraiment supprimer [wave]\"Fichier %s\"[/wave] ?\n                %s Confirmer\n                %s Annuler","本当に [wave]ファイルを削除する？ %s[/wave]?\n               %s 確定\n               %s キャンセル","Realmente Borrar [wave]\"Archivo %s\"[/wave]?                                                                          %s Confirmar\n    %s Cancelar"
 UI.PauseMenu.0,"%s to select, %s to resume ","按%s选择，按%s继续","%s выбора, %s отмены","%s selecionar, %s voltar","%s: sélectionner, %s: reprendre","%s 選択, %s 閉じる","%s seleccionar, %s retomar"
 UI.PauseMenu.1,resume,继续,Вернуться,Voltar,"reprendre",閉じる,retomar
 UI.PauseMenu.2,Input,操作方法,Управление,Controles,"Contrôles",インプット,Controles
@@ -19,7 +20,7 @@ UI.InputMenu.1,Keyboard,键盘,Клавиатура,Teclado,"Clavier",キーボ�
 UI.InputMenu.2,Controller,手柄,Контроллер,Controle,"Manette",コントローラー,Mando
 UI.InputMenu.3,Button mapping,按钮,кнопки,Botões,"Boutons",ボタン,Mapeo de Botones
 UI.InputMenu.4,button type,按钮类型,Глифове,Tipo de botão,"Type de boutons",ボタングリフ：,Design de botón
-UI.InputMenu.5,joystick?: ,启用操纵杆？： ,джойстик?: ,Joystick?: ,joystick ?: ,アナログ？：,Joystick?:
+UI.InputMenu.5,joystick?: ,启用操纵杆？： ,джойстик?: ,Joystick?: ,joystick ?:,アナログ？：,Joystick?:
 UI.InputMenu.Action.1,move left,向左,Влево,esquerda,"gauche",左に移動,izquierda
 UI.Tutorial.InputPrompt.1,"%s to Sweep. %s to Jump. %s%s to walk..","%s 扫帚。%s 跳跃。%s%s 向左向右","%s Метла. %s Прыжок. %s%s ходить","%s vassourada %s pular %s%s andar","%s balayer, %s sauter, %s%s mouvement",%s 掃く。 %s ジャンプ。 %s%s 歩く。,%s Barrer. %s Saltar. %s%s caminar..
 UI.InputMenu.Action.2,move right,向右,Вправо,direita,"droite",右に移動,derecha
@@ -30,30 +31,30 @@ UI.InputMenu.Action.5,jump,跳跃,Прыжок,pular,"sauter",ジャンプ,Salta
 UI.InputMenu.Action.6,sweep broom,扫帚,Метла,vassourada,"balayer",ほうきを掃く,Barredada
 UI.InputMenu.Action.6_0,"talk","讲话","разговаривать","falar","parler",話す,Hablar
 UI.InputMenu.Action.7,Return to save.,回到上一个存档点,«Вернуться»,último checkpoint,"Retour à sauvegarde.",セーブに戻る,Volver
-UI.InputMenu.Action.8,next spell,下一个咒语,Следующее заклинание,próximo feitiço,"prochain sort",次の魔法,próximo hechizo
-UI.InputMenu.Action.9,prev spell,上一个咒语,Предыдущее заклинание,feitiço anterior,"dernier sort",前の魔法,hechizo anterior
+UI.InputMenu.Action.8,next spell,下一个咒语,Следующее заклинание,próximo feitiço,"sort suivant",次の魔法,próximo hechizo
+UI.InputMenu.Action.9,prev spell,上一个咒语,Предыдущее заклинание,feitiço anterior,"sort précédent",前の魔法,hechizo anterior
 UI.InputMenu.Action.9_0,spell %s,一个咒语%s,заклинание %s,feitiço %s,"sort %s",魔法 %s,hechizo %s
 UI.InputMenu.Action.10,open map,打开地图,Открыть карту,abrir mapa,"ouvrir la carte",マップを開く,abrir mapa
 UI.InputMenu.13_0,"press %s to select, %s to go back.","按%s选择，按%s返回","%s выбора, %s возвращения.","%s escolher, %s voltar.","%s sélectionner, %s retour",%s 選択、 %s 戻る,"pulsa %s eligir, %s regresar."
 UI.InputMenu.13_1,"Really quit?\npress %s to select, %s to go back.","真的退出吗？\n按%s选择，按%s返回","Действительно уйти?\n%s выбора, %s возвращения.","Realmente desistir?\n%s escolher, %s voltar.","Tu veux vraiment arrêter ?\n%s sélectionner, %s retour",本当にやめる？\n %s 選択、 %s 戻る。,"Realmente salir?\n%s seleccionar, %s volver."
 UI.InputMenu.13_2,"unsaved progress will be lost.\npress %s to select, %s to go back.","未保存的进度将会丢失。\n按%s选择，按%s返回","Несохраненный прогресс будет утерян.\n%s выбора, %s возвращения.","o progresso não salvo será perdido.\naperte %s escolher %s voltar.","les progrès non sauvegardés seront perdus\n%s sélectionner, %s retour",セーブしてないプログレスは消えてしまいます\n %s 選択、 %s 戻る。,"Se perderá el progreso no guardado.\n%s seleccionar, %s volver."
-UI.InputMenu.13,"press %s to select, %s to go back\nhold %s: reset bindings","按%s选择，按%s返回\n长按%s恢复默认设置","%s выбора, %s возвращения.\nУдерживайте %s сброса настроек","%s selecionar %s voltar\nsegure %s para redefinir","%s sélectionner, %s retour\ngardez %s réinitialiser les saisies.", %s 選択、 %s 戻る。\n %s 長押し：バインドリセット,"%s seleccionar, %s retroceder\npulsado %s: restablecer controles"
+UI.InputMenu.13,"press %s to select, %s to go back\nhold %s: reset bindings","按%s选择，按%s返回\n长按%s恢复默认设置","%s выбора, %s возвращения.\nУдерживайте %s сброса настроек","%s selecionar %s voltar\nsegure %s para redefinir","%s sélectionner, %s retour\ngardez %s appuyé pour\nréinitialiser les contrôles.", %s 選択、 %s 戻る。\n %s 長押し：バインドリセット,"%s seleccionar, %s retroceder\npulsado %s: restablecer controles"
 UI.InputMenu.14,"press key to set %s",按键设定%s,Задайте кнопку\nдля действия %s,"aperte para definir %s","appuyez sur la touche\nchoisie pour: %s",キー選択して %s を設定する,pulse la tecla para fijar %s
-UI.InputMenu.14_2,"press button to set %s",按钮设定%s,Задайте клавиатура\nдля действия %s,"aperte para definir %s","appuyez sur la bouton\nchoisie pour: %s","ボタンを押して %s を設定する。","\"pulse el botón para fijar %s\""
-UI.InputMenu.15,"reset bindings\n...3 ...2 ...1!","恢复默认设置中\n…3…2…1！","Сброс настроек\n3... 2... 1!","redefinindo controles\n...3 ...2 ...1!","réinitialisation des saisies\n...3 ...2 ...1!",バインドのリセットまで\n...3 ...2 ...1!,restableciendo controles\n...3 ...2 ...1!
-UI.InputMenu.15_2,"reset bindings\n...3 ...2","恢复默认设置中\n…3…2","Сброс настроек\n3... 2...","redefinindo controles\n...3 ...2","réinitialisation des saisies\n...3 ...2",バインドのリセットまで\n...3 ...2,restableciendo controles\n...3 ...2
-UI.InputMenu.15_3,"reset bindings\n...3","恢复默认设置中\n…3","Сброс настроек\n3...","redefinindo controles\n...3","réinitialisation des saisies\n...3",バインドのリセットまで\n...3,restableciendo controles\n...3
+UI.InputMenu.14_2,"press button to set %s",按钮设定%s,Задайте клавиатура\nдля действия %s,"aperte para definir %s","\"appuyez sur le bouton choisi pour: %s\"","ボタンを押して %s を設定する。","\"pulse el botón para fijar %s\""
+UI.InputMenu.15,"reset bindings\n...3 ...2 ...1!","恢复默认设置中\n…3…2…1！","Сброс настроек\n3... 2... 1!","redefinindo controles\n...3 ...2 ...1!","réinitialisation des contrôles\n...3 ...2 ...1!",バインドのリセットまで\n...3 ...2 ...1!,restableciendo controles\n...3 ...2 ...1!
+UI.InputMenu.15_2,"reset bindings\n...3 ...2","恢复默认设置中\n…3…2","Сброс настроек\n3... 2...","redefinindo controles\n...3 ...2","réinitialisation des contrôles\n...3 ...2",バインドのリセットまで\n...3 ...2,restableciendo controles\n...3 ...2
+UI.InputMenu.15_3,"reset bindings\n...3","恢复默认设置中\n…3","Сброс настроек\n3...","redefinindo controles\n...3","réinitialisation des contrôles\n...3",バインドのリセットまで\n...3,restableciendo controles\n...3
 UI.PauseMenu.3,Graphics,画面,Графика,Gráficos,"Graphismes",グラフィック,Gráficos
 UI.GraphicsMenu.ON,ON,开,ВКЛ,SIM,"OUI",ON,ON
 UI.GraphicsMenu.OFF,OFF,关,ВЫКЛ,NÃO,"NON",OFF,OFF
-UI.GraphicsMenu.1,CRT Filter: ,显像管滤波器： ,ЭЛТ-фильтр: ,Filtro CRT: ,"Effet CRT: ",CRT フィルター：,Efecto CRT:
-UI.GraphicsMenu.2,Glitch Screen: ,闪屏： ,Глитч-эффекты: ,Efeito Glitch: ,"Ecran Glitch: ",グリッチ画面：,Efecto de Bugs:
-UI.GraphicsMenu.3,Color Blind: ,色盲模式： ,Дальтонизм: ,Modo Daltônico: ,"Daltonisme: ",色盲：,Para Daltonicos:
-UI.GraphicsMenu.4,Fullscreen: ,全屏： ,Весь экран: ,Tela Cheia: ,"Plein Ecran: ",フルスクリーン：,Pantalla Completa:
+UI.GraphicsMenu.1,CRT Filter: ,显像管滤波器： ,ЭЛТ-фильтр: ,Filtro CRT: ,"Effet CRT:",CRT フィルター：,Efecto CRT:
+UI.GraphicsMenu.2,Glitch Screen: ,闪屏： ,Глитч-эффекты: ,Efeito Glitch: ,"Ecran Glitch:",グリッチ画面：,Efecto de Bugs:
+UI.GraphicsMenu.3,Color Blind: ,色盲模式： ,Дальтонизм: ,Modo Daltônico: ,"Mode Daltonien: ",色盲：,Para Daltonicos:
+UI.GraphicsMenu.4,Fullscreen: ,全屏： ,Весь экран: ,Tela Cheia: ,"Plein Ecran:",フルスクリーン：,Pantalla Completa:
 UI.PauseMenu.4,Sound,声音,Звук,Som,"Son",音声,Sonido
-UI.SoundMenu.1,"Music: ",音乐音量： ,"Музыка: ","Música: ","Musique: ",音楽: ,Música:
-UI.SoundMenu.2,"SFX: ",音效音量： ,"Эффекты: ","Som: ","Sons: ",SFX: ,Efectos Sonoros:
-UI.SoundMenu.3,Music Glitches: ,故障音效： ,Глитч-музыка: ,Glitch Musical: ,"Glitch Musicaux: ",音楽グリッチ:,Música Bugeada:
+UI.SoundMenu.1,"Music: ",音乐音量： ,"Музыка: ","Música: ","Musique:",音楽: ,Música:
+UI.SoundMenu.2,"SFX: ",音效音量： ,"Эффекты: ","Som: ","Sons:",SFX: ,Efectos Sonoros:
+UI.SoundMenu.3,Music Glitches: ,故障音效： ,Глитч-музыка: ,Glitch Musical: ,"Glitch Musicaux:",音楽グリッチ:,Música Bugeada:
 UI.PauseMenu.5,Quit to Main Menu,回到主菜单,Выход в главное меню,Voltar ao Menu,"Retour au menu principal",メインメニューへ,Volver al Menú Principal
 UI.PauseMenu.6,Quit Game,退出游戏,Выйти из игры,Sair do jogo,"Quitter le jeu",ゲームをやめる,Salir del Juego
 UI.EndCredits.QuitGame,Quit Game: %s,退出游戏：%s,Выйти из игры: %s,Sair do jogo: %s,"Quitter le jeu: %s",ゲームをやめる： %s,Salir del Juego: %s
@@ -70,40 +71,40 @@ NPC.Crone.1,"•ah! a fellow crone! you \nsaved me from near-death.\nthis glitch
 NPC.Crone.1_2,"•I think the crystals are ahead\nbut I can't get past this door..","我认为水晶在前面\n但我无法跨过这扇门..","Я думаю кристаллы впереди\nно я не могу пройти через эту дверь..","os cristais devem estar em\nalgum lugar atrás desta porta...\nmas não consigo abri\nla de jeito nenhum.","Je pense que les cristaux sont\ndevant, mais je n'arrive pas\nà passer cette porte.",•クリスタルはおそらくこの先にある！\nでもこの扉のせいで先に進めないの・・・,-Creo que los cristales están adelante\npero no puedo pasar de esta puerta..
 NPC.Crone.1_3,"•Ah! great work.\nI'll meet you on ahead","啊!很棒的工作\n我会在前面遇见你","Ах! отличная работа.\nЯ встречу тебя впереди","ah, que maravilha!\nte encontro mais adiante,\nquerida!","Ah ! Excellent travail. \nÀ bientôt.",•すごい！\nじゃあ、向こうで待ち合せよ！,-Gran trabajo. \nTe veré más adelante.
 NPC.Crone.2,don't test me hag,老太婆！你再抽我试试？,"Не испытывай меня, старая ты мымра.","não teste minha paciência, velha coroca.","ne me provoque pas mégère",おい、クソババア。なめんなよ。,"no me molestes, vieja!"
-NPC.Tutorial.0,touch magic pillar to learn:,触摸魔法柱习得：,"Коснитесь волшебной колонны, чтобы изучить:",toque no pilar mágico para aprender:,"touchez pilier magique apprendre:",魔法の柱に触れて習得しよう,tocar pilar mágico para aprender:
-NPC.Tutorial.1,"touch magic pillar to learn\n[color=#00ff00]Feather Fall[/color] spell: jump high\nby holding jump button",[color=#00ff00]一飞冲天[/color]：长按跳跃键高跳,"[color=#00ff00]Пёрышко[/color] – удерживайте кнопку прыжка, чтобы прыгнуть выше.",[color=#00ff00]Sopro de Pena[/color]: pule mais alto\nsegurando o botão de pulo.,"touchez le pilier pour apprendre:\n[color=#00ff00]Poids Plume:[/color] sautez plus haut\nen maintenant bouton saut",魔法の柱に触れて\n[color=#00ff00]フェザーフォール[/color]を習得しよう：\nジャンプボタンを長押しすれば\n高く飛べる。,Toca el pilar mágico aprender \nel hechizo [color=#00ff00]Caída Emplumada[/color]:\nsalta alto manteniendo pulsado\nel botón de salto.
+NPC.Tutorial.0,touch magic pillar to learn:,触摸魔法柱习得：,"Коснитесь волшебной колонны, чтобы изучить:",toque no pilar mágico para aprender:,"touchez le pilier magique pour apprendre:",魔法の柱に触れて習得しよう,tocar pilar mágico para aprender:
+NPC.Tutorial.1,"touch magic pillar to learn\n[color=#00ff00]Feather Fall[/color] spell: jump high\nby holding jump button",[color=#00ff00]一飞冲天[/color]：长按跳跃键高跳,"[color=#00ff00]Пёрышко[/color] – удерживайте кнопку прыжка, чтобы прыгнуть выше.",[color=#00ff00]Sopro de Pena[/color]: pule mais alto\nsegurando o botão de pulo.,"touchez le pilier magique pour apprendre:\n[color=#00ff00]Poids Plume:[/color] sautez plus haut en\nmaintenant le bouton \"saut\" appuyé",魔法の柱に触れて\n[color=#00ff00]フェザーフォール[/color]を習得しよう：\nジャンプボタンを長押しすれば\n高く飛べる。,Toca el pilar mágico aprender \nel hechizo [color=#00ff00]Caída Emplumada[/color]:\nsalta alto manteniendo pulsado\nel botón de salto.
 NPC.Tutorial.2,"you can also hold\n[color=#00ff00]jump[/color]\nbutton\nto float gracefully",长按跳跃键优雅漂浮。\n实在太优雅了！,"Ещё, если удерживать\nкнопку прыжка, вы можете\nпарить в воздухе.",você também pode segurar\no botão de pulo no ar\npara planar graciosamente.,"vous pouvez aussi gracieusement\nléviter en maintenant le \nbouton saut appuyé",[color=#00ff00]ジャンプ[/color]\nボタン\nを長押しすれば浮くこともできるよ。,también puede mantener el botón de\n[color=#00ff00]saltar[/color]\npara flotar graciosamente
-NPC.Tutorial.3,are you stuck?\npress %s to Return,卡住了吗？\n按%s返回,"Не знаете, куда идти?\nНажмите %s, чтобы «вернуться».",está presa?\naperte %s para retornar.,"mémé est coincée?\nappuyez sur %s pour Retourner",出られなくなった？\n %s 前の場所に戻る,estás atascado?\npulsa %s para volver
+NPC.Tutorial.3,are you stuck?\npress %s to Return,卡住了吗？\n按%s返回,"Не знаете, куда идти?\nНажмите %s, чтобы «вернуться».",está presa?\naperte %s para retornar.,"vous êtes coincée ?\nappuyez sur %s pour retourner au dernier point de sauvegarde",出られなくなった？\n %s 前の場所に戻る,estás atascado?\npulsa %s para volver
 NPC.Tutorial.4,"•touch magic pillar to learn\nthe [color=#ff0000]Air Walk[/color] spell:\nwalk without falling down",[color=#ff0000]空中漫步[/color]：在空中漂浮移动,"[color=#ff0000]Лёгкость[/color] – ходите по\nвоздуху, не падая вниз.",[color=#ff0000]Passeio Etéreo[/color]: ande pelo\nar sem cair.,"touchez le pilier pour apprendre:\n[color=#ff0000]Marche Aérienne:[/color] continuez\nà marcher sans tomber",•魔法の柱に触れて\n [color=#ff0000]エア・ウォーク[/color] を習得しよう：\n落ちずに歩くことができる。,•toca el pilar mágico aprender\n el hechizo [color=#ff0000]Paso Suspendido[/color]:\ncamina sin caerse!
 NPC.Tutorial.5,"•some glitches are\nun-sweepable.\ni know this",有些故障就是没法打扫干净。\n我知道的。,Некоторые глитчи\nнельзя убрать.\nПоверьте на слово.,alguns glitches não\npodem ser varridos.\ndisso eu sei.,"certains glitchs sont\ninbalayables.\noui je sais.",•掃くことができない\nグリッチもあるんだ。\n知ってるかな？,"Algunos bugs \nno se pueden barrer, \neso ya lo sé!"
 NPC.Tutorial.5_2,"•i am also\nun-sweepable.\ni know this.",我也无法被清除。\n我知道。,Я также удалить невозможно.\nПоверьте на слово.,Eu também não\nposso ser varrido.\ndisso eu sei.,"je suis aussi inbalayables\noui je sais.",•私のことも\n掃くことはできないよ。\n知らなかった？,•Yo tambíen\no me puedo barrer.\ntambién sé eso.
-NPC.Tutorial.6,"sometimes, you must go\nbackwards to progress.\nGlitches can help you.",有时以退为进也是良策。\n故障也会有用处的。,"Иногда нужно пойти назад,\nчтобы продвинуться вперёд.\nГлитчи в этом помогут.",às vezes você precisa voltar\npara poder seguir em frente.\nglitches podem te ajudar.,"des fois, il faut revenir en\narrière pour avancer. Les\nglitch peuvent vous aider",先に進むためには\n戻る必要がある時もある。\nグリッチが役に立つこともある。,"A veces, debes \nretroceder para avanzar.\nLos bugs pueden ayudarte."
+NPC.Tutorial.6,"sometimes, you must go\nbackwards to progress.\nGlitches can help you.",有时以退为进也是良策。\n故障也会有用处的。,"Иногда нужно пойти назад,\nчтобы продвинуться вперёд.\nГлитчи в этом помогут.",às vezes você precisa voltar\npara poder seguir em frente.\nglitches podem te ajudar.,"des fois, il faut revenir en\narrière pour avancer. Les\nGlitchs peuvent vous aider",先に進むためには\n戻る必要がある時もある。\nグリッチが役に立つこともある。,"A veces, debes \nretroceder para avanzar.\nLos bugs pueden ayudarte."
 UI.Alert.0,got small key!,拿到了一枚小钥匙！,Ключик!,você encontrou uma chave pequena!,"vous obtenez petite clef!",小さい鍵が手に入った！,encontró una llave pequeña
 UI.Alert.1,angel egg!,天使的卵！,Ангельское яйцо!,ovo celestial!,"oeuf d'ange!",天使の卵！,Angeluevo!
 UI.Alert.2,all tidy!,打扫干净了！,Всё чисто!,tudo arrumadinho!,"tout propre!",掃除完了！,todo limpio!
-NPC.Treasure.1,????\npress %s to Return,？？？？\n按 %s返回上一存档点,"????\nНажмите %s, чтобы «вернуться».",????\naperte %s para retornar,"????\nappuyez sur %s Retourner",????\n %s 戻る,????\npulsa %s para Regresar
-NPC.Treasure.2,"•You got Grimoire\n..but it's missing a\nfew pages","你拿到了魔法书\n…就是缺了几页",У вас есть «Гримуар»...\nно в нём не хватает\nпары страниц.,"você encontrou o GRIMÓRIO...\nmas faltam algumas páginas","Vous obtenez Grimoire\n..mais il y manque des pages ","• 「グリモワール」を入手した\nでも・・・\nページ足りないかも。","•Encontraste un \"Grimorio\"\n... Pero le faltán \nalgunas páginas..."
-NPC.Treasure.2_2,"•You got Grimoire MEMORY!!","你拿到了圣洁魔法书",У вас есть\nДУША «Гримуар»,"você encontrou o\nMEMÓRIA DE GRIMÓRIO","Vous obtenez Grimoire MÉMOIRE!!","• 「グリモワール」の記憶を入手した！","•Encontraste una \nMEMÓRIA del \"Grimorio\"!! "
+NPC.Treasure.1,????\npress %s to Return,？？？？\n按 %s返回上一存档点,"????\nНажмите %s, чтобы «вернуться».",????\naperte %s para retornar,"????\nappuyez sur %s pour Retourner",????\n %s 戻る,????\npulsa %s para Regresar
+NPC.Treasure.2,"•You got Grimoire\n..but it's missing a\nfew pages","你拿到了魔法书\n…就是缺了几页",У вас есть «Гримуар»...\nно в нём не хватает\nпары страниц.,"você encontrou o GRIMÓRIO...\nmas faltam algumas páginas","Vous obtenez Grimoire\n..mais il y manque des pages","• 「グリモワール」を入手した\nでも・・・\nページ足りないかも。","•Encontraste un \"Grimorio\"\n... Pero le faltán \nalgunas páginas..."
+NPC.Treasure.2_2,"•You got Grimoire MEMORY!!","你拿到了圣洁魔法书",У вас есть\nДУША «Гримуар»,"você encontrou o\nMEMÓRIA DE GRIMÓRIO","Vous obtenez le SOUVENIR \"Grimoire\" !!","• 「グリモワール」の記憶を入手した！","•Encontraste una \nMEMÓRIA del \"Grimorio\"!! "
 NPC.Treasure.3,"got map,\nview from inventory\nor press %s.","-发现了 地图！\n在物品栏打开\n或按%s查看","– Вы нашли «карту».\nПосмотрите её в инвентаре\nили нажмите %s.","-você encontrou um MAPA\nveja no inventário ou aperte %s","Vous obtenez une carte\nvisionnez-la depuis votre inventaire,\nou appuyez sur %s","「地図」を入手した、\nもちものから開くか、\n 「%s で見れる」.","•Encontraste \"mapa\",\nUsa-lo en su inventario,\no pulsa \"%s\""
-NPC.Treasure.4,"•FISHING ROD GET\nbut you don't know\nhow to fish...","-拿到了 鱼竿\n但你不会钓鱼……","– Вы нашли удочку.\nНо вы же не знаете,\nкак надо рыбачить...","-você encontrou uma VARA DE PESCA\nmas saber pescar que é bom, nada...","CANNE A PECHE OBTENTION\nmais vous ne savez pas pêcher...",•釣り竿を入手した\nでも釣りを\nしたことがない・・・,•OBTUVE UNA CAÑA DE PESCAR\nPero no sabes pescar...
+NPC.Treasure.4,"•FISHING ROD GET\nbut you don't know\nhow to fish...","-拿到了 鱼竿\n但你不会钓鱼……","– Вы нашли удочку.\nНо вы же не знаете,\nкак надо рыбачить...","-você encontrou uma VARA DE PESCA\nmas saber pescar que é bom, nada...","CANNE À PÊCHE OBTENTION\nmais vous ne savez pas pêcher...",•釣り竿を入手した\nでも釣りを\nしたことがない・・・,•OBTUVE UNA CAÑA DE PESCAR\nPero no sabes pescar...
 NPC.Treasure.5,"•FLOWER POT GET\nwell, maybe it will be useful..","-拿到了 花盆\n行吧。万一以后用得着呢…","– Вы нашли горшок.\nМожет, он и пригодится...","-você encontrou um VASINHO DE FLORES\nvai que serve para alguma coisa...","POT DE FLEURS OBTENTION\neh bien, ce sera peut-être utile..",•花瓶を入手した\nいつか役に立つかも・・・,"• OBTUVE UNA MACETA DE FLORES\nBueno, tal vez le resulte útil..."
 NPC.Treasure.6,"•CUTE PET GET\nalthough you're not sure that\nit's really that cute..","-拿到了 可爱的宠物\n虽然但是，这真的算可爱吗…","– Вы нашли милаш”ку.\nПравда, так назвать его\nможно только с большой натяжкой...","-você encontrou um BICHINHO FOFINHO\nfofinho? tenho lá minhas dúvidas...","COMPAGNON MIGNON OBTENTION\nmais vous n'êtes pas si sûre\nqu'il soit si mignon que ça..",•かわいいペットを入手した\n正直\nあまり可愛くないかも・・・,•ENCONTRASTE UN ANIMALITO TIERNO\naunque no está seguro de que\nrealmente és tierno...
 NPC.Treasure.7,"FISH MEMORY:\ntry jumping in water","化鱼在水中跳跃","ДУША РЫБЫ\nПопробуйте прыгнуть\nв воду.","MEMÓRIA DE PEIXE\nque tal dar um mergulhinho?","SOUVENIR DU POISSON\nessayez de sauter dans l'eau",魚の記憶：\n水の中に飛び込んでみよう,MEMORIA DE PEZ\nqué tal un chapuzón?
 NPC.Treasure.8,"CRICKET MEMORY:\ntry digging through walls","化蟋蟀挖穿墙壁","ДУША МЕДВЕДКИ\nПопробуйте покопаться в стенах.","MEMÓRIA DE GRILO\nexperimente cavar as paredes","SOUVENIR DU CRIQUET\nessayez de creuser à\ntravers les murs",コオロギの記憶：\n壁を掘ってみよう,MEMORIA DE GRILLO\nintenta cavar en las paredes!
-NPC.Treasure.9,"SPORE MEMORY: sweep 3 times\nto teleport to your broomerang","化孢子横扫三次\n瞬移到回旋镖上","ДУША СПОР\nВзмахните метлой три раза,\nчтобы переместиться к метлорангу.","MEMÓRIA DE FUNGO\nvarra três vezes para se teleportar até sua vassourangue","SOUVENIR D'UNE SPORE\nbalayez trois fois pour vous\ntéléporter sur votre balairang",胞子の記憶：３回掃くと\nブルーメランにテレポートできる,MEMORIA DE HONGO\nbarrer 3 veces\npara teletransportarte a tu barrerang
+NPC.Treasure.9,"SPORE MEMORY: sweep 3 times\nto teleport to your broomerang","化孢子横扫三次\n瞬移到回旋镖上","ДУША СПОР\nВзмахните метлой три раза,\nчтобы переместиться к метлорангу.","MEMÓRIA DE FUNGO\nvarra três vezes para se teleportar até sua vassourangue","SOUVENIR D'UNE SPORE\nbalayez trois fois pour vous\ntéléporter à votre balairang",胞子の記憶：３回掃くと\nブルーメランにテレポートできる,MEMORIA DE HONGO\nbarrer 3 veces\npara teletransportarte a tu barrerang
 NPC.AngelStatue.0,"...","…","...","...","...",・・・,...
-NPC.AngelStatue.1,"teleport?","瞬移？","переместиться?","teleportar?","téléporter?",テレポート？,teletransportar?
-NPC.MimicTreasure.1,"FISHING ROD","鱼竿","удочку","VARA DE PESCA",CANNE A PECHE,釣り竿,CAÑA DE PESCAR
+NPC.AngelStatue.1,"teleport?","瞬移？","переместиться?","teleportar?","se téléporter?",テレポート？,teletransportar?
+NPC.MimicTreasure.1,"FISHING ROD","鱼竿","удочку","VARA DE PESCA",CANNE À PÊCHE,釣り竿,CAÑA DE PESCAR
 NPC.MimicTreasure.2,"FLOWER POT","花盆","горшок","VASINHO DE FLORES",POT DE FLEURS,花瓶,MACETA DE FLORES
-NPC.MimicTreasure.3,"CUTE PET","可爱的宠物","милашку","BICHINHO FOFINHO",COMPAGNON MIGNON ,かわいいペット,ANIMALITO TIERNO
+NPC.MimicTreasure.3,"CUTE PET","可爱的宠物","милашку","BICHINHO FOFINHO",COMPAGNON MIGNON,かわいいペット,ANIMALITO TIERNO
 NPC.BabushkaCat.1,*meow* *prrrr*,喵~咕噜咕噜~,*мяу* *мур-р*,*miau* *prrrr*,*miou* *ronron*,*にゃー* *にゃおー*,*miau* *prrrr*
-NPC.BabushkaCat.1_2,*me-OW!*,喵！！,*мяу!!*,*miau!!*,*miou!!!*,*にゃおー！*,*miau!!*
+NPC.BabushkaCat.1_2,*me-OW!*,喵！！,*мяу!!*,*miau!!*,*mi-AILLE!*,*にゃおー！*,*miau!!*
 Dialog.Player.3,oh hello dearie,哎呀~咪咪,"О, здравствуй!","oi, fofura.",tiens bonjour très chère,あら、こんにちは,hola ternura
 NPC.Tutorial.7,"with the Grimoire:\npress %s to switch\nbetween spells","使用魔法书：\n按%s切换咒语","С «Гримуаром»:\nнажмите %s, чтобы\nсменить заклинание.","com o Grimório:\naperte %s para\ntrocar de feitiço",avec le Grimoire: appuyez\nsur %s pour changer de sort,"「グリモワール」使用：\n %s で魔法を\n入れ替えることができる","con el \"Grimorio\":\npulsa %s para cambiar\nlos hechizos"
-NPC.Tutorial.8,try jumping and swapping\nat the same time!,尝试同时交换和跳跃！,Попробуй сменить заклинание\nи прыгнуть одновременно!,tente trocar feitiços\nenquanto pula!,essayez de changer\nde sort en sautant!,ジャンプと同時に\n魔法を入れ替えてみよう！,intenta cambiarlos\nmientras salta!
+NPC.Tutorial.8,try jumping and swapping\nat the same time!,尝试同时交换和跳跃！,Попробуй сменить заклинание\nи прыгнуть одновременно!,tente trocar feitiços\nenquanto pula!,essayez de changer\nde sort tout en sautant!,ジャンプと同時に\n魔法を入れ替えてみよう！,intenta cambiarlos\nmientras salta!
 NPC.Tutorial.9,hi..\n•because you're [color=red]old[/color]: you'll only\nremember 2 spells at a time,那个…年纪大了，\n你一次只能记住两个咒语咯,Вряд ли вы запомните\nбольше двух заклинаний.\nВозраст сказывается.,"oi...\ncomo a senhora está bem velhinha,\nsó consegue se lembrar de\n2 feitiços de cada vez",bonjour... puisque vous êtes vieille:\nvous ne vous souviendrez que\nde 2 sorts à la fois,こんにちは・・・\n•あなたは [color=red]年寄り[/color]だから：魔法は\n２つしか覚えられないんだ,"Hola, ya eres una señora muy viejita...,solo puede recordar-se 2 hechizos por vez..."
 Dialog.Player.4,harumph!!,什么玩意儿！！,Ой-ой-ой!,hunf!!,saperlipopette!!,ふん！！！,hmmff!!
-NPC.Tutorial.10,did you notice?\nthe spell you forget\nis the one you had active. i\nthought that was interesting.,发现了吗？\n你忘记的咒语就是你激活的那个。\n这可太有意思了。,А вы заметили?\nВы забываете именно\nактивное заклинание.\nЭто любопытно.,"viu? a senhora\nesquece justo o feitiço\nque estava usando.\ncurioso, não?",avez-vous remarqué?\nle sort que vous avez oublié\nest celui qui était actif.\nj'ai pensé cela intéressant,気づいた？\n入れ替えた時に使ってた\n魔法と入れ替わったんだ。\n面白くない？,Notaste?\nEl hechizo que olvidó\nés lo que estaba activado. \nCurioso no?
+NPC.Tutorial.10,did you notice?\nthe spell you forget\nis the one you had active. i\nthought that was interesting.,发现了吗？\n你忘记的咒语就是你激活的那个。\n这可太有意思了。,А вы заметили?\nВы забываете именно\nактивное заклинание.\nЭто любопытно.,"viu? a senhora\nesquece justo o feitiço\nque estava usando.\ncurioso, não?",avez-vous remarqué ?\nle sort que vous avez oublié\nétait le dernier sort actif.\nj'ai pensé cela intéressant,気づいた？\n入れ替えた時に使ってた\n魔法と入れ替わったんだ。\n面白くない？,Notaste?\nEl hechizo que olvidó\nés lo que estaba activado. \nCurioso no?
 NPC.Tutorial.11,"you were here once\nbefore, weren't you?",你之前来过这，对吗？,Вы ведь уже\nздесь были?,"você já esteve aqui antes,\nnão é mesmo?","vous avez été ici auparavant,\nn'est-ce pas?",ここは前に\n来たことあるよね？,"has estado aquí antes, \nverdad?"
 NPC.Tutorial.12,[color=blue]holy aura[/color]\nmakes you forget...,圣洁光环会让你忘记…,Святая аура\nстирает память...,a aura sagrada faz\na gente esquecer...,[color=blue]l'aura bénie[/color] vous fait oublier...,[color=blue]聖なるオーラ[/color]のせいで忘れたんだ・・・,[color=blue]Aura sagrada[/color]\nte hace olvidar...
 NPC.Tutorial.13,"when you're red, you \ncan walk on air.. try \nnot to jump at first!\nthat's all i'll say about that","当你是红色的时候，\n你可以在空中行走…\n但是别先跳跃！","Когда вы светитесь красным,\nто можете ходить по воздуху!\nТолько не надо прыгать...","quando você ficar vermelha,\nvai poder andar no ar...\ncuidado com os pulos!","quand vous êtes rouge,\nvous pouvez marcher sur l'air...\nessayez de ne pas sauter!",赤い時、 \n落ちずに空気の上を歩けるようになるんだ・・\nでもジャンプはしないようにね！\n危ないから。,"Cuando estás roja, \npuedes caminar en el aire. \nIntenta no saltar al principio! \nEso es todo lo que diré al respecto."
@@ -113,25 +114,25 @@ NPC.Crone.3,"•you awoke a crystal elder!\n•you seem to have\nsome [color=red
 NPC.Crone.4,"•trade %s shards for\n[color=red]BROOMERANG[/color]?",用 %s 个魔法碎片交换\n回旋扫帚？,Потратить %s\nосколков на МЕТЛОРАНГ?,quer trocar %s\nfragmentos pela VASSOURANGUE?,"échanger %s fragments\ncontre un BALAIRANG?",•シャードを交換して %s \n[color=red]ブルーメラン[/color]を手に入れる？,-Intercambiar %s fragmentos por [color=red]ESCOBARANG[/color]?
 NPC.Crone.5,need %s more shards.\nthis is strong magic y'know.,还需要%s个魔法碎片。\n谁让这是强力魔法呢。,"Нужны ещё осколки: %s.\nЭто сильная магия,\nзнаешь ли.","faltam %s fragmentos.\nessa magia é poderosa, sabia?","il vous manque %s fragments.\nc'est de la bonne magie, vous savez.",シャードが %s 足りない。\nこれは強力な魔法なんだぞ。欲しいでしょ？,"faltan %s fragmentos. \nEsta magia es poderosa, sabes?"
 NPC.Crone.6,BROOMERANG GET!\nsweep twice to THROW,得到了 回旋扫帚！\n横扫两次投掷,"У тебя есть МЕТЛОРАНГ!\nВзмахни метлой два раза,\nчтобы её БРОСИТЬ.",VASSOURANGUE!\nvarra 2 vezes para LANÇAR,"BALAIRANG OBTENTION!\nbalayez deux fois pour LANCER",ブルーメランを入手した！\n２回掃けば投げることができる,OBTUVE UN ESCOBARANG!\nbarre 2 veces para lanzar-lo!
-NPC.Crone.7,"•the tower will unlock when\nyou've awoken all 4 elders\nit holds some strong magic.",这所高塔具有强大的魔法，\n需要唤醒4位水晶长老才能解锁。,"Эта башня откроется,\nкогда ты пробудишь 4 старух.\nУ неё сильная магия.",esta torre abrirá quando você\ndespertar 4 anciãs de cristal.\nela guarda uma magia poderosa.,"cette tour s'ouvrira lorsque vous\naurez réveillé les 4 ainés-cristal.\nelle contient une grande magie.",•エルダーが全員目覚めたら\n塔に入れるようになる\n中からかなり強い魔力を感じる,"-La torre se desbloqueará cuando \nhayas despertado a las 4 ancianas, \ntiene una magia fuerte."
+NPC.Crone.7,"•the tower will unlock when\nyou've awoken all 4 elders\nit holds some strong magic.",这所高塔具有强大的魔法，\n需要唤醒4位水晶长老才能解锁。,"Эта башня откроется,\nкогда ты пробудишь 4 старух.\nУ неё сильная магия.",esta torre abrirá quando você\ndespertar 4 anciãs de cristal.\nela guarda uma magia poderosa.,"cette tour s'ouvrira lorsque vous\naurez réveillé les 4 ainées-cristaux.\nelle contient une grande magie.",•エルダーが全員目覚めたら\n塔に入れるようになる\n中からかなり強い魔力を感じる,"-La torre se desbloqueará cuando \nhayas despertado a las 4 ancianas, \ntiene una magia fuerte."
 NPC.Door.2,"magically sealed, needs %s",已被魔法封印。还需%s,Запечатано магией. %s.,"selada com magia, %s.","verrouillée magiquement, nécessite %s",魔法で封じられてる。 %s人足りない,"*Sellado mágicamente, necesita %s"
-NPC.Door.3,"%s more\nCRYSTAL ELDERS","还需要%s位水晶长老","«Осталось старух: %s»","%s mais\nanciãs de cristal","%s Cristaux afin d'être purifiée",%s 足りない\nクリスタル・エルダー,%s más\nANCIANAS DE CRISTAL
-NPC.Crystal.1,"you awoke a\n     [color=#00ffff][wave amp=50 freq=2]Crystal Elder[/wave][/color]","你唤醒了一\n     [color=#00ffff][wave amp=50 freq=2]位水晶长老！[/wave][/color]","Вы пробудили\n     [color=#00ffff][wave amp=50 freq=2]«вы пробудили старуху»[/wave][/color]","você acordou \n     [color=#00ffff][wave amp=50 freq=2]uma anciã de cristal.[/wave][/color]","vous avez réveillé\n     [color=#00ffff][wave amp=50 freq=2]un aîné-cristal[/wave][/color]",\n     [color=#00ffff][wave amp=50 freq=2]クリスタル・エルダー[/wave][/color]が目覚めた！,Hás despertado \n[color=#00ffff][wave amp=50 freq=2]una anciana de cristal![/wave][/color]
+NPC.Door.3,"%s more\nCRYSTAL ELDERS","还需要%s位水晶长老","«Осталось старух: %s»","%s mais\nanciãs de cristal","%s CRISTAUX afin d'être purifiée",%s 足りない\nクリスタル・エルダー,%s más\nANCIANAS DE CRISTAL
+NPC.Crystal.1,"you awoke a\n     [color=#00ffff][wave amp=50 freq=2]Crystal Elder[/wave][/color]","你唤醒了一\n     [color=#00ffff][wave amp=50 freq=2]位水晶长老！[/wave][/color]","Вы пробудили\n     [color=#00ffff][wave amp=50 freq=2]«вы пробудили старуху»[/wave][/color]","você acordou \n     [color=#00ffff][wave amp=50 freq=2]uma anciã de cristal.[/wave][/color]","vous avez réveillé\n [color=#00ffff][wave amp=50 freq=2]un aîné-cristal[/wave][/color]",\n     [color=#00ffff][wave amp=50 freq=2]クリスタル・エルダー[/wave][/color]が目覚めた！,Hás despertado \n[color=#00ffff][wave amp=50 freq=2]una anciana de cristal![/wave][/color]
 NPC.Crystal.End,"[color=#00ffff][wave amp=50 freq=2]primordial ooze,[/wave][/color]\ncleanse this world","[color=#00ffff][wave amp=50 freq=2]远古淤泥,[/wave][/color]\n把这个世界打扫干净。","[color=#00ffff][wave amp=50 freq=2]Первичная слизь,[/wave][/color]\nочистим этот мир.","[color=#00ffff][wave amp=50 freq=2]Sopa Primordial[/wave][/color]\nlimpar este mundo todinho.","[color=#00ffff][wave amp=50 freq=2]limon primordial[/wave][/color]\nnettoyez ce monde",\n[color=#00ffff][wave amp=50 freq=2]始源の軟泥[/wave][/color]\n世界を浄化せよ！,[color=#00ffff][wave amp=50 freq=2]Sopa Primordial[/wave][/color]\nlimpiar todo ese mundito.
-NPC.Crystal.2,"deaths: ","死亡： ","Смертей: ","mortes: ","morts: ",デス: ,Muertes:
-NPC.Crystal.3,"angel eggs: ","天使卵：","Ангельских яиц: ","ovos celestiais: ","oeufs d'ange: ",天使の卵: ,Angelhuevos:
-NPC.Crystal.4,"broom sweeps: ","扫帚攻击： ","Взмахов метлой: ","vassouradas: ","balayages: ",掃いた数: ,Barridas:
-NPC.Crystal.5,"jumps: ","扫帚攻击： ","Прыжков: ","pulos: ","sauts: ",ジャンプ: ,Saltos:
-NPC.Crystal.6,"love: ","LOVE: ","Любви: ","amor: ","amour: ",愛: ,Amor:
-NPC.Crystal.7,"shards: ","个碎片： ","осколков: ","fragmentos: ","fragments: ",シャード: ,Fragmentos:
-NPC.Crystal.8,"clean dust: ","灰尘打扫： ","Глитч-чистый: ","sujeira: ","poussière: ",綺麗にしたほこり: ,Suciedad limpia:
-NPC.Crystal.9,"time aged: ","时间变老： ","время: ","tempo velhinha: ","vous avez âgé de: ",年取った時間: ,Tiempo de envejecimiento:
+NPC.Crystal.2,"deaths: ","死亡： ","Смертей: ","mortes: ","morts:",デス: ,Muertes:
+NPC.Crystal.3,"angel eggs: ","天使卵：","Ангельских яиц: ","ovos celestiais: ","oeufs d'ange:",天使の卵: ,Angelhuevos:
+NPC.Crystal.4,"broom sweeps: ","扫帚攻击： ","Взмахов метлой: ","vassouradas: ","balayages:",掃いた数: ,Barridas:
+NPC.Crystal.5,"jumps: ","扫帚攻击： ","Прыжков: ","pulos: ","sauts:",ジャンプ: ,Saltos:
+NPC.Crystal.6,"love: ","LOVE: ","Любви: ","amor: ","amour:",愛: ,Amor:
+NPC.Crystal.7,"shards: ","个碎片： ","осколков: ","fragmentos: ","fragments:",シャード: ,Fragmentos:
+NPC.Crystal.8,"clean dust: ","灰尘打扫： ","Глитч-чистый: ","sujeira: ","poussière:",綺麗にしたほこり: ,Suciedad limpia:
+NPC.Crystal.9,"time aged: ","时间变老： ","время: ","tempo velhinha: ","vous avez âgé de:",年取った時間: ,Tiempo de envejecimiento:
 NPC.Crystal.NULL,NULL,NULL,ноль,NULL,NULL,NULL,NULL
 NPC.Crystal.Final,press %s to continue,按%s继续,"%s продолжить",%s continuar.,"%s continuer", %s 続く,Pulsa %s para continuar.
 NPC.Elder.1,"•zzz\n(well, she's still asleep...\ncan you wake her?)",呼呼\n（啊，她还在睡着呢…\n你能把她叫醒吗？）,"Хр-р...\n(Она ещё спит...\nМожет, разбудить?)",zzz\n(ela ainda está dormindo...\nvocê pode acordar ela?).,"zzz\n(eh bien, elle dort toujours...\npouvez vous la réveiller?)",•zzz\n(まだ眠ってる・・・\n起こさないと。),"•zzz\n(eeeh, sigue durmiendo...\nla puedes despertar tu?)"
-NPC.Elder.2,quiet down\nwhippersnapper!,小点声！\n你个愣头青！,"Да уймись ты,\nсвиристелка.","sossega o facho,\ncapetinha!","tais-toi\nfreluquet!",おい\n落ち着け！,Eeey! Deja de golpearme \nViejota!!
-NPC.Elder.3,"•ok I'm up.! [wave]*cough*[/wave] \nwhere am i? i still feel weak.\noh, you're trying to tidy up?\nwell, awaken my 3 other sisters\nwe can pray to Goddess\nand clean up this world",好了我起来了！咳咳，这是哪？\n我还是觉得有点虚弱。\n啊，你是要打扫这个地方吗？\n那你得把我其他三个妹妹叫醒。\n我们可以向女神祈祷然后把这个世界打扫干净。,"Встаю я, встаю! *кхе-кхе*\nОй, где это я?\nСлабенькая я стала.\nЧто, хочешь прибраться?\nТогда разбуди 3 моих сестриц.\nМы вместе помолимся Богине\nи очистим этот мир.","pronto, acordei! *cof cof*\nonde é que eu estou?\nainda me sinto fraca...\nah, você quer arrumar essa bagunça?\nentão desperte minhas 3 irmãs.\npodemos rezar para a Deusa\ne limpar este mundo todinho.","bon je suis debout.! *tousse*\noù suis-je? Je me sens si faible.\nah, tu essaies de nettoyer\nl'endroit? alors, réveille mes 3\nautres soeurs. nous pouvons\nprier la Déesse de nettoyer\nce monde.",•もう起きたから！ [wave]*ゴホ*[/wave] \nここはどこ？体がすごくだるい。\nあ、もしかして掃除中？\nなら私の姉妹３人を起こすといいよ\n一緒に女神に祈ればこの世界を綺麗にできるよ！,"•Vale, desperté! [wave]*tos*[/wave] \ndonde estoy? me siento flaca...\noh, quieres limpiar eses bugs?\nbueno, despierta mis 3 otras\nhermanas, asi podemos rezar a la \nDiosa y limpyar ese mundo..."
-NPC.Elder.3_2,"•ok I'm up.! [wave]*cough*[/wave] \nwhere am i? i still feel weak.\noh, you already woke up my sisters?\nwell, we will meet\nat the holy site at top of tower.\nmake haste!",好了我起来了！咳咳，这是哪？\n我们会在塔顶的圣地与你会合。\n务必速来！,"Встаю я, встаю! *кхе-кхе*\nВстречаемся в священном\nместе на вершине башни.\nПоторопись!","pronto, acordei! *cof cof*\nnos encontraremos no local\nsagrado no topo desta torre.\napresse-se!","bon je suis debout.! *tousse*\nje pars à la rencontre de\nmes soeurs. ciao",•もう起きたから！ [wave]*ゴホ*[/wave] \nここはどこ？体がすごくだるい。\nあ、私の姉妹を起こしたの？\nなら\n塔のてっぺんで会おう。\n待たせるなよ！,"•Vale, desperté! [wave]*tos*[/wave] \ndonde estoy? aún me siento flaca... \noh, ya despertó mis hermanas?\nbueno, nos encontraremos en el lugar sagrado en la cima de la torre. Date prisa!"
+NPC.Elder.2,quiet down\nwhippersnapper!,小点声！\n你个愣头青！,"Да уймись ты,\nсвиристелка.","sossega o facho,\ncapetinha!","du calme\nfripouille !",おい\n落ち着け！,Eeey! Deja de golpearme \nViejota!!
+NPC.Elder.3,"•ok I'm up.! [wave]*cough*[/wave] \nwhere am i? i still feel weak.\noh, you're trying to tidy up?\nwell, awaken my 3 other sisters\nwe can pray to Goddess\nand clean up this world",好了我起来了！咳咳，这是哪？\n我还是觉得有点虚弱。\n啊，你是要打扫这个地方吗？\n那你得把我其他三个妹妹叫醒。\n我们可以向女神祈祷然后把这个世界打扫干净。,"Встаю я, встаю! *кхе-кхе*\nОй, где это я?\nСлабенькая я стала.\nЧто, хочешь прибраться?\nТогда разбуди 3 моих сестриц.\nМы вместе помолимся Богине\nи очистим этот мир.","pronto, acordei! *cof cof*\nonde é que eu estou?\nainda me sinto fraca...\nah, você quer arrumar essa bagunça?\nentão desperte minhas 3 irmãs.\npodemos rezar para a Deusa\ne limpar este mundo todinho.","bon je suis debout ! [wave]*tousse*[/wave]\noù suis-je ? je me sens si faible.\nah, tu essaies de nettoyer\nce donjon ? alors, réveille mes 3\nautres soeurs. nous pouvons\nprier la Déesse de nettoyer\nce monde.",•もう起きたから！ [wave]*ゴホ*[/wave] \nここはどこ？体がすごくだるい。\nあ、もしかして掃除中？\nなら私の姉妹３人を起こすといいよ\n一緒に女神に祈ればこの世界を綺麗にできるよ！,"•Vale, desperté! [wave]*tos*[/wave] \ndonde estoy? me siento flaca...\noh, quieres limpiar eses bugs?\nbueno, despierta mis 3 otras\nhermanas, asi podemos rezar a la \nDiosa y limpyar ese mundo..."
+NPC.Elder.3_2,"•ok I'm up.! [wave]*cough*[/wave] \nwhere am i? i still feel weak.\noh, you already woke up my sisters?\nwell, we will meet\nat the holy site at top of tower.\nmake haste!",好了我起来了！咳咳，这是哪？\n我们会在塔顶的圣地与你会合。\n务必速来！,"Встаю я, встаю! *кхе-кхе*\nВстречаемся в священном\nместе на вершине башни.\nПоторопись!","pronto, acordei! *cof cof*\nnos encontraremos no local\nsagrado no topo desta torre.\napresse-se!","bon je suis debout ! [wave]*tousse*[/wave]\noù suis-je ? je me sens si faible.\ntu as déjà réveillé mes autres soeurs ?\nbien, on se retrouve en haut de la tour. à bientôt !",•もう起きたから！ [wave]*ゴホ*[/wave] \nここはどこ？体がすごくだるい。\nあ、私の姉妹を起こしたの？\nなら\n塔のてっぺんで会おう。\n待たせるなよ！,"•Vale, desperté! [wave]*tos*[/wave] \ndonde estoy? aún me siento flaca... \noh, ya despertó mis hermanas?\nbueno, nos encontraremos en el lugar sagrado en la cima de la torre. Date prisa!"
 NPC.Elder.4,"hi! thanks *cough*\ni'll go meet my other sisters.\nbye bye",好了我起来了！咳咳，\n我要去见我的其他姐妹了。\n再见。,"Встаю я, встаю! *кхе-кхе*\nПойду-ка я к другим своим\nсестрицам. Увидимся!","pronto, acordei! *cof cof*\nvou encontrar minhas irmãs.\ntchauzinho!","bon je suis debout.! *tousse*\nje pars à la rencontre de\nmes soeurs. ciao",やあ！ありがとう *ゴホ*\n姉たちのところへ行くね！\nバイバイ！,"•Hola! Gracias, *tos*\nme reuniré con mis otras hermanas.\nChau Chau"
 NPC.Elder.5,"•awaken my %s other sisters\nwe can pray to Goddess\nand clean up this world",还需要%s个水晶才能唤醒！\n我们要一起祈祷才会更有力量。,"Нужно пробудить ещё\nнемного кристаллов: %s!\nНаши молитвы сильнее,\nкогда мы вместе.",só faltam %s Cristais\npara despertar! juntas nossas\npreces são mais fortes.,"réveille mes %s autres soeurs.\nnous pouvons prier la Déesse\nde nettoyer ce monde.",•残りの姉 %s 人起こしてね\n一緒に女神に祈れば\nこの世界を綺麗にできるの。,"•Vamos! despierta mis %s otras\nhermanas, podemos rezar para la\nDiosa y limpiar ese mundo."
 NPC.Elder.6,"thank you young one! we will meet\nat the holy site at top of tower.\nmake haste!",谢谢你啊小姑娘。\n我们会在塔顶的圣地与你会合。\n务必速来！,"Спасибо тебе, девочка!\nВстречаемся в священном\nместе на вершине башни.\nПоторопись!","muito obrigada, minha jovem!\nnos encontraremos no local\nsagrado no topo desta torre.\napresse-se!","merci jeune enfant!\nretrouve nous au site sacré\nsitué en haut de cette tour.\nfais vite!",ありがとう！\n塔のてっぺんで会おう！\n待たせるなよ！,"•Muchas gracias jovencita! Nos encontraremos en el lugar sagrado, \na lo alto de la torre.n\Date prisa!"
@@ -143,10 +144,10 @@ UI.Inventory.3,"change spell order, %s to swap",改变咒语顺序，按%s调换
 UI.Inventory.4,--equip--,--装备--,-Применить-,--equipar--,--équipement--,--装備--,--Equipar--
 UI.Inventory.5,your trusty broom...\ngreat for sweeping dust,你的宝藏扫帚…\n打扫灰尘必备神器,Ваша верная метла...\nхорошо метёт.,sua fiel vassoura...\nperfeita para varrer\nsujeira,"votre fidèle balai...\nsuper pour balayer",ほうき・・・\nほこりの掃除に使える,"Tu fiel escoba, \nperfecta para barrer la \nsuciedad."
 UI.Inventory.6,babushka head scarf.\nkeeps ya warm,老奶牌头巾，\n包你暖暖的,Платок. Держит\nголову в тепле.,lenço da babushka.\nquentinho e confortável,"foulard de tête à babushka.\nvous tient chaud",バブシカのヘッドスカーフ\n温かい,Pañuelo de babushka. Te mantiene calentita.
-UI.Inventory.7,spawn of the goddess: ,女神的后代：,Порождение Богини.: ,crias da deusa: ,ponte de la déesse: ,女神の使い：,Engendros de la diosa:
-UI.Inventory.8,--memories--,"--存储--","-ДУША-","--MEMÓRIA--",--SOUVENIR--,--記憶--,MEMORIAS
+UI.Inventory.7,spawn of the goddess: ,女神的后代：,Порождение Богини.: ,crias da deusa: ,ponte de la déesse:,女神の使い：,Engendros de la diosa:
+UI.Inventory.8,--memories--,"--存储--","-ДУША-","--MEMÓRIA--",--souvenirs--,--記憶--,MEMORIAS
 UI.Inventory.9,--key items--,"--钥匙--","-Ключик-","--chave--",--éléments clés--,--大切なアイテム--,--Itens Llave--
-UI.Inventory.10,keys,"钥匙","Ключик","chave",clés,鍵,llave
+UI.Inventory.10,keys,"钥匙","Ключик","chave",clefs,鍵,llave
 LevelName.1,Haven,天堂,Безопасное убежище,Refúgio,Havre,安全の地,Refugio
 LevelName.2,tadpole bog,蝌蚪沼泽,Болото головастиков,Brejo dos Sapinhos,tourbière aux têtards,おたまじゃくしの沼地,Pantano de las Ranas
 LevelName.3,moldy spore forest,霉菌孢子森林,Плесневелый лес,Floresta Bolorenta,forêt sporifère,カビた胞子の森,Bosque Enmohecido
@@ -201,7 +202,7 @@ NPC.TowerGuard.1,"part of the soul,\nexists in the stone.","灵魂的碎片\n就
 NPC.TowerGuard.2,"pssst, hey, let me\ntell you a secret.\nif you smack a glitch,\nyou can jump again midair..\nit's easy being green.","嘘，过来\n我来告诉你个秘密\n打中一个故障之后\n你可以在半空中再跳一次\n这边建议绿色出行哦","Хотите, я расскажу\nвам секрет?\nЕсли ударить по глитчу,\nто можно прыгнуть в воздухе ещё раз.\nЛишь зелёным покоряются моря.","deixa eu te contar\num segredo...\nse você bater num glitch,\npode pular de novo no ar...","pssst, hé, laisse-moi te conter\nun secret: si tu frappes un glitch,\ntu peux à nouveau sauter;\nen plein air, c'est\nfacile d'être vert",ねえねえ\nいいこと教えてあげる。\nグリッチを叩いたら、\n空中ジャンプができるようになるんだ・・・\n,"Pssst, hey, dejame contarte un secreto. \nSi golpeas un bug, puedes saltar de nuevo en el aire."
 NPC.BabushkaCat.5,"*meow...* (but\nsomething seems wrong..)","喵喵~\n（ 但好像有什么不对劲…）","*мяу...*\n(Но что-то всё равно не так.)","*miau*\n(mas tem algo errado......).","*miou* (il reste un CRISTAL\nimpur dans cette zone) *miou...*\n(mais quelque-chose ne va pas...)",*にゃあ・・・* (ん～\nにゃにかがおかしい・・・),*miau...* (Pero algo parece estar mal...)
 NPC.HighPriestess.1,"•keeheehee •oh, my dear hag,\nyou've made an old crone\nvery happy! •these crystals\ngive strong magic!! •now, I can\nbecome the new GODDESS","嘻嘻…亲爱的女巫，\n你让我这个老妪\n非常开心！\n这些水晶给了我强大的魔力！！\n现在，我可以成为新的女神了","Ки-хи-хи. Моя старая мымра.\nТы так меня осчастливила.\nЯ так рада!\nКристаллы моих сестёр\nдаруют мне силу!\nТеперь я стану БОГИНЕЙ!","•hihihi •ah, minha querida, você fez esta velha bruxa muito feliz!\n•os cristais das minhas irmãs me dão uma força poderosa!\n•agora, posso me tornar a DEUSA!","•kiihiihii\n•oh, ma chère mémère, tu rends une\nvieille sorcière bien compère!\n•ces cristaux me confèrent\nune magie sans pair!!\n•à présent, DEESSE je me confère!!!","•へへへへ •お、ババア！\n本当に感謝してるよ！ \n•このクリスタルは\nかなり強力な魔法が入ってるの。\n•これで私は\n新たな女神になれる。","•Oh, mi estimada viejita, has hecho\nmuy feliz a una vieja bruja! \n•Estos cristales son magia fuerte! \n•Ahora, puedo convertirme\nen la nueva DIOSA."
-NPC.HighPrietess.2,"•AGH! Aagast. this\nCorruption. i cannot\n•controle . . . . ","啊！啊啊！\n故障…我…\n控制不了…","А-А! Какой ужас.\nЯ не могу сдерживать\nэту порчу...","•AH! aaah. toda essa corrupção. não consigo\n•controlar . . .","•AHH! Dammmation.\ncette Corruption. je ne puis\n•control . . . . ",•うわ！\nだめだ！\n制御できない・・・,•AAGH! Ngghmm!! esta\nCorrupción. y-yo no puedo\nc-controlar. . . .
+NPC.HighPrietess.2,"•AGH! Aagast. this\nCorruption. i cannot\n•controle . . . . ","啊！啊啊！\n故障…我…\n控制不了…","А-А! Какой ужас.\nЯ не могу сдерживать\nэту порчу...","•AH! aaah. toda essa corrupção. não consigo\n•controlar . . .","•AHH! Dammmation.\ncette Corruption. je ne puis\n•control . . . .",•うわ！\nだめだ！\n制御できない・・・,•AAGH! Ngghmm!! esta\nCorrupción. y-yo no puedo\nc-controlar. . . .
 NPC.Goddess.1,"WHO. HAS. AWOKEN. ME?\nAH. MY CHILDREN. THEY WISH FOR A CLEAN SLATE?\nIT. SHALL BE MY WILL.","是谁！唤醒了我？\n啊，我的孩子。他们想要\n一片洁净的土地吗？\n那便如此。","КТО ПРОБУДИЛ МЕНЯ?\nА, ЧАДА МОИ. ХОТИТЕ НАЧАТЬ С ЧИСТОГО ЛИСТА?\nДА БУДЕТ ИСПОЛНЕНА ВАША ВОЛЯ.","QUEM OUSA ME DESPERTAR?\nAH. MINHAS FILHAS DESEJAM\nUM NOVO COMEÇO? ENTÃO,\nASSIM SERÁ FEITO.","QUI. ME. REVEILLE?\nAH. MES ENFANTS. ILS SOUHAITENT\nFAIRE TABLE RASE?\nCELA. SERA.",私を眠りから起こしたのは誰だ？\n我が子。浄化されたいのか。\nこれが私の意志だ。,QUIÉN SE ATREVE A DESPERTARME? \nAH. DESEAN MIS HIJAS UN NUEVO COMIENZO? \nENTONCES SE HARÁ.
 NPC.BabushkaCat.6,"*meow*, (seems like this place\nis falling apart.\nlet's get out!!)",喵\n（这里要崩坏了\n快跑啊！！！）,"*мяу* (Кажется, здесь\nвсё рушится.\nНадо выбираться!)",*miau* (este lugar\nvai desmoronar.\nvamos sair daqui!!!).,"*miou*,\n(tout s'écroule, filons!!!)","*にゃあ*, (危にゃい！\n全部崩れてる！\n早く逃げにゃいと！！)",*meow* (Este lugar se va a caer a pedazos. \nVámonos de aquí!!!).
 NPC.ClayWorker.8,"*wheeze*\n•don't tell anyone\ni'm slacking off..","呼…\n别告诉别人\n我在摸鱼…","*хр-р*\nНикому не говорите,\nчто я прохлаждаюсь...","*arfa*\n•não conte para ninguém que eu estou dando um tempo aqui...","*rheu*\n•ne dites à personne que\nje glande..",*ひぃ！*\n•サボってること\n誰にも話さないで・・・,"*Arf, Arf* No le digas a nadie que me estoy tomando un descanso aquí..."
@@ -230,3 +231,790 @@ NPC.Crone.9,"ah, I'm so tired..\nwhy can't I just sleep",唉，好累啊…\n要
 Dialog.Player.6,what a long day..\ni should warm up some stew.,总算搞完了…\n我得去把菜热上了,Ну и денёк выдался.\nРазогрею-ка я\nчего-нибудь поесть.,que dia longo...\nmereço uma sopinha.,"quelle longue journée..\nje devrais réchauffer\nun ragoût.",今日は長かったな・・・\nシチューでも食べようかな。,Qué día tan largo... \nme merezco un poco de sopita.
 EndCredits.0,END,终,КОНЕЦ,FIM,FIN,おわり,FIN
 EndCredits.0_1,END OF DEMO\nthanks for playing!,演示终\n谢谢你玩我的游戏,КОНЕЦ ДЕМО\nСпасибо за игру!,FIM DA DEMO\nobrigado por jogar!,FIN DE LA DÉMO\nmerci d'avoir joué !,プレイしてくれてありがとうございます！,Gracias por jugar! 
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
