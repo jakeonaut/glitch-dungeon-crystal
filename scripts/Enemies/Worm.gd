@@ -144,6 +144,8 @@ func unsmack():
   evolvedSelf.on_ground = true
   evolvedSelf.my_up_vector = self.my_up_vector
   evolvedSelf.building_time_limit = building_time_limit
+  evolvedSelf.permanently_alter_tiles = false
+  evolvedSelf.keep_spawning_anyway = true
   level.add_child(evolvedSelf)
   evolvedSelf.global_transform.origin = self.global_transform.origin
   evolvedSelf.get_node("Sprite3D2").rotation_degrees = mySprite.rotation_degrees

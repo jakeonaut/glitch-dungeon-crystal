@@ -27,13 +27,20 @@ func _process(delta):
     if global.pauseGame:
         return
     quitPrompt.bbcode_text = "[right]" + tr("UI.EndCredits.QuitGame") %  global.getInputText("ui_start") + "[/right]"
-    if not quitPromptRect.visible and Input.is_action_just_pressed("ui_start"):
+    if not quitPromptRect.visible and (
+        Input.is_action_just_pressed("restart_key") or 
+        Input.is_action_just_pressed("open_map") or
+        Input.is_action_just_pressed("ui_cancel") or
+        Input.is_action_just_pressed("ui_cancel_controller") or
+        Input.is_action_just_pressed("ui_start")
+    ):
         quitPromptRect.visible = true
         holdToQuitTimer = 0
         hideHoldToQuitTimer = 0
     elif quitPromptRect.visible:
         if Input.is_action_just_pressed("ui_start"):
             global.pauseGame = true
+            transition.colorRect.visible = true
             transition.reset_game("res://levels/EndlessFantasy/gd1/MainMenu.tscn")
             quitPromptRect.visible = false
         else:

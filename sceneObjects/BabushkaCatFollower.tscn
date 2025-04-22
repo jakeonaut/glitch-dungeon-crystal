@@ -325,27 +325,27 @@ automatically_change_color = false
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -5.0
 pitch_scale = 0.9
+bus = "Sfx"
 
 [node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 9 )
 volume_db = -20.0
 pitch_scale = 0.8
+bus = "Sfx"
 
 [node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 6 )
 volume_db = -15.0
+bus = "Sfx"
 
 [node name="StartEvolveSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -10.0
 pitch_scale = 0.5
+bus = "Sfx"
 
 [node name="NPC" type="Spatial" parent="." groups=["npc"]]
 script = ExtResource( 18 )
@@ -357,7 +357,7 @@ script = ExtResource( 17 )
 [node name="CollisionShape" type="CollisionShape" parent="NPC/SmallInteractionArea"]
 shape = SubResource( 2 )
 
-[node name="SmallerInteractionArea" type="Area" parent="NPC" groups=["corporeal_body", "malware"]]
+[node name="SmallerInteractionArea" type="Area" parent="NPC" groups=["malware"]]
 
 [node name="CollisionShape" type="CollisionShape" parent="NPC/SmallerInteractionArea"]
 shape = SubResource( 24 )
@@ -424,10 +424,10 @@ frame = 745
 frame_delay = 0.5
 
 [node name="SmackSound" type="AudioStreamPlayer" parent="NPC"]
-bus="Sfx"
 stream = ExtResource( 21 )
 volume_db = -20.0
 pitch_scale = 0.65
+bus = "Sfx"
 
 [node name="TextBoxCameraTarget" type="Spatial" parent="NPC"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )

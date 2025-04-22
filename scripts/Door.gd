@@ -195,7 +195,7 @@ func _process(delta):
         newWeakEye.global_transform.origin.y += 4
         newWeakEye.reenemize(true)
         weakEyeRef = weakref(newWeakEye)
-    elif weakEyeRef == null or weakEyeRef.get_ref() == null:
+    elif weakEyeRef == null or weakEyeRef.get_ref() == null or weakEyeRef.get_ref().am_i_dying:
       startDoorUnlock()
       is_locked = false
       locked_to_weakeye = false
@@ -450,10 +450,10 @@ func actuallyUnlockAndEnterDoor():
   global.pauseMoveInput = false
 
 
-func passiveActivate(_delta, _is_player):
-  return # just let player tryDieToOffscreenCamera handle it!!!
-  # if is_passive and is_player:
-  #   goThroughDoor()
+export var is_sneaky = false
+func passiveActivate(_delta, is_player):
+  if is_sneaky and is_passive and is_player:
+    goThroughDoor()
     
 func justStopPassiveActivate():
   pass
@@ -577,7 +577,7 @@ func land(should_change_shader_params = true, should_play_transition = false):
     npc.can_activate = false
     npc.is_active = false
   
-  if isLandingOutsideOfCameraBounds():
+  if isLandingOutsideOfCameraBounds() and not is_sneaky:
     if global.grannyEnteringRoom:
       transition.reverse_granny_teleport()
       global.grannyEnteringRoom = false

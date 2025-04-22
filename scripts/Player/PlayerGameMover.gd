@@ -200,17 +200,16 @@ func _process(delta):
   #   aniPlayer.stop()
   #   aniPlayer.clear_queue()
   #   aniPlayer.queue("fishingSitDown")
-  var areAnyTilesBelowMeSpikes = false
-  if glitch_form == global.GlitchForm.INVISIBLE:
-    var solidTilesBelow = getTilesBelow(getLevelTiles())
-    for i in range(solidTilesBelow.size()):
-      var coords = solidTilesBelow[i]
-      if coords == null: continue
-      var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
-      if getLevelTiles().isTileSpikes(tile_type):
-        areAnyTilesBelowMeSpikes = true
-        break
-  if pressingDown() and on_ground: # and (glitch_form != global.GlitchForm.INVISIBLE or (glitch_form == global.GlitchForm.INVISIBLE and areAnyTilesBelowMeSpikes)):
+  var areAnyTilesBelowMeFragile = false
+  var solidTilesBelow = getTilesBelow(getLevelTiles())
+  for i in range(solidTilesBelow.size()):
+    var coords = solidTilesBelow[i]
+    if coords == null: continue
+    var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
+    if getLevelTiles().isTileFragileSolid(tile_type):
+      areAnyTilesBelowMeFragile = true
+      break
+  if pressingDown() and on_ground and not transformation == TransformationState.UNDERGROUND_RETURNING and (dig_timer > 0 or justPressedDown()) and not areAnyTilesBelowMeFragile:
     processMoleDigTimer(Vector3(0, -2, 0))
 
   just_pressed_joystick = [
@@ -617,7 +616,7 @@ func collideWithWall(local_lv):
 
 onready var digSound = get_node("Sounds/DigSound")
 func processMoleDigTimer(digDirection):
-  if global.memory["mole_cricket"] == 0 or not global.mole_cricket_enabled or global.pauseGame:
+  if global.memory["mole_cricket"] == 0 or not global.memory["mole_cricket_enabled"] or global.pauseGame:
     dig_timer = 0
     return
 
@@ -635,7 +634,7 @@ func processMoleDigTimer(digDirection):
     global.memory["broom"] = false
     moleSprite.visible = false
     summonSmokeClouds(3, true, true, 0)
-    global_transform.origin += digDirection
+    global_transform.origin += digDirection / 2
     digSound.play()
     physics_vars.should_apply_gravity = false
     should_collide_floor = false

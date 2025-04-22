@@ -53,6 +53,7 @@ func _process(delta):
 func ouchies(_broom_pos):
   if am_i_dying:
     return
+  unenemize()
   am_i_dying = true
   if dieSound != null: dieSound.play()
   level.player.getSmacked()

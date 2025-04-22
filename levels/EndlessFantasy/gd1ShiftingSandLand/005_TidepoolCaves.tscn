@@ -1002,6 +1002,7 @@ frame = 2
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.94679, 28.8982, 0 )
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
 is_passive = true
+is_sneaky = true
 
 [node name="landing" parent="Viewport/level/Door5" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.25179, 1, 1 )

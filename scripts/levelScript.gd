@@ -188,7 +188,8 @@ func _ready_impl():
   player.properlyApplyTransformation()
   has_room_initialized = true
   global.setHaveIBeenToLevel(self)
-  global.setLevelZoneStartTime()
+  if not "EndCredits" in getShortLevelName():
+    global.setLevelZoneStartTime()
 
 var hasGameFrameBackground = false
 func tryToAddGameFrameBackground():
@@ -400,6 +401,7 @@ func tryToRespawn():
   var found_broth = null
 
   if global.isEnteringRoom and not global.isRespawning:
+    player.num_horizontal_input_presses = global.num_horizontal_input_presses
     if global.memory.has("roomPath"):
       var door_path = global.memory["roomPath"]
       var doors = get_tree().get_nodes_in_group("doors")
@@ -420,6 +422,7 @@ func tryToRespawn():
           found_broth = broth
           break
   elif global.isRespawning:
+    player.num_horizontal_input_presses = global.num_horizontal_input_presses
     global.memory["hp"] = global.memory["max_hp"]
     # if closest_extra_life != null and closest_extra_life.isActive():
     #   global.memory["hp"] = 1 # respawning at a grandma statue, don't restore bag
@@ -708,14 +711,14 @@ func trySpawnFollowers():
   #     0
   #   )
   # )
-  # var numKeys = global.memory["key"] if global.memory.has("key") else null
-  # if numKeys != null:
-  #   for _i in range(numKeys):
-  #     spawnKeyFollower(
-  #       player.global_transform.origin + Vector3(
-  #         stepify(rand_range(-1.0, 1.0), 0.125),
-  #         stepify(rand_range(0.5, 1.5), 0.125), 
-  #         0))
+  var numKeys = global.memory["key"] if global.memory.has("key") else null
+  if numKeys != null:
+    for _i in range(numKeys):
+      spawnKeyFollower(
+        player.global_transform.origin + Vector3(
+          stepify(rand_range(-1.0, 1.0), 0.125),
+          stepify(rand_range(0.5, 1.5), 0.125), 
+          0))
 
   # var numEggs = global.getThingFromAllLevelZonez("angelEgg")
   # if numEggs != null:

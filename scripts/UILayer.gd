@@ -397,8 +397,9 @@ func processHiscoreRenderLogic(delta):
 
   if timeHiscoreLabel.visible and stupidTimeAgedStartTimeTemp != null:
     var total_time = global.getThingFromAllLevelZonez("total_time")
+    print(total_time)
     var time_aged = total_time if total_time != null else tr("NPC.Crystal.NULL")
-    if total_time != null and stupidTimeAgedStartTimeTemp != null:
+    if not global.isEndOfGame and total_time != null and stupidTimeAgedStartTimeTemp != null:
       time_aged += (Time.get_unix_time_from_system() - stupidTimeAgedStartTimeTemp)
     # @warning_ignore("integer_division")
     var SECONDS_IN_MINUTE = 60
@@ -411,8 +412,7 @@ func processHiscoreRenderLogic(delta):
     var seconds = int(time_aged) / 1
     var optional_second_zero = "" if seconds >= 10 else "0"
     var time_aged_formatted = str(hours) + ":" + optional_minute_zero + str(minutes) + ":" + optional_second_zero + str(seconds)
-
-    timeHiscoreLabel.bbcode_text = "[right]" + tr("NPC.Crystal.9") + "\n" + time_aged_formatted + "[/right]"
+    timeHiscoreLabel.bbcode_text = "[right]" + tr("NPC.Crystal.9") + " " + time_aged_formatted + "[/right]"
 
   hiscoreTimer += (delta*11)
   if hiscoreTimer >= hiscoreTimeLimit:

@@ -723,9 +723,14 @@ func processInventoryLogic(delta):
     elif inventoryOptionIndex == 1:
       popupRect.visible = not popupRect.visible
       shouldShowPopupYesNoOptions = false
-      popupYesNoOptions = false
       if inventoryOptionIndexX == 0:
         popupText.text = tr("UI.Inventory.5") # "your trusty broom.." if not global.memory["glitched_broom"] else "uyro utsryt oomr;b"
+        if global.memory["broomerang"] > 0:
+          shouldShowPopupYesNoOptions = true
+          if popupRect.visible:
+            popupYesNoOptions = global.memory["broomerang_enabled"]
+          else:
+            global.memory["broomerang_enabled"] = popupYesNoOptions
         # if global.memory["broomerang"] > 1:
         #   popupText.text += "\nsweep twice to throw it!"
         # else:
@@ -746,21 +751,21 @@ func processInventoryLogic(delta):
       if inventoryOptionIndexX == 0:
         popupText.text = tr("NPC.Treasure.7") # "memory of fish:\n  swim in water\n"
         if popupRect.visible:
-          popupYesNoOptions = global.zora_flippers_enabled
+          popupYesNoOptions = global.memory["zora_flippers_enabled"]
         else:
-          global.zora_flippers_enabled = popupYesNoOptions
+          global.memory["zora_flippers_enabled"] = popupYesNoOptions
       elif inventoryOptionIndexX == 1:
         popupText.text = tr("NPC.Treasure.8") # "mole cricket memory:\n  jump and hold to dig\n  up through ceilings"
         if popupRect.visible:
-          popupYesNoOptions = global.mole_cricket_enabled
+          popupYesNoOptions = global.memory["mole_cricket_enabled"]
         else:
-          global.mole_cricket_enabled = popupYesNoOptions
+          global.memory["mole_cricket_enabled"] = popupYesNoOptions
       elif inventoryOptionIndexX == 2:
         popupText.text = tr("NPC.Treasure.9") # "spore memory:\n  hold sweep button to\n  teleport when smacking  \n  works with broomerang"
         if popupRect.visible:
-          popupYesNoOptions = global.mushroom_soul_enabled
+          popupYesNoOptions = global.memory["mushroom_soul_enabled"]
         else:
-          global.mushroom_soul_enabled = popupYesNoOptions
+          global.memory["mushroom_soul_enabled"] = popupYesNoOptions
     elif inventoryOptionIndex == 3:
       popupRect.visible = not popupRect.visible
       shouldShowPopupYesNoOptions = false
@@ -964,6 +969,7 @@ func normalizeInventoryOptionIndex(y, x):
 
 onready var grimoireSprite = get_node("InventoryRect/GrimoireSprite")
 onready var forgetMeNotSprite = get_node("InventoryRect/FlowerSprite")
+onready var broomSprite = get_node("InventoryRect/BroomSprite")
 onready var bagSprite = get_node("InventoryRect/BagSprite")
 onready var petSprite = get_node("InventoryRect/PetSprite")
 onready var returnSprite = get_node("InventoryRect/ReturnSprite")
@@ -1046,16 +1052,17 @@ func processInventoryRender(_delta):
     glitchRect3.visible = false
     glitchRect4.visible = false
 
+  broomSprite.scale = Vector2(3, 3) if global.memory["broomerang_enabled"] else Vector2(1.5, 1.5)
   bagSprite.visible = global.memory["hp"] > 1
   returnSprite.visible = global.memory["can_force_respawn"]
   petSprite.visible = false
 
   soulSprite1.visible = global.memory["zora_flippers"]
-  soulSprite1.scale = Vector2(3, 3) if global.zora_flippers_enabled else Vector2(1, 1)
+  soulSprite1.scale = Vector2(3, 3) if global.memory["zora_flippers_enabled"] else Vector2(1.5, 1.5)
   soulSprite2.visible = global.memory["mole_cricket"]
-  soulSprite2.scale = Vector2(3, 3) if global.mole_cricket_enabled else Vector2(1, 1)
+  soulSprite2.scale = Vector2(3, 3) if global.memory["mole_cricket_enabled"] else Vector2(1.5, 1.5)
   soulSprite3.visible = global.memory["mushroom_soul"]
-  soulSprite3.scale = Vector2(3, 3) if global.mushroom_soul_enabled else Vector2(1, 1)
+  soulSprite3.scale = Vector2(3, 3) if global.memory["mushroom_soul_enabled"] else Vector2(1.5, 1.5)
   soulLabel.visible = soulSprite1.visible or soulSprite2.visible or soulSprite3.visible
   var numEggs = global.getThingFromAllLevelZonez("angelEgg")
   angelEggSprite.visible = numEggs > 0

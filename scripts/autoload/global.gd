@@ -296,9 +296,6 @@ func _ready():
     global.hasInitializedControlsConfig = true
 
 var MAX_CRYSTALS_FOR_TOWER = 4
-var zora_flippers_enabled = true
-var mole_cricket_enabled = true
-var mushroom_soul_enabled = true
 func resetMemory():
     memory = {}
 
@@ -312,6 +309,11 @@ func resetMemory():
     memory["allMyBrooms"] = [GrandmaBroom.NORMAL]
     memory["currBag"] = GrandmaBag.NORMAL
     memory["allMyBags"] = [GrandmaBag.NORMAL]
+
+    memory["mushroom_soul_enabled"] = true
+    memory["mole_cricket_enabled"] = true
+    memory["zora_flippers_enabled"] = true
+    memory["broomerang_enabled"] = true
 
     # game stuff
     memory["hasEverTouchedObelisk"] = false
@@ -409,7 +411,7 @@ var allLocales = {
     "ja": { "code": "ja", "supported": true, "label": "日本語" },
     "es": { "code": "es", "supported": true, "label": "Español" },
     "it": { "code": "it", "supported": true, "label": "Italiano" },
-    "pl": { "code": "pl", "supported": true, "label": "Polski" },
+    "pl": { "code": "pl", "supported": false, "label": "Polski" },
 }
 func getSupportedLocalesArray():
     var supportedLocales = []
@@ -495,6 +497,7 @@ func processEasterEggs():
     # else:
     #     anna_key_helper = false
 
+var num_horizontal_input_presses = 0
 func prepareForTransition(level, enteredDoor = null):
     global.memory["transformation"] = level.player.transformation
     global.activeInteractor = null
@@ -506,6 +509,8 @@ func prepareForTransition(level, enteredDoor = null):
     global.hasJustEnteredRoom = false
     global.respawnVarTimerHack = 0
     global.memory["on_ground"] = true
+    # a little hack. 0*0 = 0, 1*1 = 1, but 2*2 > 2!!!!!!!
+    global.num_horizontal_input_presses = level.player.num_horizontal_input_presses*level.player.num_horizontal_input_presses
 
     if enteredDoor != null:
         var doors = level.get_tree().get_nodes_in_group("doors")

@@ -83,11 +83,11 @@ func _ready():
         # set_process(false)
         yield(TempTimer.idle_frame(self), "timeout")
         yield(TempTimer.idle_frame(self), "timeout")
-        var miniCubeCrystal = miniCubeCrystalRes.instance()
-        level.add_child(miniCubeCrystal)
-        miniCubeCrystal.global_transform.origin = global.normalizeMemoryPosition(self.getMyStaticLevelZoneVar())
-        miniCubeCrystal.addPlusSprite()
-        miniCubeCrystal.queue_free()
+        # var miniCubeCrystal = miniCubeCrystalRes.instance()
+        # level.add_child(miniCubeCrystal)
+        # miniCubeCrystal.global_transform.origin = global.normalizeMemoryPosition(self.getMyStaticLevelZoneVar())
+        # miniCubeCrystal.addPlusSprite()
+        # miniCubeCrystal.queue_free()
         can_spawn_mini_crystal = false
     
     if my_up_vector.y <= 0:
