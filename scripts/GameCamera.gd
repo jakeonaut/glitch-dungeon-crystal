@@ -71,20 +71,24 @@ func _ready():
       topmost_y = tile_y + TILE_HEIGHT
 
 func shakeScreen():
+  level.player.screenShakeSound.pitch_scale = 1.5
+  level.player.screenShakeSound.play()
+  if global.userSettings["canGlitchScreen"]:
+    return
   aniPlayer.stop()
   aniPlayer.clear_queue()
   aniPlayer.play("screenShake")
-  level.player.screenShakeSound.pitch_scale = 1.5
-  level.player.screenShakeSound.play()
 
 func miniShakeScreen():
+  level.player.screenShakeSound.pitch_scale = 2.0
+  level.player.screenShakeSound.play()
+  if global.userSettings["canGlitchScreen"]:
+    return
   if aniPlayer.assigned_animation == "screenShake" and aniPlayer.is_playing():
     return
   aniPlayer.stop()
   aniPlayer.clear_queue()
   aniPlayer.play("miniScreenShake")
-  level.player.screenShakeSound.pitch_scale = 2.0
-  level.player.screenShakeSound.play()
       
 func setCameraPositionNow():
   global_transform.origin.x = initial_target.global_transform.origin.x

@@ -909,6 +909,7 @@ var animate_life_timer = 0
 var animate_life_time_limit = 5
 var num_visible_boss_lives = 0
 var health_cheat_code_counter = 0
+var kill_cheat_code_counter = 0
 func processBossHealth(delta):
   var whichBoss = getBoss()
   if whichBoss == null or whichBoss.getMyVariable() == 0:
@@ -923,6 +924,12 @@ func processBossHealth(delta):
     if health_cheat_code_counter >= 3:
       whichBoss.MAX_GRANNY_HITS = 6
       whichBoss.num_granny_hits += 3
+      global.lifeUISound2.play()
+  if kill_cheat_code_counter < 7:
+    if Input.is_action_just_pressed("kill_cheat_code"):
+      kill_cheat_code_counter += 1
+    if kill_cheat_code_counter >= 7:
+      whichBoss.yaBeatMe()
       global.lifeUISound2.play()
   # a bit esoteric logic given that we're hard coding it
 

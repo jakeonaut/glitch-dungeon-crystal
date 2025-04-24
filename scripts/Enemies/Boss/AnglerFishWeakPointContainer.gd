@@ -44,6 +44,6 @@ func getSmacked(broom_origin = null, silently = false):
       elif anglerFish.num_hits == 3:
           anglerFish.cubeCrystal.get_ref().getHitSound3.play()
     if anglerFish.num_hits >= anglerFish.MAX_NUM_HITS:
-        anglerFish.defeatMe()
+        anglerFish.yaBeatMe()
     .getSmacked(broom_origin, silently)
     return true

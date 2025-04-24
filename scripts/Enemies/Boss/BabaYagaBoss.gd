@@ -81,19 +81,7 @@ func getHurt():
             cubeCrystal.get_ref().getHitSound3.play()
     RUN_COUNT_MAX += 1
     if num_hits >= MAX_NUM_HITS:
-        level.saveTheGame()
-        
-        secretAniPlayer.stop()
-        secretAniPlayer.clear_queue()
-        secretAniPlayer.play("dieMove")
-        prev_boss_phase = boss_phase
-        boss_phase = BossPhase.DEFEATED
-        musicPlayer.stopAll()
-        level.player.pauseInput = true
-        global.pauseMoveInput = true
-        global.pauseGame = true
-        global.shouldRenderAsCinematic = true
-        if global.demo_mode <= 0: Steam.set_achievement("BABA_BOSS")
+        yaBeatMe()
         return
     if num_hits >= 2 and boss_phase_should_crash == 0 and not has_crashed:
         boss_phase_should_crash = 1
@@ -104,6 +92,20 @@ func getHurt():
     # secretAniPlayer.queue("hibernate")
     prev_boss_phase = boss_phase
     boss_phase = BossPhase.GOT_HURT
+
+func yaBeatMe():
+    level.saveTheGame()
+    secretAniPlayer.stop()
+    secretAniPlayer.clear_queue()
+    secretAniPlayer.play("dieMove")
+    prev_boss_phase = boss_phase
+    boss_phase = BossPhase.DEFEATED
+    musicPlayer.stopAll()
+    level.player.pauseInput = true
+    global.pauseMoveInput = true
+    global.pauseGame = true
+    global.shouldRenderAsCinematic = true
+    if global.demo_mode <= 0: Steam.set_achievement("BABA_BOSS")
 
 var am_i_hurt = false
 var kill_invis = false

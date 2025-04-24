@@ -550,7 +550,7 @@ func detachWeakPoint():
     weakPointContainer.global_transform.origin = weakPointTarget.global_transform.origin
     weakPointContainer.vulnerable = true
 
-func defeatMe():
+func yaBeatMe():
     idle_timer = 0
     unenemize()
     boss_phase = BossPhase.DEFEATED
