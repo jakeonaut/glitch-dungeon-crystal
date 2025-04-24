@@ -47,6 +47,7 @@ export var is_static_in_level = true
 
 export var is_wiggling_fast = false
 export var can_be_smacked = false
+export var is_sprite_not_flipped = false
 
 func _ready():
   set_process(true)
@@ -257,7 +258,7 @@ func passiveActivate(delta, is_player):
     return
   if can_move and level.player.global_transform.origin.y < self.global_transform.origin.y + 0.5:
     mySprite.flip_h = which_side_is_player_on
-    if is_sprite_flipped:
+    if is_sprite_not_flipped:
       mySprite.flip_h = not mySprite.flip_h
   
 

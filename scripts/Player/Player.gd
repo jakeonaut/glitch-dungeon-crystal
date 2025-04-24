@@ -2177,6 +2177,9 @@ func processBroomLogic(delta):
   force_a_sweep = false
 
 func sneezeCloud():
+  gravitySound.pitch_scale = rand_range(0.8, 1.2)
+  gravitySound.play()
+  glitchTickle()
   summonSmokeClouds(1, false, true, 1)
 
 func startCutsceneIntroAni(aniName):

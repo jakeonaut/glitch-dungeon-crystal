@@ -483,13 +483,13 @@ text = "keys
 scroll_active = false
 
 [node name="SpellsLabel" type="RichTextLabel" parent="InventoryRect"]
-margin_left = 117.0
-margin_top = -16.0
-margin_right = 350.0
-margin_bottom = 31.0
+margin_left = -1.0
+margin_top = -18.0
+margin_right = 419.0
+margin_bottom = 29.0
 theme = ExtResource( 8 )
 bbcode_enabled = true
-bbcode_text = "--spells--"
+bbcode_text = "[center]--spells--[/center]"
 text = "--spells--"
 scroll_active = false
 
@@ -510,10 +510,10 @@ vframes = 5
 frame = 19
 
 [node name="EquipLabel" type="RichTextLabel" parent="InventoryRect"]
-margin_left = 60.0
-margin_top = 68.0
-margin_right = 359.0
-margin_bottom = 135.0
+margin_left = 5.0
+margin_top = 66.0
+margin_right = 411.0
+margin_bottom = 133.0
 theme = ExtResource( 8 )
 bbcode_enabled = true
 bbcode_text = "[center]--equip--[/center]"
@@ -562,13 +562,13 @@ vframes = 5
 frame = 22
 
 [node name="SoulLabel" type="RichTextLabel" parent="InventoryRect"]
-margin_left = 107.0
+margin_left = 10.0
 margin_top = 154.0
-margin_right = 348.0
+margin_right = 426.0
 margin_bottom = 206.0
 theme = ExtResource( 8 )
 bbcode_enabled = true
-bbcode_text = "--memories--"
+bbcode_text = "[center]--memories--[/center]"
 text = "--memories--"
 scroll_active = false
 
@@ -597,9 +597,9 @@ vframes = 5
 frame = 23
 
 [node name="KeyLabel" type="RichTextLabel" parent="InventoryRect"]
-margin_left = 33.0
+margin_left = -3.0
 margin_top = 231.0
-margin_right = 354.0
+margin_right = 414.0
 margin_bottom = 287.0
 theme = ExtResource( 8 )
 bbcode_enabled = true
@@ -2519,5 +2519,5 @@ rect_clip_content = false
 theme = SubResource( 17223 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "[right]ver-3.0.5.2[/right]"
-text = "ver-3.0.5.2"
+bbcode_text = "[right]ver-3.0.6.0[/right]"
+text = "ver-3.0.6.0"

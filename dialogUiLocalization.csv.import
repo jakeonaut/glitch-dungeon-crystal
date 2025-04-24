@@ -5,10 +5,10 @@ type="Translation"
 
 [deps]
 
-files=[ "res://dialogUiLocalization.en.translation", "res://dialogUiLocalization.zh_CN.translation", "res://dialogUiLocalization.ru.translation", "res://dialogUiLocalization.pt_BR.translation", "res://dialogUiLocalization.fr.translation", "res://dialogUiLocalization.ja.translation", "res://dialogUiLocalization.es.translation", "res://dialogUiLocalization.it.translation", "res://dialogUiLocalization.pl.translation" ]
+files=[ "res://dialogUiLocalization.en.translation", "res://dialogUiLocalization.zh_CN.translation", "res://dialogUiLocalization.ru.translation", "res://dialogUiLocalization.pt_BR.translation", "res://dialogUiLocalization.fr.translation", "res://dialogUiLocalization.ja.translation", "res://dialogUiLocalization.es.translation", "res://dialogUiLocalization.it.translation", "res://dialogUiLocalization.pl.translation", "res://dialogUiLocalization.de_DE.translation" ]
 
 source_file="res://dialogUiLocalization.csv"
-dest_files=[ "res://dialogUiLocalization.en.translation", "res://dialogUiLocalization.zh_CN.translation", "res://dialogUiLocalization.ru.translation", "res://dialogUiLocalization.pt_BR.translation", "res://dialogUiLocalization.fr.translation", "res://dialogUiLocalization.ja.translation", "res://dialogUiLocalization.es.translation", "res://dialogUiLocalization.it.translation", "res://dialogUiLocalization.pl.translation" ]
+dest_files=[ "res://dialogUiLocalization.en.translation", "res://dialogUiLocalization.zh_CN.translation", "res://dialogUiLocalization.ru.translation", "res://dialogUiLocalization.pt_BR.translation", "res://dialogUiLocalization.fr.translation", "res://dialogUiLocalization.ja.translation", "res://dialogUiLocalization.es.translation", "res://dialogUiLocalization.it.translation", "res://dialogUiLocalization.pl.translation", "res://dialogUiLocalization.de_DE.translation" ]
 
 [params]
 

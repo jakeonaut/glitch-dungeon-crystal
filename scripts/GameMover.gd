@@ -982,7 +982,7 @@ const PROJECTION_ORTHOGONAL = 1
 var was_running = false
 var horizontal_multiplier = 1
 var horizontal_addition = 0
-export var is_sprite_flipped = false
+var is_sprite_flipped = false
 var should_always_stop_walking_immediately = false
 func processHorizontalInputs(delta):
   if is_climbing_ladder: return

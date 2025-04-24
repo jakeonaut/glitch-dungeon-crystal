@@ -253,9 +253,9 @@ func _process(delta):
 
   if pauseMenuState == PauseMenuState.INVENTORY:
     inventoryPauseTitleText.bbcode_text = tr("UI.Inventory.1")
-    spellsLabelText.bbcode_text = tr("UI.Inventory.2")
+    spellsLabelText.bbcode_text = "[center]" + tr("UI.Inventory.2") + "[/center]"
     equipLabelText.bbcode_text = "[center]" + tr("UI.Inventory.4") + "[/center]"
-    soulLabelText.bbcode_text = tr("UI.Inventory.8")
+    soulLabelText.bbcode_text = "[center]" + tr("UI.Inventory.8") + "[/center]"
     keyLabelText.bbcode_text = "[center]" + tr("UI.Inventory.9") + "[/center]"
     keysText.bbcode_text = tr("UI.Inventory.10")
     shardsText.bbcode_text = tr("NPC.Crystal.7")

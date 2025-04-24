@@ -734,6 +734,7 @@ path = "res://levels/EndlessFantasy/gd1PrimordialOoze/FishingScene2.tscn"
 can_nav_left = false
 can_nav_right = false
 can_nav_up = false
+hide_me_from_map = true
 kill_after_glitch = true
 
 [node name="LeakyGroundwater" parent="PrimordialOoze" instance=ExtResource( 3 )]
@@ -746,4 +747,5 @@ frame = 56
 path = "res://levels/EndlessFantasy/gd1PrimordialOoze/LeakyGroundwater.tscn"
 can_nav_left = false
 can_nav_right = false
+hide_me_from_map = true
 kill_after_glitch = true
