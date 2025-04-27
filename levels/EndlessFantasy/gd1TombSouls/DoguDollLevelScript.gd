@@ -10,8 +10,6 @@ onready var lostSoulsNPC = get_node("LostSoulsNPC")
 func setUpRoomInitializationOverride():
     if global.memory["dogu_matryoshka_boss"] >= 3:
         doguMatryoshkaBoss.queue_free()
-        yield(get_tree().create_timer(0.5), "timeout")
-        summonSmokeClouds(shortcutDoor.global_transform.origin, 2, true, true)
         shortcutDoor.visible = true
     else:
         lostSoulsNPC.queue_free()

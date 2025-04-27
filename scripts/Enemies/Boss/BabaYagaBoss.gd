@@ -383,7 +383,7 @@ func okayImDead():
     level.add_child(newRealCrystal)
     newRealCrystal.global_transform.origin = Vector3(8, -3, 0)
     level.summonSmokeClouds(newRealCrystal.global_transform.origin, 3, true, true, false)
-    level.door.visible = true
+    # level.door.visible = true
     queue_free()
 
 onready var tweetSound = get_node("Sounds/TweetSound")

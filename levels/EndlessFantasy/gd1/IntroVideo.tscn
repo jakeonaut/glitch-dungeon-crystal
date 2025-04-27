@@ -196,9 +196,9 @@ flip_v = true
 [node name="SkipPrompt" type="RichTextLabel" parent="."]
 visible = false
 margin_left = 800.0
-margin_top = 964.0
+margin_top = 972.0
 margin_right = 1452.0
-margin_bottom = 1100.0
+margin_bottom = 1108.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 1.5, 1.5 )

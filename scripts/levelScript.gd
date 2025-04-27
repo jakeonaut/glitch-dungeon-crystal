@@ -152,11 +152,11 @@ func _ready_impl():
   if global.memory.has("player_costume"):
     player.wearCostume(global.memory["player_costume"])
 
-  # if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
-  #   if global.isRespawning:
-  #     global.memory["grav_direction"] = 1
-  #   else:
-  flipGravity(-1)
+  if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
+    if global.isRespawning:
+      global.memory["grav_direction"] = 1
+    else:
+      flipGravity(-1)
   
   tryToRespawn()
   global.tryInitializeLevelZone(self.getLevelZoneName())

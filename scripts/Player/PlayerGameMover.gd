@@ -590,10 +590,10 @@ func collideWithWall(local_lv):
         touching_fragile_solid = true
       if not touching_spikes and getLevelTiles().isTileSpikes(tile_type):
         touching_spikes = true
-    # if on_ground and not touching_fragile_solid and not pressingJump(): # and (glitch_form == global.GlitchForm.FLOOR or (glitch_form == global.GlitchForm.INVISIBLE and touching_spikes)):
-    #   processMoleDigTimer(Vector3(-2, 0, 0))
-    # else:
-    #   dig_timer = 0
+    if on_ground and not touching_fragile_solid and not pressingJump(): # and (glitch_form == global.GlitchForm.FLOOR or (glitch_form == global.GlitchForm.INVISIBLE and touching_spikes)):
+      processMoleDigTimer(Vector3(-2, 0, 0))
+    else:
+      dig_timer = 0
   if pressingMoveRight():
     var rightTiles = getTilesRightOf(getLevelTiles(), tile_buffer, glitch_form == global.GlitchForm.INVISIBLE)
     var touching_fragile_solid = false
@@ -607,12 +607,10 @@ func collideWithWall(local_lv):
         touching_fragile_solid = true
       if not touching_spikes and getLevelTiles().isTileSpikes(tile_type):
         touching_spikes = true
-    # if on_ground and not touching_fragile_solid and not pressingJump() and (glitch_form == global.GlitchForm.FLOOR or (
-    #   glitch_form == global.GlitchForm.INVISIBLE and touching_spikes
-    # )):
-    #   processMoleDigTimer(Vector3(2, 0, 0))
-    # else:
-    #   dig_timer = 0
+    if on_ground and not touching_fragile_solid and not pressingJump(): # and (glitch_form == global.GlitchForm.FLOOR or (glitch_form == global.GlitchForm.INVISIBLE and touching_spikes)):
+      processMoleDigTimer(Vector3(2, 0, 0))
+    else:
+      dig_timer = 0
 
 onready var digSound = get_node("Sounds/DigSound")
 func processMoleDigTimer(digDirection):

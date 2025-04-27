@@ -628,7 +628,7 @@ func unsmack():
   mySprite.material_override.set_shader_param("enable_palette_cycle", false)
 
 func startTeleport():
-  if global.memory["mushroom_soul"] and global.memory["mushroom_soul_enabled"] and teleport_to != null and Input.is_action_pressed("sub_action_button") and global.activeInteractor == null:
+  if teleport_to != null and Input.is_action_pressed("sub_action_button") and global.activeInteractor == null:
     pauseSelf = true
     global.pauseMoveInput = true
     visible = false
@@ -686,15 +686,9 @@ func processTeleportationLogic(delta):
       if not has_teleported:
         # TODO
         # reassembleSound.play()
-        if global.memory["mushroom_soul"] and global.memory["mushroom_soul_enabled"]:
-          # if teleport_to != null and teleport_to.get_ref() != null:
-          #   var teleportTarget = teleport_to.get_ref()
-          #   var temp_position = self.global_transform.origin
-          #   self.global_transform.origin = teleportTarget.global_transform.origin
-          #   # teleportTarget.global_transform.origin = temp_position
-          if teleport_to_origin != null:
-            self.global_transform.origin = teleport_to_origin
-            self.camera_target_y_pos = self.global_transform.origin.y
+        if teleport_to_origin != null:
+          self.global_transform.origin = teleport_to_origin
+          self.camera_target_y_pos = self.global_transform.origin.y
         has_teleported = true
         teleport_to = null
         teleport_to_origin = null
@@ -1603,7 +1597,9 @@ func processMoleLogic(delta):
     # TODO(jaketrower): TODO(jaketrower): TODO(jaketrower): TODO(jaketrower):
     if dig_direction != null and dig_timer > 0 and transformation != TransformationState.MOLE_DIGGING and (
       (pressingJump() and dig_direction.y >= 0 and on_ceiling and not was_on_ceiling) or
-      (pressingDown() and dig_direction.y <= 0 and on_ground)
+      (pressingDown() and dig_direction.y <= 0 and on_ground) or
+      (pressingMoveRight() and dig_direction.x >= 0 and horizontal_collision) or 
+      (pressingMoveLeft() and dig_direction.x <= 0 and horizontal_collision)
     ):
       transformation = TransformationState.MOLE_DIGGING
       # aniPlayer.stop()
@@ -1895,6 +1891,10 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     nesting_doll_state = global.NestingDoll.GRANDMA
     updateNestingDoll(nesting_doll_state)
     global.pauseMoveInput = false
+  elif nesting_doll_state == global.NestingDoll.GRANDMA and global.memory["mushroom_soul"] >= 1 and global.memory["mushroom_soul_enabled"] and not should_immediately_die and whichBoss == null:
+    level.player.nesting_doll_state = global.NestingDoll.BABY
+    global.memory["nesting_doll"] = global.NestingDoll.BABY
+    level.player.updateNestingDoll(global.NestingDoll.BABY)
   elif global.memory["hp"] <= 0 or should_immediately_die or (whichBoss != null and whichBoss.num_granny_hits == 0):
     if summonedBroom:
       broomStop()
@@ -2125,7 +2125,7 @@ func processBroomLogic(delta):
       var found_fallen_broom = false
       var fallenBroomArray = self.get_tree().get_nodes_in_group("fallen_broom_group")
       for fallenBroom in fallenBroomArray:
-        if fallenBroom.visible and global.memory["mushroom_soul"] > 0 and global.memory["mushroom_soul_enabled"]:
+        if fallenBroom.visible and global.memory["broomerang"] >= 2:
           fallenBroom.warpToIt()
         elif not fallenBroom.returning and fallenBroom.visible and not fallenBroom.should_die_on_land and not fallenBroom.is_dying and fallenBroom.should_return and fallenBroom.can_return_via_input:
           fallenBroom.returning = true
@@ -2261,6 +2261,24 @@ func doBroomAttack(which_broom_attack):
       summonedBroom.smacked_npc = smacked_npc
     summonedBroom.my_broom_owner = self
     adjustSummonedBroomSpritePosition()
+    if global.memory["zora_flippers"] > 0 and global.memory["zora_flippers_enabled"]:
+      var bubble = bubbleRes.instance()
+      # bubble.mySprite.material_override.set_shader_param("enable_no_transparency", true)
+      bubble.can_broom_pop_me = false
+      bubble.is_horizontal = true
+      level.add_child(bubble)
+      bubble.setAsParent(self)
+      bubble.global_transform.origin = global_transform.origin
+      if mySprite.flip_h:
+        bubble.global_transform.origin.x -= 2
+        bubble.horizontal_direction = -1
+      else:
+        bubble.global_transform.origin.x += 2
+        bubble.horizontal_direction = 1
+      bubble.my_original_pos = bubble.global_transform.origin.y
+      bubble.my_target_pos = bubble.global_transform.origin.y  + rand_range(-1, 1)
+      if abs(linear_velocity.x) > 1:
+        bubble.my_speed = abs(linear_velocity.x) * 0.9
   
   # if global.memory["debug_broom"]:
   #   var x = global_transform.origin.x
@@ -2647,6 +2665,22 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
     elif x_direction != 0:
       fallenBroom.walk_direction.x = x_direction
     fallenBroom.thrown_direction.x = fallenBroom.walk_direction.x
+    if global.memory["zora_flippers"] > 0 and global.memory["zora_flippers_enabled"]:
+      for _i in range(3):
+        var bubble = bubbleRes.instance()
+        # bubble.mySprite.material_override.set_shader_param("enable_no_transparency", true)
+        bubble.can_broom_pop_me = false
+        level.add_child(bubble)
+        bubble.setAsParent(self)
+        bubble.global_transform.origin = global_transform.origin
+        bubble.global_transform.origin.x += rand_range(-1, 1)
+        bubble.global_transform.origin.y += rand_range(0, 1)
+        if mySprite.flip_h:
+          bubble.global_transform.origin.x -= 2
+        else:
+          bubble.global_transform.origin.x += 2
+        bubble.my_original_pos = bubble.global_transform.origin.x
+        bubble.my_target_pos = bubble.global_transform.origin.x  + rand_range(-1, 1)
 
   global.memory["broom"] = false
   var fallenBroomArray = self.get_tree().get_nodes_in_group("fallen_broom_group")

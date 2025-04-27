@@ -23,22 +23,21 @@ func activateScript():
         global.incrementLevelZoneThing("num_mini_crystal_cubes", -global.NUM_GEMS_FOR_BROOMERANG)
         global.memory["broomerang"] = 1
         level.player.sayThis(tr("NPC.Crone.6"))
-        global.memory["crone"] = 3 # not two... skip the bag for now...
+        global.memory["crone"] = 2
         if global.demo_mode <= 0: Steam.set_achievement("BROOMERANG")
       else:
         level.player.errorSound.play()
         level.player.sayThis(tr("NPC.Crone.5") % str(global.NUM_GEMS_FOR_BROOMERANG - num_cubes))
-  # elif global.memory["crone"] == 2 or (global.memory["broomerang"] == 1 and global.memory["max_hp"] < 2):
-  #   if global.memory["max_hp"] < 2 and textBox.selectedYesNoOption: 
-  #     if num_cubes >= global.NUM_GEMS_FOR_ENCHANTED_BAG:
-  #       global.incrementLevelZoneThing("num_mini_crystal_cubes", -global.NUM_GEMS_FOR_ENCHANTED_BAG)
-  #       global.memory["max_hp"] = 2
-  #       global.memory["hp"] = global.memory["max_hp"]
-  #       level.player.sayThis("ENCHANTED BAG GET!\nnow you can take another hit")
-  #       global.memory["crone"] = 3
-  #     else:
-  #       level.player.errorSound.play()
-  #       level.player.sayThis("need " + str(global.NUM_GEMS_FOR_ENCHANTED_BAG - num_cubes) + " more shards.\n" + suffix)
+  elif global.memory["crone"] == 2 or global.memory["broomerang"] == 1:
+    if textBox.selectedYesNoOption: 
+      if num_cubes >= global.NUM_GEMS_FOR_BROOMERANG_WARP:
+        global.incrementLevelZoneThing("num_mini_crystal_cubes", -global.NUM_GEMS_FOR_BROOMERANG_WARP)
+        global.memory["broomerang"] = 2
+        level.player.sayThis(tr("NPC.Treasure.10"))
+        global.memory["crone"] = 3
+      else:
+        level.player.errorSound.play()
+        level.player.sayThis(tr("NPC.Crone.5") % str(global.NUM_GEMS_FOR_BROOMERANG_WARP - num_cubes))
   # elif global.memory["crone"] == 3 or (global.memory["broomerang"] == 1): # and global.memory["max_hp"] >= 2):
   #   if global.memory["broomerang"] < 2 and textBox.selectedYesNoOption: 
   #     if num_cubes >= global.NUM_GEMS_FOR_BROOMERANG_WARP:

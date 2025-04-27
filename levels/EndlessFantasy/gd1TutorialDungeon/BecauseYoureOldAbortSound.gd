@@ -13,7 +13,8 @@ func activateScript():
   level.player.stopTalking()
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
-  level.player.sayThis(tr("Dialog.Player.4"), 10.0)
+  if global.memory.has("spellbookPage"):
+    level.player.sayThis(tr("Dialog.Player.4"), 10.0)
 
 func cutOffEarlyActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
   pass

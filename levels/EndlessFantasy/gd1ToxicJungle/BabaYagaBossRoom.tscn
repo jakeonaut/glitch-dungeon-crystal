@@ -1931,6 +1931,16 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6758, -6.95296, 0 )
+lb = null
+rb = null
+tb = null
+bb = null
+glitch_form = null
+floor_glitch_walk_speed = null
+invisible_glitch_walk_speed = null
+time_influence = null
+y_div = null
+normal_offset = null
 
 [node name="GrandmaStatues" type="Spatial" parent="Viewport/level"]
 
@@ -2574,7 +2584,7 @@ is_fan_spinning = true
 can_deactivate_fan = false
 
 [node name="ShortcutDoor" parent="Viewport/level" instance=ExtResource( 24 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.312, -8.03421, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.312, -8.03421, 0 )
 visible = false
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
 

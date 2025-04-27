@@ -6,6 +6,9 @@ onready var broomUpgradeCrone = get_node("BroomUpgradeCrone")
 onready var fishElderNPC = get_node("FishElderNPC")
 onready var sporeElderNPC = get_node("SporeElderNPC")
 onready var wormElderNPC = get_node("WormElderNPC")
+onready var featherSpell = get_node("FeatherSpell")
+onready var ladderSpell = get_node("LadderSpell")
+onready var invisibleSpell = get_node("InvisibleSpell")
 
 onready var anglerShortcut = get_node("AnglerShortcutDoor")
 onready var babaShortcut = get_node("BabaShortcutDoor")
@@ -18,16 +21,22 @@ onready var glitchEnemy2 = get_node("GlitchEnemy2")
 func setUpRoomInitializationOverride():
   if not global.memory.has("anglerShortcut") or not global.memory["anglerShortcut"]:
     anglerShortcut.visible = false
+    featherSpell.visible = false
   else:
     anglerShortcut.visible = true
+    featherSpell.visible = true
   if not global.memory.has("babaShortcut") or not global.memory["babaShortcut"]:
     babaShortcut.visible = false
+    invisibleSpell.visible = false
   else:
     babaShortcut.visible = true
+    invisibleSpell.visible = true
   if not global.memory.has("claydolShortcut") or not global.memory["claydolShortcut"]:
     claydolShortcut.visible = false
+    ladderSpell.visible = false
   else:
     claydolShortcut.visible = true
+    ladderSpell.visible = true
 
   if global.demo_mode <= 0:
     glitchEnemy.queue_free()

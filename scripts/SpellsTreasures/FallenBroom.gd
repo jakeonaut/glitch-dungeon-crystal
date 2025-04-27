@@ -176,7 +176,7 @@ func _process(delta):
             on_ground = false
 
 func warpToIt():
-    if global.memory["mushroom_soul"] > 0 and can_warp:
+    if global.memory["broomerang"] >= 2 and can_warp:
         if not level.player.can_broomerang_warp and level.player.teleport_to == null:
             level.player.errorSound.play()
         else:

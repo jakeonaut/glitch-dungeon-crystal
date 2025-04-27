@@ -9,6 +9,7 @@ onready var eldestMonkeyNPC = get_node("EldestMonkeyNPC")
 func setUpRoomInitializationOverride():
     if global.memory["baba_yaga_boss"] >= 3:
         babaYagaBoss.queue_free()
+        shortcutDoor.visible = true
     else:
         eldestMonkeyNPC.queue_free()
         if global.memory["baba_yaga_boss"] == 2:

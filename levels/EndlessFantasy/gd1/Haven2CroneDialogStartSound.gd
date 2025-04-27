@@ -15,10 +15,10 @@ func activateScript():
   #   textBox.text_final = text
   #   textBox.textNode.bbcode_text = text
   #   textBox.showYesNoOptions = true
-  elif global.memory["broomerang"] < 1:
+  elif global.memory["broomerang"] < 2:
     var text = tr("NPC.Crone.4") % str(global.NUM_GEMS_FOR_BROOMERANG)
-    # if global.memory["broomerang"] == 1:
-    #   text = "•trade " + str(global.NUM_GEMS_FOR_BROOMERANG_WARP) + " shards for\n[color=red]BROOMERANG WARP[/color]?"
+    if global.memory["broomerang"] == 1:
+      text = "•trade " + str(global.NUM_GEMS_FOR_BROOMERANG_WARP) + " shards for\n[color=red]BROOMERANG WARP[/color]?"
     textBox.text_final = text
     textBox.textNode.bbcode_text = text
     textBox.showYesNoOptions = true

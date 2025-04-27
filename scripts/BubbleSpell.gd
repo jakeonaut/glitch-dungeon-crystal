@@ -132,10 +132,13 @@ func _process(delta):
 func isActive(_debug=false):
   return true
 
+var can_broom_pop_me = true
 func passiveActivate(_delta, is_player):
   if didja_get_me or global.pauseGame or (is_player and (level.player.transformation == level.player.TransformationState.BUBBLE or level.player.glitch_form == global.GlitchForm.BUBBLE)):
     return
 
+  if not is_player and not can_broom_pop_me:
+    return
   bubbleStartPop()
   if not is_player and not global.memory["broom"]:
     return
@@ -159,7 +162,7 @@ func passiveActivate(_delta, is_player):
       var jump_val = 14
       getPlayer().linear_velocity.y = jump_val
       getPlayer().lv.y = jump_val
-      getPlayer().vv = getPlayer().up.dot(jump_val)
+      getPlayer().vv = getPlayer().up.dot(getPlayer().lv)
   else:
     getPlayer().has_sweeped_glitch = true
 

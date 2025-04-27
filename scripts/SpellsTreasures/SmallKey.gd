@@ -11,7 +11,7 @@ var land_count_limit = 3
 func _ready():
     set_process(true)
     set_physics_process(false)
-    message = tr("UI.Alert.0") if message == "UI.Alert.0" else message
+    message = tr(message)
 
     var memory = self.getMyStaticLevelZoneVar()
     if is_static_in_level and memory:

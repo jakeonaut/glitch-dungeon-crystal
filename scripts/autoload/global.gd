@@ -249,7 +249,7 @@ var isOnMainMenu = false
 var NUM_GEMS_FOR_BROOMERANG = 25
 var NUM_GEMS_FOR_ENCHANTED_BAG = 75
 var NUM_GEMS_FOR_DOUBLE_JUMP = 75
-var NUM_GEMS_FOR_BROOMERANG_WARP = 999
+var NUM_GEMS_FOR_BROOMERANG_WARP = 99
 
 var has_started_game = false
 var has_really_started_game = false
@@ -345,9 +345,9 @@ func resetMemory():
     memory["angler_seaman_boss"] = 0
     memory["angler_heart"] = 0
     memory["dogu_matryoshka_boss"] = 0
-    memory["claydol_heart"] = 1
+    memory["claydol_heart"] = 0
     memory["baba_yaga_boss"] = 0
-    memory["baba_heart"] = 1
+    memory["baba_heart"] = 0
     # and associated shortcuts
     memory["anglerShortcut"] = 0
     memory["claydolShortcut"] = 0
