@@ -21,7 +21,6 @@ var crystalGeodeRes = preload("res://sceneObjects/CrystalGeode2.tscn")
 var num_hits = 0
 var MAX_NUM_HITS = 3
 var num_granny_hits = 3
-var MAX_GRANNY_HITS = 3
 
 enum BossPhase {
     IDLE,
@@ -63,6 +62,9 @@ var how_many_final_charges = 0
 
 onready var spawnSound = get_node("Sounds/SpawnSound")
 func _ready():
+    var how_many_more_hearts = global.memory["angler_heart"] + global.memory["baba_heart"] + global.memory["claydol_heart"]
+    num_granny_hits += how_many_more_hearts
+
     if global.memory["anglerShortcut"] == 0:
         global.memory["anglerShortcut"] = 1
     set_process(true)

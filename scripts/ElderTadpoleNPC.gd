@@ -10,6 +10,7 @@ onready var caneSprite = get_node("CaneSprite")
 var npcSleepSfxRes = preload("res://assets/sounds/Sleeping.wav")
 var am_i_sleepy = false
 var am_i_glitchy = false
+var heartContainerRes = preload("res://sceneObjects/SpellsTreasureCollectables/HeartContainer.tscn")
 
 var can_smack_back = true
 var render_cane = false
@@ -68,6 +69,16 @@ func processLevelZone():
     elif global.memory[memoryVarName] == 3:
       global.memory[memoryVarName] = 4
   have_i_processed = true
+
+func spawnHeartContainer():
+  if have_i_spawned_heart:
+    return
+  var newHeartContainer = heartContainerRes.instance()
+  level.add_child(newHeartContainer)
+  newHeartContainer.global_transform.origin = self.global_transform.origin
+  newHeartContainer.global_transform.origin.y += 1
+  newHeartContainer.on_ground = true
+  have_i_spawned_heart = true
 
 func _process(delta):
   if render_cane:
@@ -190,3 +201,25 @@ func setGlobalMemoryOfHasSpoken(set_vars = false):
     can_smack_back = false
     return
   .setGlobalMemoryOfHasSpoken(set_vars)
+
+var have_i_spawned_heart = false
+# @override
+func landed():
+  if have_i_spawned_heart:
+    return
+  if not have_i_processed:
+    return
+  var levelZoneName = global.currLevelZone
+  if levelZoneName == "gd1GrandmaVillage" or levelZoneName == "gd1PrimordialOoze":
+    return
+  
+  match levelZoneName:
+    "gd1FishingVillage":
+      if global.memory["angler_heart"] == 0:
+        spawnHeartContainer()
+    "gd1ToxicJungle":
+      if global.memory["baba_heart"] == 0:
+        spawnHeartContainer()
+    "gd1ShiftingSandLand":
+      if global.memory["claydol_heart"] == 0:
+        spawnHeartContainer()

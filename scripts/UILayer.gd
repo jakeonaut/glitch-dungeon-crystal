@@ -397,7 +397,7 @@ func processHiscoreRenderLogic(delta):
 
   if timeHiscoreLabel.visible and stupidTimeAgedStartTimeTemp != null:
     var total_time = global.getThingFromAllLevelZonez("total_time")
-    print(total_time)
+    # print(total_time)
     var time_aged = total_time if total_time != null else tr("NPC.Crystal.NULL")
     if not global.isEndOfGame and total_time != null and stupidTimeAgedStartTimeTemp != null:
       time_aged += (Time.get_unix_time_from_system() - stupidTimeAgedStartTimeTemp)

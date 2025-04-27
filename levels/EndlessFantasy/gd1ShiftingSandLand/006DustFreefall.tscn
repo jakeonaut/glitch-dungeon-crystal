@@ -663,6 +663,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -12, 0 )
 [node name="SandStream5" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -18, 0 )
 
+[node name="SandStream6" parent="Viewport/level" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -15, 0 )
+
+[node name="SandStream7" parent="Viewport/level" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -9, 0 )
+
+[node name="SandStream8" parent="Viewport/level" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -3, 0 )
+
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16, 0 )
 
@@ -772,7 +781,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -16, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -10, 0 )
 
 [node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 27 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -4, 0 )
 
 [node name="HungryWorm" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -8, 0 )

@@ -3,7 +3,6 @@ extends "../../../scripts/levelScript.gd"
 # String is a path to a file.
 export(String, FILE) var memory_zone_path
 
-onready var altarSprite = get_node("AltarSprite")
 onready var highPriestessBoss = weakref(get_node("HighPriestessBoss"))
 onready var croneNPC = get_node("CroneNPC")
 onready var croneNPCDefeated = get_node("CroneNPCDefeated")
@@ -176,7 +175,7 @@ func _process(delta):
         # theGoddess.get_node("AnimationPlayer").play("disintegrate", -1, 0.4)
         # summonSmokeClouds(highpriestessCrystal5, 3)
         # highpriestessCrystal5.visible = true
-        goddess_cutscene_counter = 3
+        goddess_cutscene_counter = 5
     elif goddess_cutscene_counter == -99:
       tryLerpUpCrystal(highpriestessCrystal, delta)
       tryLerpUpCrystal(highpriestessCrystal2, delta)
@@ -266,6 +265,7 @@ func tryLerpUpCrystal(crystal, delta):
     crystal.global_transform.origin.y = crystal.global_transform.origin.y + (4.029 - crystal.global_transform.origin.y) * (delta*2)
 
 func triggerCroneDialog():
+  print("trigger crone dialog?")
   croneNPC.activate(true)
 
 var is_defeated = false

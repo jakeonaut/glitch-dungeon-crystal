@@ -12,6 +12,9 @@ onready var basicTadpoleEnemy4 = get_node("BasicTadpoleEnemy4")
 onready var npc = get_node("NPC")
 onready var npc2 = get_node("NPC2")
 onready var npc3 = get_node("NPC3")
+onready var fishingRod = get_node("FishingRod")
+onready var fishingRod2 = get_node("FishingRod2")
+onready var fishingRod3 = get_node("FishingRod3")
 var should_process_npcs = true
 
 onready var fishies = get_node("Fishies")
@@ -38,6 +41,9 @@ func setUpRoomInitializationOverride():
         npc.queue_free()
         npc2.queue_free()
         npc3.queue_free()
+        fishingRod.queue_free()
+        fishingRod2.queue_free()
+        fishingRod3.queue_free()
         yield(get_tree().create_timer(0.5), "timeout")
         summonSmokeClouds(shortcutDoor.global_transform.origin, 2, true, true)
         shortcutDoor.visible = true

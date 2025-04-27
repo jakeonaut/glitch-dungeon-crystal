@@ -879,7 +879,7 @@ func tryDieToOffscreenCamera(_delta):
         DEATH_MARGIN = -1
         just_pacman_flipped_timer = 0
         was_walk_direction_flipped = shouldFlipWalkingDirection()
-        print("was_walk_dir_flipped: " + str(was_walk_direction_flipped))
+        # print("was_walk_dir_flipped: " + str(was_walk_direction_flipped))
         if global.roomEdgeVector == Vector3(1, 0, 0):
           global_transform.origin.x = getGameCamera().leftmost_x - DEATH_MARGIN
           if pressingMoveRight() or pressingMoveLeft():
@@ -1154,7 +1154,7 @@ func processFishyLogic(_delta):
       allSpritesBackToNormal(mySprite)
     return
 
-  var has_been_in_water = (is_touching_water and was_touching_water) # or (is_touching_sandstream and was_touching_sandstream)
+  var has_been_in_water = (is_touching_water and was_touching_water) or (is_touching_sandstream and was_touching_sandstream)
   if touched_water_area != null and touched_water_area.get_node("..").is_cleansing:
     malwareCured()
     
@@ -1168,7 +1168,7 @@ func processFishyLogic(_delta):
     fishySprite.flip_h = mySprite.flip_h
     physics_vars.should_apply_gravity = pressingDown()
     glitchTilesAroundMe(-2)
-    if (not is_touching_water and not was_touching_water) or physics_state == PhysicsState.BEING_TOSSED:
+    if (not is_touching_water and not was_touching_water and not is_touching_sandstream and not was_touching_sandstream) or physics_state == PhysicsState.BEING_TOSSED:
       getFishyCured()
       gravitySound.pitch_scale = rand_range(0.8, 1.2)
       gravitySound.play()

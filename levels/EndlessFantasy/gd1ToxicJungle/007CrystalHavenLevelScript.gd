@@ -1,7 +1,7 @@
 extends "../../../scripts/levelScript.gd"
 
-onready var elderShroomNPC = get_node("ElderShroomNPC")
-onready var elderShroomNPCSmallerInteractionShape = get_node("ElderShroomNPC/SmallerInteractionArea/CollisionShape")
+# onready var elderShroomNPC = get_node("ElderShroomNPC")
+# onready var elderShroomNPCSmallerInteractionShape = get_node("ElderShroomNPC/SmallerInteractionArea/CollisionShape")
 var original_elder_text = ""
 
 # @override
@@ -10,7 +10,7 @@ func setUpRoomInitializationOverride():
   pass
 
 var has_updated_elder_text = false
-func _process(delta):
+func _process(_delta):
   # ._process(delta) implicit
   pass
 

@@ -343,8 +343,11 @@ func resetMemory():
     
     # crystal elder bosses
     memory["angler_seaman_boss"] = 0
+    memory["angler_heart"] = 0
     memory["dogu_matryoshka_boss"] = 0
+    memory["claydol_heart"] = 1
     memory["baba_yaga_boss"] = 0
+    memory["baba_heart"] = 1
     # and associated shortcuts
     memory["anglerShortcut"] = 0
     memory["claydolShortcut"] = 0
@@ -411,8 +414,9 @@ var allLocales = {
     "ja": { "code": "ja", "supported": true, "label": "日本語" },
     "es": { "code": "es", "supported": true, "label": "Español" },
     "it": { "code": "it", "supported": true, "label": "Italiano" },
-    "pl": { "code": "pl", "supported": false, "label": "Polski" },
+    "pl": { "code": "pl", "supported": true, "label": "Polski" },
     "de": { "code": "de", "supported": true, "label": "Deutsch" },
+    "ko_KR": { "code": "ko_KR", "supported": true, "label": "한국어"}
 }
 func getSupportedLocalesArray():
     var supportedLocales = []
@@ -440,6 +444,8 @@ func normalizeLocaleHelper(locale):
         return "fr"
     if "ru_" in locale:
         return "ru"
+    if locale == "ko":
+        return "ko_KR"
 func normalizeLocale(locale):
     var normalizedLocale = normalizeLocaleHelper(locale)
     if not normalizedLocale in allLocales or not allLocales[normalizedLocale].supported:
@@ -1581,12 +1587,12 @@ func updateLevelZoneTime():
     if startTime == null:
         return
     var currTime = Time.get_unix_time_from_system()
-    print("add " + str(currTime - startTime) + " to " + str(currLevelZone))
+    # print("add " + str(currTime - startTime) + " to " + str(currLevelZone))
     incrementLevelZoneTime(currTime - startTime)
     setLevelZoneThing("start_time", null)
 func setLevelZoneStartTime():
     if not global.has_started_game: return
-    print("set " + str(currLevelZone) + " start time to " + str(Time.get_unix_time_from_system()))
+    # print("set " + str(currLevelZone) + " start time to " + str(Time.get_unix_time_from_system()))
     setLevelZoneThing("start_time", Time.get_unix_time_from_system())
 
 func incrementLevelZoneTime(amt):

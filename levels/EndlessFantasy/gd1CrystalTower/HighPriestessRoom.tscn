@@ -1,4 +1,4 @@
-[gd_scene load_steps=139 format=2]
+[gd_scene load_steps=140 format=2]
 
 [ext_resource path="res://sceneObjects/Enemies/Boss/HighPriestessBoss.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/pokeball0000.png" type="Texture" id=2]
@@ -2143,6 +2143,9 @@ shader_param/texture_albedo = ExtResource( 54 )
 shader_param/base_palette = ExtResource( 23 )
 shader_param/target_palette = ExtResource( 30 )
 
+[sub_resource type="BoxShape" id=330]
+extents = Vector3( 1, 2, 1 )
+
 [sub_resource type="ArrayMesh" id=328]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
@@ -2265,7 +2268,7 @@ shader_param/shake_color_rate = 0.0
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 14 )
-starting_glitch_type = 2
+starting_glitch_type = 1
 tileset_type = 6
 has_spellbook_page = true
 pacman_wrapping = true
@@ -2975,6 +2978,9 @@ max_frames = 4
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -4, 0 )
 script = ExtResource( 57 )
 
+[node name="CollisionShape" parent="Viewport/level/InteractionAreaEvent/Area" index="0"]
+shape = SubResource( 330 )
+
 [node name="LadderSpell2" parent="Viewport/level" instance=ExtResource( 37 )]
 transform = Transform( 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0, 1, 7, -2.53798, 0 )
 visible = false
@@ -3081,6 +3087,7 @@ material = SubResource( 322 )
 [editable path="Viewport/level/TheGoddess"]
 [editable path="Viewport/level/SecretGoddessNPC"]
 [editable path="Viewport/level/SecretGoddessNPC/NPC TextBox"]
+[editable path="Viewport/level/InteractionAreaEvent"]
 [editable path="Viewport/level/GlitchedGeode"]
 [editable path="Viewport/level/GlitchedGeode/GlitchAura"]
 [editable path="Viewport2/ScreenEffects"]

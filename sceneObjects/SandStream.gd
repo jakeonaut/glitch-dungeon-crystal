@@ -25,6 +25,8 @@ func passiveActivate(delta, is_player):
   # level.player.on_ground = true
   # if global.memory["zora_flippers"] == 0:
   level.player.pauseAnimation = true
+  if level.player.transformation == level.player.TransformationState.FISHY:
+    return
   var aa = level.player.aniPlayer.assigned_animation
   if aa != "jumpSquat" and aa != "sinkInSand" and aa != "sweepFloor" and not "broom" in aa:
     level.player.aniPlayer.play("sinkInSand", -1, 1)

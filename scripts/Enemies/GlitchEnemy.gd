@@ -932,7 +932,7 @@ func unsmack():
             mySprite.material_override.set_shader_param("shake_power", 0.03)
         mySprite.material_override.set_shader_param("target_palette", last_palette)
 
-    if myOtherSprite:
+    if myOtherSprite and myOtherSprite.material_override:
         myOtherSprite.material_override.set_shader_param("time_influence", 3)
         myOtherSprite.material_override.set_shader_param("y_div", 2.3)
         myOtherSprite.material_override.set_shader_param("normal_offset", .02)

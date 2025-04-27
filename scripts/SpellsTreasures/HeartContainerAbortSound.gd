@@ -1,30 +1,32 @@
 extends AudioStreamPlayer
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+export(int, "NORMAL", "FISH", "PYRAMID", "SHROOM", "CAT") var key_type
 
 func _ready():
     pass
-
-onready var treasure = get_node("../../..")
-func activateScript():
-    treasure.visible = false
-    treasure.is_active = false
-    treasure.being_collected = false
     
+onready var heart = get_node("../../..")
+func activateScript():
+    # global.getKeyInMemory(key_type, level)
+
+    var levelZoneName = global.currLevelZone
+    
+    match levelZoneName:
+        "gd1FishingVillage":
+            global.memory["angler_heart"] = 1
+        "gd1ToxicJungle":
+            global.memory["baba_heart"] = 1
+        "gd1ShiftingSandLand":
+            global.memory["claydol_heart"] = 1
+
     global.pauseGame = false
     global.pauseMoveInput = false
-    level.player.aniPlayer.clear_queue()
-    level.player.aniPlayer.queue("walkStop")
-    level.player.aniPlayer.queue("stand")
-    
-    if not global.memory.has("max_hp"):
-        global.memory["max_hp"] = 1
-        
-    global.memory["max_hp"] += 1
-    global.memory["hearts_recovering"] = true
-    level.get_node("UILayer").recreateHeartSprites()
-        
-    level.saveTheGame()
+    # level.spawnKeyFollower(level.player.global_transform.origin)
+    heart.okay_im_done = true
+    heart.queue_free()
+    level.player.pauseInput = false
+    level.player.aniPlayer.play("stand")
 
 func isActive(_debug=false):
     return true

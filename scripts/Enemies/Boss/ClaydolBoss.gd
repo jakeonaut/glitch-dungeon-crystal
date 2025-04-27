@@ -11,7 +11,6 @@ onready var cubeCrystal = weakref(get_node("CubeCrystal"))
 var num_hits = 0
 var MAX_NUM_HITS = 3
 var num_granny_hits = 3
-var MAX_GRANNY_HITS = 3
 
 var dreidel_timer = 0
 var dreidel_time_limit = 60
@@ -56,6 +55,9 @@ var big_rock_count_max = 2
 var myBigRock = null
 
 func _ready():
+    var how_many_more_hearts = global.memory["angler_heart"] + global.memory["baba_heart"] + global.memory["claydol_heart"]
+    num_granny_hits += how_many_more_hearts
+    
     if global.memory["claydolShortcut"] == 0:
         global.memory["claydolShortcut"] = 1
     set_process(true)

@@ -152,11 +152,11 @@ func _ready_impl():
   if global.memory.has("player_costume"):
     player.wearCostume(global.memory["player_costume"])
 
-  if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
-    if global.isRespawning:
-      global.memory["grav_direction"] = 1
-    else:
-      flipGravity(-1)
+  # if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
+  #   if global.isRespawning:
+  #     global.memory["grav_direction"] = 1
+  #   else:
+  flipGravity(-1)
   
   tryToRespawn()
   global.tryInitializeLevelZone(self.getLevelZoneName())
@@ -918,19 +918,18 @@ func processBossHealth(delta):
 
   animate_life_timer += (delta*11)
   uiLayer.livesRect.visible = true
-  if health_cheat_code_counter < 3:
-    if Input.is_action_just_pressed("health_cheat_code"):
-      health_cheat_code_counter += 1
-    if health_cheat_code_counter >= 3:
-      whichBoss.MAX_GRANNY_HITS = 6
-      whichBoss.num_granny_hits += 3
-      global.lifeUISound2.play()
-  if kill_cheat_code_counter < 7:
-    if Input.is_action_just_pressed("kill_cheat_code"):
-      kill_cheat_code_counter += 1
-    if kill_cheat_code_counter >= 7:
-      whichBoss.yaBeatMe()
-      global.lifeUISound2.play()
+  # if health_cheat_code_counter < 3:
+  #   if Input.is_action_just_pressed("health_cheat_code"):
+  #     health_cheat_code_counter += 1
+  #   if health_cheat_code_counter >= 3:
+  #     whichBoss.num_granny_hits += 3
+  #     global.lifeUISound2.play()
+  # if kill_cheat_code_counter < 7:
+  #   if Input.is_action_just_pressed("kill_cheat_code"):
+  #     kill_cheat_code_counter += 1
+  #   if kill_cheat_code_counter >= 7:
+  #     whichBoss.yaBeatMe()
+  #     global.lifeUISound2.play()
   # a bit esoteric logic given that we're hard coding it
 
   if animate_life_timer >= animate_life_time_limit*1 and animate_life_timer < animate_life_time_limit*4 and not uiLayer.grannyLifeSprite1.visible:
@@ -942,14 +941,9 @@ func processBossHealth(delta):
   if animate_life_timer >= animate_life_time_limit*3 and animate_life_timer < animate_life_time_limit*4 and not uiLayer.grannyLifeSprite3.visible:
     global.lifeUISound.play()
   uiLayer.grannyLifeSprite3.visible = whichBoss.num_granny_hits >= 3 and (animate_life_timer >= animate_life_time_limit*3)
-  if health_cheat_code_counter < 3:
-    uiLayer.grannyLifeSprite4.visible = false
-    uiLayer.grannyLifeSprite5.visible = false
-    uiLayer.grannyLifeSprite6.visible = false
-  else:
-    uiLayer.grannyLifeSprite4.visible = whichBoss.num_granny_hits >= 4
-    uiLayer.grannyLifeSprite5.visible = whichBoss.num_granny_hits >= 5
-    uiLayer.grannyLifeSprite6.visible = whichBoss.num_granny_hits >= 6
+  uiLayer.grannyLifeSprite4.visible = whichBoss.num_granny_hits >= 4 and (animate_life_timer >= animate_life_time_limit*4)
+  uiLayer.grannyLifeSprite5.visible = whichBoss.num_granny_hits >= 5 and (animate_life_timer >= animate_life_time_limit*5)
+  uiLayer.grannyLifeSprite6.visible = whichBoss.num_granny_hits >= 6 and (animate_life_timer >= animate_life_time_limit*6)
 
   # a bit esoteric logic given that we're hard coding it
   if whichBoss.MAX_NUM_HITS == 6:
@@ -980,6 +974,5 @@ func processBossHealth(delta):
     uiLayer.bossLifeSprite6.visible = false
 
   # Text!
-  # uiLayer.deadTextLabel.visible = whichBoss.num_granny_hits == whichBoss.MAX_GRANNY_HITS
   # uiLayer.bossTextLabel.visible = whichBoss.num_hits == whichBoss.MAX_NUM_HITS
   

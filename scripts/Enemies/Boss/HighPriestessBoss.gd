@@ -35,7 +35,6 @@ var has_animated_attack = false
 var num_hits = 0
 var MAX_NUM_HITS = 6
 var num_granny_hits = 3
-var MAX_GRANNY_HITS = 3
 
 enum BossPhase {
     IDLE,
@@ -61,6 +60,9 @@ onready var laughSound = get_node("Sounds/LaughSound")
 onready var spawnSound = get_node("Sounds/SpawnSound")
 onready var spawnSavePointSound = get_node("Sounds/SpawnSavePointSound")
 func _ready():
+    var how_many_more_hearts = global.memory["angler_heart"] + global.memory["baba_heart"] + global.memory["claydol_heart"]
+    num_granny_hits += how_many_more_hearts
+
     if global.memory["priestessShortcut"] == 0:
         global.memory["priestessShortcut"] = 1
     set_process(true)
@@ -189,7 +191,6 @@ func _process(delta):
     if glitch_crystal_timer >= glitch_crystal_time_limit:
         glitch_crystal_timer = 0
         crystalsContainer.rotation_degrees.y -= normalized_num_hits * 30
-    # processSavePointSpawns(delta)
 
     if boss_phase == BossPhase.DEFEATED:
         processDefeatEffects(delta)
@@ -439,31 +440,6 @@ func spawnGlitchBullet():
     level.add_child(bullet)
 
     bullet.global_transform.origin = staff_pos
-
-func processSavePointSpawns(delta):
-    if can_spawn_save_points and not has_spawned_save_points:
-        save_point_spawn_timer += (delta*11)
-        if save_point_spawn_timer >= save_point_spawn_time_limit:
-            save_point_spawn_timer = 0
-            if level.altarSprite.visible:
-                level.altarSprite.visible = false
-                var newSavePoint = savePointRes.instance()
-                level.add_child(newSavePoint)
-                newSavePoint.global_transform.origin = level.altarSprite.global_transform.origin
-                spawnSavePointSound.play()
-            else:
-                var saveSpawnPoint = null
-                if len(saveSpawnPointArray) > 0:
-                    saveSpawnPoint = saveSpawnPointArray.pop_front()
-                if saveSpawnPoint != null:
-                    var newSavePoint = savePointRes.instance()
-                    level.add_child(newSavePoint)
-                    newSavePoint.global_transform.origin = saveSpawnPoint.global_transform.origin
-                    spawnSavePointSound.play()
-
-                if len(saveSpawnPointArray) <= 0:
-                    has_spawned_save_points = true
-
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var player = null

@@ -158,38 +158,43 @@ shape = SubResource( 2 )
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 10 )
 volume_db = -30.0
+bus = "Sfx"
+
+[node name="SpawnSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 10 )
+volume_db = -80.0
+bus = "Sfx"
 
 [node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 11 )
 volume_db = -20.0
 pitch_scale = 0.3
+bus = "Sfx"
 
 [node name="PoofSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 16 )
 volume_db = -20.0
 pitch_scale = 1.5
+bus = "Sfx"
 
 [node name="ReassembleSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 15 )
 volume_db = -10.0
 pitch_scale = 0.5
+bus = "Sfx"
 
 [node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -15.0
+bus = "Sfx"
 
 [node name="StartEvolveSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 9 )
 volume_db = -10.0
 pitch_scale = 0.5
+bus = "Sfx"
 
 [node name="PlayerActivationArea" type="Area" parent="." groups=["playerActivation"]]
 script = ExtResource( 6 )
