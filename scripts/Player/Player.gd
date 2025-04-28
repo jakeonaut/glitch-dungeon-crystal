@@ -2692,9 +2692,9 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
         bubble.my_target_pos = bubble.global_transform.origin.x  + rand_range(-1, 1)
 
   global.memory["broom"] = false
-  var fallenBroomArray = self.get_tree().get_nodes_in_group("fallen_broom_group")
-  if was_thrown and fallenBroomArray.size() < global.memory["broomerang"]:
-    global.memory["broom"] = true
+  # var fallenBroomArray = self.get_tree().get_nodes_in_group("fallen_broom_group")
+  # if was_thrown and fallenBroomArray.size() < global.memory["broomerang"]:
+  #   global.memory["broom"] = true
 
   if (fallenBroom.walk_direction.x < 0 or mySprite.flip_h) and was_thrown:
     if grav > 0:

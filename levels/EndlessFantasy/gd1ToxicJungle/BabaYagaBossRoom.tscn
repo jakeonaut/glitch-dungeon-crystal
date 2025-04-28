@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=2]
+[gd_scene load_steps=110 format=2]
 
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=1]
 [ext_resource path="res://levels/EndlessFantasy/gd1ToxicJungle/BabaYagaLevelScript.gd" type="Script" id=2]
@@ -41,6 +41,7 @@
 [ext_resource path="res://assets/palettes/pseudo_greyscale.png" type="Texture" id=39]
 [ext_resource path="res://sceneObjects/Enemies/EvilGlitchSlime.tscn" type="PackedScene" id=40]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=41]
+[ext_resource path="res://sceneObjects/KizzyCat.tscn" type="PackedScene" id=42]
 
 [sub_resource type="Animation" id=89]
 length = 0.001
@@ -1833,7 +1834,6 @@ tileset_type = 7
 has_spellbook_page = true
 spellbook_spells = [ 2, 3 ]
 pacman_wrapping = true
-weird_pacman_wrapping = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Viewport/level"]
 anims/RESET = SubResource( 89 )
@@ -2593,13 +2593,13 @@ transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 22, 18.
 [node name="GlitchSlime" parent="Viewport/level" instance=ExtResource( 40 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -7, 0 )
 grav = 0
-walk_speed = 4.0
+walk_speed = 3.0
 only_activate_in_range = false
 
 [node name="GlitchSlime2" parent="Viewport/level" instance=ExtResource( 40 )]
 transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 13, 20, 0 )
 grav = 0
-walk_speed = 4.0
+walk_speed = 3.0
 only_activate_in_range = false
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 24 )]
@@ -2666,6 +2666,22 @@ shape = SubResource( 272 )
 
 [node name="CollisionShape" parent="Viewport/level/Door3/FallthroughSolid" index="0"]
 shape = SubResource( 273 )
+
+[node name="Furbo" parent="Viewport/level" instance=ExtResource( 42 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.69737, 0, 0 )
+grav = 0
+
+[node name="Furbo2" parent="Viewport/level" instance=ExtResource( 42 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.3026, -2, 0 )
+grav = 0
+
+[node name="Furbo3" parent="Viewport/level" instance=ExtResource( 42 )]
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 9.98356, 13, 0 )
+grav = 0
+
+[node name="Furbo4" parent="Viewport/level" instance=ExtResource( 42 )]
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -5.64739, 16, 0 )
+grav = 0
 
 [node name="Viewport2" parent="." instance=ExtResource( 17 )]
 

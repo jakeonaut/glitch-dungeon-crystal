@@ -440,9 +440,10 @@ var just_pacman_flipped_timer = 0
 var just_pacman_flipped_time_limit = 0
 var was_walk_direction_flipped = false
 func shouldFlipWalkingDirection():
-  if just_pacman_flipped:
-    return was_walk_direction_flipped
-  return (grav < 0 and not transformation == TransformationState.BUBBLE) or malware_infected
+  return false
+  # if just_pacman_flipped:
+  #   return was_walk_direction_flipped
+  # return (grav < 0 and not transformation == TransformationState.BUBBLE) or malware_infected
 
 var override_stop_left_input = false
 func rawJustPressedAnalogLeft():

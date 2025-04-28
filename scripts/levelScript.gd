@@ -211,6 +211,7 @@ func randomizeARandomGameFrameBgSprite():
     bgSprite.totallyRandomizeFrame()
 
 func tryInitializeFromDebug():
+  return
   if global.memory["initialized_from_debug"]:
     pass
   else:

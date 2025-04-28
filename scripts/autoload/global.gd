@@ -751,7 +751,7 @@ func loadGame(saveGameIndex):
         if numAngelEggs >= 28:
             Steam.set_achievement("ANGEL_EGG_ALL")
         elif numAngelEggs > 0:
-            Steam.indicate_achievement_progress("ANGEL_EGG_ALL", numAngelEggs, 28)
+            Steam.user_stats.indicate_achievement_progress("ANGEL_EGG_ALL", numAngelEggs, 28)
 
     # reset boss flags from 1 to 0 if we are loading, so we can start the opening cinematic again for all of them.
     # if the boss flag is 2 already, it means you've beat them, so don't reset

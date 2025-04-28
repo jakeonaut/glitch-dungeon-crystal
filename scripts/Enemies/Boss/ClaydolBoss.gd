@@ -14,7 +14,7 @@ var num_granny_hits = 3
 
 var dreidel_timer = 0
 var dreidel_time_limit = 60
-var dreidel_charge_time_limit = 8
+var dreidel_charge_time_limit = 14
 var dizzy_timer = 0
 var dizzy_time_limit = 120
 var smokeCloudTimer = 0
