@@ -451,9 +451,10 @@ func actuallyUnlockAndEnterDoor():
 
 
 export var is_sneaky = false
+export var dlc_locked = false
 export var only_active_if_chicken = false
 func passiveActivate(_delta, is_player):
-  if is_sneaky and is_passive and is_player and (
+  if not dlc_locked and is_sneaky and is_passive and is_player and (
     not only_active_if_chicken or
     only_active_if_chicken and getPlayer().transformation == getPlayer().TransformationState.CHICKEN
   ):
@@ -463,7 +464,7 @@ func justStopPassiveActivate():
   pass
 
 func goThroughDoor(start_of_game = false, really_long_fade = false, really_really_long_fade = false):
-  if path == "" and parter_door_id == "":
+  if dlc_locked or (path == "" and parter_door_id == ""):
     if not sillySound.is_playing():
       sillySound.play()
     return

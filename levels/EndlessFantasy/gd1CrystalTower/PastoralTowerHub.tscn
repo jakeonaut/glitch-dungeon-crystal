@@ -410,6 +410,9 @@ script = ExtResource( 3 )
 frame_delay = 0.3
 max_frames = 4
 
+[node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 23 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 33, 0 )
+
 [node name="Viewport2" parent="." instance=ExtResource( 18 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]

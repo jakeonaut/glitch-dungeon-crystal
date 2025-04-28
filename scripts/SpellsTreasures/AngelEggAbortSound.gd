@@ -18,8 +18,15 @@ func activateScript():
     global.activeInteractor = null
     egg.queue_free()
     level.player.aniPlayer.play("stand")
+    level.player.giveMeMiniCrystalCubes(3)
     # level.player.sayThis("what the hell is this?", 3.0)
-    if global.demo_mode <= 0: Steam.set_achievement("ANGEL_EGG_FIRST")
+    if global.demo_mode <= 0:
+        Steam.set_achievement("ANGEL_EGG_FIRST")
+        var numAngelEggs = global.getThingFromAllLevelZonez("angelEgg")
+        if numAngelEggs >= 28:
+            Steam.set_achievement("ANGEL_EGG_ALL")
+        else:
+            Steam.indicate_achievement_progress("ANGEL_EGG_ALL", numAngelEggs, 28)
 
 func isActive(_debug=false):
     return true

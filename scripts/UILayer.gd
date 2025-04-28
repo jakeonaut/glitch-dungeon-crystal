@@ -389,6 +389,10 @@ func processHiscoreRenderLogic(delta):
     glitchStatusText1.visible = true
     return
   # global.pauseMoveInput = true
+  if stupidTimeAgedStartTimeTemp == null:
+    stupidTimeAgedStartTimeTemp = global.getLevelZoneThing("start_time")
+    global.updateLevelZoneTime()
+    global.setLevelZoneStartTime()
   endOfLevel.visible = true
   hiscoreRect.visible = true
   if not congratsHiscoreLabel.visible:
@@ -463,10 +467,6 @@ func processHiscoreRenderLogic(delta):
       loveHiscoreLabel.text = tr("NPC.Crystal.8") + str(global.getThingFromAllLevelZonez("num_glitch_tiles")) + "/" + str(global.getThingFromAllLevelZonez("total_num_glitch_tiles"))
       hiscoreDisplayIndex += 1
     elif hiscoreDisplayIndex == 6:
-      if stupidTimeAgedStartTimeTemp == null:
-        stupidTimeAgedStartTimeTemp = global.getLevelZoneThing("start_time")
-        global.updateLevelZoneTime()
-        global.setLevelZoneStartTime()
       timeHiscoreLabel.visible = true
       timeHiscoreLabel.bbcode_text = ""
       hiscoreDisplayIndex += 1
@@ -476,7 +476,7 @@ func processHiscoreRenderLogic(delta):
       var sweep_button_text = global.getInputText("talk_button")
       pressEnterLabel.bbcode_text = tr("NPC.Crystal.Final") % sweep_button_text
   
-  if hiscoreDisplayIndex >= 5 and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("talk_button") or Input.is_action_just_pressed("sub_action_button") or Input.is_action_just_pressed("jump_button") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))):
+  if hiscoreDisplayIndex >= 5 and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("talk_button") or Input.is_action_just_pressed("sub_action_button") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))):
     # global.isEnteringRoom = true
     global.hasGottenLevelGeode = false
     global.hasLevelGeodeBeenSmacked = false

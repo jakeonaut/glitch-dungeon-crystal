@@ -1630,7 +1630,7 @@ func applyGravity(delta):
   #   on_ground = true
   #   was_on_ground = true
   #   feather_jump_timer = 0
-  if glitch_form == global.GlitchForm.FEATHER or (glitch_form == global.GlitchForm.INVISIBLE and not on_ground):
+  if not on_ground:
     dig_timer = 0
   .applyGravity(delta)
 
@@ -1674,7 +1674,6 @@ func collideWithCeiling(local_lv):
     local_lv.y = 0
     getMoleCured()
     return local_lv
-  print("COLLIDE CEIL!")
   local_lv.y = 0
   processMoleDigTimer(Vector3(0, 2, 0))
   return local_lv
@@ -1892,9 +1891,19 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     updateNestingDoll(nesting_doll_state)
     global.pauseMoveInput = false
   elif nesting_doll_state == global.NestingDoll.GRANDMA and global.memory["mushroom_soul"] >= 1 and global.memory["mushroom_soul_enabled"] and not should_immediately_die and whichBoss == null:
-    level.player.nesting_doll_state = global.NestingDoll.BABY
+    global.memory["hp"] += 1
+    physics_state = PhysicsState.GLITCH_HURT
+    glitchTickle(true)
+    getSmacked()
+    glitch_death_timer = 0
+    shroomAniPlayer.stop()
+    shroomAniPlayer.clear_queue()
+    shroomAniPlayer.play("RESET")
+    shroomAniPlayer.queue("shrink")
+    shroomAniPlayer.queue("adjust")
+    nesting_doll_state = global.NestingDoll.BABY
     global.memory["nesting_doll"] = global.NestingDoll.BABY
-    level.player.updateNestingDoll(global.NestingDoll.BABY)
+    updateNestingDoll(global.NestingDoll.BABY)
   elif global.memory["hp"] <= 0 or should_immediately_die or (whichBoss != null and whichBoss.num_granny_hits == 0):
     if summonedBroom:
       broomStop()

@@ -18,6 +18,7 @@ func activateScript():
   level.player.aniPlayer.queue("stand")
   level.player.glitchTickle()
   global.memory["mushroom_soul"] = 1
+  global.memory["mushroom_soul_ver"] = 1
 
   level.saveTheGame()
   global.tryGiveMemoryAchievement()

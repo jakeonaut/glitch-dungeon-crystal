@@ -228,6 +228,17 @@ can_nav_left = false
 can_nav_up = false
 hide_me_from_map = true
 
+[node name="WaterGate" parent="FishingVillage" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 0 )
+material_override = null
+frame = 20
+path = "res://levels/EndlessFantasy/gd1FishingVillage/WaterGateRoom.tscn"
+can_nav_left = false
+can_nav_right = false
+can_nav_up = false
+can_nav_down = false
+hide_me_from_map = true
+
 [node name="FishingVillageIntro" parent="FishingVillage" instance=ExtResource( 3 )]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 0 )
 material_override = null

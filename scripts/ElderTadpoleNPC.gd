@@ -153,7 +153,21 @@ func chickenifyPlayer():
     textBox.interact(true) # was_smacked
 
 # @override
+func isActive(debug = false):
+  if global.hasGottenLevelGeode or global.hasLevelGeodeBeenSmacked:
+    return false
+  return .isActive(debug)
+
+# @override
+func tryShowInteractPrompt(is_active_interact_prompt = false, is_comic_alert = false):
+  if global.hasGottenLevelGeode or global.hasLevelGeodeBeenSmacked:
+    return
+  .tryShowInteractPrompt(is_active_interact_prompt, is_comic_alert)
+
+# @override
 func getSmacked(broom_origin = null, silently = false):
+  if global.hasGottenLevelGeode or global.hasLevelGeodeBeenSmacked:
+    return
   # if not can_be_smacked:
   #   return false
   if is_smacked:
@@ -190,8 +204,8 @@ func getSmacked(broom_origin = null, silently = false):
   if am_i_glitchy:
     secretAniPlayer.queue("glitchTickle")
   mySprite.flip_h = which_side_is_player_on
-  global.pauseGame = true
-  level.player.pauseInput = true
+  # global.pauseGame = true
+  # level.player.pauseInput = true
 
 # @override
 func setGlobalMemoryOfHasSpoken(set_vars = false):

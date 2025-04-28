@@ -108,8 +108,18 @@ var is_currently_on_save_point = false
 func passiveActivate(_delta, is_player):
     if not visible: return false
 
-    if is_player and level.player.malware_infected:
-        level.player.malwareCured()
+    if is_player:
+        if level.player.malware_infected:
+            level.player.malwareCured()
+        if level.player.nesting_doll_state == global.NestingDoll.BABY:
+            level.player.shroomAniPlayer.stop()
+            level.player.shroomAniPlayer.clear_queue()
+            level.player.shroomAniPlayer.play("RESET")
+            level.player.shroomAniPlayer.queue("grow")
+            level.player.shroomAniPlayer.queue("adjust")
+            level.player.nesting_doll_state = global.NestingDoll.GRANDMA
+            global.memory["nesting_doll"] = global.NestingDoll.GRANDMA
+            level.player.updateNestingDoll(global.NestingDoll.GRANDMA)
     global.memory["hp"] = global.memory["max_hp"]
     if not global.isRespawning and not isOnSavePoint():
         was_on_save_point = false

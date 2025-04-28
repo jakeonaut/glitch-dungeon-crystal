@@ -640,19 +640,19 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -7, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -4, 0 )
 
 [node name="Dragonfly4" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3, -6.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.3, -6.9, 0 )
 
 [node name="Sprite3D" parent="Viewport/level/Dragonfly4" index="0"]
 frame = 37
 
 [node name="Dragonfly6" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3, -9.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3, -9.9, 0 )
 
 [node name="Sprite3D" parent="Viewport/level/Dragonfly6" index="0"]
 frame = 37
 
 [node name="Dragonfly7" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3, -12.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.3, -12.9, 0 )
 
 [node name="Sprite3D" parent="Viewport/level/Dragonfly7" index="0"]
 frame = 37
@@ -775,10 +775,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -21, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -5, 0 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 27 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -16, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -17, 0 )
 
 [node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 27 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -10, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -11, 0 )
 
 [node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -4, 0 )

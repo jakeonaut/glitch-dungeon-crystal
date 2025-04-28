@@ -182,8 +182,12 @@ func _ready_impl():
   global.activeThrowableObjectPath = null
   player.mySprite.get_material_override().set_shader_param("enable_glitch", false)
   player.mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
-  if player_message != "???":
+  if global.memory["mushroom_soul"] > 0 and global.memory["mushroom_soul_ver"] == 0:
+    global.memory["mushroom_soul_ver"] = 1
+    player.sayThis(tr("NPC.Secret.2") + "\n" + tr("NPC.Treasure.9"))
+  elif player_message != "???":
     player.sayThis(player_message)
+
   player.transformation = global.memory["transformation"] if global.memory.has("transformation") else player.TransformationState.NORMAL
   player.properlyApplyTransformation()
   has_room_initialized = true
@@ -908,7 +912,8 @@ func getBoss():
 var animate_life_timer = 0
 var animate_life_time_limit = 5
 var num_visible_boss_lives = 0
-var health_cheat_code_counter = 0
+var kill_cheat_code_timer = 0
+var kill_cheat_code_time_limit = 30
 var kill_cheat_code_counter = 0
 func processBossHealth(delta):
   var whichBoss = getBoss()
@@ -918,6 +923,45 @@ func processBossHealth(delta):
 
   animate_life_timer += (delta*11)
   uiLayer.livesRect.visible = true
+  if kill_cheat_code_counter <= 5:
+    if kill_cheat_code_counter > 0:
+      kill_cheat_code_timer += (delta*11)
+      if kill_cheat_code_timer >= kill_cheat_code_time_limit:
+        kill_cheat_code_timer = 0
+        kill_cheat_code_counter = 0
+    if Input.is_action_just_pressed("CHEAT_Y"):
+      kill_cheat_code_counter = 1
+      kill_cheat_code_timer = 0
+    elif Input.is_action_just_pressed("CHEAT_U"):
+      if kill_cheat_code_counter == 1:
+        kill_cheat_code_counter += 1
+        kill_cheat_code_timer = 0
+      else:
+        kill_cheat_code_counter = 0
+        kill_cheat_code_timer = 0
+    elif Input.is_action_just_pressed("CHEAT_N"):
+      if kill_cheat_code_counter == 2 or kill_cheat_code_counter == 4:
+        kill_cheat_code_counter += 1
+        kill_cheat_code_timer = 0
+      else:
+        kill_cheat_code_counter = 0
+        kill_cheat_code_timer = 0
+    elif Input.is_action_just_pressed("CHEAT_I"):
+      if kill_cheat_code_counter == 3:
+        kill_cheat_code_counter += 1
+        kill_cheat_code_timer = 0
+      else:
+        kill_cheat_code_counter = 0
+        kill_cheat_code_timer = 0
+    elif Input.is_action_just_pressed("CHEAT_G"):
+      if kill_cheat_code_counter == 5:
+        kill_cheat_code_counter = 99
+        whichBoss.yaBeatMe()
+        global.lifeUISound2.play()
+      else:
+        kill_cheat_code_counter = 0
+        kill_cheat_code_timer = 0
+    
   # if health_cheat_code_counter < 3:
   #   if Input.is_action_just_pressed("health_cheat_code"):
   #     health_cheat_code_counter += 1

@@ -1,0 +1,39 @@
+IntroTutorial:
+-----------------
++1 StoryHook
++1 tutorial_GhostIntro
+
+FishingVillage:
+-----------------
++1 FishingVillageIntro
++1 FishingVillageEntrance
++2 GlitchFishersPuzzle
++1 RightsideTunnel
++1 FrogBossHaven
++1 WaterfallSecretRoom
++1 WaterGateRoom
+
+
+CricketCaves:
+-----------------
++1 FallFromGraceFreefall
++1 000Start
++2 DustyCricketIntro_old
++1 RedTunnelHallway
++1 DustyCricketHoppers
++1 ExcavationRoom
++1 CricketCaveHub1
+
+ToxicJungle:
+-----------------
++1 LostWoods3
++1 PoisonShroomCove
++2 InvisIntro
++1 LostWoods1
++1 TeleportDoorMaze
++1 SafariZone
++1 CrystalHaven
+
+CrystalTower:
+-----------------
++2 PastoralTowerHub

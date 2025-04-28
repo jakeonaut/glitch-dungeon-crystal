@@ -371,6 +371,7 @@ func resetMemory():
     memory["mole_cricket"] = 0
     memory["flowerPot"] = false
     memory["mushroom_soul"] = 0
+    memory["mushroom_soul_ver"] = 0
     memory["cutePet"] = false
     memory["glitched_broom"] = false
     memory["max_hp"] = 1
@@ -744,8 +745,13 @@ func loadGame(saveGameIndex):
             Steam.set_achievement("ANGLER_BOSS")
         if global.memory["broomerang"] >= 1:
             Steam.set_achievement("BROOMERANG")
-        if global.getThingFromAllLevelZonez("angelEgg") >= 1:
+        var numAngelEggs = global.getThingFromAllLevelZonez("angelEgg")
+        if numAngelEggs >= 1:
             Steam.set_achievement("ANGEL_EGG_FIRST")
+        if numAngelEggs >= 28:
+            Steam.set_achievement("ANGEL_EGG_ALL")
+        elif numAngelEggs > 0:
+            Steam.indicate_achievement_progress("ANGEL_EGG_ALL", numAngelEggs, 28)
 
     # reset boss flags from 1 to 0 if we are loading, so we can start the opening cinematic again for all of them.
     # if the boss flag is 2 already, it means you've beat them, so don't reset
