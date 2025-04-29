@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://assets/sprites2D/obelisk_sheet_sans.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/Quirk.ttf" type="DynamicFontData" id=2]
@@ -38,6 +38,7 @@
 [ext_resource path="res://levels/common/UITheme_small.tres" type="Theme" id=36]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=37]
 [ext_resource path="res://assets/sprites/savepoint.png" type="Texture" id=38]
+[ext_resource path="res://assets/fonts/VGABullet5-Medium.ttf" type="DynamicFontData" id=39]
 
 [sub_resource type="Animation" id=32]
 length = 0.001
@@ -175,7 +176,7 @@ default_font = SubResource( 23 )
 flags_unshaded = true
 albedo_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="ArrayMesh" id=17226]
+[sub_resource type="ArrayMesh" id=17229]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -815,6 +816,17 @@ shader_param/precision = 0.1
 shader_param/palette_in = ExtResource( 18 )
 shader_param/palette_out = ExtResource( 17 )
 
+[sub_resource type="DynamicFont" id=17227]
+size = 32
+outline_size = 3
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+use_mipmaps = true
+extra_spacing_bottom = 8
+font_data = ExtResource( 39 )
+
+[sub_resource type="Theme" id=17228]
+default_font = SubResource( 17227 )
+
 [node name="UILayer" type="CanvasLayer"]
 scale = Vector2( 2, 2 )
 transform = Transform2D( 2, 0, 0, 2, 0, 0 )
@@ -1102,11 +1114,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -603 )
 [node name="MeshInstance" type="MeshInstance" parent="GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer"]
 transform = Transform( 0.534633, -0.525684, 0.0180076, 0.385063, 0.373667, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 material_override = SubResource( 17199 )
-mesh = SubResource( 17226 )
+mesh = SubResource( 17229 )
 script = ExtResource( 30 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 material_override = SubResource( 17211 )
 mesh = SubResource( 17 )
 
@@ -1685,7 +1697,7 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 [node name="RichTextLabel" type="RichTextLabel" parent="LevelTitle"]
 margin_top = 11.0
 margin_right = 640.0
-margin_bottom = 64.0
+margin_bottom = 86.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_clip_content = false
@@ -1713,9 +1725,9 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 0.556863 )
 
 [node name="CongratsHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
 visible = false
-margin_left = 89.5
+margin_left = 40.0
 margin_top = 42.5
-margin_right = 570.5
+margin_right = 599.0
 margin_bottom = 130.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -1723,17 +1735,17 @@ rect_clip_content = false
 theme = ExtResource( 13 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "you awoke a
-     [color=#00ffff][wave amp=50 freq=2]Crystal Elder[/wave][/color]"
+bbcode_text = "[center]you awoke a
+[color=#00ffff][wave amp=50 freq=2]Crystal Elder[/wave][/color][/center]"
 text = "you awoke a
-     Crystal Elder"
+Crystal Elder"
 scroll_active = false
 
 [node name="CrystalCubeHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
 visible = false
-margin_left = 288.5
+margin_left = 40.0
 margin_top = 153.5
-margin_right = 800.5
+margin_right = 599.0
 margin_bottom = 206.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -1741,15 +1753,15 @@ rect_clip_content = false
 theme = ExtResource( 31 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "shards: 25"
+bbcode_text = "[center]shards: 25"
 text = "shards: 25"
 scroll_active = false
 
 [node name="DeathsHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
 visible = false
-margin_left = 370.5
+margin_left = 40.0
 margin_top = 188.0
-margin_right = 753.5
+margin_right = 599.0
 margin_bottom = 241.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -1757,15 +1769,15 @@ rect_clip_content = false
 theme = ExtResource( 31 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "deaths: 35"
+bbcode_text = "[center]deaths: 35"
 text = "deaths: 35"
 scroll_active = false
 
 [node name="AngelHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
 visible = false
-margin_left = 243.5
+margin_left = 40.0
 margin_top = 222.5
-margin_right = 809.0
+margin_right = 599.0
 margin_bottom = 275.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -1773,15 +1785,15 @@ rect_clip_content = false
 theme = ExtResource( 31 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "angels: 0"
+bbcode_text = "[center]angels: 0"
 text = "angels: 0"
 scroll_active = false
 
 [node name="GlitchTilesHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
 visible = false
-margin_left = 327.0
+margin_left = 40.0
 margin_top = 256.0
-margin_right = 709.0
+margin_right = 599.0
 margin_bottom = 309.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -1789,15 +1801,15 @@ rect_clip_content = false
 theme = ExtResource( 31 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "broom sweeps: 120"
+bbcode_text = "[center]broom sweeps: 120"
 text = "broom sweeps: 120"
 scroll_active = false
 
 [node name="JumpsHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
 visible = false
-margin_left = 387.0
+margin_left = 40.0
 margin_top = 292.0
-margin_right = 678.0
+margin_right = 599.0
 margin_bottom = 334.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -1805,15 +1817,15 @@ rect_clip_content = false
 theme = ExtResource( 31 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "jumps: 3"
+bbcode_text = "[center]jumps: 3"
 text = "jumps: 3"
 scroll_active = false
 
 [node name="LoveHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
 visible = false
-margin_left = 197.0
+margin_left = 40.0
 margin_top = 329.0
-margin_right = 601.0
+margin_right = 599.0
 margin_bottom = 371.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -1821,13 +1833,13 @@ rect_clip_content = false
 theme = ExtResource( 31 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "love: 3"
+bbcode_text = "[center]love: 3"
 text = "love: 3"
 scroll_active = false
 
 [node name="TimeHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
 visible = false
-margin_left = 17.0
+margin_left = 40.0
 margin_top = 365.0
 margin_right = 599.0
 margin_bottom = 420.0
@@ -1837,15 +1849,15 @@ rect_clip_content = false
 theme = ExtResource( 31 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "time aged: 30 minutes"
+bbcode_text = "[center]time aged: 30 minutes"
 text = "time aged: 30 minutes"
 scroll_active = false
 
 [node name="PressEnterLabel" type="RichTextLabel" parent="EndOfLevel"]
 visible = false
-margin_left = 173.5
+margin_left = 40.0
 margin_top = 433.0
-margin_right = 556.5
+margin_right = 599.0
 margin_bottom = 518.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -1853,7 +1865,7 @@ rect_clip_content = false
 theme = ExtResource( 31 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "press X to continue"
+bbcode_text = "[center]press X to continue"
 text = "press X to continue"
 scroll_active = false
 
@@ -2018,6 +2030,19 @@ rect_clip_content = false
 theme = ExtResource( 36 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 text = "u did it!"
+
+[node name="BetaBuildLabel" type="RichTextLabel" parent="."]
+margin_left = 740.0
+margin_top = 500.0
+margin_right = 992.0
+margin_bottom = 554.0
+rect_scale = Vector2( 0.5, 0.5 )
+rect_clip_content = false
+theme = SubResource( 17228 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "[right]ver-3.0.8.0[/right]"
+text = "ver-3.0.8.0"
 
 [editable path="EdgeDistortion"]
 [editable path="PauseMenu"]

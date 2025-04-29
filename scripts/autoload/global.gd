@@ -417,7 +417,8 @@ var allLocales = {
     "it": { "code": "it", "supported": true, "label": "Italiano" },
     "pl": { "code": "pl", "supported": true, "label": "Polski" },
     "de": { "code": "de", "supported": true, "label": "Deutsch" },
-    "ko_KR": { "code": "ko_KR", "supported": true, "label": "한국어"}
+    "ko_KR": { "code": "ko_KR", "supported": true, "label": "한국어"},
+    "uk_UA": { "code": "uk_UA", "supported": true, "label": "Українська"}
 }
 func getSupportedLocalesArray():
     var supportedLocales = []
@@ -447,6 +448,8 @@ func normalizeLocaleHelper(locale):
         return "ru"
     if locale == "ko":
         return "ko_KR"
+    if locale == "uk":
+        return "uk_UA"
 func normalizeLocale(locale):
     var normalizedLocale = normalizeLocaleHelper(locale)
     if not normalizedLocale in allLocales or not allLocales[normalizedLocale].supported:

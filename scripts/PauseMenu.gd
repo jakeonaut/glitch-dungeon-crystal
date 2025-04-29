@@ -4,8 +4,10 @@ onready var popupRectCanvasLayer = get_node("CanvasLayer")
 onready var popupRect = get_node("CanvasLayer/PopupRect")
 onready var popupText = get_node("CanvasLayer/PopupRect/ColorRect/ColorRect/RichTextLabel")
 onready var popupYesButton = get_node("CanvasLayer/PopupRect/YesButton")
+onready var popupYesButtonText = get_node("CanvasLayer/PopupRect/YesButton/TextPrompt")
 onready var popupYesCursor = get_node("CanvasLayer/PopupRect/YesButton/CursorSprite")
 onready var popupNoButton = get_node("CanvasLayer/PopupRect/NoButton")
+onready var popupNoButtonText = get_node("CanvasLayer/PopupRect/NoButton/TextPrompt")
 onready var popupNoCursor = get_node("CanvasLayer/PopupRect/NoButton/CursorSprite")
 var shouldShowPopupYesNoOptions = false
 var popupYesNoOptions = false
@@ -35,6 +37,7 @@ onready var shardsRect = get_node("InventoryRect/ShardsRect")
 onready var keysRect = get_node("InventoryRect/KeysRect")
 onready var mapRect = get_node("MapRect")
 onready var mapTitleRect = get_node("MapRect/MapTitleRect")
+onready var mapTitleText = get_node("MapRect/MapTitleRect/MapText")
 onready var mapColorRect1 = get_node("MapRect/ColorRect")
 onready var mapColorRect2 = get_node("MapRect/ColorRect/ColorRect")
 onready var mapBackgroundSprite = get_node("MapRect/ColorRect/ColorRect/MapBackgroundSprite")
@@ -137,6 +140,7 @@ func _process(delta):
   self.visible = global.isPauseMenuOpen
   pauseMenuRect.visible = self.visible
   mapTitleRect.visible = true
+  mapTitleText.bbcode_text = tr("UI.Inventory.Map")
   pauseTitleRect.visible = true
   mapRect.rect_position = Vector2(450, 131)
   mapRect.rect_scale = Vector2(1, 1)
@@ -606,6 +610,8 @@ func processInventoryLogic(delta):
   if popupRect.visible:
     popupYesButton.visible = shouldShowPopupYesNoOptions
     popupNoButton.visible = shouldShowPopupYesNoOptions
+    popupYesButtonText.bbcode_text = tr("UI.Yes")
+    popupNoButtonText.bbcode_text = tr("UI.No")
     popupYesCursor.visible = popupYesNoOptions
     popupNoCursor.visible = not popupYesNoOptions
     if shouldShowPopupYesNoOptions:

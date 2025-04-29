@@ -152,8 +152,13 @@ func unsmack():
     mySprite.material_override.set_shader_param("y_div", 2.3)
     mySprite.material_override.set_shader_param("normal_offset", .02)
     
-
+# var sprite3d_noglitchShader = preload("res://shaders/Sprite3D_noglitch.shader")
+# var sprite3dShader = preload("res://shaders/Sprite3D_noglitch.shader")
 func _process(delta):
+    # if global.userSettings["canGlitchScreen"]:
+    #     mySprite.material_override.shader = sprite3dShader
+    # else:
+    #     mySprite.material_override.shader = sprite3d_noglitchShader
     if is_smacked:
         smack_timer += (delta * 22)
     if smack_timer >= smack_time_limit:

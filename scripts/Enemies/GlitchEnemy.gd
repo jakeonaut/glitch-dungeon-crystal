@@ -74,6 +74,8 @@ export var hp_enemy = 1
 var am_i_hurt = false
 
 # Called when the node enters the scene tree for the first time.
+# var sprite3d_noglitchShader = preload("res://shaders/Sprite3D_noglitch.shader")
+# var sprite3dShader = preload("res://shaders/Sprite3D_noglitch.shader")
 func _ready():
     set_process(true)
 
@@ -412,6 +414,10 @@ func glitchOut():
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
+    # if global.userSettings["canGlitchScreen"]:
+    #     mySprite.material_override.shader = sprite3dShader
+    # else:
+    #     mySprite.material_override.shader = sprite3d_noglitchShader
 
     if glitch_form != global.GlitchForm.NORMAL and spellbookGlitchSprite != null:
         spellbookGlitchSprite.visible = true

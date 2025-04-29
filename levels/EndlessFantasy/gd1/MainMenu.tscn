@@ -2916,6 +2916,10 @@ transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.52
 [node name="Camera" parent="UILayer/GlitchStatusRect/Viewport" index="1"]
 current = true
 
+[node name="BetaBuildLabel" parent="UILayer" index="24"]
+margin_left = 664.0
+margin_right = 916.0
+
 [node name="MainMenu" type="Control" parent="UILayer"]
 visible = false
 margin_top = -45.0
@@ -2988,7 +2992,7 @@ text = "1: File 1
 scroll_active = false
 
 [node name="PressC" type="RichTextLabel" parent="UILayer/MainMenu"]
-margin_left = 12.0
+margin_left = -107.0
 margin_top = 515.0
 margin_right = 710.0
 margin_bottom = 616.0
@@ -3064,10 +3068,10 @@ __meta__ = {
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UILayer/MainMenu/DeleteConfirmationLayer/PopupRect/ColorRect/ColorRect"]
-margin_left = 11.0
+margin_left = -7.0
 margin_top = 3.0
-margin_right = 394.0
-margin_bottom = 115.0
+margin_right = 433.0
+margin_bottom = 127.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_clip_content = false

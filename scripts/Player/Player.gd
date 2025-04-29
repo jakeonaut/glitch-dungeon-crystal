@@ -406,6 +406,8 @@ func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
 
+  if is_in_mini_cutscene and Input.is_action_just_pressed("sub_action_button"):
+    finishCutsceneIntroAni()
   # is_turn_based = malware_infected and not physics_state == PhysicsState.BEING_TOSSED
   should_always_stop_walking_immediately = malware_infected
 
@@ -431,7 +433,7 @@ func _process(delta):
     level.saveUserSettings()
     level.uiLayer.pauseMenu.shouldUpdateMenuText = true
   var can_respawn_out_of_pause = not global.pauseGame or (global.activeInteractor != null and not global.shouldRenderAsCinematic)
-  if not isItWeird() and not isItKindaWeird() and global.memory["can_force_respawn"] and Input.is_action_just_pressed("restart_key") and not global.isPauseMenuOpen and can_respawn_out_of_pause and ritual_state_index < len(global.correct_ritual)-1:
+  if not global.isRespawning and not isItWeird() and not isItKindaWeird() and global.memory["can_force_respawn"] and Input.is_action_just_pressed("restart_key") and not global.isPauseMenuOpen and can_respawn_out_of_pause: # and ritual_state_index < len(global.correct_ritual)-1:
     respawn_key_hp = global.memory["hp"]
     if global.activeInteractor != null:
       global.activeInteractor.hideTextbox()
@@ -2191,7 +2193,11 @@ func sneezeCloud():
   glitchTickle()
   summonSmokeClouds(1, false, true, 1)
 
+var is_in_mini_cutscene = false
 func startCutsceneIntroAni(aniName):
+  if summonedBroom:
+    broomStop()
+  is_in_mini_cutscene = true
   pauseAnimation = true
   pauseInput = true
   pauseSelf = true
@@ -2204,6 +2210,7 @@ func startCutsceneIntroAni(aniName):
   aniPlayer.play(aniName)
 
 func finishCutsceneIntroAni():
+  is_in_mini_cutscene = false
   pauseAnimation = false
   pauseInput = false
   pauseSelf = false

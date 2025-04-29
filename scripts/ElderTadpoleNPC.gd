@@ -81,6 +81,7 @@ func spawnHeartContainer():
   have_i_spawned_heart = true
 
 func _process(delta):
+  is_active = not global.hasGottenLevelGeode and not global.hasLevelGeodeBeenSmacked
   if render_cane:
     processBroomRenderLogic(delta)
     if mySprite.flip_h:

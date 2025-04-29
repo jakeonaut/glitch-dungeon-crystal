@@ -846,14 +846,14 @@ tracks/13/loop_wrap = true
 tracks/13/imported = false
 tracks/13/enabled = true
 tracks/13/keys = {
-"times": PoolRealArray( 0.5, 1.9 ),
+"times": PoolRealArray( 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
-"method": "freeUpPlayer"
+"method": "speakToMe"
 }, {
 "args": [  ],
-"method": "speakToMe"
+"method": "freeUpPlayer"
 } ]
 }
 tracks/14/type = "value"

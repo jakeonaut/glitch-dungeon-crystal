@@ -199,6 +199,8 @@ func speakToMe():
     #     level.player.sayThis("wow, congrats, you purified a crystal!")
 
 func getPurified():
+    if is_purified:
+        return
     var children = self.get_children()
     for child in children:
         if child.is_in_group("event") and child.isActive():

@@ -1679,8 +1679,7 @@ func iFellFlat():
 
 func isWalkingIntoWall():
   return horizontal_collision \
-       and is_pressing_horizontal_input and (was_pressing_horizontal_input or is_turn_based) \
-       and (pauseAnimation or aniPlayer == null or aniPlayer.assigned_animation != "jumpSquat") 
+       and is_pressing_horizontal_input and (was_pressing_horizontal_input or is_turn_based)
 
 func updateFacing(local_dir):
   if local_dir.x != 0 or local_dir.y != 0 or local_dir.z != 0:

@@ -86,6 +86,7 @@ onready var keyStatusRect = get_node("KeyStatusRect")
 onready var keyStatusText1 = get_node("KeyStatusRect/RichTextLabel")
 onready var keyStatusText2 = get_node("KeyStatusRect/RichTextLabel2")
 onready var pauseMenu = get_node("PauseMenu")
+onready var betaBuildLabel = get_node("BetaBuildLabel")
 onready var textBoxes = get_node("TextBoxes")
 onready var edgeDistortion = get_node("EdgeDistortion")
 onready var edgeDistortionLeft = get_node("EdgeDistortion/LeftDistortion")
@@ -123,6 +124,7 @@ func _process(delta):
 
   textBoxes.visible = not global.isPauseMenuOpen
   pauseMenu.visible = global.isPauseMenuOpen
+  betaBuildLabel.visible = pauseMenu.visible or global.isOnMainMenu
   processCutsceneRenderLogic(delta)
   processHiscoreRenderLogic(delta)
   # TODO(jaketrower):
@@ -397,7 +399,7 @@ func processHiscoreRenderLogic(delta):
   hiscoreRect.visible = true
   if not congratsHiscoreLabel.visible:
     congratsHiscoreLabel.visible = true
-    congratsHiscoreLabel.bbcode_text = tr("NPC.Crystal.1") if not global.isEndOfGame else tr("NPC.Crystal.End")
+    congratsHiscoreLabel.bbcode_text = "[center]" + (tr("NPC.Crystal.1") if not global.isEndOfGame else tr("NPC.Crystal.End")) + "[/center]"
 
   if timeHiscoreLabel.visible and stupidTimeAgedStartTimeTemp != null:
     var total_time = global.getThingFromAllLevelZonez("total_time")
@@ -416,7 +418,7 @@ func processHiscoreRenderLogic(delta):
     var seconds = int(time_aged) / 1
     var optional_second_zero = "" if seconds >= 10 else "0"
     var time_aged_formatted = str(hours) + ":" + optional_minute_zero + str(minutes) + ":" + optional_second_zero + str(seconds)
-    timeHiscoreLabel.bbcode_text = "[right]" + tr("NPC.Crystal.9") + " " + time_aged_formatted + "[/right]"
+    timeHiscoreLabel.bbcode_text = "[center]" + tr("NPC.Crystal.9") + " " + time_aged_formatted + "[/center]"
 
   hiscoreTimer += (delta*11)
   if hiscoreTimer >= hiscoreTimeLimit:
@@ -425,7 +427,7 @@ func processHiscoreRenderLogic(delta):
     # TODO(jaketrower): can consolidate this but i'm lazy rn
     if hiscoreDisplayIndex == 0:
       crystalCubeHiscoreLabel.visible = false # true
-      crystalCubeHiscoreLabel.text = tr("NPC.Crystal.7") + str(hiscoreCounter)
+      crystalCubeHiscoreLabel.bbcode_text = "[center]" + tr("NPC.Crystal.7") + str(hiscoreCounter) + "[/center]"
       var hiscoreSource = global.getThingFromAllLevelZonez("num_mini_crystal_cubes")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter = hiscoreSource
@@ -435,7 +437,7 @@ func processHiscoreRenderLogic(delta):
         hiscoreCounter = 0
     elif hiscoreDisplayIndex == 1:
       deathsHiscoreLabel.visible = true
-      deathsHiscoreLabel.text = tr("NPC.Crystal.2") + str(hiscoreCounter)
+      deathsHiscoreLabel.bbcode_text = "[center]" + tr("NPC.Crystal.2") + str(hiscoreCounter) + "[/center]"
       var hiscoreSource = global.getThingFromAllLevelZonez("num_deaths")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter = hiscoreSource
@@ -445,7 +447,7 @@ func processHiscoreRenderLogic(delta):
         hiscoreCounter = 0
     elif hiscoreDisplayIndex == 2:
       angelHiscoreLabel.visible = true
-      angelHiscoreLabel.text = tr("NPC.Crystal.3") + str(hiscoreCounter)
+      angelHiscoreLabel.bbcode_text = "[center]" + tr("NPC.Crystal.3") + str(hiscoreCounter) + "[/center]"
       var hiscoreSource = global.getThingFromAllLevelZonez("angelEgg")
       if hiscoreSource != null and hiscoreCounter < hiscoreSource:
         hiscoreCounter += 1
@@ -456,15 +458,15 @@ func processHiscoreRenderLogic(delta):
         hiscoreTimeLimit = 5
     elif hiscoreDisplayIndex == 3:
       glitchTilesHiscoreLabel.visible = true
-      glitchTilesHiscoreLabel.text = tr("NPC.Crystal.4") + str(global.getThingFromAllLevelZonez("num_broom_sweeps"))
+      glitchTilesHiscoreLabel.bbcode_text = "[center]" + tr("NPC.Crystal.4") + str(global.getThingFromAllLevelZonez("num_broom_sweeps")) + "[/center]"
       hiscoreDisplayIndex += 1
     elif hiscoreDisplayIndex == 4:
       jumpsHiscoreLabel.visible = true
-      jumpsHiscoreLabel.text = tr("NPC.Crystal.5") + str(global.getThingFromAllLevelZonez("num_jumps"))
+      jumpsHiscoreLabel.bbcode_text = "[center]" + tr("NPC.Crystal.5") + str(global.getThingFromAllLevelZonez("num_jumps")) + "[/center]"
       hiscoreDisplayIndex += 1
     elif hiscoreDisplayIndex == 5:
       loveHiscoreLabel.visible = true
-      loveHiscoreLabel.text = tr("NPC.Crystal.8") + str(global.getThingFromAllLevelZonez("num_glitch_tiles")) + "/" + str(global.getThingFromAllLevelZonez("total_num_glitch_tiles"))
+      loveHiscoreLabel.bbcode_text = "[center]" + tr("NPC.Crystal.8") + str(global.getThingFromAllLevelZonez("num_glitch_tiles")) + "/" + str(global.getThingFromAllLevelZonez("total_num_glitch_tiles")) + "[/center]"
       hiscoreDisplayIndex += 1
     elif hiscoreDisplayIndex == 6:
       timeHiscoreLabel.visible = true
@@ -474,22 +476,48 @@ func processHiscoreRenderLogic(delta):
     elif hiscoreDisplayIndex == 7:
       pressEnterLabel.visible = not pressEnterLabel.visible
       var sweep_button_text = global.getInputText("talk_button")
-      pressEnterLabel.bbcode_text = tr("NPC.Crystal.Final") % sweep_button_text
+      pressEnterLabel.bbcode_text = "[center]" + (tr("NPC.Crystal.Final") % sweep_button_text) + "[/center]"
+      hiscoreDisplayIndex += 1
+      hiscoreTimeLimit = 5
   
-  if hiscoreDisplayIndex >= 5 and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("talk_button") or Input.is_action_just_pressed("sub_action_button") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))):
-    # global.isEnteringRoom = true
-    global.hasGottenLevelGeode = false
-    global.hasLevelGeodeBeenSmacked = false
-    if global.isEndOfGame:
-      var endOfGameNPC = level.get_node("PrimordialOozeBoss/EndOfGameNPC") if level.has_node("PrimordialOozeBoss/EndOfGameNPC") else null
-      if endOfGameNPC: endOfGameNPC.activate(true)
+  if (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("talk_button") or Input.is_action_just_pressed("sub_action_button") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))):
+    if hiscoreDisplayIndex >= 8:
+      # global.isEnteringRoom = true
+      global.hasGottenLevelGeode = false
+      global.hasLevelGeodeBeenSmacked = false
+      if global.isEndOfGame:
+        var endOfGameNPC = level.get_node("PrimordialOozeBoss/EndOfGameNPC") if level.has_node("PrimordialOozeBoss/EndOfGameNPC") else null
+        if endOfGameNPC: endOfGameNPC.activate(true)
+      else:
+        global.pauseMoveInput = false
+        global.pauseGame = false
+        global.isEnteringRoom = false
+        level.player.pauseSelf = false
+        level.player.physics_state = level.player.PhysicsState.NORMAL
+        level.player.pauseInput = false
+        level.player.ignorePhysics = false
+        global.shouldRenderAsCinematic = false
+        global.isPauseMenuOpen = false
+        yield(get_tree().create_timer(0.1), "timeout")
+        global.pauseMoveInput = false
+        global.pauseGame = false
+        global.isEnteringRoom = false
+        level.player.pauseSelf = false
+        level.player.physics_state = level.player.PhysicsState.NORMAL
+        level.player.pauseInput = false
+        level.player.ignorePhysics = false
+        global.shouldRenderAsCinematic = false
+        yield(get_tree().create_timer(0.1), "timeout")
+        global.pauseMoveInput = false
+        global.pauseGame = false
+        global.isEnteringRoom = false
+        level.player.pauseSelf = false
+        level.player.physics_state = level.player.PhysicsState.NORMAL
+        level.player.pauseInput = false
+        level.player.ignorePhysics = false
+        global.shouldRenderAsCinematic = false
     else:
-      global.pauseMoveInput = false
-      global.pauseGame = false
-      level.player.pauseSelf = false
-      level.player.physics_state = level.player.PhysicsState.NORMAL
-      level.player.pauseInput = false
-      global.shouldRenderAsCinematic = false
+      hiscoreTimer = hiscoreTimeLimit
 
 func tryLerpFromCenter(rect, delta, final_pos):
   if rect.rect_scale.x != 1:

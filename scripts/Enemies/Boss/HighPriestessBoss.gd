@@ -178,7 +178,14 @@ var glitch_crystal_timer = 0
 var glitch_crystal_time_limit = 5
 var goddess_glitch_effect_spawn_timer = 0
 var goddess_glitch_effect_spawn_time_limit = 2.5
+# var sprite3d_noglitchShader = preload("res://shaders/Sprite3D_noglitch.shader")
+# var sprite3dShader = preload("res://shaders/Sprite3D_noglitch.shader")
 func _process(delta):
+    # if global.userSettings["canGlitchScreen"]:
+    #     mySprite.material_override.shader = sprite3dShader
+    # else:
+    #     mySprite.material_override.shader = sprite3d_noglitchShader
+
     if global.pauseGame or am_i_hidden:
         if boss_phase == BossPhase.DEFEATED:
             processDefeatEffects(delta)

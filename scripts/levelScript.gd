@@ -100,10 +100,12 @@ func _ready_impl():
   if self.has_node("../../UILayer"):
     should_offset_ui = true
     uiLayer.offset = Vector2(320, 28)
+    uiLayer.betaBuildLabel.rect_position.x = 640
     uiLayer.edgeDistortion.offset = Vector2(320, 28)
     uiLayer.textBoxes.offset = Vector2(320, 28)
   else:
     uiLayer.offset = Vector2(0, 0)
+    uiLayer.betaBuildLabel.rect_position.x = 464
     uiLayer.edgeDistortion.offset = Vector2(0, 0)
     uiLayer.textBoxes.offset = Vector2(0, 0)
     uiLayer.pauseMenu.popupRect.rect_position.x = 0

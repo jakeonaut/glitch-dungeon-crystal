@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://assets/sprites/objects_2d.png" type="Texture" id=1]
 [ext_resource path="res://assets/sounds/eb_menu6.wav" type="AudioStream" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=7]
 [ext_resource path="res://levels/common/UITheme_real.tres" type="Theme" id=8]
 [ext_resource path="res://assets/palettes2D/yellow_palette.png" type="Texture" id=9]
-[ext_resource path="res://assets/fonts/VGABullet5-Medium.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://assets/sounds/MinishCap_Link_Run.wav" type="AudioStream" id=11]
 [ext_resource path="res://pauseMenuTheme.tres" type="Theme" id=12]
 [ext_resource path="res://scripts/Sprite2D.gd" type="Script" id=13]
@@ -128,17 +127,6 @@ shader_param/palette_out = ExtResource( 24 )
 [sub_resource type="CanvasItemMaterial" id=62]
 
 [sub_resource type="CanvasItemMaterial" id=72]
-
-[sub_resource type="DynamicFont" id=17222]
-size = 32
-outline_size = 3
-outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-use_mipmaps = true
-extra_spacing_bottom = 8
-font_data = ExtResource( 10 )
-
-[sub_resource type="Theme" id=17223]
-default_font = SubResource( 17222 )
 
 [node name="PauseMenu" type="Control"]
 visible = false
@@ -2508,16 +2496,3 @@ bbcode_text = "[center]no[/center]"
 tab_size = 2
 text = "no"
 scroll_active = false
-
-[node name="BetaBuildLabel" type="RichTextLabel" parent="."]
-margin_left = 740.0
-margin_top = 500.0
-margin_right = 992.0
-margin_bottom = 554.0
-rect_scale = Vector2( 0.5, 0.5 )
-rect_clip_content = false
-theme = SubResource( 17223 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "[right]ver-3.0.7.3[/right]"
-text = "ver-3.0.7.3"
