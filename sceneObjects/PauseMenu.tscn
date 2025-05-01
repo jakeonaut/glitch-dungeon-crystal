@@ -424,19 +424,18 @@ text = "shards
 scroll_active = false
 
 [node name="KeysRect" type="ColorRect" parent="InventoryRect"]
-margin_left = 421.0
+margin_left = 427.0
 margin_top = -38.0
 margin_right = 511.0
 margin_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_clip_content = true
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="ColorRect" type="ColorRect" parent="InventoryRect/KeysRect"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 85.0
+margin_right = 80.0
 margin_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -445,7 +444,7 @@ color = Color( 0.223529, 0.298039, 0.384314, 1 )
 [node name="ColorRect" type="ColorRect" parent="InventoryRect/KeysRect/ColorRect"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 77.0
+margin_right = 70.0
 margin_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -455,25 +454,25 @@ __meta__ = {
 }
 
 [node name="KeysText" type="RichTextLabel" parent="InventoryRect/KeysRect/ColorRect"]
-margin_left = 9.0
+margin_left = -97.0
 margin_top = 4.0
-margin_right = 525.0
-margin_bottom = 97.0
+margin_right = 67.0
+margin_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource( 8 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "keys
+bbcode_text = "[right]keys
 "
 text = "keys
 "
 scroll_active = false
 
 [node name="SpellsLabel" type="RichTextLabel" parent="InventoryRect"]
-margin_left = -1.0
+margin_left = -20.0
 margin_top = -18.0
-margin_right = 419.0
+margin_right = 376.0
 margin_bottom = 29.0
 theme = ExtResource( 8 )
 bbcode_enabled = true
@@ -498,9 +497,9 @@ vframes = 5
 frame = 19
 
 [node name="EquipLabel" type="RichTextLabel" parent="InventoryRect"]
-margin_left = 5.0
+margin_left = -20.0
 margin_top = 66.0
-margin_right = 411.0
+margin_right = 378.0
 margin_bottom = 133.0
 theme = ExtResource( 8 )
 bbcode_enabled = true
@@ -550,9 +549,9 @@ vframes = 5
 frame = 22
 
 [node name="SoulLabel" type="RichTextLabel" parent="InventoryRect"]
-margin_left = 10.0
+margin_left = -19.0
 margin_top = 154.0
-margin_right = 426.0
+margin_right = 376.0
 margin_bottom = 206.0
 theme = ExtResource( 8 )
 bbcode_enabled = true
@@ -585,9 +584,9 @@ vframes = 5
 frame = 23
 
 [node name="KeyLabel" type="RichTextLabel" parent="InventoryRect"]
-margin_left = -3.0
+margin_left = -70.0
 margin_top = 231.0
-margin_right = 414.0
+margin_right = 381.0
 margin_bottom = 287.0
 theme = ExtResource( 8 )
 bbcode_enabled = true
@@ -772,18 +771,18 @@ color = Color( 0, 0, 0, 0.501961 )
 
 [node name="MapRect" type="ColorRect" parent="."]
 visible = false
-margin_left = 450.0
+margin_left = 480.0
 margin_top = 131.0
-margin_right = 713.0
+margin_right = 743.0
 margin_bottom = 394.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="ColorRect" type="ColorRect" parent="MapRect"]
-margin_left = 4.0
+margin_left = 8.0
 margin_top = 4.0
-margin_right = 259.0
+margin_right = 263.0
 margin_bottom = 259.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -2131,7 +2130,6 @@ margin_right = 172.0
 margin_bottom = 11.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_clip_content = true
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="ColorRect" type="ColorRect" parent="MapRect/MapTitleRect"]
@@ -2159,16 +2157,16 @@ __meta__ = {
 }
 
 [node name="MapText" type="RichTextLabel" parent="MapRect/MapTitleRect"]
-margin_left = 19.0
+margin_left = -63.0
 margin_top = 4.0
-margin_right = 535.0
+margin_right = 176.0
 margin_bottom = 97.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource( 8 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "map"
+bbcode_text = "[center]map[/center]"
 text = "map"
 scroll_active = false
 

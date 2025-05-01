@@ -44,6 +44,10 @@ func fallthroughCollisionActivate(possible_game_mover):
                 jump_val = 18
             if possible_game_mover.grav < 0:
                 jump_val *= -1
+            if not getPlayer().pressingJump():
+                jump_val *= 0.75
+            if getPlayer().nesting_doll_state == global.NestingDoll.BABY:
+                jump_val *= 2
             possible_game_mover.magicJump()
             getPlayer().linear_velocity.y = jump_val
             getPlayer().lv.y = jump_val

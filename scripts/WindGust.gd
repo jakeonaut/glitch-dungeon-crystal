@@ -59,6 +59,8 @@ func otherPassiveActivate(delta, gameMover):
       mult = 2
     if getDirection().y == -1:
       v_sign = -1
+    if gameMover == level.player and level.player.nesting_doll_state == global.NestingDoll.BABY:
+      v_sign *= 2
     gameMover.lv.y += (v_sign*mult*delta*22)
     if gameMover.on_ground:
       gameMover.lv.y = v_sign*2

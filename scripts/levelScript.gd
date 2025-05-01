@@ -97,19 +97,16 @@ func _ready_impl():
 
   yield(TempTimer.idle_frame(self), "timeout")
   yield(TempTimer.idle_frame(self), "timeout")
-  if self.has_node("../../UILayer"):
-    should_offset_ui = true
-    uiLayer.offset = Vector2(320, 28)
-    uiLayer.betaBuildLabel.rect_position.x = 640
-    uiLayer.edgeDistortion.offset = Vector2(320, 28)
-    uiLayer.textBoxes.offset = Vector2(320, 28)
-  else:
-    uiLayer.offset = Vector2(0, 0)
-    uiLayer.betaBuildLabel.rect_position.x = 464
-    uiLayer.edgeDistortion.offset = Vector2(0, 0)
-    uiLayer.textBoxes.offset = Vector2(0, 0)
-    uiLayer.pauseMenu.popupRect.rect_position.x = 0
+  if not self.has_node("../../UILayer") and self.has_node("UILayer"):
+    self.remove_child(uiLayer)
+    self.get_node("../..").add_child(uiLayer)
+  should_offset_ui = true
+  uiLayer.offset = Vector2(320, 28)
+  uiLayer.betaBuildLabel.rect_position.x = 640
+  uiLayer.edgeDistortion.offset = Vector2(320, 28)
+  uiLayer.textBoxes.offset = Vector2(320, 28)
   screenEffectsContainer.offset = Vector2(320, 28)
+  
   if not get_tree().get_root().has_node("Game/GameFrameBackground"):
     viewportTexture.rect_position = Vector2(320, 28)
   tryToAddGameFrameBackground()

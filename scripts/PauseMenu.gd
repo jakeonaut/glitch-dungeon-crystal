@@ -140,7 +140,7 @@ func _process(delta):
   self.visible = global.isPauseMenuOpen
   pauseMenuRect.visible = self.visible
   mapTitleRect.visible = true
-  mapTitleText.bbcode_text = tr("UI.Inventory.Map")
+  mapTitleText.bbcode_text = "[center]" + tr("UI.Inventory.Map") + "[/center]"
   pauseTitleRect.visible = true
   mapRect.rect_position = Vector2(450, 131)
   mapRect.rect_scale = Vector2(1, 1)
@@ -261,7 +261,7 @@ func _process(delta):
     equipLabelText.bbcode_text = "[center]" + tr("UI.Inventory.4") + "[/center]"
     soulLabelText.bbcode_text = "[center]" + tr("UI.Inventory.8") + "[/center]"
     keyLabelText.bbcode_text = "[center]" + tr("UI.Inventory.9") + "[/center]"
-    keysText.bbcode_text = tr("UI.Inventory.10")
+    keysText.bbcode_text = "[right]" + tr("UI.Inventory.10") + "[/right]"
     shardsText.bbcode_text = tr("NPC.Crystal.7_2")
     largerPopup.visible = true
     normalMenu.visible = false

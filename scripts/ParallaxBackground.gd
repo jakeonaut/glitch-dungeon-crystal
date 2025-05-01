@@ -7,8 +7,8 @@ onready var camera = get_node("../GameCamera")
 var camera_origin
 export var dont_recolor_me = false
 var hiding = false
-var opacity = 0.1
-export var MAX_OPACITY = 0.1
+var opacity = 0.5
+export var MAX_OPACITY = 0.5
 
 
 func _ready():

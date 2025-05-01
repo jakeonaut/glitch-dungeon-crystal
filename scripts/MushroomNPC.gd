@@ -35,6 +35,8 @@ func fallthroughCollisionActivate(possible_game_mover):
         mySprite.material_override.set_shader_param("y_div", 1.5)
         mySprite.material_override.set_shader_param("normal_offset", .1)
         smack_timer = smack_time_limit / 3
+      if getPlayer().nesting_doll_state == global.NestingDoll.BABY:
+        jump_val *= 2
       possible_game_mover.magicJump()
       getPlayer().linear_velocity.y = jump_val
       getPlayer().lv.y = jump_val

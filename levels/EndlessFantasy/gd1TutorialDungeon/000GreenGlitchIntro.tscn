@@ -1337,6 +1337,8 @@ visible = false
 pixel_size = 0.0313
 texture = ExtResource( 57 )
 
+[node name="UILayer" parent="Viewport/level" instance=ExtResource( 22 )]
+
 [node name="Viewport2" parent="." instance=ExtResource( 7 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
@@ -1354,8 +1356,6 @@ texture = SubResource( 80 )
 flip_v = true
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 23 )]
-
-[node name="UILayer" parent="." instance=ExtResource( 22 )]
 
 [editable path="Viewport/level/Player"]
 [editable path="Viewport/level/Player/TextContainer"]
