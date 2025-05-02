@@ -7,8 +7,9 @@ func _ready():
 
 func activateScript():
   # OVERRIDE ME
-  # textBox.text_final = "hi"
-  # textBox.textNode.bbcode_text = "hi"
+  # var text = tr("NPC.Fake.Text")
+  # textBox.text_final = text
+  # textBox.textNode.bbcode_text = text
   pass
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND

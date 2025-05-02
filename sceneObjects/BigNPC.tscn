@@ -150,6 +150,8 @@ shader_param/target_palette = ExtResource( 3 )
 
 [node name="NPC" type="Spatial" groups=["npc"]]
 script = ExtResource( 10 )
+interact_prompt_offset = -40
+bring_to_front = false
 
 [node name="SmallInteractionArea" type="Area" parent="." groups=["malware", "npc"]]
 script = ExtResource( 11 )

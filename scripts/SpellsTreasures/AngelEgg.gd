@@ -19,7 +19,7 @@ func _ready():
     if is_static_in_level and self.getMyStaticLevelZoneVar():
         visible = false
 
-func _process(_delta):
+func _process(delta):
     pauseSelf = not visible
     if pauseSelf:
       return
@@ -34,27 +34,27 @@ func _process(_delta):
     #     bubble.global_transform.origin.y += 1
     #     bubble.setAsParent(self)
 
-    # spawn_timer += (delta*22)
-    # if spawn_timer >= spawn_time_limit:
-    #     var children = self.get_children()
-    #     var num_children = 0
-    #     for i in children:
-    #         num_children += 1
+    spawn_timer += (delta*22)
+    if spawn_timer >= spawn_time_limit:
+        var children = self.get_children()
+        var num_children = 0
+        for i in children:
+            num_children += 1
 
-    #     if num_children < 20:
-    #         var newSprite = sparkleSprite.duplicate()
-    #         newSprite.should_fizzle_out = true
-    #         newSprite.visible = true
-    #         var origin_diff = Vector3(
-    #             stepify(rand_range(-1.0, 1.0), 0.125),
-    #             stepify(rand_range(0.5, 1.5), 0.125),
-    #             0
-    #         )
-    #         newSprite.updateBaseFrame(0, 0)
-    #         newSprite.max_frames = 2
-    #         level.add_child(newSprite)
-    #         newSprite.global_transform.origin = self.global_transform.origin + origin_diff
-    #         spawn_timer = 0
+        if num_children < 20:
+            var newSprite = sparkleSprite.duplicate()
+            newSprite.should_fizzle_out = true
+            newSprite.visible = true
+            var origin_diff = Vector3(
+                stepify(rand_range(-1.0, 1.0), 0.125),
+                stepify(rand_range(0.5, 1.5), 0.125),
+                0
+            )
+            newSprite.updateBaseFrame(0, 0)
+            newSprite.max_frames = 2
+            level.add_child(newSprite)
+            newSprite.global_transform.origin = self.global_transform.origin + origin_diff
+            spawn_timer = 0
 
 func isActive(_debug=false):
     return visible and on_ground

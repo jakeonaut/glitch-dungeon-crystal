@@ -5,7 +5,7 @@ extends "GameMover.gd"
 export(NodePath) var nextTextBoxPath = NodePath("")
 export(String, MULTILINE) var bbText = ""
 export(String, MULTILINE) var smackedBbText = ""
-export(String, MULTILINE) var glitchedBbText = ""
+export var needs_to_talk_normal_first = false
 export(Texture) var portrait
 export var is_important = false # when dialogue is started, can't walk away until finished.
 export var is_really_important = false # touching it will start the dialogue
@@ -48,6 +48,7 @@ export var is_static_in_level = true
 export var is_wiggling_fast = false
 export var can_be_smacked = false
 export var is_sprite_not_flipped = false
+export var interact_prompt_offset = 0
 
 func _ready():
   set_process(true)
@@ -64,10 +65,9 @@ func _ready():
 
   if bbText != "" and textBoxContainer.bbText == "":
     textBoxContainer.bbText = bbText
-  if glitchedBbText != "" and global.memory["glitch_world"] > 0:
-    textBoxContainer.bbText = glitchedBbText
   if smackedBbText != "":
     textBoxContainer.smackedBbText = smackedBbText
+  textBoxContainer.needs_to_talk_normal_first = needs_to_talk_normal_first
   if portrait and not textBoxContainer.portrait:
     textBoxContainer.portrait = portrait
   textBoxContainer.is_immediate = is_immediate
@@ -82,6 +82,7 @@ func _ready():
         nextTextBoxPathStr += "/"
       nextTextBoxPathStr += nextTextBoxPath.get_name(i)
     textBoxContainer.nextTextBoxPath = NodePath(nextTextBoxPathStr)
+  textBoxContainer.interact_prompt_offset = interact_prompt_offset
   is_sprite_flipped = true
 
   var my_memory = self.getMyStaticLevelZoneVar()
@@ -107,6 +108,7 @@ func _ready():
         visible = true
         can_activate = false
       textBox.has_been_shown = true
+      textBox.has_talked_normal = true
       if textBox.has_been_shown: 
         textBox.is_important = false
 

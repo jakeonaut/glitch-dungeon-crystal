@@ -8,6 +8,8 @@ export(Texture) var portrait
 var is_immediate = false
 var floating_text = false
 var showYesNoOptions = false
+var needs_to_talk_normal_first = false
+var interact_prompt_offset = 0
 
 onready var textBox = get_node("TextBox")
 onready var textBoxtext = get_node("TextBox/TextCanvasLayer/Container/ScrollContainer/Text")
@@ -39,6 +41,8 @@ func setVars():
             nextTextBoxPathStr += nextTextBoxPath.get_name(i)
         textBox.nextTextBoxPath = NodePath(nextTextBoxPathStr)
 
+    textBox.interact_prompt_offset = interact_prompt_offset
+    textBox.needs_to_talk_normal_first = needs_to_talk_normal_first
     textBox.is_immediate = is_immediate
     textBox.floating_text = floating_text
     textBox.showYesNoOptions = showYesNoOptions

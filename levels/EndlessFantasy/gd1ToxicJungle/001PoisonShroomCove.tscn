@@ -835,7 +835,7 @@ shape = SubResource( 76 )
 
 [node name="MushroomNPC2" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0 )
-bbText = "NPC.SporeCreature.6"
+bbText = "NPC.ClayWorker.9"
 
 [node name="Waterfall" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 0 )

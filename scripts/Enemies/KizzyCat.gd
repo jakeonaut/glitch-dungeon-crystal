@@ -78,6 +78,7 @@ func landed():
   if is_evil:
     getSmacked()
 
+var should_flip = true
 var my_shroom = null
 # @override
 func getSmacked(broom_origin = null, silently = false):
@@ -91,23 +92,29 @@ func getSmacked(broom_origin = null, silently = false):
   pauseSelf = true
   # on_ground = true
   notDieSound.play()
+  if global.memory["broom"] and should_flip:
+    playerInhale()
 
 func passiveActivate(_delta, is_player):
   if is_player:
+    should_flip = false
     getSmacked()
+    should_flip = true
+    playerInhale()
     if is_evil:
       pass
       # if level.player.malware_infected:
       #   level.player.malwareCured()
       # else:
       #   level.player.malwareCorruptMe()
-    else:
-      level.player.gravitySound.pitch_scale = rand_range(0.8, 1.2)
-      level.player.gravitySound.play()
-      level.player.glitchTickle()
-      level.flipGravity(-1 * (level.player.grav / abs(level.player.grav)))
-      for _i in range(5):
-        level.player.spawnASpore(level.player.global_transform.origin, false)
+    
+func playerInhale():
+  level.player.gravitySound.pitch_scale = rand_range(0.8, 1.2)
+  level.player.gravitySound.play()
+  level.player.glitchTickle()
+  level.flipGravity(-1 * (level.player.grav / abs(level.player.grav)))
+  for _i in range(5):
+    level.player.spawnASpore(level.player.global_transform.origin, false)
 
 # @override
 func unsmack():

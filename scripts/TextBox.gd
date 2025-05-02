@@ -138,6 +138,7 @@ func untinify():
   get_node("ColorRect").visible = true
   setTextBoxPosition()
 
+var interact_prompt_offset = 0
 func setTinyPosition():
   var factor = 0.4
 
@@ -149,11 +150,11 @@ func setTinyPosition():
   getGameCamera().respectLevelTilesEdges()
   var target_pos = getGameCamera().unproject_position(target_origin)
   self.rect_position.x = factor * target_pos.x - 50 - adjusted_tiny_x_pos
-  self.rect_position.y = factor * target_pos.y - 50 - adjusted_tiny_y_pos
+  self.rect_position.y = factor * target_pos.y - 50 - adjusted_tiny_y_pos + interact_prompt_offset
 
   var m = 2.5
   textNodeCanvasLayerContainer.rect_position.x = self.rect_position.x * m
-  textNodeCanvasLayerContainer.rect_position.y = self.rect_position.y * m
+  textNodeCanvasLayerContainer.rect_position.y = self.rect_position.y * m + interact_prompt_offset
 
 func setTextBoxPosition():
   if not is_tiny:
@@ -372,6 +373,8 @@ func hideInteractPrompt():
       
 var tindex = -1
 var smackedBbText = null
+var needs_to_talk_normal_first = false
+var has_talked_normal = false
 func showTextbox(wasSmacked = false):
   selectedYesNoOption = false
   # TODO(jaketrower): DialogStartSound play nice with smackedBbText?
@@ -383,11 +386,12 @@ func showTextbox(wasSmacked = false):
   textNode.visible_characters = 0
 
   textNode.scroll_to_line(0)
-  if wasSmacked and smackedBbText != null and smackedBbText != "":
+  if wasSmacked and smackedBbText != null and smackedBbText != "" and (not needs_to_talk_normal_first or has_talked_normal):
     if textSprite: textSprite.visible = false
     textNode.bbcode_text = tr(smackedBbText)
     showYesNoOptions = false
   else:
+    has_talked_normal = true
     if textSprite: textSprite.visible = true
     textNode.bbcode_text = tr(text_final)
   tindex = -1

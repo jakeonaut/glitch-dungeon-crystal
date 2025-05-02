@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/models/lowPolyHorse.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=8]
 [ext_resource path="res://sceneObjects/Enemies/GlitchMoleCricket.tscn" type="PackedScene" id=9]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=11]
 [ext_resource path="res://sceneObjects/Enemies/HungryWorm.tscn" type="PackedScene" id=12]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=13]
@@ -216,6 +217,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 0 )
 
 [node name="BrothCauldron" parent="Viewport/level" instance=ExtResource( 28 )]
 path = "res://levels/MinimumRoom2.tscn"
+
+[node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 1 )]
 

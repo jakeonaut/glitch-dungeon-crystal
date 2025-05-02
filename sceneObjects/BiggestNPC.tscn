@@ -137,6 +137,8 @@ shader_param/target_palette = ExtResource( 3 )
 
 [node name="NPC" type="Spatial" groups=["npc"]]
 script = ExtResource( 6 )
+interact_prompt_offset = -60
+bring_to_front = false
 
 [node name="SmallInteractionArea" type="Area" parent="." groups=["malware", "npc"]]
 script = ExtResource( 9 )
@@ -211,10 +213,10 @@ frame = 745
 frame_delay = 0.5
 
 [node name="SmackSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 11 )
 volume_db = -20.0
 pitch_scale = 0.65
+bus = "Sfx"
 
 [node name="TextBoxCameraTarget" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )

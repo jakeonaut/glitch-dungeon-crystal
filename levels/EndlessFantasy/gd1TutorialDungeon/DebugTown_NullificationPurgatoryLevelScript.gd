@@ -13,7 +13,9 @@ func setUpRoomInitializationOverride():
     var text = tr("NPC.Secret.4")
     npcTutorial2.textBox.text_final = text
     npcTutorial2.textBox.textNode.bbcode_text = text
-    npcTutorial2.textBox.showYesNoOptions = false
+
+  if global.memory["clean_crystals"] >= 1:
+    npcTutorial2.mySprite.updateBaseFrame(4, 1)
   
 func activateNPC():
   has_activated_npc = true

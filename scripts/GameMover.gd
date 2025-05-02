@@ -282,9 +282,9 @@ func processPhysics(delta):
     var pressing_jump = justPressedJump() or recentlyJustPressedJump()
     if not global.pauseMoveInput and (pressing_horizontal_input or pressing_jump or pressingDown() or not on_ground or tryingToWakeUp()):
       if not pauseAnimation and aniPlayer:
-        aniPlayer.play("wakeup")
+        aniPlayer.play("wakeup", -1, 0.75)
       if bounceAniPlayer:
-        playBounce("wakeup")
+        playBounce("wakeup", [], 0.75)
       physics_state = PhysicsState.WAKING_UP
   elif physics_state == PhysicsState.WAKING_UP:
     if aniPlayer == null or not aniPlayer.is_playing():
@@ -1626,11 +1626,11 @@ func handleSpikeCollisions(_delta):
 func postProcessInputs(_delta):
   pass
   
-func playBounce(aniName, aniNameQueue = []):
+func playBounce(aniName, aniNameQueue = [], speed = 1.0):
   if bounceAniPlayer != null:
     bounceAniPlayer.stop()
     bounceAniPlayer.clear_queue()
-    bounceAniPlayer.play(aniName)
+    bounceAniPlayer.play(aniName, -1, speed)
     for queuedAniName in aniNameQueue:
       bounceAniPlayer.queue(queuedAniName)
 

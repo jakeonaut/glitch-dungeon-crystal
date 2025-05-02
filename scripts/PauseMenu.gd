@@ -403,7 +403,8 @@ func processLocaleLogic(_delta):
   if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     shouldUpdateMenuText = true
     var localeCode = localeOptions[localeOptionIndex].code
-    global.changeLocale(localeCode, false)
+    var saveUserSettings = true
+    global.changeLocale(localeCode, saveUserSettings)
     global.resetControlsConfigLabels()
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
     shouldUpdateMenuText = true
@@ -1304,7 +1305,7 @@ func processTopInputLogic(_delta):
       shouldUpdateMenuText = true
     elif topInputOptionIndex == 2:
       global.toggleEnterDoorDirection()
-      global.saveUserSettings()
+      level.saveUserSettings()
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
     pauseMenuState = PauseMenuState.NORMAL
     shouldUpdateMenuText = true
@@ -1353,11 +1354,11 @@ func processControllerOptionsLogic(_delta):
       pauseMenuState = PauseMenuState.CONTROLLER_INPUT
     elif controllerOptionsOptionIndex == 1:
       global.userSettings["use_joystick"] *= -1
-      global.saveUserSettings()
+      level.saveUserSettings()
       shouldUpdateMenuText = true
     elif controllerOptionsOptionIndex == 2:
       global.toggleGlyphType()
-      global.saveUserSettings()
+      level.saveUserSettings()
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
     pauseMenuState = PauseMenuState.TOP_INPUT
     topInputOptionIndex = 1
@@ -1422,14 +1423,21 @@ func processControlsLogic(_delta):
           last_control_index = -1
           level.saveUserSettings()
     if global.last_read_joystick_input != null and pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
-      tempControlsConfig[control_index].button_index = null
-      tempControlsConfig[control_index].axis = global.last_read_joystick_input[0]
-      tempControlsConfig[control_index].axis_value = global.last_read_joystick_input[1]
-      global.setJoystickAxis(tempControlsConfig[control_index].input_action, global.last_read_joystick_input[0], global.last_read_joystick_input[1])
+      var button_index = global.getButtonIndexFromJoystick(global.last_read_joystick_input)
+      if button_index == null:
+        return
+      tempControlsConfig[control_index].button_index = button_index
+      tempControlsConfig[control_index].axis = null
+      tempControlsConfig[control_index].axis_value = null
+      tempControlsConfig[control_index].axis2 = null
+      tempControlsConfig[control_index].axis2_value = null
+      global.setButtonIndex(tempControlsConfig[control_index].input_action, button_index)
       global.userSettings["controls_config"] = tempControlsConfig
       global.is_reading_input = false
       global.is_reading_controller_input = false
       last_control_index = -1
+      # enable joystick if we tried to input with it!!
+      global.userSettings["use_joystick"] = 1
       level.saveUserSettings()
     return
   else:

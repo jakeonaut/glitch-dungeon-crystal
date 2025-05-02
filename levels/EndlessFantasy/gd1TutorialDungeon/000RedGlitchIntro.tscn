@@ -230,6 +230,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8, 0.957091, 0 )
 grav = 0
 bbText = "NPC.Tutorial.5"
 smackedBbText = "NPC.Tutorial.5_2"
+needs_to_talk_normal_first = true
 can_camera_zoom = false
 is_a_body = false
 
@@ -287,7 +288,7 @@ flip_v = true
 mesh = SubResource( 35 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]

@@ -823,9 +823,24 @@ func _input(ev):
         if ev is InputEventJoypadButton and ev.pressed:
             last_read_input = ev.button_index
         # why ev.axis < 4 ? so we don't count left / right analog trigger...
-        # if ev is InputEventJoypadMotion and ev.axis < 4 and \
-        #    (ev.axis_value > GLOBAL_DEADZONE or ev.axis_value < -GLOBAL_DEADZONE):
-        #     last_read_joystick_input = [ev.axis, 1 if ev.axis_value > 0 else -1]
+        elif ev is InputEventJoypadMotion and ev.axis < 4 and \
+           (ev.axis_value > GLOBAL_DEADZONE or ev.axis_value < -GLOBAL_DEADZONE):
+            last_read_joystick_input = [ev.axis, 1 if ev.axis_value > 0 else -1]
+
+func getButtonIndexFromJoystick(joystickInput):
+    var axis = joystickInput[0]
+    var axis_value = joystickInput[1]
+    if axis == JOY_AXIS_0 or axis == JOY_AXIS_2:
+        if axis_value < 0:
+            return JOY_DPAD_LEFT
+        if axis_value > 0:
+            return JOY_DPAD_RIGHT
+    if axis == JOY_AXIS_1 or axis == JOY_AXIS_3:
+        if axis_value < 0:
+            return JOY_DPAD_UP
+        if axis_value > 0:
+            return JOY_DPAD_DOWN
+    return null
 
 func getJoystickAxisStr(axis, axis_value, useSpecialChar = true):
     if axis == JOY_AXIS_0:
@@ -1020,6 +1035,7 @@ func resetControlsConfigLabels():
     for i in range(len(controlConfigLabels)):
         global.controlsConfig[i]["label_str"] = controlConfigLabels[i]["label_str"]
 
+var JUMP_INDEX = 4
 func initializeControlsConfig():
   # good luck! hope this never gets out of sync with controlConfigLabels (above)
   global.controlsConfig = [
@@ -1028,7 +1044,7 @@ func initializeControlsConfig():
     { "input_action": "ui_down" },
     { "input_action": "enter_door" }, # don't delete, idk if it will mess up savedUserSettings -_-
     { "input_action": "ui_up" },
-    { "input_action": "jump_button" },
+    { "input_action": "jump_button" }, # GLOBAL_JUMP_INDEX = 4
     { "input_action": "sub_action_button" },
     { "input_action": "talk_button" },
     { "input_action": "restart_key" },

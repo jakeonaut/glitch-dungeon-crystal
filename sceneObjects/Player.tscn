@@ -7560,7 +7560,8 @@ bus = "Sfx"
 
 [node name="BumpSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 17 )
-volume_db = -26.0
+volume_db = -22.0
+pitch_scale = 0.75
 bus = "Sfx"
 
 [node name="BumpSound2" type="AudioStreamPlayer" parent="Sounds"]
