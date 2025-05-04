@@ -1053,6 +1053,7 @@ func processGlitchHurtRecovery(delta):
         glitch_death_timer = 0
         if physics_state == PhysicsState.GLITCH_RECOVERY:
           self.physics_state = PhysicsState.NORMAL
+        global.isRespawning = false
         mySprite.material_override.set_shader_param("enable_glitch", false)
         mySprite.material_override.set_shader_param("enable_remove_skin_tone", false)
 
@@ -2769,7 +2770,9 @@ func swordClank(play_sound = true):
 
 func getItemFailsafe():
   if global.activeInteractor == null:
-    physics_state = PhysicsState.NORMAL
+    if physics_state == PhysicsState.OCCUPIED:
+      physics_state = PhysicsState.NORMAL
+      global.isRespawning = false
     pauseAnimation = false
     pauseSelf = false
     global.pauseMoveInput = false

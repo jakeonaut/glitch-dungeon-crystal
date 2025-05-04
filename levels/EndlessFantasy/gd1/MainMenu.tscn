@@ -2675,15 +2675,12 @@ shape = SubResource( 228 )
 
 [node name="FreeChicken" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 7.27493, 0 )
-how_many_times_did_u_hit_me = -999
 
 [node name="FreeChicken5" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.411366, 0 )
-how_many_times_did_u_hit_me = -999
 
 [node name="FreeChicken2" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 2.52752, 0 )
-how_many_times_did_u_hit_me = -999
 
 [node name="Sprite3D9" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 69.9973, 9.78628, -6 )
