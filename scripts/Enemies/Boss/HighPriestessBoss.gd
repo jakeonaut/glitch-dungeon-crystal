@@ -60,15 +60,15 @@ onready var laughSound = get_node("Sounds/LaughSound")
 onready var spawnSound = get_node("Sounds/SpawnSound")
 onready var spawnSavePointSound = get_node("Sounds/SpawnSavePointSound")
 func _ready():
-    var how_many_more_hearts = global.memory["angler_heart"] + global.memory["baba_heart"] + global.memory["claydol_heart"]
-    num_granny_hits += how_many_more_hearts
+    num_granny_hits += global.getNumGrannyHearts()
 
-    if global.memory["priestessShortcut"] == 0:
-        global.memory["priestessShortcut"] = 1
     set_process(true)
     # Wait two frames cuz idk
     yield(TempTimer.idle_frame(self), "timeout")
     yield(TempTimer.idle_frame(self), "timeout")
+    if global.memory["priestessShortcut"] == 0:
+        global.memory["priestessShortcut"] = 1
+        level.saveTheGame()
     original_pos = global_transform.origin
     randomizeTargetPos()
 

@@ -44,8 +44,7 @@ var sproutedArray = []
 var landingIndex = 0
 
 func _ready():
-    var how_many_more_hearts = global.memory["angler_heart"] + global.memory["baba_heart"] + global.memory["claydol_heart"]
-    num_granny_hits += how_many_more_hearts
+    num_granny_hits += global.getNumGrannyHearts()
     
     if global.memory["babaShortcut"] == 0:
         global.memory["babaShortcut"] = 1

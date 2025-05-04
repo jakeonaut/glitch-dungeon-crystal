@@ -24,6 +24,7 @@ func _ready():
     saveDiskSprite.set_material_override(saveDiskSprite.get_material_override().duplicate())
 
 var was_on_save_point = false
+var spin_dir = 1
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
     aniPlayer.playback_speed = global.time_dilation_multiplier * animation_speed_multiplier
@@ -31,7 +32,7 @@ func _process(delta):
         return
     
     if isOnSavePoint():
-        triangleContainer.rotation_degrees.y -= delta*22*5
+        triangleContainer.rotation_degrees.y -= delta*22*5*spin_dir
         if not is_active or not was_on_save_point:
             enablePaletteCycle()
             spawn_timer = spawn_time_limit
@@ -120,8 +121,12 @@ func passiveActivate(_delta, is_player):
             level.player.nesting_doll_state = global.NestingDoll.GRANDMA
             global.memory["nesting_doll"] = global.NestingDoll.GRANDMA
             level.player.updateNestingDoll(global.NestingDoll.GRANDMA)
+    else:
+        spin_dir *= -1
+        saveSound.stop()
+
     global.memory["hp"] = global.memory["max_hp"]
-    if not global.isRespawning and not isOnSavePoint():
+    if not global.isRespawning and (not isOnSavePoint() or not is_player):
         was_on_save_point = false
         if not saveSound.is_playing():
             if isOnSavePoint():

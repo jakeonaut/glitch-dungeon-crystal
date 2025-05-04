@@ -559,6 +559,25 @@ bbcode_text = "[center]--memories--[/center]"
 text = "--memories--"
 scroll_active = false
 
+[node name="HeartSprite" type="Sprite" parent="InventoryRect"]
+position = Vector2( 88, 203 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 5
+frame = 24
+
+[node name="HeartLabel" type="RichTextLabel" parent="InventoryRect"]
+margin_left = 27.0
+margin_top = 202.0
+margin_right = 77.0
+margin_bottom = 248.0
+rect_clip_content = false
+theme = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "[right]0[/right]"
+text = "0"
+
 [node name="SoulSprite1" type="Sprite" parent="InventoryRect"]
 position = Vector2( 137, 202 )
 scale = Vector2( 3, 3 )
@@ -601,6 +620,17 @@ texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
 frame = 5
+
+[node name="AngelEggLabel" type="RichTextLabel" parent="InventoryRect"]
+margin_left = 43.0
+margin_top = 284.0
+margin_right = 93.0
+margin_bottom = 330.0
+rect_clip_content = false
+theme = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "[right]0[/right]"
+text = "0"
 
 [node name="FishingRodSprite" type="Sprite" parent="InventoryRect"]
 position = Vector2( 163, 286 )
@@ -659,17 +689,6 @@ texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
 frame = 20
-
-[node name="AngelEggLabel" type="RichTextLabel" parent="InventoryRect"]
-margin_left = 113.0
-margin_top = 287.0
-margin_right = 232.0
-margin_bottom = 333.0
-rect_clip_content = false
-theme = ExtResource( 8 )
-bbcode_enabled = true
-bbcode_text = "0"
-text = "0"
 
 [node name="GlitchRect1" type="ColorRect" parent="InventoryRect"]
 margin_left = 104.0

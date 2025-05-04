@@ -452,6 +452,7 @@ func actuallyUnlockAndEnterDoor():
 
 export var is_sneaky = false
 export var dlc_locked = false
+export var gravity_flip = false
 export var only_active_if_chicken = false
 func passiveActivate(_delta, is_player):
   if not dlc_locked and is_sneaky and is_passive and is_player and (
@@ -463,6 +464,7 @@ func passiveActivate(_delta, is_player):
 func justStopPassiveActivate():
   pass
 
+var has_gravity_flipped = false
 func goThroughDoor(start_of_game = false, really_long_fade = false, really_really_long_fade = false):
   if dlc_locked or (path == "" and parter_door_id == ""):
     if not sillySound.is_playing():
@@ -530,6 +532,19 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
       getPlayer().pauseSelf = false
       getPlayer().pauseAnimation = false
       getPlayer().pauseInput = false
+      if gravity_flip and not has_gravity_flipped:
+        print("FLIP_GRAVITY")
+        has_gravity_flipped = true
+        getPlayer().gravitySound.pitch_scale = rand_range(0.8, 1.2)
+        getPlayer().gravitySound.play()
+        getPlayer().glitchTickle()
+        level.flipGravity(-1 * (getPlayer().grav / abs(getPlayer().grav)))
+        if getPlayer().glitch_form == global.GlitchForm.FEATHER:
+          getPlayer().lv.y *= 2
+          getPlayer().vv *= 2
+          getPlayer().linear_velocity.y *= 2
+        yield(get_tree().create_timer(0.2), "timeout")
+        has_gravity_flipped = false
     return
 
   global.prepareForTransition(level, self)

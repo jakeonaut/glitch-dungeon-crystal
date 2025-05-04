@@ -784,6 +784,11 @@ func tryToApplySpellAssist(desired_spell):
 
 func summonBroomSmokeClouds(num_clouds, play_sound = false, is_glitchy = false):
   level.summonSmokeClouds(secretSweepActualCollisionShape.global_transform.origin, num_clouds, play_sound, is_glitchy)
+
+func getDistToLeftEdge(): return max(global_transform.origin.x - getGameCamera().leftmost_x, 0.0)
+func getDistToRightEdge(): return max(getGameCamera().rightmost_x - global_transform.origin.x, 0.0)
+func getDistToTopEdge(): return max(getGameCamera().topmost_y - global_transform.origin.y, 0.0)
+func getDistToBottomEdge(): return max(global_transform.origin.y - getGameCamera().botmost_y, 0.0)
   
 var returning_to_save_point = 0
 func tryDieToOffscreenCamera(_delta):
@@ -2449,6 +2454,8 @@ func processBroomRenderLogic(_delta):
   broomSpriteVisible.frame = broomSpriteAnimated.frame
   broomSpriteVisible.translation = broomSpriteAnimated.translation
   broomSpriteVisible.scale = broomSpriteAnimated.scale
+  global.updateBroomSpriteTexture(broomSpriteVisible, false)
+
   secretSweepActualCollisionShape.translation = secretSweepCollisionShape.translation
   broomSpriteVisible.flip_h = false
   if not can_broomerang_warp:

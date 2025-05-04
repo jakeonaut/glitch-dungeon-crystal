@@ -46,6 +46,7 @@ var can_return_via_input = false
 var can_return_via_input_timer = 0
 var can_return_via_input_time_limit = 3
 func _process(delta):
+    global.updateBroomSpriteTexture(mySpriteReal, true)
     if global.shouldRenderAsCinematic:
         global.memory["broom"] = true
         queue_free()

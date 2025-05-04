@@ -10,6 +10,10 @@ func activateScript():
     var text = tr("NPC.Tutorial.9_2")
     textBox.text_final = text
     textBox.textNode.bbcode_text = text
+  elif not global.memory.has("spellbookPage"):
+    var text = tr("NPC.Tutorial.9_3")
+    textBox.text_final = text
+    textBox.textNode.bbcode_text = text
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
   # OVERRIDE ME

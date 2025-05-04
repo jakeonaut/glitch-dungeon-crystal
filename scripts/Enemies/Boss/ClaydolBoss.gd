@@ -55,8 +55,7 @@ var big_rock_count_max = 2
 var myBigRock = null
 
 func _ready():
-    var how_many_more_hearts = global.memory["angler_heart"] + global.memory["baba_heart"] + global.memory["claydol_heart"]
-    num_granny_hits += how_many_more_hearts
+    num_granny_hits += global.getNumGrannyHearts()
     
     if global.memory["claydolShortcut"] == 0:
         global.memory["claydolShortcut"] = 1
@@ -376,7 +375,7 @@ func landed():
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("idleStomp")
-            level.gameCamera.shakeScreen()
+            level.gameCamera.miniShakeScreen()
             var newBigRock = spawnFallingRock(global_transform.origin.x)
             newBigRock.scale = Vector3(2, 2, 1)
             newBigRock.is_big = true

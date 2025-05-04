@@ -43,12 +43,32 @@ func setUpRoomInitializationOverride():
     glitchEnemy.queue_free()
     glitchEnemy2.queue_free()
 
+  if global.memory["broomerang"] >= 2:
+    broomUpgradeCrone.is_merchant = false
+    
   if global.memory["clean_crystals"] >= 4:
     broomUpgradeCrone.queue_free()
-  var hasEnteredTower = false # global.memory.has("gd1CrystalTower")
+  var hasEnteredTower = global.memory["priestessShortcut"] > 0 # global.memory.has("gd1CrystalTower")
+  if global.memory["angler_seaman_boss"] >= 3 and global.memory["angler_heart"] == 0:
+    spawnHeartContainer(fishElderNPC.global_transform.origin, "gd1FishingVillage")
   if global.memory["angler_seaman_boss"] < 3 or hasEnteredTower:
     fishElderNPC.queue_free()
+
+  if global.memory["baba_yaga_boss"] >= 3 and global.memory["baba_heart"] == 0:
+    spawnHeartContainer(sporeElderNPC.global_transform.origin, "gd1ToxicJungle")
   if global.memory["baba_yaga_boss"] < 3 or hasEnteredTower:
     sporeElderNPC.queue_free()
+
+  if global.memory["dogu_matryoshka_boss"] >= 3 and global.memory["claydol_heart"] == 0:
+    spawnHeartContainer(wormElderNPC.global_transform.origin, "gd1ShiftingSandLand")
   if global.memory["dogu_matryoshka_boss"] < 3 or hasEnteredTower:
     wormElderNPC.queue_free()
+
+var heartContainerRes = preload("res://sceneObjects/SpellsTreasureCollectables/HeartContainer.tscn")
+func spawnHeartContainer(position, override_level_zone):
+  var newHeartContainer = heartContainerRes.instance()
+  self.add_child(newHeartContainer)
+  newHeartContainer.global_transform.origin = position
+  newHeartContainer.global_transform.origin.y += 2
+  newHeartContainer.on_ground = true
+  newHeartContainer.get_node("NPC TextBox/TextBox/AbortSound").override_level_zone = override_level_zone

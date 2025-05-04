@@ -62,8 +62,7 @@ var how_many_final_charges = 0
 
 onready var spawnSound = get_node("Sounds/SpawnSound")
 func _ready():
-    var how_many_more_hearts = global.memory["angler_heart"] + global.memory["baba_heart"] + global.memory["claydol_heart"]
-    num_granny_hits += how_many_more_hearts
+    num_granny_hits += global.getNumGrannyHearts()
 
     if global.memory["anglerShortcut"] == 0:
         global.memory["anglerShortcut"] = 1
@@ -181,10 +180,10 @@ func _process(delta):
         behavior_walking = true
         walk_speed = 24
         walk_direction.x = -1
-        if global_transform.origin.y - 2 > level.player.global_transform.origin.y:
-            global_transform.origin.y -= delta*2
-        elif global_transform.origin.y + 2 < level.player.global_transform.origin.y:
-            global_transform.origin.y += delta*2
+        # if global_transform.origin.y - 2 > level.player.global_transform.origin.y:
+        #     global_transform.origin.y -= delta*2
+        # elif global_transform.origin.y + 2 < level.player.global_transform.origin.y:
+        #     global_transform.origin.y += delta*2
         # this is stupid and specific to the level I'm in... oh well
         if global_transform.origin.x < 28:
             if how_many_final_charges >= num_hits:
@@ -194,6 +193,7 @@ func _process(delta):
                 linear_velocity.x = 0
                 hv = Vector3(0, 0, 0)
                 boss_phase = BossPhase.STUN_FALL
+                getGameCamera().shakeScreen()
                 level.player.bumpSound.play()
                 unenemize()
                 secretAniPlayer.stop()
@@ -215,10 +215,10 @@ func _process(delta):
         walk_speed = 36
         behavior_walking = true
         walk_direction.x = 1
-        if global_transform.origin.y - 2 > level.player.global_transform.origin.y:
-            global_transform.origin.y -= delta
-        elif global_transform.origin.y + 2 < level.player.global_transform.origin.y:
-            global_transform.origin.y += delta
+        # if global_transform.origin.y - 2 > level.player.global_transform.origin.y:
+        #     global_transform.origin.y -= delta
+        # elif global_transform.origin.y + 2 < level.player.global_transform.origin.y:
+        #     global_transform.origin.y += delta
         if global_transform.origin.x >= 66:
             if how_many_final_charges >= num_hits:
                 behavior_walking = false
@@ -227,6 +227,7 @@ func _process(delta):
                 linear_velocity.x = 0
                 hv = Vector3(0, 0, 0)
                 boss_phase = BossPhase.STUN_FALL
+                getGameCamera().shakeScreen()
                 level.player.bumpSound.play()
                 unenemize()
                 secretAniPlayer.stop()
@@ -338,6 +339,7 @@ func _process(delta):
             vv = 0
             global_transform.origin.y = -30
             boss_phase = BossPhase.STUN_IDLE
+            getGameCamera().miniShakeScreen()
             level.player.bumpSound.play()
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()

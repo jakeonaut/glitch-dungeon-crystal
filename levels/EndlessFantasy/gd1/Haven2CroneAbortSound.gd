@@ -35,6 +35,7 @@ func activateScript():
         global.memory["broomerang"] = 2
         level.player.sayThis(tr("NPC.Treasure.10"))
         global.memory["crone"] = 3
+        NPC.is_merchant = false
       else:
         level.player.errorSound.play()
         level.player.sayThis(tr("NPC.Crone.5") % str(global.NUM_GEMS_FOR_BROOMERANG_WARP - num_cubes))

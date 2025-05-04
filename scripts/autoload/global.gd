@@ -160,6 +160,7 @@ enum GrandmaBroom {
     CRONE_STAFF,
     BABA_YAGA_CHICKEN_STAFF,
     BUG_NET,
+    FRYING_PAN,
 }
 
 enum GrandmaBag {
@@ -306,10 +307,11 @@ func resetMemory():
     memory["currOutfit"] = GrandmaOutfit.BABUSHKA
     memory["allMyOutfits"] = [GrandmaOutfit.BABUSHKA]
     memory["currBroom"] = GrandmaBroom.NORMAL
-    memory["allMyBrooms"] = [GrandmaBroom.NORMAL]
+    memory["allMyBrooms"] = [GrandmaBroom.NORMAL, GrandmaBroom.FRYING_PAN]
     memory["currBag"] = GrandmaBag.NORMAL
     memory["allMyBags"] = [GrandmaBag.NORMAL]
 
+    memory["hearts_enabled"] = true
     memory["mushroom_soul_enabled"] = true
     memory["mole_cricket_enabled"] = true
     memory["zora_flippers_enabled"] = true
@@ -405,6 +407,27 @@ func resetMemory():
     # EASTER EGGS
     memory["anna_mode"] = false
     memory["blue_mode"] = false
+
+func getNumGrannyHearts(label = false):
+    if not label and not global.memory["hearts_enabled"]:
+        return 0
+    return global.memory["angler_heart"] + global.memory["baba_heart"] + global.memory["claydol_heart"]
+
+var broomSheet = preload("res://assets/player_sheet_broom.png")
+var broomSheetAni = preload("res://assets/sprites/broom_ani.png")
+var fryingPanSheet = preload("res://assets/player_sheet_frying_pan.png")
+var fryingPanSheetAni = preload("res://assets/sprites/frying_pan_ani.png")
+func updateBroomSpriteTexture(sprite, useAniSheet):
+  if global.memory["currBroom"] == global.GrandmaBroom.NORMAL:
+    if useAniSheet:
+        sprite.material_override.set_shader_param("texture_albedo", broomSheetAni)
+    else:
+        sprite.material_override.set_shader_param("texture_albedo", broomSheet)
+  if global.memory["currBroom"] == global.GrandmaBroom.FRYING_PAN:
+    if useAniSheet:
+        sprite.material_override.set_shader_param("texture_albedo", fryingPanSheetAni)
+    else:
+        sprite.material_override.set_shader_param("texture_albedo", fryingPanSheet)
 
 var allLocales = {
     "en": { "code": "en", "supported": true, "label": "English" },
@@ -639,6 +662,7 @@ var save_game_files = [
     "user://savegame.save",
     "user://savegame2.save",
     "user://savegame3.save",
+    "user://savegame4.save",
 ]
 var user_settings_files = [
     "user://usersettings.config"

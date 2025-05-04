@@ -186,9 +186,9 @@ script = ExtResource( 12 )
 
 [node name="TextPrompt" type="RichTextLabel" parent="TextBox/TextCanvasLayer/Container/YesButton"]
 margin_left = 25.0
-margin_top = -6.0
+margin_top = 1.0
 margin_right = 236.0
-margin_bottom = 46.0
+margin_bottom = 60.0
 rect_pivot_offset = Vector2( -511, -189 )
 rect_clip_content = false
 size_flags_horizontal = 0
@@ -220,9 +220,9 @@ script = ExtResource( 12 )
 
 [node name="TextPrompt" type="RichTextLabel" parent="TextBox/TextCanvasLayer/Container/NoButton"]
 margin_left = 25.0
-margin_top = -2.0
+margin_top = 2.0
 margin_right = 222.0
-margin_bottom = 50.0
+margin_bottom = 54.0
 rect_pivot_offset = Vector2( -511, -189 )
 rect_clip_content = false
 size_flags_horizontal = 0

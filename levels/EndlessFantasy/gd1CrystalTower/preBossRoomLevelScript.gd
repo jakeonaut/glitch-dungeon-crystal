@@ -13,6 +13,12 @@ onready var npc9 = weakref(get_node("NPC9"))
 
 # @override
 func setUpRoomInitializationOverride():
+  if global.getLevelZoneThing("angel_statue") == null:
+    global.setLevelZoneThing("angel_statue", [
+      global.getDisplayTitle(self.getLevelZoneName(), tr("LevelName.1")),
+      self.getLevelName()
+    ])
+
   if global.memory["priestess"] < 2 and global.memory["glitch_world"] > 0:
     global.memory["glitch_world"] = 0
   # if global.memory.has("spellbookPage"):

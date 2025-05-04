@@ -11,6 +11,7 @@ onready var powerupRectTextLabel = get_node("PowerupRect/ColorRect/ColorRect/Ric
 onready var miniCrystalCubeRect = get_node("MiniCrystalCubeRect")
 onready var miniCrystalCubeTextLabel = get_node("MiniCrystalCubeRect/ColorRect/ColorRect/RichTextLabel")
 
+onready var glitchStatusRect = get_node("GlitchStatusRect")
 onready var miniCrystalTextureRect = get_node("GlitchStatusRect/TextureRect") if has_node("GlitchStatusRect/TextureRect") else null
 onready var miniCrystalViewport = get_node("GlitchStatusRect/Viewport") if has_node("GlitchStatusRect/Viewport") else null
 onready var savingTextureRect = get_node("SavingTextLabel/TextureRect") if has_node("SavingTextLabel/TextureRect") else null
@@ -93,6 +94,7 @@ onready var edgeDistortionLeft = get_node("EdgeDistortion/LeftDistortion")
 onready var edgeDistortionRight = get_node("EdgeDistortion/RightDistortion")
 onready var edgeDistortionTop = get_node("EdgeDistortion/TopDistortion")
 onready var edgeDistortionBottom = get_node("EdgeDistortion/BottomDistortion")
+onready var equipmentRect = get_node("EquipmentRect")
 onready var glitchSpellSprite1 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect1/ColorRect/EquipmentSlotSprite")
 onready var glitchSpellSprite2 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect2/ColorRect/EquipmentSlotSprite")
 onready var glitchSpellSprite3 = get_node("EquipmentRect/ColorRect/ColorRect/GlitchRect3/ColorRect/EquipmentSlotSprite")
@@ -118,6 +120,7 @@ onready var bossLifeSprite5 = get_node("LivesRect/BossLifeSprite5")
 onready var bossLifeSprite6 = get_node("LivesRect/BossLifeSprite6")
 onready var bossTextLabel = get_node("LivesRect/BossTextLabel")
 
+var UI_DIFF = 6.0
 func _process(delta):
   if not level or not level.hasGameFrameBackground:
     return
@@ -136,7 +139,7 @@ func _process(delta):
     keyStatusRect.visible = false
     
   # if global.memory["max_mp"] <= 0:
-  #  get_node("GlitchStatusRect").visible = false
+  #  glitchStatusRect.visible = false
   # statsTitleRect.get_node("ColorRect/ColorRect/RichTextLabel").bbcode_text = "MAGICK: "+ str(global.memory["mp"]) + " / " + str(global.memory["max_mp"]) + " CRYSTALS"
   var glitchStatusText = str(global.getThingFromAllLevelZonez("num_mini_crystal_cubes")) # str(global.memory["mp"]) + " /\n" + str(global.memory["max_mp"])
   glitchStatusText1.text = glitchStatusText 
@@ -247,15 +250,44 @@ func _process(delta):
   # else:
   miniCrystalCubeRect.visible = false
 
-  get_node("EquipmentRect").visible = global.memory.has("spellbookPage") and not global.isPauseMenuOpen
+  var pLeft = level.player.getDistToLeftEdge()
+  var pTop = level.player.getDistToTopEdge()
+  var pRight = level.player.getDistToRightEdge()
+  equipmentRect.visible = global.memory.has("spellbookPage") and not global.isPauseMenuOpen
   glitchSpriteContainer.visible = (global.memory["hasEverTouchedObelisk"] or level.player.glitch_form != global.GlitchForm.NORMAL) and not global.memory.has("spellbookPage") and not global.isPauseMenuOpen and not global.isOnMainMenu
+  var pTopLeft = Vector2(pLeft, pTop)
+  var pTopRight = Vector2(pRight, pTop)
+  var vec0 = Vector2(0.0, 0.0)
+  if pTopLeft.distance_to(vec0) <= UI_DIFF and not global.isPauseMenuOpen:
+    var modVal = min(max(sqrt(pTopLeft.distance_to(vec0)) / UI_DIFF, 0.0), 1.0)
+    equipmentRect.modulate.a = modVal
+    glitchSpriteContainer.modulate.a = modVal
+  else:
+    equipmentRect.modulate.a = 1.0
+    glitchSpriteContainer.modulate.a = 1.0
+
+  if pTop <= UI_DIFF and not global.isPauseMenuOpen:
+    var modVal = min(max(1 - ((UI_DIFF - pTop) / UI_DIFF), 0.0), 1.0)
+    livesRect.modulate.a = modVal
+  else:
+    livesRect.modulate.a = 1.0
+
+  if pTopRight.distance_to(vec0) <= UI_DIFF and not global.isPauseMenuOpen:
+    var modVal = min(max(sqrt(pTopRight.distance_to(vec0)) / UI_DIFF, 0.0), 1.0)
+    keyStatusRect.modulate.a = modVal
+    glitchStatusRect.modulate.a = modVal
+  else:
+    keyStatusRect.modulate.a = 1.0
+    glitchStatusRect.modulate.a = 1.0
+
+
+
   # tryLerpSpriteFromCenter(get_node("GlitchSprite"), delta, Vector2(0, 1))
   if savingTextureRect != null and savingTextureRect.texture == null and savingViewport != null:
     savingTextureRect.texture = savingViewport.get_texture()
   if global.memory["tutorial_gem"] == 1:
     if miniCrystalTextureRect != null and miniCrystalTextureRect.texture == null and miniCrystalViewport != null:
       miniCrystalTextureRect.texture = miniCrystalViewport.get_texture()
-    var glitchStatusRect = get_node("GlitchStatusRect")
     glitchStatusRect.visible = true
     tryLerpFromCenter(glitchStatusRect, delta, Vector2(530, 8))
   var num_keys = global.memory["key"] if global.memory.has("key") else null

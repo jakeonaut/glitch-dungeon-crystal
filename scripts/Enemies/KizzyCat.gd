@@ -76,6 +76,7 @@ func landed():
   .landed()
   behavior_jumping = false
   if is_evil:
+    should_flip = false
     getSmacked()
 
 var should_flip = true

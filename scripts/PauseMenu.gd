@@ -755,7 +755,14 @@ func processInventoryLogic(delta):
     elif inventoryOptionIndex == 2:
       popupRect.visible = not popupRect.visible
       shouldShowPopupYesNoOptions = true
-      if inventoryOptionIndexX == 0:
+      if inventoryOptionIndexX == -1:
+        shouldShowPopupYesNoOptions = true
+        popupText.text = tr("NPC.Crystal.6") + " +" + str(global.getNumGrannyHearts(true))
+        if popupRect.visible:
+          popupYesNoOptions = global.memory["hearts_enabled"]
+        else:
+          global.memory["hearts_enabled"] = popupYesNoOptions
+      elif inventoryOptionIndexX == 0:
         popupText.text = tr("NPC.Treasure.7") # "memory of fish:\n  swim in water\n"
         if popupRect.visible:
           popupYesNoOptions = global.memory["zora_flippers_enabled"]
@@ -901,6 +908,8 @@ func normalizeInventoryOptionIndex(y, x):
   if inventoryOptionIndex == 2:
     inventoryOptionIndexX += x
     if x >= 0:
+      if inventoryOptionIndexX == -1 and not heartSprite.visible:
+        inventoryOptionIndexX = 0
       if inventoryOptionIndexX == 0 and not soulSprite1.visible:
         inventoryOptionIndexX = 1
       if inventoryOptionIndexX == 1 and not soulSprite2.visible:
@@ -914,14 +923,16 @@ func normalizeInventoryOptionIndex(y, x):
           inventoryOptionIndexX = 0
           return
         else:
-          inventoryOptionIndexX = 0 if soulSprite1.visible else 1 if soulSprite2.visible else 2
+          inventoryOptionIndexX = -1 if heartSprite.visible else 0 if soulSprite1.visible else 1 if soulSprite2.visible else 2
     elif x < 0:
       if inventoryOptionIndexX == 2 and not soulSprite3.visible:
         inventoryOptionIndexX = 1
       if inventoryOptionIndexX == 1 and not soulSprite2.visible:
         inventoryOptionIndexX = 0
-      if (inventoryOptionIndexX == 0 and not soulSprite1.visible) or inventoryOptionIndexX < 0:
-        inventoryOptionIndexX = 2 if soulSprite3.visible else 1 if soulSprite2.visible else 0
+      if inventoryOptionIndexX == 0 and not soulSprite1.visible:
+        inventoryOptionIndexX = -1
+      if (inventoryOptionIndexX == -1 and not heartSprite.visible) or inventoryOptionIndexX < -1:
+        inventoryOptionIndexX = 2 if soulSprite3.visible else 1 if soulSprite2.visible else 0 if soulSprite1.visible else -1
 
   if inventoryOptionIndex == 3:
     inventoryOptionIndexX += x
@@ -981,6 +992,8 @@ onready var bagSprite = get_node("InventoryRect/BagSprite")
 onready var petSprite = get_node("InventoryRect/PetSprite")
 onready var returnSprite = get_node("InventoryRect/ReturnSprite")
 # onready var bagLabel = get_node("InventoryRect/BagLabel")
+onready var heartSprite = get_node("InventoryRect/HeartSprite")
+onready var heartLabel = get_node("InventoryRect/HeartLabel")
 onready var soulSprite1 = get_node("InventoryRect/SoulSprite1")
 onready var soulSprite2 = get_node("InventoryRect/SoulSprite2")
 onready var soulSprite3 = get_node("InventoryRect/SoulSprite3")
@@ -1006,7 +1019,9 @@ func processInventoryRender(_delta):
     #   invSelectionSprite.position.x = 265
   elif inventoryOptionIndex == 2:
     invSelectionSprite.position.y = 204
-    if inventoryOptionIndexX == 0:
+    if inventoryOptionIndexX == -1:
+      invSelectionSprite.position.x = 84
+    elif inventoryOptionIndexX == 0:
       invSelectionSprite.position.x = 136
     elif inventoryOptionIndexX == 1:
       invSelectionSprite.position.x = 190
@@ -1064,17 +1079,21 @@ func processInventoryRender(_delta):
   returnSprite.visible = global.memory["can_force_respawn"]
   petSprite.visible = false
 
+  heartSprite.visible = (global.getNumGrannyHearts(true) > 0)
+  heartSprite.scale = Vector2(3, 3) if global.memory["hearts_enabled"] else Vector2(1.5, 1.5)
+  heartLabel.visible = heartSprite.visible
+  heartLabel.bbcode_text = "[right]" + str(global.getNumGrannyHearts(true)) + "[/right]"
   soulSprite1.visible = global.memory["zora_flippers"]
   soulSprite1.scale = Vector2(3, 3) if global.memory["zora_flippers_enabled"] else Vector2(1.5, 1.5)
   soulSprite2.visible = global.memory["mole_cricket"]
   soulSprite2.scale = Vector2(3, 3) if global.memory["mole_cricket_enabled"] else Vector2(1.5, 1.5)
   soulSprite3.visible = global.memory["mushroom_soul"]
   soulSprite3.scale = Vector2(3, 3) if global.memory["mushroom_soul_enabled"] else Vector2(1.5, 1.5)
-  soulLabel.visible = soulSprite1.visible or soulSprite2.visible or soulSprite3.visible
+  soulLabel.visible = heartSprite.visible or soulSprite1.visible or soulSprite2.visible or soulSprite3.visible
   var numEggs = global.getThingFromAllLevelZonez("angelEgg")
   angelEggSprite.visible = numEggs > 0
   angelEggLabel.visible = angelEggSprite.visible
-  angelEggLabel.bbcode_text = str(numEggs)
+  angelEggLabel.bbcode_text = "[right]" + str(numEggs) + "[/right]"
   fishingRodSprite.visible = (global.memory.has("fishingRod") and global.memory["fishingRod"])
   flowerPotSprite.visible = (global.memory.has("flowerPot") and global.memory["flowerPot"])
   cutePetSprite.visible = (global.memory.has("cutePet") and global.memory["cutePet"])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=110 format=2]
+[gd_scene load_steps=111 format=2]
 
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=1]
 [ext_resource path="res://levels/EndlessFantasy/gd1ToxicJungle/BabaYagaLevelScript.gd" type="Script" id=2]
@@ -1273,9 +1273,9 @@ shader_param/target_palette = ExtResource( 7 )
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.75, 1 )
 
-[sub_resource type="BoxShape" id=270]
+[sub_resource type="BoxShape" id=289]
 resource_local_to_scene = true
-extents = Vector3( 1.5, 1.5, 1 )
+extents = Vector3( 2, 2, 1 )
 
 [sub_resource type="BoxShape" id=271]
 resource_local_to_scene = true
@@ -1790,6 +1790,10 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 10, 11 ]
 }
+
+[sub_resource type="BoxShape" id=290]
+resource_local_to_scene = true
+extents = Vector3( 2, 2, 1 )
 
 [sub_resource type="ViewportTexture" id=167]
 viewport_path = NodePath("Viewport")
@@ -2596,18 +2600,13 @@ grav = 0
 walk_speed = 3.0
 only_activate_in_range = false
 
-[node name="GlitchSlime2" parent="Viewport/level" instance=ExtResource( 40 )]
-transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 13, 20, 0 )
-grav = 0
-walk_speed = 3.0
-only_activate_in_range = false
-
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.53131, 25.3749, 0 )
 parter_door_id = "Door3"
 is_passive = true
 is_vertical = true
 is_sneaky = true
+gravity_flip = true
 
 [node name="landing" parent="Viewport/level/Door2" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 1 )
@@ -2616,7 +2615,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 1 )
 shape = SubResource( 269 )
 
 [node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
-shape = SubResource( 270 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0647545, 0 )
+shape = SubResource( 289 )
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea2" index="0"]
 shape = SubResource( 271 )
@@ -2628,11 +2628,12 @@ shape = SubResource( 272 )
 shape = SubResource( 273 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 24 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4687, -13.6251, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4687, -12.6251, 0 )
 parter_door_id = "Door2"
 is_passive = true
 is_vertical = true
 is_sneaky = true
+gravity_flip = true
 
 [node name="landing" parent="Viewport/level/Door3" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 1 )
@@ -2656,7 +2657,7 @@ anims/shroomLocked = SubResource( 286 )
 shape = SubResource( 269 )
 
 [node name="PassiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="1"]
-shape = SubResource( 270 )
+shape = SubResource( 290 )
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door3/InteractionArea2" index="0"]
 shape = SubResource( 271 )

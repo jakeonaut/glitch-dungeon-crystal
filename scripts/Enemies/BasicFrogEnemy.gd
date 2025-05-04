@@ -83,6 +83,8 @@ func _process(delta):
           tongueAniPlayer.stop()
           tongueAniPlayer.clear_queue()
           tongueAniPlayer.play("spitOut")
+          if global.activeInteractor != null:
+            global.activeInteractor.stopInteract()
           break
     # if tongueAniPlayer.assigned_animation == "gulpIdle" and not tongueAniPlayer.is_playing():
     #   tongueAniPlayer.play("gulpIdle")

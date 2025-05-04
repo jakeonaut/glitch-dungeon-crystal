@@ -115,6 +115,9 @@ func _ready():
   if smallInteractionShape.shape is BoxShape and smallInteractionShape.shape.extents.x == 2 and round(smallInteractionShape.shape.extents.y) == 1:
     smallInteractionShape.shape.extents = Vector3(4, 2, 1.3)
 
+  if interactPrompt != null:
+    interactPrompt.offset.y = -interact_prompt_offset
+    interactPrompt.max_frames = 1
   tryShowInteractPrompt()
 
 func _process(delta):
@@ -149,14 +152,19 @@ func unsmack():
     material.set_shader_param("normal_offset", .02)
     mySprite.material_override = material
 
+export var is_merchant = false
 func tryHideActiveInteractPrompt():
   textBox.hideInteractPrompt() # also handled by stopPassiveActivate...
   if interactPrompt == null:
     return
   if visible and is_active and not floating_text and textBox.text_final != "":
     interactPrompt.visible = true
-    interactPrompt.max_frames = 4
-    interactPrompt.updateBaseFrame(9, 23)
+    if is_merchant:
+      interactPrompt.max_frames = 4
+      interactPrompt.updateBaseFrame(13, 23)
+    else:
+      interactPrompt.max_frames = 4
+      interactPrompt.updateBaseFrame(9, 23)
   else:
     interactPrompt.visible = false
 
@@ -170,12 +178,18 @@ func tryShowInteractPrompt(is_active_interact_prompt = false, is_comic_alert = f
     interactPrompt.visible = true
     if is_active_interact_prompt and level.player.global_transform.origin.y < self.global_transform.origin.y + 0.5:
       interactPrompt.max_frames = 1
-      interactPrompt.updateBaseFrame(9, 23)
+      if is_merchant:
+        interactPrompt.updateBaseFrame(13, 23)
+      else:
+        interactPrompt.updateBaseFrame(9, 23)
       interactPrompt.visible = false
       textBox.showInteractPrompt(is_comic_alert)
     elif interactPrompt.max_frames == 1:
       interactPrompt.max_frames = 4
-      interactPrompt.updateBaseFrame(9, 23)
+      if is_merchant:
+        interactPrompt.updateBaseFrame(13, 23)
+      else:
+        interactPrompt.updateBaseFrame(9, 23)
   else:
     interactPrompt.visible = false
 

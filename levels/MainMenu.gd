@@ -395,8 +395,10 @@ func _process(delta):
             player.applyGlitch(global.GlitchForm.FEATHER, true)
         if mainMenuPromptIndex == 2:
             player.applyGlitch(global.GlitchForm.FLOOR, true)
+        if mainMenuPromptIndex == 3:
+            player.applyGlitch(global.GlitchForm.LADDER, true)
 
-        selectPrompt.rect_position.y = 354.5 + (mainMenuPromptIndex*55)
+        selectPrompt.rect_position.y = 300.5 + (mainMenuPromptIndex*55)
         if updateMenuText:
             menuText.bbcode_text = ""
             for i in range(global.save_game_files.size()):
@@ -491,10 +493,10 @@ func processSkipPrompt(delta):
 
 func normalizeMainMenuPromptIndex(change):
     mainMenuPromptIndex += change
-    if mainMenuPromptIndex > 2:
+    if mainMenuPromptIndex > global.save_game_files.size() - 1:
         mainMenuPromptIndex = 0
     if mainMenuPromptIndex < 0:
-        mainMenuPromptIndex = 2
+        mainMenuPromptIndex = global.save_game_files.size() - 1
 
 var has_ever_started_music = false
 # @override

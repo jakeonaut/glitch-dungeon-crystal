@@ -73,7 +73,7 @@ func _ready():
 func shakeScreen():
   level.player.screenShakeSound.pitch_scale = 1.5
   level.player.screenShakeSound.play()
-  if global.userSettings["canGlitchScreen"]:
+  if not global.userSettings["canGlitchScreen"]:
     return
   aniPlayer.stop()
   aniPlayer.clear_queue()
@@ -82,7 +82,7 @@ func shakeScreen():
 func miniShakeScreen():
   level.player.screenShakeSound.pitch_scale = 2.0
   level.player.screenShakeSound.play()
-  if global.userSettings["canGlitchScreen"]:
+  if not global.userSettings["canGlitchScreen"]:
     return
   if aniPlayer.assigned_animation == "screenShake" and aniPlayer.is_playing():
     return

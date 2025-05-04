@@ -3,14 +3,16 @@ extends AudioStreamPlayer
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 export(int, "NORMAL", "FISH", "PYRAMID", "SHROOM", "CAT") var key_type
 
-func _ready():
-    pass
-    
 onready var heart = get_node("../../..")
+func _ready():
+    yield(TempTimer.idle_frame(self), "timeout")
+    heart.message = tr("NPC.Crystal.6") + " +1"
+    
+var override_level_zone = null
 func activateScript():
     # global.getKeyInMemory(key_type, level)
 
-    var levelZoneName = global.currLevelZone
+    var levelZoneName = global.currLevelZone if override_level_zone == null else override_level_zone
     
     match levelZoneName:
         "gd1FishingVillage":
@@ -27,6 +29,7 @@ func activateScript():
     heart.queue_free()
     level.player.pauseInput = false
     level.player.aniPlayer.play("stand")
+    level.player.sayThis(tr("NPC.Crystal.6") + " +1\n")
 
 func isActive(_debug=false):
     return true

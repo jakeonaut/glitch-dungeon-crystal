@@ -81,7 +81,7 @@ radius = 0.8
 [node name="HeartContainer" type="Spatial"]
 script = ExtResource( 15 )
 true_terminal_vel = 8
-grav = 30
+grav = 0
 stop_all_music = false
 display_textbox = false
 message = "NPC.Crystal.6"

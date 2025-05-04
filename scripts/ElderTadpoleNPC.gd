@@ -10,7 +10,6 @@ onready var caneSprite = get_node("CaneSprite")
 var npcSleepSfxRes = preload("res://assets/sounds/Sleeping.wav")
 var am_i_sleepy = false
 var am_i_glitchy = false
-var heartContainerRes = preload("res://sceneObjects/SpellsTreasureCollectables/HeartContainer.tscn")
 
 var can_smack_back = true
 var render_cane = false
@@ -46,6 +45,10 @@ func processLevelZone():
         self.textBox.dialogStartSound.script = haven2CroneDialogStartSoundScriptRes
         self.textBox.abortSound.script = haven2CroneAbortSoundScriptRes
         global.memory["crone"] = 1
+        if global.memory["broomerang"] >= 2:
+          self.is_merchant = false
+        else:
+          self.is_merchant = true
     "gd1FishingVillage":
       memoryVarName = "angler_seaman_boss"
       can_smack_back = false
@@ -70,13 +73,14 @@ func processLevelZone():
       global.memory[memoryVarName] = 4
   have_i_processed = true
 
+var heartContainerRes = preload("res://sceneObjects/SpellsTreasureCollectables/HeartContainer.tscn")
 func spawnHeartContainer():
   if have_i_spawned_heart:
     return
   var newHeartContainer = heartContainerRes.instance()
   level.add_child(newHeartContainer)
   newHeartContainer.global_transform.origin = self.global_transform.origin
-  newHeartContainer.global_transform.origin.y += 1
+  newHeartContainer.global_transform.origin.y += 2
   newHeartContainer.on_ground = true
   have_i_spawned_heart = true
 

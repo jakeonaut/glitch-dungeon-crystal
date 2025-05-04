@@ -13,7 +13,9 @@ func activateScript():
   level.player.stopTalking()
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
-  if global.memory.has("spellbookPage"):
+  if global.getNumGrannyHearts(true) > 0:
+    level.player.sayThis(tr("Dialog.Player.4_2"), 10.0)
+  elif global.memory.has("spellbookPage"):
     level.player.sayThis(tr("Dialog.Player.4"), 10.0)
 
 func cutOffEarlyActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
