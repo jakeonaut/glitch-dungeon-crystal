@@ -63,6 +63,7 @@ onready var lifeUISound2 = get_node("LifeUISound2")
 onready var doorSound = get_node("DoorSound")
 onready var glitchedDoorSound = get_node("GlitchedDoorSound")
 onready var gustSound = get_node("GustSound")
+onready var panSmackSound = get_node("PanSmackSound")
 var DELETE_ME = 2
 
 # GlitchForm variables
@@ -307,7 +308,7 @@ func resetMemory():
     memory["currOutfit"] = GrandmaOutfit.BABUSHKA
     memory["allMyOutfits"] = [GrandmaOutfit.BABUSHKA]
     memory["currBroom"] = GrandmaBroom.NORMAL
-    memory["allMyBrooms"] = [GrandmaBroom.NORMAL, GrandmaBroom.FRYING_PAN]
+    memory["allMyBrooms"] = [GrandmaBroom.NORMAL]
     memory["currBag"] = GrandmaBag.NORMAL
     memory["allMyBags"] = [GrandmaBag.NORMAL]
 
@@ -343,6 +344,7 @@ func resetMemory():
     memory["forget_me_not"] = false
     memory["glitched_grimoire2"] = false
     
+    memory["mimic_heart"] = 0
     # crystal elder bosses
     memory["angler_seaman_boss"] = 0
     memory["angler_heart"] = 0
@@ -363,6 +365,7 @@ func resetMemory():
 
     # POWERUPS
     # memory["spellbookPage"] = [] # we check if the key exists to see if we have it... -_-
+    memory["has_eggs_marked"] = false
     memory["can_force_respawn"] = 0
     memory["has_map_item"] = false
     memory["broomerang"] = 0
@@ -411,7 +414,7 @@ func resetMemory():
 func getNumGrannyHearts(label = false):
     if not label and not global.memory["hearts_enabled"]:
         return 0
-    return global.memory["angler_heart"] + global.memory["baba_heart"] + global.memory["claydol_heart"]
+    return global.memory["angler_heart"] + global.memory["baba_heart"] + global.memory["claydol_heart"] + global.memory["mimic_heart"]
 
 var broomSheet = preload("res://assets/player_sheet_broom.png")
 var broomSheetAni = preload("res://assets/sprites/broom_ani.png")
@@ -733,6 +736,7 @@ func loadUserSettings():
     file.close()
     return true
 
+var MAX_ANGEL_EGGS = 28
 func loadGame(saveGameIndex):
     if saveGameIndex < 0 or saveGameIndex >= save_game_files.size():
         return false # Error! out of bounds
@@ -775,10 +779,10 @@ func loadGame(saveGameIndex):
         var numAngelEggs = global.getThingFromAllLevelZonez("angelEgg")
         if numAngelEggs >= 1:
             Steam.set_achievement("ANGEL_EGG_FIRST")
-        if numAngelEggs >= 28:
+        if numAngelEggs >= global.MAX_ANGEL_EGGS:
             Steam.set_achievement("ANGEL_EGG_ALL")
         elif numAngelEggs > 0:
-            Steam.user_stats.indicate_achievement_progress("ANGEL_EGG_ALL", numAngelEggs, 28)
+            Steam.user_stats.indicate_achievement_progress("ANGEL_EGG_ALL", numAngelEggs, global.MAX_ANGEL_EGGS)
 
     # reset boss flags from 1 to 0 if we are loading, so we can start the opening cinematic again for all of them.
     # if the boss flag is 2 already, it means you've beat them, so don't reset
@@ -1686,6 +1690,9 @@ func saveMySpot(savePoint, position, level):
     global.memory["active_save_point_z"] = position.z
     global.memory["savedRoomPath"] = level.getLevelName()
 
+func broomSmackSound():
+    if global.memory["currBroom"] == global.GrandmaBroom.FRYING_PAN:
+        global.panSmackSound.play()
 
 func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, smacked_npc):
   var have_i_smacked_an_npc = false
@@ -1696,6 +1703,7 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
       continue
     elif (area.is_in_group("weak_enemies")or area.is_in_group("nonviolent_enemies")) and area.has_method("isActive") and area.isActive() and is_active:
       if not area.get_node("..").am_i_dying:
+        broomSmackSound()
         area.get_node("..").ouchies(global_transform.origin)
         level.summonSmokeClouds(global_transform.origin, 5, true, true)
         if my_broom_owner:
@@ -1709,12 +1717,14 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
     elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive() and is_active:
       if global.memory["glitched_broom"]: # see GlitchEnemy.activate cuz it gets there first...
         if area.get_node("..").ouchies(global_transform.origin):
+          broomSmackSound()
           if my_broom_owner:
             my_broom_owner.getSmacked()
             my_broom_owner.has_sweeped_glitch = true
             my_broom_owner.glitchTickle()
       else:
         if area.get_node("..").notOuchies(global_transform.origin):
+          broomSmackSound()
           if my_broom_owner:
             my_broom_owner.getSmacked()
             my_broom_owner.has_sweeped_glitch = true
@@ -1729,6 +1739,8 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
       var areaParent = area.get_node("..")
       if canActivate(area, smacked_npc, have_i_smacked_an_npc) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive() and areaParent.visible:
         var smackResult = areaParent.getSmacked(global_transform.origin)
+        if smackResult != false:
+            broomSmackSound()
         if areaParent == level.player and my_broom_owner and my_broom_owner != level.player and my_broom_owner.summonedBroom and my_broom_owner.summonedBroom.is_evil:
           level.player.tryDieToEnemy(0, true, false)
 
@@ -1745,6 +1757,8 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
       var areaParent = area.get_node("..")
       if canActivate(area, smacked_npc, have_i_smacked_an_npc) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
         var smackResult = areaParent.getSmacked(global_transform.origin)
+        if smackResult != false:
+            broomSmackSound()
         if not (area.is_in_group("tadpole") and smackResult == null):
           if my_broom_owner:
             my_broom_owner.getSmacked()

@@ -330,12 +330,14 @@ func hitStuff(_delta):
                     #     my_broom_owner.teleport_to = weakref(area.get_parent())
                     #     my_broom_owner.teleport_to_origin = area.get_parent().global_transform.origin
                 area.get_node("..").ouchies(global_transform.origin)
+                global.broomSmackSound()
                 my_broom_owner.has_sweeped_glitch = true
                 level.summonSmokeClouds(global_transform.origin, 5, true, true)
                 # my_broom_owner.should_die_on_land)
                 has_hit_something = true
         elif area.is_in_group("enemies") and area.has_method("isActive") and area.isActive():
             if area.get_node("..").notOuchies(global_transform.origin):
+                global.broomSmackSound()
                 if not returning:
                     my_broom_owner.getSmacked()
                     # my_broom_owner.teleport_to = weakref(area.get_parent())
@@ -349,6 +351,8 @@ func hitStuff(_delta):
             var areaParent = area.get_node("..")
             if canActivate(area) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive() and areaParent.visible and not returning:
                 var smackResult = areaParent.getSmacked(global_transform.origin)
+                if smackResult != false:
+                    global.broomSmackSound()
                 if areaParent.has_method("imAnNpc") and smackResult == null and not returning:
                     smacked_npc = weakref(areaParent)
                     have_i_smacked_an_npc = true
@@ -363,6 +367,8 @@ func hitStuff(_delta):
             var areaParent = area.get_node("..")
             if canActivate(area) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
                 var smackResult = areaParent.getSmacked(global_transform.origin)
+                if smackResult != false:
+                    global.broomSmackSound()
                 if not (area.is_in_group("tadpole") and smackResult == null):
                     if not returning:
                         my_broom_owner.getSmacked()

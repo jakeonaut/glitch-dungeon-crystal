@@ -988,6 +988,9 @@ func processBossHealth(delta):
   uiLayer.grannyLifeSprite4.visible = whichBoss.num_granny_hits >= 4 and (animate_life_timer >= animate_life_time_limit*4)
   uiLayer.grannyLifeSprite5.visible = whichBoss.num_granny_hits >= 5 and (animate_life_timer >= animate_life_time_limit*5)
   uiLayer.grannyLifeSprite6.visible = whichBoss.num_granny_hits >= 6 and (animate_life_timer >= animate_life_time_limit*6)
+  uiLayer.grannyLifeSprite7.visible = whichBoss.num_granny_hits >= 7 and (animate_life_timer >= animate_life_time_limit*7)
+  uiLayer.grannyLifeSprite8.visible = whichBoss.num_granny_hits >= 8 and (animate_life_timer >= animate_life_time_limit*8)
+  uiLayer.grannyLifeSprite9.visible = whichBoss.num_granny_hits >= 9 and (animate_life_timer >= animate_life_time_limit*9)
 
   # a bit esoteric logic given that we're hard coding it
   if whichBoss.MAX_NUM_HITS == 6:

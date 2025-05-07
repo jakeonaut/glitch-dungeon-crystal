@@ -471,6 +471,7 @@ func _process(delta):
       spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x + 0.25
   spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.userSettings["colorblindMode"] and transformation == TransformationState.NORMAL
 
+  processSleepyLogic(delta)
   if global.isPauseMenuOpen:
     return
 
@@ -630,7 +631,7 @@ func unsmack():
   mySprite.material_override.set_shader_param("enable_palette_cycle", false)
 
 func startTeleport():
-  if teleport_to != null and Input.is_action_pressed("sub_action_button") and global.activeInteractor == null:
+  if teleport_to != null and Input.is_action_just_pressed("sub_action_button") and global.activeInteractor == null:
     pauseSelf = true
     global.pauseMoveInput = true
     visible = false
@@ -1418,6 +1419,21 @@ func getCurseCured():
   transformation = TransformationState.NORMAL
   getABroom()
 
+var snoring = false
+var sleepy_timer = 0
+var sleepy_time_limit = 45
+func processSleepyLogic(delta):
+  if transformation == TransformationState.NORMAL and on_ground and not summonedBroom and physics_state == self.PhysicsState.NORMAL and not anyOtherRitualInputsDetected(false) and aniPlayer.assigned_animation == "stand":
+    sleepy_timer += (delta*11)
+    if sleepy_timer >= sleepy_time_limit:
+      snoring = true
+      aniPlayer.stop()
+      aniPlayer.clear_queue()
+      aniPlayer.play("yawn")
+      aniPlayer.queue("sleepy")
+  elif not global.isPauseMenuOpen:
+    sleepy_timer = 0
+
 onready var ritualSound = get_node("Sounds/RitualSound")
 onready var angelZoneLevelDoor = get_node("AngelZoneLevelDoor")
 var ritual_state_index = 0
@@ -1457,10 +1473,12 @@ func processAngelStatueRitual(_delta):
     
   
 
-func anyOtherRitualInputsDetected():
+func anyOtherRitualInputsDetected(just_pressed = true):
   var inputs = ["ui_left", "ui_right", "ui_up", "ui_down", "jump_button", "sub_action_button", "alt_action_button", "restart_key", "ui_start", "popup_menu", "left_button"]
   for input in inputs:
-    if Input.is_action_just_pressed(input):
+    if just_pressed and Input.is_action_just_pressed(input):
+      return true
+    elif Input.is_action_pressed(input):
       return true
   return false
 
@@ -2328,6 +2346,21 @@ func doBroomAttack(which_broom_attack):
   #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 2, y + 0, z), false, false)
   #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 1, y - 1, z), false, false)
   #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 2, y - 1, z), false, false)
+
+func spawnSnoreBubble():
+  var bubble = bubbleRes.instance()
+  bubble.is_horizontal = true
+  level.add_child(bubble)
+  bubble.setAsParent(self)
+  bubble.global_transform.origin = global_transform.origin
+  if mySprite.flip_h:
+    bubble.global_transform.origin.x -= 2
+    bubble.horizontal_direction = -1
+  else:
+    bubble.global_transform.origin.x += 2
+    bubble.horizontal_direction = 1
+  bubble.my_original_pos = bubble.global_transform.origin.y
+  bubble.my_target_pos = bubble.global_transform.origin.y  + rand_range(-1, 1)
 
 var spore_spawn_timer = 0
 var spore_spawn_time_limit = 15

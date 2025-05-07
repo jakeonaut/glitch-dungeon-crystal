@@ -306,6 +306,7 @@ unit_db = -24.0
 unit_size = 5.0
 max_db = -24.0
 max_distance = 25.0
+bus = "Sfx"
 
 [node name="Area" type="Area" parent="."]
 script = ExtResource( 10 )

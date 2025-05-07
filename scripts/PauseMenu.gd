@@ -98,6 +98,7 @@ var pauseMenuState = PauseMenuState.NORMAL
 var shouldUpdateMenuText = true
 
 func _ready():
+  popupText.bbcode_text = tr("Dialog.Player.3")
   set_process(true)
 
 func _process(delta):
@@ -1172,7 +1173,22 @@ func tryDrawMap():
       #         mapAngelSprite.get_parent().add_child(angelSprite)
       #       else:
       #         sprite.material.set_shader_param("offset", 6)
-      if "BossRoom" in mapRoom.path and not "preBossRoom" in mapRoom.path:
+      var numAngelEggs = mapRoom.has_angel_egg
+      var mapPath = mapRoom.path
+      var levelZoneName = global.getLevelZoneName(mapPath)
+      var levelName = global.getShortLevelName(mapPath)
+      if global.memory.has(levelZoneName) and global.memory[levelZoneName].has(levelName):
+        if global.memory[levelZoneName][levelName].has("AngelEgg"):
+          numAngelEggs -= 1
+        if global.memory[levelZoneName][levelName].has("AngelEgg2"):
+          numAngelEggs -= 1
+      if numAngelEggs > 0 and global.memory["has_eggs_marked"]:
+        sprite.material.set_shader_param("offset", 9)
+        if numAngelEggs == 1:
+          sprite.frame = 207
+        elif numAngelEggs == 2:
+          sprite.frame = 206
+      elif "BossRoom" in mapRoom.path and not "preBossRoom" in mapRoom.path:
         if "AnglerFish" in mapRoom.path:
           if global.memory["angler_seaman_boss"] >= 3:
             sprite.frame = 238

@@ -2,12 +2,13 @@ extends AudioStreamPlayer
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var npc = get_node("../../..")
+onready var textBox = get_node("..")
 
 func _ready():
   pass
 
 func activateScript():
-  if global.memory.has("fishingRod") and global.memory["fishingRod"]:
+  if textBox.has_been_shown and global.memory.has("fishingRod") and global.memory["fishingRod"]:
     if global.memory["zora_flippers"] == 0:
       npc.textBoxContainer.bbText = tr("NPC.BigFisherman.2")
     else:

@@ -2,7 +2,6 @@ extends "TreasureCollectable.gd"
 
 export var behavior_walking = true
 export var behavior_was_thrown = true
-export var message = "UI.Alert.0"
 
 var land_count = 0
 var land_count_limit = 3

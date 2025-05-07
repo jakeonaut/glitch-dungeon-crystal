@@ -14,6 +14,7 @@ export var display_textbox = true
 export var canPause = true
 
 onready var chestSprite = get_node("TreasureSprite3D") if has_node("TreasureSprite3D") else null
+export var message = "UI.Alert.0"
 
 func _ready():
   if is_static_in_level and self.getMyStaticLevelZoneVar():

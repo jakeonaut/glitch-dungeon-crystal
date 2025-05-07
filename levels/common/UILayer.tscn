@@ -1945,6 +1945,33 @@ hframes = 16
 vframes = 16
 frame = 62
 
+[node name="LifeSprite7" type="Sprite" parent="LivesRect"]
+material = SubResource( 17217 )
+position = Vector2( 188, 21 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 35 )
+hframes = 16
+vframes = 16
+frame = 62
+
+[node name="LifeSprite8" type="Sprite" parent="LivesRect"]
+material = SubResource( 17217 )
+position = Vector2( 216, 21 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 35 )
+hframes = 16
+vframes = 16
+frame = 62
+
+[node name="LifeSprite9" type="Sprite" parent="LivesRect"]
+material = SubResource( 17217 )
+position = Vector2( 244, 21 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 35 )
+hframes = 16
+vframes = 16
+frame = 62
+
 [node name="BossLifeSprite" type="Sprite" parent="LivesRect"]
 material = SubResource( 17218 )
 position = Vector2( 22, 48.5 )
@@ -2041,8 +2068,8 @@ rect_clip_content = false
 theme = SubResource( 17228 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "[right]ver-3.0.8.9[/right]"
-text = "ver-3.0.8.9"
+bbcode_text = "[right]ver-3.0.10.0[/right]"
+text = "ver-3.0.10.0"
 
 [editable path="EdgeDistortion"]
 [editable path="PauseMenu"]

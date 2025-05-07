@@ -1342,3 +1342,4 @@ unit_size = 6.0
 max_db = -20.0
 pitch_scale = 0.8
 max_distance = 15.0
+bus = "Sfx"

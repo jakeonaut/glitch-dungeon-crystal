@@ -281,6 +281,7 @@ stream = ExtResource( 15 )
 unit_db = 20.0
 unit_size = 6.0
 max_db = -24.0
+bus = "Sfx"
 
 [node name="PlayerActivationArea" type="Area" parent="." groups=["playerActivation"]]
 script = ExtResource( 1 )

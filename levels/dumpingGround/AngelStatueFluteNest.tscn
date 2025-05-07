@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=2]
@@ -28,16 +28,25 @@
 [ext_resource path="res://sceneObjects/CrystalGeode.tscn" type="PackedScene" id=26]
 [ext_resource path="res://assets/sprites/geodeShine.png" type="Texture" id=27]
 
-[sub_resource type="BoxShape" id=20]
+[sub_resource type="BoxShape" id=29]
 resource_local_to_scene = true
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=30]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=31]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="BoxShape" id=21]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
-[sub_resource type="BoxShape" id=22]
+[sub_resource type="BoxShape" id=32]
 resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
+extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="Animation" id=17]
 resource_name = "doorClose"
@@ -86,17 +95,25 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="BoxShape" id=15]
+[sub_resource type="BoxShape" id=33]
 resource_local_to_scene = true
-extents = Vector3( 2, 8, 1 )
+extents = Vector3( 0.5, 0.75, 1 )
+
+[sub_resource type="BoxShape" id=34]
+resource_local_to_scene = true
+extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=35]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="BoxShape" id=23]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
 
-[sub_resource type="BoxShape" id=24]
+[sub_resource type="BoxShape" id=36]
 resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
+extents = Vector3( 1.5, 0.24, 1 )
 
 [sub_resource type="BoxShape" id=16]
 resource_local_to_scene = true
@@ -108,74 +125,111 @@ extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="ShaderMaterial" id=26]
 shader = ExtResource( 22 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
 shader_param/texture_albedo = ExtResource( 24 )
 shader_param/base_palette = ExtResource( 23 )
 shader_param/target_palette = ExtResource( 20 )
 
 [sub_resource type="ShaderMaterial" id=27]
 shader = ExtResource( 22 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 0.5
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = true
 shader_param/palette_cycle_speed = 5.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
 shader_param/texture_albedo = ExtResource( 25 )
 shader_param/base_palette = ExtResource( 23 )
 shader_param/target_palette = ExtResource( 21 )
 
 [sub_resource type="ShaderMaterial" id=28]
 shader = ExtResource( 22 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 0.0
-shader_param/line_color = Color( 0.01, 0.01, 0.01, 1 )
-shader_param/line_scale = 0.04
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = true
 shader_param/palette_cycle_speed = 15.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.0
+shader_param/time_influence = 0.0
+shader_param/y_div = 0.0
 shader_param/texture_albedo = ExtResource( 27 )
 shader_param/base_palette = ExtResource( 23 )
 shader_param/target_palette = ExtResource( 20 )
-
-[sub_resource type="BoxShape" id=29]
-resource_local_to_scene = true
-extents = Vector3( 5, 3, 1.3 )
-
-[sub_resource type="BoxShape" id=30]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
@@ -230,9 +284,6 @@ cell_octant_size = 4
 cell_center_z = false
 collision_layer = 0
 collision_mask = 0
-data = {
-"cells": PoolIntArray(  )
-}
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_clip_": 0
@@ -281,19 +332,24 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -0.0999999 )
 
 [node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, 0 )
-visible = false
 
-[node name="landing" parent="Viewport/level/Door" index="3"]
+[node name="landing" parent="Viewport/level/Door" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 1 )
 
-[node name="CollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
-shape = SubResource( 20 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
+shape = SubResource( 29 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
+shape = SubResource( 30 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea2" index="0"]
+shape = SubResource( 31 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 21 )
 
-[node name="CollisionShape" parent="Viewport/level/Door/NPC/FallthroughSolid" index="0"]
-shape = SubResource( 22 )
+[node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
+shape = SubResource( 32 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -1, 0 )
@@ -303,23 +359,28 @@ is_passive = true
 [node name="Sprite3D" parent="Viewport/level/Door2" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )
 
-[node name="landing" parent="Viewport/level/Door2" index="3"]
+[node name="landing" parent="Viewport/level/Door2" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/doorClose = SubResource( 17 )
 anims/doorOpen = SubResource( 18 )
 anims/locked = SubResource( 19 )
 
-[node name="CollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
-shape = SubResource( 15 )
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
+shape = SubResource( 33 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
+shape = SubResource( 34 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea2" index="0"]
+shape = SubResource( 35 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 23 )
 
-[node name="CollisionShape" parent="Viewport/level/Door2/NPC/FallthroughSolid" index="0"]
-shape = SubResource( 24 )
+[node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
+shape = SubResource( 36 )
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 0 )
@@ -347,7 +408,7 @@ is_really_important = true
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
 
-[node name="Sprite3D" parent="Viewport/level/NPC" index="5"]
+[node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.927, 0 )
 frame = 6
 
@@ -375,12 +436,6 @@ material_override = SubResource( 27 )
 [node name="ShineSprite" parent="Viewport/level/CrystalGeode" index="2"]
 material_override = SubResource( 28 )
 
-[node name="CollisionShape" parent="Viewport/level/CrystalGeode/NPC/SmallInteractionArea" index="0"]
-shape = SubResource( 29 )
-
-[node name="CollisionShape" parent="Viewport/level/CrystalGeode/NPC/FallthroughSolid" index="0"]
-shape = SubResource( 30 )
-
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -393,13 +448,9 @@ __meta__ = {
 [node name="ScreenEffects" parent="." instance=ExtResource( 6 )]
 
 [editable path="Viewport/level/Door"]
-[editable path="Viewport/level/Door/NPC"]
 [editable path="Viewport/level/Door/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door2"]
-[editable path="Viewport/level/Door2/NPC"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/NPC"]
 [editable path="Viewport/level/NPC/NPC TextBox"]
 [editable path="Viewport/level/CrystalGeode"]
-[editable path="Viewport/level/CrystalGeode/NPC"]
-[editable path="Viewport/level/CrystalGeode/NPC/NPC TextBox"]

@@ -13,12 +13,13 @@ func setUpRoomInitializationOverride():
     global.memory["babushka_cat_story_hook"] = 2
     global.memory["currPet"] = null
     babushkaCatFollower.popFromFollowers()
-    var npc = babushkaCatFollower.get_node("NPC")
-    babushkaCatFollower.remove_child(npc)
-    self.add_child(npc)
-    npc.global_transform.origin = babushkaCatFollower.global_transform.origin
+    # var npc = babushkaCatFollower.get_node("NPC")
+    # babushkaCatFollower.remove_child(npc)
+    # self.add_child(npc)
+    # npc.global_transform.origin = babushkaCatFollower.global_transform.origin
+    self.summonSmokeClouds(babushkaCatFollower.global_transform.origin, 3)
     babushkaCatFollower.queue_free()
-    npc.glitchOut()
+    # npc.glitchOut()
 
   # if global.memory["clean_crystals"] >= 4:    
   #   door2.is_locked = false

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/exhale.mp3-e4094f977fd1bbee4ef46b2c53af3359.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/exhale.mp3"
+dest_files=[ "res://.import/exhale.mp3-e4094f977fd1bbee4ef46b2c53af3359.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

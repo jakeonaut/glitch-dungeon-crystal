@@ -18,6 +18,7 @@ export var has_spore_door = false
 export var has_phishing_door = false
 export var has_angel_statue = false
 export var kill_after_glitch = false
+export var has_angel_egg = 0
 
 
 # Declare member variables here. Examples:

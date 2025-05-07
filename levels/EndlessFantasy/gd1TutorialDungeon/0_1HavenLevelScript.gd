@@ -45,9 +45,14 @@ func setUpRoomInitializationOverride():
 
   if global.memory["broomerang"] >= 2:
     broomUpgradeCrone.is_merchant = false
+
+  if global.memory["allMyBrooms"].find(global.GrandmaBroom.FRYING_PAN) >= 0:
+    fryingPanNPC.is_merchant = false
     
   if global.memory["clean_crystals"] >= 4:
     broomUpgradeCrone.queue_free()
+    fryingPanNPC.visible = true
+
   var hasEnteredTower = global.memory["priestessShortcut"] > 0 # global.memory.has("gd1CrystalTower")
   if global.memory["angler_seaman_boss"] >= 3 and global.memory["angler_heart"] == 0:
     spawnHeartContainer(fishElderNPC.global_transform.origin, "gd1FishingVillage")

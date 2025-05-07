@@ -1,7 +1,7 @@
 extends AudioStreamPlayer
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
-export(int, "NORMAL", "FISH", "PYRAMID", "SHROOM", "CAT") var key_type
+export var is_mimic = false
 
 onready var heart = get_node("../../..")
 func _ready():
@@ -12,15 +12,17 @@ var override_level_zone = null
 func activateScript():
     # global.getKeyInMemory(key_type, level)
 
-    var levelZoneName = global.currLevelZone if override_level_zone == null else override_level_zone
-    
-    match levelZoneName:
-        "gd1FishingVillage":
-            global.memory["angler_heart"] = 1
-        "gd1ToxicJungle":
-            global.memory["baba_heart"] = 1
-        "gd1ShiftingSandLand":
-            global.memory["claydol_heart"] = 1
+    if is_mimic:
+        global.memory["mimic_heart"] += 1
+    else:
+        var levelZoneName = global.currLevelZone if override_level_zone == null else override_level_zone
+        match levelZoneName:
+            "gd1FishingVillage":
+                global.memory["angler_heart"] = 1
+            "gd1ToxicJungle":
+                global.memory["baba_heart"] = 1
+            "gd1ShiftingSandLand":
+                global.memory["claydol_heart"] = 1
 
     global.pauseGame = false
     global.pauseMoveInput = false

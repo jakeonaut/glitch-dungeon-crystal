@@ -140,4 +140,4 @@ func getSmacked(broom_origin = null):
   is_smacked = true
 
 func isActive():
-  return true
+  return false

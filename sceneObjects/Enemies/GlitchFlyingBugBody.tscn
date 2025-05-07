@@ -206,6 +206,7 @@ unit_size = 6.0
 max_db = -20.0
 pitch_scale = 0.8
 max_distance = 15.0
+bus = "Sfx"
 
 [node name="ScoochSound2" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = ExtResource( 15 )
@@ -214,6 +215,7 @@ max_db = -24.0
 pitch_scale = 0.9
 max_distance = 20.0
 out_of_range_mode = 1
+bus = "Sfx"
 
 [node name="HeartSound" type="AudioStreamPlayer" parent="Sounds"]
 bus="Sfx"

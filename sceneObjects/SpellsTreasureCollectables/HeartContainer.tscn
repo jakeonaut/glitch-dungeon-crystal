@@ -143,7 +143,6 @@ volume_db = -10.0
 [node name="AbortSound" parent="NPC TextBox/TextBox" index="13"]
 stream = null
 script = ExtResource( 14 )
-key_type = 0
 
 [node name="CollectSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )

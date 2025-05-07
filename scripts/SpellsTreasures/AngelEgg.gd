@@ -19,6 +19,13 @@ func _ready():
     if is_static_in_level and self.getMyStaticLevelZoneVar():
         visible = false
 
+    if grav == 0:
+        landSound.play()
+        yield(get_tree().create_timer(0.3), "timeout")
+        landSound.play()
+        yield(get_tree().create_timer(0.1), "timeout")
+        landSound.play()
+
 func _process(delta):
     pauseSelf = not visible
     if pauseSelf:

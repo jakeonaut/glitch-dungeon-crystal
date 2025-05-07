@@ -23,10 +23,10 @@ func activateScript():
     if global.demo_mode <= 0:
         Steam.set_achievement("ANGEL_EGG_FIRST")
         var numAngelEggs = global.getThingFromAllLevelZonez("angelEgg")
-        if numAngelEggs >= 28:
+        if numAngelEggs >= global.MAX_ANGEL_EGGS:
             Steam.set_achievement("ANGEL_EGG_ALL")
         else:
-            Steam.user_stats.indicate_achievement_progress("ANGEL_EGG_ALL", numAngelEggs, 28)
+            Steam.user_stats.indicate_achievement_progress("ANGEL_EGG_ALL", numAngelEggs, global.MAX_ANGEL_EGGS)
 
 func isActive(_debug=false):
     return true

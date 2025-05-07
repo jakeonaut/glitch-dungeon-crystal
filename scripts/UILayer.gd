@@ -111,6 +111,9 @@ onready var grannyLifeSprite3 = get_node("LivesRect/LifeSprite3")
 onready var grannyLifeSprite4 = get_node("LivesRect/LifeSprite4")
 onready var grannyLifeSprite5 = get_node("LivesRect/LifeSprite5")
 onready var grannyLifeSprite6 = get_node("LivesRect/LifeSprite6")
+onready var grannyLifeSprite7 = get_node("LivesRect/LifeSprite7")
+onready var grannyLifeSprite8 = get_node("LivesRect/LifeSprite8")
+onready var grannyLifeSprite9 = get_node("LivesRect/LifeSprite9")
 onready var deadTextLabel = get_node("LivesRect/DeadTextLabel")
 onready var bossLifeSprite1 = get_node("LivesRect/BossLifeSprite")
 onready var bossLifeSprite2 = get_node("LivesRect/BossLifeSprite2")
@@ -530,24 +533,6 @@ func processHiscoreRenderLogic(delta):
         level.player.ignorePhysics = false
         global.shouldRenderAsCinematic = false
         global.isPauseMenuOpen = false
-        yield(get_tree().create_timer(0.1), "timeout")
-        global.pauseMoveInput = false
-        global.pauseGame = false
-        global.isEnteringRoom = false
-        level.player.pauseSelf = false
-        level.player.physics_state = level.player.PhysicsState.NORMAL
-        level.player.pauseInput = false
-        level.player.ignorePhysics = false
-        global.shouldRenderAsCinematic = false
-        yield(get_tree().create_timer(0.1), "timeout")
-        global.pauseMoveInput = false
-        global.pauseGame = false
-        global.isEnteringRoom = false
-        level.player.pauseSelf = false
-        level.player.physics_state = level.player.PhysicsState.NORMAL
-        level.player.pauseInput = false
-        level.player.ignorePhysics = false
-        global.shouldRenderAsCinematic = false
     else:
       hiscoreTimer = hiscoreTimeLimit
 

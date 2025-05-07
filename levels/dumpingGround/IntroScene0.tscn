@@ -356,6 +356,7 @@ unit_db = 20.0
 unit_size = 6.0
 max_db = 1.947
 max_distance = 10.0
+bus = "Sfx"
 
 [node name="Snail2" parent="Viewport/level" instance=ExtResource( 35 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48.1, -0.2, 0 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=238 format=2]
+[gd_scene load_steps=240 format=2]
 
 [ext_resource path="res://levels/EndlessFantasy/gd1TutorialDungeon/0_1HavenLevelScript.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/dream-haze-8-1x.png" type="Texture" id=2]
@@ -52,6 +52,8 @@
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=50]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/InvisibleSpell.tscn" type="PackedScene" id=51]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/LadderSpell.tscn" type="PackedScene" id=52]
+[ext_resource path="res://levels/EndlessFantasy/gd1TutorialDungeon/FryingPanNPCDialogStartSound.gd" type="Script" id=53]
+[ext_resource path="res://levels/EndlessFantasy/gd1TutorialDungeon/FryingPanNPCAbortSound.gd" type="Script" id=54]
 
 [sub_resource type="ShaderMaterial" id=17]
 shader = ExtResource( 6 )
@@ -6376,20 +6378,25 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7, -17.4, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, -11.6, 0 )
 
 [node name="FryingPanNPC" parent="Viewport/level" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 0.5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 0, 0 )
 visible = false
 grav = 0
+bbText = "NPC.FryingPan.1"
 needs_to_talk_normal_first = true
-can_activate = false
 is_a_body = false
-is_active = false
 is_merchant = true
 
 [node name="CollisionShape" parent="Viewport/level/FryingPanNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 422 )
 
+[node name="DialogStartSound" parent="Viewport/level/FryingPanNPC/NPC TextBox/TextBox" index="10"]
+script = ExtResource( 53 )
+
+[node name="AbortSound" parent="Viewport/level/FryingPanNPC/NPC TextBox/TextBox" index="13"]
+script = ExtResource( 54 )
+
 [node name="Sprite3D" parent="Viewport/level/FryingPanNPC" index="3"]
-frame = 12
+frame = 33
 
 [node name="CollisionShape" parent="Viewport/level/FryingPanNPC/FallthroughSolid" index="0"]
 shape = SubResource( 423 )
@@ -6421,7 +6428,7 @@ flip_v = true
 mesh = SubResource( 424 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [editable path="Viewport/level/GameCamera"]
 [editable path="Viewport/level/Player"]

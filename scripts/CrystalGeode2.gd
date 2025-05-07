@@ -98,6 +98,14 @@ var pre_purification_rotate_amt = 1
 func _process(delta):
     if is_purified:
         cubeContainer.rotation_degrees.y += delta*22
+        if not global.hasGottenLevelGeode and global.shouldRenderAsCinematic:
+            global.pauseMoveInput = false
+            global.pauseGame = false
+            level.player.pauseSelf = false
+            level.player.physics_state = level.player.PhysicsState.NORMAL
+            level.player.pauseInput = false
+            level.player.ignorePhysics = false
+            global.shouldRenderAsCinematic = false
     else: 
         cubeContainer.rotation_degrees.y -= delta*22 * pre_purification_rotate_amt
     # if is_purified:
@@ -187,6 +195,7 @@ func isActive(_debug=false):
     return visible and is_active
 
 func speakToMe():
+    is_purified = true
     if high_priestess_crystal:
         global.hasGottenLevelGeode = false
         global.hasLevelGeodeBeenSmacked = false
@@ -198,8 +207,9 @@ func speakToMe():
     # else:
     #     level.player.sayThis("wow, congrats, you purified a crystal!")
 
+var soft_is_purified = false
 func getPurified():
-    if is_purified:
+    if is_purified or soft_is_purified:
         return
     var children = self.get_children()
     for child in children:
@@ -220,7 +230,7 @@ func getPurified():
     global.shouldRenderAsCinematic = true
     # level.levelTiles.randomize_num += 10
     # level.levelTiles.randomize_num_counter = 15
-    is_purified = true
+    soft_is_purified = true
     # level.show_crt_effect = true
     # level.player.pauseSelf = true
     # musicPlayer.stopAll()
