@@ -179,6 +179,18 @@ can_nav_left = false
 can_nav_right = false
 can_nav_down = false
 
+[node name="LiminalAngelFluteRoom" parent="TutorialDungeon" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 0 )
+material_override = null
+offset = Vector2( 1, 0 )
+frame = 4
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/LiminalAngelFluteRoom.tscn"
+can_nav_left = false
+can_nav_right = false
+can_nav_up = false
+can_nav_down = false
+hide_me_from_map = true
+
 [node name="ChickenRoomSecret" parent="TutorialDungeon" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2, 0 )
 material_override = null
@@ -732,7 +744,7 @@ can_nav_down = false
 has_angel_statue = true
 
 [node name="PrimordialOoze" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, -1 )
 material_override = null
 pixel_size = 0.1
 texture = ExtResource( 24 )

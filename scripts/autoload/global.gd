@@ -383,6 +383,7 @@ func resetMemory():
     memory["hp"] = memory["max_hp"]
     memory["angel_flute"] = false
     memory["has_marked_bosses_on_map"] = false
+    memory["has_teleported"] = false
     # ==============================================
 
     # DEFUNCT POWERUPS
@@ -554,7 +555,7 @@ func prepareForTransition(level, enteredDoor = null):
     global.activeInteractor = null
     global.memory["cameraSize"] = level.gameCamera.initial_size
     # global.memory["lastDoor"] = id
-    global.memory["roomPath"] = level.getLevelName()
+    global.memory["roomPath"] = level.getLevelName(true)
     global.pauseGame = true
     global.isEnteringRoom = true
     global.hasJustEnteredRoom = false

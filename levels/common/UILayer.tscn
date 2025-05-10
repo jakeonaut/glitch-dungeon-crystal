@@ -2068,8 +2068,8 @@ rect_clip_content = false
 theme = SubResource( 17228 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "[right]ver-3.0.10.0[/right]"
-text = "ver-3.0.10.0"
+bbcode_text = "[right]ver-3.0.10.3[/right]"
+text = "ver-3.0.10.3"
 
 [editable path="EdgeDistortion"]
 [editable path="PauseMenu"]

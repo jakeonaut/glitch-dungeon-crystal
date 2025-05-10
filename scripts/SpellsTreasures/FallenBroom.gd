@@ -179,7 +179,7 @@ func _process(delta):
 func warpToIt():
     if global.memory["broomerang"] >= 2 and can_warp:
         if not level.player.can_broomerang_warp and level.player.teleport_to == null:
-            level.player.errorSound.play()
+            level.player.tickleSound.play()
         else:
             if level.player.teleport_to == null:
                 level.player.teleport_to = weakref(self)

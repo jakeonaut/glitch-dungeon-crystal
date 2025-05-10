@@ -376,7 +376,10 @@ func overrideLevelRespawnEvent():
 func setUpRoomInitializationOverride():
   pass
 
-func getLevelName():
+var overrideRoomPath = null
+func getLevelName(allow_override = false):
+  if allow_override and overrideRoomPath != null:
+    return overrideRoomPath
   return get_node("../..").get_filename()
   
 func getShortLevelName():
@@ -420,6 +423,8 @@ func tryToRespawn():
           if global.getStaticLevelZoneLevelVar(self, door) == door.DoorMemory.LAST_ENTERED:
             found_door = door
             break
+      if not found_door and self.has_node("ShortcutDoor"):
+        found_door = self.get_node("ShortcutDoor")
       var broths = get_tree().get_nodes_in_group("broths")
       for broth in broths:
         if broth.path == door_path:

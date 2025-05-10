@@ -17,6 +17,7 @@ export var is_vertical = false
 export var num_keys_unlock = 999
 export var locked_to_monsters = false
 export var is_level_door = false
+var is_shortcut = false
 
 onready var npc = get_node("NPC")
 

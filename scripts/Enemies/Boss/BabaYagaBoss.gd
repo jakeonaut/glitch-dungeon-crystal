@@ -154,6 +154,8 @@ func unsmack():
 # var sprite3d_noglitchShader = preload("res://shaders/Sprite3D_noglitch.shader")
 # var sprite3dShader = preload("res://shaders/Sprite3D_noglitch.shader")
 func _process(delta):
+    if not visible: return
+    
     # if global.userSettings["canGlitchScreen"]:
     #     mySprite.material_override.shader = sprite3dShader
     # else:

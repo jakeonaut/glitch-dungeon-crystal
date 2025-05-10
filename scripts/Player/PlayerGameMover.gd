@@ -369,6 +369,8 @@ func playJumpSound():
   if transformation == TransformationState.CHICKEN:
     flapSound.pitch_scale = rand_range(1.2, 1.4)
     flapSound.play()
+    summonSmokeClouds(1, false, false, -1)
+    summonSmokeClouds(1, false, false, 1)
     return
   elif nesting_doll_state == global.NestingDoll.MATRIARCH:
     jumpSound.pitch_scale = rand_range(0.5, 0.6)
@@ -400,7 +402,9 @@ func landed():
   has_used_magic_lantern = false
 
 func isTextboxPausingMe():
-  return global.activeInteractor != null and global.activeInteractor.showYesNoOptions
+  return global.activeInteractor != null and (global.activeInteractor.showYesNoOptions or (
+    not rawPressingMoveUp() and not rawPressingMoveDown() and not rawPressingMoveLeft() and not rawPressingMoveRight() and on_ground)
+  )
 
 func rawJustPressedAnalogDown():
   return just_pressed_joystick[3]
@@ -918,9 +922,10 @@ func broomStop():
   if summonedBroom != null:
     summonedBroom.queue_free()
   summonedBroom = null
-  pauseInput = false
+  if global.has_really_started_game:
+    pauseInput = false
+    global.pauseMoveInput = false
   pauseAnimation = false
-  global.pauseMoveInput = false
   walk_speed = remembered_walk_speed
   feather_glitch_walk_speed = remembered_feather_glitch_walk_speed
   invisible_glitch_walk_speed = remembered_invisible_glitch_walk_speed

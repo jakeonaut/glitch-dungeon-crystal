@@ -4,7 +4,6 @@ extends "../GlitchEnemy.gd"
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 
 onready var cubeCrystal = weakref(get_node("CubeCrystal"))
-onready var fakeCrystalContainer = get_node("FakeCrystals")
 onready var weakPointContainer = get_node("WeakPointContainer")
 onready var weakPointAniPlayer = get_node("WeakPointContainer/WeakPointAnimationPlayer")
 onready var weakEyeAniPlayer = get_node("WeakPointContainer/WeakEye/SecretAnimationPlayer")
@@ -32,7 +31,6 @@ enum BossPhase {
     TURNING_LEFT_TO_RIGHT,
     TURNING_RIGHT_TO_LEFT,
     BARFING_SNAILS,
-    HIDING_WITH_DUPLICATES,
     EAT_IT,
     STUN_FALL,
     STUN_IDLE,
@@ -82,9 +80,6 @@ func _ready():
     behavior_phase_through_walls = true
     walk_speed = 24
 
-    self.remove_child(fakeCrystalContainer)
-    level.add_child(fakeCrystalContainer)
-
 var has_already_hidden = false
 
 # @override
@@ -98,6 +93,8 @@ func getMyVariable():
 
 var preyTarget = null
 func _process(delta):
+    if not visible: return
+
     # need to be before global.pauseGame check so we can unpause
     if boss_phase == BossPhase.LYING_IN_WAIT:
         unenemize()
@@ -245,42 +242,6 @@ func _process(delta):
                 crystals.translation.z = -2.13 # from 2.13
                 mySprite.translation.z = -2 # from 2
                 chargeSound.play()
-    elif boss_phase == BossPhase.HIDING_WITH_DUPLICATES:
-        has_already_hidden = true
-        behavior_walking = false
-        unenemize()
-        if which_three.size() > 0:
-            idle_timer += (delta*11)
-            if idle_timer >= crystal_appear_time_limit:
-                idle_timer = 0
-                var crystalLanding = which_three.pop_back()
-                if which_three.size() == 0:
-                    global_transform.origin = crystalLanding.global_transform.origin
-                    global_transform.origin.x += 6
-                    global_transform.origin.y -= 1.5
-                else:
-                    var newFakeCrystal = crystalGeodeRes.instance()
-                    newFakeCrystal.fakify()
-                    fakeCrystalContainer.add_child(newFakeCrystal)
-                    newFakeCrystal.global_transform.origin = crystalLanding.global_transform.origin
-
-        if cubeCrystal.get_ref() != null and cubeCrystal.get_ref().meshInstance1.visible:
-            cubeCrystal.get_ref().meshInstance1.visible = false
-            boss_phase = BossPhase.IDLE
-            secretAniPlayer.stop()
-            secretAniPlayer.clear_queue()
-            secretAniPlayer.play("fadeFromBlack")
-            secretAniPlayer.queue("idle")
-            behavior_walking = false
-            dir = Vector3(0, 0, 0)
-            lv.x = 0
-            linear_velocity.x = 0
-            hv = Vector3(0, 0, 0)
-
-            var fakeCrystals = fakeCrystalContainer.get_children()
-            for fakeCrystal in fakeCrystals:
-                fakeCrystalContainer.remove_child(fakeCrystal)
-                fakeCrystal.queue_free()
     elif boss_phase == BossPhase.GNASH_ATTACK_PREP:
         idle_timer += (delta*11)
         if idle_timer >= gnash_charge_time_limit:

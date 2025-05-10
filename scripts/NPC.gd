@@ -323,10 +323,10 @@ func processPhysics(delta):
   
 
 func justPressedJump():
-  return just_pressed_jump
+  return just_pressed_jump or override_just_pressed_jump
 
 func pressingJump():
-  return pressing_jump
+  return pressing_jump or override_press_jump
 
 func idleTalk():
   if not is_wiggling_fast:

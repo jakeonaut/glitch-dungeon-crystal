@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -48,6 +48,8 @@
 [ext_resource path="res://assets/DELETEME/LA_Chest_Open.wav" type="AudioStream" id=46]
 [ext_resource path="res://assets/treasureChestGirl.png" type="Texture" id=47]
 [ext_resource path="res://assets/sounds/eba_funny.wav" type="AudioStream" id=48]
+[ext_resource path="res://scripts/SpellsTreasures/HeartContainerAbortSound.gd" type="Script" id=49]
+[ext_resource path="res://scripts/HeartContainerDialogStartSound.gd" type="Script" id=50]
 
 [sub_resource type="BoxShape" id=91]
 resource_local_to_scene = true
@@ -1188,6 +1190,13 @@ shape = SubResource( 113 )
 
 [node name="NPC TextBox" parent="TreasureSpellCollectable" instance=ExtResource( 22 )]
 
+[node name="DialogStartSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="10"]
+script = ExtResource( 50 )
+
+[node name="AbortSound" parent="TreasureSpellCollectable/NPC TextBox/TextBox" index="13"]
+script = ExtResource( 49 )
+is_mimic = true
+
 [node name="Sprite3D" type="Sprite3D" parent="TreasureSpellCollectable"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
 visible = false
@@ -1254,3 +1263,5 @@ pixel_size = 0.12
 texture = ExtResource( 29 )
 hframes = 8
 script = ExtResource( 1 )
+
+[editable path="TreasureSpellCollectable/NPC TextBox"]

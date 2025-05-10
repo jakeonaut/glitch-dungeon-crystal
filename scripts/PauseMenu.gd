@@ -100,6 +100,9 @@ var shouldUpdateMenuText = true
 func _ready():
   popupText.bbcode_text = tr("Dialog.Player.3")
   set_process(true)
+  yield(TempTimer.idle_frame(self), "timeout")
+  yield(TempTimer.idle_frame(self), "timeout")
+  processInventoryRender(0)
 
 func _process(delta):
   if player == null: getPlayer()
@@ -268,6 +271,7 @@ func _process(delta):
     normalMenu.visible = false
     cursorSprite.visible = false
     processInventoryLogic(delta)
+    processInventoryRender(delta)
     inventoryRect.visible = true
     mapRect.visible = global.memory["has_map_item"]
     mapTitleRect.visible = mapRect.visible and inventoryOptionIndex != 4
@@ -599,21 +603,20 @@ func processInventoryLogic(delta):
   else:
     pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " " + tr("UI.Confirmation") + ", " + global.getInputText("menu_cancel") + " " + tr("UI.PauseMenu.1")
     # pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to resume\n" + global.getInputText("menu_left") + " " + global.getInputText("menu_right") + " " + global.getInputText("menu_up") + " " + global.getInputText("menu_down")
-  var spellbook = global.memory["spellbookPage"] if global.memory.has("spellbookPage") else []
+  var spellbook = global.memory["spellbookPage"] if global.memory.has("spellbookPage") else [player.glitch_form]
   var spellbookSize = spellbook.size()
   if selectedGlitchSprite >= 0:
     if spellbookSize == 0:
       pauseTitleText.bbcode_text = tr("NPC.Tutorial.12") # "you've forgotten your spells"
     else:
       pauseTitleText.bbcode_text = tr("UI.Inventory.3") % global.getInputText("menu_confirm") # "change spell order, " + global.getInputText("menu_left") + global.getInputText("menu_right") + "\n" + global.getInputText("menu_confirm") + " to swap"
-  processInventoryRender(delta)
   tryDrawMap()
 
   if popupRect.visible:
     popupYesButton.visible = shouldShowPopupYesNoOptions
     popupNoButton.visible = shouldShowPopupYesNoOptions
-    popupYesButtonText.bbcode_text = tr("UI.Yes")
-    popupNoButtonText.bbcode_text = tr("UI.No")
+    popupYesButtonText.bbcode_text = tr("UI.GraphicsMenu.ON")
+    popupNoButtonText.bbcode_text = tr("UI.GraphicsMenu.OFF")
     popupYesCursor.visible = popupYesNoOptions
     popupNoCursor.visible = not popupYesNoOptions
     if shouldShowPopupYesNoOptions:
@@ -627,9 +630,9 @@ func processInventoryLogic(delta):
   var inactiveColor = Color("#006400")
   var selectedColor = Color("#f79838")
   if inventoryOptionIndex == 0:
-    if not global.memory.has("spellbookPage"):
-      inventoryOptionIndex = 1
-      return
+    # if not global.memory.has("spellbookPage"):
+    #   inventoryOptionIndex = 1
+    #   return
     if player.justPressedMenuRight():
       inventoryOptionIndexX += 1
       menuMoveSound.play()
@@ -653,15 +656,17 @@ func processInventoryLogic(delta):
     if spellbookSize > 0:
       var which_glitch = spellbook[inventoryOptionIndexX] if global.memory["glitched_grimoire"] or level.player.spellCastPauseIndex == 0 else spellbook[1-inventoryOptionIndexX]
       if which_glitch == global.GlitchForm.FLOOR:
-        popupText.text = tr("UI.GlitchSpell.2") # "air walk:\n  walk off platforms\n  without falling"
+        popupText.bbcode_text = tr("UI.GlitchSpell.2") # "air walk:\n  walk off platforms\n  without falling"
       if which_glitch == global.GlitchForm.FEATHER:
-        popupText.text = tr("UI.GlitchSpell.1") # "feather fall:\n  hold jump to\n  float or jump high"
+        popupText.bbcode_text = tr("UI.GlitchSpell.1") # "feather fall:\n  hold jump to\n  float or jump high"
       if which_glitch == global.GlitchForm.LADDER:
-        popupText.text = tr("UI.GlitchSpell.3") # "ladder:\n  walk into walls\n  climb upwards"
+        popupText.bbcode_text = tr("UI.GlitchSpell.3") # "ladder:\n  walk into walls\n  climb upwards"
       if which_glitch == global.GlitchForm.INVISIBLE:
-        popupText.text = tr("UI.GlitchSpell.4") # "ghost:\n  glitches can't get u"
+        popupText.bbcode_text = tr("UI.GlitchSpell.4") # "ghost:\n  glitches can't get u"
       if which_glitch == global.GlitchForm.WALK_THROUGH_WALLS:
-        popupText.text = tr("NPC.Crystal.NULL") # "undefined:\n ???"
+        popupText.bbcode_text = tr("NPC.Crystal.NULL") # "undefined:\n ???"
+      if which_glitch == global.GlitchForm.NORMAL:
+        popupText.bbcode_text = tr("Dialog.Player.3")
   else:
     glitchRect1.color = inactiveColor
     glitchRect2.color = inactiveColor
@@ -732,7 +737,7 @@ func processInventoryLogic(delta):
       popupRect.visible = not popupRect.visible
       shouldShowPopupYesNoOptions = false
       if inventoryOptionIndexX == 0:
-        popupText.text = tr("UI.Inventory.5") # "your trusty broom.." if not global.memory["glitched_broom"] else "uyro utsryt oomr;b"
+        popupText.bbcode_text = tr("UI.Inventory.5") # "your trusty broom.." if not global.memory["glitched_broom"] else "uyro utsryt oomr;b"
         if global.memory["broomerang"] > 0:
           shouldShowPopupYesNoOptions = true
           if popupRect.visible:
@@ -740,43 +745,43 @@ func processInventoryLogic(delta):
           else:
             global.memory["broomerang_enabled"] = popupYesNoOptions
         # if global.memory["broomerang"] > 1:
-        #   popupText.text += "\nsweep twice to throw it!"
+        #   popupText.bbcode_text += "\nsweep twice to throw it!"
         # else:
-        #   popupText.text += "\ngreat for sweeping dust"
+        #   popupText.bbcode_text += "\ngreat for sweeping dust"
         # if global.memory["broomerang"] >= 2:
-        #   popupText.text += "\nno limits!"
+        #   popupText.bbcode_text += "\nno limits!"
       elif inventoryOptionIndexX == 1:
-        popupText.text = tr("UI.Inventory.6")
+        popupText.bbcode_text = tr("UI.Inventory.6")
       elif inventoryOptionIndexX == 2:
         popupText.bbcode_text = tr("NPC.Treasure.1") % global.getInputText("restart_key")
       elif inventoryOptionIndexX == 3:
-        popupText.text = "pet follower\nin progress..."
+        popupText.bbcode_text = "pet follower\nin progress..."
       elif inventoryOptionIndexX == 4:
-        popupText.text = "an enchanted bag\nlets you take another hit"
+        popupText.bbcode_text = "an enchanted bag\nlets you take another hit"
     elif inventoryOptionIndex == 2:
       popupRect.visible = not popupRect.visible
       shouldShowPopupYesNoOptions = true
       if inventoryOptionIndexX == -1:
         shouldShowPopupYesNoOptions = true
-        popupText.text = tr("NPC.Crystal.6") + " +" + str(global.getNumGrannyHearts(true))
+        popupText.bbcode_text = tr("NPC.Crystal.6") + " +" + str(global.getNumGrannyHearts(true))
         if popupRect.visible:
           popupYesNoOptions = global.memory["hearts_enabled"]
         else:
           global.memory["hearts_enabled"] = popupYesNoOptions
       elif inventoryOptionIndexX == 0:
-        popupText.text = tr("NPC.Treasure.7") # "memory of fish:\n  swim in water\n"
+        popupText.bbcode_text = tr("NPC.Treasure.7") # "memory of fish:\n  swim in water\n"
         if popupRect.visible:
           popupYesNoOptions = global.memory["zora_flippers_enabled"]
         else:
           global.memory["zora_flippers_enabled"] = popupYesNoOptions
       elif inventoryOptionIndexX == 1:
-        popupText.text = tr("NPC.Treasure.8") # "mole cricket memory:\n  jump and hold to dig\n  up through ceilings"
+        popupText.bbcode_text = tr("NPC.Treasure.8") # "mole cricket memory:\n  jump and hold to dig\n  up through ceilings"
         if popupRect.visible:
           popupYesNoOptions = global.memory["mole_cricket_enabled"]
         else:
           global.memory["mole_cricket_enabled"] = popupYesNoOptions
       elif inventoryOptionIndexX == 2:
-        popupText.text = tr("NPC.Treasure.9") # "spore memory:\n  hold sweep button to\n  teleport when smacking  \n  works with broomerang"
+        popupText.bbcode_text = tr("NPC.Treasure.9") # "spore memory:\n  hold sweep button to\n  teleport when smacking  \n  works with broomerang"
         if popupRect.visible:
           popupYesNoOptions = global.memory["mushroom_soul_enabled"]
         else:
@@ -787,13 +792,13 @@ func processInventoryLogic(delta):
       popupYesNoOptions = false
       if inventoryOptionIndexX == 0:
         var numEggs = global.getThingFromAllLevelZonez("angelEgg")
-        popupText.text = tr("UI.Inventory.7") + str(numEggs) # "angel eggs:\n  spawn of goddess\n  got " 
+        popupText.bbcode_text = tr("UI.Inventory.7") + str(numEggs) # "angel eggs:\n  spawn of goddess\n  got " 
       elif inventoryOptionIndexX == 1:
-        popupText.text = tr("NPC.Treasure.4")
+        popupText.bbcode_text = tr("NPC.Treasure.4")
       elif inventoryOptionIndexX == 2:
-        popupText.text = tr("NPC.Treasure.5")
+        popupText.bbcode_text = tr("NPC.Treasure.5")
       elif inventoryOptionIndexX == 3:
-        popupText.text = tr("NPC.Treasure.6")
+        popupText.bbcode_text = tr("NPC.Treasure.6")
     elif angelStatueToTeleportTo != null:
       var level_to_spawn_to = angelStatueToTeleportTo[1]
       global.memory["roomPath"] = level.getLevelName()
@@ -827,7 +832,7 @@ func processInventoryLogic(delta):
           localizedLevelZoneName = tr("LevelName.5")
         elif "primordial" in levelZoneName:
           localizedLevelZoneName = tr("LevelName.6")
-        popupText.text = tr("NPC.AngelStatue.1") + "\n" + localizedLevelZoneName
+        popupText.bbcode_text = tr("NPC.AngelStatue.1") + " " + localizedLevelZoneName + " " + tr("UI.MainMenu.CreditsConfirm") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     angelStatueToTeleportTo = null
     if popupRect.visible:
@@ -865,8 +870,8 @@ func normalizeInventoryOptionIndex(y, x):
     inventoryOptionIndexX = 0
     inventoryOptionIndex += y
     if y > 0:
-      if inventoryOptionIndex == 0 and not grimoireSprite.visible:
-        inventoryOptionIndex = 1
+      # if inventoryOptionIndex == 0 and not grimoireSprite.visible:
+      #   inventoryOptionIndex = 1
       if (inventoryOptionIndex == 2 and not soulLabel.visible):
         inventoryOptionIndex = 3
       if (inventoryOptionIndex == 3 and not keyLabel.visible) or inventoryOptionIndex > 3:
@@ -876,7 +881,7 @@ func normalizeInventoryOptionIndex(y, x):
         mapCursorSprite.restart()
         mapCursorSprite2.restart()
     elif y < 0:
-      if inventoryOptionIndex == -1 or (inventoryOptionIndex == 0 and not grimoireSprite.visible):
+      if inventoryOptionIndex == -1: # or (inventoryOptionIndex == 0 and not grimoireSprite.visible):
         inventoryOptionIndex = 4
         menuConfirmSound.play()
         mapCursorSprite.restart()
@@ -968,9 +973,8 @@ func normalizeInventoryOptionIndex(y, x):
     inventoryOptionIndexX += x
     if x > 0:
       if inventoryOptionIndexX >= angelStatues.size():
-        inventoryOptionIndex = 0 if grimoireSprite.visible else 1
+        inventoryOptionIndex = 0 # if grimoireSprite.visible else 1
         inventoryOptionIndexX = 0
-        processInventoryRender(0)
         return
     if x < 0:
       if inventoryOptionIndexX < 0:
@@ -980,13 +984,13 @@ func normalizeInventoryOptionIndex(y, x):
         if inventoryOptionIndex == 2 and not soulLabel.visible:
           inventoryOptionIndex = 1
         inventoryOptionIndexX = 0
-        processInventoryRender(0)
         return
     
 
 
 
 onready var grimoireSprite = get_node("InventoryRect/GrimoireSprite")
+onready var playerSprite = get_node("InventoryRect/PlayerSprite")
 onready var forgetMeNotSprite = get_node("InventoryRect/FlowerSprite")
 onready var broomSprite = get_node("InventoryRect/BroomSprite")
 onready var bagSprite = get_node("InventoryRect/BagSprite")
@@ -1007,7 +1011,7 @@ onready var cutePetSprite = get_node("InventoryRect/CutePetSprite")
 onready var keyLabel = get_node("InventoryRect/KeyLabel")
 func processInventoryRender(_delta):
   if inventoryOptionIndex == 0:
-    invSelectionSprite.position = Vector2(99, 51)
+    invSelectionSprite.position = Vector2(99, 51) if grimoireSprite.visible else Vector2(88, 51)
   elif inventoryOptionIndex == 1:
     invSelectionSprite.position.y = 122
     if inventoryOptionIndexX == 0:
@@ -1044,9 +1048,9 @@ func processInventoryRender(_delta):
   var index = level.player.spellCastPauseIndex
   if global.memory.has("spellbookPage"):
     grimoireSprite.visible = true
+    playerSprite.visible = false
     # should dedupe with UILayer...
     if global.memory["glitched_grimoire"]:
-      forgetMeNotSprite.visible = true
       grimoireSprite.frame = 3
       glitchRect1.visible = true
       glitchRect2.visible = true
@@ -1069,12 +1073,15 @@ func processInventoryRender(_delta):
       else:
         setGlitchSprite(glitchSprite2, global.GlitchForm.NORMAL)
   else:
+    playerSprite.visible = true
     grimoireSprite.visible = false
-    glitchRect1.visible = false
+    glitchRect1.visible = true
+    setGlitchSprite(glitchSprite1, level.player.glitch_form)
     glitchRect2.visible = false
     glitchRect3.visible = false
     glitchRect4.visible = false
 
+  forgetMeNotSprite.visible = global.memory["angel_flute"]
   broomSprite.scale = Vector2(3, 3) if global.memory["broomerang_enabled"] else Vector2(1.5, 1.5)
   bagSprite.visible = global.memory["hp"] > 1
   returnSprite.visible = global.memory["can_force_respawn"]
@@ -1543,11 +1550,11 @@ func processPopupRenderLogic(delta):
     popupTimer += (delta*11)
     if global.isPauseMenuOpen:
       if popupTimer < 5:
-        popupText.text = tr("UI.InputMenu.15_3")
+        popupText.bbcode_text = tr("UI.InputMenu.15_3")
       elif popupTimer < 10:
-        popupText.text = tr("UI.InputMenu.15_2")
+        popupText.bbcode_text = tr("UI.InputMenu.15_2")
       elif popupTimer < 15:
-        popupText.text = tr("UI.InputMenu.15")
+        popupText.bbcode_text = tr("UI.InputMenu.15")
       if popupTimer >= popupTimeLimit:
         global.resetKeyBindings()
         level.saveUserSettings()
@@ -1560,11 +1567,11 @@ func processPopupRenderLogic(delta):
     popupTimer += (delta*11)
     if global.isPauseMenuOpen:
       if popupTimer < 5:
-        popupText.text = tr("UI.InputMenu.15_3")
+        popupText.bbcode_text = tr("UI.InputMenu.15_3")
       elif popupTimer < 10:
-        popupText.text = tr("UI.InputMenu.15_2")
+        popupText.bbcode_text = tr("UI.InputMenu.15_2")
       elif popupTimer < 15:
-        popupText.text = tr("UI.InputMenu.15")
+        popupText.bbcode_text = tr("UI.InputMenu.15")
       if popupTimer >= popupTimeLimit:
         global.resetControllerBindings()
         level.saveUserSettings()

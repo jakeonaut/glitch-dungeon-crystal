@@ -683,6 +683,7 @@ vframes = 6
 frame = 27
 
 [node name="HeartMimic" parent="Viewport/level" instance=ExtResource( 36 )]
+visible = false
 
 [node name="Viewport2" parent="." instance=ExtResource( 19 )]
 

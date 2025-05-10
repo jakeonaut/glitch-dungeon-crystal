@@ -27,7 +27,7 @@
 [ext_resource path="res://sceneObjects/SwampBubbleSpawn.tscn" type="PackedScene" id=25]
 [ext_resource path="res://sceneObjects/WaterCubes/BogWaterCube.tscn" type="PackedScene" id=26]
 [ext_resource path="res://sceneObjects/Enemies/FanPlant.tscn" type="PackedScene" id=27]
-[ext_resource path="res://pauseMenuTheme.tres" type="Theme" id=28]
+[ext_resource path="res://uiTutorialFont.tres" type="Theme" id=28]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=29]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=30]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=31]
@@ -2819,8 +2819,10 @@ margin_bottom = 1074.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 0 )
 
 [node name="QuitPrompt" type="RichTextLabel" parent="ColorRect"]
-margin_right = 672.0
-margin_bottom = 66.0
+margin_left = 185.0
+margin_top = 35.0
+margin_right = 734.0
+margin_bottom = 98.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 1.5, 1.5 )

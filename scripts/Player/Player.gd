@@ -1431,7 +1431,7 @@ func processSleepyLogic(delta):
       aniPlayer.clear_queue()
       aniPlayer.play("yawn")
       aniPlayer.queue("sleepy")
-  elif not global.isPauseMenuOpen:
+  elif not global.isPauseMenuOpen and not global.isOnMainMenu:
     sleepy_timer = 0
 
 onready var ritualSound = get_node("Sounds/RitualSound")
@@ -2152,7 +2152,7 @@ func processBroomLogic(delta):
   if not global.memory["broom"]:
     # if nesting_doll_state == global.NestingDoll.BABY and Input.is_action_just_pressed("sub_action_button") and Input.is_action_pressed("ui_down"):
     #   summonSporeShroom()
-    if global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing() and global.memory["broomerang"] == 1 and not isItWeird():
+    if global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing() and global.memory["broomerang"] >= 1 and not isItWeird():
       # if fallenBroomRef.get_ref() and not fallenBroomRef.get_ref().returning:
       #   var distance = global_transform.origin.distance_to(fallenBroomRef.get_ref().global_transform.origin)
       #   if distance >= 2:
@@ -2160,7 +2160,7 @@ func processBroomLogic(delta):
       var found_fallen_broom = false
       var fallenBroomArray = self.get_tree().get_nodes_in_group("fallen_broom_group")
       for fallenBroom in fallenBroomArray:
-        if fallenBroom.visible and global.memory["broomerang"] >= 2:
+        if fallenBroom.visible and global.memory["broomerang"] >= 2 and can_broomerang_warp:
           fallenBroom.warpToIt()
         elif not fallenBroom.returning and fallenBroom.visible and not fallenBroom.should_die_on_land and not fallenBroom.is_dying and fallenBroom.should_return and fallenBroom.can_return_via_input:
           fallenBroom.returning = true
@@ -2348,19 +2348,22 @@ func doBroomAttack(which_broom_attack):
   #       levelTiles.addTile(SOFT_SAND_TOP_TILE, Vector3(x + 2, y - 1, z), false, false)
 
 func spawnSnoreBubble():
-  var bubble = bubbleRes.instance()
-  bubble.is_horizontal = true
-  level.add_child(bubble)
-  bubble.setAsParent(self)
-  bubble.global_transform.origin = global_transform.origin
-  if mySprite.flip_h:
-    bubble.global_transform.origin.x -= 2
-    bubble.horizontal_direction = -1
+  if global.memory["zora_flippers"] > 0 and global.memory["zora_flippers_enabled"]:
+    var bubble = bubbleRes.instance()
+    bubble.is_horizontal = true
+    level.add_child(bubble)
+    bubble.setAsParent(self)
+    bubble.global_transform.origin = global_transform.origin
+    if mySprite.flip_h:
+      bubble.global_transform.origin.x -= 2
+      bubble.horizontal_direction = -1
+    else:
+      bubble.global_transform.origin.x += 2
+      bubble.horizontal_direction = 1
+    bubble.my_original_pos = bubble.global_transform.origin.y
+    bubble.my_target_pos = bubble.global_transform.origin.y  + rand_range(-1, 1)
   else:
-    bubble.global_transform.origin.x += 2
-    bubble.horizontal_direction = 1
-  bubble.my_original_pos = bubble.global_transform.origin.y
-  bubble.my_target_pos = bubble.global_transform.origin.y  + rand_range(-1, 1)
+    summonSmokeClouds(1, true, true, 1)
 
 var spore_spawn_timer = 0
 var spore_spawn_time_limit = 15

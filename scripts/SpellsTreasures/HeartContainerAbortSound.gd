@@ -27,11 +27,12 @@ func activateScript():
     global.pauseGame = false
     global.pauseMoveInput = false
     # level.spawnKeyFollower(level.player.global_transform.origin)
-    heart.okay_im_done = true
-    heart.queue_free()
     level.player.pauseInput = false
     level.player.aniPlayer.play("stand")
     level.player.sayThis(tr("NPC.Crystal.6") + " +1\n")
+    if not is_mimic:
+        heart.okay_im_done = true
+        heart.queue_free()
 
 func isActive(_debug=false):
     return true

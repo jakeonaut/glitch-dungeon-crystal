@@ -735,14 +735,16 @@ func startRun():
   level.summonSmokeClouds(origin, 2, false, false)
 
 func justPressedJump():
-  return false
+  return override_just_pressed_jump
   
 func recentlyJustPressedJump():
-  return false
+  return override_just_pressed_jump
 
-
+var override_press_jump = false
+var prev_override_press_jump = false
+var override_just_pressed_jump = false
 func pressingJump():
-  return false
+  return override_press_jump
 
 func pressingMoveUp():
   return false
@@ -813,6 +815,9 @@ func processLadderInputs(_delta):
     
 func processJumpInputs(delta):
   if is_climbing_ladder or global.pauseMoveInput: return
+
+  override_just_pressed_jump = override_press_jump and not prev_override_press_jump
+  prev_override_press_jump = override_press_jump
 
   if not is_turn_based:
     # jump

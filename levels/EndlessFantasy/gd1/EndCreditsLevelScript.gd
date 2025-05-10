@@ -26,7 +26,7 @@ func _process(delta):
 
     if global.pauseGame:
         return
-    quitPrompt.bbcode_text = "[right]" + tr("UI.EndCredits.QuitGame") %  global.getInputText("ui_start") + "[/right]"
+    quitPrompt.bbcode_text = "[right]" + tr("UI.PauseMenu.5") + ": " + global.getInputText("ui_start") + "[/right]"
     if not quitPromptRect.visible and (
         Input.is_action_just_pressed("restart_key") or 
         Input.is_action_just_pressed("open_map") or

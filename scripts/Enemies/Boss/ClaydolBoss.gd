@@ -70,6 +70,8 @@ func getMyVariable():
     return global.memory["dogu_matryoshka_boss"]
 
 func _process(delta):
+    if not visible: return
+    
     noseSprite.flip_h = mySprite.flip_h
     # need to be before global.pauseGame check so we can unpause
     if boss_phase == BossPhase.ASLEEP:

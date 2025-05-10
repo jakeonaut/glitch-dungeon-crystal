@@ -13,6 +13,7 @@ onready var bellSound = get_node("BellSound")
 enum MainMenuState {
     MAIN_MENU,
     TRY_DELETE_FILE,
+    TRY_GO_CREDITS,
     MAIN_MENU_TRY_QUIT_GAME,
     NORMAL_GAMEPLAY,
 }
@@ -91,6 +92,10 @@ func startGame(saveGameIndex):
   player.applyGlitch(global.GlitchForm.NORMAL, true)
   uiLayer.glitchSprite.visible = false
   uiLayer.get_node("GlitchStatusRect").visible = false
+  if player.sleepy_timer >= player.sleepy_time_limit:
+    player.exclamationAniPlayer.play("exclaim")
+    player.aniPlayer.play("fall")
+  player.sleepy_time_limit *= 2
   if global.display_mode > 0:
     global.has_started_game = true
     global.has_really_started_game = true
@@ -136,14 +141,22 @@ func startGame(saveGameIndex):
   yield(get_tree().create_timer(2.0), "timeout")
   if was_intro_cutscene_skipped == 2: return
 
-  summonSmokeClouds(Vector3(28, 2, 0), 3)
-  var cell_index = Vector3(27, 1, 0)
+  summonSmokeClouds(Vector3(21.5, 3.5, 0), 3)
+  var cell_index = Vector3(20, 2, 0)
   levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
-  cell_index = Vector3(29, 1, 0)
+  cell_index = Vector3(21, 2, 0)
   levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
-  cell_index = Vector3(28, 2, 0)
+  cell_index = Vector3(22, 2, 0)
   levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
-  cell_index = Vector3(29, 2, 0)
+  cell_index = Vector3(20, 3, 0)
+  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
+  cell_index = Vector3(22, 3, 0)
+  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
+  cell_index = Vector3(20, 4, 0)
+  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
+  cell_index = Vector3(21, 4, 0)
+  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
+  cell_index = Vector3(22, 4, 0)
   levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
 
   player.exclamationAniPlayer.play("exclaim")
@@ -188,6 +201,7 @@ func startGame(saveGameIndex):
   babushkaCat.get_ref().mySprite.should_randomize_frame_delay = false
   babushkaCat.get_ref().mySprite.frame_delay = 0.1
   babushkaCat.get_ref().override_press_move_right = true
+  babushkaCat.get_ref().override_press_jump = true
   player.mySprite.flip_h = not player.mySprite.flip_h
   eventSound1.play()
   yield(get_tree().create_timer(0.2), "timeout")
@@ -195,23 +209,16 @@ func startGame(saveGameIndex):
   yield(get_tree().create_timer(0.2), "timeout")
   player.mySprite.flip_h = not player.mySprite.flip_h
   secretGlitchyNPC6.glitchOut()
+  babushkaCat.get_ref().override_press_jump = false
 
-  summonSmokeClouds(Vector3(21.5, 3.5, 0), 3)
-  cell_index = Vector3(20, 2, 0)
+  summonSmokeClouds(Vector3(28, 2, 0), 3)
+  cell_index = Vector3(27, 1, 0)
   levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
-  cell_index = Vector3(21, 2, 0)
+  cell_index = Vector3(29, 1, 0)
   levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
-  cell_index = Vector3(22, 2, 0)
+  cell_index = Vector3(28, 2, 0)
   levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
-  cell_index = Vector3(20, 3, 0)
-  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
-  cell_index = Vector3(22, 3, 0)
-  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
-  cell_index = Vector3(20, 4, 0)
-  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
-  cell_index = Vector3(21, 4, 0)
-  levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
-  cell_index = Vector3(22, 4, 0)
+  cell_index = Vector3(29, 2, 0)
   levelTiles.set_cell_item(cell_index.x, cell_index.y, cell_index.z, 51)
 
   yield(get_tree().create_timer(1.6), "timeout")
@@ -270,13 +277,14 @@ var hideSkipPromptTimeLimit = 15
 
 # @override
 func canOpenPauseMenu():
-  return mainMenuState != MainMenuState.TRY_DELETE_FILE
+  return mainMenuState != MainMenuState.TRY_DELETE_FILE and mainMenuState != MainMenuState.TRY_GO_CREDITS
 
 export var camera_size = 30
 var mainMenuPromptIndex = 0
 var updateMenuText = true
 var has_reset_transition = false
 func _process(delta):
+    global.isEndOfGame = false
     if not transition.aniPlayer.is_playing() and not has_reset_transition:
         transition.colorRect.rect_position = Vector2(320, 28)
         transition.colorRect.rect_size = Vector2(1280, 1024)
@@ -299,6 +307,24 @@ func _process(delta):
         elif Input.is_action_just_pressed("menu_delete"):
             noBroomSound.play()
         return
+    elif mainMenuState == MainMenuState.TRY_GO_CREDITS:
+        deleteConfirmationLayer.visible = true
+        if deleteConfirmationLayerText.bbcode_text == "":
+            deleteConfirmationLayerText.bbcode_text = tr("UI.MainMenu.CreditsPrompt") + " " + tr("UI.MainMenu.CreditsConfirm") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
+        if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
+            global.has_really_started_game = true
+            global.okay_really_really_started_game = true
+            global.isEnteringRoom = true
+            transition.long_fade_to("res://levels/EndlessFantasy/gd1/EndCredits.tscn")
+            global.isRespawning = true
+        elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
+            reliefSound.play()
+            broomSound.play()
+            yield(get_tree().create_timer(0.15), "timeout")
+            mainMenuState = MainMenuState.MAIN_MENU
+        elif Input.is_action_just_pressed("menu_delete"):
+            noBroomSound.play()
+        return
     deleteConfirmationLayer.visible = false
     deleteConfirmationLayerText.bbcode_text = ""
 
@@ -306,6 +332,7 @@ func _process(delta):
         if global.has_started_game and not global.isRespawning:
             player.camera_y_offset = 5
             if global.has_really_started_game:
+                skipPrompt.visible = false
                 gameCamera.initial_size = gameCamera.initial_size + (25 - gameCamera.initial_size) * (delta * 2)
                 gameCamera.zoomed_size = gameCamera.initial_size
                 # pressCText.rect_position.x = 214
@@ -347,7 +374,7 @@ func _process(delta):
             var secondPartTemp = tr("UI.MainMenu.4") % global.getInputText("menu_delete")
             var second_part = secondPartTemp if global.doesSaveGameExist(mainMenuPromptIndex) else ("[s][color=gray]" + secondPartTemp + "[/color][/s]")
             pressCText.bbcode_text = "[right]" + (tr("UI.MainMenu.3") % global.getInputText("menu_confirm")) + "    " + second_part + "[/right]"
-        optionsMenuPrompt.bbcode_text = tr("UI.MainMenu.1") % global.getInputText("ui_start")
+        optionsMenuPrompt.bbcode_text = (tr("UI.MainMenu.1") % global.getInputText("ui_start")) + "\n[right]" + (global.getInputText("menu_cancel")) + ": " + tr("UI.MainMenu.CreditsPrompt") + "[/right]"
         selectTextPrompt.bbcode_text = global.getInputText("menu_confirm")
 
         if player.justPressedMenuDown():
@@ -423,6 +450,9 @@ func _process(delta):
                 startDeleteSound.play()
             else:
                 noBroomSound.play()
+        elif Input.is_action_just_pressed("menu_cancel"):
+            mainMenuState = MainMenuState.TRY_GO_CREDITS
+            broomSound.play()
     
 # @override
 # func processPauseMenu():
@@ -483,6 +513,9 @@ func processSkipPrompt(delta):
                     babushkaCat.get_ref().mySprite.should_randomize_frame_delay = false
                     babushkaCat.get_ref().mySprite.frame_delay = 0.1
                     babushkaCat.get_ref().override_press_move_right = true
+                    babushkaCat.get_ref().override_press_jump = true
+                    yield(get_tree().create_timer(0.5), "timeout")
+                    babushkaCat.get_ref().override_press_jump = false
                 # yield(get_tree().create_timer(1.0), "timeout")
                 # if babushkaCat.get_ref(): babushkaCat.get_ref().glitchOut()
         else:
