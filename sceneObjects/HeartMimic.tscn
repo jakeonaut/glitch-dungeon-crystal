@@ -902,7 +902,7 @@ margin_right = 1218.0
 margin_bottom = 960.0
 expand = true
 
-[node name="ScrollContainer" type="Control" parent="MimicNPC/NPC TextBox/TextBox/TextCanvasLayer/Container"]
+[node name="ScrollContainer" type="Control" parent="MimicNPC/NPC TextBox/TextBox/Container"]
 margin_left = 31.0
 margin_top = 30.0
 margin_right = 1213.0
@@ -913,7 +913,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource( 23 )
 
-[node name="Text" type="RichTextLabel" parent="MimicNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer"]
+[node name="Text" type="RichTextLabel" parent="MimicNPC/NPC TextBox/TextBox/Container/ScrollContainer"]
 margin_right = 1183.0
 margin_bottom = 202.0
 rect_clip_content = false
@@ -925,7 +925,7 @@ bbcode_enabled = true
 tab_size = 2
 scroll_active = false
 
-[node name="FakeTextSprite" type="Sprite" parent="MimicNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer"]
+[node name="FakeTextSprite" type="Sprite" parent="MimicNPC/NPC TextBox/TextBox/Container/ScrollContainer"]
 position = Vector2( 1076, 157 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 39 )
@@ -933,14 +933,14 @@ hframes = 6
 vframes = 5
 frame = 24
 
-[node name="YesButton" type="ColorRect" parent="MimicNPC/NPC TextBox/TextBox/TextCanvasLayer/Container"]
+[node name="YesButton" type="ColorRect" parent="MimicNPC/NPC TextBox/TextBox/Container"]
 margin_left = 211.0
 margin_top = 254.0
 margin_right = 361.0
 margin_bottom = 309.0
 color = Color( 0, 0.309804, 0.309804, 1 )
 
-[node name="CursorSprite" type="Sprite" parent="MimicNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton"]
+[node name="CursorSprite" type="Sprite" parent="MimicNPC/NPC TextBox/TextBox/Container/YesButton"]
 material = SubResource( 7 )
 position = Vector2( 7, 24 )
 scale = Vector2( 4, 4 )
@@ -950,7 +950,7 @@ vframes = 5
 frame = 26
 script = ExtResource( 27 )
 
-[node name="TextPrompt" type="RichTextLabel" parent="MimicNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton"]
+[node name="TextPrompt" type="RichTextLabel" parent="MimicNPC/NPC TextBox/TextBox/Container/YesButton"]
 margin_left = 25.0
 margin_top = 1.0
 margin_right = 236.0
@@ -967,14 +967,14 @@ tab_size = 2
 text = "yes"
 scroll_active = false
 
-[node name="NoButton" type="ColorRect" parent="MimicNPC/NPC TextBox/TextBox/TextCanvasLayer/Container"]
+[node name="NoButton" type="ColorRect" parent="MimicNPC/NPC TextBox/TextBox/Container"]
 margin_left = 461.0
 margin_top = 254.0
 margin_right = 611.0
 margin_bottom = 309.0
 color = Color( 0, 0.309804, 0.309804, 1 )
 
-[node name="CursorSprite" type="Sprite" parent="MimicNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton"]
+[node name="CursorSprite" type="Sprite" parent="MimicNPC/NPC TextBox/TextBox/Container/NoButton"]
 material = SubResource( 7 )
 position = Vector2( 7, 24 )
 scale = Vector2( 4, 4 )
@@ -984,7 +984,7 @@ vframes = 5
 frame = 26
 script = ExtResource( 27 )
 
-[node name="TextPrompt" type="RichTextLabel" parent="MimicNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton"]
+[node name="TextPrompt" type="RichTextLabel" parent="MimicNPC/NPC TextBox/TextBox/Container/NoButton"]
 margin_left = 25.0
 margin_top = 2.0
 margin_right = 222.0
@@ -1001,7 +1001,7 @@ tab_size = 2
 text = "no"
 scroll_active = false
 
-[node name="TextPrompt" type="RichTextLabel" parent="MimicNPC/NPC TextBox/TextBox/TextCanvasLayer/Container"]
+[node name="TextPrompt" type="RichTextLabel" parent="MimicNPC/NPC TextBox/TextBox/Container"]
 margin_left = 883.0
 margin_top = 254.0
 margin_right = 1164.0

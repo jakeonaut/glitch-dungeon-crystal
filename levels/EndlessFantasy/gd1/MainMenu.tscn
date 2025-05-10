@@ -2126,20 +2126,6 @@ extents = Vector3( 0.5, 0.24, 1 )
 [sub_resource type="ViewportTexture" id=69]
 viewport_path = NodePath("Viewport")
 
-[sub_resource type="ShaderMaterial" id=230]
-shader = ExtResource( 19 )
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1.0
-shader_param/canvas_width = 1280.0
-shader_param/canvas_height = 1024.0
-shader_param/r_mult = 0.0
-shader_param/g_mult = 1.0
-shader_param/b_mult = -1.0
-shader_param/target_palette = ExtResource( 4 )
-
-[sub_resource type="ViewportTexture" id=70]
-viewport_path = NodePath("Viewport2")
-
 [sub_resource type="Animation" id=192]
 length = 0.001
 tracks/0/type = "value"
@@ -2268,6 +2254,20 @@ surfaces/0 = {
 }
 
 [sub_resource type="CanvasItemMaterial" id=191]
+
+[sub_resource type="ShaderMaterial" id=230]
+shader = ExtResource( 19 )
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1.0
+shader_param/canvas_width = 1280.0
+shader_param/canvas_height = 1024.0
+shader_param/r_mult = 0.0
+shader_param/g_mult = 1.0
+shader_param/b_mult = -1.0
+shader_param/target_palette = ExtResource( 4 )
+
+[sub_resource type="ViewportTexture" id=70]
+viewport_path = NodePath("Viewport2")
 
 [node name="Game" type="Spatial"]
 
@@ -2939,82 +2939,67 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 62 )]
+[node name="UILayer" parent="Viewport2" instance=ExtResource( 52 )]
 
-[node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
-material = SubResource( 230 )
-
-[node name="BasicCrtEffectRect" parent="Viewport2/ScreenEffects" index="1"]
-visible = true
-
-[node name="ViewportTexture" type="TextureRect" parent="."]
-margin_right = 1280.0
-margin_bottom = 1024.0
-texture = SubResource( 70 )
-flip_v = true
-
-[node name="UILayer" parent="." instance=ExtResource( 52 )]
-
-[node name="CinematicAnimationPlayer" parent="UILayer" index="4"]
+[node name="CinematicAnimationPlayer" parent="Viewport2/UILayer" index="4"]
 anims/RESET = SubResource( 192 )
 anims/endCutscene = SubResource( 193 )
 anims/startCutscene = SubResource( 194 )
 anims/startCutsceneImmediate = SubResource( 195 )
 
-[node name="ColorRect" parent="UILayer/MiniCrystalCubeRect" index="0"]
+[node name="ColorRect" parent="Viewport2/UILayer/MiniCrystalCubeRect" index="0"]
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" parent="UILayer/GlitchStatusRect" index="3"]
+[node name="TextureRect" parent="Viewport2/UILayer/GlitchStatusRect" index="3"]
 texture = SubResource( 235 )
 
-[node name="MeshInstance" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
+[node name="MeshInstance" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
 mesh = SubResource( 330 )
 
-[node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
+[node name="MeshInstance2" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
 transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
-[node name="Camera" parent="UILayer/GlitchStatusRect/Viewport" index="1"]
+[node name="Camera" parent="Viewport2/UILayer/GlitchStatusRect/Viewport" index="1"]
 current = true
 
-[node name="BetaBuildLabel" parent="UILayer" index="24"]
+[node name="BetaBuildLabel" parent="Viewport2/UILayer" index="24"]
 margin_left = 664.0
 margin_right = 916.0
 
-[node name="MainMenu" type="Control" parent="UILayer"]
-visible = false
+[node name="MainMenu" type="Control" parent="Viewport2/UILayer"]
 margin_top = -45.0
 
-[node name="ColorRect" type="ColorRect" parent="UILayer/MainMenu"]
+[node name="ColorRect" type="ColorRect" parent="Viewport2/UILayer/MainMenu"]
 margin_left = 307.0
 margin_top = 355.0
 margin_right = 488.0
 margin_bottom = 395.0
 color = Color( 0, 0.309804, 0.309804, 1 )
 
-[node name="ColorRect4" type="ColorRect" parent="UILayer/MainMenu"]
+[node name="ColorRect4" type="ColorRect" parent="Viewport2/UILayer/MainMenu"]
 margin_left = 307.0
 margin_top = 303.0
 margin_right = 488.0
 margin_bottom = 343.0
 color = Color( 0, 0.309804, 0.309804, 1 )
 
-[node name="ColorRect2" type="ColorRect" parent="UILayer/MainMenu"]
+[node name="ColorRect2" type="ColorRect" parent="Viewport2/UILayer/MainMenu"]
 margin_left = 308.0
 margin_top = 412.0
 margin_right = 486.0
 margin_bottom = 452.0
 color = Color( 0, 0.309804, 0.309804, 1 )
 
-[node name="ColorRect3" type="ColorRect" parent="UILayer/MainMenu"]
+[node name="ColorRect3" type="ColorRect" parent="Viewport2/UILayer/MainMenu"]
 margin_left = 311.5
 margin_top = 467.0
 margin_right = 489.5
 margin_bottom = 507.0
 color = Color( 0, 0.309804, 0.309804, 1 )
 
-[node name="SelectPrompt" type="Control" parent="UILayer/MainMenu"]
+[node name="SelectPrompt" type="Control" parent="Viewport2/UILayer/MainMenu"]
 margin_left = 271.5
 margin_top = 301.0
 margin_right = 591.0
@@ -3023,7 +3008,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource( 51 )
 
-[node name="CursorSprite" type="Sprite" parent="UILayer/MainMenu/SelectPrompt"]
+[node name="CursorSprite" type="Sprite" parent="Viewport2/UILayer/MainMenu/SelectPrompt"]
 material = SubResource( 191 )
 position = Vector2( 30, 15 )
 scale = Vector2( 3, 3 )
@@ -3033,7 +3018,7 @@ vframes = 5
 frame = 26
 script = ExtResource( 22 )
 
-[node name="TextPrompt" type="RichTextLabel" parent="UILayer/MainMenu/SelectPrompt"]
+[node name="TextPrompt" type="RichTextLabel" parent="Viewport2/UILayer/MainMenu/SelectPrompt"]
 margin_left = 221.0
 margin_top = 4.0
 margin_right = 322.0
@@ -3042,7 +3027,7 @@ bbcode_enabled = true
 bbcode_text = "[font=res://DarkInputFont_small.tres]x[/font]"
 text = "x"
 
-[node name="MenuText" type="RichTextLabel" parent="UILayer/MainMenu"]
+[node name="MenuText" type="RichTextLabel" parent="Viewport2/UILayer/MainMenu"]
 margin_left = 319.0
 margin_top = 301.0
 margin_right = 539.0
@@ -3063,10 +3048,10 @@ text = "1: File 1
 4. Empty"
 scroll_active = false
 
-[node name="PressC" type="RichTextLabel" parent="UILayer/MainMenu"]
-margin_left = -107.0
+[node name="PressC" type="RichTextLabel" parent="Viewport2/UILayer/MainMenu"]
+margin_left = -241.0
 margin_top = 515.0
-margin_right = 710.0
+margin_right = 576.0
 margin_bottom = 616.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -3079,7 +3064,7 @@ bbcode_text = "[right]press [font=res://DarkInputFont_small.tres]x[/font] to sta
 text = "press x to start  c: delete file"
 scroll_active = false
 
-[node name="OptionsMenuPrompt" type="RichTextLabel" parent="UILayer/MainMenu"]
+[node name="OptionsMenuPrompt" type="RichTextLabel" parent="Viewport2/UILayer/MainMenu"]
 margin_left = 12.0
 margin_top = 61.0
 margin_right = 635.0
@@ -3094,19 +3079,19 @@ bbcode_text = "Press [font=res://DarkInputFont_small.tres]R[/font] for OPTIONS"
 text = "Press R for OPTIONS"
 scroll_active = false
 
-[node name="DeleteConfirmationLayer" type="CanvasLayer" parent="UILayer/MainMenu"]
+[node name="DeleteConfirmationLayer" type="CanvasLayer" parent="Viewport2/UILayer/MainMenu"]
 layer = 3
 visible = false
 offset = Vector2( 320, 28 )
 scale = Vector2( 2, 2 )
 transform = Transform2D( 2, 0, 0, 2, 320, 28 )
 
-[node name="ColorRect" type="ColorRect" parent="UILayer/MainMenu/DeleteConfirmationLayer"]
+[node name="ColorRect" type="ColorRect" parent="Viewport2/UILayer/MainMenu/DeleteConfirmationLayer"]
 margin_right = 640.0
 margin_bottom = 512.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 0.501961 )
 
-[node name="PopupRect" type="ColorRect" parent="UILayer/MainMenu/DeleteConfirmationLayer"]
+[node name="PopupRect" type="ColorRect" parent="Viewport2/UILayer/MainMenu/DeleteConfirmationLayer"]
 margin_left = 138.0
 margin_top = 219.0
 margin_right = 510.0
@@ -3115,7 +3100,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
-[node name="ColorRect" type="ColorRect" parent="UILayer/MainMenu/DeleteConfirmationLayer/PopupRect"]
+[node name="ColorRect" type="ColorRect" parent="Viewport2/UILayer/MainMenu/DeleteConfirmationLayer/PopupRect"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 368.0
@@ -3127,7 +3112,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="UILayer/MainMenu/DeleteConfirmationLayer/PopupRect/ColorRect"]
+[node name="ColorRect" type="ColorRect" parent="Viewport2/UILayer/MainMenu/DeleteConfirmationLayer/PopupRect/ColorRect"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 361.0
@@ -3139,7 +3124,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UILayer/MainMenu/DeleteConfirmationLayer/PopupRect/ColorRect/ColorRect"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Viewport2/UILayer/MainMenu/DeleteConfirmationLayer/PopupRect/ColorRect/ColorRect"]
 margin_left = -7.0
 margin_top = 3.0
 margin_right = 433.0
@@ -3158,7 +3143,7 @@ text = "Really Delete \"File 1\"?
                       z Cancel"
 scroll_active = false
 
-[node name="SkipPrompt" type="RichTextLabel" parent="UILayer"]
+[node name="SkipPrompt" type="RichTextLabel" parent="Viewport2/UILayer"]
 visible = false
 margin_left = 303.0
 margin_top = 472.0
@@ -3172,6 +3157,20 @@ bbcode_enabled = true
 bbcode_text = "Press [font=res://DarkInputFont_small.tres]R[/font] for OPTIONS"
 text = "Press R for OPTIONS"
 scroll_active = false
+
+[node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 62 )]
+
+[node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
+material = SubResource( 230 )
+
+[node name="BasicCrtEffectRect" parent="Viewport2/ScreenEffects" index="1"]
+visible = true
+
+[node name="ViewportTexture" type="TextureRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 1024.0
+texture = SubResource( 70 )
+flip_v = true
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 62 )]
 
@@ -3205,8 +3204,8 @@ scroll_active = false
 [editable path="Viewport/level/SecretGlitchyNPC6/NPC TextBox"]
 [editable path="Viewport/level/Signpost"]
 [editable path="Viewport/level/Signpost/NPC TextBox"]
+[editable path="Viewport2/UILayer"]
+[editable path="Viewport2/UILayer/EdgeDistortion"]
+[editable path="Viewport2/UILayer/PauseMenu"]
 [editable path="Viewport2/ScreenEffects"]
-[editable path="UILayer"]
-[editable path="UILayer/EdgeDistortion"]
-[editable path="UILayer/PauseMenu"]
 [editable path="ScreenEffects"]

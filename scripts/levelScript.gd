@@ -1,6 +1,6 @@
 extends Node
 
-onready var uiLayer = get_node("../../UILayer") if has_node("../../UILayer") else get_node("UILayer")
+onready var uiLayer = get_node("../../UILayer") if has_node("../../UILayer") else get_node("UILayer") if has_node("UILayer") else get_node("../../Viewport2/UILayer")
 onready var player = get_node("Player")
 onready var levelTiles = get_node("LevelTiles")
 onready var fakeLevelTiles = get_node("FakeLevelTiles") if has_node("FakeLevelTiles") else null
@@ -12,6 +12,7 @@ onready var ditherPaletteEffectRect2 = get_node("../../Viewport2/ScreenEffects/D
 onready var paletteSwapColorBlindEffectRect2 = get_node("../../Viewport2/ScreenEffects/PaletteSwapEffectRect") 
 onready var basicCrtEffectRect2 = get_node("../../Viewport2/ScreenEffects/BasicCrtEffectRect")
 onready var viewportTexture = get_node("../../ViewportTexture")
+onready var viewport2Texture = get_node("../../Viewport2/ViewportTexture")
 onready var viewport2or3 = get_node("../../Viewport3") if has_node("../../Viewport3") else get_node("../../Viewport2")
 var current_sprite_palette = global.grey_palette
 export var player_message = "???"
@@ -97,14 +98,21 @@ func _ready_impl():
 
   yield(TempTimer.idle_frame(self), "timeout")
   yield(TempTimer.idle_frame(self), "timeout")
-  if not self.has_node("../../UILayer") and self.has_node("UILayer"):
+  if not self.has_node("../../Viewport2/UILayer") and self.has_node("UILayer"):
     self.remove_child(uiLayer)
-    self.get_node("../..").add_child(uiLayer)
-  should_offset_ui = true
-  uiLayer.offset = Vector2(320, 28)
+    self.get_node("../../Viewport2").add_child_below_node(viewport2Texture, uiLayer)
+  if not self.has_node("../../Viewport2/UILayer") and self.has_node("../../UILayer"):
+    print(uiLayer)
+    self.get_node("../..").remove_child(uiLayer)
+    print(self.get_node("../.."))
+    self.get_node("../../Viewport2").add_child_below_node(viewport2Texture, uiLayer)
+    print(self.get_node("../../Viewport2"))
+    print(viewport2Texture)
+  # should_offset_ui = true
+  uiLayer.offset = Vector2(0, 0)
   uiLayer.betaBuildLabel.rect_position.x = 640
-  uiLayer.edgeDistortion.offset = Vector2(320, 28)
-  uiLayer.textBoxes.offset = Vector2(320, 28)
+  uiLayer.edgeDistortion.offset = Vector2(0, 0)
+  uiLayer.textBoxes.offset = Vector2(0, 0)
   screenEffectsContainer.offset = Vector2(320, 28)
   
   if not get_tree().get_root().has_node("Game/GameFrameBackground"):

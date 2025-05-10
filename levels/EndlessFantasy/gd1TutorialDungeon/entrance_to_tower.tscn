@@ -756,7 +756,7 @@ extents = Vector3( 0.5, 0.75, 1 )
 
 [sub_resource type="BoxShape" id=311]
 resource_local_to_scene = true
-extents = Vector3( 15, 1.5, 1 )
+extents = Vector3( 15, 1.2, 1 )
 
 [sub_resource type="BoxShape" id=312]
 resource_local_to_scene = true
@@ -989,19 +989,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 3, 0 )
 [node name="CubeCrystal" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -4, 6, 0 )
 
-[node name="CubeContainer" parent="Viewport/level/CubeCrystal" index="0"]
-transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
-
 [node name="MeshInstance" parent="Viewport/level/CubeCrystal/CubeContainer" index="0"]
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, 5.33851e-08, 0, 0, 0 )
 mesh = SubResource( 316 )
 
 [node name="MeshInstance3" parent="Viewport/level/CubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
 mesh = SubResource( 317 )
-
-[node name="MeshInstance2" parent="Viewport/level/CubeCrystal/CubeContainer" index="2"]
-transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )
 
 [node name="PriestessShortcutDoor" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.2055, 10.0447, 0 )
@@ -1028,7 +1021,7 @@ is_vertical = true
 is_sneaky = true
 
 [node name="landing" parent="Viewport/level/Door4" index="5"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 1 )
 
 [node name="AnimationPlayer" parent="Viewport/level/Door4" index="6"]
 anims/RESET = SubResource( 297 )
@@ -1057,49 +1050,49 @@ shape = SubResource( 312 )
 [node name="CollisionShape" parent="Viewport/level/Door4/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 313 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door4/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="0"]
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door4/NPC/NPC TextBox/TextBox/Container/ScrollContainer/Text" index="0"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door4/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="1"]
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door4/NPC/NPC TextBox/TextBox/Container/ScrollContainer/Text" index="1"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door4/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="0"]
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door4/NPC/NPC TextBox/TextBox/Container/YesButton/TextPrompt" index="0"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door4/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="1"]
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door4/NPC/NPC TextBox/TextBox/Container/YesButton/TextPrompt" index="1"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door4/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="0"]
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door4/NPC/NPC TextBox/TextBox/Container/NoButton/TextPrompt" index="0"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door4/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="1"]
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door4/NPC/NPC TextBox/TextBox/Container/NoButton/TextPrompt" index="1"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door4/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="0"]
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/Door4/NPC/NPC TextBox/TextBox/Container/TextPrompt" index="0"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door4/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="1"]
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/Door4/NPC/NPC TextBox/TextBox/Container/TextPrompt" index="1"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0

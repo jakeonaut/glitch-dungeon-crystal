@@ -15,10 +15,10 @@ enum MainMenuState {
     INTRO_VIDEO
 }
 var mainMenuState = MainMenuState.SHOWING_EPILEPSY_WARNING
-onready var epilepsyWarning = get_node("../../UILayer/EpilepsyWarning")
-onready var epilepsyWarningCoverup = get_node("../../UILayer/EpilepsyWarning/Coverup")
-onready var epilepsyWarningSprite = get_node("../../UILayer/EpilepsyWarning/Sprite")
-onready var epilepsyWarningText = get_node("../../UILayer/EpilepsyWarning/Text")
+onready var epilepsyWarning = get_node("../../Viewport2/UILayer/EpilepsyWarning")
+onready var epilepsyWarningCoverup = get_node("../../Viewport2/UILayer/EpilepsyWarning/Coverup")
+onready var epilepsyWarningSprite = get_node("../../Viewport2/UILayer/EpilepsyWarning/Sprite")
+onready var epilepsyWarningText = get_node("../../Viewport2/UILayer/EpilepsyWarning/Text")
 var has_finished_initial_initialization = false
 
 func setUpRoomInitializationOverride():

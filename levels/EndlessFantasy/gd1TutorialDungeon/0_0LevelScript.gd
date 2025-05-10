@@ -25,8 +25,8 @@ func setUpRoomInitializationOverride():
   has_decided = true
   
 var showInstructions = false
-onready var pressCText = get_node("../../UILayer/PressC")
-onready var optionsMenuPrompt = get_node("../../UILayer/OptionsMenuPrompt")
+onready var pressCText = get_node("../../Viewport2/UILayer/PressC")
+onready var optionsMenuPrompt = get_node("../../Viewport2/UILayer/OptionsMenuPrompt")
 var has_played_sound = false
 func _process(_delta):
   # ._process(delta) implicit

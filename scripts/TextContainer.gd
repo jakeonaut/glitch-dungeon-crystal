@@ -12,7 +12,7 @@ var needs_to_talk_normal_first = false
 var interact_prompt_offset = 0
 
 onready var textBox = get_node("TextBox")
-onready var textBoxtext = get_node("TextBox/TextCanvasLayer/Container/ScrollContainer/Text")
+onready var textBoxtext = get_node("TextBox/Container/ScrollContainer/Text")
 onready var textBoxportrait = get_node("TextBox/PortraitColor/ColorRect2/ColorRect4/Portrait")
 
 var type = "textBoxContainer"

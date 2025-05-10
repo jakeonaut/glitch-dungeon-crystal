@@ -181,6 +181,38 @@ stream = ExtResource( 17 )
 volume_db = -10.0
 bus = "Sfx"
 
+[node name="UILayer" parent="Viewport2" instance=ExtResource( 14 )]
+
+[node name="EpilepsyWarning" type="ColorRect" parent="Viewport2/UILayer"]
+margin_right = 640.0
+margin_bottom = 512.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="Text" type="RichTextLabel" parent="Viewport2/UILayer/EpilepsyWarning"]
+margin_left = 114.0
+margin_top = 185.0
+margin_right = 536.0
+margin_bottom = 497.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource( 21 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "UI.Photosensitivity.Warning"
+text = "UI.Photosensitivity.Warning"
+scroll_active = false
+
+[node name="Sprite" type="Sprite" parent="Viewport2/UILayer/EpilepsyWarning"]
+position = Vector2( 312, 131 )
+scale = Vector2( 8, 8 )
+texture = ExtResource( 20 )
+
+[node name="Coverup" type="ColorRect" parent="Viewport2/UILayer/EpilepsyWarning"]
+margin_right = 640.0
+margin_bottom = 512.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
 [node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 16 )]
 
 [node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
@@ -209,38 +241,6 @@ bbcode_enabled = true
 bbcode_text = "Press [font=res://DarkInputFont_small.tres]R[/font] for OPTIONS"
 text = "Press R for OPTIONS"
 scroll_active = false
-
-[node name="UILayer" parent="." instance=ExtResource( 14 )]
-
-[node name="EpilepsyWarning" type="ColorRect" parent="UILayer"]
-margin_right = 640.0
-margin_bottom = 512.0
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="Text" type="RichTextLabel" parent="UILayer/EpilepsyWarning"]
-margin_left = 114.0
-margin_top = 185.0
-margin_right = 536.0
-margin_bottom = 497.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 3
-theme = ExtResource( 21 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "UI.Photosensitivity.Warning"
-text = "UI.Photosensitivity.Warning"
-scroll_active = false
-
-[node name="Sprite" type="Sprite" parent="UILayer/EpilepsyWarning"]
-position = Vector2( 312, 131 )
-scale = Vector2( 8, 8 )
-texture = ExtResource( 20 )
-
-[node name="Coverup" type="ColorRect" parent="UILayer/EpilepsyWarning"]
-margin_right = 640.0
-margin_bottom = 512.0
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 16 )]
 

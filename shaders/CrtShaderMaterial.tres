@@ -4,14 +4,14 @@
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/res = Vector2( 1280, 1024 )
-shader_param/mask_type = 0
-shader_param/bloom_type = 2
-shader_param/hardScan = -1.0
-shader_param/hardPix = -4.0
-shader_param/hardBloomScan = -1.465
-shader_param/hardBloomPix = -1.512
-shader_param/bloomAmount = 7.69
-shader_param/warp = Vector2( 512, 256 )
-shader_param/maskDark = 0.482
-shader_param/maskLight = 1.15
+shader_param/res = Vector2( 640, 512 )
+shader_param/mask_type = 2
+shader_param/bloom_type = 1
+shader_param/hardScan = -2.467
+shader_param/hardPix = -1.621
+shader_param/hardBloomScan = -1.568
+shader_param/hardBloomPix = -0.886
+shader_param/bloomAmount = 2.767
+shader_param/warp = Vector2( 128, 48 )
+shader_param/maskDark = 1.0
+shader_param/maskLight = 1.617

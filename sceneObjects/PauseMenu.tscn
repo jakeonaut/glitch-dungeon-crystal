@@ -2409,23 +2409,17 @@ vframes = 6
 script = ExtResource( 13 )
 max_frames = 1
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 3
+[node name="PopupRect" type="ColorRect" parent="."]
 visible = false
-offset = Vector2( 160, 14 )
-scale = Vector2( 2.5, 2.5 )
-transform = Transform2D( 2.5, 0, 0, 2.5, 160, 14 )
-
-[node name="PopupRect" type="ColorRect" parent="CanvasLayer"]
-margin_left = 109.0
+margin_left = 195.0
 margin_top = 112.0
-margin_right = 469.0
+margin_right = 555.0
 margin_bottom = 222.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/PopupRect"]
+[node name="ColorRect" type="ColorRect" parent="PopupRect"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 356.0
@@ -2437,7 +2431,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/PopupRect/ColorRect"]
+[node name="ColorRect" type="ColorRect" parent="PopupRect/ColorRect"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 348.0
@@ -2446,7 +2440,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/PopupRect/ColorRect/ColorRect"]
+[node name="RichTextLabel" type="RichTextLabel" parent="PopupRect/ColorRect/ColorRect"]
 margin_left = 11.0
 margin_top = 3.0
 margin_right = 343.0
@@ -2460,8 +2454,7 @@ bbcode_text = "oh, hello"
 text = "oh, hello"
 scroll_active = false
 
-[node name="YesButton" type="ColorRect" parent="CanvasLayer/PopupRect"]
-visible = false
+[node name="YesButton" type="ColorRect" parent="PopupRect"]
 margin_left = 86.3333
 margin_top = 96.6666
 margin_right = 236.333
@@ -2469,7 +2462,7 @@ margin_bottom = 151.667
 rect_scale = Vector2( 0.4, 0.4 )
 color = Color( 0, 0.309804, 0.309804, 1 )
 
-[node name="CursorSprite" type="Sprite" parent="CanvasLayer/PopupRect/YesButton"]
+[node name="CursorSprite" type="Sprite" parent="PopupRect/YesButton"]
 material = SubResource( 72 )
 position = Vector2( 7, 24 )
 scale = Vector2( 4, 4 )
@@ -2479,9 +2472,9 @@ vframes = 5
 frame = 26
 script = ExtResource( 13 )
 
-[node name="TextPrompt" type="RichTextLabel" parent="CanvasLayer/PopupRect/YesButton"]
-margin_left = -24.0
-margin_right = 187.0
+[node name="TextPrompt" type="RichTextLabel" parent="PopupRect/YesButton"]
+margin_left = 26.0
+margin_right = 183.0
 margin_bottom = 62.0
 rect_pivot_offset = Vector2( -511, -189 )
 rect_clip_content = false
@@ -2495,8 +2488,7 @@ tab_size = 2
 text = "yes"
 scroll_active = false
 
-[node name="NoButton" type="ColorRect" parent="CanvasLayer/PopupRect"]
-visible = false
+[node name="NoButton" type="ColorRect" parent="PopupRect"]
 margin_left = 213.667
 margin_top = 96.6667
 margin_right = 363.667
@@ -2504,7 +2496,8 @@ margin_bottom = 151.667
 rect_scale = Vector2( 0.4, 0.4 )
 color = Color( 0, 0.309804, 0.309804, 1 )
 
-[node name="CursorSprite" type="Sprite" parent="CanvasLayer/PopupRect/NoButton"]
+[node name="CursorSprite" type="Sprite" parent="PopupRect/NoButton"]
+visible = false
 material = SubResource( 72 )
 position = Vector2( 7, 24 )
 scale = Vector2( 4, 4 )
@@ -2514,10 +2507,10 @@ vframes = 5
 frame = 26
 script = ExtResource( 13 )
 
-[node name="TextPrompt" type="RichTextLabel" parent="CanvasLayer/PopupRect/NoButton"]
-margin_left = 4.0
+[node name="TextPrompt" type="RichTextLabel" parent="PopupRect/NoButton"]
+margin_left = 17.0
 margin_top = -1.0
-margin_right = 152.0
+margin_right = 144.0
 margin_bottom = 58.0
 rect_pivot_offset = Vector2( -511, -189 )
 rect_clip_content = false

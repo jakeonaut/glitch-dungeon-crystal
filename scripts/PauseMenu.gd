@@ -1,14 +1,13 @@
 extends Control
 
-onready var popupRectCanvasLayer = get_node("CanvasLayer")
-onready var popupRect = get_node("CanvasLayer/PopupRect")
-onready var popupText = get_node("CanvasLayer/PopupRect/ColorRect/ColorRect/RichTextLabel")
-onready var popupYesButton = get_node("CanvasLayer/PopupRect/YesButton")
-onready var popupYesButtonText = get_node("CanvasLayer/PopupRect/YesButton/TextPrompt")
-onready var popupYesCursor = get_node("CanvasLayer/PopupRect/YesButton/CursorSprite")
-onready var popupNoButton = get_node("CanvasLayer/PopupRect/NoButton")
-onready var popupNoButtonText = get_node("CanvasLayer/PopupRect/NoButton/TextPrompt")
-onready var popupNoCursor = get_node("CanvasLayer/PopupRect/NoButton/CursorSprite")
+onready var popupRect = get_node("PopupRect")
+onready var popupText = get_node("PopupRect/ColorRect/ColorRect/RichTextLabel")
+onready var popupYesButton = get_node("PopupRect/YesButton")
+onready var popupYesButtonText = get_node("PopupRect/YesButton/TextPrompt")
+onready var popupYesCursor = get_node("PopupRect/YesButton/CursorSprite")
+onready var popupNoButton = get_node("PopupRect/NoButton")
+onready var popupNoButtonText = get_node("PopupRect/NoButton/TextPrompt")
+onready var popupNoCursor = get_node("PopupRect/NoButton/CursorSprite")
 var shouldShowPopupYesNoOptions = false
 var popupYesNoOptions = false
 var popupTimer = 0
@@ -162,9 +161,6 @@ func _process(delta):
 
   if not global.hasInitializedControlsConfig:
     return
-  if not popupRectCanvasLayer.visible:
-    popupRectCanvasLayer.visible = true
-  popupRectCanvasLayer.scale = Vector2(2.5, 2.5)
   popupRect.rect_position = Vector2(150, 150)
   # popupRect.rect_size = Vector2(400, 60)
 
@@ -623,7 +619,9 @@ func processInventoryLogic(delta):
       if player.justPressedMenuRight() or player.justPressedMenuLeft():
         popupYesNoOptions = not popupYesNoOptions
   else:
+    popupYesButton.visible = false
     popupYesCursor.visible = false
+    popupNoButton.visible = false
     popupNoCursor.visible = false
   
   var activeColor = Color("#dcdcdc")
@@ -894,19 +892,22 @@ func normalizeInventoryOptionIndex(y, x):
       if inventoryOptionIndex == 2 and not soulLabel.visible:
         inventoryOptionIndex = 1
 
+    if inventoryOptionIndex == 2 and heartSprite.visible:
+      inventoryOptionIndexX = -1
+
   if inventoryOptionIndex == 1:
     inventoryOptionIndexX += x
     if x >= 0:
       if inventoryOptionIndexX > (2 if returnSprite.visible else 1): # (inventoryOptionIndexX == 3 and not bagSprite.visible) or inventoryOptionIndexX > 3:
-        if hasAngelFlute:
-          inventoryOptionIndex = 4
-          menuConfirmSound.play()
-          mapCursorSprite.restart()
-          mapCursorSprite2.restart()
-          inventoryOptionIndexX = 0
-          return
-        else:
-          inventoryOptionIndexX = 0
+        # if hasAngelFlute:
+        #   inventoryOptionIndex = 4
+        #   menuConfirmSound.play()
+        #   mapCursorSprite.restart()
+        #   mapCursorSprite2.restart()
+        #   inventoryOptionIndexX = 0
+        #   return
+        # else:
+        inventoryOptionIndexX = 0
     elif x < 0:
       if inventoryOptionIndexX < 0:
         inventoryOptionIndexX = 2 if returnSprite.visible else 1
@@ -921,15 +922,15 @@ func normalizeInventoryOptionIndex(y, x):
       if inventoryOptionIndexX == 1 and not soulSprite2.visible:
         inventoryOptionIndexX = 2
       if (inventoryOptionIndexX == 2 and not soulSprite3.visible) or inventoryOptionIndexX > 2:
-        if hasAngelFlute:
-          inventoryOptionIndex = 4
-          menuConfirmSound.play()
-          mapCursorSprite.restart()
-          mapCursorSprite2.restart()
-          inventoryOptionIndexX = 0
-          return
-        else:
-          inventoryOptionIndexX = -1 if heartSprite.visible else 0 if soulSprite1.visible else 1 if soulSprite2.visible else 2
+        # if hasAngelFlute:
+        #   inventoryOptionIndex = 4
+        #   menuConfirmSound.play()
+        #   mapCursorSprite.restart()
+        #   mapCursorSprite2.restart()
+        #   inventoryOptionIndexX = 0
+        #   return
+        # else:
+        inventoryOptionIndexX = -1 if heartSprite.visible else 0 if soulSprite1.visible else 1 if soulSprite2.visible else 2
     elif x < 0:
       if inventoryOptionIndexX == 2 and not soulSprite3.visible:
         inventoryOptionIndexX = 1
@@ -950,15 +951,15 @@ func normalizeInventoryOptionIndex(y, x):
       if inventoryOptionIndexX == 2 and not flowerPotSprite.visible:
         inventoryOptionIndexX = 3
       if (inventoryOptionIndexX == 3 and not cutePetSprite.visible) or inventoryOptionIndexX > 3:
-        if hasAngelFlute:
-          inventoryOptionIndex = 4
-          menuConfirmSound.play()
-          mapCursorSprite.restart()
-          mapCursorSprite2.restart()
-          inventoryOptionIndexX = 0
-          return
-        else:
-          inventoryOptionIndexX = 0 if angelEggSprite.visible else 1 if fishingRodSprite.visible else 2 if flowerPotSprite.visible else 3
+        # if hasAngelFlute:
+        #   inventoryOptionIndex = 4
+        #   menuConfirmSound.play()
+        #   mapCursorSprite.restart()
+        #   mapCursorSprite2.restart()
+        #   inventoryOptionIndexX = 0
+        #   return
+        # else:
+        inventoryOptionIndexX = 0 if angelEggSprite.visible else 1 if fishingRodSprite.visible else 2 if flowerPotSprite.visible else 3
     elif x < 0:
       if inventoryOptionIndexX == 3 and not cutePetSprite.visible:
         inventoryOptionIndexX = 2

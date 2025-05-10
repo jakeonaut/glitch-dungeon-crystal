@@ -2,10 +2,9 @@ extends TextureRect
 
 var dialogFont = preload("res://dialogBodyFontTheme.tres")
 var promptFont = preload("res://levels/common/UITheme_real.tres")
-onready var textNode = get_node("TextCanvasLayer/Container/ScrollContainer/Text")
-onready var textSprite = get_node("TextCanvasLayer/Container/ScrollContainer/TextSprite") if has_node("TextCanvasLayer/Container/ScrollContainer/TextSprite") else null
-onready var textNodeCanvasLayer = get_node("TextCanvasLayer")
-onready var textNodeCanvasLayerContainer = get_node("TextCanvasLayer/Container")
+onready var textNode = get_node("Container/ScrollContainer/Text")
+onready var textSprite = get_node("Container/ScrollContainer/TextSprite") if has_node("Container/ScrollContainer/TextSprite") else null
+onready var container = get_node("Container")
 onready var dialogStartSound = get_node("DialogStartSound")
 onready var dialogSound = get_node("DialogSound")
 onready var nextDialogSound = get_node("NextDialogSound")
@@ -46,16 +45,16 @@ var override_target_origin = null
 var is_fast_text = false
 
 var showYesNoOptions = false
-onready var yesButton = get_node("TextCanvasLayer/Container/YesButton")
-onready var yesButtonCursor = get_node("TextCanvasLayer/Container/YesButton/CursorSprite")
-onready var yesButtonText = get_node("TextCanvasLayer/Container/YesButton/TextPrompt")
-onready var noButton = get_node("TextCanvasLayer/Container/NoButton")
-onready var noButtonCursor = get_node("TextCanvasLayer/Container/NoButton/CursorSprite")
-onready var noButtonText = get_node("TextCanvasLayer/Container/NoButton/TextPrompt")
+onready var yesButton = get_node("Container/YesButton")
+onready var yesButtonCursor = get_node("Container/YesButton/CursorSprite")
+onready var yesButtonText = get_node("Container/YesButton/TextPrompt")
+onready var noButton = get_node("Container/NoButton")
+onready var noButtonCursor = get_node("Container/NoButton/CursorSprite")
+onready var noButtonText = get_node("Container/NoButton/TextPrompt")
 var selectedYesNoOption = true
 onready var nextPrompt = get_node("NextPrompt")
 onready var endPrompt = get_node("EndPrompt")
-onready var textPrompt = get_node("TextCanvasLayer/Container/TextPrompt")
+onready var textPrompt = get_node("Container/TextPrompt")
 var nextPrompt_wiggle_timer = 0
 var nextPrompt_wiggle_time_limit = 20
 var nextPrompt_wiggled_up = false
@@ -88,7 +87,6 @@ func getPlayer():
 
 func _ready():
   hideMe()
-  textNodeCanvasLayer.hide()
   set_process(true)
   
   # text_final = textNode.get_bbcode_text() # this is better set by TextContainer.gd
@@ -102,10 +100,6 @@ func _ready():
   if textSprite: textSprite.visible = false
   yield(TempTimer.idle_frame(self), "timeout")
   yield(TempTimer.idle_frame(self), "timeout")
-  if level.should_offset_ui:
-    textNodeCanvasLayer.offset = Vector2(320, 28)
-  else:
-    textNodeCanvasLayer.offset = Vector2(0, 0)
   tryMoveToUiLayer()
 
 func tryMoveToUiLayer():
@@ -152,9 +146,9 @@ func setTinyPosition():
   self.rect_position.x = factor * target_pos.x - 50 - adjusted_tiny_x_pos
   self.rect_position.y = factor * target_pos.y - 50 - adjusted_tiny_y_pos + interact_prompt_offset
 
-  var m = 2.5
-  textNodeCanvasLayerContainer.rect_position.x = self.rect_position.x * m
-  textNodeCanvasLayerContainer.rect_position.y = self.rect_position.y * m + interact_prompt_offset
+  var m = 0.05 # 2.5
+  container.rect_position.x = self.rect_position.x * m
+  container.rect_position.y = self.rect_position.y * m + interact_prompt_offset
 
 func setTextBoxPosition():
   if not is_tiny:
@@ -168,10 +162,10 @@ func setTextBoxPosition():
       self.rect_position.y = 30
     
     var m = 2.5
-    textNodeCanvasLayerContainer.rect_position.x = self.rect_position.x * m
-    textNodeCanvasLayerContainer.rect_position.y = self.rect_position.y * m
-    textNodeCanvasLayerContainer.rect_size.x = self.rect_size.x * m
-    textNodeCanvasLayerContainer.rect_size.y = self.rect_size.x * m
+    container.rect_position.x = 0# self.rect_position.x * m
+    container.rect_position.y = 0# self.rect_position.y * m
+    container.rect_size.x = self.rect_size.x * m
+    container.rect_size.y = self.rect_size.x * m
 
 func _process(delta):
   if global.activeInteractor == self and not self.visible:
@@ -180,13 +174,11 @@ func _process(delta):
   portraitContainer.visible = false # not is_interact_prompt and not is_tiny
   if is_interact_prompt and not textboxParent.get_ref():
     hideMe()
-    textNodeCanvasLayer.hide()
     portraitContainer.visible = false
     return
   if not textboxParent.get_ref() and not self.visible and not global.activeInteractor == self:
     queue_free()
 
-  textNodeCanvasLayer.visible = self.visible and not global.isPauseMenuOpen
   textPrompt.visible = not floating_text and (isWaitingForEndPrompt() or isWaitingForNextPrompt()) and not is_tiny
   if global.isPauseMenuOpen:
     return

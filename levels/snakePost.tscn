@@ -167,7 +167,7 @@ grav = 0
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 24 )
 
-[node name="Text" parent="Viewport/level/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer" index="0"]
+[node name="Text" parent="Viewport/level/NPC/NPC TextBox/TextBox/Container/ScrollContainer" index="0"]
 theme = ExtResource( 16 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC" index="3"]

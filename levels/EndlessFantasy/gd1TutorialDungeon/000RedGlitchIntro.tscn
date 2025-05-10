@@ -243,7 +243,7 @@ visible = true
 [node name="TextCanvasLayer" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="3"]
 visible = true
 
-[node name="Text" parent="Viewport/level/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer" index="0"]
+[node name="Text" parent="Viewport/level/NPC/NPC TextBox/TextBox/Container/ScrollContainer" index="0"]
 bbcode_text = "•some glitches are
 un-sweepable.
 i know this"
@@ -251,7 +251,7 @@ text = "•some glitches are
 un-sweepable.
 i know this"
 
-[node name="TextSprite" type="Sprite" parent="Viewport/level/NPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer" index="1"]
+[node name="TextSprite" type="Sprite" parent="Viewport/level/NPC/NPC TextBox/TextBox/Container/ScrollContainer" index="1"]
 position = Vector2( 1000, 96 )
 texture = ExtResource( 13 )
 

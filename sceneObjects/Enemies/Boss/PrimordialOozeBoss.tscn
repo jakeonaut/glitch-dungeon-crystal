@@ -411,7 +411,7 @@ visible = false
 [node name="TextBox" parent="PrimordialOozeNPC/NPC TextBox" index="0"]
 visible = true
 
-[node name="Text" parent="PrimordialOozeNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer" index="0"]
+[node name="Text" parent="PrimordialOozeNPC/NPC TextBox/TextBox/Container/ScrollContainer" index="0"]
 theme = SubResource( 14 )
 
 [node name="AbortSound" parent="PrimordialOozeNPC/NPC TextBox/TextBox" index="13"]

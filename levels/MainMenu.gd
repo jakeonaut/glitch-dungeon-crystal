@@ -263,15 +263,15 @@ func loadGame(saveGameIndex):
 func quitGame():
     get_tree().quit()
 
-onready var mainMenuUi = get_node("../../UILayer/MainMenu")
-onready var optionsMenuPrompt = get_node("../../UILayer/MainMenu/OptionsMenuPrompt")
-onready var selectPrompt = get_node("../../UILayer/MainMenu/SelectPrompt")
-onready var selectTextPrompt = get_node("../../UILayer/MainMenu/SelectPrompt/TextPrompt")
-onready var menuText = get_node("../../UILayer/MainMenu/MenuText")
-onready var pressCText = get_node("../../UILayer/MainMenu/PressC")
-onready var deleteConfirmationLayer = get_node("../../UILayer/MainMenu/DeleteConfirmationLayer")
-onready var deleteConfirmationLayerText =  get_node("../../UILayer/MainMenu/DeleteConfirmationLayer/PopupRect/ColorRect/ColorRect/RichTextLabel")
-onready var skipPrompt = get_node("../../UILayer/SkipPrompt")
+onready var mainMenuUi = get_node("../../Viewport2/UILayer/MainMenu")
+onready var optionsMenuPrompt = get_node("../../Viewport2/UILayer/MainMenu/OptionsMenuPrompt")
+onready var selectPrompt = get_node("../../Viewport2/UILayer/MainMenu/SelectPrompt")
+onready var selectTextPrompt = get_node("../../Viewport2/UILayer/MainMenu/SelectPrompt/TextPrompt")
+onready var menuText = get_node("../../Viewport2/UILayer/MainMenu/MenuText")
+onready var pressCText = get_node("../../Viewport2/UILayer/MainMenu/PressC")
+onready var deleteConfirmationLayer = get_node("../../Viewport2/UILayer/MainMenu/DeleteConfirmationLayer")
+onready var deleteConfirmationLayerText =  get_node("../../Viewport2/UILayer/MainMenu/DeleteConfirmationLayer/PopupRect/ColorRect/ColorRect/RichTextLabel")
+onready var skipPrompt = get_node("../../Viewport2/UILayer/SkipPrompt")
 var hideSkipPromptTimer = 0
 var hideSkipPromptTimeLimit = 15
 

@@ -403,7 +403,7 @@ func landed():
 
 func isTextboxPausingMe():
   return global.activeInteractor != null and (global.activeInteractor.showYesNoOptions or (
-    not rawPressingMoveUp() and not rawPressingMoveDown() and not rawPressingMoveLeft() and not rawPressingMoveRight() and on_ground)
+    not rawPressingMoveUp() and not rawPressingMoveDown() and not rawPressingMoveLeft() and not rawPressingMoveRight() and on_ground and not Input.is_action_pressed("jump_button"))
   )
 
 func rawJustPressedAnalogDown():

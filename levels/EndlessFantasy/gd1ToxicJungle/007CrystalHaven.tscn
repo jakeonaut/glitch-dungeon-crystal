@@ -1352,145 +1352,145 @@ bbText = "NPC.SporeCreature.9"
 [node name="CollisionShape" parent="Viewport/level/MushroomNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 69 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="0"]
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/ScrollContainer/Text" index="0"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="1"]
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/ScrollContainer/Text" index="1"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="2"]
+[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/ScrollContainer/Text" index="2"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="3"]
+[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/ScrollContainer/Text" index="3"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="4"]
+[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/ScrollContainer/Text" index="4"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/ScrollContainer/Text" index="5"]
+[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/ScrollContainer/Text" index="5"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="0"]
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/YesButton/TextPrompt" index="0"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="1"]
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/YesButton/TextPrompt" index="1"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="2"]
+[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/YesButton/TextPrompt" index="2"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="3"]
+[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/YesButton/TextPrompt" index="3"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="4"]
+[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/YesButton/TextPrompt" index="4"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/YesButton/TextPrompt" index="5"]
+[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/YesButton/TextPrompt" index="5"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="0"]
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/NoButton/TextPrompt" index="0"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="1"]
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/NoButton/TextPrompt" index="1"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="2"]
+[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/NoButton/TextPrompt" index="2"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="3"]
+[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/NoButton/TextPrompt" index="3"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="4"]
+[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/NoButton/TextPrompt" index="4"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/NoButton/TextPrompt" index="5"]
+[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/NoButton/TextPrompt" index="5"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="0"]
+[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/TextPrompt" index="0"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="1"]
+[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/TextPrompt" index="1"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="2"]
+[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/TextPrompt" index="2"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="3"]
+[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/TextPrompt" index="3"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="4"]
+[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/TextPrompt" index="4"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 step = 1.0
 
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/TextCanvasLayer/Container/TextPrompt" index="5"]
+[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/TextPrompt" index="5"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
