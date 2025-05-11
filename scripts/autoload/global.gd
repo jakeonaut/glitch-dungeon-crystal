@@ -504,6 +504,7 @@ func resetUserSettings():
     userSettings["locale"] = normalizeLocale(OS.get_locale_language())
     userSettings["doorDir"] = -1
     userSettings["fullscreen"] = true
+    userSettings["gles3"] = true
 
 func getDeadzone():
     return float(float(userSettings["deadzone_real"]) / 100.0)

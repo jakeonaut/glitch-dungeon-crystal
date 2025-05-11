@@ -281,11 +281,11 @@ func triggerCroneDefeatedDialog():
   musicPlayer.stopAll()
   # yield(get_tree().create_timer(0.5), "timeout")
   # summonSmokeClouds(ladderSpell2.global_transform.origin, 1, true, true)
-  var grandmaStatueArr = grandmaStatues.get_children()
-  for grandmaStatue in grandmaStatueArr:
-    summonSmokeClouds(grandmaStatue.global_transform.origin, 1)
-    grandmaStatue.queue_free()
-    yield(get_tree().create_timer(0.5), "timeout")
+  # var grandmaStatueArr = grandmaStatues.get_children()
+  # for grandmaStatue in grandmaStatueArr:
+  #   summonSmokeClouds(grandmaStatue.global_transform.origin, 1)
+  #   grandmaStatue.queue_free()
+  #   yield(get_tree().create_timer(0.5), "timeout")
 
 func playGlitchTransitionAnimation():
   aniPlayer.stop()

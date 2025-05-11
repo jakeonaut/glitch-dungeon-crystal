@@ -7368,6 +7368,10 @@ alpha_cut = 2
 texture = ExtResource( 30 )
 hframes = 8
 vframes = 8
+script = ExtResource( 10 )
+max_frames = 1
+should_animate = false
+automatically_change_color = false
 
 [node name="FishySprite" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.75 )
@@ -7479,6 +7483,10 @@ alpha_cut = 2
 texture = ExtResource( 31 )
 hframes = 8
 vframes = 8
+script = ExtResource( 10 )
+max_frames = 1
+should_animate = false
+automatically_change_color = false
 
 [node name="Sprite3DBagAnimated" type="Sprite3D" parent="SpriteContainer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.734869, -0.0372463, 0.6 )
