@@ -549,10 +549,10 @@ func justPressedJump():
     (
       Input.is_action_just_pressed("jump_button") or
       # TODO(jaketrower): this could be generalized for sweep and other stuff more elegantly...
-      (global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_LEFT and just_pressed_joystick[0]) or
+      (global.userSettings["controls_config"][global.JUMP_INDEX].has("button_index") and ((global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_LEFT and just_pressed_joystick[0]) or
       (global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_RIGHT and just_pressed_joystick[1]) or
       (global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_UP and just_pressed_joystick[2]) or
-      (global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_DOWN and just_pressed_joystick[3])
+      (global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_DOWN and just_pressed_joystick[3])))
     ) and
     (not pauseInput or has_sweeped_glitch) and not isTextboxPausingMe()
   ) or should_magic_jump
@@ -713,10 +713,10 @@ func pressingJump():
         (
           Input.is_action_pressed("jump_button") or \
           # TODO(jaketrower): this could be generalized for sweep and other stuff more elegantly...
-          (global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_LEFT and rawPressingAnalogLeft()) or \
+          (global.userSettings["controls_config"][global.JUMP_INDEX].has("button_index") and ((global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_LEFT and rawPressingAnalogLeft()) or \
           (global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_RIGHT and rawPressingAnalogRight()) or \
           (global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_UP and rawPressingAnalogUp()) or \
-          (global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_DOWN and rawPressingAnalogDown())
+          (global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_DOWN and rawPressingAnalogDown())))
         ) and \
         (not pauseInput or summonedBroom != null) and \
         not isTextboxPausingMe()
