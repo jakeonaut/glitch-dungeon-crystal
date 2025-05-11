@@ -460,7 +460,7 @@ func processGraphicsLogic(_delta):
     elif graphicsOptionIndex == 3:
       OS.window_fullscreen = not OS.window_fullscreen
       global.userSettings["fullscreen"] = OS.window_fullscreen
-    elif graphicsOptionIndex == 3:
+    elif graphicsOptionIndex == 4:
       global.userSettings["gles3"] = not global.userSettings["gles3"]
     level.saveUserSettings()
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
