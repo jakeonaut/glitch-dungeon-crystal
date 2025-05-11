@@ -7,6 +7,11 @@ onready var sparkleSprite = get_node("SparkleSprite3D")
 export var is_permanent = false
 var is_fast = false
 
+onready var spikes3 = get_node("TileSpikes/Spikes3")
+onready var spikes4 = get_node("TileSpikes/Spikes4")
+onready var spikes5 = get_node("TileSpikes/Spikes5")
+onready var spikes6 = get_node("TileSpikes/Spikes6")
+
 func _ready():
   set_process(true)
   yield(TempTimer.idle_frame(self), "timeout")
@@ -30,6 +35,16 @@ func _ready():
 var spawn_timer = 0
 var spawn_time_limit = 5
 func _process(delta): 
+  if not global.userSettings["canGlitchScreen"]:
+    spikes3.mesh.material.set_shader_param("enable_glitch", false)
+    spikes3.mesh.material.set_shader_param("enable_glitch_3d", false)
+    spikes4.mesh.material.set_shader_param("enable_glitch", false)
+    spikes4.mesh.material.set_shader_param("enable_glitch_3d", false)
+    spikes5.mesh.material.set_shader_param("enable_glitch", false)
+    spikes5.mesh.material.set_shader_param("enable_glitch_3d", false)
+    spikes6.mesh.material.set_shader_param("enable_glitch", false)
+    spikes6.mesh.material.set_shader_param("enable_glitch_3d", false)
+
   if "blinkClose" in secretAniPlayer.assigned_animation and not secretAniPlayer.is_playing():
     queue_free()
     return

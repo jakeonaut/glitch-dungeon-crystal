@@ -1952,6 +1952,8 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   remembered_on_ground = on_ground
 
 func actuallyProcessDeath(should_glitch):
+  if global.memory["priestess"] >= 2:
+    return
   if transformation == TransformationState.FISHY:
     getFishyCured()
   if transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.UNDERGROUND or transformation == TransformationState.MOLE_DIGGING:

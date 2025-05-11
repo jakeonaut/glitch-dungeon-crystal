@@ -30,6 +30,7 @@ uniform bool enable_color_glitch = true;
 uniform bool disable_glitch_dither = false;
 uniform bool enable_palette_cycle = false;
 uniform float palette_cycle_speed = 10.0;
+uniform vec2 uvOff = vec2(3, 2);
 
 // Glitch intensity
 uniform float shake_power_3d = 0.5;
@@ -78,7 +79,7 @@ float random3d(float seed) {
 }
 
 void vertex() {
-    UV=UV*vec3(3, 2, 3).xy+vec3(0, 0, 0).xy;
+    UV=UV*uvOff+vec2(0, 0);
     float adjusted_time = mod(TIME, 5.0);
 
     enable_shift = float(random3d(trunc(adjusted_time * shake_speed)) < shake_rate);

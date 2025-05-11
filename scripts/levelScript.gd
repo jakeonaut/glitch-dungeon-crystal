@@ -1,6 +1,6 @@
 extends Node
 
-onready var uiLayer = get_node("../../UILayer") if has_node("../../UILayer") else get_node("UILayer") if has_node("UILayer") else get_node("../../Viewport2/UILayer")
+onready var uiLayer = get_node("../../UILayer") if has_node("../../UILayer") else get_node("UILayer") if has_node("UILayer") else get_node("../../Viewport2/UILayer") if has_node("../../Viewport2/UILayer") else get_node("../../Viewport3/UILayer")
 onready var player = get_node("Player")
 onready var levelTiles = get_node("LevelTiles")
 onready var fakeLevelTiles = get_node("FakeLevelTiles") if has_node("FakeLevelTiles") else null
@@ -102,17 +102,13 @@ func _ready_impl():
     self.remove_child(uiLayer)
     self.get_node("../../Viewport2").add_child_below_node(viewport2Texture, uiLayer)
   if not self.has_node("../../Viewport2/UILayer") and self.has_node("../../UILayer"):
-    print(uiLayer)
     self.get_node("../..").remove_child(uiLayer)
-    print(self.get_node("../.."))
     self.get_node("../../Viewport2").add_child_below_node(viewport2Texture, uiLayer)
-    print(self.get_node("../../Viewport2"))
-    print(viewport2Texture)
   # should_offset_ui = true
   uiLayer.offset = Vector2(0, 0)
-  uiLayer.betaBuildLabel.rect_position.x = 640
+  uiLayer.betaBuildLabel.rect_position.x = 510
   uiLayer.edgeDistortion.offset = Vector2(0, 0)
-  uiLayer.textBoxes.offset = Vector2(0, 0)
+  uiLayer.textBoxes.rect_position = Vector2(0, 0)
   screenEffectsContainer.offset = Vector2(320, 28)
   
   if not get_tree().get_root().has_node("Game/GameFrameBackground"):

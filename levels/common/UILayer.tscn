@@ -1118,7 +1118,7 @@ mesh = SubResource( 17229 )
 script = ExtResource( 30 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 material_override = SubResource( 17211 )
 mesh = SubResource( 17 )
 
@@ -1606,59 +1606,6 @@ bbcode_enabled = true
 bbcode_text = "[wave] feather fall[/wave]"
 text = " feather fall"
 
-[node name="TextBoxes" type="CanvasLayer" parent="."]
-layer = 0
-offset = Vector2( 320, 28 )
-scale = Vector2( 2.5, 2.5 )
-transform = Transform2D( 2.5, 0, 0, 2.5, 320, 28 )
-
-[node name="Filters" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="StatsTitle" type="ColorRect" parent="."]
-visible = false
-margin_right = 640.0
-margin_bottom = 49.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = true
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="ColorRect" type="ColorRect" parent="StatsTitle"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 637.0
-margin_bottom = 45.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.223529, 0.298039, 0.384314, 1 )
-
-[node name="ColorRect" type="ColorRect" parent="StatsTitle/ColorRect"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 629.0
-margin_bottom = 37.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="RichTextLabel" type="RichTextLabel" parent="StatsTitle/ColorRect/ColorRect"]
-margin_left = 68.0
-margin_top = 7.0
-margin_right = 473.0
-margin_bottom = 39.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource( 15 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "MAGIC: 10"
-text = "MAGIC: 10"
-scroll_active = false
-
-[node name="PauseMenu" parent="." instance=ExtResource( 9 )]
-
 [node name="LevelTitle" type="ColorRect" parent="."]
 visible = false
 margin_top = 428.0
@@ -1704,165 +1651,49 @@ bbcode_text = "[center][wave]the Warty Sea Devil[/wave][/center]"
 text = "the Warty Sea Devil"
 scroll_active = false
 
-[node name="EndOfLevel" type="Control" parent="."]
+[node name="Filters" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="StatsTitle" type="ColorRect" parent="."]
 visible = false
 margin_right = 640.0
-margin_bottom = 512.0
-
-[node name="HiscoreRect" type="ColorRect" parent="EndOfLevel"]
-visible = false
-margin_left = 40.0
-margin_top = 25.0
-margin_right = 599.0
-margin_bottom = 489.0
+margin_bottom = 49.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color( 0.0156863, 0.0156863, 0.0156863, 0.556863 )
+rect_clip_content = true
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
-[node name="CongratsHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
-visible = false
-margin_left = 40.0
-margin_top = 21.0
-margin_right = 599.0
-margin_bottom = 131.0
+[node name="ColorRect" type="ColorRect" parent="StatsTitle"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 637.0
+margin_bottom = 45.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_clip_content = false
-theme = ExtResource( 13 )
+color = Color( 0.223529, 0.298039, 0.384314, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="StatsTitle/ColorRect"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 629.0
+margin_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StatsTitle/ColorRect/ColorRect"]
+margin_left = 68.0
+margin_top = 7.0
+margin_right = 473.0
+margin_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 15 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "[center]you awoke a
-[color=#00ffff][wave amp=50 freq=2]Crystal Elder[/wave][/color][/center]"
-text = "you awoke a
-Crystal Elder"
-scroll_active = false
-
-[node name="CrystalCubeHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
-visible = false
-margin_left = 40.0
-margin_top = 161.5
-margin_right = 599.0
-margin_bottom = 214.5
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = false
-theme = ExtResource( 31 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "[center]shards: 25"
-text = "shards: 25"
-scroll_active = false
-
-[node name="DeathsHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
-visible = false
-margin_left = 40.0
-margin_top = 196.0
-margin_right = 599.0
-margin_bottom = 249.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = false
-theme = ExtResource( 31 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "[center]deaths: 35"
-text = "deaths: 35"
-scroll_active = false
-
-[node name="AngelHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
-visible = false
-margin_left = 40.0
-margin_top = 230.5
-margin_right = 599.0
-margin_bottom = 283.5
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = false
-theme = ExtResource( 31 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "[center]angels: 0"
-text = "angels: 0"
-scroll_active = false
-
-[node name="GlitchTilesHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
-visible = false
-margin_left = 40.0
-margin_top = 264.0
-margin_right = 599.0
-margin_bottom = 317.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = false
-theme = ExtResource( 31 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "[center]broom sweeps: 120"
-text = "broom sweeps: 120"
-scroll_active = false
-
-[node name="JumpsHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
-visible = false
-margin_left = 40.0
-margin_top = 300.0
-margin_right = 599.0
-margin_bottom = 342.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = false
-theme = ExtResource( 31 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "[center]jumps: 3"
-text = "jumps: 3"
-scroll_active = false
-
-[node name="LoveHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
-visible = false
-margin_left = 40.0
-margin_top = 337.0
-margin_right = 599.0
-margin_bottom = 379.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = false
-theme = ExtResource( 31 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "[center]love: 3"
-text = "love: 3"
-scroll_active = false
-
-[node name="TimeHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
-visible = false
-margin_left = 40.0
-margin_top = 373.0
-margin_right = 599.0
-margin_bottom = 428.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = false
-theme = ExtResource( 31 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "[center]time aged: 30 minutes"
-text = "time aged: 30 minutes"
-scroll_active = false
-
-[node name="PressEnterLabel" type="RichTextLabel" parent="EndOfLevel"]
-visible = false
-margin_left = 40.0
-margin_top = 439.0
-margin_right = 599.0
-margin_bottom = 524.5
-grow_horizontal = 2
-grow_vertical = 2
-rect_clip_content = false
-theme = ExtResource( 31 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "[center]press X to continue"
-text = "press X to continue"
+bbcode_text = "MAGIC: 10"
+text = "MAGIC: 10"
 scroll_active = false
 
 [node name="LivesRect" type="ColorRect" parent="."]
@@ -2054,18 +1885,184 @@ theme = ExtResource( 36 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 text = "u did it!"
 
+[node name="TextBoxes" type="Control" parent="."]
+rect_scale = Vector2( 1.25, 1.25 )
+
+[node name="PauseMenu" parent="." instance=ExtResource( 9 )]
+
+[node name="EndOfLevel" type="Control" parent="."]
+visible = false
+margin_right = 640.0
+margin_bottom = 512.0
+
+[node name="HiscoreRect" type="ColorRect" parent="EndOfLevel"]
+visible = false
+margin_left = 40.0
+margin_top = 25.0
+margin_right = 599.0
+margin_bottom = 489.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.0156863, 0.0156863, 0.0156863, 0.556863 )
+
+[node name="CongratsHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
+visible = false
+margin_left = 40.0
+margin_top = 21.0
+margin_right = 599.0
+margin_bottom = 131.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 13 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]you awoke a
+[color=#00ffff][wave amp=50 freq=2]Crystal Elder[/wave][/color][/center]"
+text = "you awoke a
+Crystal Elder"
+scroll_active = false
+
+[node name="CrystalCubeHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
+visible = false
+margin_left = 40.0
+margin_top = 161.5
+margin_right = 599.0
+margin_bottom = 214.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 31 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]shards: 25"
+text = "shards: 25"
+scroll_active = false
+
+[node name="DeathsHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
+visible = false
+margin_left = 40.0
+margin_top = 196.0
+margin_right = 599.0
+margin_bottom = 249.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 31 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]deaths: 35"
+text = "deaths: 35"
+scroll_active = false
+
+[node name="AngelHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
+visible = false
+margin_left = 40.0
+margin_top = 230.5
+margin_right = 599.0
+margin_bottom = 283.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 31 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]angels: 0"
+text = "angels: 0"
+scroll_active = false
+
+[node name="GlitchTilesHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
+visible = false
+margin_left = 40.0
+margin_top = 264.0
+margin_right = 599.0
+margin_bottom = 317.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 31 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]broom sweeps: 120"
+text = "broom sweeps: 120"
+scroll_active = false
+
+[node name="JumpsHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
+visible = false
+margin_left = 40.0
+margin_top = 300.0
+margin_right = 599.0
+margin_bottom = 342.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 31 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]jumps: 3"
+text = "jumps: 3"
+scroll_active = false
+
+[node name="LoveHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
+visible = false
+margin_left = 40.0
+margin_top = 337.0
+margin_right = 599.0
+margin_bottom = 379.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 31 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]love: 3"
+text = "love: 3"
+scroll_active = false
+
+[node name="TimeHiscoreLabel" type="RichTextLabel" parent="EndOfLevel"]
+visible = false
+margin_left = 40.0
+margin_top = 373.0
+margin_right = 599.0
+margin_bottom = 428.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 31 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]time aged: 30 minutes"
+text = "time aged: 30 minutes"
+scroll_active = false
+
+[node name="PressEnterLabel" type="RichTextLabel" parent="EndOfLevel"]
+visible = false
+margin_left = 40.0
+margin_top = 439.0
+margin_right = 599.0
+margin_bottom = 524.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 31 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]press X to continue"
+text = "press X to continue"
+scroll_active = false
+
 [node name="BetaBuildLabel" type="RichTextLabel" parent="."]
-margin_left = 740.0
+margin_left = 510.0
 margin_top = 500.0
-margin_right = 992.0
+margin_right = 762.0
 margin_bottom = 554.0
 rect_scale = Vector2( 0.5, 0.5 )
 rect_clip_content = false
 theme = SubResource( 17228 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "[right]ver-3.0.10.3[/right]"
-text = "ver-3.0.10.3"
+bbcode_text = "[right]ver-3.0.10.4[/right]"
+text = "ver-3.0.10.4"
 
 [editable path="EdgeDistortion"]
 [editable path="PauseMenu"]

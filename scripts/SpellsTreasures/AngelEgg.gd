@@ -19,7 +19,7 @@ func _ready():
     if is_static_in_level and self.getMyStaticLevelZoneVar():
         visible = false
 
-    if grav == 0:
+    if grav == 0 and visible:
         landSound.play()
         yield(get_tree().create_timer(0.3), "timeout")
         landSound.play()

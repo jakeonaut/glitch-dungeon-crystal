@@ -73,6 +73,9 @@ func preProcess():
 
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
+    if not global.userSettings["canGlitchScreen"] and material_override and material_override is ShaderMaterial:
+        material_override.set_shader_param("enable_glitch", false)
+        material_override.set_shader_param("enable_glitch_3d", false)
     
     preProcess()
     if visible and should_animate:

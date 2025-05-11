@@ -507,6 +507,7 @@ func applyTerminalVelocity(_delta):
     vv = 0
     
 func getTilesBelow(currLevelTiles, buffer = 0.1, ignore_just_give_me_coords = false, allow_negative = false):
+  if currLevelTiles == null: return [null, null, null]
   var solidTilesBelow = [null, null, null]
   var x = global_transform.origin.x
   var y = global_transform.origin.y
@@ -535,6 +536,7 @@ func getTilesBelow(currLevelTiles, buffer = 0.1, ignore_just_give_me_coords = fa
   return solidTilesBelow
 
 func getTilesAbove(currLevelTiles, buffer = 0.1, ignore_just_give_me_coords = false, allow_negative = false):
+  if currLevelTiles == null: return [null, null, null]
   var solidTilesAbove = [null, null, null]
   var x = global_transform.origin.x
   var y = global_transform.origin.y
@@ -563,6 +565,7 @@ func getTilesAbove(currLevelTiles, buffer = 0.1, ignore_just_give_me_coords = fa
   return solidTilesAbove
 
 func getTilesLeftOf(currLevelTiles, buffer = 0.5, ignore_just_give_me_coords = false, allow_negative = false):
+  if currLevelTiles == null: return [null, null, null]
   var x = global_transform.origin.x
   var y = global_transform.origin.y
   var z = global_transform.origin.z
@@ -591,6 +594,7 @@ func getTilesLeftOf(currLevelTiles, buffer = 0.5, ignore_just_give_me_coords = f
   return solidTilesLeftOf
 
 func getTilesRightOf(currLevelTiles, buffer = 0.1, ignore_just_give_me_coords = false, allow_negative = false, debug = false):
+  if currLevelTiles == null: return [null, null, null]
   var x = global_transform.origin.x
   var y = global_transform.origin.y
   var z = global_transform.origin.z

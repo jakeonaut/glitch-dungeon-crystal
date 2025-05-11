@@ -29,6 +29,9 @@ onready var tongueSprite2 = get_node("TongueSprite2") if has_node("TongueSprite2
 onready var tongueSprite3 = get_node("TongueSprite3") if has_node("TongueSprite3") else null
 onready var tongueSprite4 = get_node("TongueSprite4") if has_node("TongueSprite4") else null
 export var should_have_fallthrough = true
+onready var spikes3 = get_node("TileSpikes/Spikes3") if has_node("TileSpikes") else null
+onready var spikes4 = get_node("TileSpikes/Spikes4") if has_node("TileSpikes") else null
+onready var spikes5 = get_node("TileSpikes/Spikes5") if has_node("TileSpikes") else null
 
 func _ready():
   mySprite.max_frames = 2
@@ -107,6 +110,13 @@ func _process(delta):
       mySprite.get_material_override().set_shader_param("offset", 1)
     if tileSpikes:
       tileSpikes.visible = true
+      if not global.userSettings["canGlitchScreen"]:
+        spikes3.mesh.material.set_shader_param("enable_glitch", false)
+        spikes3.mesh.material.set_shader_param("enable_glitch_3d", false)
+        spikes4.mesh.material.set_shader_param("enable_glitch", false)
+        spikes4.mesh.material.set_shader_param("enable_glitch_3d", false)
+        spikes5.mesh.material.set_shader_param("enable_glitch", false)
+        spikes5.mesh.material.set_shader_param("enable_glitch_3d", false)
     if not smallInteractionArea.is_in_group("weak_enemies"):
       smallInteractionArea.add_to_group("weak_enemies")
     if not smallInteractionArea.is_in_group("enemies"):

@@ -2958,9 +2958,6 @@ texture = SubResource( 235 )
 [node name="MeshInstance" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
 mesh = SubResource( 330 )
 
-[node name="MeshInstance2" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
-
 [node name="Camera" parent="Viewport2/UILayer/GlitchStatusRect/Viewport" index="1"]
 current = true
 
@@ -3082,9 +3079,8 @@ scroll_active = false
 [node name="DeleteConfirmationLayer" type="CanvasLayer" parent="Viewport2/UILayer/MainMenu"]
 layer = 3
 visible = false
-offset = Vector2( 320, 28 )
 scale = Vector2( 2, 2 )
-transform = Transform2D( 2, 0, 0, 2, 320, 28 )
+transform = Transform2D( 2, 0, 0, 2, 0, 0 )
 
 [node name="ColorRect" type="ColorRect" parent="Viewport2/UILayer/MainMenu/DeleteConfirmationLayer"]
 margin_right = 640.0

@@ -42,7 +42,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2, 0 )
 pixel_size = 0.07
 frame = 18
 path = "res://levels/EndlessFantasy/gd1/PoisonForest.tscn"
-can_nav_left = false
 hide_me_from_map = true
 
 [node name="TutorialDungeon" type="Spatial" parent="."]
@@ -149,7 +148,6 @@ frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/LadderIntro.tscn"
 can_nav_left = false
 can_nav_right = false
-can_nav_up = false
 can_nav_down = false
 
 [node name="GhostIntro" parent="TutorialDungeon" instance=ExtResource( 3 )]
@@ -196,9 +194,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2, 0 )
 material_override = null
 frame = 45
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/ChickenRoomSecret.tscn"
-can_nav_left = false
-can_nav_right = false
-can_nav_up = false
 hide_me_from_map = true
 
 [node name="EndCredits" parent="TutorialDungeon" instance=ExtResource( 3 )]

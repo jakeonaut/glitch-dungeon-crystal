@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/NES_base_broom_palette.png" type="Texture" id=2]
@@ -90,6 +90,7 @@ shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 3.0
+shader_param/uvOff = Vector2( 1, 1 )
 shader_param/shake_power_3d = 0.5
 shader_param/shake_rate = 0.5
 shader_param/shake_speed = 5.0
@@ -99,13 +100,13 @@ shader_param/texture_albedo = SubResource( 150 )
 shader_param/base_palette = ExtResource( 3 )
 shader_param/real_base_palette = ExtResource( 6 )
 
-[sub_resource type="CubeMesh" id=151]
+[sub_resource type="QuadMesh" id=168]
 material = SubResource( 155 )
-size = Vector3( 1, 1, 1 )
+center_offset = Vector3( 0, 0, 0.5 )
 
-[sub_resource type="CubeMesh" id=153]
+[sub_resource type="QuadMesh" id=169]
 material = SubResource( 155 )
-size = Vector3( 1, 1, 1 )
+center_offset = Vector3( 0, 0, 0.5 )
 
 [sub_resource type="AnimatedTexture" id=152]
 flags = 19
@@ -135,6 +136,7 @@ shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = true
 shader_param/palette_cycle_speed = 3.0
+shader_param/uvOff = Vector2( 1, 1 )
 shader_param/shake_power_3d = 0.5
 shader_param/shake_rate = 0.5
 shader_param/shake_speed = 5.0
@@ -144,9 +146,13 @@ shader_param/texture_albedo = SubResource( 152 )
 shader_param/base_palette = ExtResource( 3 )
 shader_param/real_base_palette = ExtResource( 5 )
 
-[sub_resource type="CubeMesh" id=154]
+[sub_resource type="QuadMesh" id=170]
 material = SubResource( 149 )
-size = Vector3( 1, 1, 1 )
+center_offset = Vector3( 0, 0, 0.5 )
+
+[sub_resource type="QuadMesh" id=171]
+material = SubResource( 149 )
+center_offset = Vector3( 0, 0, 0.5 )
 
 [sub_resource type="Animation" id=157]
 length = 0.001
@@ -1092,19 +1098,19 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34734, -0.34734, 0 )
 
 [node name="Spikes3" type="MeshInstance" parent="TileSpikes"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -0.611063, 0 )
-mesh = SubResource( 151 )
+mesh = SubResource( 168 )
 
 [node name="Spikes4" type="MeshInstance" parent="TileSpikes"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.384219, 0.61578, 1 )
-mesh = SubResource( 153 )
+mesh = SubResource( 169 )
 
 [node name="Spikes5" type="MeshInstance" parent="TileSpikes"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.09262, 0 )
-mesh = SubResource( 154 )
+mesh = SubResource( 170 )
 
 [node name="Spikes6" type="MeshInstance" parent="TileSpikes"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0231566, 0 )
-mesh = SubResource( 154 )
+mesh = SubResource( 171 )
 
 [node name="SecretAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 157 )

@@ -1,40 +1,23 @@
-[gd_scene load_steps=82 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=3]
-[ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=4]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=5]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=6]
-[ext_resource path="res://assets/palettes2D/base_palette.png" type="Texture" id=7]
 [ext_resource path="res://scripts/NPC.gd" type="Script" id=8]
 [ext_resource path="res://scripts/SpellsTreasures/TreasureCollectable.gd" type="Script" id=9]
 [ext_resource path="res://sceneObjects/MiniAdventures.tscn" type="PackedScene" id=10]
-[ext_resource path="res://shaders/palette_swapper_glitch.shader" type="Shader" id=11]
 [ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=12]
-[ext_resource path="res://assets/palettes2D/grey_palette.png" type="Texture" id=13]
-[ext_resource path="res://assets/sounds/broomThrow.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/sounds/glitchtalk.wav" type="AudioStream" id=15]
-[ext_resource path="res://assets/sounds/broomSwing.wav" type="AudioStream" id=16]
-[ext_resource path="res://scripts/AbortSound.gd" type="Script" id=17]
-[ext_resource path="res://assets/sprites2D/objects.png" type="Texture" id=18]
 [ext_resource path="res://assets/sounds/sfx004_meteors.wav" type="AudioStream" id=19]
-[ext_resource path="res://assets/npcs/tadpoleportrait.png" type="Texture" id=20]
-[ext_resource path="res://assets/sprites/nextTextboxPrompt.png" type="Texture" id=21]
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=22]
-[ext_resource path="res://dialogBodyFontTheme.tres" type="Theme" id=23]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=24]
 [ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=25]
-[ext_resource path="res://TextPromptTheme.tres" type="Theme" id=26]
-[ext_resource path="res://scripts/Sprite2D.gd" type="Script" id=27]
-[ext_resource path="res://scripts/TextBox.gd" type="Script" id=28]
 [ext_resource path="res://assets/sprites/spinning_cube_sheet.png" type="Texture" id=29]
-[ext_resource path="res://shaders/Sprite2D.shader" type="Shader" id=30]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=31]
-[ext_resource path="res://scripts/TextContainer.gd" type="Script" id=32]
 [ext_resource path="res://assets/sounds/151RetroMonsters/glitchEvolve.wav" type="AudioStream" id=33]
 [ext_resource path="res://assets/sounds/pop.wav" type="AudioStream" id=34]
-[ext_resource path="res://assets/sprites/endTextboxPrompt.png" type="Texture" id=35]
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=36]
 [ext_resource path="res://assets/miniAdventures.png" type="Texture" id=37]
 [ext_resource path="res://assets/sounds/smack.wav" type="AudioStream" id=38]
@@ -61,45 +44,6 @@ extents = Vector3( 4, 2, 1.3 )
 
 [sub_resource type="BoxShape" id=24]
 extents = Vector3( 1, 0.8, 1 )
-
-[sub_resource type="GradientTexture" id=6]
-
-[sub_resource type="ShaderMaterial" id=4]
-shader = ExtResource( 30 )
-shader_param/palette_size = 16
-shader_param/base_palette = ExtResource( 7 )
-shader_param/target_palette = ExtResource( 13 )
-
-[sub_resource type="CanvasItemMaterial" id=7]
-
-[sub_resource type="ShaderMaterial" id=3]
-shader = ExtResource( 11 )
-shader_param/albedo = null
-shader_param/opacity = 1.0
-shader_param/outline_color = null
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/texture_albedo = ExtResource( 20 )
-shader_param/base_palette = ExtResource( 4 )
 
 [sub_resource type="ShaderMaterial" id=104]
 shader = ExtResource( 2 )
@@ -817,295 +761,6 @@ shape = SubResource( 111 )
 [node name="CollisionShape" type="CollisionShape" parent="MimicNPC/SmallerInteractionArea"]
 shape = SubResource( 24 )
 
-[node name="NPC TextBox" type="CanvasLayer" parent="MimicNPC"]
-visible = false
-scale = Vector2( 2.5, 2.5 )
-transform = Transform2D( 2.5, 0, 0, 2.5, 0, 0 )
-script = ExtResource( 32 )
-
-[node name="TextBox" type="TextureRect" parent="MimicNPC/NPC TextBox"]
-margin_left = 20.0
-margin_top = 280.0
-margin_right = 487.0
-margin_bottom = 491.0
-texture = SubResource( 6 )
-expand = true
-script = ExtResource( 28 )
-
-[node name="ColorRect" type="ColorRect" parent="MimicNPC/NPC TextBox/TextBox"]
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 464.0
-margin_bottom = 99.0
-color = Color( 0, 0.309804, 0.309804, 1 )
-
-[node name="ColorRect2" type="ColorRect" parent="MimicNPC/NPC TextBox/TextBox/ColorRect"]
-margin_right = 456.0
-margin_bottom = 90.0
-
-[node name="ColorRect3" type="ColorRect" parent="MimicNPC/NPC TextBox/TextBox/ColorRect/ColorRect2"]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 456.0
-margin_bottom = 91.0
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="PortraitColor" type="ColorRect" parent="MimicNPC/NPC TextBox/TextBox"]
-visible = false
-margin_left = 395.6
-margin_top = 27.6
-margin_right = 490.6
-margin_bottom = 125.6
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="ColorRect2" type="ColorRect" parent="MimicNPC/NPC TextBox/TextBox/PortraitColor"]
-margin_left = 4.0
-margin_top = 5.0
-margin_right = 92.0
-margin_bottom = 93.0
-color = Color( 0, 0.309804, 0.309804, 1 )
-
-[node name="ColorRect4" type="ColorRect" parent="MimicNPC/NPC TextBox/TextBox/PortraitColor/ColorRect2"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 85.0
-margin_bottom = 86.0
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="Portrait" type="Sprite" parent="MimicNPC/NPC TextBox/TextBox/PortraitColor/ColorRect2/ColorRect4" groups=["sprite"]]
-material = SubResource( 4 )
-position = Vector2( 41, 40.9 )
-scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 20 )
-script = ExtResource( 27 )
-max_frames = 1
-
-[node name="TinyColorRect" type="ColorRect" parent="MimicNPC/NPC TextBox/TextBox"]
-visible = false
-margin_left = 135.0
-margin_top = 20.0
-margin_right = 137.0
-margin_bottom = 20.0
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextCanvasLayer" type="CanvasLayer" parent="MimicNPC/NPC TextBox/TextBox"]
-layer = 2
-visible = false
-
-[node name="Container" type="TextureRect" parent="MimicNPC/NPC TextBox/TextBox/TextCanvasLayer"]
-margin_left = 50.0
-margin_top = 700.0
-margin_right = 1218.0
-margin_bottom = 960.0
-expand = true
-
-[node name="ScrollContainer" type="Control" parent="MimicNPC/NPC TextBox/TextBox/Container"]
-margin_left = 31.0
-margin_top = 30.0
-margin_right = 1213.0
-margin_bottom = 228.0
-rect_pivot_offset = Vector2( -511, -189 )
-rect_clip_content = true
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource( 23 )
-
-[node name="Text" type="RichTextLabel" parent="MimicNPC/NPC TextBox/TextBox/Container/ScrollContainer"]
-margin_right = 1183.0
-margin_bottom = 202.0
-rect_clip_content = false
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource( 23 )
-custom_colors/default_color = Color( 0.933594, 0.915867, 0.915867, 1 )
-bbcode_enabled = true
-tab_size = 2
-scroll_active = false
-
-[node name="FakeTextSprite" type="Sprite" parent="MimicNPC/NPC TextBox/TextBox/Container/ScrollContainer"]
-position = Vector2( 1076, 157 )
-scale = Vector2( 4, 4 )
-texture = ExtResource( 39 )
-hframes = 6
-vframes = 5
-frame = 24
-
-[node name="YesButton" type="ColorRect" parent="MimicNPC/NPC TextBox/TextBox/Container"]
-margin_left = 211.0
-margin_top = 254.0
-margin_right = 361.0
-margin_bottom = 309.0
-color = Color( 0, 0.309804, 0.309804, 1 )
-
-[node name="CursorSprite" type="Sprite" parent="MimicNPC/NPC TextBox/TextBox/Container/YesButton"]
-material = SubResource( 7 )
-position = Vector2( 7, 24 )
-scale = Vector2( 4, 4 )
-texture = ExtResource( 18 )
-hframes = 6
-vframes = 5
-frame = 26
-script = ExtResource( 27 )
-
-[node name="TextPrompt" type="RichTextLabel" parent="MimicNPC/NPC TextBox/TextBox/Container/YesButton"]
-margin_left = 25.0
-margin_top = 1.0
-margin_right = 236.0
-margin_bottom = 60.0
-rect_pivot_offset = Vector2( -511, -189 )
-rect_clip_content = false
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource( 23 )
-custom_colors/default_color = Color( 0.796078, 0.835294, 0.917647, 1 )
-bbcode_enabled = true
-bbcode_text = "yes"
-tab_size = 2
-text = "yes"
-scroll_active = false
-
-[node name="NoButton" type="ColorRect" parent="MimicNPC/NPC TextBox/TextBox/Container"]
-margin_left = 461.0
-margin_top = 254.0
-margin_right = 611.0
-margin_bottom = 309.0
-color = Color( 0, 0.309804, 0.309804, 1 )
-
-[node name="CursorSprite" type="Sprite" parent="MimicNPC/NPC TextBox/TextBox/Container/NoButton"]
-material = SubResource( 7 )
-position = Vector2( 7, 24 )
-scale = Vector2( 4, 4 )
-texture = ExtResource( 18 )
-hframes = 6
-vframes = 5
-frame = 26
-script = ExtResource( 27 )
-
-[node name="TextPrompt" type="RichTextLabel" parent="MimicNPC/NPC TextBox/TextBox/Container/NoButton"]
-margin_left = 25.0
-margin_top = 2.0
-margin_right = 222.0
-margin_bottom = 54.0
-rect_pivot_offset = Vector2( -511, -189 )
-rect_clip_content = false
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource( 23 )
-custom_colors/default_color = Color( 0.796078, 0.835294, 0.917647, 1 )
-bbcode_enabled = true
-bbcode_text = "no"
-tab_size = 2
-text = "no"
-scroll_active = false
-
-[node name="TextPrompt" type="RichTextLabel" parent="MimicNPC/NPC TextBox/TextBox/Container"]
-margin_left = 883.0
-margin_top = 254.0
-margin_right = 1164.0
-margin_bottom = 310.0
-rect_pivot_offset = Vector2( -511, -189 )
-rect_clip_content = false
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource( 26 )
-bbcode_enabled = true
-bbcode_text = "[right]c[/right]"
-tab_size = 2
-text = "c"
-scroll_active = false
-
-[node name="Sprite" type="Sprite" parent="MimicNPC/NPC TextBox/TextBox"]
-visible = false
-material = SubResource( 7 )
-position = Vector2( 4, 5 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 12 )
-hframes = 8
-vframes = 8
-frame = 41
-
-[node name="Sprite5" type="Sprite" parent="MimicNPC/NPC TextBox/TextBox"]
-visible = false
-material = SubResource( 7 )
-position = Vector2( 3.5, 98 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 12 )
-hframes = 8
-vframes = 8
-frame = 41
-
-[node name="Sprite6" type="Sprite" parent="MimicNPC/NPC TextBox/TextBox"]
-visible = false
-material = SubResource( 7 )
-position = Vector2( 460.5, 97.5 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 12 )
-hframes = 8
-vframes = 8
-frame = 41
-
-[node name="Sprite7" type="Sprite" parent="MimicNPC/NPC TextBox/TextBox"]
-visible = false
-material = SubResource( 7 )
-position = Vector2( 460, 4.5 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 12 )
-hframes = 8
-vframes = 8
-frame = 41
-
-[node name="NextPrompt" type="Sprite" parent="MimicNPC/NPC TextBox/TextBox"]
-material = SubResource( 3 )
-position = Vector2( 439.5, 80 )
-scale = Vector2( 1e-05, 1e-05 )
-texture = ExtResource( 21 )
-
-[node name="EndPrompt" type="Sprite" parent="MimicNPC/NPC TextBox/TextBox"]
-material = SubResource( 3 )
-position = Vector2( 439.5, 80 )
-scale = Vector2( 1e-05, 1e-05 )
-texture = ExtResource( 35 )
-
-[node name="DialogStartSound" type="AudioStreamPlayer" parent="MimicNPC/NPC TextBox/TextBox"]
-stream = ExtResource( 34 )
-volume_db = -20.0
-bus = "Sfx"
-script = ExtResource( 43 )
-
-[node name="DialogSound" type="AudioStreamPlayer" parent="MimicNPC/NPC TextBox/TextBox"]
-stream = ExtResource( 15 )
-volume_db = -15.0
-pitch_scale = 0.7
-bus = "Sfx"
-script = ExtResource( 17 )
-
-[node name="NextDialogSound" type="AudioStreamPlayer" parent="MimicNPC/NPC TextBox/TextBox"]
-volume_db = -20.0
-bus = "Sfx"
-script = ExtResource( 17 )
-
-[node name="AbortSound" type="AudioStreamPlayer" parent="MimicNPC/NPC TextBox/TextBox"]
-stream = ExtResource( 40 )
-volume_db = -30.0
-pitch_scale = 0.7
-bus = "Sfx"
-script = ExtResource( 42 )
-
-[node name="BroomSelectSound" type="AudioStreamPlayer" parent="MimicNPC/NPC TextBox/TextBox"]
-stream = ExtResource( 16 )
-volume_db = -8.0
-pitch_scale = 0.9
-bus = "Sfx"
-
-[node name="BroomConfirmSound" type="AudioStreamPlayer" parent="MimicNPC/NPC TextBox/TextBox"]
-stream = ExtResource( 14 )
-volume_db = -5.0
-pitch_scale = 0.9
-bus = "Sfx"
-
 [node name="Sprite3D" type="Sprite3D" parent="MimicNPC" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )
 material_override = SubResource( 104 )
@@ -1119,6 +774,47 @@ region_rect = Rect2( 0, 0, 62, 0 )
 script = ExtResource( 1 )
 should_randomize_frame_delay = true
 max_frames = 1
+
+[node name="NPC TextBox" parent="MimicNPC" instance=ExtResource( 22 )]
+visible = true
+
+[node name="TextBox" parent="MimicNPC/NPC TextBox" index="0"]
+margin_bottom = 491.0
+
+[node name="ColorRect2" parent="MimicNPC/NPC TextBox/TextBox/ColorRect" index="0"]
+margin_bottom = 90.0
+
+[node name="ColorRect3" parent="MimicNPC/NPC TextBox/TextBox/ColorRect/ColorRect2" index="0"]
+margin_bottom = 91.0
+
+[node name="Sprite" type="Sprite" parent="MimicNPC/NPC TextBox/TextBox/Container/ScrollContainer" index="1"]
+position = Vector2( 1074, 161 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 39 )
+hframes = 6
+vframes = 5
+frame = 24
+
+[node name="NextPrompt" parent="MimicNPC/NPC TextBox/TextBox" index="8"]
+position = Vector2( 439.5, 80 )
+
+[node name="EndPrompt" parent="MimicNPC/NPC TextBox/TextBox" index="9"]
+position = Vector2( 439.5, 80 )
+
+[node name="DialogStartSound" parent="MimicNPC/NPC TextBox/TextBox" index="10"]
+stream = ExtResource( 34 )
+volume_db = -20.0
+script = ExtResource( 43 )
+
+[node name="DialogSound" parent="MimicNPC/NPC TextBox/TextBox" index="11"]
+stream = ExtResource( 15 )
+volume_db = -15.0
+
+[node name="AbortSound" parent="MimicNPC/NPC TextBox/TextBox" index="13"]
+stream = ExtResource( 40 )
+volume_db = -30.0
+pitch_scale = 0.7
+script = ExtResource( 42 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MimicNPC"]
 anims/default = SubResource( 93 )
@@ -1264,4 +960,5 @@ texture = ExtResource( 29 )
 hframes = 8
 script = ExtResource( 1 )
 
+[editable path="MimicNPC/NPC TextBox"]
 [editable path="TreasureSpellCollectable/NPC TextBox"]

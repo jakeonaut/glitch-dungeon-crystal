@@ -237,12 +237,6 @@ is_a_body = false
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 28 )
 
-[node name="TextBox" parent="Viewport/level/NPC/NPC TextBox" index="0"]
-visible = true
-
-[node name="TextCanvasLayer" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="3"]
-visible = true
-
 [node name="Text" parent="Viewport/level/NPC/NPC TextBox/TextBox/Container/ScrollContainer" index="0"]
 bbcode_text = "•some glitches are
 un-sweepable.
@@ -288,7 +282,7 @@ flip_v = true
 mesh = SubResource( 35 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]

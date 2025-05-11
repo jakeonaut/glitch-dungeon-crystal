@@ -22,18 +22,6 @@ shader_type canvas_item;
 // Emulated input resolution.
 uniform vec2 res;
 
-// Mask type
-//  0 = Very compressed TV style shadow mask
-//  1 = Stretched VGA style shadow mask (same as prior shaders)
-//  2 = VGA style shadow mask 
-uniform int mask_type :hint_range(0, 2) = 0;
-
-// Bloom Type
-//  0 = Normalized exposure
-//  1 = Aditive bloom
-//  2 = No Bloom
-uniform int bloom_type :hint_range(0, 2) = 0;
-
 // Hardness of scanline.
 //  -8.0 = soft
 // -16.0 = medium
@@ -218,44 +206,17 @@ vec2 Warp(vec2 pos){
 }
 
 vec3 Mask(vec2 pos){
-	if (mask_type == 0){
-		float line = maskLight;
-		float odd = 0.0;
-		
-		if(fract(pos.x / 6.0) < 0.5) odd = 1.0;
-		if(fract((pos.y + odd) / 2.0) < 0.5) line = maskDark;  
-		pos.x = fract(pos.x / 3.0);
-		
-		vec3 mask = vec3(maskDark, maskDark, maskDark);
-		if(pos.x < 0.333)mask.r = maskLight;
-		else if(pos.x < 0.666)mask.g = maskLight;
-		else mask.b = maskLight;
-		
-		mask *= line;
-		return mask;
-	}else if (mask_type == 1){
-		pos.x += pos.y * 3.0;
-		
-		vec3 mask = vec3(maskDark, maskDark, maskDark);
-		pos.x = fract(pos.x / 6.0);
-		if(pos.x < 0.333)mask.r = maskLight;
-		else if(pos.x < 0.666)mask.g = maskLight;
-		else mask.b = maskLight;
-		
-		return mask;
-	}else if (mask_type == 2){
-		pos.xy = floor(pos.xy * vec2(1.0, 0.5));
-		pos.x += pos.y * 3.0;
-		
-		vec3 mask = vec3(maskDark, maskDark, maskDark);
-		pos.x = fract(pos.x / 6.0);
-		if(pos.x < 0.333)mask.r = maskLight;
-		else if(pos.x < 0.666)mask.g = maskLight;
-		else mask.b = maskLight;
+	pos.xy = floor(pos.xy * vec2(1.0, 0.5));
+	pos.x += pos.y * 3.0;
 	
-		return mask;
-	}
-  }    
+	vec3 mask = vec3(maskDark, maskDark, maskDark);
+	pos.x = fract(pos.x / 6.0);
+	if(pos.x < 0.333)mask.r = maskLight;
+	else if(pos.x < 0.666)mask.g = maskLight;
+	else mask.b = maskLight;
+
+	return mask;
+  }
 
 // Draw dividing bars.
 float Bar(float pos, float bar){ pos -= bar; return pos * pos < 4.0 ? 0.0 : 1.0; }
@@ -265,11 +226,7 @@ void fragment(){
 	vec2 pos = Warp(FRAGCOORD.xy / (1.0 / SCREEN_PIXEL_SIZE).xy);
 	
 	COLOR.rgb = Tri(pos, SCREEN_TEXTURE) * Mask(FRAGCOORD.xy);
-	if (bloom_type == 0){ 
-		COLOR.rgb = mix(COLOR.rgb,Bloom(pos, SCREEN_TEXTURE), 1.0 / bloomAmount);    
-	}else if (bloom_type == 1){
-		COLOR.rgb += Bloom(pos, SCREEN_TEXTURE) * 1.0 / bloomAmount;    
-	} 
+	COLOR.rgb += Bloom(pos, SCREEN_TEXTURE) * 1.0 / bloomAmount;
 	
 	COLOR.a = 1.0;  
 	COLOR.rgb = ToSrgb(COLOR.rgb);

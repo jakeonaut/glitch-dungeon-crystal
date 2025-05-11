@@ -2214,8 +2214,6 @@ shader_param/target_palette = ExtResource( 32 )
 [sub_resource type="ShaderMaterial" id=320]
 shader = ExtResource( 5 )
 shader_param/res = Vector2( 1280, 1024 )
-shader_param/mask_type = 0
-shader_param/bloom_type = 2
 shader_param/hardScan = -1.0
 shader_param/hardPix = -4.0
 shader_param/hardBloomScan = -4.0
@@ -2268,6 +2266,7 @@ shader_param/shake_color_rate = 0.0
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 14 )
+show_crt_effect = true
 starting_glitch_type = 1
 tileset_type = 6
 has_spellbook_page = true
@@ -2993,11 +2992,19 @@ grav = 0
 [node name="GlitchedGeode" parent="Viewport/level" instance=ExtResource( 58 )]
 transform = Transform( 0.4, 0, 0, 0, 0.5, 0, 0, 0, 0.4, 6.89768, -1.9, 0 )
 
+[node name="CubeContainer" parent="Viewport/level/GlitchedGeode" index="0"]
+transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
+
 [node name="MeshInstance" parent="Viewport/level/GlitchedGeode/CubeContainer" index="0"]
+transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
 mesh = SubResource( 331 )
 
 [node name="MeshInstance3" parent="Viewport/level/GlitchedGeode/CubeContainer" index="1"]
+transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
 mesh = SubResource( 332 )
+
+[node name="MeshInstance2" parent="Viewport/level/GlitchedGeode/CubeContainer" index="2"]
+transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 9 )]
 
@@ -3012,9 +3019,6 @@ flip_v = true
 [node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
 material = SubResource( 45 )
 
-[node name="BasicCrtEffectRect" parent="Viewport2/ScreenEffects" index="1"]
-visible = true
-
 [node name="Viewport3" parent="." instance=ExtResource( 9 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport3"]
@@ -3027,9 +3031,6 @@ flip_v = true
 
 [node name="DitherPaletteEffectRect" parent="Viewport3/ScreenEffects" index="0"]
 material = SubResource( 326 )
-
-[node name="BasicCrtEffectRect" parent="Viewport3/ScreenEffects" index="1"]
-visible = true
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0

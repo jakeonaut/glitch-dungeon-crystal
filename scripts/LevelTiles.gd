@@ -202,13 +202,13 @@ func buildSingleRandomTile(cell_index, glitch_type):
       setRandomTileNameOfType("PinkCloudSemisolidTop", 1, Vector3(cell_index.x, cell_index.y+1, cell_index.z), tile_orientation, 0)
       
   elif tile_name == "Spikes":
-    var top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+1, cell_index.z)
-    if top_neighbor_tile_type == -1: # no top neighbor
-      setRandomTileNameOfType("CloudSemisolidTop", 4, cell_index, tile_orientation, 0)
     # var left_neighbor_tile_type = get_cell_item(cell_index.x-1, cell_index.y, cell_index.z)
     # var right_neighbor_tile_type = get_cell_item(cell_index.x+1, cell_index.y, cell_index.z)
     # if left_neighbor_tile_type == -1 and right_neighbor_tile_type == -1: # no left or right neighbors
-    setRandomTileNameOfType("Spikes", 5, cell_index, tile_orientation) # 5, but 0 indexed...
+    if global.userSettings["canGlitchScreen"]:
+      setRandomTileNameOfType("Spikes", 5, cell_index, tile_orientation) # 5, but 0 indexed...
+    else:
+      setRandomTileNameOfType("CleanSpikes", 5, cell_index, tile_orientation) # 5, but 0 indexed...
     # elif left_neighbor_tile_type == -1: # no left neighbor
     #   pass 
     # elif right_neighbor_tile_type == -1: # no right neighbor
@@ -473,7 +473,7 @@ func isNeighborOfInfectedSpikes(neighborCoords):
   return false
 
 func tryToSayTidy():
-  var spike_id_array = [51, 52, 53, 54, 55]
+  var spike_id_array = [51, 52, 53, 54, 55, 329, 330, 331, 332, 333]
   for spike_id in spike_id_array:
     if get_used_cells_by_item(spike_id).size() > 0:
       return
@@ -555,7 +555,10 @@ func infectSpikes(coords, play_sound = true):
   return did_infect_spikes
 
 func reappearSpikes(coords, play_sound = true):
-  setRandomTileNameOfType("Spikes", 5, coords, 0)
+  if global.userSettings["canGlitchScreen"]:
+    setRandomTileNameOfType("CleanSpikes", 5, coords, 0)
+  else:
+    setRandomTileNameOfType("Spikes", 5, coords, 0)
   var tile_pos = self.map_to_world(coords.x, coords.y, coords.z)
   level.summonSmokeClouds(tile_pos, 1, play_sound, true)
 
