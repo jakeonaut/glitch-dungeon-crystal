@@ -71,7 +71,7 @@ var logo_timer = 0
 var logo_time_limit = 360
 onready var overlayRect = get_node("OverlayRect")
 onready var glitchEnemy6 = get_node("GlitchEnemy6")
-onready var colorRect = get_node("../../UILayer/MainMenu/ColorRect")
+onready var colorRect = get_node("../../Viewport2/UILayer/MainMenu/ColorRect")
 onready var cameraTarget = get_node("cameraTarget")
 onready var dialogPosition = get_node("DialogPosition")
 

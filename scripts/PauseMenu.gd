@@ -462,6 +462,10 @@ func processGraphicsLogic(_delta):
       global.userSettings["fullscreen"] = OS.window_fullscreen
     elif graphicsOptionIndex == 4:
       global.userSettings["gles3"] = not global.userSettings["gles3"]
+      if global.userSettings["gles3"]:
+        level.convertAll3dSpritesFromGles2ToGles3()
+      else:
+        level.convertAll3dSpritesFromGles3ToGles2()
     level.saveUserSettings()
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
     pauseMenuState = PauseMenuState.NORMAL

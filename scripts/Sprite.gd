@@ -71,33 +71,9 @@ func changeSpriteColorPalette(palette, palette_name = ""):
 func preProcess():
     pass
 
-var gles3Shader = preload("res://shaders/Sprite3D.shader")
-var gles2Shader = preload("res://shaders/Sprite3D_gles2.shader")
-func convertFromGles3ToGles2():
-    if not material_override or not material_override is ShaderMaterial:
-        return
-    if not material_override.shader or material_override.shader != gles3Shader:
-        return
-    var texture_albedo = material_override.get_shader_param("texture_albedo")
-    var base_palette = material_override.get_shader_param("base_palette")
-    var target_palette = material_override.get_shader_param("target_palette")
-    material_override.shader = gles2Shader
-    material_override.set_shader_param("texture_albedo", texture_albedo)
-    material_override.set_shader_param("base_palette", base_palette)
-    material_override.set_shader_param("target_palette", target_palette)
-
-func convertFromGles2ToGles3():
-    if not material_override or not material_override is ShaderMaterial:
-        return
-    if not material_override.shader or not material_override.shader == gles2Shader:
-        return
-    material_override.shader = gles3Shader
-
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
-    if not global.userSettings["gles3"] and material_override and material_override is ShaderMaterial:
-        convertFromGles3ToGles2()
-    elif not global.userSettings["canGlitchScreen"] and material_override and material_override is ShaderMaterial:
+    if not global.userSettings["canGlitchScreen"] and material_override and material_override is ShaderMaterial:
         material_override.set_shader_param("enable_glitch", false)
         material_override.set_shader_param("enable_glitch_3d", false)
     

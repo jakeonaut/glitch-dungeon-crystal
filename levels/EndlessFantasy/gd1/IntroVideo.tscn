@@ -69,6 +69,13 @@ viewport_path = NodePath("Viewport2")
 
 [sub_resource type="ShaderMaterial" id=246]
 shader = ExtResource( 6 )
+shader_param/palettesize = 16
+shader_param/resolution_scale = 4.0
+shader_param/canvas_width = 1280.0
+shader_param/canvas_height = 1024.0
+shader_param/r_mult = 0.0
+shader_param/g_mult = 1.0
+shader_param/b_mult = -1.0
 
 [node name="Game" type="Spatial"]
 
@@ -76,6 +83,7 @@ shader = ExtResource( 6 )
 
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 12 )
+show_crt_effect = true
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 5 )]
 
@@ -191,7 +199,7 @@ bus = "Sfx"
 mesh = SubResource( 247 )
 
 [node name="MeshInstance2" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="BetaBuildLabel" parent="Viewport2/UILayer" index="24"]
 visible = false
@@ -229,6 +237,8 @@ margin_bottom = 512.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 16 )]
+offset = Vector2( 320, 28 )
+transform = Transform2D( 1, 0, 0, 1, 320, 28 )
 
 [node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
 material = SubResource( 245 )
