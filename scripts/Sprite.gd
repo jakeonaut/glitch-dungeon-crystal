@@ -49,6 +49,11 @@ func _ready():
         pass
         material_override = material_override.duplicate()
     
+    if global.gles3:
+        get_tree().get_root().get_node("Game/Viewport/level").convertSprite3dFromGles2ToGles3(self)
+  # else:
+  #   convertAll3dSpritesFromGles3ToGles2()
+    
 export var automatically_change_color = true
 func changeSpriteColorPaletteToLevelPalette():
     if not automatically_change_color:

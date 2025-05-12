@@ -416,7 +416,7 @@ onready var colorblindPlayers = get_node("ColorblindPlayers")
 onready var colorblindHats = get_node("ColorblindPlayers/ColorblindHats")
 var graphicsOptionIndex = 0
 func processGraphicsLogic(_delta):
-  var graphicsOptions = [tr("UI.GraphicsMenu.1"), tr("UI.GraphicsMenu.2"), tr("UI.GraphicsMenu.3"), tr("UI.GraphicsMenu.4"), tr("UI.GraphicsMenu.5")]
+  var graphicsOptions = [tr("UI.GraphicsMenu.1"), tr("UI.GraphicsMenu.2"), tr("UI.GraphicsMenu.3"), tr("UI.GraphicsMenu.4")] #, tr("UI.GraphicsMenu.5")]
   pauseTitleText.bbcode_text = tr("UI.InputMenu.13_0") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
 
   if shouldUpdateMenuText:
@@ -427,7 +427,7 @@ func processGraphicsLogic(_delta):
       if i == 1: option += (tr("UI.GraphicsMenu.ON") if global.userSettings["canGlitchScreen"] else tr("UI.GraphicsMenu.OFF"))
       if i == 2: option += (tr("UI.GraphicsMenu.ON") if global.userSettings["colorblindMode"] else tr("UI.GraphicsMenu.OFF"))
       if i == 3: option += (tr("UI.GraphicsMenu.ON") if OS.window_fullscreen else tr("UI.GraphicsMenu.OFF"))
-      if i == 4: option += (tr("UI.GraphicsMenu.ON") if global.userSettings["gles3"] else tr("UI.GraphicsMenu.OFF"))
+      # if i == 4: option += (tr("UI.GraphicsMenu.ON") if global.userSettings["gles3"] else tr("UI.GraphicsMenu.OFF"))
 
       if i == graphicsOptionIndex:
         text += "[wave]" + str(option) + "[/wave]\n" 
@@ -460,12 +460,12 @@ func processGraphicsLogic(_delta):
     elif graphicsOptionIndex == 3:
       OS.window_fullscreen = not OS.window_fullscreen
       global.userSettings["fullscreen"] = OS.window_fullscreen
-    elif graphicsOptionIndex == 4:
-      global.userSettings["gles3"] = not global.userSettings["gles3"]
-      if global.userSettings["gles3"]:
-        level.convertAll3dSpritesFromGles2ToGles3()
-      else:
-        level.convertAll3dSpritesFromGles3ToGles2()
+    # elif graphicsOptionIndex == 4:
+    #   global.userSettings["gles3"] = not global.userSettings["gles3"]
+    #   if global.userSettings["gles3"]:
+    #     level.convertAll3dSpritesFromGles2ToGles3()
+    #   else:
+    #     level.convertAll3dSpritesFromGles3ToGles2()
     level.saveUserSettings()
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
     pauseMenuState = PauseMenuState.NORMAL

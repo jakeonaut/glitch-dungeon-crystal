@@ -47,8 +47,8 @@ vec4 getClosestMatchingFromPalette(ivec3 color) {
     float closest_distance = 9990.0;
     vec4 closest_color = vec4(0, 1.0, 0, 1.0);
     for (int x=0; x<palettesize; x++) {
-        ivec2 coord = ivec2(x,0);
-        vec4 pixelcolor = texelFetch(target_palette, coord, 0);
+        vec2 coord = vec2(float(x)/float(palettesize), 0.0); // ivec2 coord = ivec2(x,0);
+        vec4 pixelcolor = texture(target_palette, coord); // texelFetch(target_palette, coord, 0);
         ivec3 ipixelcolor = ivec3(round(pixelcolor.rgb * 255.0));
         float dist = distance(vec3(color), vec3(ipixelcolor.rgb));
         if (dist < closest_distance) {
@@ -61,8 +61,8 @@ vec4 getClosestMatchingFromPalette(ivec3 color) {
 
 int getpaletteidx(vec3 color) {
     for (int x=0; x<palettesize; x++) {
-        ivec2 coord = ivec2(x,0);
-        vec3 pixelcolor = texelFetch(base_palette, coord, 0).rgb;    
+        vec2 coord = vec2(float(x)/float(palettesize),0.0); // ivec2 coord = ivec2(x,0);
+        vec3 pixelcolor = texture(base_palette, coord).rgb; // texelFetch(base_palette, coord, 0).rgb;    
         if (distance(color, pixelcolor) == 0.0) {
             return x;
         }
@@ -71,8 +71,8 @@ int getpaletteidx(vec3 color) {
 }
 
 vec3 getpalettecolor(int x) {
-    ivec2 coord = ivec2(x,0);
-    return texelFetch(target_palette, coord, 0).rgb;
+    vec2 coord = vec2(float(x)/float(palettesize),0.0); // ivec2 coord = ivec2(x,0);
+    return texture(target_palette, coord).rgb; // texelFetch(target_palette, coord, 0).rgb;
 }
 
 float random(float seed) {
@@ -89,30 +89,51 @@ uniform float time_influence : hint_range(0, 50) = 0;
 uniform float y_div : hint_range(0, 10, .1) = 0;
 
 void vertex() {
-    VERTEX.x += sin(VERTEX.y * y_div + round(TIME * time_influence)) * normal_offset;
-    VERTEX.y += sin(VERTEX.x * y_div + round(TIME * time_influence)) * normal_offset;
-    VERTEX.z += sin(VERTEX.y * y_div + round(TIME * time_influence)) * normal_offset;
+    // VERTEX.x += sin(VERTEX.y * y_div + round(TIME * time_influence)) * normal_offset;
+    // VERTEX.y += sin(VERTEX.x * y_div + round(TIME * time_influence)) * normal_offset;
+    // VERTEX.z += sin(VERTEX.y * y_div + round(TIME * time_influence)) * normal_offset;
 
-    float adjusted_time = mod(TIME, 5.0);
+    // float adjusted_time = mod(TIME, 5.0);
 
-    enable_shift = float(random3d(trunc(adjusted_time * shake_speed)) < shake_rate);
+    enable_shift = 0.0; //float(random3d(trunc(adjusted_time * shake_speed)) < shake_rate);
 
-    if (enable_glitch_3d) {
-        float offset_x = (random3d((trunc(VERTEX.y * shake_block_size) / shake_block_size) + adjusted_time) - 0.5) * shake_power * enable_shift;
-        VERTEX.x += offset_x;
-    }
+    // if (enable_glitch_3d) {
+    //     float offset_x = (random3d((trunc(VERTEX.y * shake_block_size) / shake_block_size) + adjusted_time) - 0.5) * shake_power * enable_shift;
+    //     VERTEX.x += offset_x;
+    // }
 }
 
 const float canvas_width = 2560.0;
 const float canvas_height = 2048.0;
 const float matrixSize = 4.0;
+int getM(int x) {
+  if (x == 0) { return 1; }
+  if (x == 1) { return 9; }
+  if (x == 2) { return 3; }
+  if (x == 3) { return 11; }
+
+  if (x == 4) { return 13; }
+  if (x == 5) { return 5; }
+  if (x == 6) { return 15; }
+  if (x == 7) { return 7; }
+
+  if (x == 8) { return 4; }
+  if (x == 9) { return 12; }
+  if (x == 10) { return 2; }
+  if (x == 11) { return 10; }
+
+  if (x == 12) { return 16; }
+  if (x == 13) { return 8; }
+  if (x == 14) { return 14; }
+  if (x == 15) { return 6; }
+}
 void fragment() {
-    int m[] = {
-        1, 9, 3, 11,
-        13, 5, 15, 7,
-        4, 12, 2, 10,
-        16, 8, 14, 6
-    };
+    // int m[] = {
+    //     1, 9, 3, 11,
+    //     13, 5, 15, 7,
+    //     4, 12, 2, 10,
+    //     16, 8, 14, 6
+    // };
     vec4 incolor = texture(texture_albedo, UV); // COLOR
     float alpha = incolor.a * opacity; 
     if (alpha == 0.0) {
@@ -123,7 +144,7 @@ void fragment() {
     float y = uv.y;
     int m_x = int(mod(x, matrixSize));
     int m_y = int(mod(y, matrixSize));
-    int ratio = m[m_x + (m_y*int(matrixSize))];
+    int ratio = getM(m_x + (m_y*int(matrixSize))); // m[m_x + (m_y*int(matrixSize))];
 
     int index = getpaletteidx(incolor.rgb);
     if (enable_remove_skin_tone && (index == 8 || index == 9)) {
@@ -170,11 +191,15 @@ void fragment() {
     else if (enable_black_unknown) {
         ALBEDO.rgb = vec3(0.016, 0.016, 0.016);
     }
+    else {
+        ALBEDO.rgb = incolor.rgb; // vec3(0.5, 0.5, 0.5);
+    }
+    
     if (enable_no_transparency && alpha == 0.0) {
         alpha = 1.0;
     } else if (closest_color.a == 0.0) {
-    alpha = 0.0;
-  }
+      alpha = 0.0;
+    }
     ALPHA = alpha;
 
     if (enable_glitch) {
@@ -214,7 +239,10 @@ void fragment() {
         if (!enable_no_transparency) {
             ALPHA = alp.a * opacity;
         } else {
-      ALPHA = opacity;
+          ALPHA = opacity;
+        }
     }
-    }
+
+  // ALBEDO.rgb = incolor.rgb;
+  // ALPHA = alpha;
 }
