@@ -258,42 +258,42 @@ func tryInitializeFromDebug():
       # # reset levelZone
       # global.currLevelZone = self.getLevelZoneName()
 
-var gles3Shader = preload("res://shaders/Sprite3D.shader")
-var gles2Shader = preload("res://shaders/Sprite3D_gles2.shader")
+# var gles3Shader = preload("res://shaders/Sprite3D.shader")
+# var gles2Shader = preload("res://shaders/Sprite3D_gles2.shader")
 
-func convertAll3dSpritesFromGles3ToGles2(fromNode = null):
-  if fromNode == null: fromNode = self
-  for node in fromNode.get_children():
-    if node is Sprite3D:
-      convertSprite3dFromGles3ToGles2(node)
-    convertAll3dSpritesFromGles3ToGles2(node)
+# func convertAll3dSpritesFromGles3ToGles2(fromNode = null):
+#   if fromNode == null: fromNode = self
+#   for node in fromNode.get_children():
+#     if node is Sprite3D:
+#       convertSprite3dFromGles3ToGles2(node)
+#     convertAll3dSpritesFromGles3ToGles2(node)
 
-func convertAll3dSpritesFromGles2ToGles3(fromNode = null):
-  if fromNode == null: fromNode = self
-  for node in fromNode.get_children():
-    if node is Sprite3D:
-      convertSprite3dFromGles2ToGles3(node)
-    convertAll3dSpritesFromGles2ToGles3(node)
+# func convertAll3dSpritesFromGles2ToGles3(fromNode = null):
+#   if fromNode == null: fromNode = self
+#   for node in fromNode.get_children():
+#     if node is Sprite3D:
+#       convertSprite3dFromGles2ToGles3(node)
+#     convertAll3dSpritesFromGles2ToGles3(node)
 
-func convertSprite3dFromGles3ToGles2(sprite):
-  if not sprite.material_override or not sprite.material_override is ShaderMaterial:
-    return
-  if not sprite.material_override.shader or sprite.material_override.shader != gles3Shader:
-    return
-  # var texture_albedo = sprite.material_override.get_shader_param("texture_albedo")
-  # var base_palette = sprite.material_override.get_shader_param("base_palette")
-  # var target_palette = sprite.material_override.get_shader_param("target_palette")
-  sprite.material_override.shader = gles2Shader
-  # sprite.material_override.set_shader_param("texture_albedo", texture_albedo)
-  # sprite.material_override.set_shader_param("base_palette", base_palette)
-  # sprite.material_override.set_shader_param("target_palette", target_palette)
+# func convertSprite3dFromGles3ToGles2(sprite):
+#   if not sprite.material_override or not sprite.material_override is ShaderMaterial:
+#     return
+#   if not sprite.material_override.shader or sprite.material_override.shader != gles3Shader:
+#     return
+#   # var texture_albedo = sprite.material_override.get_shader_param("texture_albedo")
+#   # var base_palette = sprite.material_override.get_shader_param("base_palette")
+#   # var target_palette = sprite.material_override.get_shader_param("target_palette")
+#   sprite.material_override.shader = gles2Shader
+#   # sprite.material_override.set_shader_param("texture_albedo", texture_albedo)
+#   # sprite.material_override.set_shader_param("base_palette", base_palette)
+#   # sprite.material_override.set_shader_param("target_palette", target_palette)
 
-func convertSprite3dFromGles2ToGles3(sprite):
-  if not sprite.material_override or not sprite.material_override is ShaderMaterial:
-    return
-  if not sprite.material_override.shader or not sprite.material_override.shader == gles2Shader:
-    return
-  sprite.material_override.shader = gles3Shader
+# func convertSprite3dFromGles2ToGles3(sprite):
+#   if not sprite.material_override or not sprite.material_override is ShaderMaterial:
+#     return
+#   if not sprite.material_override.shader or not sprite.material_override.shader == gles2Shader:
+#     return
+#   sprite.material_override.shader = gles3Shader
 
 func _process(delta):
   delta = delta * global.time_dilation_multiplier

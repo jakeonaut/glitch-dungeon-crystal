@@ -33,6 +33,9 @@ func activateScript():
     if not is_mimic:
         heart.okay_im_done = true
         heart.queue_free()
+    else:
+        heart.okay_im_done = true
+        heart.visible = false
 
 func isActive(_debug=false):
     return true

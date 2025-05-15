@@ -550,13 +550,13 @@ hframes = 6
 vframes = 5
 frame = 9
 
-[node name="PetSprite" type="Sprite" parent="InventoryRect"]
+[node name="MapSprite" type="Sprite" parent="InventoryRect"]
 position = Vector2( 262, 123 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
-frame = 6
+frame = 2
 
 [node name="BagSprite" type="Sprite" parent="InventoryRect"]
 position = Vector2( 318, 123 )
@@ -2447,6 +2447,7 @@ margin_right = 343.0
 margin_bottom = 103.0
 grow_horizontal = 2
 grow_vertical = 2
+rect_clip_content = false
 theme = ExtResource( 26 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true

@@ -2144,6 +2144,7 @@ script = ExtResource( 33 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -4, 0 )
 grav = 0
 bbText = "NPC.EldestCreature.1"
+interact_prompt_offset = -35
 
 [node name="CollisionShape" parent="Viewport/level/EldestMonkeyNPC/MimicNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 253 )

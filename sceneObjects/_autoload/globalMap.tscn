@@ -236,7 +236,6 @@ frame = 20
 path = "res://levels/EndlessFantasy/gd1FishingVillage/WaterfallSecretRoom.tscn"
 can_nav_left = false
 can_nav_up = false
-hide_me_from_map = true
 has_angel_egg = 1
 
 [node name="WaterGate" parent="FishingVillage" instance=ExtResource( 3 )]

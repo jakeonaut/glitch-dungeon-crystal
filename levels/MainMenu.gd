@@ -28,6 +28,7 @@ func setUpRoomInitializationOverride():
         show_dither_effect = false
         show_crt_effect = true
         mainMenuState = MainMenuState.MAIN_MENU
+        logoSprite.visible = true
     else:
         mainMenuState = MainMenuState.NORMAL_GAMEPLAY
         logoSprite.visible = false
@@ -372,7 +373,7 @@ func _process(delta):
             pressCText.bbcode_text = "[right]press " + global.getInputText("menu_cancel") + " to cancel, " + global.getInputText("menu_confirm") + " to start[/right]"
         else:
             var secondPartTemp = tr("UI.MainMenu.4") % global.getInputText("menu_delete")
-            var second_part = secondPartTemp if global.doesSaveGameExist(mainMenuPromptIndex) else ("[s][color=gray]" + secondPartTemp + "[/color][/s]")
+            var second_part = secondPartTemp if global.doesSaveGameExist(mainMenuPromptIndex) else ("[color=grey]" + secondPartTemp + "[/color]")
             pressCText.bbcode_text = "[right]" + (tr("UI.MainMenu.3") % global.getInputText("menu_confirm")) + "    " + second_part + "[/right]"
         optionsMenuPrompt.bbcode_text = (tr("UI.MainMenu.1") % global.getInputText("ui_start")) + "\n[right]" + (global.getInputText("menu_cancel")) + ": " + tr("UI.MainMenu.CreditsPrompt") + "[/right]"
         selectTextPrompt.bbcode_text = global.getInputText("menu_confirm")
@@ -431,7 +432,7 @@ func _process(delta):
             for i in range(global.save_game_files.size()):
                 if i != 0: menuText.bbcode_text += "\n"
 
-                var fileText = (tr("UI.MainMenu.2") + str(i+1)) if global.doesSaveGameExist(i) else ("[color=gray]" + tr("UI.MainMenu.2") + str(i+1) + "[/color]")
+                var fileText = (tr("UI.MainMenu.2") + str(i+1)) if global.doesSaveGameExist(i) else ("[color=teal]" + tr("UI.MainMenu.2") + str(i+1) + "[/color]")
                 if mainMenuPromptIndex == i:
                     menuText.bbcode_text += "[wave]" + fileText + "[/wave]"
                 else:
@@ -460,7 +461,7 @@ func _process(delta):
 
 func processSkipPrompt(delta):
     var which_input_to_skip = "popup_menu"
-    skipPrompt.bbcode_text = tr("UI.MainMenu.3") % global.getInputText(which_input_to_skip)
+    skipPrompt.bbcode_text = "[right]" + tr("UI.MainMenu.3") % global.getInputText(which_input_to_skip) + "[/right]"
     if (
         Input.is_action_just_pressed("ui_right") or
         Input.is_action_just_pressed("ui_left") or
@@ -534,8 +535,8 @@ func normalizeMainMenuPromptIndex(change):
 var has_ever_started_music = false
 # @override
 func playMenuMusic():
-    if not musicPlayer.currentlyPlayingTheme:
-        musicPlayer.conductFromScenePath(getLevelName())
+    # if not musicPlayer.currentlyPlayingTheme:
+    #     musicPlayer.conductFromScenePath(getLevelName())
     # musicPlayer.tryToPlay(musicPlayer.restZonePlayer)
     pass
     

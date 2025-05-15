@@ -1,20 +1,20 @@
 extends AudioStreamPlayer
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
-onready var npc = get_node("../../..")
-onready var textBox = get_node("../../..")
+onready var textBox = get_node("..")
 
 func _ready():
   pass
 
 func activateScript():
-  if textBox.has_been_shown and global.memory.has("cutePet") and global.memory["cutePet"]:
+  var text = tr("NPC.EldestCreature.1")
+  if global.memory.has("cutePet") and global.memory["cutePet"]:
     if global.memory["mushroom_soul"] == 0:
-      npc.textBoxContainer.bbText = tr("NPC.EldestCreature.2")
+      text += "\n" + tr("NPC.EldestCreature.2")
     else:
-      npc.textBoxContainer.bbText = tr("NPC.EldestCreature.3")
-    
-    npc.textBoxContainer.setVars()
+      text = tr("NPC.EldestCreature.3")
+  textBox.text_final = text
+  textBox.textNode.bbcode_text = text
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
   # OVERRIDE ME

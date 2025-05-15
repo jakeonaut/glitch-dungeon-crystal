@@ -1423,6 +1423,12 @@ var snoring = false
 var sleepy_timer = 0
 var sleepy_time_limit = 45
 func processSleepyLogic(delta):
+  if global.shouldRenderAsCinematic:
+    sleepy_timer = 0
+    return
+  var effective_sleepy_time_limit = sleepy_time_limit
+  if global.activeInteractor != null: # grandma respects social norms
+    effective_sleepy_time_limit *= 2
   if transformation == TransformationState.NORMAL and on_ground and not summonedBroom and physics_state == self.PhysicsState.NORMAL and not anyOtherRitualInputsDetected(false) and aniPlayer.assigned_animation == "stand":
     sleepy_timer += (delta*11)
     if sleepy_timer >= sleepy_time_limit:
@@ -1474,7 +1480,9 @@ func processAngelStatueRitual(_delta):
   
 
 func anyOtherRitualInputsDetected(just_pressed = true):
-  var inputs = ["ui_left", "ui_right", "ui_up", "ui_down", "jump_button", "sub_action_button", "alt_action_button", "restart_key", "ui_start", "popup_menu", "left_button"]
+  var inputs = ["ui_left", "ui_right", "ui_up", "ui_down", "jump_button", "sub_action_button", "alt_action_button", "restart_key", "ui_start", "popup_menu", "left_button", "talk_button"]
+  if rawPressingMoveDown() or rawPressingMoveUp() or rawPressingMoveLeft() or rawPressingMoveRight():
+    return true
   for input in inputs:
     if just_pressed and Input.is_action_just_pressed(input):
       return true

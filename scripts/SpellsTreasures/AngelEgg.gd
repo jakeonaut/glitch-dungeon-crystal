@@ -20,6 +20,7 @@ func _ready():
         visible = false
 
     if grav == 0 and visible:
+        landSoundCounter = 3
         landSound.play()
         yield(get_tree().create_timer(0.3), "timeout")
         landSound.play()
@@ -74,9 +75,13 @@ func justPressedJump():
 func alignMySprite():
     pass
 
+var landSoundCounter = 0
+var landSoundCountLimit = 3
 func landed():
     get_node("SecretAnimationPlayer").play("land")
-    landSound.play()
+    if landSoundCounter < landSoundCountLimit:
+        landSound.play()
+    landSoundCounter += 1
     jump_force /= 2
     land_count += 1
     if land_count >= land_count_limit:

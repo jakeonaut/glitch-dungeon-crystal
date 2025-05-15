@@ -1095,7 +1095,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 31.2, 0 )
 grav = 0
 
 [node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 30 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 24, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 23, 0 )
+grav = 0
 
 [node name="MushroomNPC" parent="Viewport/level" instance=ExtResource( 31 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 1, 0 )
