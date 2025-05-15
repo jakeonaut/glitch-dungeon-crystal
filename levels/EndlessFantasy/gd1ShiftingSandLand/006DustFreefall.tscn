@@ -771,6 +771,9 @@ anims/windDown = SubResource( 79 )
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -21, 0 )
 
+[node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -4, 0 )
+
 [node name="SmallKey" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -5, 0 )
 

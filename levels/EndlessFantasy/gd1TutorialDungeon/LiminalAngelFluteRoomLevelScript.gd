@@ -7,5 +7,4 @@ func setUpRoomInitializationOverride():
   if global.memory.has("roomPath"):
     overrideRoomPath = global.memory["roomPath"]
     shortcutDoor.path = overrideRoomPath
-  global.memory["has_teleported"] = true
 

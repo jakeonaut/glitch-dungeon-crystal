@@ -201,9 +201,12 @@ func fallthroughCollisionActivate(_friend):
   pass
 
 var should_i_respond_to_smacks = true
+export var is_very_tiny = false
 func getSmacked(_broom_origin = null, _silently = false):
   # if not can_be_smacked:
   #   return false
+  if not visible or is_very_tiny:
+    return false
   if is_smacked:
     return false
   # don't get smacked if we're on the wrong side of a wind up

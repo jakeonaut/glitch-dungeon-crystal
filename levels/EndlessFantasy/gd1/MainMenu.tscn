@@ -2739,6 +2739,7 @@ texture = ExtResource( 48 )
 [node name="SecretGlitchyNPC" parent="Viewport/level" instance=ExtResource( 53 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 4, 0 )
 grav = 0
+is_very_tiny = true
 
 [node name="CollisionShape" parent="Viewport/level/SecretGlitchyNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 282 )
@@ -2755,6 +2756,7 @@ shape = SubResource( 283 )
 [node name="SecretGlitchyNPC2" parent="Viewport/level" instance=ExtResource( 53 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 31, 7, 0 )
 grav = 0
+is_very_tiny = true
 
 [node name="CollisionShape" parent="Viewport/level/SecretGlitchyNPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 282 )
@@ -2781,6 +2783,7 @@ shape = SubResource( 283 )
 [node name="SecretGlitchyNPC4" parent="Viewport/level" instance=ExtResource( 53 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 4, 0 )
 grav = 0
+is_very_tiny = true
 
 [node name="CollisionShape" parent="Viewport/level/SecretGlitchyNPC4/SmallInteractionArea" index="0"]
 shape = SubResource( 282 )
@@ -2807,6 +2810,7 @@ shape = SubResource( 283 )
 [node name="SecretGlitchyNPC3" parent="Viewport/level" instance=ExtResource( 53 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 3, 0 )
 grav = 0
+is_very_tiny = true
 
 [node name="CollisionShape" parent="Viewport/level/SecretGlitchyNPC3/SmallInteractionArea" index="0"]
 shape = SubResource( 282 )
@@ -2833,6 +2837,7 @@ shape = SubResource( 283 )
 [node name="SecretGlitchyNPC5" parent="Viewport/level" instance=ExtResource( 53 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 2, 0 )
 grav = 0
+is_very_tiny = true
 
 [node name="CollisionShape" parent="Viewport/level/SecretGlitchyNPC5/SmallInteractionArea" index="0"]
 shape = SubResource( 282 )
@@ -2859,6 +2864,7 @@ shape = SubResource( 283 )
 [node name="SecretGlitchyNPC6" parent="Viewport/level" instance=ExtResource( 53 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 28, 4, 0 )
 grav = 0
+is_very_tiny = true
 
 [node name="CollisionShape" parent="Viewport/level/SecretGlitchyNPC6/SmallInteractionArea" index="0"]
 shape = SubResource( 282 )
@@ -2957,6 +2963,9 @@ texture = SubResource( 235 )
 
 [node name="MeshInstance" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
 mesh = SubResource( 330 )
+
+[node name="MeshInstance2" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="Camera" parent="Viewport2/UILayer/GlitchStatusRect/Viewport" index="1"]
 current = true

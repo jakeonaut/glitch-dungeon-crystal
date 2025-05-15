@@ -2365,7 +2365,7 @@ func spawnSnoreBubble():
     bubble.my_original_pos = bubble.global_transform.origin.y
     bubble.my_target_pos = bubble.global_transform.origin.y  + rand_range(-1, 1)
   else:
-    summonSmokeClouds(1, true, true, 1)
+    summonSmokeClouds(1, false, true, 1)
 
 var spore_spawn_timer = 0
 var spore_spawn_time_limit = 15

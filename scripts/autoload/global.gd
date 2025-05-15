@@ -445,7 +445,8 @@ var allLocales = {
     "pl": { "code": "pl", "supported": true, "label": "Polski" },
     "de": { "code": "de", "supported": true, "label": "Deutsch" },
     "ko_KR": { "code": "ko_KR", "supported": true, "label": "한국어"},
-    "uk_UA": { "code": "uk_UA", "supported": true, "label": "Українська"}
+    "uk_UA": { "code": "uk_UA", "supported": true, "label": "Українська"},
+    "tr_TR": { "code": "tr_TR", "supported": true, "label": "Türkçe"}
 }
 func getSupportedLocalesArray():
     var supportedLocales = []

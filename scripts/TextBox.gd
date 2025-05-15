@@ -213,10 +213,10 @@ func _process(delta):
       
     if isWaitingForEndPrompt():
       if showYesNoOptions and not is_interact_prompt:
-        if Input.is_action_just_pressed("ui_left"):
+        if getPlayer().rawPressingMoveLeft():
           if not selectedYesNoOption: broomSelectSound.play()
           selectedYesNoOption = true
-        elif Input.is_action_just_pressed("ui_right"):
+        elif getPlayer().rawPressingMoveRight():
           if selectedYesNoOption: broomSelectSound.play()
           selectedYesNoOption = false
         yesButton.visible = true

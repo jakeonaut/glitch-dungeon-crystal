@@ -377,7 +377,7 @@ func digTiles(solidTiles, should_summon_clouds, is_fake_tiles = false):
             if getLevelTiles().isTileFragileSolid(tile_type):
                 getSmacked()
                 thudSound.play()
-                should_fade_away = flight_anchor.should_fade_away
+                should_fade_away = flight_anchor != null and flight_anchor.should_fade_away
                 mole_state = MoleState.OVERRIDE_FLY_START
                 return
 

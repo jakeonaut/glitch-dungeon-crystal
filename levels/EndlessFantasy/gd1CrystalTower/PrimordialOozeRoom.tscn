@@ -2382,9 +2382,6 @@ flip_v = true
 [node name="DitherPaletteEffectRect" parent="Viewport3/ScreenEffects" index="0"]
 material = SubResource( 326 )
 
-[node name="BasicCrtEffectRect" parent="Viewport3/ScreenEffects" index="1"]
-visible = true
-
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0

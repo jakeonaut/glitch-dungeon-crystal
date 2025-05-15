@@ -198,8 +198,8 @@ func _ready_impl():
   if not "EndCredits" in getShortLevelName():
     global.setLevelZoneStartTime()
 
-  if not global.userSettings["gles3"]:
-    convertAll3dSpritesFromGles3ToGles2()
+  # if not global.userSettings["gles3"]:
+  #   convertAll3dSpritesFromGles3ToGles2()
 
 var hasGameFrameBackground = false
 func tryToAddGameFrameBackground():
@@ -276,12 +276,9 @@ func convertAll3dSpritesFromGles2ToGles3(fromNode = null):
     convertAll3dSpritesFromGles2ToGles3(node)
 
 func convertSprite3dFromGles3ToGles2(sprite):
-  print(sprite)
   if not sprite.material_override or not sprite.material_override is ShaderMaterial:
-    print("bye bye 1")
     return
   if not sprite.material_override.shader or sprite.material_override.shader != gles3Shader:
-    print("bye bye 2")
     return
   # var texture_albedo = sprite.material_override.get_shader_param("texture_albedo")
   # var base_palette = sprite.material_override.get_shader_param("base_palette")

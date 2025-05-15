@@ -685,7 +685,7 @@ is_passive = true
 is_vertical = true
 
 [node name="landing" parent="Viewport/level/Door" index="5"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 1 )
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 shape = SubResource( 24 )
@@ -765,6 +765,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 4.6, 0 )
 [node name="NPC" parent="Viewport/level/DustFarmer" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, -1.6, 0 )
 bbText = "NPC.ClayWorker.1"
+smackedBbText = "NPC.Secret.2"
 can_move = false
 can_camera_zoom = false
 is_a_body = false

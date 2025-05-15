@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=20]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=21]
 [ext_resource path="res://levels/EndlessFantasy/gd1TutorialDungeon/LiminalAngelFluteRoomLevelScript.gd" type="Script" id=22]
+[ext_resource path="res://levels/EndlessFantasy/gd1TutorialDungeon/LiminalSpaceAbortSound.gd" type="Script" id=23]
 
 [sub_resource type="BoxShape" id=24]
 resource_local_to_scene = true
@@ -265,6 +266,9 @@ shape = SubResource( 29 )
 
 [node name="DialogStartSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="10"]
 script = ExtResource( 6 )
+
+[node name="AbortSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="13"]
+script = ExtResource( 23 )
 
 [node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, -2.38419e-07, 0.4, 0 )
