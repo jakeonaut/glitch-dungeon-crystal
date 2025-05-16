@@ -1,233 +1,185 @@
-//SHADER ORIGINALY CREADED BY "TimothyLottes" FROM SHADERTOY
-//PORTED AND MODIFYED TO GODOT BY AHOPNESS (@ahopness)
-//LICENSE : CC0
-//COMATIBLE WITH : GLES2, GLES3, WEBGL
-//SHADERTOY LINK : https://www.shadertoy.com/view/MsjXzh
 
-// PUBLIC DOMAIN CRT STYLED SCAN-LINE SHADER
-//
-//   by Timothy Lottes
-//
-// This is more along the style of a really good CGA arcade monitor.
-// With RGB inputs instead of NTSC.
-// The shadow mask example has the mask rotated 90 degrees for less chromatic aberration.
-//
-// Left it unoptimized to show the theory behind the algorithm.
-//
-// It is an example what I personally would want as a display option for pixel art games.
-// Please take and use, change, or whatever.
+/*
+Shader from Godot Shaders - the free shader library.
+
+This shader is under CC0 license. Feel free to use, improve and 
+change this shader according to your needs and consider sharing 
+the modified result to godotshaders.com.
+
+Optimised and packed by @c64cosmin
+If you do use this please share it with me
+Would love to see what you're making with it <3
+
+It's a combination of these two shaders
+~godotshaders.com/shader/VHS-and-CRT-monitor-effect
+godotshaders.com/shader/crt-shader-with-realistic-blurring/
+
+CRT grille and rolling lines made by @c64cosmin
+Vignette and warping effect was made by pend00
+Scanlines are from "TimothyLottes" FROM SHADERTOY
+Then ported by AHOPNESS (@Ahopness)
+https://www.shadertoy.com/view/MsjXzh
+*/
 
 shader_type canvas_item;
 
-// Emulated input resolution.
-uniform vec2 res;
+//uniform sampler2D SCREEN_TEXTURE: hint_screen_texture;
 
-// Hardness of scanline.
-//  -8.0 = soft
-// -16.0 = medium
-uniform float hardScan :hint_range(-12.0, -1.0) = -8.0;
+uniform vec2 resolution = vec2(320.0, 180.0);
 
-// Hardness of pixels in scanline.
-// -2.0 = soft
-// -4.0 = hard
-uniform float hardPix :hint_range(-4.0, 0.0) = -2.0;
+uniform float scan_line_amount :hint_range(0.0, 1.0) = 1.0;
+uniform float warp_amount :hint_range(0.0, 5.0) = 0.1;
+uniform float noise_amount :hint_range(0.0, 0.3) = 0.03;
+uniform float interference_amount :hint_range(0.0, 1.0) = 0.2;
+uniform float grille_amount :hint_range(0.0, 1.0) = 0.1;
+uniform float grille_size :hint_range(1.0, 5.0) = 1.0;
+uniform float vignette_amount :hint_range(0.0, 2.0) = 0.6;
+uniform float vignette_intensity : hint_range(0.0, 1.0) = 0.4;
+uniform float aberation_amount :hint_range(0.0, 1.0) = 0.5;
+uniform float roll_line_amount :hint_range(0.0, 1.0) = 0.3;
+uniform float roll_speed :hint_range(-8.0, 8.0) = 1.0;
+uniform float scan_line_strength :hint_range(-12.0, -1.0) = -8.0;
+uniform float pixel_strength :hint_range(-4.0, 0.0) = -2.0;
 
-// Hardness of short vertical bloom.
-//  -1.0 = wide to the point of clipping (bad)
-//  -1.5 = wide
-//  -4.0 = not very wide at all
-uniform float hardBloomScan :hint_range(-4.0, 0.0) = -2.0;
+float random(vec2 uv){
+   return fract(cos(uv.x * 83.4827 + uv.y * 92.2842) * 43758.5453123);
+}
 
-// Hardness of short horizontal bloom.
-//  -0.5 = wide to the point of clipping (bad)
-//  -1.0 = wide
-//  -2.0 = not very wide at all
-uniform float hardBloomPix :hint_range(-2.0, 0.0) = -1.5;
+vec3 fetch_pixel(vec2 uv, vec2 off, sampler2D screen_texture){
+   vec2 pos = floor(uv * resolution + off) / resolution + vec2(0.5) / resolution;
 
-// Amount of small bloom effect.
-//  1.0/1.0 = only bloom
-//  1.0/16.0 = what I think is a good amount of small bloom
-//  0.0     = no bloom
-uniform float bloomAmount :hint_range(1.0, 16.0) = 16.0;
+   float noise = 0.0;
+   if(noise_amount > 0.0){
+       noise = random(pos + fract(TIME)) * noise_amount;
+   }
 
-// Display warp.
-// 0.0 = none
-// 1.0/8.0 = extreme
-uniform vec2 warp = vec2(64.0, 24.0); 
+   if(max(abs(pos.x - 0.5), abs(pos.y - 0.5)) > 0.5){
+       return vec3(0.0, 0.0, 0.0);
+   }
 
-// Amount of shadow mask.
-uniform float maskDark  :hint_range(0.0, 1.0) = 0.5;
-uniform float maskLight :hint_range(1.0, 2.0) = 1.5;
-
-//------------------------------------------------------------------------
-
-// sRGB to Linear.
-// Assuing using sRGB typed textures this should not be needed.
-float ToLinear1(float c){ return(c <= 0.04045) ? c / 12.92 : pow((c + 0.055) / 1.055, 2.4); }
-vec3 ToLinear(vec3 c){ return vec3(ToLinear1(c.r), ToLinear1(c.g), ToLinear1(c.b)); }
-
-// Linear to sRGB.
-// Assuing using sRGB typed textures this should not be needed.
-float ToSrgb1(float c){ return(c < 0.0031308?c * 12.92 : 1.055 * pow(c, 0.41666) - 0.055); }
-vec3 ToSrgb(vec3 c){ return vec3(ToSrgb1(c.r), ToSrgb1(c.g), ToSrgb1(c.b)); }
-
-// Nearest emulated sample given floating point position and texel offset.
-// Also zero's off screen.
-vec3 Fetch(vec2 pos, vec2 off, sampler2D iChannel0){
-	pos = floor(pos * res + off) / res;
-	
-	if(max(abs(pos.x - 0.5), abs(pos.y - 0.5)) > 0.5){
-		return vec3(0.0, 0.0, 0.0);
-	}
-	
-	return ToLinear(texture(iChannel0 , pos.xy , -16.0).rgb);
+   vec3 screen = texture(screen_texture , pos, -16.0).rgb + noise;
+   return screen;
 }
 
 // Distance in emulated pixels to nearest texel.
 vec2 Dist(vec2 pos){ 
-	pos = pos * res; 
-	return - ((pos - floor(pos)) - vec2(0.5));
+   pos = pos * resolution;
+   return - ((pos - floor(pos)) - vec2(0.5));
 }
-    
+
 // 1D Gaussian.
 float Gaus(float pos, float scale){ return exp2(scale * pos * pos); }
 
 // 3-tap Gaussian filter along horz line.
-vec3 Horz3(vec2 pos, float off, sampler2D iChannel0){
-	vec3 b = Fetch(pos, vec2(-1.0, off), iChannel0);
-	vec3 c = Fetch(pos, vec2( 0.0, off), iChannel0);
-	vec3 d = Fetch(pos, vec2( 1.0, off), iChannel0);
-	float dst = Dist(pos).x;
-	
-	// Convert distance to weight.
-	float scale = hardPix;
-	float wb = Gaus(dst - 1.0, scale);
-	float wc = Gaus(dst + 0.0, scale);
-	float wd = Gaus(dst + 1.0, scale);
-	
-	// Return filtered sample.
-	return (b * wb + c * wc + d * wd) / (wb + wc + wd);
-}
-// 5-tap Gaussian filter along horz line.
-vec3 Horz5(vec2 pos, float off, sampler2D iChannel0){
-	vec3 a = Fetch(pos, vec2(-2.0, off), iChannel0);
-	vec3 b = Fetch(pos, vec2(-1.0, off), iChannel0);
-	vec3 c = Fetch(pos, vec2( 0.0, off), iChannel0);
-	vec3 d = Fetch(pos, vec2( 1.0, off), iChannel0);
-	vec3 e = Fetch(pos, vec2( 2.0, off), iChannel0);
-	float dst = Dist(pos).x;
-	
-	// Convert distance to weight.
-	float scale = hardPix;
-	float wa = Gaus(dst - 2.0, scale);
-	float wb = Gaus(dst - 1.0, scale);
-	float wc = Gaus(dst + 0.0, scale);
-	float wd = Gaus(dst + 1.0, scale);
-	float we = Gaus(dst + 2.0, scale);
-	
-	// Return filtered sample.
-	return (a * wa + b * wb + c * wc + d * wd + e * we) / (wa + wb + wc + wd + we);
-}
-// 7-tap Gaussian filter along horz line.
-vec3 Horz7(vec2 pos, float off, sampler2D iChannel0){
-	vec3 a = Fetch(pos, vec2(-3.0, off), iChannel0);
-	vec3 b = Fetch(pos, vec2(-2.0, off), iChannel0);
-	vec3 c = Fetch(pos, vec2( 1.0, off), iChannel0);
-	vec3 d = Fetch(pos, vec2( 0.0, off), iChannel0);
-	vec3 e = Fetch(pos, vec2( 1.0, off), iChannel0);
-	vec3 f = Fetch(pos, vec2( 2.0, off), iChannel0);
-	vec3 g = Fetch(pos, vec2( 3.0, off), iChannel0);
-	float dst = Dist(pos).x;
-	
-	// Convert distance to weight.
-	float scale = hardBloomPix;
-	float wa = Gaus(dst - 3.0, scale);
-	float wb = Gaus(dst - 2.0, scale);
-	float wc = Gaus(dst - 1.0, scale);
-	float wd = Gaus(dst + 0.0, scale);
-	float we = Gaus(dst + 1.0, scale);
-	float wf = Gaus(dst + 2.0, scale);
-	float wg = Gaus(dst + 3.0, scale);
-	
-	// Return filtered sample.
-	return (a * wa + b * wb + c * wc + d * wd + e * we + f * wf + g * wg) / (wa + wb + wc + wd + we + wf + wg);
+vec3 Horz3(vec2 pos, float off, sampler2D screen_texture){
+   vec3 b = fetch_pixel(pos, vec2(-1.0, off), screen_texture);
+   vec3 c = fetch_pixel(pos, vec2( 0.0, off), screen_texture);
+   vec3 d = fetch_pixel(pos, vec2( 1.0, off), screen_texture);
+   float dst = Dist(pos).x;
+
+   // Convert distance to weight.
+   float scale = pixel_strength;
+   float wb = Gaus(dst - 1.0, scale);
+   float wc = Gaus(dst + 0.0, scale);
+   float wd = Gaus(dst + 1.0, scale);
+
+   // Return filtered sample.
+   return (b * wb + c * wc + d * wd) / (wb + wc + wd);
 }
 
 // Return scanline weight.
 float Scan(vec2 pos, float off){
-	float dst = Dist(pos).y;
-	
-	return Gaus(dst + off, hardScan);
-}
+   float dst = Dist(pos).y;
 
-// Return scanline weight for bloom.
-float BloomScan(vec2 pos, float off){
-	float dst = Dist(pos).y;
-	
-	return Gaus(dst + off, hardBloomScan);
+   return Gaus(dst + off, scan_line_strength);
 }
 
 // Allow nearest three lines to effect pixel.
-vec3 Tri(vec2 pos, sampler2D iChannel0){
-	vec3 a = Horz3(pos,-1.0, iChannel0);
-	vec3 b = Horz5(pos, 0.0, iChannel0);
-	vec3 c = Horz3(pos, 1.0, iChannel0);
-	
-	float wa = Scan(pos,-1.0);
-	float wb = Scan(pos, 0.0);
-	float wc = Scan(pos, 1.0);
-	
-	return a * wa + b * wb + c * wc;
+vec3 Tri(vec2 pos, sampler2D screen_texture){
+   vec3 clr = fetch_pixel(pos, vec2(0.0), screen_texture);
+   if(scan_line_amount > 0.0){
+       vec3 a = Horz3(pos,-1.0, screen_texture);
+       vec3 b = Horz3(pos, 0.0, screen_texture);
+       vec3 c = Horz3(pos, 1.0, screen_texture);
+
+       float wa = Scan(pos,-1.0);
+       float wb = Scan(pos, 0.0);
+       float wc = Scan(pos, 1.0);
+
+       vec3 scanlines = a * wa + b * wb + c * wc;
+       clr = mix(clr, scanlines, scan_line_amount);
+   }
+   return clr;
 }
 
-// Small bloom.
-vec3 Bloom(vec2 pos, sampler2D iChannel0){
-	vec3 a = Horz5(pos,-2.0, iChannel0);
-	vec3 b = Horz7(pos,-1.0, iChannel0);
-	vec3 c = Horz7(pos, 0.0, iChannel0);
-	vec3 d = Horz7(pos, 1.0, iChannel0);
-	vec3 e = Horz5(pos, 2.0, iChannel0);
-	
-	float wa = BloomScan(pos,-2.0);
-	float wb = BloomScan(pos,-1.0);
-	float wc = BloomScan(pos, 0.0);
-	float wd = BloomScan(pos, 1.0);
-	float we = BloomScan(pos, 2.0);
-	
-	return a * wa + b * wb + c * wc + d * wd + e * we;
+// Takes in the UV and warps the edges, creating the spherized effect
+vec2 warp(vec2 uv){
+   vec2 delta = uv - 0.5;
+   float delta2 = dot(delta.xy, delta.xy);
+   float delta4 = delta2 * delta2;
+   float delta_offset = delta4 * warp_amount;
+
+   vec2 warped = uv + delta * delta_offset;
+   return (warped - 0.5) / mix(1.0,1.2,warp_amount/5.0) + 0.5;
 }
 
-// Distortion of scanlines, and end of screen alpha.
-vec2 Warp(vec2 pos){
-	pos = pos * 2.0 - 1.0;    
-	pos *= vec2(1.0 + (pos.y * pos.y) * 1.0 / warp.x, 1.0 + (pos.x * pos.x) * 1.0/ warp.y);
-	
-	return pos * 0.5+0.5;
+float vignette(vec2 uv){
+   uv *= 1.0 - uv.xy;
+   float vignette = uv.x * uv.y * 15.0;
+   return pow(vignette, vignette_intensity * vignette_amount);
 }
 
-vec3 Mask(vec2 pos){
-	pos.xy = floor(pos.xy * vec2(1.0, 0.5));
-	pos.x += pos.y * 3.0;
-	
-	vec3 mask = vec3(maskDark, maskDark, maskDark);
-	pos.x = fract(pos.x / 6.0);
-	if(pos.x < 0.333)mask.r = maskLight;
-	else if(pos.x < 0.666)mask.g = maskLight;
-	else mask.b = maskLight;
+float floating_mod(float a, float b){
+   return a - b * floor(a/b);
+}
 
-	return mask;
-  }
+vec3 grille(vec2 uv){
+   float unit = 3.14;
+   float scale = 2.0*unit/grille_size;
+   float r = smoothstep(0.5, 0.8, cos(uv.x*scale - unit));
+   float g = smoothstep(0.5, 0.8, cos(uv.x*scale + unit));
+   float b = smoothstep(0.5, 0.8, cos(uv.x*scale + 3.0*unit));
+   return mix(vec3(1.0), vec3(r,g,b), grille_amount);
+}
 
-// Draw dividing bars.
-float Bar(float pos, float bar){ pos -= bar; return pos * pos < 4.0 ? 0.0 : 1.0; }
+float roll_line(vec2 uv){
+   float x = uv.y * 3.0 - TIME * roll_speed;
+   float f = cos(x) * cos(x * 2.35 + 1.1) * cos(x * 4.45 + 2.3);
+   float roll_line = smoothstep(0.5, 0.9, f);
+   return roll_line * roll_line_amount;
+}
 
-// Entry.
 void fragment(){
-	vec2 pos = Warp(FRAGCOORD.xy / (1.0 / SCREEN_PIXEL_SIZE).xy);
-	
-	COLOR.rgb = Tri(pos, SCREEN_TEXTURE) * Mask(FRAGCOORD.xy);
-	COLOR.rgb += Bloom(pos, SCREEN_TEXTURE) * 1.0 / bloomAmount;
-	
-	COLOR.a = 1.0;  
-	COLOR.rgb = ToSrgb(COLOR.rgb);
+   vec2 pix = FRAGCOORD.xy;
+   vec2 pos = warp(SCREEN_UV);
+//   sampler2D screen_texture = SCREEN_TEXTURE;
+
+   float line = 0.0;
+   if(roll_line_amount > 0.0){
+       line = roll_line(pos);
+   }
+
+   vec2 sq_pix = floor(pos * resolution) / resolution + vec2(0.5) / resolution;
+   if(interference_amount + roll_line_amount > 0.0){
+       float interference = random(sq_pix.yy + fract(TIME));
+       pos.x += (interference * (interference_amount + line * 6.0)) / resolution.x;
+   }
+
+   vec3 clr = Tri(pos, SCREEN_TEXTURE);
+   if(aberation_amount > 0.0){
+       float chromatic = aberation_amount + line * 2.0;
+       vec2 chromatic_x = vec2(chromatic,0.0) / resolution.x;
+       vec2 chromatic_y = vec2(0.0, chromatic/2.0) / resolution.y;
+       float r = Tri(pos - chromatic_x, SCREEN_TEXTURE).r;
+       float g = Tri(pos + chromatic_y, SCREEN_TEXTURE).g;
+       float b = Tri(pos + chromatic_x, SCREEN_TEXTURE).b;
+       clr = vec3(r,g,b);
+   }
+
+   if(grille_amount > 0.0)clr *= grille(pix);
+   clr *= 1.0 + scan_line_amount * 0.6 + line * 3.0 + grille_amount * 2.0;
+   if(vignette_amount > 0.0)clr *= vignette(pos);
+
+   COLOR.rgb = clr;
+   COLOR.a = 1.0;
 }

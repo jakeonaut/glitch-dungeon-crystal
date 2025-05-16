@@ -116,10 +116,6 @@ func _ready_impl():
   tryToAddGameFrameBackground()
 
   viewportTexture.texture = viewport2or3.get_texture()
-  
-  levelTiles.removeRemovedTiles()
-  levelTiles.setTileset(tileset_type, false)
-  levelTiles.buildRandomTiles()
 
   if global.memory.has("current_glitch") and not should_glitch_activate:
     # if global.memory["mp"] > 0 or global.memory["max_mp"] == 0:
@@ -162,7 +158,10 @@ func _ready_impl():
       flipGravity(-1)
   
   tryToRespawn()
-  global.tryInitializeLevelZone(self.getLevelZoneName())
+  global.tryInitializeLevelZone(self.getLevelZoneName(), true)
+  levelTiles.removeRemovedTiles()
+  levelTiles.setTileset(tileset_type, false)
+  levelTiles.buildRandomTiles()
   if global.memory["currLevelZone"] != global.currLevelZone and not global.memory["glitch_world"]:
     uiLayer.setDisplayTitle(global.getDisplayTitle(self.getLevelZoneName()))
   tryShowUIElements()

@@ -1420,32 +1420,11 @@ func doFallthroughObjectCollision(gameMover, area, debug = false):
 
 var currLevelZone = null
 const HUB_LEVEL_ZONE = "gd1" 
-func tryInitializeLevelZone(levelZone):
-    if currLevelZone == levelZone:
-        return
-
+func tryInitializeLevelZone(levelZone, should_set_currLevelZone = false):
+    if should_set_currLevelZone:
+        currLevelZone = levelZone
     if not self.memory.has(levelZone):
         self.memory[levelZone] = {}
-    
-    if currLevelZone == HUB_LEVEL_ZONE and levelZone != HUB_LEVEL_ZONE:
-        # entering the level from the hub world, restart!
-        # resetLevelZone(levelZone)
-        pass
-    elif hasGottenLevelGeode and currLevelZone != null and currLevelZone != HUB_LEVEL_ZONE and levelZone == HUB_LEVEL_ZONE:
-        pass
-        # # just got back to the hub!, record the levelZone's results
-        # var highScoreStr = currLevelZone + "_highscore"
-        # if not self.memory.has(highScoreStr):
-        #     self.memory[currLevelZone + "_highscore"] = {}
-
-        # setLevelZoneThingHighScoreMemory(highScoreStr, "num_mini_crystal_cubes", 1)
-        # setLevelZoneThingHighScoreMemory(highScoreStr, "angelTadpole", 1)
-        # setLevelZoneThingHighScoreMemory(highScoreStr, "num_deaths", -1)
-        # setLevelZoneThingHighScoreMemory(highScoreStr, "num_jumps", -1)
-        # setLevelZoneThingHighScoreMemory(highScoreStr, "num_glitch_tiles", 1)
-        # setLevelZoneThingHighScoreMemory(highScoreStr, "num_broom_sweeps", -1)
-        # setLevelZoneThingHighScoreMemory(highScoreStr, "hiscore", 1)
-    currLevelZone = levelZone
     if not global.memory["level_zonez"].has(currLevelZone):
         global.memory["level_zonez"].push_back(currLevelZone)
 
@@ -1492,28 +1471,18 @@ func setHaveIBeenToLevel(level):
         level.levelTiles.tryToCountAndIncrementTotalGlitchTiles()
     global.memory[tempLevelZone][levelName]["have_i_been_here"] = true
 
-func haveIBeenToThisLevel(level):
-    tryInitializeLevelZone(level.getLevelZoneName())
-    if currLevelZone == null or not global.memory.has(currLevelZone):
-        return null
-
-    if not global.memory[currLevelZone].has(level.getShortLevelName()):
-        return false
-    if not global.memory[currLevelZone][level.getShortLevelName()].has("have_i_been_here"):
-        return false
-    return global.memory[currLevelZone][level.getShortLevelName()]["have_i_been_here"]
-
 func haveIBeenToThisLevelPath(levelPath):
     var shortLevelName = getShortLevelName(levelPath)
-    tryInitializeLevelZone(getLevelZoneName(levelPath))
-    if currLevelZone == null or not global.memory.has(currLevelZone):
+    var tempLevelZone = getLevelZoneName(levelPath)
+    tryInitializeLevelZone(tempLevelZone)
+    if tempLevelZone == null or not global.memory.has(tempLevelZone):
         return null
 
-    if not global.memory[currLevelZone].has(shortLevelName):
+    if not global.memory[tempLevelZone].has(shortLevelName):
         return false
-    if not global.memory[currLevelZone][shortLevelName].has("have_i_been_here"):
+    if not global.memory[tempLevelZone][shortLevelName].has("have_i_been_here"):
         return false
-    return global.memory[currLevelZone][shortLevelName]["have_i_been_here"]
+    return global.memory[tempLevelZone][shortLevelName]["have_i_been_here"]
 
 func eraseStaticLevelZoneLevelVar(level, node):
     if node == null:
@@ -1521,13 +1490,14 @@ func eraseStaticLevelZoneLevelVar(level, node):
     var name = getNameRelativeToLevel(level, node)
     if name == null: return # failure
 
-    tryInitializeLevelZone(level.getLevelZoneName())
-    if currLevelZone == null or not global.memory.has(currLevelZone): 
+    var tempLevelZone = level.getLevelZoneName()
+    tryInitializeLevelZone(tempLevelZone)
+    if tempLevelZone == null or not global.memory.has(tempLevelZone): 
         return null
 
-    if not global.memory[currLevelZone].has(level.getShortLevelName()):
-        global.memory[currLevelZone][level.getShortLevelName()] = {}
-    global.memory[currLevelZone][level.getShortLevelName()].erase(name)
+    if not global.memory[tempLevelZone].has(level.getShortLevelName()):
+        global.memory[tempLevelZone][level.getShortLevelName()] = {}
+    global.memory[tempLevelZone][level.getShortLevelName()].erase(name)
 
 func setStaticLevelZoneLevelVar(level, node, val):
     if node == null:
@@ -1535,27 +1505,29 @@ func setStaticLevelZoneLevelVar(level, node, val):
     var name = getNameRelativeToLevel(level, node)
     if name == null: return # failure
 
-    tryInitializeLevelZone(level.getLevelZoneName())
-    if currLevelZone == null or not global.memory.has(currLevelZone): 
+    var tempLevelZone = level.getLevelZoneName()
+    tryInitializeLevelZone(tempLevelZone)
+    if tempLevelZone == null or not global.memory.has(tempLevelZone): 
         return null
 
-    if not global.memory[currLevelZone].has(level.getShortLevelName()):
-        global.memory[currLevelZone][level.getShortLevelName()] = {}
-    global.memory[currLevelZone][level.getShortLevelName()][name] = val
+    if not global.memory[tempLevelZone].has(level.getShortLevelName()):
+        global.memory[tempLevelZone][level.getShortLevelName()] = {}
+    global.memory[tempLevelZone][level.getShortLevelName()][name] = val
 
 func getStaticLevelZoneLevelVar(level, node):
     var name = getNameRelativeToLevel(level, node)
     if name == null: return null # failure
 
-    tryInitializeLevelZone(level.getLevelZoneName())
-    if currLevelZone == null or not global.memory.has(currLevelZone): 
+    var tempLevelZone = level.getLevelZoneName()
+    tryInitializeLevelZone(tempLevelZone)
+    if tempLevelZone == null or not global.memory.has(tempLevelZone):
         return null
 
-    if not global.memory[currLevelZone].has(level.getShortLevelName()):
+    if not global.memory[tempLevelZone].has(level.getShortLevelName()):
         return null
-    if not global.memory[currLevelZone][level.getShortLevelName()].has(name):
+    if not global.memory[tempLevelZone][level.getShortLevelName()].has(name):
         return null
-    return global.memory[currLevelZone][level.getShortLevelName()][name]
+    return global.memory[tempLevelZone][level.getShortLevelName()][name]
 
 func getHighScoreLevelZoneThing(highScoreStr, levelZoneThing):
     if not self.memory.has(highScoreStr) or not self.memory[highScoreStr].has(levelZoneThing):
@@ -1659,13 +1631,14 @@ func removeLevelZoneTile(levelName, coords):
     if currLevelZone == null:
         return
 
+    var rt = removedLevelZoneTilesKey
     if not self.memory.has(currLevelZone):
         self.memory[currLevelZone] = {}
     if not self.memory[currLevelZone].has(levelName):
         self.memory[currLevelZone][levelName] = {}
-    if not self.memory[currLevelZone][levelName].has(removedLevelZoneTilesKey):
-        self.memory[currLevelZone][levelName][removedLevelZoneTilesKey] = []
-    self.memory[currLevelZone][levelName][removedLevelZoneTilesKey].append(coords)
+    if not self.memory[currLevelZone][levelName].has(rt):
+        self.memory[currLevelZone][levelName][rt] = []
+    self.memory[currLevelZone][levelName][rt].append(coords)
 
 func incrementLevelZoneSecretEggs():
     incrementLevelZoneThing("num_secret_eggs", 1)

@@ -892,7 +892,7 @@ func normalizeInventoryOptionIndex(y, x):
         menuConfirmSound.play()
         mapCursorSprite.restart()
         mapCursorSprite2.restart()
-        inventoryOptionIndexX = angelStatues.size() - 1
+        inventoryOptionIndexX = 0
       if inventoryOptionIndex == 4 and not hasAngelFlute:
         inventoryOptionIndex = 3
       if inventoryOptionIndex == 3 and not keyLabel.visible:
@@ -965,14 +965,6 @@ func normalizeInventoryOptionIndex(y, x):
       if inventoryOptionIndexX == 2 and not flowerPotSprite.visible:
         inventoryOptionIndexX = 3
       if (inventoryOptionIndexX == 3 and not cutePetSprite.visible) or inventoryOptionIndexX > 3:
-        # if hasAngelFlute:
-        #   inventoryOptionIndex = 4
-        #   menuConfirmSound.play()
-        #   mapCursorSprite.restart()
-        #   mapCursorSprite2.restart()
-        #   inventoryOptionIndexX = 0
-        #   return
-        # else:
         inventoryOptionIndexX = 0 if angelEggSprite.visible else 1 if fishingRodSprite.visible else 2 if flowerPotSprite.visible else 3
     elif x < 0:
       if inventoryOptionIndexX == 3 and not cutePetSprite.visible:

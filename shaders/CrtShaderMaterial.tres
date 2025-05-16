@@ -4,12 +4,17 @@
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/res = Vector2( 1280, 1024 )
-shader_param/hardScan = -2.411
-shader_param/hardPix = -1.621
-shader_param/hardBloomScan = -1.568
-shader_param/hardBloomPix = -0.886
-shader_param/bloomAmount = 2.767
-shader_param/warp = Vector2( 128, 48 )
-shader_param/maskDark = 1.0
-shader_param/maskLight = 1.617
+shader_param/resolution = Vector2( 640, 512 )
+shader_param/scan_line_amount = 0.431
+shader_param/warp_amount = 0.077
+shader_param/noise_amount = 0.0
+shader_param/interference_amount = 0.0
+shader_param/grille_amount = 0.005
+shader_param/grille_size = 4.918
+shader_param/vignette_amount = 0.168
+shader_param/vignette_intensity = 0.458
+shader_param/aberation_amount = 0.5
+shader_param/roll_line_amount = 0.0
+shader_param/roll_speed = -8.0
+shader_param/scan_line_strength = -9.699
+shader_param/pixel_strength = -1.878
