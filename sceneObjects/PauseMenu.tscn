@@ -75,15 +75,6 @@ shader_param/precision = 0.1
 shader_param/palette_in = ExtResource( 7 )
 shader_param/palette_out = ExtResource( 9 )
 
-[sub_resource type="ShaderMaterial" id=66]
-shader = ExtResource( 23 )
-shader_param/screen_mode = false
-shader_param/num_colors = 0
-shader_param/offset = null
-shader_param/precision = 0.1
-shader_param/palette_in = ExtResource( 7 )
-shader_param/palette_out = ExtResource( 22 )
-
 [sub_resource type="Animation" id=67]
 length = 0.001
 tracks/0/type = "value"
@@ -132,6 +123,15 @@ shader_param/offset = 11
 shader_param/precision = 0.1
 shader_param/palette_in = ExtResource( 7 )
 shader_param/palette_out = ExtResource( 24 )
+
+[sub_resource type="ShaderMaterial" id=66]
+shader = ExtResource( 23 )
+shader_param/screen_mode = false
+shader_param/num_colors = 0
+shader_param/offset = null
+shader_param/precision = 0.1
+shader_param/palette_in = ExtResource( 7 )
+shader_param/palette_out = ExtResource( 22 )
 
 [sub_resource type="CanvasItemMaterial" id=62]
 
@@ -839,24 +839,11 @@ position = Vector2( 123, 124 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
 
-[node name="PlayerSprite" type="Sprite" parent="MapRect/ColorRect/ColorRect/MapBackgroundSprite"]
-position = Vector2( -46.5, -47.5 )
-scale = Vector2( 0.75, 0.75 )
-z_index = 99
-z_as_relative = false
-texture = ExtResource( 25 )
-hframes = 8
-vframes = 8
-frame = 48
-script = ExtResource( 13 )
-
 [node name="AnglerFishBossSprite" type="Sprite" parent="MapRect/ColorRect/ColorRect/MapBackgroundSprite"]
 visible = false
 material = SubResource( 64 )
 position = Vector2( 21.5, -47.5 )
 scale = Vector2( 0.75, 0.75 )
-z_index = 99
-z_as_relative = false
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
@@ -867,8 +854,6 @@ visible = false
 material = SubResource( 64 )
 position = Vector2( 3.50002, -47.5 )
 scale = Vector2( 0.75, 0.75 )
-z_index = 99
-z_as_relative = false
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
@@ -879,8 +864,6 @@ visible = false
 material = SubResource( 64 )
 position = Vector2( -12.5, -47.5 )
 scale = Vector2( 0.75, 0.75 )
-z_index = 99
-z_as_relative = false
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
@@ -891,8 +874,6 @@ visible = false
 material = SubResource( 64 )
 position = Vector2( -12.5, -30 )
 scale = Vector2( 0.75, 0.75 )
-z_index = 99
-z_as_relative = false
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
@@ -903,8 +884,6 @@ visible = false
 material = SubResource( 64 )
 position = Vector2( 4.50002, -30 )
 scale = Vector2( 0.75, 0.75 )
-z_index = 99
-z_as_relative = false
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
@@ -915,8 +894,6 @@ visible = false
 material = SubResource( 64 )
 position = Vector2( 20.5, -30 )
 scale = Vector2( 0.75, 0.75 )
-z_index = 99
-z_as_relative = false
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
@@ -927,8 +904,6 @@ visible = false
 material = SubResource( 64 )
 position = Vector2( 20.5, -12.5 )
 scale = Vector2( 0.75, 0.75 )
-z_index = 99
-z_as_relative = false
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
@@ -939,8 +914,6 @@ visible = false
 material = SubResource( 64 )
 position = Vector2( 20.5, -12.5 )
 scale = Vector2( 0.75, 0.75 )
-z_index = 99
-z_as_relative = false
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
@@ -951,45 +924,15 @@ visible = false
 material = SubResource( 64 )
 position = Vector2( 20.5, -12.5 )
 scale = Vector2( 0.75, 0.75 )
-z_index = 99
-z_as_relative = false
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
 frame = 13
 
-[node name="CursorSprite" type="Sprite" parent="MapRect/ColorRect/ColorRect/MapBackgroundSprite"]
-visible = false
-material = SubResource( 66 )
-position = Vector2( -46.5, -47 )
-scale = Vector2( 0.75, 0.75 )
-z_index = 99
-z_as_relative = false
-texture = ExtResource( 25 )
-hframes = 8
-vframes = 8
-frame = 40
-script = ExtResource( 13 )
-
-[node name="CursorSprite2" type="Sprite" parent="MapRect/ColorRect/ColorRect/MapBackgroundSprite"]
-visible = false
-material = SubResource( 66 )
-position = Vector2( -60.5, -47 )
-scale = Vector2( 0.75, 0.75 )
-z_index = 99
-z_as_relative = false
-texture = ExtResource( 25 )
-hframes = 8
-vframes = 8
-frame = 46
-script = ExtResource( 13 )
-
 [node name="AngelSprite" type="Sprite" parent="MapRect/ColorRect/ColorRect/MapBackgroundSprite"]
 visible = false
 position = Vector2( -29, -47.5 )
 scale = Vector2( 0.75, 0.75 )
-z_index = 2
-z_as_relative = false
 texture = ExtResource( 15 )
 hframes = 8
 vframes = 8
@@ -2151,6 +2094,37 @@ texture = ExtResource( 19 )
 hframes = 16
 vframes = 16
 frame = 183
+
+[node name="PlayerSprite" type="Sprite" parent="MapRect/ColorRect/ColorRect/MapBackgroundSprite"]
+position = Vector2( -46.5, -47.5 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 25 )
+hframes = 8
+vframes = 8
+frame = 48
+script = ExtResource( 13 )
+
+[node name="CursorSprite" type="Sprite" parent="MapRect/ColorRect/ColorRect/MapBackgroundSprite"]
+visible = false
+material = SubResource( 66 )
+position = Vector2( -46.5, -47 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 25 )
+hframes = 8
+vframes = 8
+frame = 40
+script = ExtResource( 13 )
+
+[node name="CursorSprite2" type="Sprite" parent="MapRect/ColorRect/ColorRect/MapBackgroundSprite"]
+visible = false
+material = SubResource( 66 )
+position = Vector2( -60.5, -47 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 25 )
+hframes = 8
+vframes = 8
+frame = 46
+script = ExtResource( 13 )
 
 [node name="MapFaderRect" type="ColorRect" parent="MapRect/ColorRect/ColorRect"]
 visible = false

@@ -145,8 +145,12 @@ func _process(delta):
   mapTitleRect.visible = true
   mapTitleText.bbcode_text = "[center]" + tr("UI.Inventory.Map") + "[/center]"
   pauseTitleRect.visible = true
-  mapRect.rect_position = Vector2(450, 131)
-  mapRect.rect_scale = Vector2(1, 1)
+  if inventoryOptionIndex == 4:
+    mapRect.rect_position = Vector2(225, 60)
+    mapRect.rect_scale = Vector2(1.5, 1.5)
+  else:
+    mapRect.rect_position = Vector2(450, 131)
+    mapRect.rect_scale = Vector2(1, 1)
   mapRect.color = Color("#040404")
   mapColorRect1.color = Color("#394c62")
   mapColorRect2.color = Color("#040404")
@@ -272,7 +276,7 @@ func _process(delta):
     processInventoryRender(delta)
     inventoryRect.visible = true
     mapRect.visible = global.memory["has_map_item"]
-    mapTitleRect.visible = mapRect.visible and inventoryOptionIndex != 4
+    mapTitleRect.visible = mapRect.visible # and inventoryOptionIndex != 4
   else:
     inventoryRect.visible = false
     mapRect.visible = false
@@ -759,6 +763,7 @@ func processInventoryLogic(delta):
         # popupText.bbcode_text = "pet follower\nin progress..."
         popupRect.visible = false
         inventoryOptionIndex = 4
+        inventoryOptionIndexX = 0
       elif inventoryOptionIndexX == 4:
         popupText.bbcode_text = "an enchanted bag\nlets you take another hit"
     elif inventoryOptionIndex == 2:
@@ -854,6 +859,11 @@ func processInventoryLogic(delta):
       global.pauseGame = false
       getPlayer().unpauseSound.play()
       level.restartMusic()
+  elif Input.is_action_just_pressed("open_map"):
+    popupRect.visible = false
+    inventoryOptionIndex = 4
+    inventoryOptionIndexX = 0
+
 
 func getAngelStatueIndex():
   var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
@@ -1253,7 +1263,6 @@ func setProperMapFrame(sprite, mapGrid, i, j):
   var haveIBeenToThisLevel = global.haveIBeenToThisLevelPath(mapPath) or global.memory["glitch_world"] > 0
   sprite.frame = 0
   sprite.material = sprite.material.duplicate()
-  sprite.z_index = 1
   sprite.material.set_shader_param("palette_out", global.white_palette2d)
   sprite.material.set_shader_param("num_colors", 16)
   if not haveIBeenToThisLevel:
