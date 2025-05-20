@@ -5943,7 +5943,6 @@ visible = false
 [node name="GlitchMoleCricket" parent="Viewport/level" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.23293, -19.705, 0 )
 permanently_alter_tiles = true
-keep_spawning_anyway = true
 
 [node name="Flypath" parent="Viewport/level" instance=ExtResource( 37 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -29, 1 )
