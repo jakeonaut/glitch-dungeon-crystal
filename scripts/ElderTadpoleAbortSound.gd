@@ -8,29 +8,10 @@ func _ready():
   pass
 
 func activateScript():
-  if not elderTadpoleNPC.has_broom:
-    # elderTadpoleNPC.has_broom = true
-    # elderTadpoleNPC.secretAniPlayer.stop()
-    # elderTadpoleNPC.secretAniPlayer.clear_queue()
-    # elderTadpoleNPC.secretAniPlayer.play("snatchBroom")
-    # level.summonSmokeClouds(elderTadpoleNPC.global_transform.origin, 3, false, false)
-    # global.memory["has_gotten_broom"] = 0
-    # global.memory["broom"] = false
-    # level.player.glitchTickle()
-    # level.player.nullify()
-    # level.player.shroomAniPlayer.stop()
-    # level.player.shroomAniPlayer.clear_queue()
-    # level.player.shroomAniPlayer.queue("shrink")
-    # level.player.shroomAniPlayer.queue("adjust")
-    # level.player.nesting_doll_state = global.NestingDoll.BABY
-    # global.memory["nesting_doll"] = global.NestingDoll.BABY
-    # level.player.updateNestingDoll(global.NestingDoll.BABY)
-
-    # elderTadpoleNPC.textBoxContainer.bbText = "•TBH.. still working on \nthe ending of game.\nBut I'm close to being done!"
-    # elderTadpoleNPC.textBoxContainer.setVars()
-    # yield(get_tree().create_timer(0.1), "timeout")
-    # elderTadpoleNPC.activate(true)
-    pass
+  if elderTadpoleNPC.am_i_sleepy:
+    var text = ""
+    textBox.text_final = text
+    textBox.textNode.bbcode_text = text
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
   # OVERRIDE ME

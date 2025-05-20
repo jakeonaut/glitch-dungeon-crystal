@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=2]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=3]
@@ -23,7 +23,7 @@
 [sub_resource type="ViewportTexture" id=240]
 viewport_path = NodePath("Viewport")
 
-[sub_resource type="ArrayMesh" id=247]
+[sub_resource type="ArrayMesh" id=249]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -35,6 +35,9 @@ surfaces/0 = {
 "skeleton_aabb": [  ],
 "vertex_count": 8
 }
+
+[sub_resource type="ViewportTexture" id=248]
+viewport_path = NodePath("Viewport2/UILayer/SavingTextLabel/Viewport")
 
 [sub_resource type="Shader" id=244]
 code = "shader_type canvas_item;
@@ -196,10 +199,7 @@ bus = "Sfx"
 [node name="UILayer" parent="Viewport2" instance=ExtResource( 14 )]
 
 [node name="MeshInstance" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 247 )
-
-[node name="MeshInstance2" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+mesh = SubResource( 249 )
 
 [node name="BetaBuildLabel" parent="Viewport2/UILayer" index="24"]
 visible = false
@@ -232,6 +232,49 @@ scale = Vector2( 8, 8 )
 texture = ExtResource( 20 )
 
 [node name="Coverup" type="ColorRect" parent="Viewport2/UILayer/EpilepsyWarning"]
+margin_right = 640.0
+margin_bottom = 512.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="AutosaveWarning" type="ColorRect" parent="Viewport2/UILayer"]
+visible = false
+margin_left = 160.0
+margin_top = 28.0
+margin_right = 800.0
+margin_bottom = 540.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="Text" type="RichTextLabel" parent="Viewport2/UILayer/AutosaveWarning"]
+margin_left = 114.0
+margin_top = 185.0
+margin_right = 536.0
+margin_bottom = 497.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource( 21 )
+custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+bbcode_enabled = true
+bbcode_text = "UI.Autosave.Warning"
+text = "UI.Autosave.Warning"
+scroll_active = false
+
+[node name="Sprite" type="Sprite" parent="Viewport2/UILayer/AutosaveWarning"]
+visible = false
+position = Vector2( 312, 131 )
+scale = Vector2( 8, 8 )
+texture = ExtResource( 20 )
+
+[node name="TextureRect" type="TextureRect" parent="Viewport2/UILayer/AutosaveWarning"]
+margin_left = 280.0
+margin_top = 90.0
+margin_right = 344.0
+margin_bottom = 154.0
+texture = SubResource( 248 )
+expand = true
+flip_v = true
+
+[node name="Coverup" type="ColorRect" parent="Viewport2/UILayer/AutosaveWarning"]
 margin_right = 640.0
 margin_bottom = 512.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )

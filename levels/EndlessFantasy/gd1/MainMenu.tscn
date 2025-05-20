@@ -2966,7 +2966,7 @@ texture = SubResource( 235 )
 mesh = SubResource( 330 )
 
 [node name="MeshInstance2" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="Camera" parent="Viewport2/UILayer/GlitchStatusRect/Viewport" index="1"]
 current = true
@@ -3102,7 +3102,7 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 0.501961 )
 margin_left = 138.0
 margin_top = 219.0
 margin_right = 510.0
-margin_bottom = 340.0
+margin_bottom = 359.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
@@ -3111,7 +3111,7 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 368.0
-margin_bottom = 117.0
+margin_bottom = 136.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.223529, 0.298039, 0.384314, 1 )
@@ -3123,7 +3123,7 @@ __meta__ = {
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 361.0
-margin_bottom = 110.0
+margin_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
@@ -3132,8 +3132,7 @@ __meta__ = {
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Viewport2/UILayer/MainMenu/DeleteConfirmationLayer/PopupRect/ColorRect/ColorRect"]
-margin_left = -7.0
-margin_top = 3.0
+margin_left = 4.0
 margin_right = 433.0
 margin_bottom = 127.0
 grow_horizontal = 2

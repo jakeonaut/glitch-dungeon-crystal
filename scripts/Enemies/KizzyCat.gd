@@ -79,6 +79,10 @@ func landed():
     should_flip = false
     getSmacked()
 
+# @override
+func tryDieToOffscreenCamera(_delta):
+  return
+
 var should_flip = true
 var my_shroom = null
 # @override

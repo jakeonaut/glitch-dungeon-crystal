@@ -625,7 +625,7 @@ bbText = "NPC.SporeCreature.2"
 
 [node name="MushroomNPC3" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 13, 0 )
-bbText = "NPC.SporeCreature.2"
+bbText = "NPC.ClayWorker.9"
 
 [node name="ParallaxBackground2" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -2.55927, 0 )

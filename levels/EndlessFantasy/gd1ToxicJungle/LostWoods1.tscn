@@ -1547,6 +1547,9 @@ shape = SubResource( 27 )
 [node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
 shape = SubResource( 28 )
 
+[node name="DirectionalLight" parent="Viewport/level/Door2" index="17"]
+transform = Transform( 1, 0, 0, 0, 0.360374, 0.932808, 0, -0.932808, 0.360374, 1.90735e-06, 8, 7.33333 )
+
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -7, -2, 0 )
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/TeleportDoorMaze.tscn"
@@ -1627,7 +1630,7 @@ shape = SubResource( 35 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 9, -1 )
 
 [node name="Mushroom2" parent="Viewport/level" instance=ExtResource( 27 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 6, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 6, -1 )
 
 [node name="Mushroom3" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 11.8539, -1 )
@@ -1689,7 +1692,7 @@ anims/landSoft = SubResource( 90 )
 anims/wakeup = SubResource( 91 )
 
 [node name="MushroomNPC" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 0 )
 bbText = "NPC.SporeCreature.7"
 
 [node name="FanPlant" parent="Viewport/level" instance=ExtResource( 2 )]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -35,6 +35,7 @@
 [ext_resource path="res://sceneObjects/GlitchTileSpawner.tscn" type="PackedScene" id=33]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Laugh3.wav" type="AudioStream" id=34]
 [ext_resource path="res://assets/sounds/chord004_innerpeace_reverse.wav" type="AudioStream" id=35]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Brundlefly.wav" type="AudioStream" id=36]
 [ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=37]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=38]
 [ext_resource path="res://scripts/InverseGlitchTileSpawner.gd" type="Script" id=39]
@@ -832,6 +833,10 @@ anims/walkStart = SubResource( 206 )
 [node name="CollisionShape" parent="Viewport/level/GlitchTileSpawner/NPC3/FallthroughSolid" index="0"]
 shape = SubResource( 207 )
 
+[node name="SmackSound" parent="Viewport/level/GlitchTileSpawner/NPC3" index="7"]
+stream = ExtResource( 36 )
+pitch_scale = 0.8
+
 [node name="InnerPeaceSound" type="AudioStreamPlayer" parent="Viewport/level"]
 stream = ExtResource( 25 )
 volume_db = -15.0
@@ -855,6 +860,9 @@ flip_v = true
 
 [node name="MeshInstance" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
 mesh = SubResource( 211 )
+
+[node name="MeshInstance2" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="PressC" type="RichTextLabel" parent="Viewport2/UILayer"]
 visible = false

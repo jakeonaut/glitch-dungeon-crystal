@@ -151,6 +151,8 @@ func chickenifyPlayer():
   level.player.pauseInput = false
   can_move = true
 
+  textBox.textNode.bbcode_text = "hi"
+  textBox.text_final = "hi"
   if (global.activeInteractor == null and not textBox.text_final == "") or (global.activeInteractor == textBox and global.pauseGame):
     textBox.hideInteractPrompt()
     if not floating_text:

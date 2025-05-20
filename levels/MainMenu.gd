@@ -391,31 +391,32 @@ func _process(delta):
             if logo_timer < logo_time_limit:
                 logo_timer = 0
         else:
-            logo_timer += (delta*11)
-            if logo_timer >= logo_time_limit:
-                logoSprite.position += logo_dir
-                var should_toggle_color = false
-                if logoSprite.position.x >= logo_max_pos.x:
-                    logoSprite.position.x = logo_max_pos.x
-                    logo_dir.x *= -1
-                    should_toggle_color = true
-                elif logoSprite.position.x <= logo_min_pos.x:
-                    logoSprite.position.x = logo_min_pos.x
-                    logo_dir.x *= -1
-                    should_toggle_color = true
-                if logoSprite.position.y >= logo_max_pos.y:
-                    logoSprite.position.y = logo_max_pos.y
-                    logo_dir.y *= -1
-                    should_toggle_color = true
-                if logoSprite.position.y <= logo_min_pos.y:
-                    logoSprite.position.y = logo_min_pos.y
-                    logo_dir.y *= -1
-                    should_toggle_color = true
-                if should_toggle_color:
-                    if logoSprite.texture == logoTex2:
-                        logoSprite.texture = logoTex3
-                    else:
-                        logoSprite.texture = logoTex2
+            pass
+            # logo_timer += (delta*11)
+            # if logo_timer >= logo_time_limit:
+            #     logoSprite.position += logo_dir
+            #     var should_toggle_color = false
+            #     if logoSprite.position.x >= logo_max_pos.x:
+            #         logoSprite.position.x = logo_max_pos.x
+            #         logo_dir.x *= -1
+            #         should_toggle_color = true
+            #     elif logoSprite.position.x <= logo_min_pos.x:
+            #         logoSprite.position.x = logo_min_pos.x
+            #         logo_dir.x *= -1
+            #         should_toggle_color = true
+            #     if logoSprite.position.y >= logo_max_pos.y:
+            #         logoSprite.position.y = logo_max_pos.y
+            #         logo_dir.y *= -1
+            #         should_toggle_color = true
+            #     if logoSprite.position.y <= logo_min_pos.y:
+            #         logoSprite.position.y = logo_min_pos.y
+            #         logo_dir.y *= -1
+            #         should_toggle_color = true
+            #     if should_toggle_color:
+            #         if logoSprite.texture == logoTex2:
+            #             logoSprite.texture = logoTex3
+            #         else:
+            #             logoSprite.texture = logoTex2
 
         if mainMenuPromptIndex == 0:
             player.applyGlitch(global.GlitchForm.NORMAL, true)

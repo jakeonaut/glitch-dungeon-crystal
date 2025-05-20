@@ -13,7 +13,7 @@ func setUpRoomInitializationOverride():
     # endCreditsLabel.text = tr("EndCredits.FULL")
     pass
 
-var STOP_POSITION = 450
+var STOP_POSITION = 455
 # @override
 func _process(delta):
     # var locale = TranslationServer.get_locale()
