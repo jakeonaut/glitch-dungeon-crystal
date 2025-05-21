@@ -293,6 +293,7 @@ func _ready():
     resetUserSettings()
     loadUserSettings()
     OS.window_fullscreen = userSettings["fullscreen"]
+    Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN if OS.window_fullscreen else Input.MOUSE_MODE_VISIBLE)
     changeLocale(userSettings["locale"], false)
     global.initializeControlsConfig()
     global.hasInitializedControlsConfig = true

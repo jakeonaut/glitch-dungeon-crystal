@@ -4,7 +4,7 @@ var is_purified = false
 var rot_amount = 100
 var rot_amount_max = 200
 onready var cubeContainer = get_node("CubeContainer")
-onready var lightAniPlayer = get_node("LightAnimationPlayer")
+onready var lightAniPlayer = get_node("LightAnimationPlayer") if has_node("LightAnimationPlayer") else null
 onready var npc = get_node("NPC")
 onready var npcSprite = get_node("NPC/Sprite3D")
 onready var getHitSound = get_node("GetHitSound")
@@ -67,7 +67,7 @@ func _ready():
     #     queue_free()
     #     # musicPlayer.changeSongPitch(1.0)
     else:
-        lightAniPlayer.play("RESET")    
+        if lightAniPlayer: lightAniPlayer.play("RESET")    
     # if global.hasGottenLevelGeode:
     #     # aniPlayer.play("quick_explode")
     #     yield(TempTimer.idle_frame(self), "timeout")
@@ -144,10 +144,11 @@ var is_fake = false
 
 func fakify():
     is_fake = true
-    yield(TempTimer.idle_frame(self), "timeout")
-    lightAniPlayer.stop()
-    lightAniPlayer.clear_queue()
-    lightAniPlayer.play("fadeIn")
+    if lightAniPlayer:
+        yield(TempTimer.idle_frame(self), "timeout")
+        lightAniPlayer.stop()
+        lightAniPlayer.clear_queue()
+        lightAniPlayer.play("fadeIn")
 
 var ok_byebye = false
 func getSmacked(_broom_origin):
@@ -157,9 +158,10 @@ func getSmacked(_broom_origin):
     smack_timer = 0
 
     if is_fake:
-        lightAniPlayer.stop()
-        lightAniPlayer.clear_queue()
-        lightAniPlayer.play("fakeBreak")
+        if lightAniPlayer:
+            lightAniPlayer.stop()
+            lightAniPlayer.clear_queue()
+            lightAniPlayer.play("fakeBreak")
         ok_byebye = true
         level.player.getSmacked()
     elif is_purified:
@@ -220,7 +222,7 @@ func getPurified():
         global.activeInteractor.stopInteract()
 
     global.setStaticLevelZoneLevelVar(level, self, true)
-    lightAniPlayer.play("lightUp")
+    if lightAniPlayer: lightAniPlayer.play("lightUp")
     level.player.physics_state = level.player.PhysicsState.OCCUPIED
     level.player.pauseAnimation = false
     level.player.pauseSelf = true

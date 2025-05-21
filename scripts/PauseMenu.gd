@@ -466,6 +466,7 @@ func processGraphicsLogic(_delta):
     elif graphicsOptionIndex == 3:
       OS.window_fullscreen = not OS.window_fullscreen
       global.userSettings["fullscreen"] = OS.window_fullscreen
+      Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN if OS.window_fullscreen else Input.MOUSE_MODE_VISIBLE)
     # elif graphicsOptionIndex == 4:
     #   global.userSettings["gles3"] = not global.userSettings["gles3"]
     #   if global.userSettings["gles3"]:

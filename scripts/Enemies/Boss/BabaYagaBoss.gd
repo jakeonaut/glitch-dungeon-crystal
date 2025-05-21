@@ -34,6 +34,7 @@ enum BossPhase {
     LAY_AN_EGG,
     DEFEATED,
     ABOUT_TO_CRASH,
+    NULL,
 }
 var has_crashed = false
 var boss_phase = BossPhase.ASLEEP
@@ -154,7 +155,7 @@ func unsmack():
 # var sprite3d_noglitchShader = preload("res://shaders/Sprite3D_noglitch.shader")
 # var sprite3dShader = preload("res://shaders/Sprite3D_noglitch.shader")
 func _process(delta):
-    if not visible: return
+    if not visible or boss_phase == BossPhase.NULL: return
     
     # if global.userSettings["canGlitchScreen"]:
     #     mySprite.material_override.shader = sprite3dShader

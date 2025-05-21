@@ -38,6 +38,7 @@ enum BossPhase {
     DEFEATED,
     GNASH_ATTACK_PREP,
     GNASH_ATTACK_CHARGE,
+    NULL,
 }
 var boss_phase = BossPhase.LYING_IN_WAIT
 
@@ -93,7 +94,7 @@ func getMyVariable():
 
 var preyTarget = null
 func _process(delta):
-    if not visible: return
+    if not visible or boss_phase == BossPhase.NULL: return
 
     # need to be before global.pauseGame check so we can unpause
     if boss_phase == BossPhase.LYING_IN_WAIT:

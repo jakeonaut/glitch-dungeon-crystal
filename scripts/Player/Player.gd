@@ -430,6 +430,7 @@ func _process(delta):
   if Input.is_action_just_pressed("toggle_fullscreen"):
     OS.window_fullscreen = !OS.window_fullscreen
     global.userSettings["fullscreen"] = OS.window_fullscreen
+    Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN if OS.window_fullscreen else Input.MOUSE_MODE_VISIBLE)
     level.saveUserSettings()
     level.uiLayer.pauseMenu.shouldUpdateMenuText = true
   var can_respawn_out_of_pause = not global.pauseGame or (global.activeInteractor != null and not global.shouldRenderAsCinematic)

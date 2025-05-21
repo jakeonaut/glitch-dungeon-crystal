@@ -44,6 +44,7 @@ enum BossPhase {
     FROG_PLAGUE_WAITING,
     CRONE_CHASE,
     DEFEATED,
+    NULL,
 }
 var boss_phase = BossPhase.CASTING
 
@@ -181,7 +182,7 @@ var goddess_glitch_effect_spawn_time_limit = 2.5
 # var sprite3d_noglitchShader = preload("res://shaders/Sprite3D_noglitch.shader")
 # var sprite3dShader = preload("res://shaders/Sprite3D_noglitch.shader")
 func _process(delta):
-    if not visible: return
+    if not visible or boss_phase == BossPhase.NULL: return
     # if global.userSettings["canGlitchScreen"]:
     #     mySprite.material_override.shader = sprite3dShader
     # else:

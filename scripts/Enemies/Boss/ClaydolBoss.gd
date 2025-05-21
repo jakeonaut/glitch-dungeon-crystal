@@ -38,6 +38,7 @@ enum BossPhase {
     SPAWN_BIG_ROCK,
     HURT,
     DEFEATED,
+    NULL,
 }
 var behavior_should_drill = false
 var behavior_should_fall_rocks = false
@@ -70,7 +71,7 @@ func getMyVariable():
     return global.memory["dogu_matryoshka_boss"]
 
 func _process(delta):
-    if not visible: return
+    if not visible or boss_phase == BossPhase.NULL: return
     
     noseSprite.flip_h = mySprite.flip_h
     # need to be before global.pauseGame check so we can unpause
