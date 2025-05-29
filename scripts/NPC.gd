@@ -49,6 +49,7 @@ export var is_wiggling_fast = false
 export var can_be_smacked = false
 export var is_sprite_not_flipped = false
 export var interact_prompt_offset = 0
+var am_i_sleepy = false
 
 func _ready():
   set_process(true)

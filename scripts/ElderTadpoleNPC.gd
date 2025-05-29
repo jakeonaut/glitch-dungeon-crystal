@@ -8,7 +8,6 @@ onready var broomSpriteAnimated = get_node("Sprite3DBroomAnimated")
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 onready var caneSprite = get_node("CaneSprite")
 var npcSleepSfxRes = preload("res://assets/sounds/Sleeping.wav")
-var am_i_sleepy = false
 var am_i_glitchy = false
 
 var can_smack_back = true

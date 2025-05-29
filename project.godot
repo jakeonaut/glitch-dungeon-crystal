@@ -122,7 +122,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Babushka's Glitch Dungeon Crystal"
+config/name="Babushka's Glitch Dungeon"
 run/main_scene="res://levels/EndlessFantasy/gd1/IntroVideo.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="GlitchDungeonCrystal"
@@ -134,7 +134,7 @@ config/windows_native_icon="res://favicon.ico"
 name="glitch dungeon 2: lovely sweet dreams crystal"
 main_scene="res://MainMenu.tscn"
 config/name_zh_CN="老奶的故障地牢大冒险"
-config/name_ru="Babushka's Glitch Dungeon Crystal"
+config/name_ru="Babushka's Glitch Dungeon"
 config/name_pt_BR="A Masmorra Glitchada da Babushka"
 
 [autoload]
