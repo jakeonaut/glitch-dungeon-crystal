@@ -78,7 +78,6 @@ func _process(_delta):
             activated_something = global.activeInteractor.InteractActivate()
         # give priority to active area if user pressing interact action
         elif nearest_area and can_activate and nearest_area.is_in_group("npc") and not nearest_area.is_in_group("door"):
-            print(nearest_area)
             # if fallthrough_collision_area == null or fallthrough_collision_area.get_node("..") != nearest_area.get_node(".."):
             activated_something = nearest_area.InteractActivate()
         if activated_something and player.summonedBroom != null and (not hadGlobalActiveInteractor or (player.smallInteractionArea.is_touching_npc and (player.on_ground or player.justPressedJump()))):

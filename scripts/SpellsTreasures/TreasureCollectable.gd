@@ -29,8 +29,8 @@ func _ready():
   # ._ready() implicit
 
 func youAlreadyGotMe():
-  if secretAniPlayer.has_animation("isOpen"):
-    secretAniPlayer.play("isOpen")
+  if get_node("SecretAnimationPlayer").has_animation("isOpen"):
+    get_node("SecretAnimationPlayer").play("isOpen")
   is_active = false
   is_important = false
   is_really_important = false

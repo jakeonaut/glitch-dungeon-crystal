@@ -455,14 +455,14 @@ func _process(delta):
         updateMenuText = false
 
         if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
-            bellSound.play()
             if global.doesSaveGameExist(global.mainMenuPromptIndex):
-                if global.loadGame(global.mainMenuPromptIndex, {})["has_beat_the_game"]:
-                    mainMenuState = MainMenuState.TRY_CONTINUE
-                    mainMenuUi.visible = false
-                    player.sayThis(tr("UI.NewGame.Plus"), 0.0, true)
-                else:
-                    loadGame(global.mainMenuPromptIndex)
+                # if global.loadGame(global.mainMenuPromptIndex, {})["has_beat_the_game"]:
+                #     mainMenuState = MainMenuState.TRY_CONTINUE
+                #     mainMenuUi.visible = false
+                #     player.sayThis(tr("UI.NewGame.Plus"), 0.0, true)
+                # else:
+                bellSound.play()
+                loadGame(global.mainMenuPromptIndex)
             else:
                 startGame(global.mainMenuPromptIndex)
         elif Input.is_action_just_pressed("menu_delete"):
@@ -478,9 +478,11 @@ func _process(delta):
         if Input.is_action_just_pressed("menu_delete") or Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
             mainMenuUi.visible = true
             mainMenuState = MainMenuState.MAIN_MENU
+            uiLayer.pauseMenu.menuMoveSound.play()
             if global.activeInteractor != null:
                 global.activeInteractor.hideTextbox()
         elif Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
+            bellSound.play()
             if global.activeInteractor != null and global.activeInteractor.selectedYesNoOption:
                 newGamePlus(global.mainMenuPromptIndex)
             else:

@@ -2721,7 +2721,7 @@ bus = "Sfx"
 
 [node name="BellSound" type="AudioStreamPlayer" parent="Viewport/level"]
 stream = ExtResource( 36 )
-volume_db = -20.0
+volume_db = -25.0
 bus = "Sfx"
 
 [node name="NoBroomSound" type="AudioStreamPlayer" parent="Viewport/level"]
@@ -2966,10 +2966,14 @@ texture = SubResource( 235 )
 mesh = SubResource( 330 )
 
 [node name="MeshInstance2" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="Camera" parent="Viewport2/UILayer/GlitchStatusRect/Viewport" index="1"]
 current = true
+
+[node name="BetaBuildLabel" parent="Viewport2/UILayer" index="24"]
+margin_left = 664.0
+margin_right = 916.0
 
 [node name="MainMenu" type="Control" parent="Viewport2/UILayer"]
 visible = false
@@ -3157,10 +3161,6 @@ bbcode_enabled = true
 bbcode_text = "[right]Press [font=res://DarkInputFont_small.tres]R[/font] for OPTIONS[/right]"
 text = "Press R for OPTIONS"
 scroll_active = false
-
-[node name="BetaBuildLabel" parent="Viewport2/UILayer" index="26"]
-margin_left = 664.0
-margin_right = 916.0
 
 [node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 62 )]
 
