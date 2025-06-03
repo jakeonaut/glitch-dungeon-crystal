@@ -1192,12 +1192,22 @@ func handleSpikeCollisions(delta):
         return
 
 # @override
-func isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords):
-  var is_tile_solid = .isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords)
+func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
+  var y = global_transform.origin.y
+  var is_above_top_of_tile = y + bb > tile_pos_coords.y
+  var tile_name = getLevelTiles().mesh_library.get_item_name(tile_type)
   var is_tile_spikes = getLevelTiles().isTileSpikes(tile_type)
-  if glitch_form == global.GlitchForm.INVISIBLE:
-    return is_tile_solid or is_tile_spikes
-  return is_tile_solid
+  if glitch_form == global.GlitchForm.INVISIBLE and is_tile_spikes:
+    return is_above_top_of_tile
+  return is_above_top_of_tile and ("Semisolid" in tile_name or (glitch_form == global.GlitchForm.WALK_THROUGH_WALLS and global.isTileSolid(tile_type, getLevelTiles().mesh_library)))
+
+# # @override
+# func isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords):
+#   var is_tile_solid = .isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords)
+#   var is_tile_spikes = getLevelTiles().isTileSpikes(tile_type)
+#   if glitch_form == global.GlitchForm.INVISIBLE:
+#     return is_tile_solid or is_tile_spikes
+#   return is_tile_solid
 
 # @override
 func isTouchingSpikes(collisionShape):

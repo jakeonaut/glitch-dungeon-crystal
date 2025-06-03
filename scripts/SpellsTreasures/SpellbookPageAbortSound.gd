@@ -3,6 +3,10 @@ extends AudioStreamPlayer
 onready var treasureChest = get_node("../../..")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
+func _ready():
+  if global.memory.has("spellbookPage"):
+    treasureChest.youAlreadyGotMe()
+
 func activateScript():
   treasureChest.mySprite.visible = false
   treasureChest.okay_im_done = true

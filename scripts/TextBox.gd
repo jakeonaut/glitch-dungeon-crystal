@@ -370,8 +370,8 @@ var has_talked_normal = false
 func showTextbox(wasSmacked = false):
   selectedYesNoOption = false
   # TODO(jaketrower): DialogStartSound play nice with smackedBbText?
-  dialogStartSound.play()
   dialogStartSound.activateScript()
+  dialogStartSound.play()
 
   # if text_final.find("•") == -1 and not text_final == "":
   #   text_final = "•" + text_final

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/dream city OST .mp3-72181b83bfa5fecc7592337b3bf66dbb.mp3str"
+
+[deps]
+
+source_file="res://assets/music/dream city OST .mp3"
+dest_files=[ "res://.import/dream city OST .mp3-72181b83bfa5fecc7592337b3bf66dbb.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

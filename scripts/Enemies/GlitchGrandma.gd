@@ -66,12 +66,16 @@ func tryDieToOffscreenCamera(_delta):
             if global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
               global_transform.origin.y = getGameCamera().topmost_y - DEATH_MARGIN
         else:
-          if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
-          global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
-          global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
-          global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+          if global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
               setGlobalMemoryOfHasBeenDefeated()
               queue_free()
+          elif global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN:
+            global_transform.origin.x = getGameCamera().rightmost_x + DEATH_MARGIN
+          elif global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN:
+            global_transform.origin.x = getGameCamera().leftmost_x - DEATH_MARGIN
+          elif global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
+            global_transform.origin.y = getGameCamera().topmost_y + DEATH_MARGIN
+          
 
 # @override
 func processGlitchFormGlitchiness():
@@ -108,10 +112,10 @@ func processGrandmaBehavior(_delta):
     unenemize()
 
   if behavior_state == BehaviorState.NORMAL:
-    if level.player.pressingMoveLeft():
+    if level.player.pressingMoveLeft() and (level.player.on_ground or glitch_form != global.GlitchForm.FLOOR):
       walk_direction = Vector2(1, 0)
       mySprite.flip_h = false
-    elif level.player.pressingMoveRight():
+    elif level.player.pressingMoveRight() and (level.player.on_ground or glitch_form != global.GlitchForm.FLOOR):
       walk_direction = Vector2(-1, 0)
       mySprite.flip_h = true
     else:
@@ -124,7 +128,7 @@ func processGrandmaBehavior(_delta):
     elif not behavior_walking and on_ground and not "stand" in secretAniPlayer.assigned_animation:
       secretAniPlayer.stop()
       secretAniPlayer.clear_queue()
-      secretAniPlayer.play("walk")
+      secretAniPlayer.play("stand")
 
     if level.player.pressingJump() and can_jump_or_fall:
       behavior_jumping = true

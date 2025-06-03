@@ -28,7 +28,7 @@ func activateScript():
       else:
         level.player.errorSound.play()
         level.player.sayThis(tr("NPC.Crone.5") % str(global.NUM_GEMS_FOR_BROOMERANG - num_cubes))
-  elif global.memory["crone"] == 2 or global.memory["broomerang"] == 1:
+  elif global.memory["crone"] == 2 or global.memory["broomerang"] == 1 and global.memory["hard_mode"] == 0:
     if textBox.selectedYesNoOption: 
       if num_cubes >= global.NUM_GEMS_FOR_BROOMERANG_WARP:
         global.incrementLevelZoneThing("num_mini_crystal_cubes", -global.NUM_GEMS_FOR_BROOMERANG_WARP)

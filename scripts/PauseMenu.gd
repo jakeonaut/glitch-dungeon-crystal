@@ -22,6 +22,7 @@ onready var spellsLabelText = get_node("InventoryRect/SpellsLabel")
 onready var equipLabelText = get_node("InventoryRect/EquipLabel")
 onready var soulLabelText = get_node("InventoryRect/SoulLabel")
 onready var keyLabelText = get_node("InventoryRect/KeyLabel")
+onready var inventoryTitleRect = get_node("InventoryRect/TitleRect")
 onready var keysText = get_node("InventoryRect/KeysRect/ColorRect/KeysText")
 onready var shardsText = get_node("InventoryRect/ShardsRect/ColorRect/ShardsText")
 
@@ -89,10 +90,10 @@ enum PauseMenuState {
   CONTROLLER_INPUT,
   QUIT_TO_MAIN,
   TEMP,
-  # SECRET_RITUAL,
   INVENTORY,
   LOCALE,
 }
+# SECRET_RITUAL,
 var pauseMenuState = PauseMenuState.NORMAL
 var shouldUpdateMenuText = true
 
@@ -141,10 +142,13 @@ func _process(delta):
     return
 
   self.visible = global.isPauseMenuOpen
-  pauseMenuRect.visible = self.visible
+  # if not global.isPauseMenuOpen and global.isOnMainMenu and global.doesSaveGameExist(global.mainMenuPromptIndex):
+  #   self.visible = true
+  #   pauseMenuState = PauseMenuState.INVENTORY
+  pauseMenuRect.visible = self.visible and global.isPauseMenuOpen
   mapTitleRect.visible = true
   mapTitleText.bbcode_text = "[center]" + tr("UI.Inventory.Map") + "[/center]"
-  pauseTitleRect.visible = true
+  pauseTitleRect.visible = global.isPauseMenuOpen
   if inventoryOptionIndex == 4:
     mapRect.rect_position = Vector2(225, 60)
     mapRect.rect_scale = Vector2(1.5, 1.5)
@@ -159,7 +163,7 @@ func _process(delta):
 
   shardsRect.visible = get_node("../GlitchStatusRect").visible
   keysRect.visible = get_node("../KeyStatusRect").visible
-  if not global.isPauseMenuOpen:
+  if not self.visible:
     popupRect.visible = false
     return
 
@@ -269,7 +273,8 @@ func _process(delta):
     keyLabelText.bbcode_text = "[center]" + tr("UI.Inventory.9") + "[/center]"
     keysText.bbcode_text = "[right]" + tr("UI.Inventory.10") + "[/right]"
     shardsText.bbcode_text = tr("NPC.Crystal.7_2")
-    largerPopup.visible = true
+    inventoryTitleRect.visible = global.isPauseMenuOpen
+    largerPopup.visible = global.isPauseMenuOpen
     normalMenu.visible = false
     cursorSprite.visible = false
     processInventoryLogic(delta)
@@ -605,7 +610,7 @@ onready var glitchSprite2 = get_node("InventoryRect/GlitchRect2/ColorRect/Equipm
 onready var glitchSprite3 = get_node("InventoryRect/GlitchRect3/ColorRect/EquipmentSlotSprite")
 onready var glitchSprite4 = get_node("InventoryRect/GlitchRect4/ColorRect/EquipmentSlotSprite")
 var angelStatueToTeleportTo = null
-func processInventoryLogic(delta):
+func processInventoryLogic(_delta):
   var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
   var angelStatueArrValue = angelStatues[getAngelStatueIndex()] if angelStatues.size() > 0 else null
   if (inventoryOptionIndex == 4 or angelStatueToTeleportTo != null) and angelStatueArrValue != null:
@@ -645,10 +650,10 @@ func processInventoryLogic(delta):
     # if not global.memory.has("spellbookPage"):
     #   inventoryOptionIndex = 1
     #   return
-    if player.justPressedMenuRight():
+    if player.justPressedMenuRight() and global.isPauseMenuOpen:
       inventoryOptionIndexX += 1
       menuMoveSound.play()
-    elif player.justPressedMenuLeft():
+    elif player.justPressedMenuLeft() and global.isPauseMenuOpen:
       inventoryOptionIndexX -= 1
       menuMoveSound.play()
     if inventoryOptionIndexX < 0:
@@ -679,6 +684,9 @@ func processInventoryLogic(delta):
     glitchRect3.color = inactiveColor
     glitchRect4.color = inactiveColor
       
+  if not global.isPauseMenuOpen:
+    return
+
   var isOnMap = inventoryOptionIndex == 4
   if (selectedGlitchSprite < 0 or spellbookSize == 0) and not popupRect.visible and not isOnMap:
     if player.justPressedMenuUp():

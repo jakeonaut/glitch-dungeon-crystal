@@ -4,7 +4,8 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var treasureChest = get_node("../../..")
 
 func _ready():
-  pass
+  if global.memory.has("fishingRod") and global.memory["fishingRod"]:
+    treasureChest.youAlreadyGotMe()
 
 func activateScript():
   treasureChest.mySprite.visible = false

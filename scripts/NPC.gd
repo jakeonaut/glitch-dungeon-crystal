@@ -41,6 +41,7 @@ var pressing_jump = false
 var just_pressed_jump = false 
 export var is_active = true
 
+var am_i_sleepy = false
 export var showYesNoOptions = false
 export var tiny_textbox = false
 export var is_static_in_level = true
@@ -49,7 +50,6 @@ export var is_wiggling_fast = false
 export var can_be_smacked = false
 export var is_sprite_not_flipped = false
 export var interact_prompt_offset = 0
-var am_i_sleepy = false
 
 func _ready():
   set_process(true)

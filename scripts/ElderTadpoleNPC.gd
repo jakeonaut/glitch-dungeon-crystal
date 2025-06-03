@@ -74,7 +74,7 @@ func processLevelZone():
 
 var heartContainerRes = preload("res://sceneObjects/SpellsTreasureCollectables/HeartContainer.tscn")
 func spawnHeartContainer():
-  if have_i_spawned_heart:
+  if have_i_spawned_heart or global.memory["hard_mode"] > 0:
     return
   var newHeartContainer = heartContainerRes.instance()
   level.add_child(newHeartContainer)

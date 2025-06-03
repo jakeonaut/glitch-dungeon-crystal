@@ -18,15 +18,7 @@ export var message = "UI.Alert.0"
 
 func _ready():
   if is_static_in_level and self.getMyStaticLevelZoneVar():
-    if secretAniPlayer.has_animation("isOpen"):
-      secretAniPlayer.play("isOpen")
-    is_active = false
-    is_important = false
-    is_really_important = false
-    set_process(false)
-    set_physics_process(false)
-    okay_im_done = true
-    okay_im_really_done_bye = true
+    youAlreadyGotMe()
     return
     
   set_process(true)
@@ -35,6 +27,17 @@ func _ready():
   is_really_important = true
   can_be_smacked = true
   # ._ready() implicit
+
+func youAlreadyGotMe():
+  if secretAniPlayer.has_animation("isOpen"):
+    secretAniPlayer.play("isOpen")
+  is_active = false
+  is_important = false
+  is_really_important = false
+  set_process(false)
+  set_physics_process(false)
+  okay_im_done = true
+  okay_im_really_done_bye = true
 
 func tryShowInteractPrompt(_is_active_interact_prompt = false, _is_comic_alert = false):
   if interactPrompt == null:

@@ -733,7 +733,6 @@ surfaces/0 = {
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 11 )
 show_dither_effect = true
-spellbook_forbidden = true
 has_spellbook_page = true
 pacman_wrapping = true
 

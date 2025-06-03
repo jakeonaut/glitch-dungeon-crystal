@@ -10,6 +10,7 @@ onready var fryingPanNPC = get_node("FryingPanNPC")
 onready var featherSpell = get_node("FeatherSpell")
 onready var ladderSpell = get_node("LadderSpell")
 onready var invisibleSpell = get_node("InvisibleSpell")
+onready var mapTreasure = get_node("MapTreasure")
 
 onready var anglerShortcut = get_node("AnglerShortcutDoor")
 onready var babaShortcut = get_node("BabaShortcutDoor")
@@ -38,6 +39,9 @@ func setUpRoomInitializationOverride():
   else:
     claydolShortcut.visible = true
     ladderSpell.visible = true
+
+  if global.memory["hard_mode"] > 0:
+    mapTreasure.visible = false
 
   if global.demo_mode <= 0:
     glitchEnemy.queue_free()

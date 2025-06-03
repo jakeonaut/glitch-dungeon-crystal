@@ -1341,7 +1341,7 @@ func isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords):
   if glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
     return not pressingDown() and checking_for_floor_collisions and (global.isTileSolid(tile_type, getLevelTiles().mesh_library) or isTileFallthroughSolidTop(tile_type, tile_pos_coords))
   else:
-    return (global.isTileSolid(tile_type, getLevelTiles().mesh_library) or (not pressingDown() and checking_for_floor_collisions and isTileFallthroughSolidTop(tile_type, tile_pos_coords))) and not "Spikes" in tile_name
+    return (global.isTileSolid(tile_type, getLevelTiles().mesh_library) or (not pressingDown() and checking_for_floor_collisions and isTileFallthroughSolidTop(tile_type, tile_pos_coords))) and (not "Spikes" in tile_name or glitch_form == global.GlitchForm.INVISIBLE)
   
 func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
   var y = global_transform.origin.y

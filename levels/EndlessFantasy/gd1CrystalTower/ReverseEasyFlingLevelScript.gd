@@ -2,6 +2,7 @@ extends "../../../scripts/levelScript.gd"
 
 onready var glitchedGrimoire = get_node("GlitchedGrimoire")
 onready var door2 = get_node("Door2")
+onready var savePoint2 = get_node("SavePoint2")
 
 onready var ladderSpell = get_node("LadderSpell")
 onready var floorSpell = get_node("FloorSpell")
@@ -11,8 +12,9 @@ onready var featherSpell = get_node("FeatherSpell")
 func setUpRoomInitializationOverride():
   if not global.memory.has("spellbookPage"):
     glitchedGrimoire.queue_free()
+    savePoint2.visible = true
     
-  if global.memory["glitched_grimoire"]:
+  if global.memory["glitched_grimoire"] or not global.memory.has("spellbookPage"):
     ladderSpell.visible = true
     floorSpell.visible = true
     featherSpell.visible = true

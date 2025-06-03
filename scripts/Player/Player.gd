@@ -364,7 +364,7 @@ func isWalkingIntoWall():
     return .isWalkingIntoWall() # super
 
 var hideSmallTextboxTimer = null
-func sayThis(message, time_to_clear = 0.0):
+func sayThis(message, time_to_clear = 0.0, showYesNo = false):
   if textBox.visible:
     textBox.hideTextbox()
   if hideSmallTextboxTimer != null:
@@ -387,6 +387,7 @@ func sayThis(message, time_to_clear = 0.0):
     textBox.untinify()
     textBox.interact()
     global.activeInteractor = textBox
+    textBox.showYesNoOptions = showYesNo
 
 func stopTalking():
   _on_dialog_timer_timeout_func()

@@ -248,6 +248,7 @@ var hasGottenLevelGeode = false
 var isAMoleDigging = false
 
 var isOnMainMenu = false
+var mainMenuPromptIndex = 0
 var NUM_GEMS_FOR_BROOMERANG = 25
 var NUM_GEMS_FOR_ENCHANTED_BAG = 75
 var NUM_GEMS_FOR_DOUBLE_JUMP = 75
@@ -337,9 +338,11 @@ func resetMemory():
     memory["level_zonez"] = []
 
     # ==============================================
+    memory["hard_mode"] = 0
     # if you've beaten the final boss
     memory["clean_crystals"] = 0
     memory["priestess"] = 0
+    memory["has_beat_the_game"] = 0
     memory["glitch_world"] = 0
     memory["glitched_grimoire"] = false
     memory["forget_me_not"] = false
@@ -358,8 +361,6 @@ func resetMemory():
     memory["claydolShortcut"] = 0
     memory["babaShortcut"] = 0
     memory["priestessShortcut"] = 0
-    
-
     # STORY OR LEVEL STATE
     memory["babushka_cat_story_hook"] = 0
     memory["fishing_rod_shortcut"] = 0
@@ -413,6 +414,50 @@ func resetMemory():
     memory["anna_mode"] = false
     memory["blue_mode"] = false
 
+func newGamePlusMemoryReset():
+    memory["clean_crystals"] = 0
+    memory["angler_seaman_boss"] = 0
+    memory["dogu_matryoshka_boss"] = 0
+    memory["baba_yaga_boss"] = 0
+    # and associated shortcuts
+    memory["anglerShortcut"] = 0
+    memory["claydolShortcut"] = 0
+    memory["babaShortcut"] = 0
+    memory["priestessShortcut"] = 0
+    memory["priestess"] = 0
+    memory["has_beat_the_game"] = 0
+    memory["glitch_world"] = 0
+    memory["babushka_cat_story_hook"] = 0
+    memory["fishing_rod_shortcut"] = 0
+    memory["broom"] = 1
+    memory.erase("savePoint")
+    memory.erase("savedRoomPath")
+    memory.erase("roomPath")
+    memory.erase("active_save_point_x")
+    memory.erase("active_save_point_y")
+    memory.erase("active_save_point_z")
+    if memory.has("spellbookPage"):
+        memory["spellbookPage"] = []
+    memory["level_zonez"] = []
+    for levelZone in LEVEL_ZONES:
+        if memory.has(levelZone):
+            memory.erase(levelZone)
+    
+var LEVEL_ZONES = [
+    "gd1", 
+    "gd1TutorialDungeon", 
+    "gd1FishingVillage", 
+    "gd1ToxicJungle", 
+    "gd1ShiftingSandLand", 
+    "gd1CrystalTower",
+    "gd1BubblegloopSwamp",
+    "gd1TombSouls",
+    "gd1AbstractSuburbs",
+    "gd1GrandmaVillage",
+    "gd1PrimordialOoze",
+    "gd1DreamMemories"
+]
+
 func getNumGrannyHearts(label = false):
     if not label and not global.memory["hearts_enabled"]:
         return 0
@@ -434,20 +479,23 @@ func updateBroomSpriteTexture(sprite, useAniSheet):
     else:
         sprite.material_override.set_shader_param("texture_albedo", fryingPanSheet)
 
+func isDlcEnabled():
+    return dlc_mode > 0 and allLocales[userSettings["locale"]]["dlc_enabled"]
+
 var allLocales = {
-    "en": { "code": "en", "supported": true, "label": "English" },
-    "zh_CN": { "code": "zh_CN", "supported": true, "label": "简体字" }, 
-    "ru": { "code": "ru", "supported": true, "label": "Pусский" },
-    "pt_BR": { "code": "pt_BR", "supported": true, "label": "Português" },
-    "fr": { "code": "fr", "supported": true, "label": "Français" },
-    "ja": { "code": "ja", "supported": true, "label": "日本語" },
-    "es": { "code": "es", "supported": true, "label": "Español" },
-    "it": { "code": "it", "supported": true, "label": "Italiano" },
-    "pl": { "code": "pl", "supported": true, "label": "Polski" },
-    "de": { "code": "de", "supported": true, "label": "Deutsch" },
-    "ko_KR": { "code": "ko_KR", "supported": true, "label": "한국어"},
-    "uk_UA": { "code": "uk_UA", "supported": true, "label": "Українська"},
-    "tr_TR": { "code": "tr_TR", "supported": true, "label": "Türkçe"}
+    "en": { "code": "en", "supported": true, "label": "English", "dlc_enabled": true },
+    "zh_CN": { "code": "zh_CN", "supported": true, "label": "简体字", "dlc_enabled": false }, 
+    "ru": { "code": "ru", "supported": true, "label": "Pусский", "dlc_enabled": false },
+    "pt_BR": { "code": "pt_BR", "supported": true, "label": "Português", "dlc_enabled": false },
+    "fr": { "code": "fr", "supported": true, "label": "Français", "dlc_enabled": false },
+    "ja": { "code": "ja", "supported": true, "label": "日本語", "dlc_enabled": false },
+    "es": { "code": "es", "supported": true, "label": "Español", "dlc_enabled": false },
+    "it": { "code": "it", "supported": true, "label": "Italiano", "dlc_enabled": false },
+    "pl": { "code": "pl", "supported": true, "label": "Polski", "dlc_enabled": false },
+    "de": { "code": "de", "supported": true, "label": "Deutsch", "dlc_enabled": false },
+    "ko_KR": { "code": "ko_KR", "supported": true, "label": "한국어", "dlc_enabled": false },
+    "uk_UA": { "code": "uk_UA", "supported": true, "label": "Українська", "dlc_enabled": false },
+    "tr_TR": { "code": "tr_TR", "supported": true, "label": "Türkçe", "dlc_enabled": false }
 }
 func getSupportedLocalesArray():
     var supportedLocales = []
@@ -646,6 +694,8 @@ func getDisplayTitle(levelZoneName, gd1TutorialName = "???"):
             return tr("Question.Mark")
         "gd1PrimordialOoze":
             return tr("LevelName.6")
+        "gd1DreamMemories":
+            return "dream memories"
         _:
             return "???"
     
@@ -741,7 +791,7 @@ func loadUserSettings():
     return true
 
 var MAX_ANGEL_EGGS = 28
-func loadGame(saveGameIndex):
+func loadGame(saveGameIndex, temp_memory_override = null):
     if saveGameIndex < 0 or saveGameIndex >= save_game_files.size():
         return false # Error! out of bounds
     save_game_index = saveGameIndex
@@ -754,51 +804,54 @@ func loadGame(saveGameIndex):
     # the object it represents.
     file.open(save_game_file, File.READ)
     
+    var memoryToLoadInto = temp_memory_override if temp_memory_override != null else global.memory
+
     var save_game_contents = file.get_line()
-    global.memory.merge(parseJsonPreserveInt(save_game_contents), true)
+    memoryToLoadInto.merge(parseJsonPreserveInt(save_game_contents), true)
     while not file.eof_reached():
         # ... ??? Is this because global.memory is stored on a single line? enigmatic..
         var _current_line = parseJsonPreserveInt(file.get_line())
-    normalizeLoadedMemory()
+    normalizeLoadedMemory(memoryToLoadInto)
         
     file.close()
 
-    if global.memory.has("roomPath"):
-        currLevelZone = getLevelZoneName(global.memory["roomPath"])
-        if not global.memory["level_zonez"].has(currLevelZone):
-            global.memory["level_zonez"].push_back(currLevelZone)
+    if temp_memory_override == null:
+        if global.memory.has("roomPath"):
+            currLevelZone = getLevelZoneName(global.memory["roomPath"])
+            if not global.memory["level_zonez"].has(currLevelZone):
+                global.memory["level_zonez"].push_back(currLevelZone)
 
-    # do some achievement backloading
-    if global.demo_mode <= 0: 
-        if global.memory["priestess"] >= 2:
-            Steam.set_achievement("PRIESTESS_BOSS")
-        if global.memory["baba_yaga_boss"] >= 2:
-            Steam.set_achievement("BABA_BOSS")
-        if global.memory["dogu_matryoshka_boss"] >= 2:
-            Steam.set_achievement("CLAYDOL_BOSS")
-        if global.memory["angler_seaman_boss"] >= 2:
-            Steam.set_achievement("ANGLER_BOSS")
-        if global.memory["broomerang"] >= 1:
-            Steam.set_achievement("BROOMERANG")
-        var numAngelEggs = global.getThingFromAllLevelZonez("angelEgg")
-        if numAngelEggs >= 1:
-            Steam.set_achievement("ANGEL_EGG_FIRST")
-        if numAngelEggs >= global.MAX_ANGEL_EGGS:
-            Steam.set_achievement("ANGEL_EGG_ALL")
-        elif numAngelEggs > 0:
-            Steam.user_stats.indicate_achievement_progress("ANGEL_EGG_ALL", numAngelEggs, global.MAX_ANGEL_EGGS)
+        # do some achievement backloading
+        if global.demo_mode <= 0: 
+            if global.memory["priestess"] >= 2:
+                Steam.set_achievement("PRIESTESS_BOSS")
+            if global.memory["baba_yaga_boss"] >= 2:
+                Steam.set_achievement("BABA_BOSS")
+            if global.memory["dogu_matryoshka_boss"] >= 2:
+                Steam.set_achievement("CLAYDOL_BOSS")
+            if global.memory["angler_seaman_boss"] >= 2:
+                Steam.set_achievement("ANGLER_BOSS")
+            if global.memory["broomerang"] >= 1:
+                Steam.set_achievement("BROOMERANG")
+            var numAngelEggs = global.getThingFromAllLevelZonez("angelEgg")
+            if numAngelEggs >= 1:
+                Steam.set_achievement("ANGEL_EGG_FIRST")
+            if numAngelEggs >= global.MAX_ANGEL_EGGS:
+                Steam.set_achievement("ANGEL_EGG_ALL")
+            elif numAngelEggs > 0:
+                Steam.user_stats.indicate_achievement_progress("ANGEL_EGG_ALL", numAngelEggs, global.MAX_ANGEL_EGGS)
 
     # reset boss flags from 1 to 0 if we are loading, so we can start the opening cinematic again for all of them.
     # if the boss flag is 2 already, it means you've beat them, so don't reset
-    if global.memory["priestess"] == 1:
-        global.memory["priestess"] = 0
-    if global.memory["baba_yaga_boss"] == 1:        
-        global.memory["baba_yaga_boss"] = 0
-    if global.memory["angler_seaman_boss"] == 1:
-        global.memory["angler_seaman_boss"] = 0
-    if global.memory["dogu_matryoshka_boss"] == 1:
-        global.memory["dogu_matryoshka_boss"] = 0
-    return true
+    if memoryToLoadInto["priestess"] == 1:
+        memoryToLoadInto["priestess"] = 0
+    if memoryToLoadInto["baba_yaga_boss"] == 1:        
+        memoryToLoadInto["baba_yaga_boss"] = 0
+    if memoryToLoadInto["angler_seaman_boss"] == 1:
+        memoryToLoadInto["angler_seaman_boss"] = 0
+    if memoryToLoadInto["dogu_matryoshka_boss"] == 1:
+        memoryToLoadInto["dogu_matryoshka_boss"] = 0
+    return memoryToLoadInto
 
 func tryDeleteGame(saveGameIndex):
     if saveGameIndex < 0 or saveGameIndex >= save_game_files.size():
@@ -1306,10 +1359,10 @@ func getInputText(input_action, input_display = 0, use_bbtext = true, showConden
                     return getKeyCodeStr(inputEvent.get_scancode(), false)
     return strToReturn
 
-func normalizeLoadedMemory():
+func normalizeLoadedMemory(memoryToLoadInto):
     if typeof(global.memory["nesting_doll"]) == TYPE_BOOL:
-        global.memory["nesting_doll"] = global.NestingDoll.GRANDMA
-    global.memory["priestess"] = 0
+        memoryToLoadInto["nesting_doll"] = global.NestingDoll.GRANDMA
+    memoryToLoadInto["priestess"] = 0
 
 func normalizeLoadedUserSettings():
     # should eventually normalize so that this is a no-op.

@@ -9,7 +9,9 @@ func _ready():
 var NUM_CRYSTAL_GEODES_TO_BOSS = 4
 func activateScript():
   if textBox.was_smacked:
+    self.pitch_scale = 1.4
     return
+  self.pitch_scale = .7
 
   if global.memory["priestess"] == 0 and not global.getLevelZoneThing("crystal_geode"):
     global.setLevelZoneThing("babushkaCatSniffed", 1)

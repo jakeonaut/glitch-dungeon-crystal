@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/palettes/pastoral_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://assets/sounds/ghostVoices/vox_Pain7.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/sounds/bawk.wav" type="AudioStream" id=9]
 [ext_resource path="res://scripts/Follower.gd" type="Script" id=10]
+[ext_resource path="res://assets/sounds/exhale.mp3" type="AudioStream" id=11]
+[ext_resource path="res://assets/sounds/chesiremiao.wav" type="AudioStream" id=12]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
@@ -87,4 +89,15 @@ bus = "Sfx"
 stream = ExtResource( 7 )
 volume_db = -10.0
 pitch_scale = 0.5
+bus = "Sfx"
+
+[node name="PurrSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 12 )
+volume_db = -20.0
+pitch_scale = 0.75
+bus = "Sfx"
+
+[node name="PurrSound2" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 11 )
+volume_db = -13.0
 bus = "Sfx"

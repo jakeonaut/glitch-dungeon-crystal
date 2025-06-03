@@ -15,7 +15,7 @@ func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SO
     
 func activateScript():
   var initial_text = ""
-  if treasureSpellCollectable.okay_im_done:
+  if treasureSpellCollectable.okay_im_done or global.memory["hard_mode"] > 0:
     initial_text = tr("NPC.TreasureMimic.2")
     textBox.showYesNoOptions = false
   else:

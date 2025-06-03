@@ -196,9 +196,9 @@ func _ready_impl():
   global.setHaveIBeenToLevel(self)
   if not "EndCredits" in getShortLevelName():
     global.setLevelZoneStartTime()
-
   # if not global.userSettings["gles3"]:
   #   convertAll3dSpritesFromGles3ToGles2()
+
 
 var hasGameFrameBackground = false
 func tryToAddGameFrameBackground():

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/dream city SONG.mp3-c69a55e44e738d9067e944c47fac004e.mp3str"
+
+[deps]
+
+source_file="res://assets/music/dream city SONG.mp3"
+dest_files=[ "res://.import/dream city SONG.mp3-c69a55e44e738d9067e944c47fac004e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

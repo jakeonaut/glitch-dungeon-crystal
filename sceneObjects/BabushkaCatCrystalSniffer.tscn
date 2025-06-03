@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://assets/npcs/catportrait2.png" type="Texture" id=15]
 [ext_resource path="res://assets/sounds/eba_speech_info.wav" type="AudioStream" id=16]
 [ext_resource path="res://sceneObjects/BabushkaCatCrystalSnifferAbortSound.gd" type="Script" id=17]
+[ext_resource path="res://assets/sounds/exhale.mp3" type="AudioStream" id=18]
 
 [sub_resource type="BoxShape" id=42]
 resource_local_to_scene = true
@@ -175,7 +176,7 @@ texture = ExtResource( 15 )
 [node name="DialogStartSound" parent="NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 14 )
 volume_db = -25.0
-pitch_scale = 0.8
+pitch_scale = 0.7
 script = ExtResource( 6 )
 
 [node name="DialogSound" parent="NPC TextBox/TextBox" index="11"]
@@ -224,6 +225,17 @@ frame_delay = 0.5
 stream = ExtResource( 13 )
 volume_db = -20.0
 pitch_scale = 0.65
+bus = "Sfx"
+
+[node name="PurrSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -20.0
+pitch_scale = 0.75
+bus = "Sfx"
+
+[node name="PurrSound2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+volume_db = -13.0
 bus = "Sfx"
 
 [node name="TextBoxCameraTarget" type="Spatial" parent="."]

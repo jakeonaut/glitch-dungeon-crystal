@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/dream city INTRO.mp3-bca72fa62dba5fe5ee5fc54b8da7a038.mp3str"
+
+[deps]
+
+source_file="res://assets/music/dream city INTRO.mp3"
+dest_files=[ "res://.import/dream city INTRO.mp3-bca72fa62dba5fe5ee5fc54b8da7a038.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

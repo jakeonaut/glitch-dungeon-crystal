@@ -16,6 +16,7 @@ enum MainMenuState {
     TRY_GO_CREDITS,
     MAIN_MENU_TRY_QUIT_GAME,
     NORMAL_GAMEPLAY,
+    TRY_CONTINUE,
 }
 var mainMenuState = MainMenuState.MAIN_MENU
 
@@ -42,6 +43,8 @@ func setUpRoomInitializationOverride():
         cowNPC.textBox.textNode.bbcode_text = finalText
     if global.pauseGame:
         transition.reverse_fade()
+    uiLayer.remove_child(uiLayer.textBoxes)
+    uiLayer.add_child(uiLayer.textBoxes)
 
 onready var eventSoundWakeup = get_node("EventSoundWakeup")
 onready var eventSound1 = get_node("EventSound1")
@@ -79,11 +82,12 @@ onready var dialogPosition = get_node("DialogPosition")
 var was_intro_cutscene_skipped = 0
 var skip_intro_cutscene_reset_timer = 0
 var skip_intro_cutscene_reset_time_limit = 10
-func startGame(saveGameIndex):
+func startGame(saveGameIndex, shouldResetMemory = true):
   global.save_game_index = saveGameIndex
   mainMenuState = MainMenuState.NORMAL_GAMEPLAY
   global.isOnMainMenu = false
-  global.resetMemory()
+  if shouldResetMemory:
+    global.resetMemory()
   global.okay_really_really_started_game = false
   global.has_started_game = true
   global.setLevelZoneStartTime()
@@ -245,6 +249,17 @@ func startGame(saveGameIndex):
   player.textBox.override_target_origin = dialogPosition.global_transform.origin
   player.sayThis(tr("Dialog.Player.1"))
 
+func newGamePlus(saveGameIndex):
+    mainMenuState = MainMenuState.NORMAL_GAMEPLAY
+    global.has_started_game = true
+    if global.loadGame(saveGameIndex):
+        global.has_really_started_game = true
+        global.okay_really_really_started_game = true
+        global.newGamePlusMemoryReset()
+        global.setLevelZoneThing("start_time", null)
+    # default
+    startGame(saveGameIndex, false)
+
 func loadGame(saveGameIndex):
     mainMenuState = MainMenuState.NORMAL_GAMEPLAY
     global.has_started_game = true
@@ -281,7 +296,6 @@ func canOpenPauseMenu():
   return mainMenuState != MainMenuState.TRY_DELETE_FILE and mainMenuState != MainMenuState.TRY_GO_CREDITS
 
 export var camera_size = 30
-var mainMenuPromptIndex = 0
 var updateMenuText = true
 var has_reset_transition = false
 func _process(delta):
@@ -293,10 +307,10 @@ func _process(delta):
     if mainMenuState == MainMenuState.TRY_DELETE_FILE:
         deleteConfirmationLayer.visible = true
         if deleteConfirmationLayerText.bbcode_text == "":
-            deleteConfirmationLayerText.bbcode_text = tr("UI.MainMenu.5") % [str(mainMenuPromptIndex + 1), global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
+            deleteConfirmationLayerText.bbcode_text = tr("UI.MainMenu.5") % [str(global.mainMenuPromptIndex + 1), global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
         if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
-            if global.doesSaveGameExist(mainMenuPromptIndex):
-                global.tryDeleteGame(mainMenuPromptIndex)
+            if global.doesSaveGameExist(global.mainMenuPromptIndex):
+                global.tryDeleteGame(global.mainMenuPromptIndex)
             mainMenuState = MainMenuState.MAIN_MENU
             deleteSound.play()
             updateMenuText = true
@@ -373,7 +387,7 @@ func _process(delta):
             pressCText.bbcode_text = "[right]press " + global.getInputText("menu_cancel") + " to cancel, " + global.getInputText("menu_confirm") + " to start[/right]"
         else:
             var secondPartTemp = tr("UI.MainMenu.4") % global.getInputText("menu_delete")
-            var second_part = secondPartTemp if global.doesSaveGameExist(mainMenuPromptIndex) else ("[color=grey]" + secondPartTemp + "[/color]")
+            var second_part = secondPartTemp if global.doesSaveGameExist(global.mainMenuPromptIndex) else ("[color=grey]" + secondPartTemp + "[/color]")
             pressCText.bbcode_text = "[right]" + (tr("UI.MainMenu.3") % global.getInputText("menu_confirm")) + "    " + second_part + "[/right]"
         optionsMenuPrompt.bbcode_text = (tr("UI.MainMenu.1") % global.getInputText("ui_start")) + "\n[right]" + (global.getInputText("menu_cancel")) + ": " + tr("UI.MainMenu.CreditsPrompt") + "[/right]"
         selectTextPrompt.bbcode_text = global.getInputText("menu_confirm")
@@ -418,23 +432,23 @@ func _process(delta):
             #         else:
             #             logoSprite.texture = logoTex2
 
-        if mainMenuPromptIndex == 0:
+        if global.mainMenuPromptIndex == 0:
             player.applyGlitch(global.GlitchForm.NORMAL, true)
-        if mainMenuPromptIndex == 1:
+        if global.mainMenuPromptIndex == 1:
             player.applyGlitch(global.GlitchForm.FEATHER, true)
-        if mainMenuPromptIndex == 2:
+        if global.mainMenuPromptIndex == 2:
             player.applyGlitch(global.GlitchForm.FLOOR, true)
-        if mainMenuPromptIndex == 3:
+        if global.mainMenuPromptIndex == 3:
             player.applyGlitch(global.GlitchForm.LADDER, true)
 
-        selectPrompt.rect_position.y = 300.5 + (mainMenuPromptIndex*55)
+        selectPrompt.rect_position.y = 300.5 + (global.mainMenuPromptIndex*55)
         if updateMenuText:
             menuText.bbcode_text = ""
             for i in range(global.save_game_files.size()):
                 if i != 0: menuText.bbcode_text += "\n"
 
                 var fileText = (tr("UI.MainMenu.2") + str(i+1)) if global.doesSaveGameExist(i) else ("[color=teal]" + tr("UI.MainMenu.2") + str(i+1) + "[/color]")
-                if mainMenuPromptIndex == i:
+                if global.mainMenuPromptIndex == i:
                     menuText.bbcode_text += "[wave]" + fileText + "[/wave]"
                 else:
                     menuText.bbcode_text += fileText
@@ -442,12 +456,17 @@ func _process(delta):
 
         if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
             bellSound.play()
-            if global.doesSaveGameExist(mainMenuPromptIndex):
-                loadGame(mainMenuPromptIndex)
+            if global.doesSaveGameExist(global.mainMenuPromptIndex):
+                if global.loadGame(global.mainMenuPromptIndex, {})["has_beat_the_game"]:
+                    mainMenuState = MainMenuState.TRY_CONTINUE
+                    mainMenuUi.visible = false
+                    player.sayThis(tr("UI.NewGame.Plus"), 0.0, true)
+                else:
+                    loadGame(global.mainMenuPromptIndex)
             else:
-                startGame(mainMenuPromptIndex)
+                startGame(global.mainMenuPromptIndex)
         elif Input.is_action_just_pressed("menu_delete"):
-            if global.doesSaveGameExist(mainMenuPromptIndex):
+            if global.doesSaveGameExist(global.mainMenuPromptIndex):
                 mainMenuState = MainMenuState.TRY_DELETE_FILE
                 startDeleteSound.play()
             else:
@@ -455,6 +474,17 @@ func _process(delta):
         elif Input.is_action_just_pressed("menu_cancel"):
             mainMenuState = MainMenuState.TRY_GO_CREDITS
             broomSound.play()
+    elif mainMenuState == MainMenuState.TRY_CONTINUE:
+        if Input.is_action_just_pressed("menu_delete") or Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
+            mainMenuUi.visible = true
+            mainMenuState = MainMenuState.MAIN_MENU
+            if global.activeInteractor != null:
+                global.activeInteractor.hideTextbox()
+        elif Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
+            if global.activeInteractor != null and global.activeInteractor.selectedYesNoOption:
+                newGamePlus(global.mainMenuPromptIndex)
+            else:
+                loadGame(global.mainMenuPromptIndex)
     
 # @override
 # func processPauseMenu():
@@ -527,11 +557,11 @@ func processSkipPrompt(delta):
                 skipPrompt.visible = false
 
 func normalizeMainMenuPromptIndex(change):
-    mainMenuPromptIndex += change
-    if mainMenuPromptIndex > global.save_game_files.size() - 1:
-        mainMenuPromptIndex = 0
-    if mainMenuPromptIndex < 0:
-        mainMenuPromptIndex = global.save_game_files.size() - 1
+    global.mainMenuPromptIndex += change
+    if global.mainMenuPromptIndex > global.save_game_files.size() - 1:
+        global.mainMenuPromptIndex = 0
+    if global.mainMenuPromptIndex < 0:
+        global.mainMenuPromptIndex = global.save_game_files.size() - 1
 
 var has_ever_started_music = false
 # @override
