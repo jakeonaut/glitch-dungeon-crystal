@@ -332,6 +332,8 @@ func spawnSparkles(delta, above_the_head = false):
 
 onready var spellbookGlitchSprite = get_node("SpriteContainer/InnerSpriteContainer/SpellbookGlitchSprite")
 func normalGlitch():
+  if global.memory.has("spellbookPage") and global.memory["spellbookPage"].size() == 1:
+    level.displaySpellMessageText(tr("NPC.Crystal.NULL"))
   glitch_form = global.GlitchForm.NORMAL
   level.normalGlitch()
   changeSpriteColorPalette(global.player_base_palette)

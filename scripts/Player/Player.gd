@@ -204,6 +204,11 @@ func actuallyApplySpellbookGlitch():
   var spellbookSize = global.memory["spellbookPage"].size() if global.memory.has("spellbookPage") else 0
   if spellbookSize == 0:
     return
+  # special case if spellbookSize == 1:
+  if spellbookSize == 1 and (spellCastPauseIndex == -1 or spellCastPauseIndex == 1):
+    applyGlitch(global.GlitchForm.NORMAL)
+    applyObeliskGlitch(global.GlitchForm.NORMAL, false)
+    return
   while spellCastPauseIndex < 0:
     spellCastPauseIndex += spellbookSize
   spellCastPauseIndex = spellCastPauseIndex % spellbookSize
@@ -736,14 +741,14 @@ func processCastingLogic(_delta):
   else:
     # manual mode
     if Input.is_action_just_pressed("alt_action_button"):
-      if global.memory["spellbookPage"].size() <= 1:
+      if global.memory["spellbookPage"].size() <= 0:
         noSpellSound.play()
       else:
         spellCastPauseIndex += 1
         applySpellbookGlitch()
         level.summonSmokeClouds(self.global_transform.origin, 1, true, true)
     elif Input.is_action_just_pressed("left_button"):
-      if global.memory["spellbookPage"].size() <= 1:
+      if global.memory["spellbookPage"].size() <= 0:
         noSpellSound.play()
       else:
         spellCastPauseIndex -= 1

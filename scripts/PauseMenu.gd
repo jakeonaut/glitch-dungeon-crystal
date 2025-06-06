@@ -619,6 +619,8 @@ func processInventoryLogic(_delta):
     pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " " + tr("UI.Confirmation") + ", " + global.getInputText("menu_cancel") + " " + tr("UI.PauseMenu.1")
     # pauseTitleText.bbcode_text = global.getInputText("menu_confirm") + " to select, " + global.getInputText("menu_cancel") + " to resume\n" + global.getInputText("menu_left") + " " + global.getInputText("menu_right") + " " + global.getInputText("menu_up") + " " + global.getInputText("menu_down")
   var spellbook = global.memory["spellbookPage"] if global.memory.has("spellbookPage") else [player.glitch_form]
+  if spellbook.size() == 1:
+    spellbook.push_back(global.GlitchForm.NORMAL)
   var spellbookSize = spellbook.size()
   if selectedGlitchSprite >= 0:
     if spellbookSize == 0:
@@ -664,7 +666,7 @@ func processInventoryLogic(_delta):
     glitchRect2.color = activeColor if inventoryOptionIndexX == 1 else selectedColor if selectedGlitchSprite == 1 else inactiveColor
     glitchRect3.color = activeColor if inventoryOptionIndexX == 2 else selectedColor if selectedGlitchSprite == 2 else inactiveColor
     glitchRect4.color = activeColor if inventoryOptionIndexX == 3 else selectedColor if selectedGlitchSprite == 3 else inactiveColor
-    if spellbookSize > 0:
+    if spellbookSize > 1:
       var which_glitch = spellbook[inventoryOptionIndexX] if global.memory["glitched_grimoire"] or level.player.spellCastPauseIndex == 0 else spellbook[1-inventoryOptionIndexX]
       if which_glitch == global.GlitchForm.FLOOR:
         popupText.bbcode_text = tr("UI.GlitchSpell.2") # "air walk:\n  walk off platforms\n  without falling"
@@ -675,9 +677,11 @@ func processInventoryLogic(_delta):
       if which_glitch == global.GlitchForm.INVISIBLE:
         popupText.bbcode_text = tr("UI.GlitchSpell.4") # "ghost:\n  glitches can't get u"
       if which_glitch == global.GlitchForm.WALK_THROUGH_WALLS:
-        popupText.bbcode_text = tr("NPC.Crystal.NULL") # "undefined:\n ???"
+        popupText.bbcode_text = tr("NPC.Secret.4") # "undefined:\n ???"
       if which_glitch == global.GlitchForm.NORMAL:
-        popupText.bbcode_text = tr("Dialog.Player.3")
+        popupText.bbcode_text = tr("NPC.Crystal.NULL")
+    else:
+      popupText.bbcode_text = tr("NPC.Treasure.2_2") if global.memory["glitched_grimoire"] else tr("NPC.Treasure.2")
   else:
     glitchRect1.color = inactiveColor
     glitchRect2.color = inactiveColor
@@ -688,7 +692,7 @@ func processInventoryLogic(_delta):
     return
 
   var isOnMap = inventoryOptionIndex == 4
-  if (selectedGlitchSprite < 0 or spellbookSize == 0) and not popupRect.visible and not isOnMap:
+  if (selectedGlitchSprite < 0 or spellbookSize <= 0) and not popupRect.visible and not isOnMap:
     if player.justPressedMenuUp():
       normalizeInventoryOptionIndex(-1, 0)
     if player.justPressedMenuDown():
@@ -731,22 +735,22 @@ func processInventoryLogic(_delta):
 
   if Input.is_action_just_pressed("menu_confirm"):
     if inventoryOptionIndex == 0:
-      if selectedGlitchSprite == -1:
-        selectedGlitchSprite = inventoryOptionIndexX
-      else:
-        if inventoryOptionIndexX != selectedGlitchSprite:
-          var temp = spellbook[selectedGlitchSprite]
-          spellbook[selectedGlitchSprite] = spellbook[inventoryOptionIndexX]
-          spellbook[inventoryOptionIndexX] = temp
-          global.memory["spellbookPage"] = spellbook
-          var spellCastPauseIndex = level.player.spellCastPauseIndex
-          if inventoryOptionIndexX == spellCastPauseIndex or selectedGlitchSprite == spellCastPauseIndex:
-            level.player.applyGlitch(spellbook[spellCastPauseIndex])
-        selectedGlitchSprite = -1
-      if spellbookSize > 0:
-        popupRect.visible = not popupRect.visible
-        shouldShowPopupYesNoOptions = false
-        popupYesNoOptions = false
+      if global.memory.has("spellbookPage") and global.memory["spellbookPage"].size() >= 2:
+        if selectedGlitchSprite == -1:
+          selectedGlitchSprite = inventoryOptionIndexX
+        else:
+          if inventoryOptionIndexX != selectedGlitchSprite:
+            var temp = spellbook[selectedGlitchSprite]
+            spellbook[selectedGlitchSprite] = spellbook[inventoryOptionIndexX]
+            spellbook[inventoryOptionIndexX] = temp
+            global.memory["spellbookPage"] = spellbook
+            var spellCastPauseIndex = level.player.spellCastPauseIndex
+            if inventoryOptionIndexX == spellCastPauseIndex or selectedGlitchSprite == spellCastPauseIndex:
+              level.player.applyGlitch(spellbook[spellCastPauseIndex])
+          selectedGlitchSprite = -1
+      popupRect.visible = not popupRect.visible
+      shouldShowPopupYesNoOptions = false
+      popupYesNoOptions = false
     elif inventoryOptionIndex == 1:
       popupRect.visible = not popupRect.visible
       shouldShowPopupYesNoOptions = false
@@ -1086,7 +1090,8 @@ func processInventoryRender(_delta):
       glitchRect2.visible = true
       glitchRect3.visible = false
       glitchRect4.visible = false
-      setGlitchSprite(glitchSprite1, spellbook[index] if spellbookSize >= 1 else level.player.glitch_form)
+      setGlitchSprite(glitchSprite1, spellbook[index] if spellbookSize >= 2 else level.player.glitch_form)
+      
       if spellbookSize >= 2:
         index = (index + 1) % spellbookSize
         setGlitchSprite(glitchSprite2, spellbook[index])

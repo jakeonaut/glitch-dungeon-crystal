@@ -343,8 +343,10 @@ func _process(delta):
       glitchSpellRect3.visible = false
       glitchSpellRect4.visible = false
       extension.visible = false
-      setGlitchSprite(glitchSpellSprite1, spellbook[level.player.spellCastPauseIndex] if spellbookSize >= 1 else level.player.glitch_form)
-      if spellbookSize >= 2:
+      setGlitchSprite(glitchSpellSprite1, spellbook[level.player.spellCastPauseIndex] if spellbookSize >= 2 else level.player.glitch_form)
+      if spellbookSize == 1 and level.player.glitch_form == global.GlitchForm.NORMAL:
+        setGlitchSprite(glitchSpellSprite2, spellbook[0])
+      elif spellbookSize >= 2:
         index = (index + 1) % spellbookSize
         setGlitchSprite(glitchSpellSprite2, spellbook[index])
       else:
