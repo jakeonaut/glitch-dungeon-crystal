@@ -21,7 +21,7 @@ func _process(delta):
         endCreditsLabel.global_transform.origin.y = STOP_POSITION
     else:
         endCreditsLabel.global_transform.origin.y += (delta*2)
-        if Input.is_action_pressed("popup_menu"):
+        if Input.is_action_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"):
             endCreditsLabel.global_transform.origin.y += (delta*40)
 
     if global.pauseGame:

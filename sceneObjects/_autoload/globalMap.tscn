@@ -48,7 +48,7 @@ hide_me_from_map = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4, 0 )
 
 [node name="IntroVideo" parent="TutorialDungeon" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 8, 0 )
 material_override = null
 frame = 26
 path = "res://levels/EndlessFantasy/gd1/IntroVideo.tscn"
@@ -197,7 +197,7 @@ path = "res://levels/EndlessFantasy/gd1TutorialDungeon/ChickenRoomSecret.tscn"
 hide_me_from_map = true
 
 [node name="EndCredits" parent="TutorialDungeon" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 8, 0 )
 material_override = null
 frame = 26
 path = "res://levels/EndlessFantasy/gd1/EndCredits.tscn"
@@ -738,7 +738,7 @@ can_nav_down = false
 has_angel_statue = true
 
 [node name="PrimordialOoze" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, -1 )
 material_override = null
 pixel_size = 0.1
 texture = ExtResource( 24 )

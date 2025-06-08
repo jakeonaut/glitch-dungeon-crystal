@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/dream city 8bit.mp3-536e605e62e9ef8abdae96582cd29117.mp3str"
+
+[deps]
+
+source_file="res://assets/music/dream city 8bit.mp3"
+dest_files=[ "res://.import/dream city 8bit.mp3-536e605e62e9ef8abdae96582cd29117.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

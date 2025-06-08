@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Primordial ooze.mp3-b17967fb55548093db7225db4df95cdc.mp3str"
+
+[deps]
+
+source_file="res://assets/music/Primordial ooze.mp3"
+dest_files=[ "res://.import/Primordial ooze.mp3-b17967fb55548093db7225db4df95cdc.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

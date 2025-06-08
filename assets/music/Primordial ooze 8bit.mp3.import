@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Primordial ooze 8bit.mp3-13d61d6896c38abfe0bb637ed9262acd.mp3str"
+
+[deps]
+
+source_file="res://assets/music/Primordial ooze 8bit.mp3"
+dest_files=[ "res://.import/Primordial ooze 8bit.mp3-13d61d6896c38abfe0bb637ed9262acd.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
