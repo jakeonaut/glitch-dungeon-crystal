@@ -1186,6 +1186,7 @@ func initializeControlsConfig():
         if axis2Vars != null:
             control_config["axis2"] = axis2Vars[0]
             control_config["axis2_value"] = axis2Vars[1]
+    global.userSettings["controls_config"] = global.controlsConfig
 
 func resetKeyBindings():
   var tempControlsConfig = global.userSettings["controls_config"] if global.userSettings.has("controls_config") else {}
