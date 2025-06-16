@@ -1,4 +1,4 @@
-[gd_scene load_steps=200 format=2]
+[gd_scene load_steps=205 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -95,6 +95,9 @@
 [ext_resource path="res://assets/sounds/exhale.mp3" type="AudioStream" id=93]
 [ext_resource path="res://assets/sounds/snore.mp3" type="AudioStream" id=94]
 [ext_resource path="res://assets/sounds/cauldron2.wav" type="AudioStream" id=95]
+[ext_resource path="res://assets/player_sheet_old_naked.png" type="Texture" id=96]
+[ext_resource path="res://assets/player_sheet_babushkaScarf.png" type="Texture" id=97]
+[ext_resource path="res://assets/player_sheet_old_hand.png" type="Texture" id=98]
 
 [sub_resource type="BoxShape" id=94]
 extents = Vector3( 0.36, 0.5, 1 )
@@ -142,6 +145,78 @@ shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 30 )
+shader_param/base_palette = ExtResource( 5 )
+shader_param/target_palette = ExtResource( 48 )
+
+[sub_resource type="ShaderMaterial" id=132]
+shader = ExtResource( 4 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.01
+shader_param/shake_block_size = 20.0
+shader_param/shake_color_rate = 0.0
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 1
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 4.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 97 )
+shader_param/base_palette = ExtResource( 5 )
+shader_param/target_palette = ExtResource( 48 )
+
+[sub_resource type="ShaderMaterial" id=133]
+shader = ExtResource( 4 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.01
+shader_param/shake_block_size = 20.0
+shader_param/shake_color_rate = 0.0
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 1
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = true
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 4.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 98 )
 shader_param/base_palette = ExtResource( 5 )
 shader_param/target_palette = ExtResource( 48 )
 
@@ -7365,7 +7440,37 @@ pixel_size = 0.125
 transparent = false
 double_sided = false
 alpha_cut = 2
-texture = ExtResource( 30 )
+texture = ExtResource( 96 )
+hframes = 8
+vframes = 8
+script = ExtResource( 10 )
+max_frames = 1
+should_animate = false
+automatically_change_color = false
+
+[node name="HatSprite" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Sprite3D"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05 )
+material_override = SubResource( 132 )
+pixel_size = 0.125
+transparent = false
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 97 )
+hframes = 8
+vframes = 8
+script = ExtResource( 10 )
+max_frames = 1
+should_animate = false
+automatically_change_color = false
+
+[node name="HandSprite" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Sprite3D"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1 )
+material_override = SubResource( 133 )
+pixel_size = 0.125
+transparent = false
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 98 )
 hframes = 8
 vframes = 8
 script = ExtResource( 10 )

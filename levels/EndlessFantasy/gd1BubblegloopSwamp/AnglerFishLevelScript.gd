@@ -9,9 +9,8 @@ onready var basicTadpoleEnemy2 = get_node("BasicTadpoleEnemy2")
 onready var basicTadpoleEnemy3 = get_node("BasicTadpoleEnemy3")
 onready var basicTadpoleEnemy4 = get_node("BasicTadpoleEnemy4")
 
-onready var npc = get_node("NPC")
-onready var npc2 = get_node("NPC2")
 onready var npc3 = get_node("NPC3")
+onready var npc4 = get_node("NPC4")
 onready var fishingRod = get_node("FishingRod")
 onready var fishingRod2 = get_node("FishingRod2")
 onready var fishingRod3 = get_node("FishingRod3")
@@ -38,8 +37,6 @@ func setUpRoomInitializationOverride():
         anglerFishBoss.queue_free()
         fishies.queue_free()
         should_process_npcs = false
-        npc.queue_free()
-        npc2.queue_free()
         npc3.queue_free()
         fishingRod.queue_free()
         fishingRod2.queue_free()
@@ -62,9 +59,8 @@ func setUpRoomInitializationOverride():
 
 func _process(_delta):
     if should_process_npcs:
-        processNPCSprite(npc)
-        processNPCSprite(npc2)
         processNPCSprite(npc3)
+        processNPCSprite(npc4)
     # if global.memory["angler_seaman_boss"] >= 2:
     #     dreamOfDeceit.visible = true
     #     dreamOfDeceit.grav = 60

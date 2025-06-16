@@ -43,6 +43,8 @@ var broom_cooldown_time_limit = 10
 onready var spriteContainer = get_node("SpriteContainer")
 onready var broomSpriteAnimated = get_node("SpriteContainer/Sprite3DBroomAnimated")
 
+onready var grandmaHatSprite = get_node("SpriteContainer/InnerSpriteContainer/Sprite3D/HatSprite")
+onready var grandmaHandSprite = get_node("SpriteContainer/InnerSpriteContainer/Sprite3D/HandSprite")
 onready var enchantedBagSpriteAnimated = get_node("SpriteContainer/Sprite3DBagAnimated")
 onready var enchantedBagSpriteVisible = get_node("SpriteContainer/Sprite3DBagVisible")
 
@@ -460,6 +462,8 @@ func _process(delta):
   if newSpriteOpacity != spriteOpacity:
     spriteOpacity = newSpriteOpacity
     mySprite.get_material_override().set_shader_param("opacity", spriteOpacity)
+    grandmaHatSprite.get_material_override().set_shader_param("opacity", spriteOpacity)
+    grandmaHandSprite.get_material_override().set_shader_param("opacity", spriteOpacity)
     broomSpriteVisible.get_material_override().set_shader_param("opacity", spriteOpacity)
   if "nterDoor" in aniPlayer.assigned_animation:
     spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x
@@ -617,6 +621,11 @@ func _process(delta):
   #     mySprite.material_override.set_shader_param("target_palette", global.base_palette)
   if global.memory.has("blue_mode") and global.memory["blue_mode"]:
     mySprite.material_override.set_shader_param("target_palette", global.NES_palette)
+
+  grandmaHatSprite.frame = mySprite.frame
+  grandmaHatSprite.flip_h = mySprite.flip_h
+  grandmaHandSprite.frame = mySprite.frame
+  grandmaHandSprite.flip_h = mySprite.flip_h
   
 
 var teleporting = false
@@ -2547,7 +2556,6 @@ func processBroomRenderLogic(_delta):
     if nesting_doll_state == global.NestingDoll.GRANDMA and not isHoldingMultiBroom():
       mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
       mySprite.material_override.set_shader_param("black_offset", 0)
-
 
 func processBagRenderLogic(_delta):
   enchantedBagSpriteVisible.frame = enchantedBagSpriteAnimated.frame

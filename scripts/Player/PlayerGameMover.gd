@@ -28,8 +28,8 @@ var has_sweeped_glitch = false
 var has_sweeped_cloud = false
 
 var cherryCarcassRes = preload("res://sceneObjects/CherryCarcass.tscn")
-var spriteSheet = preload("res://assets/player_sheet_old.png")
-var spriteSheetNoBroom = preload("res://assets/player_sheet_old_nobroom.png")
+var spriteSheet = preload("res://assets/player_sheet_old_naked.png")
+var spriteSheetNoBroom = preload("res://assets/player_sheet_old_naked.png")
 var spriteSheetTiny = preload("res://assets/player_sheet_old_baby.png")
 var broomSpriteSheet = preload("res://assets/player_sheet_broom.png")
 var broomSpriteSheetTiny = preload("res://assets/player_sheet_broom_tiny.png")

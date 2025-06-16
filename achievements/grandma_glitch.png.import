@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GRANDMA_WIN_naked.png-8cc413238e0d7b1f340a225783325854.stex"
+path="res://.import/grandma_glitch.png-c9d885c298fe89dcb169f7681dd7583a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://achievements/GRANDMA_WIN_naked.png"
-dest_files=[ "res://.import/GRANDMA_WIN_naked.png-8cc413238e0d7b1f340a225783325854.stex" ]
+source_file="res://achievements/grandma_glitch.png"
+dest_files=[ "res://.import/grandma_glitch.png-c9d885c298fe89dcb169f7681dd7583a.stex" ]
 
 [params]
 

@@ -384,6 +384,7 @@ func resetMemory():
     memory["max_hp"] = 1
     memory["hp"] = memory["max_hp"]
     memory["angel_flute"] = false
+    memory["can_freely_teleport"] = 0
     memory["has_marked_bosses_on_map"] = false
     memory["has_teleported"] = false
     # ==============================================
