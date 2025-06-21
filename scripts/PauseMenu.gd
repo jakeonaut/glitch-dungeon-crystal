@@ -611,6 +611,7 @@ onready var glitchSprite3 = get_node("InventoryRect/GlitchRect3/ColorRect/Equipm
 onready var glitchSprite4 = get_node("InventoryRect/GlitchRect4/ColorRect/EquipmentSlotSprite")
 var angelStatueToTeleportTo = null
 func processInventoryLogic(_delta):
+  # TODO(jaketrower): findme
   var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
   var angelStatueArrValue = angelStatues[getAngelStatueIndex()] if angelStatues.size() > 0 else null
   if (inventoryOptionIndex == 4 or angelStatueToTeleportTo != null) and angelStatueArrValue != null:
@@ -692,19 +693,19 @@ func processInventoryLogic(_delta):
     return
 
   var isOnMap = inventoryOptionIndex == 4
-  if (selectedGlitchSprite < 0 or spellbookSize <= 0) and not popupRect.visible and not isOnMap:
+  if (selectedGlitchSprite < 0 or spellbookSize <= 0) and not popupRect.visible:
     if player.justPressedMenuUp():
       normalizeInventoryOptionIndex(-1, 0)
     if player.justPressedMenuDown():
       normalizeInventoryOptionIndex(1, 0)
 
   if inventoryOptionIndex != 0 and not popupRect.visible:
-    if player.justPressedMenuRight() or (player.justPressedMenuDown() and isOnMap):
+    if player.justPressedMenuRight() or (player.justPressedMenuDown() and isOnMap and not global.memory["can_freely_teleport"]):
       mapCursorSprite.restart()
       mapCursorSprite2.restart()
       normalizeInventoryOptionIndex(0, 1)
       menuMoveSound.play()
-    elif player.justPressedMenuLeft() or (player.justPressedMenuUp() and isOnMap):
+    elif player.justPressedMenuLeft() or (player.justPressedMenuUp() and isOnMap and not global.memory["can_freely_teleport"]):
       mapCursorSprite.restart()
       mapCursorSprite2.restart()
       normalizeInventoryOptionIndex(0, -1)
@@ -714,23 +715,29 @@ func processInventoryLogic(_delta):
   # mapFaderRect.visible = not isOnMap
 
   invSelectionSprite.visible = not isOnMap
-  if isOnMap and angelStatues.size() != 0 and angelStatueArrValue != null:
-    var mapGrid = transition.mapManager.gimmeMapGrid()
-    var mapPathToSeek = angelStatueArrValue[1]
-    for i in range(MAP_HEIGHT):
-      for j in range(MAP_WIDTH):
-        if not mapGrid.has(i) or not mapGrid[i].has(j):
-          continue
-        var roomPath = mapGrid[i][j].path
-        if roomPath == mapPathToSeek:
-          var spriteIndex = (j + ((MAP_HEIGHT-1-i)*MAP_WIDTH)) + 1
-          var spriteName = MAP_SPRITE_PREFIX + str(spriteIndex)
-          var sprite = mapRect.get_node(spriteName) if mapRect.has_node(spriteName) else null
-          if sprite != null:
-            mapCursorSprite.position = sprite.position
-            mapCursorSprite2.position = mapCursorSprite.position
-            mapCursorSprite2.position.x -= 14
-          break
+  if isOnMap:
+    if global.memory["can_freely_teleport"]:
+      var spriteIndex = (int(mapCursorPosition.x) + ((MAP_HEIGHT-1-int(mapCursorPosition.y))*MAP_WIDTH)) + 1
+      var spriteName = MAP_SPRITE_PREFIX + str(spriteIndex)
+      var sprite = mapRect.get_node(spriteName) if mapRect.has_node(spriteName) else null
+      mapCursorSprite.position = sprite.position
+      mapCursorSprite2.position = mapCursorSprite.position + Vector2(-14, 0)
+    elif angelStatues.size() != 0 and angelStatueArrValue != null:
+      var mapGrid = transition.mapManager.gimmeMapGrid()
+      var mapPathToSeek = angelStatueArrValue[1]
+      for i in range(MAP_HEIGHT):
+        for j in range(MAP_WIDTH):
+          if not mapGrid.has(i) or not mapGrid[i].has(j):
+            continue
+          var roomPath = mapGrid[i][j].path
+          if roomPath == mapPathToSeek:
+            var spriteIndex = (j + ((MAP_HEIGHT-1-i)*MAP_WIDTH)) + 1
+            var spriteName = MAP_SPRITE_PREFIX + str(spriteIndex)
+            var sprite = mapRect.get_node(spriteName) if mapRect.has_node(spriteName) else null
+            if sprite != null:
+              mapCursorSprite.position = sprite.position
+              mapCursorSprite2.position = mapCursorSprite.position + Vector2(-14, 0)
+            break
         
 
   if Input.is_action_just_pressed("menu_confirm"):
@@ -895,6 +902,14 @@ func normalizeInventoryOptionIndex(y, x):
   # gonna need to not be hard coded... based on global.memories... it will be REALLY gross to hardcode this in the case where
   # for example, the player has not collected the enchanted broom, but has collected some SOUL MEMORIES or DREAMS.
   # so on menu_down/up, we're gonna have to have a normalizeFunction...
+  var isOnMap = inventoryOptionIndex == 4
+  if isOnMap and global.memory["can_freely_teleport"]:
+    mapCursorSprite.restart()
+    mapCursorSprite2.restart()
+    return normalizeMapCursorIndex(-y, x)
+  elif isOnMap and y != 0:
+    return normalizeInventoryOptionIndex(0, y)
+
   if y != 0:
     inventoryOptionIndexX = 0
     inventoryOptionIndex += y
@@ -1010,7 +1025,23 @@ func normalizeInventoryOptionIndex(y, x):
         inventoryOptionIndexX = angelStatues.size() - 1
         return
     
+func normalizeMapCursorIndex(y_diff, x_diff):
+  var mapGrid = transition.mapManager.gimmeMapGrid()
+  mapCursorPosition.y += y_diff
+  mapCursorPosition.x += x_diff
+  # wrap around
+  if mapCursorPosition.y >= MAP_HEIGHT: mapCursorPosition.y = 0
+  elif mapCursorPosition.y < 0: mapCursorPosition.y = MAP_HEIGHT - 1
+  if mapCursorPosition.x >= MAP_WIDTH: mapCursorPosition.x = 0
+  elif mapCursorPosition.x < 0: mapCursorPosition.x = MAP_WIDTH - 1
 
+  var y = int(mapCursorPosition.y)
+  var x = int(mapCursorPosition.x)
+  if not mapGrid.has(y) or not mapGrid[y].has(x):
+    return normalizeMapCursorIndex(y_diff, x_diff)
+  var mapRoom = mapGrid[y][x]
+  if not global.haveIBeenToThisLevelPath(mapRoom.path):
+    return normalizeMapCursorIndex(y_diff, x_diff)
 
 
 onready var grimoireSprite = get_node("InventoryRect/GrimoireSprite")
@@ -1109,7 +1140,8 @@ func processInventoryRender(_delta):
   forgetMeNotSprite.visible = global.memory["angel_flute"]
   broomSprite.scale = Vector2(3, 3) if global.memory["broomerang_enabled"] else Vector2(1.5, 1.5)
   bagSprite.visible = global.memory["hp"] > 1
-  returnSprite.visible = global.memory["can_force_respawn"]
+  returnSprite.visible = global.memory["can_force_respawn"] or global.memory["can_freely_teleport"]
+  returnSprite.frame = 10 if global.memory["can_freely_teleport"] else 9
   mapSprite.visible = global.memory["has_map_item"]
 
   heartSprite.visible = (global.getNumGrannyHearts(true) > 0)
@@ -1145,6 +1177,7 @@ var MAP_HEIGHT = 12
 var has_drawn_map = false
 var glitchSheetTex = preload("res://assets/sprites2D/glitchSheet.png")
 var spriteScript = preload("res://scripts/Sprite2D.gd")
+var mapCursorPosition = Vector2(0, 0) # TODO(jaketrower): findme
 func tryDrawMap():
   if has_drawn_map:
     return
@@ -1170,6 +1203,7 @@ func tryDrawMap():
       if mapRoom.path == level.getLevelName():
         mapPlayerSprite.visible = true
         mapPlayerSprite.position = sprite.position
+        mapCursorPosition = Vector2(j, i)
       if mapGrid[i][j].hide_me_from_map:
         sprite.frame = 0
         var haveIBeenToThisLevel = global.haveIBeenToThisLevelPath(mapRoom.path)
