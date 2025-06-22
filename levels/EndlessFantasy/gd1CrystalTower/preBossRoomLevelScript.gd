@@ -10,7 +10,7 @@ onready var npc5 = weakref(get_node("NPC5"))
 onready var npc7 = weakref(get_node("NPC7"))
 onready var npc8 = weakref(get_node("NPC8"))
 onready var npc9 = weakref(get_node("NPC9"))
-onready var mapTreasure = get_node("MapTreasure")
+onready var croneTeleportKeyTreasure = get_node("CroneTeleportKeyTreasure")
 
 # @override
 func setUpRoomInitializationOverride():
@@ -20,8 +20,8 @@ func setUpRoomInitializationOverride():
       self.getLevelName()
     ])
 
-  if global.memory["hard_mode"] > 0:
-    mapTreasure.visible = true
+  if global.memory["has_beat_the_game"] > 0:
+    croneTeleportKeyTreasure.visible = true
 
   if global.memory["priestess"] < 2 and global.memory["glitch_world"] > 0:
     global.memory["glitch_world"] = 0

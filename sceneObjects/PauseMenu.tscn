@@ -2388,7 +2388,7 @@ visible = false
 margin_left = 195.0
 margin_top = 112.0
 margin_right = 555.0
-margin_bottom = 222.0
+margin_bottom = 262.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
@@ -2397,7 +2397,7 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 356.0
-margin_bottom = 106.0
+margin_bottom = 146.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.223529, 0.298039, 0.384314, 1 )
@@ -2409,7 +2409,7 @@ __meta__ = {
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 348.0
-margin_bottom = 98.0
+margin_bottom = 139.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
@@ -2430,10 +2430,10 @@ text = "oh, hello"
 scroll_active = false
 
 [node name="YesButton" type="ColorRect" parent="PopupRect"]
-margin_left = 86.3333
-margin_top = 96.6666
+margin_left = 86.333
+margin_top = 140.667
 margin_right = 236.333
-margin_bottom = 151.667
+margin_bottom = 195.667
 rect_scale = Vector2( 0.4, 0.4 )
 color = Color( 0, 0.309804, 0.309804, 1 )
 
@@ -2465,9 +2465,9 @@ scroll_active = false
 
 [node name="NoButton" type="ColorRect" parent="PopupRect"]
 margin_left = 213.667
-margin_top = 96.6667
+margin_top = 140.667
 margin_right = 363.667
-margin_bottom = 151.667
+margin_bottom = 195.667
 rect_scale = Vector2( 0.4, 0.4 )
 color = Color( 0, 0.309804, 0.309804, 1 )
 

@@ -676,7 +676,7 @@ func getDisplayTitle(levelZoneName, gd1TutorialName = "???"):
         "gd1":
             return "???" # basically "null"
         "gd1TutorialDungeon":
-            return gd1TutorialName
+            return gd1TutorialName if not global.memory["can_freely_teleport"] else tr("LevelName.0")
         "gd1FishingVillage":
             return tr("LevelName.2")
         "gd1ToxicJungle":
@@ -696,7 +696,7 @@ func getDisplayTitle(levelZoneName, gd1TutorialName = "???"):
         "gd1PrimordialOoze":
             return tr("LevelName.6")
         "gd1DreamMemories":
-            return "dream memories"
+            return tr("LevelName.7")
         _:
             return "???"
     

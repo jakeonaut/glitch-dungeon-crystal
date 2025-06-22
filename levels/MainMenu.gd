@@ -308,7 +308,7 @@ func _process(delta):
         deleteConfirmationLayer.visible = true
         if deleteConfirmationLayerText.bbcode_text == "":
             deleteConfirmationLayerText.bbcode_text = tr("UI.MainMenu.5") % [str(global.mainMenuPromptIndex + 1), global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
-        if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
+        if (Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))) and not Input.is_action_pressed("menu_delete"):
             if global.doesSaveGameExist(global.mainMenuPromptIndex):
                 global.tryDeleteGame(global.mainMenuPromptIndex)
             mainMenuState = MainMenuState.MAIN_MENU

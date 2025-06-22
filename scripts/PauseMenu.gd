@@ -611,8 +611,7 @@ onready var glitchSprite3 = get_node("InventoryRect/GlitchRect3/ColorRect/Equipm
 onready var glitchSprite4 = get_node("InventoryRect/GlitchRect4/ColorRect/EquipmentSlotSprite")
 var angelStatueToTeleportTo = null
 func processInventoryLogic(_delta):
-  # TODO(jaketrower): findme
-  var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
+  var angelStatues = getAngelStatuesArr()
   var angelStatueArrValue = angelStatues[getAngelStatueIndex()] if angelStatues.size() > 0 else null
   if (inventoryOptionIndex == 4 or angelStatueToTeleportTo != null) and angelStatueArrValue != null:
     pauseTitleText.bbcode_text = str(angelStatueArrValue[0]) + "\n" + global.getInputText("menu_confirm") + " " + tr("NPC.AngelStatue.1") + " " + global.getInputText("menu_cancel") + " " + tr("UI.No")
@@ -828,6 +827,7 @@ func processInventoryLogic(_delta):
       elif inventoryOptionIndexX == 3:
         popupText.bbcode_text = tr("NPC.Treasure.6")
     elif angelStatueToTeleportTo != null:
+      print("angelStatueToTeleportTo: " + str(angelStatueToTeleportTo))
       var level_to_spawn_to = angelStatueToTeleportTo[1]
       global.memory["roomPath"] = level.getLevelName()
       global.pauseGame = true
@@ -840,6 +840,7 @@ func processInventoryLogic(_delta):
       global.isPauseMenuOpen = false
       get_node("TeleportSound").play()
     elif inventoryOptionIndex == 4 and angelStatues.size() > 0 and angelStatueArrValue != null:
+      print("angelStatueArrValue: " + str(angelStatueArrValue))
       if angelStatueArrValue[1] == level.getLevelName():
         getPlayer().noBroomSound.play()
       else:
@@ -850,7 +851,11 @@ func processInventoryLogic(_delta):
         if popupRect.visible:
           angelStatueToTeleportTo = angelStatueArrValue
         var localizedLevelZoneName = tr("LevelName.1")
-        if "tadpole" in levelZoneName:
+        if "0_1Haven" in angelStatueArrValue[1]:
+          pass # default to tr("LevelName.1") aka "Haven"
+        elif global.memory["can_freely_teleport"]:
+          localizedLevelZoneName = levelZoneName
+        elif "tadpole" in levelZoneName:
           localizedLevelZoneName = tr("LevelName.2")
         elif "spore" in levelZoneName:
           localizedLevelZoneName = tr("LevelName.3")
@@ -884,11 +889,28 @@ func processInventoryLogic(_delta):
     inventoryOptionIndex = 4
     inventoryOptionIndexX = 0
 
+func getAngelStatuesArr():
+  if global.memory["can_freely_teleport"]:
+    var y = int(mapCursorPosition.y)
+    var x = int(mapCursorPosition.x)
+    var mapGrid = transition.mapManager.gimmeMapGrid()
+    if not mapGrid.has(y) or not mapGrid[y].has(x):
+      return []
+    var path = mapGrid[y][x].path
+    return [[global.getDisplayTitle(global.getLevelZoneName(path)), path]]
+  return global.getThingArrayFromAllLevelZonez("angel_statue")
 
 func getAngelStatueIndex():
-  var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
+  if global.memory["can_freely_teleport"]:
+    return 0
+
+  var angelStatues = getAngelStatuesArr()
   # do it in order of collection, so reverse order of appending... sorry!
-  var angelStatueIndex = angelStatues.size() - inventoryOptionIndexX - 1
+  var angelStatueIndex = angelStatues.size() - 1
+  # adjust by user cursor selection
+  angelStatueIndex -= inventoryOptionIndexX
+
+  # normalize
   if angelStatueIndex >= angelStatues.size():
     return angelStatues.size() - 1
   if angelStatueIndex < 0:
@@ -897,7 +919,7 @@ func getAngelStatueIndex():
 
 # this would be SOO much easier with a 2d array
 func normalizeInventoryOptionIndex(y, x):
-  var angelStatues = global.getThingArrayFromAllLevelZonez("angel_statue")
+  var angelStatues = getAngelStatuesArr()
   var hasAngelFlute = global.memory["angel_flute"] and angelStatues.size() > 0
   # gonna need to not be hard coded... based on global.memories... it will be REALLY gross to hardcode this in the case where
   # for example, the player has not collected the enchanted broom, but has collected some SOUL MEMORIES or DREAMS.

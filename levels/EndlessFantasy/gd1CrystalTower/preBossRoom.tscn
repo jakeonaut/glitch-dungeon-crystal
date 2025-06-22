@@ -18,7 +18,7 @@
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=16]
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=18]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/MapTreasure.tscn" type="PackedScene" id=19]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/CroneTeleportKeyTreasure.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/GlitchWorldSpawner.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/UpwardDigGlitch.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/palettes/kirokaze-gameboy-1x.png" type="Texture" id=22]
@@ -940,9 +940,8 @@ hframes = 5
 vframes = 6
 frame = 27
 
-[node name="MapTreasure" parent="Viewport/level" instance=ExtResource( 19 )]
+[node name="CroneTeleportKeyTreasure" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.92803, 7, 0 )
-visible = false
 
 [node name="Viewport2" parent="." instance=ExtResource( 10 )]
 
