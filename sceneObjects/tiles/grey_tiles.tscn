@@ -1,10 +1,10 @@
-[gd_scene load_steps=14659 format=2]
+[gd_scene load_steps=14658 format=2]
 
 [ext_resource path="res://shaders/palette_swapper.shader" type="Shader" id=1]
 [ext_resource path="res://sceneObjects/tiles/tile_shader.tres" type="Shader" id=2]
 [ext_resource path="res://addons/sprite_mesh/sprite_mesh_instance.gd" type="Script" id=3]
 [ext_resource path="res://sceneObjects/tiles/tile_spatial_material.tres" type="Material" id=4]
-[ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=5]
+[ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=5]
 [ext_resource path="res://shaders/palette_swapper_glitch.shader" type="Shader" id=6]
 [ext_resource path="res://assets/textures/greyglitchspikes3.png" type="Texture" id=7]
 [ext_resource path="res://assets/textures/greyglitchspikes4.png" type="Texture" id=8]
@@ -19,7 +19,6 @@
 [ext_resource path="res://assets/palettes/base_palette_pink.png" type="Texture" id=17]
 [ext_resource path="res://sceneObjects/tiles/glitchSpikeAniTexture1.tres" type="Texture" id=18]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=22]
-[ext_resource path="res://assets/palettes/spikes_palette.png" type="Texture" id=23]
 [ext_resource path="res://sceneObjects/tiles/glitchSpikeAniTexture2.tres" type="Texture" id=24]
 [ext_resource path="res://addons/sprite_mesh/sprite_mesh.gd" type="Script" id=194]
 [ext_resource path="res://sceneObjects/tiles/tile_material.tres" type="Material" id=195]
@@ -158981,9 +158980,8 @@ surfaces/0 = {
 
 [sub_resource type="ShaderMaterial" id=17206]
 shader = ExtResource( 2 )
-shader_param/alpha = 1.0
-shader_param/palettesize = 16
-shader_param/base_palette = ExtResource( 23 )
+shader_param/num_colors = 1
+shader_param/precision = 0.1
 
 [sub_resource type="SpatialMaterial" id=16428]
 next_pass = SubResource( 17206 )
@@ -165635,9 +165633,8 @@ material = SubResource( 19738 )
 
 [sub_resource type="ShaderMaterial" id=13328]
 shader = ExtResource( 2 )
-shader_param/alpha = 1.0
-shader_param/palettesize = 16
-shader_param/base_palette = ExtResource( 5 )
+shader_param/num_colors = 1
+shader_param/precision = 0.1
 
 [sub_resource type="SpatialMaterial" id=13338]
 next_pass = SubResource( 13328 )
@@ -169597,9 +169594,10 @@ surfaces/0 = {
 
 [sub_resource type="ShaderMaterial" id=13337]
 shader = ExtResource( 2 )
-shader_param/alpha = 1.0
-shader_param/palettesize = 16
-shader_param/base_palette = ExtResource( 5 )
+shader_param/num_colors = 16
+shader_param/precision = 0.1
+shader_param/palette_in = ExtResource( 14 )
+shader_param/palette_out = ExtResource( 5 )
 
 [sub_resource type="SpatialMaterial" id=15536]
 next_pass = SubResource( 13337 )
@@ -173628,9 +173626,10 @@ material = SubResource( 13241 )
 
 [sub_resource type="ShaderMaterial" id=17720]
 shader = ExtResource( 2 )
-shader_param/alpha = 1.0
-shader_param/palettesize = 16
-shader_param/base_palette = ExtResource( 22 )
+shader_param/num_colors = 16
+shader_param/precision = 0.1
+shader_param/palette_in = ExtResource( 14 )
+shader_param/palette_out = ExtResource( 22 )
 
 [sub_resource type="SpatialMaterial" id=408]
 next_pass = SubResource( 17720 )
@@ -173714,9 +173713,10 @@ material = SubResource( 677 )
 
 [sub_resource type="ShaderMaterial" id=15535]
 shader = ExtResource( 2 )
-shader_param/alpha = 1.0
-shader_param/palettesize = 16
-shader_param/base_palette = ExtResource( 5 )
+shader_param/num_colors = 16
+shader_param/precision = 0.1
+shader_param/palette_in = ExtResource( 14 )
+shader_param/palette_out = ExtResource( 22 )
 
 [sub_resource type="SpatialMaterial" id=679]
 next_pass = SubResource( 15535 )

@@ -43,8 +43,6 @@ var broom_cooldown_time_limit = 10
 onready var spriteContainer = get_node("SpriteContainer")
 onready var broomSpriteAnimated = get_node("SpriteContainer/Sprite3DBroomAnimated")
 
-onready var grandmaHatSprite = get_node("SpriteContainer/InnerSpriteContainer/Sprite3D/HatSprite")
-onready var grandmaHandSprite = get_node("SpriteContainer/InnerSpriteContainer/Sprite3D/HandSprite")
 onready var enchantedBagSpriteAnimated = get_node("SpriteContainer/Sprite3DBagAnimated")
 onready var enchantedBagSpriteVisible = get_node("SpriteContainer/Sprite3DBagVisible")
 
@@ -1447,7 +1445,7 @@ func processSleepyLogic(delta):
     effective_sleepy_time_limit *= 2
   if transformation == TransformationState.NORMAL and on_ground and not summonedBroom and physics_state == self.PhysicsState.NORMAL and not anyOtherRitualInputsDetected(false) and aniPlayer.assigned_animation == "stand":
     sleepy_timer += (delta*11)
-    if sleepy_timer >= sleepy_time_limit:
+    if sleepy_timer >= effective_sleepy_time_limit:
       snoring = true
       aniPlayer.stop()
       aniPlayer.clear_queue()

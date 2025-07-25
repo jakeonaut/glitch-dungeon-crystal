@@ -166,7 +166,13 @@ tb = 2.0
 bb = -2.0
 grav = 0
 walk_speed = 13.0
+glitch_form = null
+floor_glitch_walk_speed = null
+invisible_glitch_walk_speed = null
 jump_force = 18
+time_influence = null
+y_div = null
+normal_offset = null
 
 [node name="Sprite3D" parent="Viewport/level/Player/SpriteContainer/InnerSpriteContainer" index="0"]
 texture = ExtResource( 13 )
@@ -202,7 +208,7 @@ bus = "Sfx"
 mesh = SubResource( 249 )
 
 [node name="MeshInstance2" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="BetaBuildLabel" parent="Viewport2/UILayer" index="24"]
 visible = false

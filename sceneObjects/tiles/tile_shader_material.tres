@@ -1,10 +1,8 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/tile_shader.tres" type="Shader" id=1]
-[ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=2]
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/alpha = 1.0
-shader_param/palettesize = 16
-shader_param/base_palette = ExtResource( 2 )
+shader_param/num_colors = 1
+shader_param/precision = 0.1

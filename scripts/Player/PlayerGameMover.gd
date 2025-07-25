@@ -339,6 +339,8 @@ func normalGlitch():
   changeSpriteColorPalette(global.player_base_palette)
   # mySprite.setNormalClothes()
 
+onready var grandmaHatSprite = get_node("SpriteContainer/InnerSpriteContainer/Sprite3D/HatSprite")
+onready var grandmaHandSprite = get_node("SpriteContainer/InnerSpriteContainer/Sprite3D/HandSprite")
 onready var broomSpriteVisible = get_node("SpriteContainer/Sprite3DBroomVisible") 
 onready var bubbleSprite = get_node("SpriteContainer/InnerSpriteContainer/BubbleSprite")
 onready var chickenSprite = get_node("SpriteContainer/InnerSpriteContainer/ChickenSprite")
@@ -353,6 +355,8 @@ func changeSpriteColorPalette(palette):
   # if malware_infected:
   #   return
   mySprite.material_override.set_shader_param("target_palette", palette)
+  grandmaHatSprite.material_override.set_shader_param("target_palette", palette)
+  grandmaHandSprite.material_override.set_shader_param("target_palette", palette)
   fishySprite.material_override.set_shader_param("target_palette", palette)
   chickenSprite.material_override.set_shader_param("target_palette", palette)
   # broomSpriteVisible.material_override.set_shader_param("target_palette", palette)

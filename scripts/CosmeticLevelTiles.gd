@@ -130,6 +130,6 @@ func changeColorPalette(palette):
         var _tile_name = mesh_library.get_item_name(item_id)
         var material = mesh.get_material()
         if material is ShaderMaterial:
-            material.set_shader_param("base_palette", palette)
+            material.set_shader_param("target_palette", palette)
         mesh.set_material(material)
         mesh_library.set_item_mesh(item_id, mesh)

@@ -90,12 +90,12 @@ func justPressedDown():
   return level.player.justPressedDown() and can_jump_or_fall
 
 # @override
-func processWallLadderWalking(delta):
+func processWallLadderWalking(_delta):
   vv = walk_speed * 1.1
   behavior_walking = true
   walk_direction = Vector2(0, 1)
 
-func processNotWallLadderWalking(delta):
+func processNotWallLadderWalking(_delta):
   pass
 
 # @override

@@ -1,11 +1,10 @@
-[gd_resource type="MeshLibrary" load_steps=1348 format=2]
+[gd_resource type="MeshLibrary" load_steps=1345 format=2]
 
 [ext_resource path="res://shaders/palette_swapper.shader" type="Shader" id=1]
 [ext_resource path="res://assets/textures/tiles_tiny0000.png" type="Texture" id=2]
 [ext_resource path="res://sceneObjects/tiles/tile_material.tres" type="Material" id=3]
 [ext_resource path="res://sceneObjects/tiles/tile_shader.tres" type="Shader" id=4]
 [ext_resource path="res://sceneObjects/tiles/tile_spatial_material.tres" type="Material" id=5]
-[ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=6]
 [ext_resource path="res://shaders/palette_swapper_glitch.shader" type="Shader" id=7]
 [ext_resource path="res://assets/textures/greyglitchspikes3.png" type="Texture" id=8]
 [ext_resource path="res://assets/textures/greyglitchspikes4.png" type="Texture" id=9]
@@ -20,8 +19,6 @@
 [ext_resource path="res://sceneObjects/tiles/glitchSpikeAniTexture1.tres" type="Texture" id=18]
 [ext_resource path="res://assets/palettes/weird_base_palette.png" type="Texture" id=19]
 [ext_resource path="res://sceneObjects/tiles/glitchSpikeAniTexture2.tres" type="Texture" id=20]
-[ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=23]
-[ext_resource path="res://assets/palettes/spikes_palette.png" type="Texture" id=24]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -1966,9 +1963,8 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=13337]
 shader = ExtResource( 4 )
-shader_param/alpha = 1.0
-shader_param/palettesize = 16
-shader_param/base_palette = ExtResource( 6 )
+shader_param/num_colors = 1
+shader_param/precision = 0.1
 
 [sub_resource type="SpatialMaterial" id=15536]
 next_pass = SubResource( 13337 )
@@ -4751,9 +4747,8 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=17720]
 shader = ExtResource( 4 )
-shader_param/alpha = 1.0
-shader_param/palettesize = 16
-shader_param/base_palette = ExtResource( 23 )
+shader_param/num_colors = 1
+shader_param/precision = 0.1
 
 [sub_resource type="SpatialMaterial" id=408]
 next_pass = SubResource( 17720 )
@@ -5013,9 +5008,8 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=15535]
 shader = ExtResource( 4 )
-shader_param/alpha = 1.0
-shader_param/palettesize = 16
-shader_param/base_palette = ExtResource( 6 )
+shader_param/num_colors = 1
+shader_param/precision = 0.1
 
 [sub_resource type="SpatialMaterial" id=679]
 next_pass = SubResource( 15535 )
@@ -9070,9 +9064,8 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=17206]
 shader = ExtResource( 4 )
-shader_param/alpha = 1.0
-shader_param/palettesize = 16
-shader_param/base_palette = ExtResource( 24 )
+shader_param/num_colors = 1
+shader_param/precision = 0.1
 
 [sub_resource type="SpatialMaterial" id=16428]
 next_pass = SubResource( 17206 )
@@ -9638,9 +9631,8 @@ size = Vector2( 64, 64 )
 
 [sub_resource type="ShaderMaterial" id=13328]
 shader = ExtResource( 4 )
-shader_param/alpha = 1.0
-shader_param/palettesize = 16
-shader_param/base_palette = ExtResource( 6 )
+shader_param/num_colors = 1
+shader_param/precision = 0.1
 
 [sub_resource type="SpatialMaterial" id=13338]
 next_pass = SubResource( 13328 )
