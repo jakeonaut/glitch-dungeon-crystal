@@ -21,7 +21,8 @@ enum MainMenuState {
 var mainMenuState = MainMenuState.MAIN_MENU
 
 func setUpRoomInitializationOverride():
-    player.mySprite.material_override.set_shader_param("black_offset", 0)
+    for sprite in [player.mySprite, player.grandmaHatSprite, player.grandmaHandSprite]:
+        sprite.material_override.set_shader_param("black_offset", 0)
     if not global.has_started_game:
         global.isOnMainMenu = true
         player.normalGlitch()

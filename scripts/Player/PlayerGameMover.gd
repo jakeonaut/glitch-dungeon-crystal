@@ -1002,12 +1002,15 @@ func processJumpInputs(delta):
 
   if not is_touching_ladder and not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
     var triedToDoubleJump = justPressedJump() and not should_magic_jump and not global.pauseMoveInput
-    # if global.memory["magic_lantern"] and not has_used_magic_lantern and triedToDoubleJump:
-    #   gravitySound.play()
-    #   level.flipGravity()
-    #   has_used_magic_lantern = true
-    #   was_just_on_ground_timer = was_just_on_ground_time_limit
-    #   glitchTickle()
+    if global.memory["mushroom_soul"] >= 1 and global.memory["mushroom_soul_enabled"] and not has_used_magic_lantern and triedToDoubleJump:
+      gravitySound.play()
+      level.flipGravity(-1 * (self.grav / abs(self.grav)))
+      for _i in range(5):
+        spawnASpore(self.global_transform.origin, false)
+      has_used_magic_lantern = true
+      was_just_on_ground_timer = was_just_on_ground_time_limit
+      glitchTickle()
+    # # ============ OLD MUSHROOM INFECTION DOUBLE JUMP ===============
     # elif is_mushroom_infected and not has_mushroom_double_jumped and triedToDoubleJump:
     #   has_mushroom_double_jumped = true
     #   feather_jump_timer = 0
@@ -1024,11 +1027,13 @@ func processJumpInputs(delta):
     #   aniPlayer.play("jumpSquat", -1, 1.0 if isFeatherLike() else 1.0)
     #   aniPlayer.queue("jumpStart")
     #   aniPlayer.queue("jump")
-    if glitch_form == global.GlitchForm.NORMAL and global.memory["can_nest"] and global.memory["nesting_doll"] > 1 and triedToDoubleJump and not has_mushroom_double_jumped: 
-      doubleJump()
-      nesting_doll_state -= 1
-      updateNestingDoll(nesting_doll_state + 1)
-      glitchTickle()
+
+    # # ============ NESTING DOLL ===============
+    # if glitch_form == global.GlitchForm.NORMAL and global.memory["can_nest"] and global.memory["nesting_doll"] > 1 and triedToDoubleJump and not has_mushroom_double_jumped: 
+    #   doubleJump()
+    #   nesting_doll_state -= 1
+    #   updateNestingDoll(nesting_doll_state + 1)
+    #   glitchTickle()
         
   .processJumpInputs(delta)
 
@@ -1091,19 +1096,31 @@ onready var malwareSound = get_node("Sounds/MalwareSound")
 var glitch_tickle_timer = 0
 func glitchTickle(play_sound = true):
   glitch_tickle_timer = 1
-  mySprite.material_override.set_shader_param("enable_glitch", true)
-  mySprite.material_override.set_shader_param("enable_remove_skin_tone", true)
-  mySprite.material_override.set_shader_param("shake_power", 0.01)
-  mySprite.material_override.set_shader_param("shake_color_rate", 0.01)
-  mySprite.material_override.set_shader_param("time_influence", 30)
-  mySprite.material_override.set_shader_param("y_div", 2.0)
-  mySprite.material_override.set_shader_param("normal_offset", 0.15)
+  glitchTickleSprite(mySprite)
+  glitchTickleSprite(grandmaHatSprite)
+  glitchTickleSprite(grandmaHandSprite)
   if play_sound:
     if malware_infected:
       malwareSound.play()
     else:
       tickleSound.pitch_scale = 0.5
       tickleSound.play()
+
+func glitchTickleSprite(sprite):
+  sprite.material_override.set_shader_param("enable_glitch", true)
+  sprite.material_override.set_shader_param("enable_remove_skin_tone", true)
+  sprite.material_override.set_shader_param("shake_power", 0.01)
+  sprite.material_override.set_shader_param("shake_color_rate", 0.01)
+  sprite.material_override.set_shader_param("time_influence", 30)
+  sprite.material_override.set_shader_param("y_div", 2.0)
+  sprite.material_override.set_shader_param("normal_offset", 0.15)
+
+func unglitchTickleSprite(sprite):
+  sprite.get_material_override().set_shader_param("enable_glitch", false)
+  sprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
+  sprite.material_override.set_shader_param("time_influence", 3)
+  sprite.material_override.set_shader_param("y_div", 2.3)
+  sprite.material_override.set_shader_param("normal_offset", .02)
 
 var sporeRes = preload("res://sceneObjects/Environment/CatSpore.tscn")
 func spawnASpore(where_origin, inverse):

@@ -101,7 +101,8 @@ func passiveActivate(_delta, _is_player):
   else:
     level.flipGravity(-1)
 
-  level.player.mySprite.material_override.set_shader_param("enable_palette_cycle", true)
+  for sprite in [level.player.mySprite, level.player.grandmaHatSprite, level.player.grandmaHandSprite]:
+    sprite.material_override.set_shader_param("enable_palette_cycle", true)
   level.player.getSmacked()
   level.player.pauseSelf = false
 

@@ -3959,8 +3959,8 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 44, 45 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sounds/SnoreSound:playing")
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -3968,31 +3968,10 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sounds/ExhaleSound:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
-}
-tracks/3/type = "method"
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
 "values": [ {
+"args": [  ],
+"method": "breathInSnore"
+}, {
 "args": [  ],
 "method": "spawnSnoreBubble"
 } ]
@@ -7398,23 +7377,13 @@ tracks/2/keys = {
 [node name="Player" type="Spatial"]
 script = ExtResource( 1 )
 true_terminal_vel = 14
-lb = null
-rb = null
-tb = null
-bb = null
 grav = 28
 walk_speed = 6.5
 run_speed = 8
-glitch_form = null
 feather_glitch_walk_speed = 7
-floor_glitch_walk_speed = null
-invisible_glitch_walk_speed = null
 swimming_walk_speed = 5
 jump_force = 9
 invisible_jump_force = 10
-time_influence = null
-y_div = null
-normal_offset = null
 
 [node name="TileArea" type="Area" parent="."]
 
@@ -7679,12 +7648,12 @@ bus = "Sfx"
 
 [node name="SnoreSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 94 )
-volume_db = -15.0
+volume_db = -19.0
 bus = "Sfx"
 
 [node name="ExhaleSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 93 )
-volume_db = -15.0
+volume_db = -19.0
 pitch_scale = 0.9
 bus = "Sfx"
 

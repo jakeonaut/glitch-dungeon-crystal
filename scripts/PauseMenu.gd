@@ -1600,9 +1600,9 @@ func processControlsLogic(_delta):
     if control_index == i:
       var buttonTextAdd = ""
       if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
-        buttonTextAdd = "press key" if global.is_reading_input else global.getInputText(controlConfig.input_action, 2, true, showCondensedMenu)
+        buttonTextAdd = (tr("UI.InputMenu.14") % (tr("UI.PauseMenu.2").to_lower()))  if global.is_reading_input else global.getInputText(controlConfig.input_action, 2, true, showCondensedMenu)
       elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
-        buttonTextAdd = "[/font]press button[font=res://DarkInputExtraFont_small.tres]" if global.is_reading_input else global.getInputText(controlConfig.input_action, 1, false)
+        buttonTextAdd = "[/font]" + (tr("UI.InputMenu.14_2") % (tr("UI.PauseMenu.2").to_lower())) + "[font=res://DarkInputExtraFont_small.tres]" if global.is_reading_input else global.getInputText(controlConfig.input_action, 1, false)
       buttonInputText += buttonTextAdd + " \n"
       inputLabelText += "[wave]" + controlConfig.label_str + "[/wave]\n"
     else:

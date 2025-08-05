@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=2]
+[gd_scene load_steps=130 format=2]
 
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=2]
@@ -90,6 +90,10 @@ extents = Vector3( 0.5, 0.75, 1 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 1.5, 1 )
 
+[sub_resource type="BoxShape" id=242]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
+
 [sub_resource type="BoxShape" id=16]
 resource_local_to_scene = true
 extents = Vector3( 2, 1.3, 1.3 )
@@ -106,6 +110,10 @@ extents = Vector3( 0.5, 0.75, 1 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 1.5, 1 )
 
+[sub_resource type="BoxShape" id=243]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
+
 [sub_resource type="BoxShape" id=148]
 resource_local_to_scene = true
 extents = Vector3( 1, 0.8, 1.3 )
@@ -120,13 +128,14 @@ extents = Vector3( 2, 1.3, 1.3 )
 
 [sub_resource type="ShaderMaterial" id=163]
 shader = ExtResource( 12 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -134,11 +143,18 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
@@ -203,13 +219,14 @@ extents = Vector3( 2, 1.3, 1.3 )
 
 [sub_resource type="ShaderMaterial" id=172]
 shader = ExtResource( 12 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -217,11 +234,18 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
@@ -287,6 +311,10 @@ extents = Vector3( 0.5, 0.75, 1 )
 [sub_resource type="BoxShape" id=233]
 resource_local_to_scene = true
 extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=244]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="BoxShape" id=181]
 resource_local_to_scene = true
@@ -459,6 +487,10 @@ extents = Vector3( 0.5, 0.75, 1 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 1.5, 1 )
 
+[sub_resource type="BoxShape" id=245]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
+
 [sub_resource type="Animation" id=222]
 length = 0.001
 tracks/0/type = "value"
@@ -621,6 +653,10 @@ extents = Vector3( 0.5, 0.75, 1 )
 [sub_resource type="BoxShape" id=237]
 resource_local_to_scene = true
 extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=246]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="Animation" id=183]
 length = 0.001
@@ -785,6 +821,10 @@ extents = Vector3( 0.5, 0.75, 1 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 1.5, 1 )
 
+[sub_resource type="BoxShape" id=247]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
+
 [sub_resource type="Animation" id=189]
 length = 0.001
 tracks/0/type = "value"
@@ -947,6 +987,10 @@ extents = Vector3( 0.5, 0.75, 1 )
 [sub_resource type="BoxShape" id=241]
 resource_local_to_scene = true
 extents = Vector3( 1.5, 1.5, 1 )
+
+[sub_resource type="BoxShape" id=248]
+resource_local_to_scene = true
+extents = Vector3( 0.25, 0.75, 1 )
 
 [sub_resource type="Animation" id=195]
 resource_name = "ActivatedIdle"
@@ -1631,7 +1675,7 @@ __meta__ = {
 [node name="Player" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.1, 8, 0 )
 
-[node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="7"]
+[node name="DialogStartSound" parent="Viewport/level/Player/TextContainer/TextBox" index="10"]
 pitch_scale = 1.1
 
 [node name="Door7" parent="Viewport/level" instance=ExtResource( 25 )]
@@ -1641,10 +1685,7 @@ is_locked = true
 path = "res://levels/EndlessFantasy/gd1AbstractSuburbs/000SuburbStreetlight.tscn"
 num_keys_unlock = 1
 
-[node name="Sprite3D2" parent="Viewport/level/Door7" index="1"]
-visible = false
-
-[node name="AnimationPlayer" parent="Viewport/level/Door7" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door7" index="6"]
 anims/doorClose = SubResource( 101 )
 anims/doorOpen = SubResource( 102 )
 anims/locked = SubResource( 103 )
@@ -1654,6 +1695,9 @@ shape = SubResource( 228 )
 
 [node name="PassiveCollisionShape" parent="Viewport/level/Door7/InteractionArea" index="1"]
 shape = SubResource( 229 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door7/InteractionArea2" index="0"]
+shape = SubResource( 242 )
 
 [node name="CollisionShape" parent="Viewport/level/Door7/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 16 )
@@ -1784,14 +1828,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -11, -4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 7, 0 )
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
 
-[node name="Sprite3D2" parent="Viewport/level/Door" index="1"]
-visible = false
-
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 shape = SubResource( 230 )
 
 [node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
 shape = SubResource( 231 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea2" index="0"]
+shape = SubResource( 243 )
 
 [node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 148 )
@@ -1819,160 +1863,6 @@ dont_recolor_me = true
 
 [node name="CollisionShape" parent="Viewport/level/FrogCroneNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 162 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="4"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="5"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar8" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="6"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar9" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="7"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar10" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="8"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar11" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="9"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 33.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar12" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="10"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar13" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="11"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar14" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="12"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar15" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="13"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar16" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="14"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar17" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="15"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar18" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/Text" index="16"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/TextPrompt" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/TextPrompt" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/TextPrompt" index="4"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 26.0
-
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/FrogCroneNPC/NPC TextBox/TextBox/TextPrompt" index="5"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="Sprite3D" parent="Viewport/level/FrogCroneNPC" index="3"]
 material_override = SubResource( 163 )
@@ -2005,160 +1895,6 @@ dont_recolor_me = true
 [node name="CollisionShape" parent="Viewport/level/BabushkaCat/SmallInteractionArea" index="0"]
 shape = SubResource( 171 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/Text" index="4"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/Text" index="5"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar8" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/Text" index="6"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar9" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/Text" index="7"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 66.0
-step = 1.0
-page = 128.0
-
-[node name="VScrollBar10" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/Text" index="8"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar11" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/Text" index="9"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 33.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar12" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/Text" index="10"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar13" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/Text" index="11"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar14" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/Text" index="12"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar15" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/Text" index="13"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar16" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/Text" index="14"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar17" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/Text" index="15"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar18" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/Text" index="16"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/TextPrompt" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/TextPrompt" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/TextPrompt" index="4"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 26.0
-
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox/TextPrompt" index="5"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="Sprite3D" parent="Viewport/level/BabushkaCat" index="3"]
 material_override = SubResource( 172 )
 frame = 18
@@ -2183,14 +1919,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -6, 0 )
 path = "res://levels/EndlessFantasy/gd1FishingVillage/__introCutscene.tscn"
 
-[node name="Sprite3D2" parent="Viewport/level/Door2" index="1"]
-visible = false
-
 [node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
 shape = SubResource( 232 )
 
 [node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
 shape = SubResource( 233 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea2" index="0"]
+shape = SubResource( 244 )
 
 [node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 181 )
@@ -2203,13 +1939,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -22, 0 )
 path = "res://levels/EndlessFantasy/gd1FishingVillage/000FishingVillageIntro.tscn"
 is_passive = true
 
-[node name="Sprite3D2" parent="Viewport/level/Door5" index="1"]
-visible = false
-
-[node name="landing" parent="Viewport/level/Door5" index="3"]
+[node name="landing" parent="Viewport/level/Door5" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door5" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door5" index="6"]
 anims/RESET = SubResource( 216 )
 anims/doorBarred = SubResource( 217 )
 anims/doorClose = SubResource( 218 )
@@ -2223,6 +1956,9 @@ shape = SubResource( 234 )
 [node name="PassiveCollisionShape" parent="Viewport/level/Door5/InteractionArea" index="1"]
 shape = SubResource( 235 )
 
+[node name="ActiveCollisionShape" parent="Viewport/level/Door5/InteractionArea2" index="0"]
+shape = SubResource( 245 )
+
 [node name="CollisionShape" parent="Viewport/level/Door5/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 181 )
 
@@ -2234,13 +1970,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -22, 0 )
 path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
 is_passive = true
 
-[node name="Sprite3D2" parent="Viewport/level/Door6" index="1"]
-visible = false
-
-[node name="landing" parent="Viewport/level/Door6" index="3"]
+[node name="landing" parent="Viewport/level/Door6" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door6" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door6" index="6"]
 anims/RESET = SubResource( 222 )
 anims/doorBarred = SubResource( 223 )
 anims/doorClose = SubResource( 224 )
@@ -2254,6 +1987,9 @@ shape = SubResource( 236 )
 [node name="PassiveCollisionShape" parent="Viewport/level/Door6/InteractionArea" index="1"]
 shape = SubResource( 237 )
 
+[node name="ActiveCollisionShape" parent="Viewport/level/Door6/InteractionArea2" index="0"]
+shape = SubResource( 246 )
+
 [node name="CollisionShape" parent="Viewport/level/Door6/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 181 )
 
@@ -2264,10 +2000,7 @@ shape = SubResource( 182 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 2, 0 )
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/0000Start.tscn"
 
-[node name="Sprite3D2" parent="Viewport/level/Door3" index="1"]
-visible = false
-
-[node name="AnimationPlayer" parent="Viewport/level/Door3" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door3" index="6"]
 anims/RESET = SubResource( 183 )
 anims/doorBarred = SubResource( 184 )
 anims/doorClose = SubResource( 185 )
@@ -2281,6 +2014,9 @@ shape = SubResource( 238 )
 [node name="PassiveCollisionShape" parent="Viewport/level/Door3/InteractionArea" index="1"]
 shape = SubResource( 239 )
 
+[node name="ActiveCollisionShape" parent="Viewport/level/Door3/InteractionArea2" index="0"]
+shape = SubResource( 247 )
+
 [node name="CollisionShape" parent="Viewport/level/Door3/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 181 )
 
@@ -2291,10 +2027,7 @@ shape = SubResource( 182 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 15, 0 )
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/001PoisonShroomCove.tscn"
 
-[node name="Sprite3D2" parent="Viewport/level/Door4" index="1"]
-visible = false
-
-[node name="AnimationPlayer" parent="Viewport/level/Door4" index="4"]
+[node name="AnimationPlayer" parent="Viewport/level/Door4" index="6"]
 anims/RESET = SubResource( 189 )
 anims/doorBarred = SubResource( 190 )
 anims/doorClose = SubResource( 191 )
@@ -2307,6 +2040,9 @@ shape = SubResource( 240 )
 
 [node name="PassiveCollisionShape" parent="Viewport/level/Door4/InteractionArea" index="1"]
 shape = SubResource( 241 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door4/InteractionArea2" index="0"]
+shape = SubResource( 248 )
 
 [node name="CollisionShape" parent="Viewport/level/Door4/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 181 )
@@ -2328,7 +2064,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, -4, 0 )
 
 [node name="AngelStatue3" parent="Viewport/level" instance=ExtResource( 34 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -47, 9, 0 )
-is_active = false
 
 [node name="Sprite3D" parent="Viewport/level/AngelStatue3" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.980348, 0 )
@@ -2345,34 +2080,6 @@ shape = SubResource( 198 )
 [node name="CollisionShape" parent="Viewport/level/AngelStatue3/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 199 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/AngelStatue3/NPC/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/AngelStatue3/NPC/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/AngelStatue3/NPC/NPC TextBox/TextBox/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 26.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/AngelStatue3/NPC/NPC TextBox/TextBox/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="AnimationPlayer" parent="Viewport/level/AngelStatue3/NPC" index="4"]
 anims/default = SubResource( 200 )
 anims/fall = SubResource( 201 )
@@ -2386,7 +2093,6 @@ shape = SubResource( 206 )
 
 [node name="AngelStatue4" parent="Viewport/level" instance=ExtResource( 34 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 9, 0 )
-is_active = false
 
 [node name="Sprite3D" parent="Viewport/level/AngelStatue4" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.980348, 0 )
@@ -2401,34 +2107,6 @@ shape = SubResource( 198 )
 
 [node name="CollisionShape" parent="Viewport/level/AngelStatue4/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 199 )
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/AngelStatue4/NPC/NPC TextBox/TextBox/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 101.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/AngelStatue4/NPC/NPC TextBox/TextBox/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/AngelStatue4/NPC/NPC TextBox/TextBox/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-max_value = 20.0
-step = 1.0
-page = 26.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/AngelStatue4/NPC/NPC TextBox/TextBox/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
 
 [node name="AnimationPlayer" parent="Viewport/level/AngelStatue4/NPC" index="4"]
 anims/default = SubResource( 210 )
@@ -2499,8 +2177,10 @@ visible = true
 [editable path="Viewport/level/AngelStatue3"]
 [editable path="Viewport/level/AngelStatue3/NPC"]
 [editable path="Viewport/level/AngelStatue3/NPC/NPC TextBox"]
+[editable path="Viewport/level/AngelStatue3/SavePoint"]
 [editable path="Viewport/level/AngelStatue4"]
 [editable path="Viewport/level/AngelStatue4/NPC"]
 [editable path="Viewport/level/AngelStatue4/NPC/NPC TextBox"]
+[editable path="Viewport/level/AngelStatue4/SavePoint"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

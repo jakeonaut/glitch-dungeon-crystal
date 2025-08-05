@@ -166,13 +166,13 @@ tb = 2.0
 bb = -2.0
 grav = 0
 walk_speed = 13.0
-glitch_form = null
-floor_glitch_walk_speed = null
-invisible_glitch_walk_speed = null
+glitch_form = 0
+floor_glitch_walk_speed = 3
+invisible_glitch_walk_speed = 6
 jump_force = 18
-time_influence = null
-y_div = null
-normal_offset = null
+time_influence = 35
+y_div = 2.3
+normal_offset = 0.15
 
 [node name="Sprite3D" parent="Viewport/level/Player/SpriteContainer/InnerSpriteContainer" index="0"]
 texture = ExtResource( 13 )

@@ -140,6 +140,7 @@ enum GrandmaOutfit {
     BABUSHKA,
     NO_HAT,
     WITCH_HAT,
+    GODDESS_EYE,
     BONNET,
     NON_LA,
     SUN_HAT,
@@ -219,6 +220,12 @@ var respawnVarTimerHack = 0
 var respawnVarTimerHackLimit = 2
 var cameraRotation = 0
 
+enum ControllerType {
+    KEYBOARD = 1
+    GAMEPAD = 2
+}
+var was_last_pressed_input_type = ControllerType.KEYBOARD
+var was_gamepad_connected = false
 var pauseMoveInput = false # don't allow player physics or camera input??
 var shouldRenderAsCinematic = false
 var pauseGame = false
@@ -289,6 +296,9 @@ func _ready():
     if angelWarping: if justAngelWarped: pass
     if has_been_baba_yaga_cursed: pass
     if malware_infected: pass
+    if self.isGamepadConnected():
+        was_last_pressed_input_type = ControllerType.GAMEPAD
+        was_gamepad_connected = true
 
     resetMemory()
     resetUserSettings()
@@ -1290,16 +1300,15 @@ func toggleEnterDoorDirection():
     elif dir == -1:
         userSettings["doorDir"] = 1
 
-func isControllerConnected():
+func isGamepadConnected():
     return Input.get_connected_joypads().size() > 0
 
 func getLargeInputText(input_action, input_display = 0, use_bbtext = true):
-    # TODO(jaketrower): Support both key & gamepad here based on which was pressed last ?
-    var is_controller_connected = (self.isControllerConnected() or input_display == 1) and not input_display == 2
+    var should_render_as_controller_input = input_display == 1 or (input_display == 0 and was_last_pressed_input_type == ControllerType.GAMEPAD)
 
     var inputEvents = InputMap.get_action_list(input_action)
     for inputEvent in inputEvents:
-        if is_controller_connected:
+        if should_render_as_controller_input:
             if inputEvent is InputEventJoypadButton:
                 if use_bbtext:
                     var buttonIndexStr = getButtonIndexStr(inputEvent.button_index, userSettings["glyphType"])
@@ -1329,13 +1338,12 @@ func getLargeInputText(input_action, input_display = 0, use_bbtext = true):
     return null
 
 func getInputText(input_action, input_display = 0, use_bbtext = true, showCondensedMenu = false):
-    # TODO(jaketrower): Support both key & gamepad here based on which was pressed last ?
-    var is_controller_connected = (self.isControllerConnected() or input_display == 1) and not input_display == 2
+    var should_render_as_controller_input = input_display == 1 or (input_display == 0 and self.was_last_pressed_input_type == ControllerType.GAMEPAD)
 
     var inputEvents = InputMap.get_action_list(input_action)
     var strToReturn = ""
     for inputEvent in inputEvents:
-        if is_controller_connected:
+        if should_render_as_controller_input:
             if inputEvent is InputEventJoypadButton:
                 if use_bbtext:
                     var buttonIndexStr = getButtonIndexStr(inputEvent.button_index, userSettings["glyphType"])

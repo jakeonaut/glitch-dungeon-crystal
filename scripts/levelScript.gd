@@ -166,6 +166,8 @@ func _ready_impl():
     uiLayer.setDisplayTitle(global.getDisplayTitle(self.getLevelZoneName()))
   tryShowUIElements()
   trySpawnFollowers()
+  for sprite in [player.mySprite, player.grandmaHatSprite, player.grandmaHandSprite]:
+    sprite.material_override.set_shader_param("black_offset", 1)
   setUpRoomInitializationOverride()
   restartMusic()
   if global.hasGottenLevelGeode or is_randomizing:
@@ -182,8 +184,9 @@ func _ready_impl():
   else:
     pass
   global.activeThrowableObjectPath = null
-  player.mySprite.get_material_override().set_shader_param("enable_glitch", false)
-  player.mySprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
+  for sprite in [player.mySprite, player.grandmaHatSprite, player.grandmaHandSprite]:
+    sprite.get_material_override().set_shader_param("enable_glitch", false)
+    sprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
   if global.memory["mushroom_soul"] > 0 and global.memory["mushroom_soul_ver"] == 0:
     global.memory["mushroom_soul_ver"] = 1
     player.sayThis(tr("NPC.Secret.2") + "\n" + tr("NPC.Treasure.9"))
@@ -305,6 +308,14 @@ func _process(delta):
   if Input.is_action_pressed("toggle_fullscreen"):
     return
 
+  if global.isGamepadConnected():
+    if not global.was_gamepad_connected:
+      global.was_last_pressed_input_type = global.ControllerType.GAMEPAD
+    global.was_gamepad_connected = true
+  else:
+    if global.was_gamepad_connected:
+      global.was_last_pressed_input_type = global.ControllerType.KEYBOARD
+    global.was_gamepad_connected = false
   processPauseMenu()
   processGrandmaStatueSavePoints()
   processBossHealth(delta)

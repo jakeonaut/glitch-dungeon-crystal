@@ -178,7 +178,7 @@ can_nav_right = false
 can_nav_down = false
 
 [node name="LiminalAngelFluteRoom" parent="TutorialDungeon" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 8, 0 )
 material_override = null
 offset = Vector2( 1, 0 )
 frame = 4
