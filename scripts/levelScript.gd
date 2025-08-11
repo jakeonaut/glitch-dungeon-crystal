@@ -16,6 +16,7 @@ onready var viewport2Texture = get_node("../../Viewport2/ViewportTexture")
 onready var viewport2or3 = get_node("../../Viewport3") if has_node("../../Viewport3") else get_node("../../Viewport2")
 var current_sprite_palette = global.grey_palette
 export var player_message = "???"
+export var is_chicken_room = false
 
 export var dont_glitch_tiles = false
 export var show_crt_effect = false
@@ -201,6 +202,10 @@ func _ready_impl():
     global.setLevelZoneStartTime()
   # if not global.userSettings["gles3"]:
   #   convertAll3dSpritesFromGles3ToGles2()
+
+  if is_chicken_room:
+    player.getChickenInfected()
+    player.chicken_timer = -player.chicken_time_limit * 4
 
 
 var hasGameFrameBackground = false

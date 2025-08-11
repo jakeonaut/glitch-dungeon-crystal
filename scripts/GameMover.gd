@@ -733,6 +733,9 @@ func pressingRun():
 func startRun():
   if not canRun():
     return
+  actuallyStartRun()
+
+func actuallyStartRun():
   var origin = Vector3(self.global_transform.origin.x, self.global_transform.origin.y - 1, 0)
   if runSound:
     runSound.play()
@@ -978,14 +981,15 @@ func isKindaSortaOfOnGround():
   # I'm on the ground or just fell off a platform...
   return on_ground or (was_just_on_ground_timer <= was_just_on_ground_time_limit and ((vv < 0 and grav > 0) or vv > 0 and grav < 0))
 
+func getRunAdd():
+  if not pressingRun():
+    return 0
+  return 3 if on_ground else 1
+
 func getWalkSpeed(_delta):
   # if glitch_form == global.GlitchForm.FLOOR and not on_ground and not jumped_from_true_ground:
   #     curr_walk_speed = floor_glitch_walk_speed
-  var run_add = 0
-  if pressingRun():
-      run_add = 3
-      if not on_ground:
-        run_add = 1
+  var run_add = getRunAdd()
 
   if glitch_form == global.GlitchForm.FEATHER:
     return feather_glitch_walk_speed + run_add # no run_add

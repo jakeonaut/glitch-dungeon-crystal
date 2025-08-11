@@ -7,10 +7,11 @@ func _ready():
   pass
 
 func activateScript():
-  if level.player.transformation != level.player.TransformationState.CHICKEN:
-    var text = tr("NPC.ChickenSecret.2")
-    textBox.text_final = text
-    textBox.textNode.bbcode_text = text
+  pass
+  # if level.player.transformation != level.player.TransformationState.CHICKEN:
+  #   var text = tr("NPC.ChickenSecret.2")
+  #   textBox.text_final = text
+  #   textBox.textNode.bbcode_text = text
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
   # OVERRIDE ME

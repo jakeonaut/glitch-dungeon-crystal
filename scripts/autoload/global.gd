@@ -329,6 +329,7 @@ func resetMemory():
     memory["mole_cricket_enabled"] = true
     memory["zora_flippers_enabled"] = true
     memory["broomerang_enabled"] = true
+    memory["pegasus_shoes_enabled"] = true
 
     # game stuff
     memory["hasEverTouchedObelisk"] = false
@@ -384,6 +385,7 @@ func resetMemory():
     memory["babushka_cat_sprint"] = 0
     memory["broom_double_jump"] = 0
     memory["zora_flippers"] = 0
+    memory["pegasus_shoes"] = 0
     memory["fishingRod"] = false
     memory["mole_cricket"] = 0
     memory["flowerPot"] = false

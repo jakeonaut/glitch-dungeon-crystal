@@ -596,6 +596,9 @@ var dig_smoke_time_limit = 3
 var dig_direction = null
 # @override
 func collideWithWall(local_lv):
+  if global.memory["pegasus_shoes"] and pressingRun() and on_ground and not has_pegasus_left_ground and global.memory["pegasus_shoes_enabled"]:
+    on_ground = true # needs to be BEFORE tryDieToEnemy to set remembered_on_ground correctly
+    biggerBump()
   .collideWithWall(local_lv)
   if physics_state == PhysicsState.BEING_TOSSED:
     pauseAnimation = false
@@ -603,6 +606,7 @@ func collideWithWall(local_lv):
     on_ground = true # needs to be BEFORE tryDieToEnemy to set remembered_on_ground correctly
     bigBump()
     getABroom()
+  
   if grav == 0:
     grav = PLAYER_GRAV
   var tile_buffer = 0.5 if glitch_form == global.GlitchForm.INVISIBLE else 0.1
@@ -690,6 +694,10 @@ func bigBump():
   aniPlayer.clear_queue()
   # aniPlayer.play("uncorruptMe")
   aniPlayer.queue("fall")
+
+func biggerBump():
+  bigBump()
+  bumpSound.play()
 
 onready var glitchCollisionShape = get_node("GlitchArea/CollisionShape")
 func glitchTilesAroundMe(margin = 0.25, rand_timer = false):
@@ -876,6 +884,29 @@ func getWalkSpeedHelper(delta):
     #       return 4
     #     else: return 2
     return .getWalkSpeed(delta) # super()
+
+var has_pegasus_left_ground = false
+# @override
+func getRunAdd():
+  if not pressingRun():
+    return 0
+  if not on_ground:
+    has_pegasus_left_ground = true
+  if global.memory["pegasus_shoes"] > 0 and global.memory["pegasus_shoes_enabled"] and not has_pegasus_left_ground:
+    return 6 if on_ground else 1
+  return 3 if on_ground else 1
+
+# @override
+func actuallyStartRun():
+  var origin = Vector3(self.global_transform.origin.x, self.global_transform.origin.y - 1, 0)
+
+  if global.memory["pegasus_shoes"] > 0 and global.memory["pegasus_shoes_enabled"] and on_ground:
+    has_pegasus_left_ground = false
+    runSound.play()
+    level.summonSmokeClouds(origin, 2, false, false)
+  else:
+    runSound.play()
+    level.summonSmokeClouds(origin, 2, false, false)
 
 func doIHaveSpell(which_spell):
   if glitch_form == which_spell:
