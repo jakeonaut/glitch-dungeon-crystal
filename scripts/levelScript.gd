@@ -595,7 +595,6 @@ func tryToRespawn():
   global.roomEdgeVector = null
   global.isRespawning = false
   global.shouldRenderAsCinematic = false
-  player.getABroom()
 
   player.visible = true
   player.unsmack()
@@ -607,6 +606,7 @@ func tryToRespawn():
     global.memory["zora_flippers"] = 3
   player.nesting_doll_state = global.memory["nesting_doll"]
   player.updateNestingDoll(global.memory["nesting_doll"]) # TODO(jaketrower): need to remember nesting doll position?
+  player.getABroom()
   
   # if player.nesting_doll_state == global.NestingDoll.BABY:
   #   player.shroomAniPlayer.stop(true)

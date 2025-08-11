@@ -411,8 +411,8 @@ func _process(delta):
   # is_turn_based = malware_infected and not physics_state == PhysicsState.BEING_TOSSED
   should_always_stop_walking_immediately = malware_infected
 
-  if nesting_doll_state == global.NestingDoll.BABY and not Input.is_action_pressed("jump_button") and not has_used_magic_lantern:
-    tryToRevertFromBaby()
+  # if nesting_doll_state == global.NestingDoll.BABY and not Input.is_action_pressed("jump_button") and not has_used_magic_lantern:
+  #   tryToRevertFromBaby()
 
   if glitch_form == global.GlitchForm.INVISIBLE and global.memory["broom"]:
     global.memory["broom"] = false
@@ -1080,6 +1080,8 @@ func processGlitchHurtRecovery(delta):
         if physics_state == PhysicsState.GLITCH_RECOVERY:
           self.physics_state = PhysicsState.NORMAL
         global.isRespawning = false
+        if nesting_doll_state == global.NestingDoll.BABY and has_used_magic_lantern >= MAX_DOUBLE_JUMPS:
+          return true
         for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite]:
           sprite.material_override.set_shader_param("enable_glitch", false)
           sprite.material_override.set_shader_param("enable_remove_skin_tone", false)
@@ -1197,7 +1199,7 @@ func processFishyLogic(_delta):
     fishFormSound.play()
   elif transformation == TransformationState.FISHY:
     if not fishySprite.visible and not aniPlayer.assigned_animation == "transformToFishy":
-      allSpritesBackToNormal(fishySprite)
+      allSpritesBackToNormal([fishySprite])
     fishySprite.flip_h = mySprite.flip_h
     physics_vars.should_apply_gravity = pressingDown()
     glitchTilesAroundMe(-2)
@@ -1383,7 +1385,7 @@ var chicken_time_limit = 90
 func processChickenLogic(delta):
   if transformation == TransformationState.CHICKEN:
     if not chickenSprite.visible and not aniPlayer.assigned_animation == "transformToChicken":
-      allSpritesBackToNormal(chickenSprite)
+      allSpritesBackToNormal([chickenSprite])
     chickenSprite.flip_h = mySprite.flip_h
     glitchTilesAroundMe(-2)
     chicken_timer += (delta*11)
@@ -1561,7 +1563,7 @@ func checkSolidTilesOnMe():
 func processMoleLogic(delta):
   if transformation == TransformationState.MOLE_DIGGING:
     # if not moleSprite.visible and not aniPlayer.assigned_animation == "transformToMole":
-    #   allSpritesBackToNormal(moleSprite)
+    #   allSpritesBackToNormal([moleSprite])
     dig_smoke_timer += (delta*11)
     if dig_smoke_timer >= dig_smoke_time_limit:
       dig_smoke_timer = 0
@@ -1730,7 +1732,7 @@ func collideWithCeiling(local_lv):
     nesting_doll_state == global.NestingDoll.MATRIARCH or
     nesting_doll_state == global.NestingDoll.BABY or
     not pressingJump() or
-    (dig_timer == 0 and (pressingMoveLeft() or pressingMoveRight())) or 
+    (dig_timer == 0 and ((pressingMoveLeft() or pressingMoveRight()) and not pressingMoveUp())) or 
     areAnyTilesAboveMeFragileBrickSolid or
     (transformation != TransformationState.NORMAL and transformation != TransformationState.MOLE_DIGGING)
     or (glitch_form != global.GlitchForm.INVISIBLE and areAnyTilesAboveMeSpikes)
@@ -1957,20 +1959,21 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     nesting_doll_state = global.NestingDoll.GRANDMA
     updateNestingDoll(nesting_doll_state)
     global.pauseMoveInput = false
-  # elif nesting_doll_state == global.NestingDoll.GRANDMA and global.memory["mushroom_soul"] >= 1 and global.memory["mushroom_soul_enabled"] and not should_immediately_die and whichBoss == null:
-  #   global.memory["hp"] += 1
-  #   physics_state = PhysicsState.GLITCH_HURT
-  #   glitchTickle(true)
-  #   getSmacked()
-  #   glitch_death_timer = 0
-  #   shroomAniPlayer.stop()
-  #   shroomAniPlayer.clear_queue()
-  #   shroomAniPlayer.play("RESET")
-  #   shroomAniPlayer.queue("shrink")
-  #   shroomAniPlayer.queue("adjust")
-  #   nesting_doll_state = global.NestingDoll.BABY
-  #   global.memory["nesting_doll"] = global.NestingDoll.BABY
-  #   updateNestingDoll(global.NestingDoll.BABY)
+  elif nesting_doll_state == global.NestingDoll.GRANDMA and global.memory["mushroom_soul"] >= 1 and global.memory["mushroom_soul_enabled"] and not should_immediately_die and whichBoss == null:
+    global.memory["hp"] += 1
+    physics_state = PhysicsState.GLITCH_HURT
+    glitchTickle(true)
+    getSmacked()
+    glitch_death_timer = 0
+    shroomAniPlayer.stop()
+    shroomAniPlayer.clear_queue()
+    shroomAniPlayer.play("RESET")
+    shroomAniPlayer.queue("shrink")
+    shroomAniPlayer.queue("adjust")
+    nesting_doll_state = global.NestingDoll.BABY
+    global.memory["nesting_doll"] = global.NestingDoll.BABY
+    updateNestingDoll(global.NestingDoll.BABY)
+    loseBroom()
   elif global.memory["hp"] <= 0 or should_immediately_die or (whichBoss != null and whichBoss.num_granny_hits == 0):
     if summonedBroom:
       broomStop()
@@ -2205,6 +2208,9 @@ func processBroomLogic(delta):
       #   var distance = global_transform.origin.distance_to(fallenBroomRef.get_ref().global_transform.origin)
       #   if distance >= 2:
       #     fallenBroomRef.get_ref().returning = true
+      # if nesting_doll_state == global.NestingDoll.BABY:
+      #   tryToRevertFromBaby()
+      #   return
       var found_fallen_broom = false
       var fallenBroomArray = self.get_tree().get_nodes_in_group("fallen_broom_group")
       for fallenBroom in fallenBroomArray:
@@ -2397,12 +2403,25 @@ func doBroomAttack(which_broom_attack):
 
 onready var snoreSound = get_node("Sounds/SnoreSound")
 onready var exhaleSound = get_node("Sounds/ExhaleSound")
+func getSnorePitchMin():
+  if nesting_doll_state == global.NestingDoll.BABY:
+    return 2.5
+  if nesting_doll_state == global.NestingDoll.MATRIARCH:
+    return 0.4
+  return 0.8
+func getSnorePitchMax():
+  if nesting_doll_state == global.NestingDoll.BABY:
+    return 3.0
+  if nesting_doll_state == global.NestingDoll.MATRIARCH:
+    return 0.8
+  return 1.2
+
 func breathInSnore():
-  snoreSound.pitch_scale = rand_range(0.8, 1.2)
+  snoreSound.pitch_scale = rand_range(getSnorePitchMin(), getSnorePitchMax())
   snoreSound.play()
 
 func spawnSnoreBubble():
-  exhaleSound.pitch_scale = rand_range(0.8, 1.2)
+  exhaleSound.pitch_scale = rand_range(getSnorePitchMin(), getSnorePitchMax())
   exhaleSound.play()
   if global.memory["zora_flippers"] > 0 and global.memory["zora_flippers_enabled"]:
     var bubble = bubbleRes.instance()
@@ -2683,11 +2702,12 @@ func landed():
      not is_pressing_horizontal_input and not was_pressing_horizontal_input:
     summonSmokeClouds(1, false, false, 1)
 
-  # TODO(jaketrower): Uncomment out for final dungeon level
-  has_used_magic_lantern = false
-  if nesting_doll_state == global.NestingDoll.BABY and not Input.is_action_pressed("jump_button"):
-    tryToRevertFromBaby()
-  elif nesting_doll_state == global.NestingDoll.MOM:
+  has_used_magic_lantern = 0
+  for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite]:
+    sprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
+  # if nesting_doll_state == global.NestingDoll.BABY and not Input.is_action_pressed("jump_button"):
+  #   tryToRevertFromBaby()
+  if nesting_doll_state == global.NestingDoll.MOM:
     var lt = getLevelTiles()
     var original_y = global_transform.origin.y
     for _i in range(4):

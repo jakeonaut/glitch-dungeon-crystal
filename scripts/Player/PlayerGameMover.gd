@@ -107,6 +107,9 @@ func _process(delta):
       just_pacman_flipped_timer = 0
       just_pacman_flipped = false
 
+  if global.memory["broom"] and nesting_doll_state == global.NestingDoll.BABY:
+    level.player.loseBroom()
+
   if should_big_bump and not physics_state == PhysicsState.BEING_TOSSED:
     should_big_bump = false
     if grav == 0:
@@ -208,7 +211,7 @@ func _process(delta):
     if getLevelTiles().isTileFragileSolid(tile_type):
       areAnyTilesBelowMeFragile = true
       break
-  if pressingDown() and on_ground and not transformation == TransformationState.UNDERGROUND_RETURNING and (dig_timer > 0 or justPressedDown()) and not areAnyTilesBelowMeFragile:
+  if pressingDown() and on_ground and not transformation == TransformationState.UNDERGROUND_RETURNING and (dig_timer > 0 or justPressedDown()) and not areAnyTilesBelowMeFragile and nesting_doll_state != global.NestingDoll.BABY:
     processMoleDigTimer(Vector3(0, -2, 0))
 
   just_pressed_joystick = [
@@ -371,7 +374,7 @@ func enemyPushMe(delta, origin, enemy_glitch_form):
     self.global_transform.origin.x -= (delta * multiplier)
 
 func playJumpSound():
-  if transformation == TransformationState.CHICKEN:
+  if transformation == TransformationState.CHICKEN or has_used_magic_lantern > 0:
     flapSound.pitch_scale = rand_range(1.2, 1.4)
     flapSound.play()
     summonSmokeClouds(1, false, false, -1)
@@ -640,7 +643,7 @@ func collideWithWall(local_lv):
 
 onready var digSound = get_node("Sounds/DigSound")
 func processMoleDigTimer(digDirection):
-  if isItWeird() or global.memory["mole_cricket"] == 0 or not global.memory["mole_cricket_enabled"] or global.pauseGame:
+  if isItWeird() or global.memory["mole_cricket"] == 0 or not global.memory["mole_cricket_enabled"] or global.pauseGame or nesting_doll_state == global.NestingDoll.BABY:
     dig_timer = 0
     return
 
@@ -751,6 +754,11 @@ func actuallyApplyJump(play_sound = true):
   # else:
   .actuallyApplyJump(play_sound)
 
+# @override
+func jumpVvModification():
+  if not isFeatherLike() and nesting_doll_state == global.NestingDoll.BABY and has_used_magic_lantern > 0:
+    vv *= 1.1
+
 func magicJump():
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
@@ -852,7 +860,7 @@ func getWalkSpeedHelper(delta):
   if aniPlayer.assigned_animation == "sweepFloor":
     return 2
   elif nesting_doll_state == global.NestingDoll.BABY:
-    return 9
+    return 9 if on_ground else 6
   elif nesting_doll_state == global.NestingDoll.MATRIARCH:
     return 6 if pressingRun() else 5
   elif transformation == TransformationState.FISHY or nesting_doll_state == global.NestingDoll.MOM:
@@ -920,6 +928,7 @@ func getABroom(unpauseAnimation = true):
      transformation == TransformationState.MOLE_DIGGING or \
      (transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE) or \
      transformation == TransformationState.CHICKEN or \
+     nesting_doll_state == global.NestingDoll.BABY or \
      is_mushroom_infected: # or malware_infected:
     return
   pauseAnimation = not unpauseAnimation
@@ -987,7 +996,8 @@ var mush_carcasses = []
 var max_num_mush_carcasses = 3
 var chicken_jumps = 0
 var MAX_CHICKEN_JUMPS = 7
-var has_used_magic_lantern = false
+var MAX_DOUBLE_JUMPS = 1
+var has_used_magic_lantern = 0
 func processJumpInputs(delta):
   if transformation == TransformationState.CHICKEN:
     was_just_on_ground_timer = -8
@@ -1000,25 +1010,36 @@ func processJumpInputs(delta):
 
   if not is_touching_ladder and not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
     var triedToDoubleJump = justPressedJump() and not should_magic_jump and not global.pauseMoveInput
-    if global.memory["mushroom_soul"] >= 1 and global.memory["mushroom_soul_enabled"] and nesting_doll_state == global.NestingDoll.GRANDMA and triedToDoubleJump:
-      gravitySound.play()
-      # level.flipGravity(-1 * (self.grav / abs(self.grav)))
-      level.player.loseBroom()
-      mushroomClone()
-      has_used_magic_lantern = true
+    if triedToDoubleJump and has_used_magic_lantern < MAX_DOUBLE_JUMPS:
+      doubleJump()
       for _i in range(5):
         spawnASpore(self.global_transform.origin, false)
-      was_just_on_ground_timer = was_just_on_ground_time_limit
-      glitchTickle(true)
-      getSmacked()
-      shroomAniPlayer.stop()
-      shroomAniPlayer.clear_queue()
-      shroomAniPlayer.play("RESET")
-      shroomAniPlayer.queue("shrink")
-      shroomAniPlayer.queue("adjust")
-      nesting_doll_state = global.NestingDoll.BABY
-      global.memory["nesting_doll"] = global.NestingDoll.BABY
-      updateNestingDoll(global.NestingDoll.BABY)
+      glitchTickle(false)
+      sporeJumpSound.pitch_scale = rand_range(0.9, 1.2)
+      sporeJumpSound.play()
+      has_used_magic_lantern += 1
+      if has_used_magic_lantern >= MAX_DOUBLE_JUMPS:
+        for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite]:
+          sprite.get_material_override().set_shader_param("enable_remove_skin_tone", true)
+    # if global.memory["mushroom_soul"] >= 1 and global.memory["mushroom_soul_enabled"] and nesting_doll_state == global.NestingDoll.GRANDMA and triedToDoubleJump:
+    #   gravitySound.play()
+    #   # level.flipGravity(-1 * (self.grav / abs(self.grav)))
+    #   level.player.loseBroom()
+    #   mushroomClone()
+    #   has_used_magic_lantern += 1
+    #   for _i in range(5):
+    #     spawnASpore(self.global_transform.origin, false)
+    #   was_just_on_ground_timer = was_just_on_ground_time_limit
+    #   glitchTickle(true)
+    #   getSmacked()
+    #   shroomAniPlayer.stop()
+    #   shroomAniPlayer.clear_queue()
+    #   shroomAniPlayer.play("RESET")
+    #   shroomAniPlayer.queue("shrink")
+    #   shroomAniPlayer.queue("adjust")
+    #   nesting_doll_state = global.NestingDoll.BABY
+    #   global.memory["nesting_doll"] = global.NestingDoll.BABY
+    #   updateNestingDoll(global.NestingDoll.BABY)
     # # ============ OLD MUSHROOM INFECTION DOUBLE JUMP ===============
     # elif is_mushroom_infected and not has_mushroom_double_jumped and triedToDoubleJump:
     #   has_mushroom_double_jumped = true
@@ -1097,6 +1118,7 @@ func addJumpSmokeCloud(flip_flip_h = false):
   .addJumpSmokeCloud(flip_flip_h)
 
 onready var sporeSound = get_node("Sounds/SporeSound")
+onready var sporeJumpSound = get_node("Sounds/SporeJumpSound")
 func playStickOnWallSound():
   sporeSound.pitch_scale = 2.0
   sporeSound.play()

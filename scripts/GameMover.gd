@@ -956,11 +956,16 @@ func actuallyApplyJump(play_sound = true):
       vv = jump_force*1.1
     else:
       vv = jump_force*0.7
+
+  jumpVvModification()
   if play_sound and jumpSound != null:
     playJumpSound()
   on_ground = false
   was_fallthrough_area_collision_triggered = false
   has_just_jumped_timer = 0 
+
+func jumpVvModification():
+  pass
 
 func playJumpSound():
   jumpSound.play()

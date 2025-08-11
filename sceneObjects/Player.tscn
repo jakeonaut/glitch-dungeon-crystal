@@ -1,4 +1,4 @@
-[gd_scene load_steps=205 format=2]
+[gd_scene load_steps=206 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -98,6 +98,7 @@
 [ext_resource path="res://assets/player_sheet_old_naked.png" type="Texture" id=96]
 [ext_resource path="res://assets/player_sheet_babushkaScarf.png" type="Texture" id=97]
 [ext_resource path="res://assets/player_sheet_old_hand.png" type="Texture" id=98]
+[ext_resource path="res://assets/sounds/sporeJump.wav" type="AudioStream" id=99]
 
 [sub_resource type="BoxShape" id=94]
 extents = Vector3( 0.36, 0.5, 1 )
@@ -7639,6 +7640,11 @@ shape = SubResource( 68 )
 stream = ExtResource( 12 )
 volume_db = -5.0
 pitch_scale = 1.05
+bus = "Sfx"
+
+[node name="SporeJumpSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 99 )
+volume_db = -15.0
 bus = "Sfx"
 
 [node name="FryingPanSound" type="AudioStreamPlayer" parent="Sounds"]
