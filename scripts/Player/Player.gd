@@ -411,6 +411,9 @@ func _process(delta):
   # is_turn_based = malware_infected and not physics_state == PhysicsState.BEING_TOSSED
   should_always_stop_walking_immediately = malware_infected
 
+  if nesting_doll_state == global.NestingDoll.BABY and not Input.is_action_pressed("jump_button") and not has_used_magic_lantern:
+    tryToRevertFromBaby()
+
   if glitch_form == global.GlitchForm.INVISIBLE and global.memory["broom"]:
     global.memory["broom"] = false
   processSpriteRenderLogic(delta)
@@ -628,6 +631,9 @@ func updateGrandmaHatHandSprites():
   var HAND_OFFSET = 0.1
   grandmaHatSprite.global_transform.origin.z = mySprite.global_transform.origin.z + HAT_OFFSET
   grandmaHandSprite.global_transform.origin.z = mySprite.global_transform.origin.z + HAND_OFFSET
+
+  grandmaHatSprite.visible = nesting_doll_state == global.NestingDoll.GRANDMA and not shroomAniPlayer.is_playing()
+  grandmaHandSprite.visible = grandmaHatSprite.visible and broomSpriteVisible.visible
   
 
 var teleporting = false
@@ -2580,7 +2586,6 @@ func processBroomRenderLogic(_delta):
     if nesting_doll_state == global.NestingDoll.GRANDMA and not isHoldingMultiBroom():
       mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
       mySprite.material_override.set_shader_param("black_offset", 0)
-  grandmaHandSprite.visible = broomSpriteVisible.visible
 
 func processBagRenderLogic(_delta):
   enchantedBagSpriteVisible.frame = enchantedBagSpriteAnimated.frame
@@ -2679,7 +2684,10 @@ func landed():
     summonSmokeClouds(1, false, false, 1)
 
   # TODO(jaketrower): Uncomment out for final dungeon level
-  if nesting_doll_state == global.NestingDoll.MOM:
+  has_used_magic_lantern = false
+  if nesting_doll_state == global.NestingDoll.BABY and not Input.is_action_pressed("jump_button"):
+    tryToRevertFromBaby()
+  elif nesting_doll_state == global.NestingDoll.MOM:
     var lt = getLevelTiles()
     var original_y = global_transform.origin.y
     for _i in range(4):
@@ -2692,6 +2700,20 @@ func landed():
         lt.rerandomizeTile(tiles[2], lt.getRandomGlitchType())
       global_transform.origin.y -= 1
     global_transform.origin.y = original_y
+
+func tryToRevertFromBaby():
+  if nesting_doll_state == global.NestingDoll.BABY:
+    shroomAniPlayer.stop()
+    shroomAniPlayer.clear_queue()
+    shroomAniPlayer.play("RESET")
+    shroomAniPlayer.queue("grow")
+    shroomAniPlayer.queue("adjust")
+    nesting_doll_state = global.NestingDoll.GRANDMA
+    global.memory["nesting_doll"] = global.NestingDoll.GRANDMA
+    updateNestingDoll(global.NestingDoll.GRANDMA)
+    getABroom()
+    for _i in range(5):
+      spawnASpore(self.global_transform.origin, false)
 
 # @override
 func playJumpSound():

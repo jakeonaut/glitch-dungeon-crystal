@@ -473,7 +473,7 @@ func applyTerminalVelocity(_delta):
       terminal_vel = hit_water_terminal_vel
     elif is_touching_waterfall:
       terminal_vel = true_terminal_vel * 1.2
-    elif pressingJump():
+    elif pressingJump() or pressingMoveUp():
       terminal_vel = water_terminal_vel/2
     elif pressingDown():
       terminal_vel = water_fall_terminal
@@ -871,7 +871,7 @@ func processJumpInputs(delta):
     if not pauseAnimation and aniPlayer != null:
       if aniPlayer.assigned_animation == "jumpSquat":
         vv = 0
-        if pressingJump():
+        if pressingJump() or (isFeatherLike() and pressingMoveUp()):
           jump_squat_jump_input_timer += (delta*22)
       if aniPlayer.assigned_animation != "jumpSquat" and jump_squat_jump_input_timer > 0:
         actuallyApplyJump()
@@ -879,16 +879,16 @@ func processJumpInputs(delta):
         
 
     if true: # not glitch_form == global.GlitchForm.LADDER:
-      if isFeatherLike() and feather_jump_timer < feather_jump_time_limit and pressingJump() and (aniPlayer == null or pauseAnimation or aniPlayer.assigned_animation != "jumpSquat"): 
+      if isFeatherLike() and feather_jump_timer < feather_jump_time_limit and (pressingJump() or pressingMoveUp()) and (aniPlayer == null or pauseAnimation or aniPlayer.assigned_animation != "jumpSquat"): 
         feather_jump_timer += (delta*22)
         if weak_feather_dbl_jump:
           feather_jump_timer += (delta*22)
         actuallyApplyJump(false)
-      elif feather_jump_timer < 4 and pressingJump() and (aniPlayer == null or pauseAnimation or aniPlayer.assigned_animation != "jumpSquat"):
+      elif feather_jump_timer < 4 and (pressingJump() or (isFeatherLike() and pressingMoveUp())) and (aniPlayer == null or pauseAnimation or aniPlayer.assigned_animation != "jumpSquat"):
         feather_jump_timer += (delta*22)
         if feather_jump_timer > 3: 
           actuallyApplyJump(false)
-      elif pressingJump() and feather_jump_timer < feather_jump_partial_time_limit: 
+      elif (pressingJump() or (isFeatherLike() and pressingMoveUp())) and feather_jump_timer < feather_jump_partial_time_limit: 
         feather_jump_timer += (delta*22)
       
     # if was_touching_water_at_start_of_jump and pressingJump() and not is_touching_water:

@@ -59,7 +59,6 @@ var is_dust_infected = false
 var mushroom_infection_direction = 1
 var mushroom_turn_timer = 0
 var mushroom_turn_time_limit = 6
-var has_used_magic_lantern = false
 
 var remembered_walk_speed = 7
 var remembered_feather_glitch_walk_speed = 6
@@ -405,7 +404,6 @@ func landed():
   has_sweeped_glitch = false
   global.num_cherries_eaten = global.num_cherries_gained
   has_mushroom_double_jumped = false
-  has_used_magic_lantern = false
 
 func isTextboxPausingMe():
   return global.activeInteractor != null and (global.activeInteractor.showYesNoOptions or (
@@ -754,7 +752,6 @@ func actuallyApplyJump(play_sound = true):
   .actuallyApplyJump(play_sound)
 
 func magicJump():
-  has_used_magic_lantern = true
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
     pauseAnimation = false
@@ -990,6 +987,7 @@ var mush_carcasses = []
 var max_num_mush_carcasses = 3
 var chicken_jumps = 0
 var MAX_CHICKEN_JUMPS = 7
+var has_used_magic_lantern = false
 func processJumpInputs(delta):
   if transformation == TransformationState.CHICKEN:
     was_just_on_ground_timer = -8
@@ -1002,14 +1000,25 @@ func processJumpInputs(delta):
 
   if not is_touching_ladder and not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
     var triedToDoubleJump = justPressedJump() and not should_magic_jump and not global.pauseMoveInput
-    if global.memory["mushroom_soul"] >= 1 and global.memory["mushroom_soul_enabled"] and not has_used_magic_lantern and triedToDoubleJump:
+    if global.memory["mushroom_soul"] >= 1 and global.memory["mushroom_soul_enabled"] and nesting_doll_state == global.NestingDoll.GRANDMA and triedToDoubleJump:
       gravitySound.play()
-      level.flipGravity(-1 * (self.grav / abs(self.grav)))
+      # level.flipGravity(-1 * (self.grav / abs(self.grav)))
+      level.player.loseBroom()
+      mushroomClone()
+      has_used_magic_lantern = true
       for _i in range(5):
         spawnASpore(self.global_transform.origin, false)
-      has_used_magic_lantern = true
       was_just_on_ground_timer = was_just_on_ground_time_limit
-      glitchTickle()
+      glitchTickle(true)
+      getSmacked()
+      shroomAniPlayer.stop()
+      shroomAniPlayer.clear_queue()
+      shroomAniPlayer.play("RESET")
+      shroomAniPlayer.queue("shrink")
+      shroomAniPlayer.queue("adjust")
+      nesting_doll_state = global.NestingDoll.BABY
+      global.memory["nesting_doll"] = global.NestingDoll.BABY
+      updateNestingDoll(global.NestingDoll.BABY)
     # # ============ OLD MUSHROOM INFECTION DOUBLE JUMP ===============
     # elif is_mushroom_infected and not has_mushroom_double_jumped and triedToDoubleJump:
     #   has_mushroom_double_jumped = true
@@ -1065,10 +1074,11 @@ func mushroomClone(_trigger_another = true):
   carcass.broomSprite.visible = false
   carcass.mushroomSprite.visible = false
   # carcass.is_crumbling = true
-  my_carcasses.push_back(carcass)
+  my_carcasses.push_back(weakref(carcass))
   if len(my_carcasses) > 6:
     var crumbled_carcass = my_carcasses.pop_front()
-    crumbled_carcass.queue_free()
+    if crumbled_carcass.get_ref():
+      crumbled_carcass.get_ref().queue_free()
   infectSound.play()
   glitchTickle()
   # if trigger_another:

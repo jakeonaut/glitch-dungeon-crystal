@@ -32,6 +32,7 @@ func _ready():
 
 
 func fallthroughCollisionActivate(possible_game_mover):
+    possible_game_mover.landed()
     if not possible_game_mover.was_on_ground and not should_wiggle:
         wiggle(possible_game_mover)
         # if level.player.nesting_doll_state == global.NestingDoll.BABY:
