@@ -149,8 +149,7 @@ func _ready_impl():
 
   displayMessageText("")
 
-  if global.memory.has("player_costume"):
-    player.wearCostume(global.memory["player_costume"])
+  player.changeOutfit(global.memory["currOutfit"])
 
   if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
     if global.isRespawning:
@@ -865,8 +864,8 @@ func spawnKeyFollower(starting_position):
   self.add_child(keyFollower)
   keyFollower.global_transform.origin = starting_position
 
-  var target = followers[-1].get_ref() if followers.size() > 0 else player
-  keyFollower.gameMoverTarget = weakref(target) if target != null else weakref(player)
+  var target = followers[-1] if followers.size() > 0 else null
+  keyFollower.gameMoverTarget = target if target != null else weakref(player)
   followers.push_back(weakref(keyFollower))
   return keyFollower
 
@@ -876,8 +875,8 @@ func spawnAngelEggFollower(starting_position):
   self.add_child(angelEggFollower)
   angelEggFollower.global_transform.origin = starting_position
 
-  var target = followers[-1] if followers.size() > 0 else player
-  angelEggFollower.gameMoverTarget = weakref(target) if target != null else weakref(player)
+  var target = followers[-1] if followers.size() > 0 else null
+  angelEggFollower.gameMoverTarget = target if target != null else weakref(player)
   followers.push_back(weakref(angelEggFollower))
 
 var petChickenFollowerRes = preload("res://sceneObjects/PetChickenFollower.tscn")
@@ -908,8 +907,8 @@ func spawnPetFollower(starting_position):
     var petFollower = petFollowerRes.instance()
     self.add_child(petFollower)
     petFollower.global_transform.origin = starting_position
-    var target = followers[-1] if followers.size() > 0 else player
-    petFollower.gameMoverTarget = weakref(target) if target != null else weakref(player)
+    var target = followers[-1] if followers.size() > 0 else null
+    petFollower.gameMoverTarget = target if target != null else weakref(player)
     followers.push_back(weakref(petFollower))
 
 

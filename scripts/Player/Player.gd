@@ -331,9 +331,6 @@ func walkThroughWallsGlitch():
   changeSpriteColorPalette(global.white_player_palette)
   spellbookGlitchSprite.changeSpriteColorPalette(global.white_palette)
 
-func wearCostume(costume):
-  global.memory["player_costume"] = costume
-
 # @override
 # func pressingRun():
 #   return true
@@ -476,7 +473,7 @@ func _process(delta):
       spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x - 0.25
     else:
       spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x + 0.25
-  spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.userSettings["colorblindMode"] and transformation == TransformationState.NORMAL
+  spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.userSettings["colorblindMode"] and transformation == TransformationState.NORMAL and getOutfitIsSpellGlitchSpriteVisible(global.memory["currOutfit"])
 
   processSleepyLogic(delta)
   if global.isPauseMenuOpen:

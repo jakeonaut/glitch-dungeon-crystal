@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=22]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=23]
 [ext_resource path="res://assets/palettes/black_palette.png" type="Texture" id=24]
+[ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=25]
 
 [sub_resource type="BoxShape" id=22]
 resource_local_to_scene = true
@@ -122,23 +123,23 @@ resource_name = "walk"
 [sub_resource type="Animation" id=36]
 resource_name = "walkStart"
 
-[sub_resource type="BoxShape" id=24]
+[sub_resource type="BoxShape" id=39]
 resource_local_to_scene = true
 extents = Vector3( 0.5, 0.75, 1 )
 
-[sub_resource type="BoxShape" id=25]
+[sub_resource type="BoxShape" id=40]
 resource_local_to_scene = true
 extents = Vector3( 1.5, 1.5, 1 )
 
-[sub_resource type="BoxShape" id=26]
+[sub_resource type="BoxShape" id=41]
 resource_local_to_scene = true
 extents = Vector3( 0.25, 0.75, 1 )
 
-[sub_resource type="BoxShape" id=27]
+[sub_resource type="BoxShape" id=42]
 resource_local_to_scene = true
 extents = Vector3( 1, 0.8, 1.3 )
 
-[sub_resource type="BoxShape" id=28]
+[sub_resource type="BoxShape" id=43]
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
@@ -218,7 +219,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 14, 0, 1, 15, 0, 1, 65526, 0, 1, 65527, 0, 1, 65550, 0, 1, 65551, 0, 1, 131062, 0, 1, 131063, 0, 1, 131086, 0, 1, 131087, 0, 1, 196598, 0, 1, 196599, 0, 1, 196622, 0, 1, 196623, 0, 1, 262134, 0, 1, 262135, 0, 1, 262136, 0, 1, 262137, 0, 1, 262158, 0, 1, 262159, 0, 1, 327670, 0, 1, 327671, 0, 1, 327673, 0, 1, 327694, 0, 1, 327695, 0, 1, 393206, 0, 1, 393207, 0, 1, 393208, 0, 1, 393209, 0, 1, 393210, 0, 1, 393211, 0, 1, 393212, 0, 1, 393213, 0, 1, 393214, 0, 1, 393215, 0, 1, 393216, 0, 51, 393217, 0, 51, 393230, 0, 1, 393231, 0, 1, 458742, 0, 1, 458743, 0, 1, 458745, 0, 1, 458747, 0, 1, 458749, 0, 1, 458751, 0, 1, 458752, 0, 51, 458753, 0, 51, 458766, 0, 1, 458767, 0, 1, 524278, 0, 1, 524279, 0, 1, 524280, 0, 1, 524281, 0, 1, 524282, 0, 1, 524283, 0, 1, 524284, 0, 1, 524285, 0, 1, 524286, 0, 1, 524287, 0, 1, 524289, 0, 1, 524290, 0, 51, 524291, 0, 51, 524297, 0, 51, 524298, 0, 51, 524299, 0, 51, 524302, 0, 1, 524303, 0, 1, 589814, 0, 1, 589815, 0, 1, 589817, 0, 1, 589819, 0, 1, 589821, 0, 1, 589823, 0, 1, 589824, 0, 1, 589825, 0, 1, 589826, 0, 51, 589827, 0, 51, 589833, 0, 51, 589835, 0, 51, 589838, 0, 1, 589839, 0, 1, 655350, 0, 1, 655351, 0, 1, 655352, 0, 1, 655353, 0, 1, 655354, 0, 1, 655355, 0, 1, 655356, 0, 1, 655357, 0, 1, 655358, 0, 1, 655359, 0, 1, 655369, 0, 51, 655370, 0, 51, 655371, 0, 51, 655374, 0, 1, 655375, 0, 1, 720910, 0, 1, 720911, 0, 1, 786446, 0, 1, 786447, 0, 1, 851981, 0, 37, 851982, 0, 37, 851983, 0, 37, 917494, 0, 37, 917495, 0, 37, 917496, 0, 37, 917504, 0, 37, 917505, 0, 37, 917506, 0, 37, 917507, 0, 37, 917508, 0, 37, 917509, 0, 37, 917510, 0, 37, 917511, 0, 37, 917512, 0, 37, 917513, 0, 37, 917514, 0, 37, 917515, 0, 37, 917516, 0, 37, 917517, 0, 37, 917519, 0, 37, 983030, 0, 37, 983032, 0, 37, 983033, 0, 37, 983034, 0, 37, 983035, 0, 37, 983036, 0, 37, 983037, 0, 37, 983038, 0, 37, 983039, 0, 37, 983040, 0, 37, 983041, 0, 37, 983042, 0, 37, 983043, 0, 37, 983044, 0, 37, 983045, 0, 37, 983046, 0, 37, 983047, 0, 37, 983048, 0, 37, 983049, 0, 37, 983050, 0, 37, 983051, 0, 37, 983052, 0, 37, 983053, 0, 37, 983054, 0, 37, 983055, 0, 37, 1048566, 0, 37, 1048567, 0, 37, 1048568, 0, 37, 1048569, 0, 37, 1048570, 0, 37, 1048571, 0, 37, 1048572, 0, 37, 1048573, 0, 37, 1048574, 0, 37, 1048575, 0, 37, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -262138, 0, 1, -262137, 0, 1, -262136, 0, 1, -262135, 0, 1, -262134, 0, 1, -262133, 0, 1, -262132, 0, 1, -262131, 0, 1, -262130, 0, 1, -262129, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196601, 0, 1, -196600, 0, 1, -196599, 0, 1, -196598, 0, 1, -196597, 0, 1, -196596, 0, 1, -196595, 0, 1, -196594, 0, 1, -196593, 0, 1, -131082, 0, 1, -131081, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131060, 0, 1, -131058, 0, 1, -131057, 0, 1, -65546, 0, 1, -65544, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65524, 0, 1, -65523, 0, 1, -65522, 0, 1, -65521, 0, 1, -10, 0, 1, -9, 0, 1, -8, 0, 1 )
+"cells": PoolIntArray( 65526, 0, 1, 65527, 0, 1, 131062, 0, 1, 131063, 0, 1, 131086, 0, 1, 196598, 0, 1, 196599, 0, 1, 196623, 0, 1, 262134, 0, 1, 262135, 0, 1, 262136, 0, 1, 262137, 0, 1, 262158, 0, 1, 262159, 0, 1, 327670, 0, 1, 327671, 0, 1, 327673, 0, 1, 327694, 0, 1, 327695, 0, 1, 393206, 0, 1, 393207, 0, 1, 393208, 0, 1, 393209, 0, 1, 393210, 0, 1, 393211, 0, 1, 393212, 0, 1, 393213, 0, 1, 393214, 0, 1, 393215, 0, 1, 393216, 0, 51, 393217, 0, 51, 393230, 0, 1, 393231, 0, 1, 458742, 0, 1, 458743, 0, 1, 458745, 0, 1, 458747, 0, 1, 458749, 0, 1, 458751, 0, 1, 458752, 0, 51, 458753, 0, 51, 458766, 0, 1, 458767, 0, 1, 524278, 0, 1, 524279, 0, 1, 524280, 0, 1, 524281, 0, 1, 524282, 0, 1, 524283, 0, 1, 524284, 0, 1, 524285, 0, 1, 524286, 0, 1, 524287, 0, 1, 524289, 0, 1, 524290, 0, 51, 524291, 0, 51, 524297, 0, 51, 524298, 0, 51, 524299, 0, 51, 524302, 0, 1, 524303, 0, 1, 589814, 0, 1, 589815, 0, 1, 589817, 0, 1, 589819, 0, 1, 589821, 0, 1, 589823, 0, 1, 589824, 0, 1, 589825, 0, 1, 589826, 0, 51, 589827, 0, 51, 589833, 0, 51, 589835, 0, 51, 589838, 0, 1, 589839, 0, 1, 655350, 0, 1, 655351, 0, 1, 655352, 0, 1, 655353, 0, 1, 655354, 0, 1, 655355, 0, 1, 655356, 0, 1, 655357, 0, 1, 655358, 0, 1, 655359, 0, 1, 655369, 0, 51, 655370, 0, 51, 655371, 0, 51, 655374, 0, 1, 655375, 0, 1, 720910, 0, 1, 720911, 0, 1, 786446, 0, 1, 786447, 0, 1, 851981, 0, 37, 851982, 0, 37, 851983, 0, 37, 917494, 0, 37, 917495, 0, 37, 917496, 0, 37, 917504, 0, 37, 917505, 0, 37, 917506, 0, 37, 917507, 0, 37, 917508, 0, 37, 917509, 0, 37, 917510, 0, 37, 917511, 0, 37, 917512, 0, 37, 917513, 0, 37, 917514, 0, 37, 917515, 0, 37, 917516, 0, 37, 917517, 0, 37, 917519, 0, 37, 983030, 0, 37, 983032, 0, 37, 983033, 0, 37, 983034, 0, 37, 983035, 0, 37, 983036, 0, 37, 983037, 0, 37, 983038, 0, 37, 983039, 0, 37, 983040, 0, 37, 983041, 0, 37, 983042, 0, 37, 983043, 0, 37, 983044, 0, 37, 983045, 0, 37, 983046, 0, 37, 983047, 0, 37, 983048, 0, 37, 983049, 0, 37, 983050, 0, 37, 983051, 0, 37, 983052, 0, 37, 983053, 0, 37, 983054, 0, 37, 983055, 0, 37, 1048566, 0, 37, 1048567, 0, 37, 1048568, 0, 37, 1048569, 0, 37, 1048570, 0, 37, 1048571, 0, 37, 1048572, 0, 37, 1048573, 0, 37, 1048574, 0, 37, 1048575, 0, 37, -262144, 0, 1, -262143, 0, 1, -262142, 0, 1, -262141, 0, 1, -262140, 0, 1, -262139, 0, 1, -262138, 0, 1, -262137, 0, 1, -262136, 0, 1, -262135, 0, 1, -262134, 0, 1, -262133, 0, 1, -262131, 0, 1, -262130, 0, 1, -262129, 0, 1, -196618, 0, 1, -196617, 0, 1, -196616, 0, 1, -196615, 0, 1, -196614, 0, 1, -196611, 0, 1, -196610, 0, 1, -196609, 0, 1, -196608, 0, 1, -196607, 0, 1, -196606, 0, 1, -196605, 0, 1, -196604, 0, 1, -196603, 0, 1, -196601, 0, 1, -196600, 0, 1, -196599, 0, 1, -196597, 0, 1, -196596, 0, 1, -196595, 0, 1, -196594, 0, 1, -196593, 0, 1, -131082, 0, 1, -131081, 0, 1, -131080, 0, 1, -131079, 0, 1, -131078, 0, 1, -131075, 0, 1, -131074, 0, 1, -131073, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131061, 0, 1, -131059, 0, 1, -131057, 0, 1, -65546, 0, 1, -65544, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65524, 0, 1, -65523, 0, 1, -65522, 0, 1, -65521, 0, 1, -10, 0, 1, -9, 0, 1, -8, 0, 1 )
 }
 script = ExtResource( 2 )
 __meta__ = {
@@ -310,32 +311,36 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 4, 0 )
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 11, 0 )
 
-[node name="Door" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -6, 0 )
-path = "res://levels/EndlessFantasy/gd1TutorialDungeon/000RedGlitchMiddle.tscn"
-is_passive = true
-is_vertical = true
-
-[node name="landing" parent="Viewport/level/Door" index="5"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 1 )
-
-[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
-shape = SubResource( 24 )
-
-[node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
-shape = SubResource( 25 )
-
-[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea2" index="0"]
-shape = SubResource( 26 )
-
-[node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
-shape = SubResource( 27 )
-
-[node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
-shape = SubResource( 28 )
-
 [node name="RespawnKeyTreasure" parent="Viewport/level" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0 )
+
+[node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 1, 0 )
+
+[node name="GlitchEnemy2" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 2, 0 )
+
+[node name="Door" parent="Viewport/level" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, 0 )
+path = "res://levels/EndlessFantasy/gd1PrimordialOoze/Interstitial_GreenMushroom.tscn"
+
+[node name="landing" parent="Viewport/level/Door" index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 1 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
+shape = SubResource( 39 )
+
+[node name="PassiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="1"]
+shape = SubResource( 40 )
+
+[node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea2" index="0"]
+shape = SubResource( 41 )
+
+[node name="CollisionShape" parent="Viewport/level/Door/NPC/SmallInteractionArea" index="0"]
+shape = SubResource( 42 )
+
+[node name="CollisionShape" parent="Viewport/level/Door/FallthroughSolid" index="0"]
+shape = SubResource( 43 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 8 )]
 

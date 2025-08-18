@@ -80,7 +80,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -1, 0 )
 material_override = null
 frame = 54
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/001GreenGlitchFinale.tscn"
-can_nav_right = false
 can_nav_up = false
 can_nav_down = false
 
@@ -801,6 +800,18 @@ vframes = 7
 frame = 56
 path = "res://levels/EndlessFantasy/gd1PrimordialOoze/LeakyGroundwater.tscn"
 can_nav_left = false
+can_nav_right = false
+hide_me_from_map = true
+kill_after_glitch = true
+
+[node name="InterGrnMush" parent="PrimordialOoze" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 5, 1 )
+material_override = null
+texture = ExtResource( 2 )
+hframes = 13
+vframes = 7
+frame = 56
+path = "res://levels/EndlessFantasy/gd1PrimordialOoze/Interstitial_GreenMushroom.tscn"
 can_nav_right = false
 hide_me_from_map = true
 kill_after_glitch = true

@@ -1,76 +1,17 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=3]
-[ext_resource path="res://sceneObjects/Enemies/Worm.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=5]
-[ext_resource path="res://assets/models/lowPolyHorse.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=8]
-[ext_resource path="res://sceneObjects/Enemies/GlitchMoleCricket.tscn" type="PackedScene" id=9]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=11]
-[ext_resource path="res://sceneObjects/Enemies/HungryWorm.tscn" type="PackedScene" id=12]
-[ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=13]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=15]
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=16]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=17]
-[ext_resource path="res://sceneObjects/Enemies/FanPlant.tscn" type="PackedScene" id=18]
-[ext_resource path="res://sceneObjects/KizzyCat.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=20]
-[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=21]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=22]
-[ext_resource path="res://assets/palettes/tidepool_palette.png" type="Texture" id=23]
-[ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=24]
-[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=25]
-[ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=26]
-[ext_resource path="res://sceneObjects/FreeChicken.tscn" type="PackedScene" id=27]
-[ext_resource path="res://sceneObjects/BrothCauldron.tscn" type="PackedScene" id=28]
-
-[sub_resource type="BoxShape" id=24]
-resource_local_to_scene = true
-extents = Vector3( 3, 2, 1.3 )
-
-[sub_resource type="ShaderMaterial" id=25]
-shader = ExtResource( 25 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 1.0
-shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-shader_param/outline_width = 1.0
-shader_param/shake_power = 0.03
-shader_param/shake_block_size = 30.5
-shader_param/shake_color_rate = 0.01
-shader_param/no_palette_swap = false
-shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = false
-shader_param/enable_no_transparency = false
-shader_param/enable_black_unknown = true
-shader_param/palettesize = 16
-shader_param/resolution_scale = 1
-shader_param/offset = 0
-shader_param/black_offset = 0
-shader_param/enable_glitch = false
-shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = false
-shader_param/enable_palette_cycle = false
-shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = false
-shader_param/shake_power_3d = 0.5
-shader_param/shake_rate = 0.5
-shader_param/shake_speed = 5.0
-shader_param/shake_block_size_3d = 30.5
-shader_param/shake_color_rate_3d = 0.5
-shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
-shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 24 )
-shader_param/base_palette = ExtResource( 21 )
-shader_param/target_palette = ExtResource( 23 )
-
-[sub_resource type="BoxShape" id=26]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
 
 [sub_resource type="ViewportTexture" id=23]
 viewport_path = NodePath("Viewport")
@@ -155,71 +96,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1, 3.1, 0 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Viewport/level"]
-
-[node name="lowPolyHorse" parent="Viewport/level" instance=ExtResource( 7 )]
-transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 1, 22, -1, 0 )
-
-[node name="Door" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1, 0 )
-path = "res://levels/MinimumRoom2.tscn"
-
-[node name="Worm" parent="Viewport/level" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
-walk_direction = Vector2( -1, 0 )
-
-[node name="HungryWorm" parent="Viewport/level" instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 0 )
-
-[node name="GlitchMoleCricket" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
-behavior_stick_to_walls = true
-
-[node name="GlitchMoleCricket2" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 7, 0 )
-behavior_stick_to_walls = true
-my_up_vector = Vector2( 1, 0 )
-
-[node name="GlitchMoleCricket4" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 5, 0 )
-behavior_stick_to_walls = true
-my_up_vector = Vector2( -1, 0 )
-
-[node name="GlitchMoleCricket3" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 13, 0 )
-behavior_stick_to_walls = true
-my_up_vector = Vector2( 0, -1 )
-
-[node name="FanPlant" parent="Viewport/level" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0 )
-
-[node name="Furbo" parent="Viewport/level" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 9, 0 )
-
-[node name="NPC" parent="Viewport/level" instance=ExtResource( 26 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 7, 0 )
-
-[node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
-shape = SubResource( 24 )
-
-[node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
-material_override = SubResource( 25 )
-frame = 38
-
-[node name="CollisionShape" parent="Viewport/level/NPC/FallthroughSolid" index="0"]
-shape = SubResource( 26 )
-
-[node name="FreeChicken" parent="Viewport/level" instance=ExtResource( 27 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 0 )
-
-[node name="BrothCauldron" parent="Viewport/level" instance=ExtResource( 28 )]
-path = "res://levels/MinimumRoom2.tscn"
-
-[node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 9, 0 )
-grav = 0
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1, 0.0999999, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 1 )]
 
@@ -241,8 +118,5 @@ flip_v = true
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 14 )]
 
-[editable path="Viewport/level/Worm"]
-[editable path="Viewport/level/NPC"]
-[editable path="Viewport/level/NPC/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

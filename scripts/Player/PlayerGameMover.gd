@@ -363,6 +363,36 @@ func changeSpriteColorPalette(palette):
   chickenSprite.material_override.set_shader_param("target_palette", palette)
   # broomSpriteVisible.material_override.set_shader_param("target_palette", palette)
 
+var babushkaScarfTex = preload("res://assets/player_sheet_babushkaScarf.png")
+var witchHatTex = preload("res://assets/outfits/player_sheet_witch_face.png")
+func getOutfitTexture(outfit):
+  match outfit:
+    global.GrandmaOutfit.WITCH_HAT:
+      return witchHatTex
+    _:
+      return babushkaScarfTex
+
+func getOutfitOffset(outfit):
+  match outfit:
+    global.GrandmaOutfit.WITCH_HAT:
+      return Vector2(0, 5)
+    _:
+      return Vector2(0, 0)
+
+func getOutfitIsSpellGlitchSpriteVisible(outfit):
+  match outfit:
+    global.GrandmaOutfit.WITCH_HAT:
+      return false
+    _:
+      return true
+
+func changeOutfit(outfit):
+  global.memory["currOutfit"] = outfit
+  grandmaHatSprite.texture = getOutfitTexture(outfit)
+  grandmaHatSprite.material_override.set_shader_param("texture_albedo", getOutfitTexture(outfit))
+  grandmaHatSprite.offset = getOutfitOffset(outfit)
+  spellbookGlitchSprite.visible = getOutfitIsSpellGlitchSpriteVisible(outfit)
+
 func enemyPushMe(delta, origin, enemy_glitch_form):
   if glitch_form != global.GlitchForm.INVISIBLE or (glitch_form != global.GlitchForm.INVISIBLE and enemy_glitch_form == global.GlitchForm.INVISIBLE):
     return
@@ -1041,7 +1071,7 @@ func processJumpInputs(delta):
 
   if not is_touching_ladder and not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
     var triedToDoubleJump = justPressedJump() and not should_magic_jump and not global.pauseMoveInput
-    if triedToDoubleJump and has_used_magic_lantern < MAX_DOUBLE_JUMPS:
+    if triedToDoubleJump and has_used_magic_lantern < MAX_DOUBLE_JUMPS and global.memory["mushroom_soul"] > 0 and global.memory["mushroom_soul_enabled"]:
       doubleJump()
       for _i in range(5):
         spawnASpore(self.global_transform.origin, false)
