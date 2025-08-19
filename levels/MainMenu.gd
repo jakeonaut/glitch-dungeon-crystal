@@ -394,12 +394,14 @@ func _process(delta):
         selectTextPrompt.bbcode_text = global.getInputText("menu_confirm")
 
         if player.justPressedMenuDown():
+            jostlePlayer()
             uiLayer.pauseMenu.menuMoveSound.play()
             normalizeMainMenuPromptIndex(1)
             updateMenuText = true
             if logo_timer < logo_time_limit:
                 logo_timer = 0
         elif player.justPressedMenuUp():
+            jostlePlayer()
             uiLayer.pauseMenu.menuMoveSound.play()
             normalizeMainMenuPromptIndex(-1)
             updateMenuText = true
@@ -432,7 +434,10 @@ func _process(delta):
             #             logoSprite.texture = logoTex3
             #         else:
             #             logoSprite.texture = logoTex2
-
+        
+        var temp = global.loadGame(global.mainMenuPromptIndex, {})
+        player.changeOutfit(temp["currOutfit"] if temp["currOutfit"] != null else global.GrandmaOutfit.BABUSHKA)
+        
         if global.mainMenuPromptIndex == 0:
             player.applyGlitch(global.GlitchForm.NORMAL, true)
         if global.mainMenuPromptIndex == 1:
@@ -492,6 +497,11 @@ func _process(delta):
 # @override
 # func processPauseMenu():
 #     pass
+
+func jostlePlayer():
+    player.global_transform.origin.y = 1
+    player.on_ground = false
+    player.miniWakeup()
 
 func processSkipPrompt(delta):
     var which_input_to_skip = "popup_menu"

@@ -806,12 +806,12 @@ func loadUserSettings():
 var MAX_ANGEL_EGGS = 28
 func loadGame(saveGameIndex, temp_memory_override = null):
     if saveGameIndex < 0 or saveGameIndex >= save_game_files.size():
-        return false # Error! out of bounds
+        return {} # Error! out of bounds
     save_game_index = saveGameIndex
     var save_game_file = save_game_files[save_game_index]
     var file = File.new()
     if not file.file_exists(save_game_file):
-        return false # Error! We don't have a save to load.
+        return {} # Error! We don't have a save to load.
     
     # Load the file line by line and process that dictionary to restore
     # the object it represents.
@@ -829,22 +829,22 @@ func loadGame(saveGameIndex, temp_memory_override = null):
     file.close()
 
     if temp_memory_override == null:
-        if global.memory.has("roomPath"):
-            currLevelZone = getLevelZoneName(global.memory["roomPath"])
-            if not global.memory["level_zonez"].has(currLevelZone):
-                global.memory["level_zonez"].push_back(currLevelZone)
+        if memoryToLoadInto.has("roomPath"):
+            currLevelZone = getLevelZoneName(memoryToLoadInto["roomPath"])
+            if not memoryToLoadInto["level_zonez"].has(currLevelZone):
+                memoryToLoadInto["level_zonez"].push_back(currLevelZone)
 
         # do some achievement backloading
-        if global.demo_mode <= 0: 
-            if global.memory["priestess"] >= 2:
+        if global.demo_mode <= 0 and memoryToLoadInto == global.memory:
+            if memoryToLoadInto["priestess"] >= 2:
                 Steam.set_achievement("PRIESTESS_BOSS")
-            if global.memory["baba_yaga_boss"] >= 2:
+            if memoryToLoadInto["baba_yaga_boss"] >= 2:
                 Steam.set_achievement("BABA_BOSS")
-            if global.memory["dogu_matryoshka_boss"] >= 2:
+            if memoryToLoadInto["dogu_matryoshka_boss"] >= 2:
                 Steam.set_achievement("CLAYDOL_BOSS")
-            if global.memory["angler_seaman_boss"] >= 2:
+            if memoryToLoadInto["angler_seaman_boss"] >= 2:
                 Steam.set_achievement("ANGLER_BOSS")
-            if global.memory["broomerang"] >= 1:
+            if memoryToLoadInto["broomerang"] >= 1:
                 Steam.set_achievement("BROOMERANG")
             var numAngelEggs = global.getThingFromAllLevelZonez("angelEgg")
             if numAngelEggs >= 1:
@@ -1372,7 +1372,7 @@ func getInputText(input_action, input_display = 0, use_bbtext = true, showConden
     return strToReturn
 
 func normalizeLoadedMemory(memoryToLoadInto):
-    if typeof(global.memory["nesting_doll"]) == TYPE_BOOL:
+    if typeof(memoryToLoadInto["nesting_doll"]) == TYPE_BOOL:
         memoryToLoadInto["nesting_doll"] = global.NestingDoll.GRANDMA
     memoryToLoadInto["priestess"] = 0
 
@@ -1610,14 +1610,15 @@ func getLevelZoneThing(thing):
     return self.memory[currLevelZone][thing]
 
 # assumes that we can make a sum of thing
-func getThingFromAllLevelZonez(thing):
+func getThingFromAllLevelZonez(thing, memoryOverride = null):
+    var memoryToLoadFrom = memoryOverride if memoryOverride != null else global.memory
     var thingSum = 0
-    for levelZone in global.memory["level_zonez"]:
-        if not self.memory.has(levelZone):
+    for levelZone in memoryToLoadFrom["level_zonez"]:
+        if not memoryToLoadFrom.has(levelZone):
             continue
-        if not self.memory[levelZone].has(thing):
+        if not memoryToLoadFrom[levelZone].has(thing):
             continue
-        thingSum += int(self.memory[levelZone][thing])
+        thingSum += int(memoryToLoadFrom[levelZone][thing])
     return thingSum
 
 func getThingArrayFromAllLevelZonez(thing):

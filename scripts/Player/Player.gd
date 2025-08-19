@@ -1469,6 +1469,12 @@ func processSleepyLogic(delta):
   elif not global.isPauseMenuOpen and not global.isOnMainMenu:
     sleepy_timer = 0
 
+func miniWakeup():
+  sleepy_timer = 0
+  aniPlayer.stop()
+  aniPlayer.clear_queue()
+  aniPlayer.play("fallStart")
+
 onready var ritualSound = get_node("Sounds/RitualSound")
 onready var angelZoneLevelDoor = get_node("AngelZoneLevelDoor")
 var ritual_state_index = 0
