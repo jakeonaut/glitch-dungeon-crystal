@@ -172,11 +172,11 @@ func _process(delta):
   popupRect.rect_position = Vector2(150, 150)
   # popupRect.rect_size = Vector2(400, 60)
 
-  if player.justPressedMenuDown():
-    menuMoveSound.play()
-  elif player.justPressedMenuUp():
-    menuMoveSound.play()
-
+  if pauseMenuState != PauseMenuState.INVENTORY:
+    if player.justPressedMenuDown() or player.justPressedMenuUp():
+      menuMoveSound.play()
+    elif player.justPressedMenuLeft() or player.justPressedMenuRight():
+      player.noBroomSound.play()
   if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     menuConfirmSound.play()
   elif (Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start")) and ((pauseMenuState == PauseMenuState.INVENTORY and popupRect.visible) or (pauseMenuState != PauseMenuState.INVENTORY and pauseMenuState != PauseMenuState.NORMAL)):
@@ -609,6 +609,8 @@ onready var glitchSprite1 = get_node("InventoryRect/GlitchRect1/ColorRect/Equipm
 onready var glitchSprite2 = get_node("InventoryRect/GlitchRect2/ColorRect/EquipmentSlotSprite")
 onready var glitchSprite3 = get_node("InventoryRect/GlitchRect3/ColorRect/EquipmentSlotSprite")
 onready var glitchSprite4 = get_node("InventoryRect/GlitchRect4/ColorRect/EquipmentSlotSprite")
+var isInOutfitSwitchingMode = false
+var isInBroomSwitchingMode = false
 var angelStatueToTeleportTo = null
 func processInventoryLogic(_delta):
   var angelStatues = getAngelStatuesArr()
@@ -639,7 +641,13 @@ func processInventoryLogic(_delta):
     if shouldShowPopupYesNoOptions:
       if player.justPressedMenuRight() or player.justPressedMenuLeft():
         popupYesNoOptions = not popupYesNoOptions
+    if isInOutfitSwitchingMode:
+      tryToSwitchOutfits()
+    elif isInBroomSwitchingMode:
+      tryToSwitchBrooms()
   else:
+    isInOutfitSwitchingMode = false
+    isInBroomSwitchingMode = false
     popupYesButton.visible = false
     popupYesCursor.visible = false
     popupNoButton.visible = false
@@ -649,19 +657,20 @@ func processInventoryLogic(_delta):
   var inactiveColor = Color("#006400")
   var selectedColor = Color("#f79838")
   if inventoryOptionIndex == 0:
+    var prevInventoryOptionIndexX = inventoryOptionIndexX
     # if not global.memory.has("spellbookPage"):
     #   inventoryOptionIndex = 1
     #   return
     if player.justPressedMenuRight() and global.isPauseMenuOpen:
       inventoryOptionIndexX += 1
-      menuMoveSound.play()
     elif player.justPressedMenuLeft() and global.isPauseMenuOpen:
       inventoryOptionIndexX -= 1
-      menuMoveSound.play()
     if inventoryOptionIndexX < 0:
       inventoryOptionIndexX = (spellbookSize - 1) if spellbookSize > 0 else 0
     elif inventoryOptionIndexX > spellbookSize - 1 and inventoryOptionIndexX != 0:
       inventoryOptionIndexX = 0
+    if inventoryOptionIndexX != prevInventoryOptionIndexX:
+      menuMoveSound.play()
     glitchRect1.color = activeColor if inventoryOptionIndexX == 0 else selectedColor if selectedGlitchSprite == 0 else inactiveColor
     glitchRect2.color = activeColor if inventoryOptionIndexX == 1 else selectedColor if selectedGlitchSprite == 1 else inactiveColor
     glitchRect3.color = activeColor if inventoryOptionIndexX == 2 else selectedColor if selectedGlitchSprite == 2 else inactiveColor
@@ -692,7 +701,7 @@ func processInventoryLogic(_delta):
     return
 
   var isOnMap = inventoryOptionIndex == 4
-  if (selectedGlitchSprite < 0 or spellbookSize <= 0) and not popupRect.visible:
+  if (selectedGlitchSprite < 0 or spellbookSize <= 0) and not popupRect.visible and (not isOnMap or global.memory["can_freely_teleport"]):
     if player.justPressedMenuUp():
       normalizeInventoryOptionIndex(-1, 0)
     if player.justPressedMenuDown():
@@ -703,12 +712,10 @@ func processInventoryLogic(_delta):
       mapCursorSprite.restart()
       mapCursorSprite2.restart()
       normalizeInventoryOptionIndex(0, 1)
-      menuMoveSound.play()
     elif player.justPressedMenuLeft() or (player.justPressedMenuUp() and isOnMap and not global.memory["can_freely_teleport"]):
       mapCursorSprite.restart()
       mapCursorSprite2.restart()
       normalizeInventoryOptionIndex(0, -1)
-      menuMoveSound.play()
   isOnMap = inventoryOptionIndex == 4
   # inventoryFaderRect.visible = isOnMap
   # mapFaderRect.visible = not isOnMap
@@ -761,21 +768,9 @@ func processInventoryLogic(_delta):
       popupRect.visible = not popupRect.visible
       shouldShowPopupYesNoOptions = false
       if inventoryOptionIndexX == 0:
-        popupText.bbcode_text = tr("UI.Inventory.5") # "your trusty broom.." if not global.memory["glitched_broom"] else "uyro utsryt oomr;b"
-        if global.memory["broomerang"] > 0:
-          shouldShowPopupYesNoOptions = true
-          if popupRect.visible:
-            popupYesNoOptions = global.memory["broomerang_enabled"]
-          else:
-            global.memory["broomerang_enabled"] = popupYesNoOptions
-        # if global.memory["broomerang"] > 1:
-        #   popupText.bbcode_text += "\nsweep twice to throw it!"
-        # else:
-        #   popupText.bbcode_text += "\ngreat for sweeping dust"
-        # if global.memory["broomerang"] >= 2:
-        #   popupText.bbcode_text += "\nno limits!"
+        updateBroomPopupText()
       elif inventoryOptionIndexX == 1:
-        popupText.bbcode_text = tr("UI.Inventory.6")
+        updateOutfitPopupText()
       elif inventoryOptionIndexX == 2:
         popupText.bbcode_text = tr("NPC.Treasure.1") % global.getInputText("restart_key")
       elif inventoryOptionIndexX == 3:
@@ -889,6 +884,87 @@ func processInventoryLogic(_delta):
     inventoryOptionIndex = 4
     inventoryOptionIndexX = 0
 
+  if not popupRect.visible:
+    popupOutfitRect.visible = false
+
+onready var popupOutfitRect = get_node("PopupOutfitRect")
+func updateOutfitPopupText():
+  var outfitSprite = popupOutfitRect.get_node("ColorRect/ColorRect/OutfitSprite")
+  match global.memory["currOutfit"]:
+    global.GrandmaOutfit.BABUSHKA:
+      popupText.bbcode_text = tr("UI.Inventory.6")
+      outfitSprite.frame = 0
+    global.GrandmaOutfit.NO_HAT:
+      popupText.bbcode_text = tr("UI.Outfit.0")
+      outfitSprite.frame = 1
+    global.GrandmaOutfit.WITCH_HAT:
+      popupText.bbcode_text = tr("UI.Outfit.1")
+      outfitSprite.frame = 2
+  popupOutfitRect.visible = true
+  if global.memory.has("allMyOutfits") and global.memory["allMyOutfits"].size() > 1:
+    popupText.bbcode_text += "\n" + global.getInputText("menu_left") + " " + global.getInputText("menu_right")
+    isInOutfitSwitchingMode = true
+
+func tryToSwitchOutfits():
+  if not global.memory.has("allMyOutfits") or not global.memory.has("currOutfit"):
+    return
+  var outfits = global.memory["allMyOutfits"]
+  var currIndex = outfits.find(global.memory["currOutfit"])
+  if currIndex == -1:
+    return
+  if player.justPressedMenuRight():
+    currIndex += 1
+    if currIndex >= outfits.size(): currIndex = 0
+  elif player.justPressedMenuLeft():
+    currIndex -= 1
+    if currIndex < 0: currIndex = outfits.size() - 1
+  if player.justPressedMenuRight() or player.justPressedMenuLeft():
+    global.memory["currOutfit"] = outfits[currIndex]
+    level.player.changeOutfit(outfits[currIndex])
+    updateOutfitPopupText()
+  elif player.justPressedMenuUp() or player.justPressedMenuDown():
+    level.player.noBroomSound.play()
+
+func updateBroomPopupText():
+  var outfitSprite = popupOutfitRect.get_node("ColorRect/ColorRect/OutfitSprite")
+  match global.memory["currBroom"]:
+    global.GrandmaBroom.NORMAL:
+      popupText.bbcode_text = tr("UI.Inventory.5")
+      outfitSprite.frame = 32
+    global.GrandmaBroom.FRYING_PAN:
+      popupText.bbcode_text = tr("UI.Broom.1")
+      outfitSprite.frame = 33
+  popupOutfitRect.visible = true
+  # if global.memory["broomerang"] > 0:
+  #   shouldShowPopupYesNoOptions = true
+  #   if popupRect.visible:
+  #     popupYesNoOptions = global.memory["broomerang_enabled"]
+  #   else:
+  #     global.memory["broomerang_enabled"] = popupYesNoOptions
+  if global.memory.has("allMyBrooms") and global.memory["allMyBrooms"].size() > 1:
+    popupText.bbcode_text += "\n" + global.getInputText("menu_left") + " " + global.getInputText("menu_right")
+    isInBroomSwitchingMode = true
+
+func tryToSwitchBrooms():
+  if not global.memory.has("allMyBrooms") or not global.memory.has("currBroom"):
+    return
+  var brooms = global.memory["allMyBrooms"]
+  var currIndex = brooms.find(global.memory["currBroom"])
+  if currIndex == -1:
+    return
+  if player.justPressedMenuRight():
+    currIndex += 1
+    if currIndex >= brooms.size(): currIndex = 0
+  elif player.justPressedMenuLeft():
+    currIndex -= 1
+    if currIndex < 0: currIndex = brooms.size() - 1
+  if player.justPressedMenuRight() or player.justPressedMenuLeft():
+    global.memory["currBroom"] = brooms[currIndex]
+    level.player.playChangeOutfitSound()
+    updateBroomPopupText()
+  elif player.justPressedMenuUp() or player.justPressedMenuDown():
+    level.player.noBroomSound.play()
+
 func getAngelStatuesArr():
   if global.memory["can_freely_teleport"]:
     var y = int(mapCursorPosition.y)
@@ -931,6 +1007,7 @@ func normalizeInventoryOptionIndex(y, x):
     return normalizeMapCursorIndex(-y, x)
   elif isOnMap and y != 0:
     return normalizeInventoryOptionIndex(0, y)
+  var prevInventoryOptionIndices = Vector2(inventoryOptionIndexX, inventoryOptionIndex)
 
   if y != 0:
     inventoryOptionIndexX = 0
@@ -1041,11 +1118,14 @@ func normalizeInventoryOptionIndex(y, x):
     if x > 0:
       if inventoryOptionIndexX >= angelStatues.size():
         inventoryOptionIndexX = 0
-        return
-    if x < 0:
+    elif x < 0:
       if inventoryOptionIndexX < 0:
         inventoryOptionIndexX = angelStatues.size() - 1
-        return
+
+  if inventoryOptionIndexX != prevInventoryOptionIndices.x or inventoryOptionIndex != prevInventoryOptionIndices.y:
+    menuMoveSound.play()
+  else:
+    level.player.noBroomSound.play()
     
 func normalizeMapCursorIndex(y_diff, x_diff):
   var mapGrid = transition.mapManager.gimmeMapGrid()

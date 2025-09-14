@@ -363,10 +363,14 @@ func changeSpriteColorPalette(palette):
   chickenSprite.material_override.set_shader_param("target_palette", palette)
   # broomSpriteVisible.material_override.set_shader_param("target_palette", palette)
 
+onready var changeOutfitSound = get_node("Sounds/ChangeOutfitSound")
 var babushkaScarfTex = preload("res://assets/player_sheet_babushkaScarf.png")
+var noHatTex = preload("res://assets/player_sheet_old_naked.png")
 var witchHatTex = preload("res://assets/outfits/player_sheet_witch_face.png")
 func getOutfitTexture(outfit):
   match outfit:
+    global.GrandmaOutfit.NO_HAT:
+      return noHatTex
     global.GrandmaOutfit.WITCH_HAT:
       return witchHatTex
     _:
@@ -386,12 +390,22 @@ func getOutfitIsSpellGlitchSpriteVisible(outfit):
     _:
       return true
 
-func changeOutfit(outfit):
+func changeOutfit(outfit, should_play_sound = true):
   global.memory["currOutfit"] = outfit
   grandmaHatSprite.texture = getOutfitTexture(outfit)
   grandmaHatSprite.material_override.set_shader_param("texture_albedo", getOutfitTexture(outfit))
   grandmaHatSprite.offset = getOutfitOffset(outfit)
   spellbookGlitchSprite.visible = getOutfitIsSpellGlitchSpriteVisible(outfit)
+  if should_play_sound:
+    playChangeOutfitSound()
+
+func playChangeOutfitSound():
+  changeOutfitSound.pitch_scale = rand_range(0.7, 1.5)
+  changeOutfitSound.play()
+
+func changePet(pet):
+  global.memory["currPet"] = pet
+  level.tryResetFollowers()
 
 func enemyPushMe(delta, origin, enemy_glitch_form):
   if glitch_form != global.GlitchForm.INVISIBLE or (glitch_form != global.GlitchForm.INVISIBLE and enemy_glitch_form == global.GlitchForm.INVISIBLE):

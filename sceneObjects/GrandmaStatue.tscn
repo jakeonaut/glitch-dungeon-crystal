@@ -239,9 +239,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.56768, 0 )
 shape = SubResource( 54 )
 
 [node name="SmackSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 1 )
 volume_db = -10.0
+bus = "Sfx"
 
 [node name="SpellbookGlitchSprite" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.392, 0 )
@@ -291,6 +291,6 @@ hframes = 8
 script = ExtResource( 4 )
 
 [node name="SaveSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 18 )
 volume_db = -35.0
+bus = "Sfx"

@@ -79,7 +79,7 @@ mesh = SubResource( 3 )
 
 [node name="ExtinguishSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-volume_db = -5.0
+volume_db = -8.0
 bus = "Sfx"
 
 [node name="SmallInteractionArea" type="Area" parent="." groups=["corporeal_body", "malware", "no_pushems"]]

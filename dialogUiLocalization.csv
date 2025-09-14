@@ -254,6 +254,15 @@ UI.NewGame.Plus,New Game +,zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr
 UI.NewGame.Continue,Continue,zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
 NPC.Treasure.1_2,?!!?\npress %s to Return\ntravel everywhere on map,？？？？\n按 %s返回上一存档点,"????\nНажмите %s, чтобы «вернуться».",????\naperte %s para retornar,"????\nappuyez sur %s pour Retourner",????\n %s 戻る,????\npulsa %s para Regresar,"????\n premi %s per \"Ritornare\"",????\nnaciśnij %s aby wrócić do punktu zapisu,"????\nDrücke %s, um es erneut zu versuchen","????\n%s 키를 눌러 돌아가기","????\nНатисніть %s, щоб повернутися",????\ngeri dönmek için %s tuşuna bas
 LevelName.0,dungeon,zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
-LevelName.7,"dream world",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
-NPC.Outfit.0,"no scarf..\ntake care, and\ndon't catch a cold!",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
-NPC.Outfit.1,"witch hat",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
+LevelName.7,"dream city",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
+UI.Outfit.Title,"OUTFIT:",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
+NPC.Outfit.Prompt,"change in inventory.",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
+UI.Outfit.0,"no scarf..\ntake care, and\ndon't catch a cold!",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
+UI.Outfit.1,"witch hat",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
+NPC.TutorialSecret.1,"i'm just hanging\nwith my pals",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
+NPC.Angel.1,"this place is frozen in time",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
+NPC.Angel.2,"no more corruption\nno more life",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
+NPC.Angel.3,"those crystal elders think\nthey're SO special. well\nwe're *all* HER children.",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
+NPC.Angel.5,"I like it here!\ni'm with my friends",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
+NPC.Angel.6,"you became like us\nwe want to become like you!",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
+UI.Broom.1,"good for frying eggs!\nactually, don't do that..",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR

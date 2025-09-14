@@ -558,6 +558,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = true
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
@@ -593,6 +594,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
@@ -628,6 +630,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
@@ -663,6 +666,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
@@ -698,6 +702,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = true
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
@@ -737,6 +742,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = true
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
@@ -772,6 +778,7 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = true
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
@@ -1887,7 +1894,7 @@ audio_listener_enable_3d = true
 script = ExtResource( 16 )
 show_crt_effect = true
 starting_glitch_type = 3
-tileset_type = 3
+tileset_type = 10
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 8 )]
 
@@ -2663,6 +2670,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 79.2, 44.0171, 0 )
 
 [node name="Sprite3D" parent="Viewport/level/AnglerFish3" index="0"]
 flip_h = true
+frame = 59
+
+[node name="DanglerBase" parent="Viewport/level/AnglerFish3" index="1"]
+visible = false
 
 [node name="SecretAnimationPlayer" parent="Viewport/level/AnglerFish3" index="7"]
 anims/RESET = SubResource( 84 )
@@ -2689,6 +2700,7 @@ shape = SubResource( 82 )
 flip_h = true
 
 [node name="RodSprite" parent="Viewport/level/AnglerFish3/FishingRod" index="1"]
+visible = true
 flip_h = true
 
 [node name="LineSprite" parent="Viewport/level/AnglerFish3/FishingRod" index="2"]

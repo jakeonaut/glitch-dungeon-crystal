@@ -1302,7 +1302,7 @@ func handleCollisionsAndMove(local_lv, delta):
   if glitch_form == global.GlitchForm.LADDER and was_on_ground:
     on_ground = isWalkingIntoWall()
   elif glitch_form != global.GlitchForm.FLOOR and should_collide_floor:
-    var tiles_underfoot = getTilesBelow(getLevelTiles())
+    var tiles_underfoot = getTilesBelow(getLevelTiles()) # TODO(jakeonaut): LAYERED_TILES
     if not is_turn_based or (tiles_underfoot[0] == null and tiles_underfoot[1] == null and tiles_underfoot[2] == null):
       on_ground = false
   truly_on_ground = false

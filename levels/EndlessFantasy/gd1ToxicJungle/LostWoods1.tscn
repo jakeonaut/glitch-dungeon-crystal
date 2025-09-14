@@ -1630,7 +1630,7 @@ shape = SubResource( 35 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 9, -1 )
 
 [node name="Mushroom2" parent="Viewport/level" instance=ExtResource( 27 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 6, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7547, 6, -1 )
 
 [node name="Mushroom3" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 11.8539, -1 )
@@ -1692,7 +1692,7 @@ anims/landSoft = SubResource( 90 )
 anims/wakeup = SubResource( 91 )
 
 [node name="MushroomNPC" parent="Viewport/level" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6371, 3, 0 )
 bbText = "NPC.SporeCreature.7"
 
 [node name="FanPlant" parent="Viewport/level" instance=ExtResource( 2 )]

@@ -1,5 +1,6 @@
 extends AudioStreamPlayer
 
+onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 onready var textBox = get_node("..")
 
 func _ready():
@@ -11,6 +12,7 @@ func activateScript():
   if numAngelEggs >= global.MAX_ANGEL_EGGS and global.memory["allMyBrooms"].find(global.GrandmaBroom.FRYING_PAN) < 0:
     global.memory["currBroom"] = global.GrandmaBroom.FRYING_PAN
     global.memory["allMyBrooms"].push_back(global.GrandmaBroom.FRYING_PAN)
+    level.player.playChangeOutfitSound()
     musicPlayer.playTreasureJingle(-20)
     
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND

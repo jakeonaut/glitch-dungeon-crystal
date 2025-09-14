@@ -2,9 +2,10 @@ extends AudioStreamPlayer
 
 onready var treasureChest = get_node("../../..")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+var outfitToUnlock = global.GrandmaOutfit.WITCH_HAT
 
 func _ready():
-  if global.GrandmaOutfit.WITCH_HAT in global.memory["allMyOutfits"]:
+  if outfitToUnlock in global.memory["allMyOutfits"]:
     treasureChest.youAlreadyGotMe()
 
 func activateScript():
@@ -21,9 +22,9 @@ func activateScript():
   level.player.aniPlayer.queue("walkStop")
   level.player.aniPlayer.queue("stand")
 
-  level.player.changeOutfit(global.GrandmaOutfit.WITCH_HAT)
+  level.player.changeOutfit(outfitToUnlock)
   level.saveTheGame()
 
 func preActivateScript():
-  if not global.GrandmaOutfit.WITCH_HAT in global.memory["allMyOutfits"]:
-    global.memory["allMyOutfits"].push_back(global.GrandmaOutfit.WITCH_HAT)
+  if not outfitToUnlock in global.memory["allMyOutfits"]:
+    global.memory["allMyOutfits"].push_back(outfitToUnlock)

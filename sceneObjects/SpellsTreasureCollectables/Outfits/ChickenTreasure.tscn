@@ -1,0 +1,600 @@
+[gd_scene load_steps=30 format=2]
+
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
+[ext_resource path="res://scripts/SpellsTreasures/Outfits/PetChickenDialogAbortSound.gd" type="Script" id=2]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=3]
+[ext_resource path="res://scripts/SpellsTreasures/TreasureCollectable.gd" type="Script" id=4]
+[ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=5]
+[ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=6]
+[ext_resource path="res://assets/sounds/sfx004_meteors.wav" type="AudioStream" id=7]
+[ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/sounds/OOT_Pot_Shatter.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sprites/objects.png" type="Texture" id=10]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=11]
+[ext_resource path="res://assets/treasureChest.png" type="Texture" id=12]
+[ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=13]
+[ext_resource path="res://assets/sprites/spinning_cube_sheet.png" type="Texture" id=14]
+[ext_resource path="res://assets/npcs/spellbookPagePortrait.png" type="Texture" id=15]
+[ext_resource path="res://assets/sounds/eba_funny.wav" type="AudioStream" id=16]
+[ext_resource path="res://assets/palettes/dark_grey_palette2.png" type="Texture" id=17]
+[ext_resource path="res://assets/DELETEME/LA_Chest_Open.wav" type="AudioStream" id=18]
+[ext_resource path="res://assets/sounds/bawk.wav" type="AudioStream" id=19]
+
+[sub_resource type="SphereShape" id=2]
+radius = 1.5
+
+[sub_resource type="BoxShape" id=8]
+resource_local_to_scene = true
+
+[sub_resource type="SpatialMaterial" id=21]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource( 10 )
+
+[sub_resource type="SpatialMaterial" id=20]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource( 13 )
+
+[sub_resource type="ShaderMaterial" id=22]
+shader = ExtResource( 3 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 12 )
+shader_param/base_palette = ExtResource( 11 )
+shader_param/target_palette = ExtResource( 17 )
+
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TreasureSprite3D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TreasureSprite3D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("OpenSound:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite3D:pixel_size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SmallInteractionArea:translation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AweSound:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite3D:opacity")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("BirdSprite:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("BirdSprite:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1.91161, 1 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("ChickenSound:playing")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "idle"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("TreasureSprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AweSound:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollectSound:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 4.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BirdSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "isOpen"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("TreasureSprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BirdSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "openUp"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("TreasureSprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite3D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite3D:pixel_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite3D:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 0.5, 1 ), Vector3( 0, 0.746825, 1 ), Vector3( 0, 1.44281, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("OpenSound:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite3D:opacity")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("BirdSprite:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("BirdSprite:translation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 1.91161, 1 ), Vector3( 0, 2.11892, 1 ), Vector3( 0, 2.80996, 1 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("ChickenSound:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="ShaderMaterial" id=18]
+shader = ExtResource( 3 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = true
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 14 )
+shader_param/base_palette = ExtResource( 11 )
+shader_param/target_palette = ExtResource( 11 )
+
+[node name="ChickenTreasure" type="Spatial"]
+script = ExtResource( 4 )
+grav = 0
+bbText = "NPC.Outfit.1"
+portrait = ExtResource( 15 )
+is_important = true
+can_activate = false
+can_move = false
+
+[node name="InteractionArea" type="Area" parent="."]
+script = ExtResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
+shape = SubResource( 2 )
+
+[node name="SmallInteractionArea" type="Area" parent="."]
+script = ExtResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
+shape = SubResource( 8 )
+
+[node name="NPC TextBox" parent="." instance=ExtResource( 8 )]
+
+[node name="DialogStartSound" parent="NPC TextBox/TextBox" index="10"]
+stream = ExtResource( 7 )
+
+[node name="DialogSound" parent="NPC TextBox/TextBox" index="11"]
+stream = null
+volume_db = -23.0
+
+[node name="NextDialogSound" parent="NPC TextBox/TextBox" index="12"]
+volume_db = -10.0
+
+[node name="AbortSound" parent="NPC TextBox/TextBox" index="13"]
+stream = null
+script = ExtResource( 2 )
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+visible = false
+material_override = SubResource( 21 )
+offset = Vector2( 0, 4 )
+pixel_size = 0.125
+shaded = true
+alpha_cut = 2
+texture = ExtResource( 10 )
+hframes = 12
+vframes = 10
+frame = 57
+script = ExtResource( 1 )
+should_randomize_frame_delay = true
+max_frames = 1
+
+[node name="BirdSprite" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.91161, 1 )
+visible = false
+material_override = SubResource( 20 )
+pixel_size = 0.0001
+shaded = true
+alpha_cut = 2
+texture = ExtResource( 13 )
+hframes = 8
+vframes = 8
+frame = 3
+script = ExtResource( 1 )
+frame_delay = 0.2
+should_randomize_frame_delay = true
+
+[node name="TreasureSprite3D" type="Sprite3D" parent="."]
+material_override = SubResource( 22 )
+pixel_size = 0.125
+shaded = true
+alpha_cut = 2
+texture = ExtResource( 12 )
+hframes = 2
+vframes = 2
+script = ExtResource( 1 )
+should_randomize_frame_delay = true
+should_animate = false
+
+[node name="SecretAnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+anims/RESET = SubResource( 13 )
+anims/idle = SubResource( 15 )
+anims/isOpen = SubResource( 16 )
+anims/openUp = SubResource( 14 )
+
+[node name="CollectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -10.0
+pitch_scale = 0.8
+bus = "Sfx"
+
+[node name="AweSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+volume_db = -15.0
+pitch_scale = 0.9
+bus = "Sfx"
+
+[node name="OpenSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+volume_db = -15.0
+bus = "Sfx"
+
+[node name="SmackSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -20.0
+pitch_scale = 0.65
+bus = "Sfx"
+
+[node name="ChickenSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+volume_db = -20.0
+bus = "Sfx"
+
+[node name="SparkleSprite3D" type="Sprite3D" parent="." groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.739999, 1 )
+visible = false
+material_override = SubResource( 18 )
+pixel_size = 0.12
+texture = ExtResource( 14 )
+hframes = 8
+script = ExtResource( 1 )
+
+[editable path="NPC TextBox"]

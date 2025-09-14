@@ -140,20 +140,20 @@ enum GrandmaOutfit {
     BABUSHKA,
     NO_HAT,
     WITCH_HAT,
-    GODDESS_EYE,
-    BONNET,
-    NON_LA,
-    SUN_HAT,
-    BUG_CATCHER,
-    CROCHET,
     SCARF_EARMUFFS,
-    YOUNG_BABA,
     YUBABA,
     WASTE_WITCH,
     SOPHIE,
-    TOTORO_GRANNY,
-    KIKI,
-    MONONOKE,
+    GODDESS_MASK,
+    CRONE_MASK,
+    SEADEVIL_MASK,
+    DOGU_MASK,
+    BABA_YAGA_MASK,
+    CRYSTAL_ELDER_MASK,
+    BABUSHKA_CAT_MASK,
+    MUSHROOM_HAT,
+    COZY_WINTER_SCARF,
+    TURNIP_MERCHANT,
 }
 
 enum GrandmaBroom {
@@ -903,7 +903,12 @@ func turnRealIntoIntRecursive(obj):
         return obj
 
 func parseJsonPreserveInt(json_str):
-    return turnRealIntoIntRecursive(parse_json(json_str))
+    var jsonResult = JSON.parse(json_str)
+    if jsonResult.error == OK:
+        return turnRealIntoIntRecursive(parse_json(json_str))
+    print(json_str)
+    return {}
+    
 
 var is_reading_input = false
 var last_read_input = null

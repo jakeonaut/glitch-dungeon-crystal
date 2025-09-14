@@ -9,6 +9,8 @@ onready var startDeleteSound = get_node("StartDeleteSound")
 onready var deleteSound = get_node("DeleteSound")
 onready var reliefSound = get_node("ReliefSound")
 onready var bellSound = get_node("BellSound")
+onready var towerSprite1 = get_node("TowerSprite1")
+onready var towerSprite2 = get_node("TowerSprite2")
 
 enum MainMenuState {
     MAIN_MENU,
@@ -42,6 +44,9 @@ func setUpRoomInitializationOverride():
         var finalText = tr("NPC.Cow.2")
         cowNPC.textBox.text_final = finalText
         cowNPC.textBox.textNode.bbcode_text = finalText
+        if global.memory["clean_crystals"] >= 4:
+            towerSprite1.visible = true
+            towerSprite2.visible = true
     if global.pauseGame:
         transition.reverse_fade()
     uiLayer.remove_child(uiLayer.textBoxes)
@@ -79,6 +84,17 @@ onready var glitchEnemy6 = get_node("GlitchEnemy6")
 onready var colorRect = get_node("../../Viewport2/UILayer/MainMenu/ColorRect")
 onready var cameraTarget = get_node("cameraTarget")
 onready var dialogPosition = get_node("DialogPosition")
+
+var saved_games_cache = null
+func getAndCacheSavedGames():
+    if saved_games_cache == null:
+        saved_games_cache = [
+            global.loadGame(0, {}) if global.doesSaveGameExist(0) else {},
+            global.loadGame(1, {}) if global.doesSaveGameExist(1) else {},
+            global.loadGame(2, {}) if global.doesSaveGameExist(2) else {},
+            global.loadGame(3, {}) if global.doesSaveGameExist(3) else {},
+        ]
+    return saved_games_cache
 
 var was_intro_cutscene_skipped = 0
 var skip_intro_cutscene_reset_timer = 0
@@ -435,8 +451,8 @@ func _process(delta):
             #         else:
             #             logoSprite.texture = logoTex2
         
-        var temp = global.loadGame(global.mainMenuPromptIndex, {})
-        player.changeOutfit(temp["currOutfit"] if temp["currOutfit"] != null else global.GrandmaOutfit.BABUSHKA)
+        var temp = getAndCacheSavedGames()[global.mainMenuPromptIndex]
+        player.changeOutfit(temp["currOutfit"] if temp.has("currOutfit") else global.GrandmaOutfit.BABUSHKA, false)
         
         if global.mainMenuPromptIndex == 0:
             player.applyGlitch(global.GlitchForm.NORMAL, true)
@@ -499,7 +515,7 @@ func _process(delta):
 #     pass
 
 func jostlePlayer():
-    player.global_transform.origin.y = 1
+    player.global_transform.origin.y = 0.5
     player.on_ground = false
     player.miniWakeup()
 

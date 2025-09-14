@@ -149,7 +149,7 @@ func _ready_impl():
 
   displayMessageText("")
 
-  player.changeOutfit(global.memory["currOutfit"])
+  player.changeOutfit(global.memory["currOutfit"], false)
 
   if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
     if global.isRespawning:
@@ -762,14 +762,20 @@ func walkThroughWallsGlitch():
   current_sprite_palette = levelTiles.white_palette
   setDoorsSpriteFrame(29)
 
-
 var followers = []
+func tryResetFollowers():
+  for follower in followers:
+    if follower != null and follower.get_ref() != null:
+      follower.queue_free()
+  followers = []
+  trySpawnFollowers()
+
 func trySpawnFollowers():
   spawnPetFollower(
-        player.global_transform.origin + Vector3(
-          stepify(rand_range(-1.0, 1.0), 0.125),
-          stepify(rand_range(0.5, 1.5), 0.125), 
-          0))
+    player.global_transform.origin + Vector3(
+      stepify(rand_range(-1.0, 1.0), 0.125),
+      stepify(rand_range(0.5, 1.5), 0.125), 
+      0))
 
   # spawnSpecialKeyFollowers(
   #   player.global_transform.origin + Vector3(
@@ -890,7 +896,6 @@ func spawnPetFollower(starting_position):
   
   var petFollowerRes = null
   var how_many = 1
-        
   
   match currPet:
     global.PetFollower.CHICKEN:
