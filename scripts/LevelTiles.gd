@@ -835,13 +835,12 @@ func changeColorPalette(palette, _palette_alt = null):
       var next_material = material.next_pass
       if next_material != null and next_material is ShaderMaterial:
         if (color_suffix == "" and not "_" in tile_name) or (color_suffix in tile_name):
-          next_material.set_shader_param("target_palette", palette_to_use)
+          next_material.set_shader_param("palette_out", palette_to_use)
     # mesh.set_material(material)
     # mesh_library.set_item_mesh(item_id, mesh)
 
 func changeTransientTileColorPalette(palette, color_suffix):
   var item_list = mesh_library.get_item_list()
-  print("try to change! " + str(palette) + ", " + str(color_suffix))
   for i in range(len(item_list)):
     var item_id = item_list[i]
     if item_id == INVALID_CELL_ITEM:
@@ -850,14 +849,12 @@ func changeTransientTileColorPalette(palette, color_suffix):
       continue
     var mesh = mesh_library.get_item_mesh(item_id)
     var tile_name = mesh_library.get_item_name(item_id)
-    print("item_id, tile_name: " + str(item_id) + ", " + str(tile_name))
     var material = mesh.surface_get_material(0)
     if material != null and material is SpatialMaterial:
       var next_material = material.next_pass
       if next_material != null and next_material is ShaderMaterial:
         if color_suffix in tile_name:
-          print("change final!")
-          next_material.set_shader_param("target_palette", palette)
+          next_material.set_shader_param("palette_out", palette)
 
 func properlySetTiles():
   var keys = tile_dict.keys()
@@ -935,11 +932,6 @@ func setTileset(tileset_type, properly_set_tiles = true):
     
   if cosmeticLevelTiles:
     cosmeticLevelTiles.setTileset(tileset_type, properly_set_tiles)
-  
-  # changeTransientTileColorPalette(global.intangible_red_palette, "_red")
-  # changeTransientTileColorPalette(global.intangible_green_palette, "_green")
-  # changeTransientTileColorPalette(global.intangible_black_palette, "_black")
-  # changeTransientTileColorPalette(global.intangible_yellow_palette, "_yellow")
 
 func normalGlitch(_palette = null):
   moveAllGlitchedTilesToTheDefaultZIndices()
@@ -998,10 +990,10 @@ func walkThroughWallsGlitch(_palette = null):
   if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(global.dark_white_palette)
 
 func moveAllGlitchedTilesToTheDefaultZIndices():
-  # changeTransientTileColorPalette(global.intangible_red_palette, "_red")
-  # changeTransientTileColorPalette(global.intangible_green_palette, "_green")
-  # changeTransientTileColorPalette(global.intangible_black_palette, "_black")
-  # changeTransientTileColorPalette(global.intangible_yellow_palette, "_yellow")
+  changeTransientTileColorPalette(global.intangible_red_palette, "_red")
+  changeTransientTileColorPalette(global.intangible_green_palette, "_green")
+  changeTransientTileColorPalette(global.intangible_black_palette, "_black")
+  changeTransientTileColorPalette(global.intangible_yellow_palette, "_yellow")
   floorGlitch_tiles = moveGlitchedTilesToZIndex(floorGlitch_tiles, -1)
   featherGlitch_tiles = moveGlitchedTilesToZIndex(featherGlitch_tiles, -2)
   invisibleGlitch_tiles = moveGlitchedTilesToZIndex(invisibleGlitch_tiles, -3)
