@@ -22,6 +22,11 @@ var base_palette2d = preload("res://assets/palettes2D/base_palette.png")
 var base_palette_pink = preload("res://assets/palettes/base_palette_pink.png")
 var weird_base_palette = preload("res://assets/palettes/weird_base_palette.png")
 
+var intangible_red_palette = preload("res://assets/palettes/intangible_red_palette.png")
+var intangible_green_palette = preload("res://assets/palettes/intangible_green_palette.png")
+var intangible_black_palette = preload("res://assets/palettes/intangible_black_palette.png")
+var intangible_yellow_palette = preload("res://assets/palettes/intangible_yellow_palette.png")
+
 var red_dungeon_palette = preload("res://assets/palettes/red_dungeon_palette.png")
 var green_dungeon_palette = preload("res://assets/palettes/green_dungeon_palette.png")
 var black_dungeon_palette = preload("res://assets/palettes/black_dungeon_palette.png")
@@ -1859,4 +1864,4 @@ func isTileSolid(tile_type, mesh_library):
   if tile_type == GridMap.INVALID_CELL_ITEM:
     return false
   var tile_name = mesh_library.get_item_name(tile_type)
-  return ("BrickSolid" in tile_name or "SoftSand" in tile_name or "DissolvingStone" in tile_name) and not "Spikes" in tile_name
+  return ("BrickSolid" in tile_name or "SoftSand" in tile_name or "DissolvingStone" in tile_name or "SolidTransientTile" in tile_name) and not "Spikes" in tile_name
