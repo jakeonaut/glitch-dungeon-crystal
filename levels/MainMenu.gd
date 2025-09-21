@@ -515,8 +515,8 @@ func _process(delta):
 #     pass
 
 func jostlePlayer():
-    player.global_transform.origin.y = 0.5
-    player.on_ground = false
+    # player.global_transform.origin.y = 0.5
+    # player.on_ground = false
     player.miniWakeup()
 
 func processSkipPrompt(delta):
