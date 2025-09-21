@@ -1473,8 +1473,8 @@ func miniWakeup():
   sleepy_timer = 0
   aniPlayer.stop()
   aniPlayer.clear_queue()
-  aniPlayer.play("fall")
-  on_ground = false
+  aniPlayer.play("land")
+  # on_ground = false
 
 onready var ritualSound = get_node("Sounds/RitualSound")
 onready var angelZoneLevelDoor = get_node("AngelZoneLevelDoor")
@@ -2868,6 +2868,7 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
 
 func iJustPressedDown():
   if glitch_form == global.GlitchForm.FLOOR and on_ground and not truly_on_ground:
+    sporeSound.play()
     .iJustPressedDown() # super
     return
 

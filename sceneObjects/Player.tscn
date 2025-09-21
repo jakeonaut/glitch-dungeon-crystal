@@ -92,8 +92,8 @@
 [ext_resource path="res://assets/sounds/eba_walking_sand1.wav" type="AudioStream" id=90]
 [ext_resource path="res://assets/sounds/eba_walking_tile2.wav" type="AudioStream" id=91]
 [ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=92]
-[ext_resource path="res://assets/sounds/exhale.mp3" type="AudioStream" id=93]
-[ext_resource path="res://assets/sounds/snore.mp3" type="AudioStream" id=94]
+[ext_resource path="res://assets/sounds/snore1.wav" type="AudioStream" id=93]
+[ext_resource path="res://assets/sounds/exhale3.wav" type="AudioStream" id=94]
 [ext_resource path="res://assets/sounds/cauldron2.wav" type="AudioStream" id=95]
 [ext_resource path="res://assets/player_sheet_old_naked.png" type="Texture" id=96]
 [ext_resource path="res://assets/player_sheet_babushkaScarf.png" type="Texture" id=97]
@@ -3947,7 +3947,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id=131]
 resource_name = "sleepy"
-length = 2.0
+length = 9.0
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
@@ -3956,10 +3956,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 1, 2.2, 3.2, 4.5, 5.5, 6.7, 8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 44, 45 ]
+"values": [ 44, 45, 44, 45, 44, 45, 44, 45 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -3968,9 +3968,27 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 1, 2.2, 3.2, 4.5, 5.5, 6.7, 8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "breathInSnore"
+}, {
+"args": [  ],
+"method": "spawnSnoreBubble"
+}, {
+"args": [  ],
+"method": "breathInSnore"
+}, {
+"args": [  ],
+"method": "spawnSnoreBubble"
+}, {
+"args": [  ],
+"method": "breathInSnore"
+}, {
+"args": [  ],
+"method": "spawnSnoreBubble"
+}, {
 "args": [  ],
 "method": "breathInSnore"
 }, {
@@ -7655,14 +7673,14 @@ pitch_scale = 1.05
 bus = "Sfx"
 
 [node name="SnoreSound" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 94 )
-volume_db = -19.0
+stream = ExtResource( 93 )
+volume_db = -16.0
+pitch_scale = 2.0
 bus = "Sfx"
 
 [node name="ExhaleSound" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 93 )
-volume_db = -19.0
-pitch_scale = 0.9
+stream = ExtResource( 94 )
+volume_db = -25.0
 bus = "Sfx"
 
 [node name="ScreenShakeSound" type="AudioStreamPlayer" parent="Sounds"]

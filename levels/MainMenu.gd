@@ -517,7 +517,12 @@ func _process(delta):
 func jostlePlayer():
     # player.global_transform.origin.y = 0.5
     # player.on_ground = false
+    var tempY = player.global_transform.origin.y
     player.miniWakeup()
+    player.vv = 0
+    player.lv.y = 0
+    player.linear_velocity.y = 0
+    player.global_transform.origin.y = tempY
 
 func processSkipPrompt(delta):
     var which_input_to_skip = "popup_menu"
