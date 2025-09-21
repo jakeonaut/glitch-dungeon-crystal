@@ -1473,7 +1473,8 @@ func miniWakeup():
   sleepy_timer = 0
   aniPlayer.stop()
   aniPlayer.clear_queue()
-  aniPlayer.play("fallStart")
+  aniPlayer.play("fall")
+  on_ground = false
 
 onready var ritualSound = get_node("Sounds/RitualSound")
 onready var angelZoneLevelDoor = get_node("AngelZoneLevelDoor")

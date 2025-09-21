@@ -835,7 +835,7 @@ func changeColorPalette(palette, _palette_alt = null):
       var next_material = material.next_pass
       if next_material != null and next_material is ShaderMaterial:
         if (color_suffix == "" and not "_" in tile_name) or (color_suffix in tile_name):
-          next_material.set_shader_param("palette_out", palette_to_use)
+          next_material.set_shader_param("base_palette", palette_to_use)
     # mesh.set_material(material)
     # mesh_library.set_item_mesh(item_id, mesh)
 
