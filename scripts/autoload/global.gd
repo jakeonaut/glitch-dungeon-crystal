@@ -184,6 +184,16 @@ enum Locale {
 }
 var currLocale = Locale.ENGLISH
 
+func getGlitchTypeFromTileName(tile_name):
+    if "_red" in tile_name:
+        return GlitchForm.FLOOR
+    if "_green" in tile_name:
+        return GlitchForm.FEATHER
+    if "_black" in tile_name:
+        return GlitchForm.INVISIBLE
+    if "_yellow" in tile_name:
+        return GlitchForm.LADDER
+
 func getColorSuffixFromTilesetType(type):
     if type == TilesetType.DUNGEON:
         return ""

@@ -6,7 +6,7 @@
   ],
   "settings": {
     "godot_tools.editor_path": "\"C:\\Program Files\\Godot\\Godot_v3.1.2-stable_win64.exe\\Godot_v3.1.2-stable_win64.exe\"",
-    "godotTools.editorPath.godot3": "/Applications/Godot.app",
+    "godotTools.editorPath.godot3": "/home/jakeonaut/Documents/Godot_v3.6.1-stable_linux.arm64",
     "workbench.colorTheme": "graygraygray"
   }
 }

@@ -55,7 +55,7 @@ func setRandomTileNameOfType(newName, num_rand, cell_index, tile_orientation, of
     if randi() % 3 <= 1:
       rand_int = randi() % num_rand
 
-  if cell_index.z != 0:
+  if "TransientTile" in newName or cell_index.z != 0:
     newName = "SolidTransientTile"
     rand_int = 0
   if -1 == cell_index.z:
@@ -180,6 +180,8 @@ func buildSingleRandomTile(cell_index, glitch_type):
       setRandomTileNameOfType("BrickSolidCeil", 6, cell_index, tile_orientation, 0, glitch_type)
   elif tile_name == "FragileBrickSolid":
     setRandomTileNameOfType("FragileBrickSolid", 8, cell_index, tile_orientation, 0)
+  elif "TransientTile" in tile_name:
+    setRandomTileNameOfType(tile_name, 1, cell_index, tile_orientation, 0, global.getGlitchTypeFromTileName(tile_name))
   elif tile_name == "BrickSolid":
     var skip_level_top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+2, cell_index.z)
     var skip_top_name = mesh_library.get_item_name(skip_level_top_neighbor_tile_type) if skip_level_top_neighbor_tile_type != -1 else ""
@@ -543,6 +545,12 @@ func isTileTransientSolid(tile_type):
   var tile_name = mesh_library.get_item_name(tile_type)
   return "SolidTransientTile" in tile_name
 
+func isTileTransientIntangible(tile_type):
+  if tile_type == GridMap.INVALID_CELL_ITEM:
+    return false
+  var tile_name = mesh_library.get_item_name(tile_type)
+  return "IntangibleTransientTile" in tile_name
+
 func isTileDissolvingStone(tile_type):
   if tile_type == GridMap.INVALID_CELL_ITEM:
     return false
@@ -819,7 +827,7 @@ func changeColorPalette(palette, _palette_alt = null):
     var item_id = item_list[i]
     if item_id == INVALID_CELL_ITEM:
       continue
-    if isTileFragileSolid(item_id) or isTileTransientSolid(item_id):
+    if isTileFragileSolid(item_id) or isTileTransientSolid(item_id) or isTileTransientIntangible(item_id):
       continue
     var mesh = mesh_library.get_item_mesh(item_id)
     var tile_name = mesh_library.get_item_name(item_id)
@@ -838,23 +846,6 @@ func changeColorPalette(palette, _palette_alt = null):
           next_material.set_shader_param("base_palette", palette_to_use)
     # mesh.set_material(material)
     # mesh_library.set_item_mesh(item_id, mesh)
-
-func changeTransientTileColorPalette(palette, color_suffix):
-  var item_list = mesh_library.get_item_list()
-  for i in range(len(item_list)):
-    var item_id = item_list[i]
-    if item_id == INVALID_CELL_ITEM:
-      continue
-    if not isTileTransientSolid(item_id):
-      continue
-    var mesh = mesh_library.get_item_mesh(item_id)
-    var tile_name = mesh_library.get_item_name(item_id)
-    var material = mesh.surface_get_material(0)
-    if material != null and material is SpatialMaterial:
-      var next_material = material.next_pass
-      if next_material != null and next_material is ShaderMaterial:
-        if color_suffix in tile_name:
-          next_material.set_shader_param("palette_out", palette)
 
 func properlySetTiles():
   var keys = tile_dict.keys()
@@ -942,44 +933,40 @@ func normalGlitch(_palette = null):
   if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(global.dark_grey_palette)
 
 func floorGlitch(_palette = null):
-  moveAllGlitchedTilesToTheDefaultZIndices()
+  moveAllGlitchedTilesToTheDefaultZIndices(global.GlitchForm.FLOOR)
   if not level.dont_glitch_tiles:
     if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
       properlySetTiles()
     changeColorPalette(red_palette, red_palette)
     if cosmeticLevelTiles: cosmeticLevelTiles.floorGlitch(global.dark_red_palette)
-  floorGlitch_tiles = moveGlitchedTilesToZIndex(floorGlitch_tiles, 0)
-  changeTransientTileColorPalette(global.red_palette, "_red")
+  floorGlitch_tiles = moveGlitchedTilesToZIndex(floorGlitch_tiles, 0, "SolidTransientTile_red")
 
 func featherGlitch(_palette = null):
-  moveAllGlitchedTilesToTheDefaultZIndices()
+  moveAllGlitchedTilesToTheDefaultZIndices(global.GlitchForm.FEATHER)
   if not level.dont_glitch_tiles:
     if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
       properlySetTiles()
     changeColorPalette(green_palette, green_palette)
     if cosmeticLevelTiles: cosmeticLevelTiles.featherGlitch(global.dark_green_palette)
-  featherGlitch_tiles = moveGlitchedTilesToZIndex(featherGlitch_tiles, 0)
-  changeTransientTileColorPalette(global.green_palette, "_green")
+  featherGlitch_tiles = moveGlitchedTilesToZIndex(featherGlitch_tiles, 0, "SolidTransientTile_green")
 
 func invisibleGlitch(_palette = null):
-  moveAllGlitchedTilesToTheDefaultZIndices()
+  moveAllGlitchedTilesToTheDefaultZIndices(global.GlitchForm.INVISIBLE)
   if not level.dont_glitch_tiles:
     if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
       properlySetTiles()
     changeColorPalette(black_palette, black_palette)
     if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(global.dark_black_palette)
-  invisibleGlitch_tiles = moveGlitchedTilesToZIndex(invisibleGlitch_tiles, 0)
-  changeTransientTileColorPalette(global.black_palette, "_black")
+  invisibleGlitch_tiles = moveGlitchedTilesToZIndex(invisibleGlitch_tiles, 0, "SolidTransientTile_black")
   
 func ladderGlitch(_palette = null):
-  moveAllGlitchedTilesToTheDefaultZIndices()
+  moveAllGlitchedTilesToTheDefaultZIndices(global.GlitchForm.LADDER)
   if not level.dont_glitch_tiles:
     if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
       properlySetTiles()
     changeColorPalette(yellow_palette, yellow_palette)
     if cosmeticLevelTiles: cosmeticLevelTiles.ladderGlitch(global.dark_yellow_palette)
-  ladderGlitch_tiles = moveGlitchedTilesToZIndex(ladderGlitch_tiles, 0)
-  changeTransientTileColorPalette(global.yellow_palette, "_yellow")
+  ladderGlitch_tiles = moveGlitchedTilesToZIndex(ladderGlitch_tiles, 0, "SolidTransientTile_yellow")
 
 func walkThroughWallsGlitch(_palette = null):
   moveAllGlitchedTilesToTheDefaultZIndices()
@@ -989,21 +976,23 @@ func walkThroughWallsGlitch(_palette = null):
   changeColorPalette(white_palette, white_palette)
   if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(global.dark_white_palette)
 
-func moveAllGlitchedTilesToTheDefaultZIndices():
-  changeTransientTileColorPalette(global.intangible_red_palette, "_red")
-  changeTransientTileColorPalette(global.intangible_green_palette, "_green")
-  changeTransientTileColorPalette(global.intangible_black_palette, "_black")
-  changeTransientTileColorPalette(global.intangible_yellow_palette, "_yellow")
-  floorGlitch_tiles = moveGlitchedTilesToZIndex(floorGlitch_tiles, -1)
-  featherGlitch_tiles = moveGlitchedTilesToZIndex(featherGlitch_tiles, -2)
-  invisibleGlitch_tiles = moveGlitchedTilesToZIndex(invisibleGlitch_tiles, -3)
-  ladderGlitch_tiles = moveGlitchedTilesToZIndex(ladderGlitch_tiles, -4)
+func moveAllGlitchedTilesToTheDefaultZIndices(except_for = global.GlitchForm.NORMAL):
+  if not except_for == global.GlitchForm.FLOOR:
+    floorGlitch_tiles = moveGlitchedTilesToZIndex(floorGlitch_tiles, -1, "IntangibleTransientTile_red")
+  if not except_for == global.GlitchForm.FEATHER:
+    featherGlitch_tiles = moveGlitchedTilesToZIndex(featherGlitch_tiles, -2, "IntangibleTransientTile_green")
+  if not except_for == global.GlitchForm.INVISIBLE:
+    invisibleGlitch_tiles = moveGlitchedTilesToZIndex(invisibleGlitch_tiles, -3, "IntangibleTransientTile_black")
+  if not except_for == global.GlitchForm.LADDER:
+    ladderGlitch_tiles = moveGlitchedTilesToZIndex(ladderGlitch_tiles, -4, "IntangibleTransientTile_yellow")
 
-func moveGlitchedTilesToZIndex(tilesToMove_dict, z_index):
+func moveGlitchedTilesToZIndex(tilesToMove_dict, z_index, tile_name):
   var newTilesToMove_dict = {}
   var keys = tilesToMove_dict.keys()
   for i in range(len(keys)):
     var cell_index = keys[i]
+    var tile_orientation = get_cell_item_orientation(cell_index.x, cell_index.y, cell_index.z)
+    set_cell_item(cell_index.x, cell_index.y, cell_index.z, mesh_library.find_item_by_name(tile_name), tile_orientation)
     var newCellIndex = Vector3(cell_index.x, cell_index.y, z_index)
     if tempGlitchMoveTile(cell_index, newCellIndex):
       newTilesToMove_dict[newCellIndex] = tilesToMove_dict[cell_index]

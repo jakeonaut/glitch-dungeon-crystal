@@ -162,6 +162,7 @@ func _ready_impl():
   levelTiles.removeRemovedTiles()
   levelTiles.setTileset(tileset_type, false)
   levelTiles.buildRandomTiles()
+  levelTiles.moveAllGlitchedTilesToTheDefaultZIndices()
   if global.memory["currLevelZone"] != global.currLevelZone and not global.memory["glitch_world"]:
     uiLayer.setDisplayTitle(global.getDisplayTitle(self.getLevelZoneName()))
   tryShowUIElements()
