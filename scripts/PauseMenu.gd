@@ -609,6 +609,10 @@ onready var glitchSprite1 = get_node("InventoryRect/GlitchRect1/ColorRect/Equipm
 onready var glitchSprite2 = get_node("InventoryRect/GlitchRect2/ColorRect/EquipmentSlotSprite")
 onready var glitchSprite3 = get_node("InventoryRect/GlitchRect3/ColorRect/EquipmentSlotSprite")
 onready var glitchSprite4 = get_node("InventoryRect/GlitchRect4/ColorRect/EquipmentSlotSprite")
+onready var grandmaFaceSprite1 = get_node("InventoryRect/GlitchRect1/ColorRect/GrandmaFaceSprite")
+onready var grandmaFaceSprite2 = get_node("InventoryRect/GlitchRect2/ColorRect/GrandmaFaceSprite")
+onready var grandmaFaceSprite3 = get_node("InventoryRect/GlitchRect3/ColorRect/GrandmaFaceSprite")
+onready var grandmaFaceSprite4 = get_node("InventoryRect/GlitchRect4/ColorRect/GrandmaFaceSprite")
 var isInOutfitSwitchingMode = false
 var isInBroomSwitchingMode = false
 var angelStatueToTeleportTo = null
@@ -1148,6 +1152,7 @@ func normalizeMapCursorIndex(y_diff, x_diff):
 
 onready var grimoireSprite = get_node("InventoryRect/GrimoireSprite")
 onready var playerSprite = get_node("InventoryRect/PlayerSprite")
+onready var playerGlitchHatSprite = get_node("InventoryRect/PlayerSprite/PlayerGlitchHatSprite")
 onready var forgetMeNotSprite = get_node("InventoryRect/FlowerSprite")
 onready var broomSprite = get_node("InventoryRect/BroomSprite")
 onready var bagSprite = get_node("InventoryRect/BagSprite")
@@ -1203,9 +1208,11 @@ func processInventoryRender(_delta):
   var spellbook = global.memory["spellbookPage"] if global.memory.has("spellbookPage") else []
   var spellbookSize = spellbook.size()
   var index = level.player.spellCastPauseIndex
+  setGlitchSprite(playerGlitchHatSprite, level.player.glitch_form)
   if global.memory.has("spellbookPage"):
     grimoireSprite.visible = true
-    playerSprite.visible = false
+    playerSprite.visible = true
+    playerSprite.position.x = 48
     # should dedupe with UILayer...
     if global.memory["glitched_grimoire"]:
       grimoireSprite.frame = 3
@@ -1213,6 +1220,10 @@ func processInventoryRender(_delta):
       glitchRect2.visible = true
       glitchRect3.visible = true
       glitchRect4.visible = true
+      grandmaFaceSprite1.visible = index == 0
+      grandmaFaceSprite2.visible = index == 1
+      grandmaFaceSprite3.visible = index == 2
+      grandmaFaceSprite4.visible = index == 3
       setGlitchSprite(glitchSprite1, spellbook[0] if spellbookSize >= 1 else level.player.glitch_form)
       setGlitchSprite(glitchSprite2, spellbook[1] if spellbookSize >= 2 else global.GlitchForm.NORMAL)
       setGlitchSprite(glitchSprite3, spellbook[2] if spellbookSize >= 3 else global.GlitchForm.NORMAL)
@@ -1223,6 +1234,10 @@ func processInventoryRender(_delta):
       glitchRect2.visible = true
       glitchRect3.visible = false
       glitchRect4.visible = false
+      grandmaFaceSprite1.visible = false
+      grandmaFaceSprite2.visible = false
+      grandmaFaceSprite3.visible = false
+      grandmaFaceSprite4.visible = false
       setGlitchSprite(glitchSprite1, spellbook[index] if spellbookSize >= 2 else level.player.glitch_form)
       
       if spellbookSize >= 2:
@@ -1232,12 +1247,17 @@ func processInventoryRender(_delta):
         setGlitchSprite(glitchSprite2, global.GlitchForm.NORMAL)
   else:
     playerSprite.visible = true
+    playerSprite.position.x = 83
     grimoireSprite.visible = false
     glitchRect1.visible = true
     setGlitchSprite(glitchSprite1, level.player.glitch_form)
     glitchRect2.visible = false
     glitchRect3.visible = false
     glitchRect4.visible = false
+    grandmaFaceSprite1.visible = false
+    grandmaFaceSprite2.visible = false
+    grandmaFaceSprite3.visible = false
+    grandmaFaceSprite4.visible = false
 
   forgetMeNotSprite.visible = global.memory["angel_flute"]
   broomSprite.scale = Vector2(3, 3) if global.memory["broomerang_enabled"] else Vector2(1.5, 1.5)

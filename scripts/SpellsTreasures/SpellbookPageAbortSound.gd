@@ -5,7 +5,7 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
 func _ready():
   if global.memory.has("spellbookPage"):
-	treasureChest.youAlreadyGotMe()
+    treasureChest.youAlreadyGotMe()
 
 func activateScript():
   treasureChest.mySprite.visible = false
@@ -21,7 +21,7 @@ func activateScript():
   level.player.aniPlayer.queue("walkStop")
   level.player.aniPlayer.queue("stand")
   if level.player.glitch_form != global.GlitchForm.NORMAL:
-	level.player.applyObeliskGlitch(level.player.glitch_form)
+    level.player.applyObeliskGlitch(level.player.glitch_form)
 
   # IFNDEF SpellbookIntroLevelScript.gd
   # if level.has_node("NPC5"):
@@ -35,12 +35,12 @@ func activateScript():
 
 func preActivateScript():
   if not global.memory.has("spellbookPage"):
-	if level.player.glitch_form != global.GlitchForm.NORMAL:
-	  global.memory["spellbookPage"] = [level.player.glitch_form]
-	else:
-	  global.memory["spellbookPage"] = []
-	global.memory["tutorial_spellbookPage"] = true
-	# TODO(jaketrower): give UILayer.gd a function
-	level.uiLayer.get_node("EquipmentRect").visible = true
-	level.uiLayer.get_node("EquipmentRect").rect_scale = Vector2(1.5, 1.5)
-	level.uiLayer.get_node("EquipmentRect").rect_position = Vector2(300, 250)
+    if level.player.glitch_form != global.GlitchForm.NORMAL:
+      global.memory["spellbookPage"] = [level.player.glitch_form]
+    else:
+      global.memory["spellbookPage"] = []
+    global.memory["tutorial_spellbookPage"] = true
+    # TODO(jaketrower): give UILayer.gd a function
+    level.uiLayer.get_node("EquipmentRect").visible = true
+    level.uiLayer.get_node("EquipmentRect").rect_scale = Vector2(1.5, 1.5)
+    level.uiLayer.get_node("EquipmentRect").rect_position = Vector2(300, 250)

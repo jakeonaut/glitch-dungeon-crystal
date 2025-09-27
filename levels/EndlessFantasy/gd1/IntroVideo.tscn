@@ -286,10 +286,10 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 offset = Vector2( 320, 28 )
 transform = Transform2D( 1, 0, 0, 1, 320, 28 )
 
-[node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
+[node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="2"]
 material = SubResource( 245 )
 
-[node name="BasicCrtEffectRect" parent="Viewport2/ScreenEffects" index="1"]
+[node name="BasicCrtEffectRect" parent="Viewport2/ScreenEffects" index="3"]
 visible = true
 margin_right = 1560.0
 margin_bottom = 1080.0
@@ -320,12 +320,12 @@ scroll_active = false
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 16 )]
 
-[node name="DitherPaletteEffectRect" parent="ScreenEffects" index="0"]
+[node name="DitherPaletteEffectRect" parent="ScreenEffects" index="2"]
 material = SubResource( 246 )
 margin_right = 1920.0
 margin_bottom = 1080.0
 
-[node name="BasicCrtEffectRect" parent="ScreenEffects" index="1"]
+[node name="BasicCrtEffectRect" parent="ScreenEffects" index="3"]
 margin_right = 1920.0
 margin_bottom = 1080.0
 

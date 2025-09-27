@@ -7,6 +7,8 @@ onready var realCamera = get_node("RealCamera")
 onready var aniPlayer = get_node("AnimationPlayer")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
+# onready var playerLight = get_node("CSGCombiner/PlayerLight") if has_node("CSGCombiner/PlayerLight") else null
+
 var leftmost_x = 999
 var rightmost_x = -999
 var topmost_y = -999

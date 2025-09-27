@@ -146,15 +146,16 @@ func buildRandomTiles():
 
 func setTileDictAndGlitchSpecificDict(index, name, tile_orientation):
   tile_dict[index] = [name, tile_orientation]
-  if 0 == index.z:
+  
+  if 0 == index.z and not "TransientTile" in name:
     normalGlitch_tiles[index] = [name, tile_orientation]
-  elif -1 == index.z:
+  elif -1 == index.z or global.getGlitchTypeFromTileName(name) == global.GlitchForm.FLOOR:
     floorGlitch_tiles[index] = [name, tile_orientation]
-  elif -2 == index.z:
+  elif -2 == index.z or global.getGlitchTypeFromTileName(name) == global.GlitchForm.FEATHER:
     featherGlitch_tiles[index] = [name, tile_orientation]
-  elif -3 == index.z:
+  elif -3 == index.z or global.getGlitchTypeFromTileName(name) == global.GlitchForm.INVISIBLE:
     invisibleGlitch_tiles[index] = [name, tile_orientation]
-  elif -4 == index.z:
+  elif -4 == index.z or global.getGlitchTypeFromTileName(name) == global.GlitchForm.LADDER:
     ladderGlitch_tiles[index] = [name, tile_orientation]
 
 func buildSingleRandomTile(cell_index, glitch_type):
