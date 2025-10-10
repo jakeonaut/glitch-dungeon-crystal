@@ -1,8 +1,12 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://sceneObjects/_autoload/globalMap.gd" type="Script" id=1]
 [ext_resource path="res://assets/Chara_sheet.png" type="Texture" id=2]
 [ext_resource path="res://sceneObjects/LevelManagerSprite.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/npc_sheet0002.png" type="Texture" id=4]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=5]
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=6]
+[ext_resource path="res://assets/palettes/violet_palette.png" type="Texture" id=7]
 [ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=10]
 [ext_resource path="res://assets/sprites/babaYagaHouse.png" type="Texture" id=14]
 [ext_resource path="res://assets/sprites/anglerFishBoss.png" type="Texture" id=15]
@@ -15,6 +19,42 @@
 [ext_resource path="res://assets/sprites/babaYagaBoss.png" type="Texture" id=23]
 [ext_resource path="res://assets/sprites/god_head.png" type="Texture" id=24]
 [ext_resource path="res://assets/sprites/babaYagaBossEye.png" type="Texture" id=25]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 6 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.5
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.0
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.0
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 2.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 4 )
+shader_param/base_palette = ExtResource( 5 )
+shader_param/target_palette = ExtResource( 7 )
 
 [node name="globalMap" type="Spatial"]
 script = ExtResource( 1 )
@@ -815,3 +855,12 @@ path = "res://levels/EndlessFantasy/gd1PrimordialOoze/Interstitial_GreenMushroom
 can_nav_right = false
 hide_me_from_map = true
 kill_after_glitch = true
+
+[node name="DreamCity" type="Spatial" parent="."]
+
+[node name="DreamGlitchTileIntro" parent="DreamCity" instance=ExtResource( 3 )]
+transform = Transform( 0.9, 0, 0, 0, 0.9, 0, 0, 0, 1, 0, 7, 0 )
+material_override = SubResource( 1 )
+pixel_size = 0.07
+path = "res://levels/EndlessFantasy/gd1DreamMemories/DreamGlitchTileIntro.tscn"
+can_nav_left = false

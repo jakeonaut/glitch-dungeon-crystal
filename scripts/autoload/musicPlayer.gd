@@ -26,6 +26,8 @@ onready var forestMarchThemePlayer = get_node("ForestMarchThemePlayer")
 onready var oceanThemePlayer = get_node("OceanThemePlayer")
 onready var exploreThemePlayer = get_node("ExploreThemePlayer")
 onready var goddessThemePlayer = get_node("GoddessThemePlayer")
+onready var dreamCityThemePlayer = get_node("DreamCityThemePlayer")
+onready var primordialOozeThemePlayer = get_node("PrimordialOozeThemePlayer")
 onready var townThemePlayer = get_node("TownThemePlayer")
 onready var bossThemePlayer = get_node("BossThemePlayer")
 onready var boss2ThemePlayer = get_node("Boss2ThemePlayer")
@@ -200,11 +202,15 @@ func conductFromScenePath(path):
         tryToPlay(exploreThemePlayer)
     elif path.find("gd1FishingVillage") > 0:
         tryToPlay(swampThemePlayer)
+    elif path.find("gd1PrimordialOoze") > 0:
+        tryToPlay(primordialOozeThemePlayer)
     elif path.find("PrimordialOoze") > 0:
         tryToPlay(weirdRestZonePlayer)
         changeSongPitch(0.3)
         default_song_pitch = 0.3
         return
+    elif path.find("gd1DreamMemories") > 0:
+        tryToPlay(dreamCityThemePlayer)
     elif path.find("gd1CrystalTower") > 0 or path.find("entrance_to_tower") > 0:
         tryToPlay(goddessThemePlayer)
     elif path.find("gd1GrandmaVillage") > 0:

@@ -1902,15 +1902,20 @@ shader_param/target_palette = ExtResource( 32 )
 
 [sub_resource type="ShaderMaterial" id=320]
 shader = ExtResource( 16 )
-shader_param/res = Vector2( 1280, 1024 )
-shader_param/hardScan = -1.0
-shader_param/hardPix = -4.0
-shader_param/hardBloomScan = -4.0
-shader_param/hardBloomPix = -2.0
-shader_param/bloomAmount = 1.0
-shader_param/warp = Vector2( 512, 256 )
-shader_param/maskDark = 1.0
-shader_param/maskLight = 1.0
+shader_param/resolution = Vector2( 320, 180 )
+shader_param/scan_line_amount = 1.0
+shader_param/warp_amount = 0.1
+shader_param/noise_amount = 0.03
+shader_param/interference_amount = 0.2
+shader_param/grille_amount = 0.1
+shader_param/grille_size = 1.0
+shader_param/vignette_amount = 0.6
+shader_param/vignette_intensity = 0.4
+shader_param/aberation_amount = 0.5
+shader_param/roll_line_amount = 0.3
+shader_param/roll_speed = 1.0
+shader_param/scan_line_strength = -8.0
+shader_param/pixel_strength = -2.0
 
 [sub_resource type="Shader" id=7]
 code = "shader_type canvas_item;

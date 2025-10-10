@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://assets/backgrounds/cloud_layer_0.png" type="Texture" id=24]
 [ext_resource path="res://sceneObjects/GrandmaMemoryPage.tscn" type="PackedScene" id=25]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/SpellbookPage.tscn" type="PackedScene" id=26]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/BrightNullificationArea.tscn" type="PackedScene" id=27]
 
 [sub_resource type="ShaderMaterial" id=24]
 shader = ExtResource( 19 )
@@ -199,6 +200,9 @@ grav = 0
 
 [node name="SpellbookPage" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.62358, 0, 0 )
+
+[node name="BrightNullificationArea" parent="Viewport/level" instance=ExtResource( 27 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 14, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 7 )]
 

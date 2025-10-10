@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/jingle.mp3-fefa9cfe938fc835a465a50d58c39a17.mp3str"
+
+[deps]
+
+source_file="res://assets/music/jingle.mp3"
+dest_files=[ "res://.import/jingle.mp3-fefa9cfe938fc835a465a50d58c39a17.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

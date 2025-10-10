@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scripts/autoload/musicPlayer.gd" type="Script" id=1]
 [ext_resource path="res://assets/music/debug town.mp3" type="AudioStream" id=2]
@@ -25,6 +25,8 @@
 [ext_resource path="res://assets/sounds/eba_leaves.wav" type="AudioStream" id=23]
 [ext_resource path="res://assets/music/A1-21-0202-chill.mp3" type="AudioStream" id=24]
 [ext_resource path="res://assets/music/boss2.mp3" type="AudioStream" id=25]
+[ext_resource path="res://assets/music/dream city 8bit.mp3" type="AudioStream" id=26]
+[ext_resource path="res://assets/music/Primordial ooze 8bit.mp3" type="AudioStream" id=27]
 
 [node name="musicPlayer" type="Node"]
 script = ExtResource( 1 )
@@ -101,6 +103,16 @@ bus = "Music"
 [node name="ForestMarchThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
 volume_db = -17.0
+bus = "Music"
+
+[node name="DreamCityThemePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 26 )
+volume_db = -6.0
+bus = "Music"
+
+[node name="PrimordialOozeThemePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 27 )
+volume_db = -4.0
 bus = "Music"
 
 [node name="ExploreThemePlayer" type="AudioStreamPlayer" parent="."]

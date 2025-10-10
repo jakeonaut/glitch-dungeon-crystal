@@ -202,7 +202,7 @@ bus = "Sfx"
 mesh = SubResource( 249 )
 
 [node name="MeshInstance2" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="BetaBuildLabel" parent="Viewport2/UILayer" index="24"]
 visible = false
@@ -286,10 +286,10 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 offset = Vector2( 320, 28 )
 transform = Transform2D( 1, 0, 0, 1, 320, 28 )
 
-[node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="2"]
+[node name="DitherPaletteEffectRect" parent="Viewport2/ScreenEffects" index="0"]
 material = SubResource( 245 )
 
-[node name="BasicCrtEffectRect" parent="Viewport2/ScreenEffects" index="3"]
+[node name="BasicCrtEffectRect" parent="Viewport2/ScreenEffects" index="1"]
 visible = true
 margin_right = 1560.0
 margin_bottom = 1080.0
@@ -320,12 +320,12 @@ scroll_active = false
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 16 )]
 
-[node name="DitherPaletteEffectRect" parent="ScreenEffects" index="2"]
+[node name="DitherPaletteEffectRect" parent="ScreenEffects" index="0"]
 material = SubResource( 246 )
 margin_right = 1920.0
 margin_bottom = 1080.0
 
-[node name="BasicCrtEffectRect" parent="ScreenEffects" index="3"]
+[node name="BasicCrtEffectRect" parent="ScreenEffects" index="1"]
 margin_right = 1920.0
 margin_bottom = 1080.0
 
