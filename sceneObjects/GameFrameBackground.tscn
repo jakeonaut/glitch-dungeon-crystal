@@ -52,6 +52,7 @@ margin_bottom = 1080.0
 rect_pivot_offset = Vector2( -479, 176 )
 
 [node name="GameBackgroundRect" type="ColorRect" parent="."]
+visible = false
 margin_right = 960.0
 margin_bottom = 540.0
 grow_horizontal = 2
@@ -60,9 +61,934 @@ rect_scale = Vector2( 2, 2 )
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="Sprites" type="Control" parent="."]
-margin_right = 40.0
+margin_left = -291.0
+margin_right = -251.0
 margin_bottom = 40.0
 rect_scale = Vector2( 8, 8 )
+
+[node name="BgSprite122" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 5, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite121" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 14, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite123" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 23, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite124" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 32, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite125" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 41, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite126" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 50, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite127" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 59, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite128" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 68, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite129" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 77, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite130" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 86, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite131" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 95, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite132" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 104, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite133" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 113, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite134" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 122, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite135" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 131, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite136" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 140, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite137" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 149, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite138" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 158, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite139" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 167, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite140" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 175, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite141" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 184, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite142" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 184, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite143" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 193, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite144" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 202, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite145" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 211, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite146" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 220, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite147" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 229, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite148" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 238, -4.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite149" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 5, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite150" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 14, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite151" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 23, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite152" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 32, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite153" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 41, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite154" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 50, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite155" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 59, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite156" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 68, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite157" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 77, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite158" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 86, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite159" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 95, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite160" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 104, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite161" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 113, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite162" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 122, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite163" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 131, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite164" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 140, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite165" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 149, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite166" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 158, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite167" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 167, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite168" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 175, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite169" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 184, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite170" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 184, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite171" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 193, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite172" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 202, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite173" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 211, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite174" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 220, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite175" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 229, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite176" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 238, -13.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite177" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 5, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite178" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 14, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite179" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 23, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite180" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 32, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite181" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 41, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite182" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 50, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite183" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 59, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite184" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 68, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite185" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 77, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite186" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 86, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite187" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 95, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite188" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 104, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite189" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 113, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite190" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 122, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite191" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 131, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite192" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 140, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite193" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 149, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite194" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 158, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite195" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 167, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite196" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 175, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite197" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 184, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite198" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 184, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite199" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 193, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite200" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 202, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite201" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 211, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite202" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 220, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite203" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 229, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
+
+[node name="BgSprite204" type="Sprite" parent="Sprites"]
+material = SubResource( 72 )
+position = Vector2( 238, -22.375 )
+texture = ExtResource( 4 )
+hframes = 16
+vframes = 16
+frame = 183
+script = ExtResource( 2 )
+randomize_frame_on_init = true
+max_frames = 1
 
 [node name="BgSprite1" type="Sprite" parent="Sprites"]
 material = SubResource( 72 )
@@ -1385,8 +2311,7 @@ randomize_frame_on_init = true
 max_frames = 1
 
 [node name="GameFrameRect" type="ColorRect" parent="."]
-margin_left = 291.0
-margin_right = 961.0
+margin_right = 670.0
 margin_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2

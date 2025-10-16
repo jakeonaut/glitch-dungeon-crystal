@@ -5,6 +5,8 @@ var smack_timer = 0
 var smack_time_limit = 10
 var which_side_is_player_on = false
 
+export(String, MULTILINE) var bbText = ""
+onready var npc = get_node("NPC")
 onready var smackSound = get_node("SmackSound") if has_node("SmackSound") else null
 onready var fallthroughSolid = get_node("FallthroughSolid") if has_node("FallthroughSolid") else null
 onready var smallInteractionShape = get_node("SmallInteractionArea/CollisionShape") if has_node("SmallInteractionArea/CollisionShape") else null
@@ -42,6 +44,10 @@ func _ready():
   original_glitch_form = glitch_form
   yield(TempTimer.idle_frame(self), "timeout")
   updateColor()
+
+  if bbText != "":
+    npc.bbText = bbText
+    npc.setupTextBoxStuff()
 
 var has_swapped = false
 var players_last_glitch_form = global.GlitchForm.NORMAL

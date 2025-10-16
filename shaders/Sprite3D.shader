@@ -192,7 +192,7 @@ void fragment() {
     
         vec4 alp = texture(texture_albedo, fixed_uv);
 
-        if (enable_color_glitch) {
+        if (enable_color_glitch || (enable_shift > 0.0 && enable_glitch_3d)) {
             closest_color.r = mix(closest_color.r, texture(texture_albedo, fixed_uv + vec2(shake_color_rate, 0.0)).r, 0.5);
             closest_color.b = mix(closest_color.b, texture(texture_albedo, fixed_uv + vec2(-shake_color_rate, 0.0)).b, 0.5);
 

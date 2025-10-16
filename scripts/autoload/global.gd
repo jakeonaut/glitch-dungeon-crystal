@@ -1,5 +1,10 @@
 extends Node
 
+var OFFSET_X = 30 # 320
+var OFFSET_Y = 30 # 28
+var VIEWPORT_WIDTH = 670
+var VIEWPORT_HEIGHT = 540
+
 var kirokaze_palette = preload("res://assets/palettes/kirokaze-gameboy-1x.png")
 
 var all_palette = preload("res://assets/palettes/all_palette.png")

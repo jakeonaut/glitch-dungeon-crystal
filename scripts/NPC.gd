@@ -64,6 +64,13 @@ func _ready():
   if floating_text or not is_a_body and smallerInteractionArea:
     smallerInteractionArea.add_to_group("no_pushems")
 
+  setupTextBoxStuff()
+
+  is_sprite_flipped = true
+  if smallInteractionShape.shape is BoxShape and smallInteractionShape.shape.extents.x == 2 and round(smallInteractionShape.shape.extents.y) == 1:
+    smallInteractionShape.shape.extents = Vector3(4, 2, 1.3)
+
+func setupTextBoxStuff():
   if bbText != "" and textBoxContainer.bbText == "":
     textBoxContainer.bbText = bbText
   if smackedBbText != "":
@@ -84,7 +91,6 @@ func _ready():
       nextTextBoxPathStr += nextTextBoxPath.get_name(i)
     textBoxContainer.nextTextBoxPath = NodePath(nextTextBoxPathStr)
   textBoxContainer.interact_prompt_offset = interact_prompt_offset
-  is_sprite_flipped = true
 
   var my_memory = self.getMyStaticLevelZoneVar()
   textBoxContainer.setVars()
@@ -112,9 +118,6 @@ func _ready():
       textBox.has_talked_normal = true
       if textBox.has_been_shown: 
         textBox.is_important = false
-
-  if smallInteractionShape.shape is BoxShape and smallInteractionShape.shape.extents.x == 2 and round(smallInteractionShape.shape.extents.y) == 1:
-    smallInteractionShape.shape.extents = Vector3(4, 2, 1.3)
 
   if interactPrompt != null:
     interactPrompt.offset.y = -interact_prompt_offset

@@ -107,7 +107,7 @@ func tryMoveToUiLayer():
     textContainer.remove_child(self)
     level.uiLayer.textBoxes.add_child(self)
     if level.should_offset_ui:
-      textContainer.offset = Vector2(320, 28)
+      textContainer.offset = Vector2(global.OFFSET_X, global.OFFSET_Y)
     else:
       textContainer.offset = Vector2(0, 0)
     am_i_in_ui_layer = true
@@ -272,6 +272,8 @@ var num_newlines = 0
 var stupid_newline_difference_variable = 0
 var currently_scrolled_line = 0
 var now_were_scrolling = false
+export var minDialogPitch = 0.8
+export var maxDialogPitch = 1.2
 func appendNextTextCharacter(play_sound = true):
   if tindex >= len(stripped_text):
     return
@@ -284,7 +286,7 @@ func appendNextTextCharacter(play_sound = true):
     resetPrompts()
     
   if play_sound:
-    dialogSound.pitch_scale = rand_range(0.8, 1.2)
+    dialogSound.pitch_scale = rand_range(minDialogPitch, maxDialogPitch)
     dialogSound.play()
   text_timer = 0
   

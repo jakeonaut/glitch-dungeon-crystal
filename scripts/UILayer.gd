@@ -626,8 +626,8 @@ func cloneGlitchedSkullSprite():
     newSkullSprite.visible = true
     livesRect.add_child(newSkullSprite)
     curr_glitched_skull_sprite_x += 28
-    if curr_glitched_skull_sprite_x >= 320:
-      curr_glitched_skull_sprite_x = -320
+    if curr_glitched_skull_sprite_x >= global.OFFSET_X:
+      curr_glitched_skull_sprite_x = -global.OFFSET_X
       curr_glitched_skull_sprite_y += 28
     newSkullSprite.position.x = curr_glitched_skull_sprite_x
     newSkullSprite.position.y = curr_glitched_skull_sprite_y

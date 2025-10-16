@@ -110,11 +110,10 @@ func _ready_impl():
   uiLayer.betaBuildLabel.rect_position.x = 510
   uiLayer.edgeDistortion.offset = Vector2(0, 0)
   uiLayer.textBoxes.rect_position = Vector2(0, 0)
-  screenEffectsContainer.offset = Vector2(320, 28)
+  screenEffectsContainer.offset = Vector2(global.OFFSET_X, global.OFFSET_Y)
   
-  if not get_tree().get_root().has_node("Game/GameFrameBackground"):
-    viewportTexture.rect_position = Vector2(320, 28)
   tryToAddGameFrameBackground()
+  repositionGameFrameAndViewport()
 
   viewportTexture.texture = viewport2or3.get_texture()
 
@@ -207,14 +206,34 @@ func _ready_impl():
     player.getChickenInfected()
     player.chicken_timer = -player.chicken_time_limit * 4
 
-
+var gameFrameBackground = null
 var hasGameFrameBackground = false
 func tryToAddGameFrameBackground():
   var gameTree = get_tree().get_root().get_node("Game")
   if not gameTree.has_node("GameFrameBackground"):
-    var newGameBackground = gameFrameBackgroundRes.instance()
-    gameTree.add_child_below_node(viewport2or3, newGameBackground)
+    gameFrameBackground = gameFrameBackgroundRes.instance()
+    gameTree.add_child_below_node(viewport2or3, gameFrameBackground)
+  else:
+    gameFrameBackground = gameTree.get_node("GameFrameBackground")
   hasGameFrameBackground = true
+
+func repositionGameFrameAndViewport():
+  var offset_x = 0
+  var offset_y = 0
+  var windowSize = OS.get_window_size()
+  var expectedAspectRatio = float(global.VIEWPORT_WIDTH) / float(global.VIEWPORT_HEIGHT)
+  var actualAspectRatio = float(windowSize.x) / float(windowSize.y)
+  var OFFSET_MULTIPLIER = actualAspectRatio
+  if actualAspectRatio > expectedAspectRatio: # width is longer
+    var viewportWidth = windowSize.y * float(global.VIEWPORT_WIDTH) / float(global.VIEWPORT_HEIGHT)
+    offset_x = (windowSize.x - viewportWidth) * OFFSET_MULTIPLIER
+  elif actualAspectRatio < expectedAspectRatio: # height is longer
+    var viewportHeight = windowSize.x * float(global.VIEWPORT_HEIGHT) / float(global.VIEWPORT_WIDTH)
+    offset_y = (windowSize.y - viewportHeight) * (1.0 / float(OFFSET_MULTIPLIER))
+  
+  viewportTexture.rect_position = Vector2(offset_x + global.OFFSET_X, offset_y + global.OFFSET_Y)
+  if gameFrameBackground != null:
+    gameFrameBackground.rect_position = Vector2(offset_x, offset_y)
 
 func randomizeARandomGameFrameBgSprite():
   var gameTree = get_tree().get_root().get_node("Game")
@@ -324,6 +343,7 @@ func _process(delta):
   processPauseMenu()
   processGrandmaStatueSavePoints()
   processBossHealth(delta)
+  repositionGameFrameAndViewport()
 
 func canOpenPauseMenu():
   return true

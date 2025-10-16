@@ -7,7 +7,7 @@ func _ready():
 func activateScript():
     var text = tr("UI.GrimoireAdvice") % global.getLargeInputText("popup_menu")
     if not global.memory.has("spellbookPage"):
-      text = tr("NPC.GrimoireSkip.Advice")
+      text = tr("NPC.BrothKappa.1")
     var textBox = get_node("..")
     textBox.text_final = text
     textBox.textNode.bbcode_text = text
