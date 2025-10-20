@@ -223,9 +223,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.33655, -4.95006, 0 )
 [node name="Torch" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0 )
 
-[node name="Torch2" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, 0 )
-
 [node name="miniCubeCrystal2" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.47562, 6, 0 )
 
@@ -343,8 +340,6 @@ flip_v = true
 material = SubResource( 45 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
-margin_right = 1280.0
-margin_bottom = 1024.0
 texture = SubResource( 14 )
 flip_v = true
 

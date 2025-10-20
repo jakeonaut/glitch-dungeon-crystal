@@ -2562,27 +2562,27 @@ anims/suddenly_fly = SubResource( 179 )
 anims/walk = SubResource( 180 )
 
 [node name="EventSoundWakeup" type="AudioStreamPlayer" parent="Viewport/level"]
-bus="Sfx"
 stream = ExtResource( 58 )
 volume_db = -25.0
 pitch_scale = 0.8
+bus = "Sfx"
 
 [node name="EventSound1" type="AudioStreamPlayer" parent="Viewport/level"]
-bus="Sfx"
 stream = ExtResource( 34 )
 volume_db = -11.0
 pitch_scale = 1.5
+bus = "Sfx"
 
 [node name="EventSound2" type="AudioStreamPlayer" parent="Viewport/level"]
-bus="Sfx"
 stream = ExtResource( 28 )
 volume_db = -15.0
+bus = "Sfx"
 
 [node name="EventSound3" type="AudioStreamPlayer" parent="Viewport/level"]
-bus="Sfx"
 stream = ExtResource( 59 )
 volume_db = -5.0
 pitch_scale = 0.74
+bus = "Sfx"
 
 [node name="CroneNPC" parent="Viewport/level" instance=ExtResource( 42 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 59.7, 0.0607356, 0 )
@@ -2648,35 +2648,35 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.406319, 3.08217, 2 )
 shape = SubResource( 236 )
 
 [node name="BroomSound" type="AudioStreamPlayer" parent="Viewport/level"]
-bus="Sfx"
 stream = ExtResource( 32 )
 volume_db = -35.0
+bus = "Sfx"
 
 [node name="DeleteSound" type="AudioStreamPlayer" parent="Viewport/level"]
-bus="Sfx"
 stream = ExtResource( 38 )
 volume_db = -10.0
+bus = "Sfx"
 
 [node name="ReliefSound" type="AudioStreamPlayer" parent="Viewport/level"]
-bus="Sfx"
 stream = ExtResource( 60 )
 volume_db = -10.0
+bus = "Sfx"
 
 [node name="StartDeleteSound" type="AudioStreamPlayer" parent="Viewport/level"]
-bus="Sfx"
 stream = ExtResource( 33 )
 volume_db = -10.0
+bus = "Sfx"
 
 [node name="BellSound" type="AudioStreamPlayer" parent="Viewport/level"]
-bus="Sfx"
 stream = ExtResource( 37 )
 volume_db = -15.0
+bus = "Sfx"
 
 [node name="NoBroomSound" type="AudioStreamPlayer" parent="Viewport/level"]
-bus="Sfx"
 stream = ExtResource( 36 )
 volume_db = -28.0
 pitch_scale = 1.6
+bus = "Sfx"
 
 [node name="DialogPosition" type="Sprite3D" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 2, 0 )
@@ -2891,7 +2891,7 @@ texture = SubResource( 235 )
 mesh = SubResource( 329 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="Camera" parent="UILayer/GlitchStatusRect/Viewport" index="1"]
 current = true

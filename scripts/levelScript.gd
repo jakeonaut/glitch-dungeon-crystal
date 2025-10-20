@@ -113,7 +113,7 @@ func _ready_impl():
   screenEffectsContainer.offset = Vector2(global.OFFSET_X, global.OFFSET_Y)
   
   tryToAddGameFrameBackground()
-  repositionGameFrameAndViewport()
+  adjustAndCenterViewportsFrameAndOverlayRects()
 
   viewportTexture.texture = viewport2or3.get_texture()
 
@@ -217,23 +217,51 @@ func tryToAddGameFrameBackground():
     gameFrameBackground = gameTree.get_node("GameFrameBackground")
   hasGameFrameBackground = true
 
-func repositionGameFrameAndViewport():
-  var offset_x = 0
-  var offset_y = 0
-  var windowSize = OS.get_window_size()
-  var expectedAspectRatio = float(global.VIEWPORT_WIDTH) / float(global.VIEWPORT_HEIGHT)
-  var actualAspectRatio = float(windowSize.x) / float(windowSize.y)
-  var OFFSET_MULTIPLIER = actualAspectRatio
-  if actualAspectRatio > expectedAspectRatio: # width is longer
-    var viewportWidth = windowSize.y * float(global.VIEWPORT_WIDTH) / float(global.VIEWPORT_HEIGHT)
-    offset_x = (windowSize.x - viewportWidth) * OFFSET_MULTIPLIER
-  elif actualAspectRatio < expectedAspectRatio: # height is longer
-    var viewportHeight = windowSize.x * float(global.VIEWPORT_HEIGHT) / float(global.VIEWPORT_WIDTH)
-    offset_y = (windowSize.y - viewportHeight) * (1.0 / float(OFFSET_MULTIPLIER))
-  
-  viewportTexture.rect_position = Vector2(offset_x + global.OFFSET_X, offset_y + global.OFFSET_Y)
-  if gameFrameBackground != null:
-    gameFrameBackground.rect_position = Vector2(offset_x, offset_y)
+func adjustAndCenterViewportsFrameAndOverlayRects():
+  # gameFrameBackground
+  gameFrameBackground.anchor_left = 0.5
+  gameFrameBackground.anchor_top = 0.5
+  gameFrameBackground.anchor_bottom = 0.5
+  gameFrameBackground.anchor_right = 0.5
+  gameFrameBackground.margin_left = -global.INTERNAL_VIEWPORT_WIDTH
+  gameFrameBackground.margin_top = -global.INTERNAL_VIEWPORT_HEIGHT
+  gameFrameBackground.margin_right = 0
+  gameFrameBackground.margin_bottom = 0
+  # viewportTexture
+  viewportTexture.grow_horizontal = 2
+  viewportTexture.grow_vertical = 2
+  viewportTexture.anchor_left = 0.5
+  viewportTexture.anchor_top = 0.5
+  viewportTexture.anchor_bottom = 0.5
+  viewportTexture.anchor_right = 0.5
+  viewportTexture.margin_left = 0
+  viewportTexture.margin_top = 0
+  viewportTexture.margin_right = 0
+  viewportTexture.margin_bottom = 0
+  # glitchScreenEffect
+  glitchScreenEffect.grow_horizontal = 2
+  glitchScreenEffect.grow_vertical = 2
+  glitchScreenEffect.anchor_left = 0.5
+  glitchScreenEffect.anchor_top = 0.5
+  glitchScreenEffect.anchor_bottom = 0.5
+  glitchScreenEffect.anchor_right = 0.5
+  glitchScreenEffect.margin_left = -global.INTERNAL_VIEWPORT_WIDTH
+  glitchScreenEffect.margin_top = -global.INTERNAL_VIEWPORT_HEIGHT
+  glitchScreenEffect.margin_right = 0
+  glitchScreenEffect.margin_bottom = 0
+  glitchScreenEffect.rect_size = Vector2(global.INTERNAL_VIEWPORT_WIDTH*2, global.INTERNAL_VIEWPORT_HEIGHT*2)
+  # transition.colorRect
+  transition.colorRect.grow_horizontal = 2
+  transition.colorRect.grow_vertical = 2
+  transition.colorRect.anchor_left = 0.5
+  transition.colorRect.anchor_top = 0.5
+  transition.colorRect.anchor_bottom = 0.5
+  transition.colorRect.anchor_right = 0.5
+  transition.colorRect.margin_left = -global.SMALLER_VIEWPORT_WIDTH
+  transition.colorRect.margin_top = -global.SMALLER_VIEWPORT_HEIGHT
+  transition.colorRect.margin_right = 0
+  transition.colorRect.margin_bottom = 0
+  transition.colorRect.rect_size = Vector2(global.SMALLER_VIEWPORT_WIDTH*2, global.SMALLER_VIEWPORT_HEIGHT*2)
 
 func randomizeARandomGameFrameBgSprite():
   var gameTree = get_tree().get_root().get_node("Game")
@@ -328,7 +356,7 @@ func _process(delta):
 
   ditherPaletteEffectRect2.visible = global.userSettings["show_crt_effect"] and show_dither_effect
   basicCrtEffectRect2.visible = global.userSettings["show_crt_effect"] and show_crt_effect
-  paletteSwapColorBlindEffectRect2 = global.userSettings["show_palette_swap_color_blind_filter"]
+  paletteSwapColorBlindEffectRect2.visible = global.userSettings["show_palette_swap_color_blind_filter"]
   if Input.is_action_pressed("toggle_fullscreen"):
     return
 
@@ -343,7 +371,6 @@ func _process(delta):
   processPauseMenu()
   processGrandmaStatueSavePoints()
   processBossHealth(delta)
-  repositionGameFrameAndViewport()
 
 func canOpenPauseMenu():
   return true

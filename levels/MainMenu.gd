@@ -318,6 +318,7 @@ var has_reset_transition = false
 func _process(delta):
     global.isEndOfGame = false
     if not transition.aniPlayer.is_playing() and not has_reset_transition:
+        # TODO
         transition.colorRect.rect_position = Vector2(320, 28)
         transition.colorRect.rect_size = Vector2(1280, 1024)
         has_reset_transition = true
