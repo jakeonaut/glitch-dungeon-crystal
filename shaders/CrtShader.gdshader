@@ -29,15 +29,11 @@ uniform vec2 resolution = vec2(320.0, 180.0);
 
 uniform float scan_line_amount :hint_range(0.0, 1.0) = 1.0;
 uniform float warp_amount :hint_range(0.0, 5.0) = 0.1;
-uniform float noise_amount :hint_range(0.0, 0.3) = 0.03;
-uniform float interference_amount :hint_range(0.0, 1.0) = 0.2;
 uniform float grille_amount :hint_range(0.0, 1.0) = 0.1;
 uniform float grille_size :hint_range(1.0, 5.0) = 1.0;
 uniform float vignette_amount :hint_range(0.0, 2.0) = 0.6;
 uniform float vignette_intensity : hint_range(0.0, 1.0) = 0.4;
 uniform float aberation_amount :hint_range(0.0, 1.0) = 0.5;
-uniform float roll_line_amount :hint_range(0.0, 1.0) = 0.3;
-uniform float roll_speed :hint_range(-8.0, 8.0) = 1.0;
 uniform float scan_line_strength :hint_range(-12.0, -1.0) = -8.0;
 uniform float pixel_strength :hint_range(-4.0, 0.0) = -2.0;
 
@@ -48,16 +44,11 @@ float random(vec2 uv){
 vec3 fetch_pixel(vec2 uv, vec2 off, sampler2D screen_texture){
    vec2 pos = floor(uv * resolution + off) / resolution + vec2(0.5) / resolution;
 
-   float noise = 0.0;
-   if(noise_amount > 0.0){
-       noise = random(pos + fract(TIME)) * noise_amount;
-   }
-
    if(max(abs(pos.x - 0.5), abs(pos.y - 0.5)) > 0.5){
        return vec3(0.0, 0.0, 0.0);
    }
 
-   vec3 screen = texture(screen_texture , pos, -16.0).rgb + noise;
+   vec3 screen = texture(screen_texture , pos, -16.0).rgb;
    return screen;
 }
 
@@ -112,8 +103,21 @@ vec3 Tri(vec2 pos, sampler2D screen_texture){
    return clr;
 }
 
+vec2 nesify(vec2 uv) {
+    float stepAmtX = 10.0;
+    float stepAmtY = 8.0;
+    float uvx = 1.0 - floor(uv.x * stepAmtX) / stepAmtX;
+    float uvxR = mod(uv.x, 1.0 / stepAmtX);
+    float uvy = floor(uv.y * stepAmtY) / stepAmtY;
+    float uvyR = mod(uv.y, 1.0 / stepAmtY);
+    
+    
+    return vec2(uvx + uvxR, uvy + uvyR);
+}
+
 // Takes in the UV and warps the edges, creating the spherized effect
 vec2 warp(vec2 uv){
+   uv = nesify(uv);
    vec2 delta = uv - 0.5;
    float delta2 = dot(delta.xy, delta.xy);
    float delta4 = delta2 * delta2;
@@ -142,43 +146,25 @@ vec3 grille(vec2 uv){
    return mix(vec3(1.0), vec3(r,g,b), grille_amount);
 }
 
-float roll_line(vec2 uv){
-   float x = uv.y * 3.0 - TIME * roll_speed;
-   float f = cos(x) * cos(x * 2.35 + 1.1) * cos(x * 4.45 + 2.3);
-   float roll_line = smoothstep(0.5, 0.9, f);
-   return roll_line * roll_line_amount;
-}
-
 void fragment(){
    vec2 pix = FRAGCOORD.xy;
    vec2 pos = warp(SCREEN_UV);
 //   sampler2D screen_texture = SCREEN_TEXTURE;
 
-   float line = 0.0;
-   if(roll_line_amount > 0.0){
-       line = roll_line(pos);
-   }
-
    vec2 sq_pix = floor(pos * resolution) / resolution + vec2(0.5) / resolution;
-   if(interference_amount + roll_line_amount > 0.0){
-       float interference = random(sq_pix.yy + fract(TIME));
-       pos.x += (interference * (interference_amount + line * 6.0)) / resolution.x;
-   }
 
    vec3 clr = Tri(pos, SCREEN_TEXTURE);
-   if(aberation_amount > 0.0){
-       float chromatic = aberation_amount + line * 2.0;
-       vec2 chromatic_x = vec2(chromatic,0.0) / resolution.x;
-       vec2 chromatic_y = vec2(0.0, chromatic/2.0) / resolution.y;
-       float r = Tri(pos - chromatic_x, SCREEN_TEXTURE).r;
-       float g = Tri(pos + chromatic_y, SCREEN_TEXTURE).g;
-       float b = Tri(pos + chromatic_x, SCREEN_TEXTURE).b;
-       clr = vec3(r,g,b);
-   }
+    float chromatic = aberation_amount;
+    vec2 chromatic_x = vec2(chromatic,0.0) / resolution.x;
+    vec2 chromatic_y = vec2(0.0, chromatic/2.0) / resolution.y;
+    float r = Tri(pos - chromatic_x, SCREEN_TEXTURE).r;
+    float g = Tri(pos + chromatic_y, SCREEN_TEXTURE).g;
+    float b = Tri(pos + chromatic_x, SCREEN_TEXTURE).b;
+    clr = vec3(r,g,b);
 
-   if(grille_amount > 0.0)clr *= grille(pix);
-   clr *= 1.0 + scan_line_amount * 0.6 + line * 3.0 + grille_amount * 2.0;
-   if(vignette_amount > 0.0)clr *= vignette(pos);
+   clr *= grille(pix);
+   clr *= 1.0 + scan_line_amount * 0.6 + grille_amount * 2.0;
+   clr *= vignette(pos);
 
    COLOR.rgb = clr;
    COLOR.a = 1.0;
