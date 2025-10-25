@@ -904,6 +904,9 @@ func updateOutfitPopupText():
     global.GrandmaOutfit.WITCH_HAT:
       popupText.bbcode_text = tr("UI.Outfit.1")
       outfitSprite.frame = 2
+    global.GrandmaOutfit.CRYSTAL_ELDER_MASK:
+      popupText.bbcode_text = tr("UI.Outfit.2")
+      outfitSprite.frame = 4
   popupOutfitRect.visible = true
   if global.memory.has("allMyOutfits") and global.memory["allMyOutfits"].size() > 1:
     popupText.bbcode_text += "\n" + global.getInputText("menu_left") + " " + global.getInputText("menu_right")

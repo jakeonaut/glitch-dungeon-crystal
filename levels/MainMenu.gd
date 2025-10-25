@@ -68,7 +68,7 @@ onready var secretGlitchyNPC5 = get_node("SecretGlitchyNPC5")
 onready var secretGlitchyNPC6 = get_node("SecretGlitchyNPC6")
 onready var croneNPC = get_node("CroneNPC")
 onready var cowNPC = get_node("NPC2")
-onready var door2 = get_node("Door2")
+onready var doorToLoadingScreen = get_node("DoorToLoadingScreen")
 onready var logoSprite = get_node("../../Viewport2/CanvasLayer/LogoSprite")
 onready var demoSprite = get_node("../../Viewport2/CanvasLayer/LogoSprite/DemoSprite")
 var logoTex2 = preload("res://assets/sprites/logo2.png")
@@ -103,6 +103,7 @@ func startGame(saveGameIndex, shouldResetMemory = true):
   global.save_game_index = saveGameIndex
   mainMenuState = MainMenuState.NORMAL_GAMEPLAY
   global.isOnMainMenu = false
+  doorToLoadingScreen.path = "res://levels/EndlessFantasy/gd1/LoadingScreenSaveInfo.tscn"
   if shouldResetMemory:
     global.resetMemory()
   global.okay_really_really_started_game = false

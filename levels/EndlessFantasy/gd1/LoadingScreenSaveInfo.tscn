@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=2]
@@ -17,13 +17,12 @@
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=15]
 [ext_resource path="res://assets/sprites2D/caution.png" type="Texture" id=16]
 [ext_resource path="res://uiTutorialFont.tres" type="Theme" id=17]
-[ext_resource path="res://grandma.ogv" type="VideoStream" id=18]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=19]
 
 [sub_resource type="ViewportTexture" id=240]
 viewport_path = NodePath("Viewport")
 
-[sub_resource type="ArrayMesh" id=249]
+[sub_resource type="ArrayMesh" id=251]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -35,9 +34,6 @@ surfaces/0 = {
 "skeleton_aabb": [  ],
 "vertex_count": 8
 }
-
-[sub_resource type="ViewportTexture" id=248]
-viewport_path = NodePath("Viewport2/UILayer/SavingTextLabel/Viewport")
 
 [sub_resource type="Shader" id=244]
 code = "shader_type canvas_item;
@@ -67,8 +63,11 @@ shader = SubResource( 244 )
 shader_param/colors = null
 shader_param/dither = null
 
-[sub_resource type="ViewportTexture" id=242]
+[sub_resource type="ViewportTexture" id=252]
 viewport_path = NodePath("Viewport2")
+
+[sub_resource type="ViewportTexture" id=248]
+viewport_path = NodePath("Viewport2/UILayer/SavingTextLabel/Viewport")
 
 [sub_resource type="ShaderMaterial" id=246]
 shader = ExtResource( 10 )
@@ -175,11 +174,10 @@ autoplay = "sweepFloor"
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23.1985, 0 )
-path = "res://levels/EndlessFantasy/gd1/MainMenu.tscn"
+path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn"
 canPlayDoorSound = false
 
 [node name="Viewport2" parent="." instance=ExtResource( 19 )]
-size = Vector2( 1920, 1080 )
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
 visible = false
@@ -188,98 +186,16 @@ margin_bottom = 1024.0
 texture = SubResource( 240 )
 flip_v = true
 
-[node name="VideoPlayer" type="VideoPlayer" parent="Viewport2"]
-margin_right = 1920.0
-margin_bottom = 1080.0
-stream = ExtResource( 18 )
-volume_db = -10.0
-bus = "Sfx"
-
 [node name="UILayer" parent="Viewport2" instance=ExtResource( 5 )]
 
 [node name="MeshInstance" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 249 )
+mesh = SubResource( 251 )
 
 [node name="MeshInstance2" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="BetaBuildLabel" parent="Viewport2/UILayer" index="24"]
 visible = false
-
-[node name="EpilepsyWarning" type="ColorRect" parent="Viewport2/UILayer"]
-margin_left = 160.0
-margin_top = 28.0
-margin_right = 800.0
-margin_bottom = 540.0
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="Text" type="RichTextLabel" parent="Viewport2/UILayer/EpilepsyWarning"]
-margin_left = 114.0
-margin_top = 185.0
-margin_right = 536.0
-margin_bottom = 497.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 3
-theme = ExtResource( 17 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "UI.Photosensitivity.Warning"
-text = "UI.Photosensitivity.Warning"
-scroll_active = false
-
-[node name="Sprite" type="Sprite" parent="Viewport2/UILayer/EpilepsyWarning"]
-position = Vector2( 312, 131 )
-scale = Vector2( 8, 8 )
-texture = ExtResource( 16 )
-
-[node name="Coverup" type="ColorRect" parent="Viewport2/UILayer/EpilepsyWarning"]
-margin_right = 640.0
-margin_bottom = 512.0
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="AutosaveWarning" type="ColorRect" parent="Viewport2/UILayer"]
-visible = false
-margin_left = 160.0
-margin_top = 28.0
-margin_right = 800.0
-margin_bottom = 540.0
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
-
-[node name="Text" type="RichTextLabel" parent="Viewport2/UILayer/AutosaveWarning"]
-margin_left = 114.0
-margin_top = 185.0
-margin_right = 536.0
-margin_bottom = 497.0
-grow_horizontal = 0
-grow_vertical = 2
-size_flags_horizontal = 3
-theme = ExtResource( 17 )
-custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
-bbcode_enabled = true
-bbcode_text = "UI.Autosave.Warning"
-text = "UI.Autosave.Warning"
-scroll_active = false
-
-[node name="Sprite" type="Sprite" parent="Viewport2/UILayer/AutosaveWarning"]
-visible = false
-position = Vector2( 312, 131 )
-scale = Vector2( 8, 8 )
-texture = ExtResource( 16 )
-
-[node name="TextureRect" type="TextureRect" parent="Viewport2/UILayer/AutosaveWarning"]
-margin_left = 280.0
-margin_top = 90.0
-margin_right = 344.0
-margin_bottom = 154.0
-texture = SubResource( 248 )
-expand = true
-flip_v = true
-
-[node name="Coverup" type="ColorRect" parent="Viewport2/UILayer/AutosaveWarning"]
-margin_right = 640.0
-margin_bottom = 512.0
-color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="ScreenEffects" parent="Viewport2" instance=ExtResource( 3 )]
 offset = Vector2( 320, 28 )
@@ -294,28 +210,51 @@ margin_right = 1560.0
 margin_bottom = 1080.0
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
-margin_right = 1920.0
-margin_bottom = 1080.0
-texture = SubResource( 242 )
-expand = true
+margin_right = 40.0
+margin_bottom = 40.0
+texture = SubResource( 252 )
 flip_v = true
 
-[node name="SkipPrompt" type="RichTextLabel" parent="."]
-visible = false
-margin_left = 800.0
-margin_top = 972.0
-margin_right = 1452.0
-margin_bottom = 1108.0
-grow_horizontal = 2
+[node name="AutosaveWarning" type="ColorRect" parent="ViewportTexture"]
+margin_left = 160.0
+margin_top = 28.0
+margin_right = 800.0
+margin_bottom = 540.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+
+[node name="Text" type="RichTextLabel" parent="ViewportTexture/AutosaveWarning"]
+margin_left = 114.0
+margin_top = 185.0
+margin_right = 536.0
+margin_bottom = 497.0
+grow_horizontal = 0
 grow_vertical = 2
-rect_scale = Vector2( 1.5, 1.5 )
-rect_clip_content = false
+size_flags_horizontal = 3
 theme = ExtResource( 17 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "Press [font=res://DarkInputFont_small.tres]R[/font] for OPTIONS"
-text = "Press R for OPTIONS"
+bbcode_text = "UI.Autosave.Warning"
+text = "UI.Autosave.Warning"
 scroll_active = false
+
+[node name="Sprite" type="Sprite" parent="ViewportTexture/AutosaveWarning"]
+position = Vector2( 312, 131 )
+scale = Vector2( 8, 8 )
+texture = ExtResource( 16 )
+
+[node name="TextureRect" type="TextureRect" parent="ViewportTexture/AutosaveWarning"]
+margin_left = 280.0
+margin_top = 90.0
+margin_right = 344.0
+margin_bottom = 154.0
+texture = SubResource( 248 )
+expand = true
+flip_v = true
+
+[node name="Coverup" type="ColorRect" parent="ViewportTexture/AutosaveWarning"]
+margin_right = 640.0
+margin_bottom = 512.0
+color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 3 )]
 

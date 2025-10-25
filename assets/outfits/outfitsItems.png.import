@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/player_sheet_old_super.png-37b227ec020f7dc128629da1ad47522b.stex"
+path="res://.import/outfitsItems.png-4162255d281b69d30d8adc830b81b39a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player_sheet_old_super.png"
-dest_files=[ "res://.import/player_sheet_old_super.png-37b227ec020f7dc128629da1ad47522b.stex" ]
+source_file="res://assets/outfits/outfitsItems.png"
+dest_files=[ "res://.import/outfitsItems.png-4162255d281b69d30d8adc830b81b39a.stex" ]
 
 [params]
 

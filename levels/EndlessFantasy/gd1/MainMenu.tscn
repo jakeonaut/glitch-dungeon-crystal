@@ -2553,16 +2553,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.2933, -13.4373, 0 )
 [node name="GlitchEnemy6" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 56.2, -4.3, -0.209856 )
 
-[node name="Door2" parent="Viewport/level" instance=ExtResource( 26 )]
+[node name="DoorToLoadingScreen" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43.9832, -17.34, 0 )
 path = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn"
 is_passive = true
 is_vertical = true
 
-[node name="landing" parent="Viewport/level/Door2" index="5"]
+[node name="landing" parent="Viewport/level/DoorToLoadingScreen" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.8, 1 )
 
-[node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
+[node name="AnimationPlayer" parent="Viewport/level/DoorToLoadingScreen" index="6"]
 anims/RESET = SubResource( 133 )
 anims/doorBarred = SubResource( 134 )
 anims/doorClose = SubResource( 135 )
@@ -2570,19 +2570,19 @@ anims/doorOpen = SubResource( 136 )
 anims/doorUnbarred = SubResource( 137 )
 anims/locked = SubResource( 138 )
 
-[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="0"]
+[node name="ActiveCollisionShape" parent="Viewport/level/DoorToLoadingScreen/InteractionArea" index="0"]
 shape = SubResource( 181 )
 
-[node name="PassiveCollisionShape" parent="Viewport/level/Door2/InteractionArea" index="1"]
+[node name="PassiveCollisionShape" parent="Viewport/level/DoorToLoadingScreen/InteractionArea" index="1"]
 shape = SubResource( 182 )
 
-[node name="ActiveCollisionShape" parent="Viewport/level/Door2/InteractionArea2" index="0"]
+[node name="ActiveCollisionShape" parent="Viewport/level/DoorToLoadingScreen/InteractionArea2" index="0"]
 shape = SubResource( 279 )
 
-[node name="CollisionShape" parent="Viewport/level/Door2/NPC/SmallInteractionArea" index="0"]
+[node name="CollisionShape" parent="Viewport/level/DoorToLoadingScreen/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 140 )
 
-[node name="CollisionShape" parent="Viewport/level/Door2/FallthroughSolid" index="0"]
+[node name="CollisionShape" parent="Viewport/level/DoorToLoadingScreen/FallthroughSolid" index="0"]
 shape = SubResource( 141 )
 
 [node name="GlitchMoleCricket" parent="Viewport/level" instance=ExtResource( 43 )]
@@ -3017,7 +3017,7 @@ texture = SubResource( 235 )
 mesh = SubResource( 332 )
 
 [node name="MeshInstance2" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="Camera" parent="Viewport2/UILayer/GlitchStatusRect/Viewport" index="1"]
 current = true
@@ -3238,8 +3238,8 @@ flip_v = true
 [editable path="Viewport/level/BabushkaCat/NPC TextBox"]
 [editable path="Viewport/level/Dragonfly2"]
 [editable path="Viewport/level/Dragonfly3"]
-[editable path="Viewport/level/Door2"]
-[editable path="Viewport/level/Door2/NPC/NPC TextBox"]
+[editable path="Viewport/level/DoorToLoadingScreen"]
+[editable path="Viewport/level/DoorToLoadingScreen/NPC/NPC TextBox"]
 [editable path="Viewport/level/GlitchMoleCricket"]
 [editable path="Viewport/level/GlitchMoleCricket2"]
 [editable path="Viewport/level/GlitchMoleCricket3"]

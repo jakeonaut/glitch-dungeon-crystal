@@ -1,0 +1,38 @@
+<style type="text/css">
+body { height: 100%; margin: 0; }
+#notepad {
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    margin: 8px;
+    padding: 8px;
+}
+</style>
+
+<div id="notepad" contenteditable>
+    this sucks, figure out how to use https://prosemirror.net/examples/basic/ instead
+    <br/>
+    turns out range selection is just way too crazy for some reason...
+</div>
+
+<script type="text/javascript">
+
+const notepad = document.getElementById("notepad");
+notepad.addEventListener("input", (ev) => {
+    const prevRange = window.getSelection().getRangeAt(0);
+    const textNode = prevRange.startContainer;
+    const textOffset = prevRange.startOffset;
+    console.log(window.getSelection());
+
+    notepad.innerHTML = notepad.innerHTML;
+
+    console.log(textNode, textOffset);
+    window.getSelection().removeAllRanges();
+    const range = document.createRange();
+    range.selectNode(notepad);
+    range.setStart(textNode, textOffset);
+    range.setEnd(textNode, textOffset);
+    window.getSelection().addRange(range);
+    console.log(window.getSelection());
+});
+
+</script>

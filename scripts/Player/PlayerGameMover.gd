@@ -364,15 +364,18 @@ func changeSpriteColorPalette(palette):
   # broomSpriteVisible.material_override.set_shader_param("target_palette", palette)
 
 onready var changeOutfitSound = get_node("Sounds/ChangeOutfitSound")
-var babushkaScarfTex = preload("res://assets/player_sheet_babushkaScarf.png")
+var babushkaScarfTex = preload("res://assets/outfits/player_sheet_babushkaScarf.png")
 var noHatTex = preload("res://assets/player_sheet_old_naked.png")
 var witchHatTex = preload("res://assets/outfits/player_sheet_witch_face.png")
+var elderMaskTex = preload("res://assets/outfits/player_sheet_elder_face.png")
 func getOutfitTexture(outfit):
   match outfit:
     global.GrandmaOutfit.NO_HAT:
       return noHatTex
     global.GrandmaOutfit.WITCH_HAT:
       return witchHatTex
+    global.GrandmaOutfit.CRYSTAL_ELDER_MASK:
+      return elderMaskTex
     _:
       return babushkaScarfTex
 

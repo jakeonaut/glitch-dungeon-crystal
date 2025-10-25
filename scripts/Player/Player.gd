@@ -36,7 +36,6 @@ var malwareBugSpriteRes = preload("res://sceneObjects/Buggies/MalwareBugSprite.t
 var summonedBroomRes = preload("res://sceneObjects/SummonedBroom.tscn")
 var fallenBroomRes = preload("res://sceneObjects/FallenBroom.tscn")
 var bubbleRes = preload("res://sceneObjects/BubbleSpell.tscn")
-# var spriteSheetFeather = preload("res://assets/player_sheet_old_feather.png")
 var broom_cooldown_timer = 0
 var broom_cooldown_time_limit = 10
 
