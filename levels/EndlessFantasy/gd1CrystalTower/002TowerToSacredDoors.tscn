@@ -157,6 +157,7 @@ show_crt_effect = true
 starting_glitch_type = 2
 has_spellbook_page = true
 spellbook_spells = [ 3, 2 ]
+pacman_wrapping = true
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 26 )]
 

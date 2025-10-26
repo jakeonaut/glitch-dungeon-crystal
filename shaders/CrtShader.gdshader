@@ -117,7 +117,7 @@ vec2 nesify(vec2 uv) {
 
 // Takes in the UV and warps the edges, creating the spherized effect
 vec2 warp(vec2 uv){
-   uv = nesify(uv);
+   // uv = nesify(uv);
    vec2 delta = uv - 0.5;
    float delta2 = dot(delta.xy, delta.xy);
    float delta4 = delta2 * delta2;

@@ -109,6 +109,7 @@ tileset_type = 10
 has_spellbook_page = true
 spellbook_spells = [ 2, 1 ]
 display_title = "village of elders"
+pacman_wrapping = true
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 20 )]
 
