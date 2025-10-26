@@ -880,8 +880,12 @@ func tryDieToOffscreenCamera(_delta):
     next_room = transition.mapManager.getRelativeRoomPath(curr_coords, global.roomEdgeVector) if curr_coords != null else null
     if next_room != null and passive_door and self.smallInteractionArea.touched_passive_door != null:
       next_room = self.smallInteractionArea.touched_passive_door.path
+    if level.pacman_wrapping or (
+      level.horizontal_pacman_wrapping and global.roomEdgeVector.y == 0 and global.roomEdgeVector.x != 0
+    ):
+      next_room = null 
 
-    if next_room != null and (not level.pacman_wrapping or passive_door):
+    if next_room != null:
       try_to_recover = false
       global.prepareForTransition(level)
       transition.edge_fade_to(next_room)
@@ -898,7 +902,9 @@ func tryDieToOffscreenCamera(_delta):
       global.memory.erase("prevYDiff")
       global.memory.erase("player_x_offset")
       global.memory.erase("prevXDiff")
-      if level.pacman_wrapping and not passive_door:
+      if (level.pacman_wrapping or (
+        level.horizontal_pacman_wrapping and global.roomEdgeVector.x != 0
+      )) and not passive_door:
         DEATH_MARGIN = -1
         just_pacman_flipped_timer = 0
         was_walk_direction_flipped = shouldFlipWalkingDirection()

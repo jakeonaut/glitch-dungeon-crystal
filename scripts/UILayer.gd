@@ -361,6 +361,12 @@ func _process(delta):
     # edgeDistortionRight.visible = (level.gameCamera.x_edge == 1 or level.gameCamera.x_edge == 2)
     # edgeDistortionBottom.visible = (level.gameCamera.y_edge == -1 or level.gameCamera.y_edge == 2)
     # edgeDistortionTop.visible = (level.gameCamera.y_edge == 1 or level.gameCamera.y_edge == 2)
+  elif global.userSettings["canGlitchScreen"] and level.horizontal_pacman_wrapping and not global.isPauseMenuOpen:
+    edgeDistortion.visible = true # a little visually glitchy at times in a way i dont like
+    edgeDistortionLeft.visible = true #(level.gameCamera.x_edge == -1 or level.gameCamera.x_edge == 2)
+    edgeDistortionRight.visible = true # (level.gameCamera.x_edge == 1 or level.gameCamera.x_edge == 2)
+    edgeDistortionBottom.visible = false # (level.gameCamera.y_edge == -1 or level.gameCamera.y_edge == 2)
+    edgeDistortionTop.visible = false # (level.gameCamera.y_edge == 1 or level.gameCamera.y_edge == 2)
   else:
     edgeDistortion.visible = false
 

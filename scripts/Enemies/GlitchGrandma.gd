@@ -59,12 +59,23 @@ func tryDieToOffscreenCamera(_delta):
             DEATH_MARGIN = 1
             if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN:
               global_transform.origin.x = getGameCamera().leftmost_x + DEATH_MARGIN
-            if global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN:
+            elif global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN:
               global_transform.origin.x = getGameCamera().rightmost_x - DEATH_MARGIN
             if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
               global_transform.origin.y = getGameCamera().botmost_y + DEATH_MARGIN
-            if global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+            elif global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
               global_transform.origin.y = getGameCamera().topmost_y - DEATH_MARGIN
+        elif level.horizontal_pacman_wrapping:
+            DEATH_MARGIN = 1
+            if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN:
+              global_transform.origin.x = getGameCamera().leftmost_x + DEATH_MARGIN
+            elif global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN:
+              global_transform.origin.x = getGameCamera().rightmost_x - DEATH_MARGIN
+            if global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+              setGlobalMemoryOfHasBeenDefeated()
+              queue_free()
+            elif global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
+              global_transform.origin.y = getGameCamera().topmost_y + DEATH_MARGIN
         else:
           if global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
               setGlobalMemoryOfHasBeenDefeated()

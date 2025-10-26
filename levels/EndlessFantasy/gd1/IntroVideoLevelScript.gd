@@ -150,6 +150,3 @@ func _process(delta):
                 if hideSkipPromptTimer >= hideSkipPromptTimeLimit:
                     hideSkipPromptTimer = 0
                     skipPrompt.visible = false
-
-func tryToAddGameFrameBackground():
-    pass

@@ -42,6 +42,7 @@ export var display_title = "???"
 export var doesnt_have_broom = false
 var has_room_initialized = false
 export var pacman_wrapping = false
+export var horizontal_pacman_wrapping = false
 export var weird_pacman_wrapping = false
 var malwareDragonflyRes = preload("res://sceneObjects/Buggies/MalwareDragonfly.tscn")
 

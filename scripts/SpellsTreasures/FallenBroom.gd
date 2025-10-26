@@ -251,17 +251,31 @@ func tryReturnToOffscreenCamera():
                 global_transform.origin.y = getGameCamera().topmost_y + buffer
             if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN:
                 global_transform.origin.y = getGameCamera().botmost_y - buffer
-            return
-        DEATH_MARGIN = 5
-        if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
-        global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
-        global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
-        global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
-            returning = true
-            if taking_the_player_with_me:
-                level.player.has_broom_flown = true
-                level.player.has_landed_since_last_flight = false
-                taking_the_player_with_me = false
+        elif level.horizontal_pacman_wrapping:
+            var buffer = -1
+            DEATH_MARGIN = -1
+            if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN:
+                global_transform.origin.x = getGameCamera().leftmost_x - buffer
+            if global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN:
+                global_transform.origin.x = getGameCamera().rightmost_x + buffer
+            DEATH_MARGIN = 5
+            if global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+                returning = true
+                if taking_the_player_with_me:
+                    level.player.has_broom_flown = true
+                    level.player.has_landed_since_last_flight = false
+                    taking_the_player_with_me = false
+        else:
+            DEATH_MARGIN = 5
+            if global_transform.origin.x > getGameCamera().rightmost_x + DEATH_MARGIN or \
+            global_transform.origin.x < getGameCamera().leftmost_x - DEATH_MARGIN or \
+            global_transform.origin.y > getGameCamera().topmost_y + DEATH_MARGIN or \
+            global_transform.origin.y < getGameCamera().botmost_y - DEATH_MARGIN:
+                returning = true
+                if taking_the_player_with_me:
+                    level.player.has_broom_flown = true
+                    level.player.has_landed_since_last_flight = false
+                    taking_the_player_with_me = false
 
 # @override
 func pressingMoveLeft():
