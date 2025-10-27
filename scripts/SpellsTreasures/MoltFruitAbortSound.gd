@@ -18,8 +18,6 @@ func activateScript():
     level.player.aniPlayer.queue("stand")
     
     global.num_cherries_gained = 1
-        
-    level.saveTheGame()
 
 func isActive(_debug=false):
     return true

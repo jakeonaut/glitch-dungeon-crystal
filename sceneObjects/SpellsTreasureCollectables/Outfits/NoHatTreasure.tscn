@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/DELETEME/LA_Chest_Open.wav" type="AudioStream" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
-[ext_resource path="res://scripts/SpellsTreasures/Outfits/NoHatDialogAbortSound.gd" type="Script" id=3]
+[ext_resource path="res://scripts/SpellsTreasures/Outfits/OutfitDialogAbortSound.gd" type="Script" id=3]
 [ext_resource path="res://scripts/SpellsTreasures/TreasureCollectable.gd" type="Script" id=4]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=5]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=6]
@@ -451,7 +451,7 @@ shader_param/target_palette = ExtResource( 2 )
 [node name="NoHatTreasure" type="Spatial"]
 script = ExtResource( 4 )
 grav = 0
-bbText = "NPC.Outfit.0"
+bbText = "UI.Outfit.0"
 portrait = ExtResource( 16 )
 is_important = true
 can_activate = false
@@ -484,6 +484,7 @@ volume_db = -10.0
 [node name="AbortSound" parent="NPC TextBox/TextBox" index="13"]
 stream = null
 script = ExtResource( 3 )
+outfit_to_unlock = "NO_HAT"
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )

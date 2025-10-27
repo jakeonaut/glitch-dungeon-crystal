@@ -28,6 +28,9 @@ func _ready():
   can_be_smacked = true
   # ._ready() implicit
 
+  if okay_im_really_done_bye:
+    youAlreadyGotMe()
+
 func youAlreadyGotMe():
   if get_node("SecretAnimationPlayer").has_animation("isOpen"):
     get_node("SecretAnimationPlayer").play("isOpen")

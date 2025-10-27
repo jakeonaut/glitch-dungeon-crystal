@@ -826,7 +826,6 @@ func processInventoryLogic(_delta):
       elif inventoryOptionIndexX == 3:
         popupText.bbcode_text = tr("NPC.Treasure.6")
     elif angelStatueToTeleportTo != null:
-      print("angelStatueToTeleportTo: " + str(angelStatueToTeleportTo))
       var level_to_spawn_to = angelStatueToTeleportTo[1]
       global.memory["roomPath"] = level.getLevelName()
       global.pauseGame = true
@@ -839,7 +838,6 @@ func processInventoryLogic(_delta):
       global.isPauseMenuOpen = false
       get_node("TeleportSound").play()
     elif inventoryOptionIndex == 4 and angelStatues.size() > 0 and angelStatueArrValue != null:
-      print("angelStatueArrValue: " + str(angelStatueArrValue))
       if angelStatueArrValue[1] == level.getLevelName():
         getPlayer().noBroomSound.play()
       else:
@@ -908,14 +906,14 @@ func updateOutfitPopupText():
       popupText.bbcode_text = tr("UI.Outfit.2")
       outfitSprite.frame = 4
   popupOutfitRect.visible = true
-  if global.memory.has("allMyOutfits") and global.memory["allMyOutfits"].size() > 1:
+  if global.userSettings.has("allMyOutfits") and global.userSettings["allMyOutfits"].size() > 1:
     popupText.bbcode_text += "\n" + global.getInputText("menu_left") + " " + global.getInputText("menu_right")
     isInOutfitSwitchingMode = true
 
 func tryToSwitchOutfits():
-  if not global.memory.has("allMyOutfits") or not global.memory.has("currOutfit"):
+  if not global.userSettings.has("allMyOutfits") or not global.memory.has("currOutfit"):
     return
-  var outfits = global.memory["allMyOutfits"]
+  var outfits = global.userSettings["allMyOutfits"]
   var currIndex = outfits.find(global.memory["currOutfit"])
   if currIndex == -1:
     return
@@ -948,14 +946,14 @@ func updateBroomPopupText():
   #     popupYesNoOptions = global.memory["broomerang_enabled"]
   #   else:
   #     global.memory["broomerang_enabled"] = popupYesNoOptions
-  if global.memory.has("allMyBrooms") and global.memory["allMyBrooms"].size() > 1:
+  if global.userSettings.has("allMyBrooms") and global.userSettings["allMyBrooms"].size() > 1:
     popupText.bbcode_text += "\n" + global.getInputText("menu_left") + " " + global.getInputText("menu_right")
     isInBroomSwitchingMode = true
 
 func tryToSwitchBrooms():
-  if not global.memory.has("allMyBrooms") or not global.memory.has("currBroom"):
+  if not global.userSettings.has("allMyBrooms") or not global.memory.has("currBroom"):
     return
-  var brooms = global.memory["allMyBrooms"]
+  var brooms = global.userSettings["allMyBrooms"]
   var currIndex = brooms.find(global.memory["currBroom"])
   if currIndex == -1:
     return

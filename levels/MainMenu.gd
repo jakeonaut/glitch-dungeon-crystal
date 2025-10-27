@@ -94,7 +94,29 @@ func getAndCacheSavedGames():
             global.loadGame(2, {}) if global.doesSaveGameExist(2) else {},
             global.loadGame(3, {}) if global.doesSaveGameExist(3) else {},
         ]
+        # add stuff from savedGames to userSettings... 
+        var has_changed_user_settings = false
+        has_changed_user_settings = moveFromMemoryToUserSettings("allMyBrooms") or has_changed_user_settings
+        has_changed_user_settings = moveFromMemoryToUserSettings("allMyPets") or has_changed_user_settings
+        has_changed_user_settings = moveFromMemoryToUserSettings("allMyBags") or has_changed_user_settings
+        has_changed_user_settings = moveFromMemoryToUserSettings("allMyOutfits") or has_changed_user_settings
+        if has_changed_user_settings:
+            global.saveUserSettings()
     return saved_games_cache
+
+func moveFromMemoryToUserSettings(memVar):
+    var has_changed_user_settings = false
+    var index = 0
+    for savedGame in saved_games_cache:
+        if savedGame.has(memVar):
+            for savedObjectInArray in savedGame[memVar]:
+                if not global.userSettings[memVar].has(savedObjectInArray):
+                    global.userSettings[memVar].push_back(savedObjectInArray)
+                    has_changed_user_settings = true
+            savedGame.erase(memVar)
+            global.saveGame(self, index)
+        index += 1
+    return has_changed_user_settings
 
 var was_intro_cutscene_skipped = 0
 var skip_intro_cutscene_reset_timer = 0
@@ -288,6 +310,11 @@ func loadGame(saveGameIndex):
         global.setLevelZoneThing("start_time", null)
         if global.memory.has("savedRoomPath") or global.memory.has("roomPath"):
             var roomPath = global.memory["savedRoomPath"] if global.memory.has("savedRoomPath") else global.memory["roomPath"]
+            # sanitize the roomPath...
+            if "IntroVideo" in roomPath or "LoadingScreen" in roomPath:
+                roomPath = global.fallbackPath
+            global.memory["roomPath"] = roomPath
+            global.memory["savedRoomPath"] = roomPath
             global.isEnteringRoom = true
             transition.long_fade_to(roomPath)
             return

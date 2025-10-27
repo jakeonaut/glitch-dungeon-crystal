@@ -31,7 +31,6 @@ var bye_bye = false
 func _process(delta):
     if bye_bye:
         return
-    global.has_started_game = false
     screenEffectsContainer.offset = Vector2(0, 0)
     viewportTexture.rect_position = Vector2(0, 0)
     if mainMenuState == MainMenuState.SHOWING_AUTOSAVE_WARNING or \
@@ -64,3 +63,6 @@ func _process(delta):
                 return
         autosaveWarningCoverup.color = Color(0, 0, 0, autosave_cover_opacity)
         return
+
+func saveTheGame(_message = "saving!!"):
+    pass

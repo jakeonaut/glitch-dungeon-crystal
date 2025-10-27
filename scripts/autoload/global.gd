@@ -78,6 +78,9 @@ onready var gustSound = get_node("GustSound")
 onready var panSmackSound = get_node("PanSmackSound")
 var DELETE_ME = 2
 
+var fallbackPath = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
+
+
 # GlitchForm variables
 enum GlitchForm {
     NORMAL,
@@ -338,13 +341,9 @@ func resetMemory():
     memory["debug"] = false
     # customization upgrades
     memory["currPet"] = PetFollower.NONE
-    memory["allMyPets"] = [PetFollower.NONE]
     memory["currOutfit"] = GrandmaOutfit.BABUSHKA
-    memory["allMyOutfits"] = [GrandmaOutfit.BABUSHKA]
     memory["currBroom"] = GrandmaBroom.NORMAL
-    memory["allMyBrooms"] = [GrandmaBroom.NORMAL]
     memory["currBag"] = GrandmaBag.NORMAL
-    memory["allMyBags"] = [GrandmaBag.NORMAL]
 
     memory["hearts_enabled"] = true
     memory["mushroom_soul_enabled"] = true
@@ -574,6 +573,12 @@ func normalizeLocale(locale):
 func resetUserSettings():
     userSettings = {}
 
+    # across multiple save files game stuff
+    userSettings["allMyOutfits"] = [GrandmaOutfit.BABUSHKA]
+    userSettings["allMyBrooms"] = [GrandmaBroom.NORMAL]
+    userSettings["allMyPets"] = [PetFollower.NONE]
+    userSettings["allMyBags"] = [GrandmaBag.NORMAL]
+
     # settings?
     userSettings["use_joystick"] = 1
     userSettings["deadzone_real"] = 50 # out of 100. can't figure out floats...
@@ -637,24 +642,27 @@ func processEasterEggs():
 
 var num_horizontal_input_presses = 0
 func prepareForTransition(level, enteredDoor = null):
-    global.memory["transformation"] = level.player.transformation
     global.activeInteractor = null
-    global.memory["cameraSize"] = level.gameCamera.initial_size
-    # global.memory["lastDoor"] = id
-    global.memory["roomPath"] = level.getLevelName(true)
     global.pauseGame = true
     global.isEnteringRoom = true
     global.hasJustEnteredRoom = false
     global.respawnVarTimerHack = 0
     global.memory["on_ground"] = true
-    # a little hack. 0*0 = 0, 1*1 = 1, but 2*2 > 2!!!!!!!
-    global.num_horizontal_input_presses = level.player.num_horizontal_input_presses*level.player.num_horizontal_input_presses
 
     if enteredDoor != null:
         var doors = level.get_tree().get_nodes_in_group("doors")
         for door in doors:
             global.eraseStaticLevelZoneLevelVar(level, door)
         global.setStaticLevelZoneLevelVar(level, enteredDoor, enteredDoor.DoorMemory.LAST_ENTERED)
+
+    if not "IntroVideo" in level.getLevelName() and not "LoadingScreen" in level.getLevelName():
+        global.memory["transformation"] = level.player.transformation
+        global.memory["roomPath"] = level.getLevelName(true)
+        global.memory["cameraSize"] = level.gameCamera.initial_size
+        # global.memory["lastDoor"] = id
+        # a little hack. 0*0 = 0, 1*1 = 1, but 2*2 > 2!!!!!!!
+        global.num_horizontal_input_presses = level.player.num_horizontal_input_presses*level.player.num_horizontal_input_presses
+    return
 
 
 func _process(delta):
@@ -760,11 +768,12 @@ var user_settings_files = [
     "user://usersettings.config"
 ]
 var save_game_index = 0
-func saveGame(level):
+func saveGame(level, overwrite_save_game_index = -1):
     if "EndCredits" in level.getShortLevelName() or "IntroVideo" in level.getShortLevelName() or "PrimordialOoze" in level.getShortLevelName():
         return
 
-    var save_game_file = save_game_files[save_game_index]
+    var temp_save_game_index = save_game_index if overwrite_save_game_index < 0 else overwrite_save_game_index
+    var save_game_file = save_game_files[temp_save_game_index]
     var file = File.new()
     file.open(save_game_file, File.WRITE)
     file.store_line(to_json(global.memory))

@@ -814,6 +814,8 @@ func getDistToBottomEdge(): return max(global_transform.origin.y - getGameCamera
   
 var returning_to_save_point = 0
 func tryDieToOffscreenCamera(_delta):
+  if "IntroVideo" in level.getLevelName() or "LoadingScreen" in level.getLevelName():
+    return
   if getGameCamera().rightmost_x <= -999 or global.isEnteringRoom or global.pauseGame or physics_state == PhysicsState.GLITCH_DYING:
     return
 

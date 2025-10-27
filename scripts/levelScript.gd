@@ -455,6 +455,7 @@ func getLevelManagerCoords():
   return transition.mapManager.getCoords(self.getLevelName())
 
 func saveTheGame(message = "saving!!"):
+  print("save the game")
   uiLayer.displaySavingText(message)
   global.memory["transformation"] = self.player.transformation
   global.memory["roomPath"] = self.getLevelName()
@@ -642,6 +643,7 @@ func tryToRespawn():
   global.respawnVarTimerHack = 0
   global.hasJustEnteredRoom = global.isEnteringRoom
   global.isEnteringRoom = false
+  print("is entering room false")
   global.grannyEnteringRoom = false
   global.isBrothWarping = false
   global.angelWarping = false

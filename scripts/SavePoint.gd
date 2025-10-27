@@ -28,7 +28,7 @@ var spin_dir = 1
 func _process(delta):
     delta = delta * global.time_dilation_multiplier
     aniPlayer.playback_speed = global.time_dilation_multiplier * animation_speed_multiplier
-    if global.pauseGame or not visible:
+    if global.pauseGame or not visible or global.isEnteringRoom:
         return
     
     if isOnSavePoint():
@@ -38,8 +38,6 @@ func _process(delta):
             spawn_timer = spawn_time_limit
             triangleContainer.scale.x = 1.5
             triangleContainer.scale.y = 1.5
-            if triangleContainer.visible and not global.isEnteringRoom:
-                level.saveTheGame()
             aniPlayer.play("sporeGrow")
         is_active = true
         was_on_save_point = true
@@ -136,8 +134,8 @@ func passiveActivate(_delta, is_player):
                 saveSound.volume_db = -32
             saveSound.play()
         global.saveMySpot(global.getNameRelativeToLevel(level, self), global_transform.origin + Vector3(0, -1, 0), level)
-        
         global.memory.erase("player_y_offset")
+        level.saveTheGame()
     is_currently_on_save_point = true
 
 func justStopPassiveActivate():
