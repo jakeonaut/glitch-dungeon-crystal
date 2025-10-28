@@ -169,6 +169,7 @@ enum GrandmaOutfit {
     MUSHROOM_HAT,
     COZY_WINTER_SCARF,
     TURNIP_MERCHANT,
+    GLITCH_FACE,
 }
 
 enum GrandmaBroom {
@@ -289,6 +290,7 @@ var NUM_GEMS_FOR_BROOMERANG_WARP = 99
 var has_started_game = false
 var has_really_started_game = false
 var okay_really_really_started_game = false
+var has_ever_seen_intro = false
 var another_start_game_variable = false
 var spellCastPauseIndex = null
 var correct_ritual = ["ui_down", "ui_down", "ui_down", "restart_key"]
@@ -578,6 +580,7 @@ func resetUserSettings():
     userSettings["allMyBrooms"] = [GrandmaBroom.NORMAL]
     userSettings["allMyPets"] = [PetFollower.NONE]
     userSettings["allMyBags"] = [GrandmaBag.NORMAL]
+    userSettings["hasEverBeatenGame"] = false
 
     # settings?
     userSettings["use_joystick"] = 1

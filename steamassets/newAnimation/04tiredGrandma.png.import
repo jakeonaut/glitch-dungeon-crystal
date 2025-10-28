@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sweepAttack.png-50b6b1d3258874f28e2d084b96b111de.stex"
+path="res://.import/04tiredGrandma.png-cffbf6251df53de94a1d29905a6dab32.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://steamassets/newAnimation/maybe/sweepAttack.png"
-dest_files=[ "res://.import/sweepAttack.png-50b6b1d3258874f28e2d084b96b111de.stex" ]
+source_file="res://steamassets/newAnimation/04tiredGrandma.png"
+dest_files=[ "res://.import/04tiredGrandma.png-cffbf6251df53de94a1d29905a6dab32.stex" ]
 
 [params]
 
@@ -23,7 +23,7 @@ flags/repeat=true
 flags/filter=false
 flags/mipmaps=true
 flags/anisotropic=false
-flags/srgb=1
+flags/srgb=0
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false

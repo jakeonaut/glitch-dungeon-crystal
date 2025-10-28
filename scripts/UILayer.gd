@@ -522,7 +522,9 @@ func processHiscoreRenderLogic(delta):
       pressEnterLabel.bbcode_text = "[center]" + (tr("NPC.Crystal.Final") % sweep_button_text) + "[/center]"
       hiscoreDisplayIndex += 1
       hiscoreTimeLimit = 5
-      if global.isEndOfGame and global.demo_mode <= 0: Steam.set_achievement("GRANDMA_WIN")
+      if global.isEndOfGame and global.demo_mode <= 0:
+        Steam.set_achievement("GRANDMA_WIN")
+        global.userSettings
   
   if (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("talk_button") or Input.is_action_just_pressed("sub_action_button") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))):
     if hiscoreDisplayIndex >= 8:

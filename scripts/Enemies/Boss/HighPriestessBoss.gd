@@ -141,6 +141,8 @@ func yaBeatMe():
     boss_phase = BossPhase.DEFEATED
     global.memory["priestess"] = 2
     global.memory["has_beat_the_game"] = 1
+    global.userSettings["hasEverBeatenGame"] = true
+    global.saveUserSettings()
     yield(get_tree().create_timer(2.0), "timeout")
     global.shouldRenderAsCinematic = true
     global.pauseGame = true

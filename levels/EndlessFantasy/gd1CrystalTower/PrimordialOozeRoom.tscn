@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=2]
+[gd_scene load_steps=115 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
 [ext_resource path="res://sceneObjects/Enemies/Boss/PrimordialOozeBoss.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=10]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=11]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=12]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/Outfits/WitchHatTreasure.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/sprites/highpriestessgoddess.png" type="Texture" id=14]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=15]
 [ext_resource path="res://shaders/CrtShader.gdshader" type="Shader" id=16]
@@ -1905,15 +1906,11 @@ shader = ExtResource( 16 )
 shader_param/resolution = Vector2( 320, 180 )
 shader_param/scan_line_amount = 1.0
 shader_param/warp_amount = 0.1
-shader_param/noise_amount = 0.03
-shader_param/interference_amount = 0.2
 shader_param/grille_amount = 0.1
 shader_param/grille_size = 1.0
 shader_param/vignette_amount = 0.6
 shader_param/vignette_intensity = 0.4
 shader_param/aberation_amount = 0.5
-shader_param/roll_line_amount = 0.3
-shader_param/roll_speed = 1.0
 shader_param/scan_line_strength = -8.0
 shader_param/pixel_strength = -2.0
 
@@ -2357,6 +2354,9 @@ pixel_size = 0.12
 texture = ExtResource( 61 )
 hframes = 8
 script = ExtResource( 49 )
+
+[node name="WitchHatTreasure" parent="Viewport/level" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -45, -5, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 9 )]
 

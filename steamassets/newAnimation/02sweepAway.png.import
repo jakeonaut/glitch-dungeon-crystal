@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sweepAttack2.png-4f425b8f269c12458194b24c52e2fc83.stex"
+path="res://.import/02sweepAway.png-7d763ebb5ce2bcf5ca22311c18e2fe5e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://steamassets/newAnimation/maybe/sweepAttack2.png"
-dest_files=[ "res://.import/sweepAttack2.png-4f425b8f269c12458194b24c52e2fc83.stex" ]
+source_file="res://steamassets/newAnimation/02sweepAway.png"
+dest_files=[ "res://.import/02sweepAway.png-7d763ebb5ce2bcf5ca22311c18e2fe5e.stex" ]
 
 [params]
 
@@ -23,7 +23,7 @@ flags/repeat=true
 flags/filter=false
 flags/mipmaps=true
 flags/anisotropic=false
-flags/srgb=1
+flags/srgb=0
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false

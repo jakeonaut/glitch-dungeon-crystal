@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=7]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=8]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=9]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/Outfits/ElderMaskTreasure.tscn" type="PackedScene" id=10]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=12]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=13]
@@ -432,7 +433,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 107, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -3, 0 )
 
 [node name="ElderTadpoleNPC" parent="Viewport/level" instance=ExtResource( 23 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -3, 0 )
 script = ExtResource( 36 )
 bbText = "NPC.Crone.9"
 
@@ -446,10 +447,13 @@ script = ExtResource( 32 )
 shape = SubResource( 124 )
 
 [node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 35 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -1.52736, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -1.52736, 0 )
 
 [node name="FloorSpell2" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 37.4148, 0 )
+
+[node name="ElderMaskTreasure" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -3, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 11 )]
 

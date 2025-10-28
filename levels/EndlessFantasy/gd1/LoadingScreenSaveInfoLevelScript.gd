@@ -31,8 +31,6 @@ var bye_bye = false
 func _process(delta):
     if bye_bye:
         return
-    screenEffectsContainer.offset = Vector2(0, 0)
-    viewportTexture.rect_position = Vector2(0, 0)
     if mainMenuState == MainMenuState.SHOWING_AUTOSAVE_WARNING or \
        mainMenuState == MainMenuState.HIDING_AUTOSAVE_WARNING:
         autosaveWarning.visible = true

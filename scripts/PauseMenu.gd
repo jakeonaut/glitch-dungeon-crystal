@@ -675,6 +675,12 @@ func processInventoryLogic(_delta):
       inventoryOptionIndexX = 0
     if inventoryOptionIndexX != prevInventoryOptionIndexX:
       menuMoveSound.play()
+      if selectedGlitchSprite >= 0 and spellbook[selectedGlitchSprite] == global.GlitchForm.NORMAL:
+        player.noSpellSound.play()
+        selectedGlitchSprite = -1
+        popupRect.visible = false
+        shouldShowPopupYesNoOptions = false
+        popupYesNoOptions = false
     glitchRect1.color = activeColor if inventoryOptionIndexX == 0 else selectedColor if selectedGlitchSprite == 0 else inactiveColor
     glitchRect2.color = activeColor if inventoryOptionIndexX == 1 else selectedColor if selectedGlitchSprite == 1 else inactiveColor
     glitchRect3.color = activeColor if inventoryOptionIndexX == 2 else selectedColor if selectedGlitchSprite == 2 else inactiveColor
@@ -758,12 +764,15 @@ func processInventoryLogic(_delta):
         else:
           if inventoryOptionIndexX != selectedGlitchSprite:
             var temp = spellbook[selectedGlitchSprite]
-            spellbook[selectedGlitchSprite] = spellbook[inventoryOptionIndexX]
-            spellbook[inventoryOptionIndexX] = temp
-            global.memory["spellbookPage"] = spellbook
-            var spellCastPauseIndex = level.player.spellCastPauseIndex
-            if inventoryOptionIndexX == spellCastPauseIndex or selectedGlitchSprite == spellCastPauseIndex:
-              level.player.applyGlitch(spellbook[spellCastPauseIndex])
+            if spellbook[inventoryOptionIndexX] == global.GlitchForm.NORMAL:
+              player.noSpellSound.play()
+            else:
+              spellbook[selectedGlitchSprite] = spellbook[inventoryOptionIndexX]
+              spellbook[inventoryOptionIndexX] = temp
+              global.memory["spellbookPage"] = spellbook
+              var spellCastPauseIndex = level.player.spellCastPauseIndex
+              if inventoryOptionIndexX == spellCastPauseIndex or selectedGlitchSprite == spellCastPauseIndex:
+                level.player.applyGlitch(spellbook[spellCastPauseIndex])
           selectedGlitchSprite = -1
       popupRect.visible = not popupRect.visible
       shouldShowPopupYesNoOptions = false
@@ -904,6 +913,9 @@ func updateOutfitPopupText():
       outfitSprite.frame = 2
     global.GrandmaOutfit.CRYSTAL_ELDER_MASK:
       popupText.bbcode_text = tr("UI.Outfit.2")
+      outfitSprite.frame = 4
+    global.GrandmaOutfit.GLITCH_FACE:
+      popupText.bbcode_text = tr("UI.Outfit.3")
       outfitSprite.frame = 4
   popupOutfitRect.visible = true
   if global.userSettings.has("allMyOutfits") and global.userSettings["allMyOutfits"].size() > 1:

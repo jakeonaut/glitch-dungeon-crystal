@@ -878,13 +878,13 @@ pitch_scale = 0.8
 [node name="InnerPeaceSound" type="AudioStreamPlayer" parent="Viewport/level"]
 stream = ExtResource( 25 )
 volume_db = -15.0
-bus = "Sfx"
+bus = "Music"
 
 [node name="InnerPeaceReverseSound" type="AudioStreamPlayer" parent="Viewport/level"]
 stream = ExtResource( 35 )
 volume_db = -15.0
 pitch_scale = 1.05
-bus = "Sfx"
+bus = "Music"
 
 [node name="TowerSprite1" type="Sprite3D" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6, 9.6, -2.3 )
@@ -907,7 +907,7 @@ flip_v = true
 mesh = SubResource( 212 )
 
 [node name="MeshInstance2" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="PressC" type="RichTextLabel" parent="Viewport2/UILayer"]
 visible = false

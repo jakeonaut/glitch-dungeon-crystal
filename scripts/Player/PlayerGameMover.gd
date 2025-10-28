@@ -368,6 +368,7 @@ var babushkaScarfTex = preload("res://assets/outfits/player_sheet_babushkaScarf.
 var noHatTex = preload("res://assets/player_sheet_old_naked.png")
 var witchHatTex = preload("res://assets/outfits/player_sheet_witch_face.png")
 var elderMaskTex = preload("res://assets/outfits/player_sheet_elder_face.png")
+var glitchFaceTex = preload("res://assets/outfits/player_sheet_glitchface.png")
 func getOutfitTexture(outfit):
   match outfit:
     global.GrandmaOutfit.NO_HAT:
@@ -376,6 +377,8 @@ func getOutfitTexture(outfit):
       return witchHatTex
     global.GrandmaOutfit.CRYSTAL_ELDER_MASK:
       return elderMaskTex
+    global.GrandmaOutfit.GLITCH_FACE:
+      return glitchFaceTex
     _:
       return babushkaScarfTex
 

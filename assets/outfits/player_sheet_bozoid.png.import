@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/animatedintro_glitch_dungeon_png0762.png-9b36deb79d293e04f7e2cab66549a13f.stex"
+path="res://.import/player_sheet_bozoid.png-646e8d3e7081775c55696a92365da5e7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://steamassets/newAnimation/animatedintro_glitch_dungeon_png0762.png"
-dest_files=[ "res://.import/animatedintro_glitch_dungeon_png0762.png-9b36deb79d293e04f7e2cab66549a13f.stex" ]
+source_file="res://assets/outfits/player_sheet_bozoid.png"
+dest_files=[ "res://.import/player_sheet_bozoid.png-646e8d3e7081775c55696a92365da5e7.stex" ]
 
 [params]
 

@@ -182,6 +182,10 @@ func applyObeliskGlitch(glitch, add_spell_to_grimoire = true):
       if global.memory["spellbookPage"].size() > 0:
         if global.memory["spellbookPage"].size() >= maxSpellbookSize:
           var spellToBeForgottenIndex = spellCastPauseIndex # - 1
+          # NULL OVERRIDE!
+          if global.memory["spellbookPage"].has(global.GlitchForm.NORMAL):
+            spellToBeForgottenIndex = global.memory["spellbookPage"].find(global.GlitchForm.NORMAL)
+
           if spellToBeForgottenIndex < 0:
             spellToBeForgottenIndex = global.memory["spellbookPage"].size() - 1
           spellToBeForgotten = global.memory["spellbookPage"][spellToBeForgottenIndex]
@@ -190,7 +194,11 @@ func applyObeliskGlitch(glitch, add_spell_to_grimoire = true):
           else:
             global.memory["spellbookPage"][spellToBeForgottenIndex] = glitch
       if maxSpellbookSize == 2 or global.memory["spellbookPage"].size() < maxSpellbookSize:
-        global.memory["spellbookPage"].push_back(glitch)
+        # NULL OVERRIDE!
+        if global.memory["spellbookPage"].has(global.GlitchForm.NORMAL):
+          global.memory["spellbookPage"][global.memory["spellbookPage"].find(global.GlitchForm.NORMAL)] = glitch
+        else:
+          global.memory["spellbookPage"].push_back(glitch)
       spellCastPauseIndex = global.memory["spellbookPage"].find(glitch)
     if add_spell_to_grimoire and global.memory.has("spellbookPage") and global.memory["spellbookPage"].has(glitch): # HAS
       spellCastPauseIndex = global.memory["spellbookPage"].find(glitch)
@@ -198,7 +206,10 @@ func applyObeliskGlitch(glitch, add_spell_to_grimoire = true):
     return null
   return spellToBeForgotten
 
-# used in AnimationPlayer.broomSmackGlitch
+func isWearing(outfit):
+  return global.memory["currOutfit"] == outfit
+
+# also used in AnimationPlayer.broomSmackGlitch
 func actuallyApplySpellbookGlitch():
   var spellbookSize = global.memory["spellbookPage"].size() if global.memory.has("spellbookPage") else 0
   if spellbookSize == 0:

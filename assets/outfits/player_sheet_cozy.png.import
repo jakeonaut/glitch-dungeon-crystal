@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/NESGlitches.png-266100a70a71ae3c01cf5dfceaf1c7a4.stex"
+path="res://.import/player_sheet_cozy.png-f572391ac416f2b01a1d7ddf6f18234d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://steamassets/newAnimation/maybe/NESGlitches.png"
-dest_files=[ "res://.import/NESGlitches.png-266100a70a71ae3c01cf5dfceaf1c7a4.stex" ]
+source_file="res://assets/outfits/player_sheet_cozy.png"
+dest_files=[ "res://.import/player_sheet_cozy.png-f572391ac416f2b01a1d7ddf6f18234d.stex" ]
 
 [params]
 

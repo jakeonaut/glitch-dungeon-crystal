@@ -11,16 +11,26 @@ onready var reliefSound = get_node("ReliefSound")
 onready var bellSound = get_node("BellSound")
 onready var towerSprite1 = get_node("TowerSprite1")
 onready var towerSprite2 = get_node("TowerSprite2")
+var epilepsy_fade_timer = 0
+var EPILEPSY_SHOW_TIME_LIMIT = 80
+var epilepsy_cover_opacity = 1
 
 enum MainMenuState {
+    SHOWING_EPILEPSY_WARNING,
+    HIDING_EPILEPSY_WARNING,
+    INTRO_VIDEO,
     MAIN_MENU,
+    MAIN_MENU_FILE_ACTION,
     TRY_DELETE_FILE,
     TRY_GO_CREDITS,
-    MAIN_MENU_TRY_QUIT_GAME,
     NORMAL_GAMEPLAY,
     TRY_CONTINUE,
 }
-var mainMenuState = MainMenuState.MAIN_MENU
+var mainMenuState = MainMenuState.SHOWING_EPILEPSY_WARNING
+onready var epilepsyWarning = get_node("../../Viewport2/UILayer/EpilepsyWarning")
+onready var epilepsyWarningCoverup = get_node("../../Viewport2/UILayer/EpilepsyWarning/Coverup")
+onready var epilepsyWarningText = get_node("../../Viewport2/UILayer/EpilepsyWarning/Text")
+var has_finished_initial_initialization = false
 
 func setUpRoomInitializationOverride():
     for sprite in [player.mySprite, player.grandmaHatSprite, player.grandmaHandSprite]:
@@ -31,8 +41,20 @@ func setUpRoomInitializationOverride():
         player.pauseInput = true
         show_dither_effect = false
         show_crt_effect = true
-        mainMenuState = MainMenuState.MAIN_MENU
         logoSprite.visible = true
+
+        if not global.has_ever_seen_intro:
+            mainMenuState = MainMenuState.SHOWING_EPILEPSY_WARNING
+            epilepsyWarningText.bbcode_text = tr("UI.Photosensitivity.Warning")
+            has_finished_initial_initialization = true
+            global.has_ever_seen_intro = true
+            yield(TempTimer.idle_frame(self), "timeout")
+            yield(TempTimer.idle_frame(self), "timeout")
+            epilepsyWarning.visible = true
+        else:
+            mainMenuState = MainMenuState.MAIN_MENU
+            epilepsyWarning.visible = false
+            has_finished_initial_initialization = true
     else:
         mainMenuState = MainMenuState.NORMAL_GAMEPLAY
         logoSprite.visible = false
@@ -125,7 +147,7 @@ func startGame(saveGameIndex, shouldResetMemory = true):
   global.save_game_index = saveGameIndex
   mainMenuState = MainMenuState.NORMAL_GAMEPLAY
   global.isOnMainMenu = false
-  doorToLoadingScreen.path = "res://levels/EndlessFantasy/gd1/LoadingScreenSaveInfo.tscn"
+#   doorToLoadingScreen.path = "res://levels/EndlessFantasy/gd1/LoadingScreenSaveInfo.tscn"
   if shouldResetMemory:
     global.resetMemory()
   global.okay_really_really_started_game = false
@@ -241,6 +263,7 @@ func startGame(saveGameIndex, shouldResetMemory = true):
   secretGlitchyNPC3.glitchOut()
   if was_intro_cutscene_skipped == 2: return
   levelTiles.randomize_num = 3
+  babushkaCat.get_ref().get_node("ExclaimSound").play()
   babushkaCat.get_ref().tryHideActiveInteractPrompt()
   babushkaCat.get_ref().mySprite.flip_h = true
   babushkaCat.get_ref().mySprite.should_randomize_frame_delay = false
@@ -330,33 +353,70 @@ onready var selectPrompt = get_node("../../Viewport2/UILayer/MainMenu/SelectProm
 onready var selectTextPrompt = get_node("../../Viewport2/UILayer/MainMenu/SelectPrompt/TextPrompt")
 onready var menuText = get_node("../../Viewport2/UILayer/MainMenu/MenuText")
 onready var pressCText = get_node("../../Viewport2/UILayer/MainMenu/PressC")
-onready var deleteConfirmationLayer = get_node("../../Viewport2/UILayer/MainMenu/DeleteConfirmationLayer")
-onready var deleteConfirmationLayerText =  get_node("../../Viewport2/UILayer/MainMenu/DeleteConfirmationLayer/PopupRect/ColorRect/ColorRect/RichTextLabel")
+onready var fadeBackgroundLayer = get_node("../../Viewport2/UILayer/MainMenu/FadeBackgroundLayer")
+onready var fileActionLayer = get_node("../../Viewport2/UILayer/MainMenu/FileActionLayer")
+onready var fileActionLayerText =  get_node("../../Viewport2/UILayer/MainMenu/FileActionLayer/PopupRect/ColorRect/ColorRect/RichTextLabel")
+onready var fileActionSelectPrompt = get_node("../../Viewport2/UILayer/MainMenu/FileActionLayer/SelectPrompt")
+onready var confirmationLayer = get_node("../../Viewport2/UILayer/MainMenu/ConfirmationLayer")
+onready var confirmationLayerText =  get_node("../../Viewport2/UILayer/MainMenu/ConfirmationLayer/PopupRect/ColorRect/ColorRect/RichTextLabel")
 onready var skipPrompt = get_node("../../Viewport2/UILayer/SkipPrompt")
 var hideSkipPromptTimer = 0
 var hideSkipPromptTimeLimit = 15
 
 # @override
 func canOpenPauseMenu():
-  return mainMenuState != MainMenuState.TRY_DELETE_FILE and mainMenuState != MainMenuState.TRY_GO_CREDITS
+  return mainMenuState != MainMenuState.MAIN_MENU_FILE_ACTION and mainMenuState != MainMenuState.TRY_DELETE_FILE and mainMenuState != MainMenuState.TRY_GO_CREDITS
 
 export var camera_size = 30
 var updateMenuText = true
-var has_reset_transition = false
 func _process(delta):
     global.isEndOfGame = false
-    if not transition.aniPlayer.is_playing() and not has_reset_transition:
-        # TODO
-        transition.colorRect.rect_position = Vector2(320, 28)
-        transition.colorRect.rect_size = Vector2(1280, 1024)
-        has_reset_transition = true
-    if mainMenuState == MainMenuState.TRY_DELETE_FILE:
-        deleteConfirmationLayer.visible = true
-        if deleteConfirmationLayerText.bbcode_text == "":
-            deleteConfirmationLayerText.bbcode_text = tr("UI.MainMenu.5") % [str(global.mainMenuPromptIndex + 1), global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
+    if mainMenuState == MainMenuState.SHOWING_EPILEPSY_WARNING or \
+       mainMenuState == MainMenuState.HIDING_EPILEPSY_WARNING:
+        player.sleepy_timer = 0
+        basicCrtEffectRect2.visible = false
+        epilepsyWarning.visible = true
+        if mainMenuState == MainMenuState.SHOWING_EPILEPSY_WARNING:
+            if not has_finished_initial_initialization:
+                return
+            epilepsy_cover_opacity -= (delta)
+            if epilepsy_cover_opacity < 0:
+                epilepsy_cover_opacity = 0
+                epilepsy_fade_timer += (delta*11)
+                if epilepsy_fade_timer >= EPILEPSY_SHOW_TIME_LIMIT or (
+                    Input.is_action_just_pressed("sub_action_button") or \
+                    Input.is_action_just_pressed("jump_button") or \
+                    Input.is_action_just_pressed("ui_start") or \
+                    (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))
+                ):
+                    mainMenuState = MainMenuState.HIDING_EPILEPSY_WARNING
+                    transition.aniPlayer.stop()
+                    transition.aniPlayer.play("long_fade_no_change")
+        elif mainMenuState == MainMenuState.HIDING_EPILEPSY_WARNING:
+            epilepsy_cover_opacity += (delta)
+            if epilepsy_cover_opacity >= 1:
+                epilepsy_cover_opacity = 1
+                transition.reverse_fade()
+                epilepsyWarning.visible = false
+                mainMenuState = MainMenuState.MAIN_MENU
+                # videoPlayer.play()
+                # musicPlayer.tryToPlay(musicPlayer.grannyPlayer)
+                player.aniPlayer.stop()
+                player.aniPlayer.clear_queue()
+                player.aniPlayer.play("land")
+                player.aniPlayer.queue("stand")
+                player.aniPlayer.queue("happyStand")
+        epilepsyWarningCoverup.color = Color(0, 0, 0, epilepsy_cover_opacity)
+        return
+    elif mainMenuState == MainMenuState.TRY_DELETE_FILE:
+        confirmationLayer.visible = true
+        fadeBackgroundLayer.visible = true
+        if confirmationLayerText.bbcode_text == "":
+            confirmationLayerText.bbcode_text = tr("UI.MainMenu.5") % [str(global.mainMenuPromptIndex + 1), global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
         if (Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))) and not Input.is_action_pressed("menu_delete"):
             if global.doesSaveGameExist(global.mainMenuPromptIndex):
                 global.tryDeleteGame(global.mainMenuPromptIndex)
+                saved_games_cache[global.mainMenuPromptIndex] = {}
             mainMenuState = MainMenuState.MAIN_MENU
             deleteSound.play()
             updateMenuText = true
@@ -369,9 +429,10 @@ func _process(delta):
             noBroomSound.play()
         return
     elif mainMenuState == MainMenuState.TRY_GO_CREDITS:
-        deleteConfirmationLayer.visible = true
-        if deleteConfirmationLayerText.bbcode_text == "":
-            deleteConfirmationLayerText.bbcode_text = tr("UI.MainMenu.CreditsPrompt") + " " + tr("UI.MainMenu.CreditsConfirm") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
+        confirmationLayer.visible = true
+        fadeBackgroundLayer.visible = true
+        if confirmationLayerText.bbcode_text == "":
+            confirmationLayerText.bbcode_text = tr("UI.MainMenu.CreditsPrompt") + " " + tr("UI.MainMenu.CreditsConfirm") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
         if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
             global.has_really_started_game = true
             global.okay_really_really_started_game = true
@@ -379,15 +440,16 @@ func _process(delta):
             transition.long_fade_to("res://levels/EndlessFantasy/gd1/EndCredits.tscn")
             global.isRespawning = true
         elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
-            reliefSound.play()
+            # reliefSound.play()
             broomSound.play()
             yield(get_tree().create_timer(0.15), "timeout")
             mainMenuState = MainMenuState.MAIN_MENU
         elif Input.is_action_just_pressed("menu_delete"):
             noBroomSound.play()
         return
-    deleteConfirmationLayer.visible = false
-    deleteConfirmationLayerText.bbcode_text = ""
+    fadeBackgroundLayer.visible = false
+    confirmationLayer.visible = false
+    confirmationLayerText.bbcode_text = ""
 
     if mainMenuState == MainMenuState.NORMAL_GAMEPLAY:
         if global.has_started_game and not global.isRespawning:
@@ -429,12 +491,12 @@ func _process(delta):
         gameCamera.zoomed_size = camera_size
         gameCamera.size = camera_size
         mainMenuUi.visible = true
-        if mainMenuState == MainMenuState.MAIN_MENU_TRY_QUIT_GAME:
-            pressCText.bbcode_text = "[right]press " + global.getInputText("menu_cancel") + " to cancel, " + global.getInputText("menu_confirm") + " to start[/right]"
-        else:
-            var secondPartTemp = tr("UI.MainMenu.4") % global.getInputText("menu_delete")
-            var second_part = secondPartTemp if global.doesSaveGameExist(global.mainMenuPromptIndex) else ("[color=grey]" + secondPartTemp + "[/color]")
-            pressCText.bbcode_text = "[right]" + (tr("UI.MainMenu.3") % global.getInputText("menu_confirm")) + "    " + second_part + "[/right]"
+
+        var secondPartTemp = tr("UI.MainMenu.4") % global.getInputText("menu_delete")
+        var second_part = secondPartTemp if global.doesSaveGameExist(global.mainMenuPromptIndex) else ("[color=grey]" + secondPartTemp + "[/color]")
+        pressCText.bbcode_text = "[right]" + (tr("UI.MainMenu.3") % global.getInputText("menu_confirm")) + "    " + second_part + "[/right]"
+        # TODO(MAIN MENU IMPROVEMENTS): Delete above, comment out below.
+        # pressCText.bbcode_text = tr("UI.MainMenu.3") % global.getInputText("menu_confirm")
         optionsMenuPrompt.bbcode_text = (tr("UI.MainMenu.1") % global.getInputText("ui_start")) + "\n[right]" + (global.getInputText("menu_cancel")) + ": " + tr("UI.MainMenu.CreditsPrompt") + "[/right]"
         selectTextPrompt.bbcode_text = global.getInputText("menu_confirm")
 
@@ -480,17 +542,10 @@ func _process(delta):
             #         else:
             #             logoSprite.texture = logoTex2
         
-        var temp = getAndCacheSavedGames()[global.mainMenuPromptIndex]
-        player.changeOutfit(temp["currOutfit"] if temp.has("currOutfit") else global.GrandmaOutfit.BABUSHKA, false)
-        
-        if global.mainMenuPromptIndex == 0:
-            player.applyGlitch(global.GlitchForm.NORMAL, true)
-        if global.mainMenuPromptIndex == 1:
-            player.applyGlitch(global.GlitchForm.FEATHER, true)
-        if global.mainMenuPromptIndex == 2:
-            player.applyGlitch(global.GlitchForm.FLOOR, true)
-        if global.mainMenuPromptIndex == 3:
-            player.applyGlitch(global.GlitchForm.LADDER, true)
+        var selectedSaveGameMemory = getAndCacheSavedGames()[global.mainMenuPromptIndex]
+        player.changeOutfit(selectedSaveGameMemory["currOutfit"] if selectedSaveGameMemory.has("currOutfit") else global.GrandmaOutfit.BABUSHKA, false)
+        global.memory["currBroom"] = selectedSaveGameMemory["currBroom"] if selectedSaveGameMemory.has("currBroom") else global.GrandmaBroom.NORMAL
+        player.applyGlitch(selectedSaveGameMemory["current_glitch"] if selectedSaveGameMemory.has("current_glitch") else global.GlitchForm.NORMAL, true)
 
         selectPrompt.rect_position.y = 300.5 + (global.mainMenuPromptIndex*55)
         if updateMenuText:
@@ -507,12 +562,15 @@ func _process(delta):
 
         if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
             if global.doesSaveGameExist(global.mainMenuPromptIndex):
-                # if global.loadGame(global.mainMenuPromptIndex, {})["has_beat_the_game"]:
-                #     mainMenuState = MainMenuState.TRY_CONTINUE
-                #     mainMenuUi.visible = false
-                #     player.sayThis(tr("UI.NewGame.Plus"), 0.0, true)
-                # else:
                 bellSound.play()
+                # TODO
+                # fileActionLayer.visible = true
+                # fileActionSelectPrompt.rect_position.y = 225
+                # fileActionLayerText.bbcode_text = tr("UI.File.Continue")
+                # if selectedSaveGameMemory["has_beat_the_game"]:
+                #     fileActionLayerText.bbcode_text += "\n" + tr("UI.File.NewGamePlus")
+                # fileActionLayerText.bbcode_text += "\n" + tr("UI.File.Delete")
+                # mainMenuState = MainMenuState.MAIN_MENU_FILE_ACTION
                 loadGame(global.mainMenuPromptIndex)
             else:
                 startGame(global.mainMenuPromptIndex)
@@ -525,6 +583,8 @@ func _process(delta):
         elif Input.is_action_just_pressed("menu_cancel"):
             mainMenuState = MainMenuState.TRY_GO_CREDITS
             broomSound.play()
+    elif mainMenuState == MainMenuState.MAIN_MENU_FILE_ACTION:
+        pass # TODO
     elif mainMenuState == MainMenuState.TRY_CONTINUE:
         if Input.is_action_just_pressed("menu_delete") or Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
             mainMenuUi.visible = true
@@ -604,6 +664,7 @@ func processSkipPrompt(delta):
                     # babushkaCat.tryShowInteractPrompt(true, true)
                     if babushkaCat.get_ref().exclamationAniPlayer != null:
                         babushkaCat.get_ref().exclamationAniPlayer.play("exclaim")
+                    babushkaCat.get_ref().get_node("ExclaimSound").play()
                     babushkaCat.get_ref().mySprite.flip_h = true
                     babushkaCat.get_ref().mySprite.should_randomize_frame_delay = false
                     babushkaCat.get_ref().mySprite.frame_delay = 0.1
@@ -613,6 +674,13 @@ func processSkipPrompt(delta):
                     babushkaCat.get_ref().override_press_jump = false
                 # yield(get_tree().create_timer(1.0), "timeout")
                 # if babushkaCat.get_ref(): babushkaCat.get_ref().glitchOut()
+            secretGlitchyNPC.glitchOut()
+            yield(get_tree().create_timer(0.2), "timeout")
+            secretGlitchyNPC2.glitchOut()
+            yield(get_tree().create_timer(0.2), "timeout")
+            secretGlitchyNPC5.glitchOut()
+            yield(get_tree().create_timer(0.5), "timeout")
+            secretGlitchyNPC6.glitchOut()
         else:
             hideSkipPromptTimer += (delta*11)
             if hideSkipPromptTimer >= hideSkipPromptTimeLimit:

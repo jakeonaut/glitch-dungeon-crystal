@@ -28,15 +28,19 @@ func setUpRoomInitializationOverride():
     transition.colorRect.rect_position = Vector2(0, 0)
     transition.colorRect.rect_size = Vector2(1920, 1080)
 
+func adjustViewportShaderVisibility():
+    if epilepsyWarning.visible:
+        return
+    .adjustViewportShaderVisibility()
+
 var was_playing = false
 # @override
 func _process(delta):
     global.has_started_game = false
-    screenEffectsContainer.offset = Vector2(0, 0)
-    viewportTexture.rect_position = Vector2(0, 0)
 
     if mainMenuState == MainMenuState.SHOWING_EPILEPSY_WARNING or \
        mainMenuState == MainMenuState.HIDING_EPILEPSY_WARNING:
+        basicCrtEffectRect2.visible = false
         epilepsyWarning.visible = true
         if mainMenuState == MainMenuState.SHOWING_EPILEPSY_WARNING:
             if not has_finished_initial_initialization:
@@ -62,6 +66,7 @@ func _process(delta):
                 epilepsyWarning.visible = false
                 mainMenuState = MainMenuState.INTRO_VIDEO
                 videoPlayer.play()
+                musicPlayer.tryToPlay(musicPlayer.grannyPlayer)
         epilepsyWarningCoverup.color = Color(0, 0, 0, epilepsy_cover_opacity)
         return
     else:
@@ -112,3 +117,19 @@ func _process(delta):
 
 func saveTheGame(_message = "saving!!"):
     pass
+
+func tryToAddGameFrameBackground():
+    pass
+
+func adjustAndCenterViewportsFrameAndOverlayRects():
+    # viewportTexture
+  viewportTexture.grow_horizontal = 2
+  viewportTexture.grow_vertical = 2
+  viewportTexture.anchor_left = 0.5
+  viewportTexture.anchor_top = 0.5
+  viewportTexture.anchor_bottom = 0.5
+  viewportTexture.anchor_right = 0.5
+  viewportTexture.margin_left = 0
+  viewportTexture.margin_top = 0
+  viewportTexture.margin_right = 0
+  viewportTexture.margin_bottom = 0

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sweepAttack3.png-b4a09c5ee91d251edcada5f0eaea5fab.stex"
+path="res://.import/player_sheet_waste.png-0afc8ab5b436061274b63286ba8920bb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://steamassets/newAnimation/maybe/sweepAttack3.png"
-dest_files=[ "res://.import/sweepAttack3.png-b4a09c5ee91d251edcada5f0eaea5fab.stex" ]
+source_file="res://assets/outfits/player_sheet_waste.png"
+dest_files=[ "res://.import/player_sheet_waste.png-0afc8ab5b436061274b63286ba8920bb.stex" ]
 
 [params]
 

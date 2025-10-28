@@ -123,7 +123,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Babushka's Glitch Dungeon"
-run/main_scene="res://levels/EndlessFantasy/gd1/IntroVideo.tscn"
+run/main_scene="res://levels/EndlessFantasy/gd1/MainMenu.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="GlitchDungeonCrystal"
 run/low_processor_mode=true

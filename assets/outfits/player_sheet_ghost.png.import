@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/animatedintro_glitch_dungeon_png0764.png-4a95d39b3f9e7ba75155c76d58dcfd17.stex"
+path="res://.import/player_sheet_ghost.png-562569c1caa878e0fc7addff160bc805.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://steamassets/newAnimation/animatedintro_glitch_dungeon_png0764.png"
-dest_files=[ "res://.import/animatedintro_glitch_dungeon_png0764.png-4a95d39b3f9e7ba75155c76d58dcfd17.stex" ]
+source_file="res://assets/outfits/player_sheet_ghost.png"
+dest_files=[ "res://.import/player_sheet_ghost.png-562569c1caa878e0fc7addff160bc805.stex" ]
 
 [params]
 

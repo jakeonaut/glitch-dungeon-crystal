@@ -13,6 +13,8 @@ func _ready():
   mySprite.material_override = mySprite.material_override.duplicate()
 
 func _process(delta):
+  if is_extinguished:
+    return
   if glow_dir == GlowDir.SHRINKING:
     meshInstance.scale.x -= 0.35 * delta
     meshInstance.scale.y = meshInstance.scale.x
@@ -34,6 +36,7 @@ func isActive():
   return visible and not is_extinguished
 
 func getSmacked(_broom_origin):
+  print("smack torch")
   if is_extinguished:
     return
   is_extinguished =  true
@@ -41,3 +44,4 @@ func getSmacked(_broom_origin):
   extinguishSound.pitch_scale = rand_range(0.9, 1.1)
   extinguishSound.play()
   mySprite.material_override.set_shader_param("texture_albedo", extinguishedTorchSheet)
+  meshInstance.visible = false

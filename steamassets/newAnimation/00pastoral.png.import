@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sweepAttackMiyazaki.png-4bc9e273b1b6c8e5125df473738b4817.stex"
+path="res://.import/00pastoral.png-b1a0ea59651b464e05ddbb49f3ba0b0e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://steamassets/newAnimation/maybe/sweepAttackMiyazaki.png"
-dest_files=[ "res://.import/sweepAttackMiyazaki.png-4bc9e273b1b6c8e5125df473738b4817.stex" ]
+source_file="res://steamassets/newAnimation/00pastoral.png"
+dest_files=[ "res://.import/00pastoral.png-b1a0ea59651b464e05ddbb49f3ba0b0e.stex" ]
 
 [params]
 
@@ -23,7 +23,7 @@ flags/repeat=true
 flags/filter=false
 flags/mipmaps=true
 flags/anisotropic=false
-flags/srgb=1
+flags/srgb=0
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false

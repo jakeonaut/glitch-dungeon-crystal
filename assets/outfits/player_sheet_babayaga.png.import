@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sweepAttack5.png-263b49f199ae6f7e6cbbaf72d0214940.stex"
+path="res://.import/player_sheet_babayaga.png-de5a2667155c946cde4634a57f5e2d27.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://steamassets/newAnimation/maybe/sweepAttack5.png"
-dest_files=[ "res://.import/sweepAttack5.png-263b49f199ae6f7e6cbbaf72d0214940.stex" ]
+source_file="res://assets/outfits/player_sheet_babayaga.png"
+dest_files=[ "res://.import/player_sheet_babayaga.png-de5a2667155c946cde4634a57f5e2d27.stex" ]
 
 [params]
 
