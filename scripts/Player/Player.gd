@@ -483,7 +483,7 @@ func _process(delta):
       spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x - 0.25
     else:
       spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x + 0.25
-  spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.userSettings["colorblindMode"] and transformation == TransformationState.NORMAL and getOutfitIsSpellGlitchSpriteVisible(global.memory["currOutfit"])
+  spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.userSettings["colorblindMode"] and transformation == TransformationState.NORMAL# and getOutfitIsSpellGlitchSpriteVisible(global.memory["currOutfit"])
 
   processSleepyLogic(delta)
   if global.isPauseMenuOpen:

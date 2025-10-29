@@ -368,7 +368,12 @@ var babushkaScarfTex = preload("res://assets/outfits/player_sheet_babushkaScarf.
 var noHatTex = preload("res://assets/player_sheet_old_naked.png")
 var witchHatTex = preload("res://assets/outfits/player_sheet_witch_face.png")
 var elderMaskTex = preload("res://assets/outfits/player_sheet_elder_face.png")
-var glitchFaceTex = preload("res://assets/outfits/player_sheet_glitchface.png")
+var grubFaceTex = preload("res://assets/outfits/player_sheet_glitchface.png")
+var glitchFaceTex = preload("res://assets/outfits/player_sheet_glitchface2.png")
+var fishermanTex = preload("res://assets/outfits/player_sheet_fisherman.png")
+var skeletonTex = preload("res://assets/outfits/player_sheet_skeleton.png")
+var frogCroneTex = preload("res://assets/outfits/player_sheet_frogcrone.png")
+var catEarsTex = preload("res://assets/outfits/player_sheet_kitty.png")
 func getOutfitTexture(outfit):
   match outfit:
     global.GrandmaOutfit.NO_HAT:
@@ -377,8 +382,18 @@ func getOutfitTexture(outfit):
       return witchHatTex
     global.GrandmaOutfit.CRYSTAL_ELDER_MASK:
       return elderMaskTex
+    global.GrandmaOutfit.GRUB_FACE:
+      return grubFaceTex
     global.GrandmaOutfit.GLITCH_FACE:
       return glitchFaceTex
+    global.GrandmaOutfit.FISHERMAN:
+      return fishermanTex
+    global.GrandmaOutfit.SKELETON:
+      return skeletonTex
+    global.GrandmaOutfit.FROG_CRONE:
+      return frogCroneTex
+    global.GrandmaOutfit.CAT_EARS:
+      return catEarsTex
     _:
       return babushkaScarfTex
 
@@ -386,22 +401,38 @@ func getOutfitOffset(outfit):
   match outfit:
     global.GrandmaOutfit.WITCH_HAT:
       return Vector2(0, 5)
+    global.GrandmaOutfit.FISHERMAN:
+      return Vector2(0, 2)
+    global.GrandmaOutfit.FROG_CRONE:
+      return Vector2(0, 2)
     _:
       return Vector2(0, 0)
 
-func getOutfitIsSpellGlitchSpriteVisible(outfit):
+func getOutfitIsSpellGlitchSpriteOffset(outfit):
   match outfit:
     global.GrandmaOutfit.WITCH_HAT:
-      return false
+      return Vector2(0, 5)
+    global.GrandmaOutfit.FISHERMAN:
+      return Vector2(0, 4)
+    global.GrandmaOutfit.FROG_CRONE:
+      return Vector2(0, 6)
     _:
-      return true
+      return Vector2(0, 0)
+
+# func getOutfitIsSpellGlitchSpriteVisible(outfit):
+#   match outfit:
+#     global.GrandmaOutfit.WITCH_HAT:
+#       return false
+#     _:
+#       return true
 
 func changeOutfit(outfit, should_play_sound = true):
   global.memory["currOutfit"] = outfit
   grandmaHatSprite.texture = getOutfitTexture(outfit)
   grandmaHatSprite.material_override.set_shader_param("texture_albedo", getOutfitTexture(outfit))
   grandmaHatSprite.offset = getOutfitOffset(outfit)
-  spellbookGlitchSprite.visible = getOutfitIsSpellGlitchSpriteVisible(outfit)
+  # spellbookGlitchSprite.visible = getOutfitIsSpellGlitchSpriteVisible(outfit)
+  spellbookGlitchSprite.offset = getOutfitIsSpellGlitchSpriteOffset(outfit)
   if should_play_sound:
     playChangeOutfitSound()
 

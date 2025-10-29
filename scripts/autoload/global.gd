@@ -152,24 +152,28 @@ enum PetFollower {
 }
 
 enum GrandmaOutfit {
-    BABUSHKA,
-    NO_HAT,
-    WITCH_HAT,
-    SCARF_EARMUFFS,
-    YUBABA,
-    WASTE_WITCH,
-    SOPHIE,
-    GODDESS_MASK,
-    CRONE_MASK,
-    SEADEVIL_MASK,
-    DOGU_MASK,
-    BABA_YAGA_MASK,
-    CRYSTAL_ELDER_MASK,
-    BABUSHKA_CAT_MASK,
-    MUSHROOM_HAT,
-    COZY_WINTER_SCARF,
-    TURNIP_MERCHANT,
-    GLITCH_FACE,
+    BABUSHKA,           # 0
+    NO_HAT,             # 1
+    WITCH_HAT,          # 2
+    SCARF_EARMUFFS,     # 3
+    YUBABA,             # 4
+    WASTE_WITCH,        # 5
+    SOPHIE,             # 6
+    GODDESS_MASK,       # 7
+    CRONE_MASK,         # 8
+    SEADEVIL_MASK,      # 9
+    DOGU_MASK,          # 10
+    BABA_YAGA_MASK,     # 11
+    CRYSTAL_ELDER_MASK, # 12
+    CAT_EARS,           # 13
+    MUSHROOM_HAT,       # 14
+    COZY_WINTER_SCARF,  # 15
+    TURNIP_MERCHANT,    # 16
+    GRUB_FACE,          # 17
+    GLITCH_FACE,        # 18
+    FISHERMAN,          # 19
+    SKELETON,           # 20
+    FROG_CRONE,         # 21
 }
 
 enum GrandmaBroom {

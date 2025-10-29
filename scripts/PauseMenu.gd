@@ -914,9 +914,24 @@ func updateOutfitPopupText():
     global.GrandmaOutfit.CRYSTAL_ELDER_MASK:
       popupText.bbcode_text = tr("UI.Outfit.2")
       outfitSprite.frame = 4
-    global.GrandmaOutfit.GLITCH_FACE:
+    global.GrandmaOutfit.GRUB_FACE:
       popupText.bbcode_text = tr("UI.Outfit.3")
-      outfitSprite.frame = 4
+      outfitSprite.frame = 18
+    global.GrandmaOutfit.GLITCH_FACE:
+      popupText.bbcode_text = tr("UI.Outfit.4")
+      outfitSprite.frame = 20
+    global.GrandmaOutfit.FISHERMAN:
+      popupText.bbcode_text = tr("UI.Outfit.5")
+      outfitSprite.frame = 17
+    global.GrandmaOutfit.SKELETON:
+      popupText.bbcode_text = tr("UI.Outfit.6")
+      outfitSprite.frame = 21
+    global.GrandmaOutfit.FROG_CRONE:
+      popupText.bbcode_text = tr("UI.Outfit.7")
+      outfitSprite.frame = 24
+    global.GrandmaOutfit.CAT_EARS:
+      popupText.bbcode_text = tr("UI.Outfit.8")
+      outfitSprite.frame = 23
   popupOutfitRect.visible = true
   if global.userSettings.has("allMyOutfits") and global.userSettings["allMyOutfits"].size() > 1:
     popupText.bbcode_text += "\n" + global.getInputText("menu_left") + " " + global.getInputText("menu_right")
