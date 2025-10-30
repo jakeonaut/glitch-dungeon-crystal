@@ -267,6 +267,9 @@ UI.Outfit.5,"fish hat",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
 UI.Outfit.6,"skull",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
 UI.Outfit.7,"crone hat",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
 UI.Outfit.8,"cat ears",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
+UI.Outfit.9,"toadstool",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
+UI.Outfit.10,"big head",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
+UI.Outfit.11,"cool hat",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
 NPC.TutorialSecret.1,"i'm just hanging\nwith my pals",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
 NPC.Angel.1,"this place is frozen in time",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
 NPC.Angel.2,"no more corruption\nno more life",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
@@ -274,6 +277,7 @@ NPC.Angel.3,"those crystal elders think\nthey're SO special. well\nwe're *all* H
 NPC.Angel.5,"I like it here!\ni'm with my friends",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
 NPC.Angel.6,"you became like us\nwe want to become like you!",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
 UI.Broom.1,"good for frying eggs!\nactually, don't do that..",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
+UI.Broom.2,"very powerful magic\nalthough a bit slimy",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
 NPC.StatueWhisper.1,"*whisper* this is my home",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
 NPC.StatueWhisper.2,"*whisper* i have nowhere\nelse to go",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR
 NPC.Chimera.1,"the closer we get to\nthe source of life..\nthe more perfect we become",zh_CN,ru,pt_BR,fr,ja,es,it,pl_PL,de_DE,ko_KR,uk_UA,tr_TR

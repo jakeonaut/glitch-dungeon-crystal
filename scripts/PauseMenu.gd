@@ -901,37 +901,34 @@ func processInventoryLogic(_delta):
 onready var popupOutfitRect = get_node("PopupOutfitRect")
 func updateOutfitPopupText():
   var outfitSprite = popupOutfitRect.get_node("ColorRect/ColorRect/OutfitSprite")
+  popupText.bbcode_text = global.getOutfitDialogText(global.memory["currOutfit"])
   match global.memory["currOutfit"]:
     global.GrandmaOutfit.BABUSHKA:
-      popupText.bbcode_text = tr("UI.Inventory.6")
       outfitSprite.frame = 0
     global.GrandmaOutfit.NO_HAT:
-      popupText.bbcode_text = tr("UI.Outfit.0")
       outfitSprite.frame = 1
     global.GrandmaOutfit.WITCH_HAT:
-      popupText.bbcode_text = tr("UI.Outfit.1")
       outfitSprite.frame = 2
     global.GrandmaOutfit.CRYSTAL_ELDER_MASK:
-      popupText.bbcode_text = tr("UI.Outfit.2")
       outfitSprite.frame = 4
     global.GrandmaOutfit.GRUB_FACE:
-      popupText.bbcode_text = tr("UI.Outfit.3")
       outfitSprite.frame = 18
     global.GrandmaOutfit.GLITCH_FACE:
-      popupText.bbcode_text = tr("UI.Outfit.4")
       outfitSprite.frame = 20
     global.GrandmaOutfit.FISHERMAN:
-      popupText.bbcode_text = tr("UI.Outfit.5")
       outfitSprite.frame = 17
     global.GrandmaOutfit.SKELETON:
-      popupText.bbcode_text = tr("UI.Outfit.6")
       outfitSprite.frame = 21
     global.GrandmaOutfit.FROG_CRONE:
-      popupText.bbcode_text = tr("UI.Outfit.7")
       outfitSprite.frame = 24
     global.GrandmaOutfit.CAT_EARS:
-      popupText.bbcode_text = tr("UI.Outfit.8")
       outfitSprite.frame = 23
+    global.GrandmaOutfit.MUSHROOM_HAT:
+      outfitSprite.frame = 10
+    global.GrandmaOutfit.YUBABA:
+      outfitSprite.frame = 13
+    global.GrandmaOutfit.WASTE_WITCH:
+      outfitSprite.frame = 14
   popupOutfitRect.visible = true
   if global.userSettings.has("allMyOutfits") and global.userSettings["allMyOutfits"].size() > 1:
     popupText.bbcode_text += "\n" + global.getInputText("menu_left") + " " + global.getInputText("menu_right")
@@ -966,6 +963,9 @@ func updateBroomPopupText():
     global.GrandmaBroom.FRYING_PAN:
       popupText.bbcode_text = tr("UI.Broom.1")
       outfitSprite.frame = 33
+    global.GrandmaBroom.CRONE_STAFF:
+      popupText.bbcode_text = tr("UI.Broom.2")
+      outfitSprite.frame = 34
   popupOutfitRect.visible = true
   # if global.memory["broomerang"] > 0:
   #   shouldShowPopupYesNoOptions = true

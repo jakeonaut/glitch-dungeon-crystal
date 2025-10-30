@@ -374,6 +374,9 @@ var fishermanTex = preload("res://assets/outfits/player_sheet_fisherman.png")
 var skeletonTex = preload("res://assets/outfits/player_sheet_skeleton.png")
 var frogCroneTex = preload("res://assets/outfits/player_sheet_frogcrone.png")
 var catEarsTex = preload("res://assets/outfits/player_sheet_kitty.png")
+var mushroomHatTex = preload("res://assets/outfits/player_sheet_mushroomhead.png")
+var yubabaTex = preload("res://assets/outfits/player_sheet_yababa.png")
+var wasteWitchTex = preload("res://assets/outfits/player_sheet_waste.png")
 func getOutfitTexture(outfit):
   match outfit:
     global.GrandmaOutfit.NO_HAT:
@@ -394,6 +397,12 @@ func getOutfitTexture(outfit):
       return frogCroneTex
     global.GrandmaOutfit.CAT_EARS:
       return catEarsTex
+    global.GrandmaOutfit.MUSHROOM_HAT:
+      return mushroomHatTex
+    global.GrandmaOutfit.YUBABA:
+      return yubabaTex
+    global.GrandmaOutfit.WASTE_WITCH:
+      return wasteWitchTex
     _:
       return babushkaScarfTex
 
@@ -403,7 +412,13 @@ func getOutfitOffset(outfit):
       return Vector2(0, 5)
     global.GrandmaOutfit.FISHERMAN:
       return Vector2(0, 2)
+    global.GrandmaOutfit.MUSHROOM_HAT:
+      return Vector2(0, 2)
     global.GrandmaOutfit.FROG_CRONE:
+      return Vector2(0, 2)
+    global.GrandmaOutfit.YUBABA:
+      return Vector2(0, 2)
+    global.GrandmaOutfit.WASTE_WITCH:
       return Vector2(0, 2)
     _:
       return Vector2(0, 0)
@@ -414,8 +429,14 @@ func getOutfitIsSpellGlitchSpriteOffset(outfit):
       return Vector2(0, 5)
     global.GrandmaOutfit.FISHERMAN:
       return Vector2(0, 4)
+    global.GrandmaOutfit.MUSHROOM_HAT:
+      return Vector2(0, 4)
     global.GrandmaOutfit.FROG_CRONE:
       return Vector2(0, 6)
+    global.GrandmaOutfit.YUBABA:
+      return Vector2(0, 4)
+    global.GrandmaOutfit.WASTE_WITCH:
+      return Vector2(0, 4)
     _:
       return Vector2(0, 0)
 

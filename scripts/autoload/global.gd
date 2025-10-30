@@ -76,6 +76,7 @@ onready var doorSound = get_node("DoorSound")
 onready var glitchedDoorSound = get_node("GlitchedDoorSound")
 onready var gustSound = get_node("GustSound")
 onready var panSmackSound = get_node("PanSmackSound")
+onready var croneStaffSmackSound = get_node("CroneStaffSmackSound")
 var DELETE_ME = 2
 
 var fallbackPath = "res://levels/EndlessFantasy/gd1TutorialDungeon/0_1Haven.tscn"
@@ -176,13 +177,43 @@ enum GrandmaOutfit {
     FROG_CRONE,         # 21
 }
 
+func getOutfitDialogText(outfit):
+    match outfit:
+        global.GrandmaOutfit.BABUSHKA:
+            return tr("UI.Inventory.6")
+        global.GrandmaOutfit.NO_HAT:
+            return tr("UI.Outfit.0")
+        global.GrandmaOutfit.WITCH_HAT:
+            return tr("UI.Outfit.1")
+        global.GrandmaOutfit.CRYSTAL_ELDER_MASK:
+            return tr("UI.Outfit.2")
+        global.GrandmaOutfit.GRUB_FACE:
+            return tr("UI.Outfit.3")
+        global.GrandmaOutfit.GLITCH_FACE:
+            return tr("UI.Outfit.4")
+        global.GrandmaOutfit.FISHERMAN:
+            return tr("UI.Outfit.5")
+        global.GrandmaOutfit.SKELETON:
+            return tr("UI.Outfit.6")
+        global.GrandmaOutfit.FROG_CRONE:
+            return tr("UI.Outfit.7")
+        global.GrandmaOutfit.CAT_EARS:
+            return tr("UI.Outfit.8")
+        global.GrandmaOutfit.MUSHROOM_HAT:
+            return tr("UI.Outfit.9")
+        global.GrandmaOutfit.YUBABA:
+            return tr("UI.Outfit.10")
+        global.GrandmaOutfit.WASTE_WITCH:
+            return tr("UI.Outfit.11")
+
 enum GrandmaBroom {
-    NORMAL,
-    ELDER_CANE,
-    CRONE_STAFF,
-    BABA_YAGA_CHICKEN_STAFF,
-    BUG_NET,
-    FRYING_PAN,
+    NORMAL,                     # 0
+    ELDER_CANE,                 # 1
+    CRONE_STAFF,                # 2
+    BABA_YAGA_CHICKEN_STAFF,    # 3
+    BUG_NET,                    # 4
+    FRYING_PAN,                 # 5
+    PUMPKIN_BAG,                # 6
 }
 
 enum GrandmaBag {
@@ -507,6 +538,9 @@ var broomSheet = preload("res://assets/player_sheet_broom.png")
 var broomSheetAni = preload("res://assets/sprites/broom_ani.png")
 var fryingPanSheet = preload("res://assets/player_sheet_frying_pan.png")
 var fryingPanSheetAni = preload("res://assets/sprites/frying_pan_ani.png")
+var croneStaffSheet = preload("res://assets/outfits/player_sheet_staff.png")
+var croneStaffSheetAni = preload("res://assets/outfits/staff_ani.png")
+var pumpkinBagSheet = preload("res://assets/outfits/player_sheet_pumpkin.png")
 func updateBroomSpriteTexture(sprite, useAniSheet):
   if global.memory["currBroom"] == global.GrandmaBroom.NORMAL:
     if useAniSheet:
@@ -518,6 +552,16 @@ func updateBroomSpriteTexture(sprite, useAniSheet):
         sprite.material_override.set_shader_param("texture_albedo", fryingPanSheetAni)
     else:
         sprite.material_override.set_shader_param("texture_albedo", fryingPanSheet)
+  if global.memory["currBroom"] == global.GrandmaBroom.CRONE_STAFF:
+    if useAniSheet:
+        sprite.material_override.set_shader_param("texture_albedo", croneStaffSheetAni)
+    else:
+        sprite.material_override.set_shader_param("texture_albedo", croneStaffSheet)
+  if global.memory["currBroom"] == global.GrandmaBroom.PUMPKIN_BAG:
+    if useAniSheet:
+        sprite.material_override.set_shader_param("texture_albedo", broomSheetAni)
+    else:
+        sprite.material_override.set_shader_param("texture_albedo", pumpkinBagSheet)
 
 func isDlcEnabled():
     return dlc_mode > 0 and allLocales[userSettings["locale"]]["dlc_enabled"]
@@ -1779,6 +1823,8 @@ func saveMySpot(savePoint, position, level):
 func broomSmackSound():
     if global.memory["currBroom"] == global.GrandmaBroom.FRYING_PAN:
         global.panSmackSound.play()
+    if global.memory["currBroom"] == global.GrandmaBroom.CRONE_STAFF:
+        global.croneStaffSmackSound.play()
 
 func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, smacked_npc):
   var have_i_smacked_an_npc = false
