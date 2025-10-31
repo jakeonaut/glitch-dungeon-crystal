@@ -826,6 +826,8 @@ var user_settings_files = [
 ]
 var save_game_index = 0
 func saveGame(level, overwrite_save_game_index = -1):
+    if not global.has_really_started_game:
+        return
     if "EndCredits" in level.getShortLevelName() or "IntroVideo" in level.getShortLevelName() or "PrimordialOoze" in level.getShortLevelName():
         return
 
