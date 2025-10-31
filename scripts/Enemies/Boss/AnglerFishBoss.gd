@@ -199,7 +199,7 @@ func _process(delta):
                 secretAniPlayer.play("stunFall")
                 tryToStartWeakPointDetachment()
                 getSmacked()
-            elif global_transform.origin.x < 15:
+            elif global_transform.origin.x < 5:
                 how_many_final_charges += 1
                 boss_phase = BossPhase.CHARGING_BACKWARDS    
                 self.global_transform.origin.y = level.player.global_transform.origin.y
@@ -233,7 +233,7 @@ func _process(delta):
                 secretAniPlayer.play("stunFall")
                 tryToStartWeakPointDetachment()
                 getSmacked()
-            elif global_transform.origin.x >= 80:
+            elif global_transform.origin.x >= 90:
                 how_many_final_charges += 1
                 boss_phase = BossPhase.CHARGING
                 self.global_transform.origin.y = level.player.global_transform.origin.y

@@ -175,6 +175,8 @@ enum GrandmaOutfit {
     FISHERMAN,          # 19
     SKELETON,           # 20
     FROG_CRONE,         # 21
+    CHICKEN_MASK,       # 22
+    BUG_WINGS,        # 23
 }
 
 func getOutfitDialogText(outfit):
@@ -205,6 +207,10 @@ func getOutfitDialogText(outfit):
             return tr("UI.Outfit.10")
         global.GrandmaOutfit.WASTE_WITCH:
             return tr("UI.Outfit.11")
+        global.GrandmaOutfit.CHICKEN_MASK:
+            return tr("UI.Outfit.12")
+        global.GrandmaOutfit.BUG_WINGS:
+            return tr("UI.Outfit.13")
 
 enum GrandmaBroom {
     NORMAL,                     # 0

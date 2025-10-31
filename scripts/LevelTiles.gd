@@ -55,17 +55,9 @@ func setRandomTileNameOfType(newName, num_rand, cell_index, tile_orientation, of
     if randi() % 3 <= 1:
       rand_int = randi() % num_rand
 
-  if "TransientTile" in newName or cell_index.z != 0:
+  if "TransientTile" in newName:
     newName = "SolidTransientTile"
     rand_int = 0
-  if -1 == cell_index.z:
-    glitch_type = global.GlitchForm.FLOOR
-  elif -2 == cell_index.z:
-    glitch_type = global.GlitchForm.FEATHER
-  elif -3 == cell_index.z:
-    glitch_type = global.GlitchForm.INVISIBLE
-  elif -4 == cell_index.z:
-    glitch_type = global.GlitchForm.LADDER
   setTileNameNum(newName, rand_int + offset, cell_index, tile_orientation, glitch_type, debug)
 
 func setTileNameNum(newName, num, cell_index, tile_orientation, glitch_type = global.GlitchForm.NORMAL, debug = false):
@@ -987,7 +979,9 @@ func moveAllGlitchedTilesToTheDefaultZIndices(except_for = global.GlitchForm.NOR
   if not except_for == global.GlitchForm.LADDER:
     ladderGlitch_tiles = moveGlitchedTilesToZIndex(ladderGlitch_tiles, -4, "IntangibleTransientTile_yellow")
 
+var is_fake_tiles = false
 func moveGlitchedTilesToZIndex(tilesToMove_dict, z_index, tile_name):
+  if is_fake_tiles: return
   var newTilesToMove_dict = {}
   var keys = tilesToMove_dict.keys()
   for i in range(len(keys)):

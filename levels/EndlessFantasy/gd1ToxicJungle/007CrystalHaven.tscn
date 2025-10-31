@@ -1352,150 +1352,6 @@ bbText = "NPC.SporeCreature.9"
 [node name="CollisionShape" parent="Viewport/level/MushroomNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 69 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/ScrollContainer/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/ScrollContainer/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/ScrollContainer/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/ScrollContainer/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/ScrollContainer/Text" index="4"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/ScrollContainer/Text" index="5"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/YesButton/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/YesButton/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/YesButton/TextPrompt" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/YesButton/TextPrompt" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/YesButton/TextPrompt" index="4"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/YesButton/TextPrompt" index="5"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/NoButton/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/NoButton/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/NoButton/TextPrompt" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/NoButton/TextPrompt" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/NoButton/TextPrompt" index="4"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/NoButton/TextPrompt" index="5"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/TextPrompt" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/TextPrompt" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar6" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/TextPrompt" index="4"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar7" type="VScrollBar" parent="Viewport/level/MushroomNPC/NPC TextBox/TextBox/Container/TextPrompt" index="5"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
 [node name="Sprite3D" parent="Viewport/level/MushroomNPC" index="3"]
 frame = 72
 
@@ -1555,6 +1411,10 @@ texture = ExtResource( 35 )
 [node name="HeartMimic" parent="Viewport/level" instance=ExtResource( 37 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.0677, 6.62774, 0 )
 visible = false
+
+[node name="Door2" parent="Viewport/level" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 18, 0 )
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/MushroomOutfitRoom.tscn"
 
 [node name="Viewport2" parent="." instance=ExtResource( 13 )]
 

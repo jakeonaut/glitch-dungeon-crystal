@@ -12,7 +12,7 @@
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=10]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=11]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=12]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/Outfits/WitchHatTreasure.tscn" type="PackedScene" id=13]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/Outfits/ElderMaskTreasure.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/sprites/highpriestessgoddess.png" type="Texture" id=14]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=15]
 [ext_resource path="res://shaders/CrtShader.gdshader" type="Shader" id=16]
@@ -2355,8 +2355,8 @@ texture = ExtResource( 61 )
 hframes = 8
 script = ExtResource( 49 )
 
-[node name="WitchHatTreasure" parent="Viewport/level" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -45, -5, 0 )
+[node name="ElderMaskTreasure" parent="Viewport/level" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -38, -5, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 9 )]
 

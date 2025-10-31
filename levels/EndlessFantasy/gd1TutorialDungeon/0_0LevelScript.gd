@@ -8,6 +8,8 @@ var should_i_show_prompt = false
 onready var innerPeaceSound = get_node("InnerPeaceSound")
 onready var innerPeaceReverseSound = get_node("InnerPeaceReverseSound")
 onready var towerSprite1 = get_node("TowerSprite1")
+var croneHatTreasureRes = preload("res://sceneObjects/SpellsTreasureCollectables/Outfits/CroneHatTreasure.tscn")
+
 
 # @override
 func setUpRoomInitializationOverride():
@@ -23,6 +25,9 @@ func setUpRoomInitializationOverride():
   if global.memory["clean_crystals"] >= 1:
     get_node("GlitchTileSpawner").queue_free()
     get_node("InverseGlitchTileSpawner").queue_free()
+    var outfitTreasure = croneHatTreasureRes.instance()
+    self.add_child(outfitTreasure)
+    outfitTreasure.global_transform.origin = Vector3(24, 7, 0)
   if global.memory["clean_crystals"] >= 4:
     towerSprite1.visible = true
   has_decided = true

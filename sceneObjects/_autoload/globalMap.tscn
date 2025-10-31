@@ -531,6 +531,18 @@ can_nav_up = false
 can_nav_down = false
 has_angel_egg = 1
 
+[node name="MushroomOutfitRoom" parent="ToxicJungle" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.667, -6, -5, 0 )
+material_override = null
+frame = 72
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/MushroomOutfitRoom.tscn"
+can_nav_left = false
+can_nav_right = false
+can_nav_up = false
+can_nav_down = false
+hide_me_from_map = true
+has_angel_egg = 1
+
 [node name="BabaYagaBossRoom" parent="ToxicJungle" instance=ExtResource( 3 )]
 transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -6, -6, -1 )
 material_override = null
@@ -820,20 +832,6 @@ hframes = 13
 vframes = 7
 frame = 56
 path = "res://levels/EndlessFantasy/gd1PrimordialOoze/FishingScene2.tscn"
-can_nav_left = false
-can_nav_right = false
-can_nav_up = false
-hide_me_from_map = true
-kill_after_glitch = true
-
-[node name="MarshChallenge_old" parent="PrimordialOoze" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 1 )
-material_override = null
-texture = ExtResource( 2 )
-hframes = 13
-vframes = 7
-frame = 56
-path = "res://levels/EndlessFantasy/gd1PrimordialOoze/Marsh_Challenge_old.tscn"
 can_nav_left = false
 can_nav_right = false
 can_nav_up = false

@@ -1,6 +1,7 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=1]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/Outfits/GrubFaceTreasure.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=3]
 [ext_resource path="res://sceneObjects/Environment/Fishy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=5]
@@ -109,7 +110,6 @@ tileset_type = 10
 has_spellbook_page = true
 spellbook_spells = [ 2, 1 ]
 display_title = "village of elders"
-pacman_wrapping = true
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 20 )]
 
@@ -422,6 +422,9 @@ max_frames = 4
 
 [node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 33, 0 )
+
+[node name="GrubFaceTreasure" parent="Viewport/level" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 24, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 18 )]
 

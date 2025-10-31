@@ -10,7 +10,9 @@ export(String,
   "FISHERMAN",
   "SKELETON",
   "FROG_CRONE",
-  "MUSHROOM_HAT"
+  "MUSHROOM_HAT",
+  "CHICKEN_MASK",
+  "BUG_WINGS"
 ) var outfit_to_unlock
 var outfitToUnlock = null
 
@@ -32,6 +34,10 @@ func setOutfitToUnlock():
       outfitToUnlock = global.GrandmaOutfit.FROG_CRONE
     "MUSHROOM_HAT":
       outfitToUnlock = global.GrandmaOutfit.MUSHROOM_HAT
+    "CHICKEN_MASK":
+      outfitToUnlock = global.GrandmaOutfit.CHICKEN_MASK
+    "BUG_WINGS":
+      outfitToUnlock = global.GrandmaOutfit.BUG_WINGS
     
 
 func _ready():
