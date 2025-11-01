@@ -3345,7 +3345,6 @@ text = "1: File 1
 scroll_active = false
 
 [node name="PressC" type="RichTextLabel" parent="Viewport2/UILayer/MainMenu"]
-margin_left = 32.0
 margin_top = 515.0
 margin_right = 576.0
 margin_bottom = 616.0
