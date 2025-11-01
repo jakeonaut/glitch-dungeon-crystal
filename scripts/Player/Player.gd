@@ -891,9 +891,9 @@ func tryDieToOffscreenCamera(_delta):
       global.memory.erase("prevYDiff")
 
     next_room = transition.mapManager.getRelativeRoomPath(curr_coords, global.roomEdgeVector) if curr_coords != null else null
-    if next_room != null and passive_door and self.smallInteractionArea.touched_passive_door != null:
+    if passive_door and self.smallInteractionArea.touched_passive_door != null:
       next_room = self.smallInteractionArea.touched_passive_door.path
-    if level.pacman_wrapping or (
+    elif level.pacman_wrapping or (
       level.horizontal_pacman_wrapping and global.roomEdgeVector.y == 0 and global.roomEdgeVector.x != 0
     ):
       next_room = null 
@@ -2614,19 +2614,22 @@ func processBroomRenderLogic(_delta):
     broomSpriteVisible.visible = false
     if nesting_doll_state == global.NestingDoll.GRANDMA:
       mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
-      mySprite.material_override.set_shader_param("black_offset", 0)
+      for sprite in [self.mySprite, self.grandmaHatSprite, self.grandmaHandSprite]:
+        sprite.material_override.set_shader_param("black_offset", 0)
   elif summonedBroom != null:
     adjustSummonedBroomSpritePosition()
   elif global.memory["broom"] and not isHoldingMultiBroom() and not (transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE):
     broomSpriteVisible.visible = true
     if nesting_doll_state == global.NestingDoll.GRANDMA:
       mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
-      mySprite.material_override.set_shader_param("black_offset", 0 if (level.getLevelName().find("MainMenu") > 0 and global.has_started_game) else 1)
+      for sprite in [self.mySprite, self.grandmaHatSprite, self.grandmaHandSprite]:
+        sprite.material_override.set_shader_param("black_offset", 0 if (level.getLevelName().find("MainMenu") > 0 and global.has_started_game) else 1)
   else:
     broomSpriteVisible.visible = false
     if nesting_doll_state == global.NestingDoll.GRANDMA and not isHoldingMultiBroom():
       mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
-      mySprite.material_override.set_shader_param("black_offset", 0)
+      for sprite in [self.mySprite, self.grandmaHatSprite, self.grandmaHandSprite]:
+        sprite.material_override.set_shader_param("black_offset", 0)
 
 func processBagRenderLogic(_delta):
   enchantedBagSpriteVisible.frame = enchantedBagSpriteAnimated.frame
