@@ -534,7 +534,6 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
       getPlayer().pauseAnimation = false
       getPlayer().pauseInput = false
       if gravity_flip and not has_gravity_flipped:
-        print("FLIP_GRAVITY")
         has_gravity_flipped = true
         getPlayer().gravitySound.pitch_scale = rand_range(0.8, 1.2)
         getPlayer().gravitySound.play()
