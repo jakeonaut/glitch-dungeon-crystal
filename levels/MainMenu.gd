@@ -57,12 +57,13 @@ func setUpRoomInitializationOverride():
             has_finished_initial_initialization = true
     else:
         mainMenuState = MainMenuState.NORMAL_GAMEPLAY
+        epilepsyWarning.visible = false
+        get_node("BabushkaCat").visible = false
         logoSprite.visible = false
         overlayRect.visible = false
         mainMenuUi.visible = false
         show_dither_effect = false
         show_crt_effect = true
-        babushkaCat.get_ref().visible = false
         var finalText = tr("NPC.Cow.2")
         cowNPC.textBox.text_final = finalText
         cowNPC.textBox.textNode.bbcode_text = finalText
