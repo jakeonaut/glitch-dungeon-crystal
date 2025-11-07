@@ -114,7 +114,7 @@ func collideWithFloor(local_lv):
     var tile_type = levelTiles.get_cell_item(tile_coords.x, tile_coords.y, tile_coords.z)
     if levelTiles.isTileDissolvingStone(tile_type):
       levelTiles.corrode(tile_coords)
-    if levelTiles.isTileFragileSolid(tile_type):
+    if justPressedDown() and levelTiles.isTileFragileSolid(tile_type) and not smallInteractionArea.is_touching_door:
       glitchTickle()
   return .collideWithFloor(local_lv)
 
@@ -2187,7 +2187,8 @@ func corruptSprite(sprite):
 func uncorruptSprite(sprite):
   # sprite.material_override.set_shader_param("enable_dither", false)
   # sprite.material_override.set_shader_param("enable_remove_skin_tone", false)
-  sprite.material_override.set_shader_param("enable_glitch", false)
+  if glitch_tickle_timer <= 0:
+    sprite.material_override.set_shader_param("enable_glitch", false)
   sprite.material_override.set_shader_param("enable_glitch_3d", false)
   sprite.material_override.set_shader_param("enable_palette_cycle", false)
   # sprite.material_override.set_shader_param("enable_no_transparency", false)
@@ -2377,24 +2378,24 @@ func doBroomAttack(which_broom_attack):
       summonedBroom.smacked_npc = smacked_npc
     summonedBroom.my_broom_owner = self
     adjustSummonedBroomSpritePosition()
-    if global.memory["zora_flippers"] > 0 and global.memory["zora_flippers_enabled"]:
-      var bubble = bubbleRes.instance()
-      # bubble.mySprite.material_override.set_shader_param("enable_no_transparency", true)
-      bubble.can_broom_pop_me = false
-      bubble.is_horizontal = true
-      level.add_child(bubble)
-      bubble.setAsParent(self)
-      bubble.global_transform.origin = global_transform.origin
-      if mySprite.flip_h:
-        bubble.global_transform.origin.x -= 2
-        bubble.horizontal_direction = -1
-      else:
-        bubble.global_transform.origin.x += 2
-        bubble.horizontal_direction = 1
-      bubble.my_original_pos = bubble.global_transform.origin.y
-      bubble.my_target_pos = bubble.global_transform.origin.y  + rand_range(-1, 1)
-      if abs(linear_velocity.x) > 1:
-        bubble.my_speed = abs(linear_velocity.x) * 0.9
+    # if global.memory["zora_flippers"] > 0 and global.memory["zora_flippers_enabled"]:
+    #   var bubble = bubbleRes.instance()
+    #   # bubble.mySprite.material_override.set_shader_param("enable_no_transparency", true)
+    #   bubble.can_broom_pop_me = false
+    #   bubble.is_horizontal = true
+    #   level.add_child(bubble)
+    #   bubble.setAsParent(self)
+    #   bubble.global_transform.origin = global_transform.origin
+    #   if mySprite.flip_h:
+    #     bubble.global_transform.origin.x -= 2
+    #     bubble.horizontal_direction = -1
+    #   else:
+    #     bubble.global_transform.origin.x += 2
+    #     bubble.horizontal_direction = 1
+    #   bubble.my_original_pos = bubble.global_transform.origin.y
+    #   bubble.my_target_pos = bubble.global_transform.origin.y  + rand_range(-1, 1)
+    #   if abs(linear_velocity.x) > 1:
+    #     bubble.my_speed = abs(linear_velocity.x) * 0.9
   
   # if global.memory["debug_broom"]:
   #   var x = global_transform.origin.x
@@ -2728,8 +2729,9 @@ func landed():
     summonSmokeClouds(1, false, false, 1)
 
   has_used_magic_lantern = 0
-  for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite]:
-    sprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
+  if glitch_tickle_timer <= 0:
+    for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite]:
+      sprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
   # if nesting_doll_state == global.NestingDoll.BABY and not Input.is_action_pressed("jump_button"):
   #   tryToRevertFromBaby()
   if nesting_doll_state == global.NestingDoll.MOM:
@@ -2842,22 +2844,22 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
     elif x_direction != 0:
       fallenBroom.walk_direction.x = x_direction
     fallenBroom.thrown_direction.x = fallenBroom.walk_direction.x
-    if global.memory["zora_flippers"] > 0 and global.memory["zora_flippers_enabled"]:
-      for _i in range(3):
-        var bubble = bubbleRes.instance()
-        # bubble.mySprite.material_override.set_shader_param("enable_no_transparency", true)
-        bubble.can_broom_pop_me = false
-        level.add_child(bubble)
-        bubble.setAsParent(self)
-        bubble.global_transform.origin = global_transform.origin
-        bubble.global_transform.origin.x += rand_range(-1, 1)
-        bubble.global_transform.origin.y += rand_range(0, 1)
-        if mySprite.flip_h:
-          bubble.global_transform.origin.x -= 2
-        else:
-          bubble.global_transform.origin.x += 2
-        bubble.my_original_pos = bubble.global_transform.origin.x
-        bubble.my_target_pos = bubble.global_transform.origin.x  + rand_range(-1, 1)
+    # if global.memory["zora_flippers"] > 0 and global.memory["zora_flippers_enabled"]:
+    #   for _i in range(3):
+    #     var bubble = bubbleRes.instance()
+    #     # bubble.mySprite.material_override.set_shader_param("enable_no_transparency", true)
+    #     bubble.can_broom_pop_me = false
+    #     level.add_child(bubble)
+    #     bubble.setAsParent(self)
+    #     bubble.global_transform.origin = global_transform.origin
+    #     bubble.global_transform.origin.x += rand_range(-1, 1)
+    #     bubble.global_transform.origin.y += rand_range(0, 1)
+    #     if mySprite.flip_h:
+    #       bubble.global_transform.origin.x -= 2
+    #     else:
+    #       bubble.global_transform.origin.x += 2
+    #     bubble.my_original_pos = bubble.global_transform.origin.x
+    #     bubble.my_target_pos = bubble.global_transform.origin.x  + rand_range(-1, 1)
 
   global.memory["broom"] = false
   # var fallenBroomArray = self.get_tree().get_nodes_in_group("fallen_broom_group")

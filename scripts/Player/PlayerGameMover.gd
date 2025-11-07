@@ -1401,7 +1401,7 @@ func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
   var is_tile_spikes = getLevelTiles().isTileSpikes(tile_type)
   if glitch_form == global.GlitchForm.INVISIBLE and is_tile_spikes:
     return is_above_top_of_tile
-  return is_above_top_of_tile and ("Semisolid" in tile_name or (glitch_form == global.GlitchForm.WALK_THROUGH_WALLS and global.isTileSolid(tile_type, getLevelTiles().mesh_library)))
+  return is_above_top_of_tile and (("Semisolid" in tile_name and not "SemisolidTop" in tile_name) or (glitch_form == global.GlitchForm.WALK_THROUGH_WALLS and global.isTileSolid(tile_type, getLevelTiles().mesh_library)))
 
 # # @override
 # func isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords):

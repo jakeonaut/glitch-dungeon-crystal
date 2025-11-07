@@ -15,7 +15,7 @@
 [sub_resource type="ShaderMaterial" id=9]
 shader = ExtResource( 3 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/opacity = 0.5
+shader_param/opacity = 0.8
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
@@ -35,7 +35,7 @@ shader_param/enable_color_glitch = false
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
-shader_param/enable_glitch_3d = true
+shader_param/enable_glitch_3d = false
 shader_param/shake_power_3d = 0.5
 shader_param/shake_rate = 0.5
 shader_param/shake_speed = 5.0

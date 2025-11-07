@@ -1356,7 +1356,7 @@ func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
   var y = global_transform.origin.y
   var is_above_top_of_tile = y + bb > tile_pos_coords.y
   var tile_name = getLevelTiles().mesh_library.get_item_name(tile_type)
-  return is_above_top_of_tile and ("Semisolid" in tile_name or (glitch_form == global.GlitchForm.WALK_THROUGH_WALLS and global.isTileSolid(tile_type, getLevelTiles().mesh_library)))
+  return is_above_top_of_tile and (("Semisolid" in tile_name and not "SemisolidTop" in tile_name) or (glitch_form == global.GlitchForm.WALK_THROUGH_WALLS and global.isTileSolid(tile_type, getLevelTiles().mesh_library)))
   
 func doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor, _debug = false):
   var z = 0 # global_transform.origin.z

@@ -68,7 +68,6 @@ pixel_size = 0.07
 frame = 18
 path = "res://levels/EndlessFantasy/gd1/MainMenu.tscn"
 can_nav_left = false
-can_nav_up = false
 
 [node name="PastoralScene3" parent="PastoralScene" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, 0 )

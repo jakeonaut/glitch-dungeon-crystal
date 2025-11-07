@@ -215,17 +215,17 @@ func buildSingleRandomTile(cell_index, glitch_type):
       #       setTileDictAndGlitchSpecificDict(new_index, name, tile_orientation)
     else:
       setRandomTileNameOfType("BrickSolid", 8, cell_index, tile_orientation, 0, glitch_type)
+  elif tile_name == "PinkCloudSemisolid":
+    var top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+1, cell_index.z)
+    if top_neighbor_tile_type == -1: # no top neighbor
+      setRandomTileNameOfType("PinkCloudSemisolid", 1, cell_index, tile_orientation, 0)
+      setRandomTileNameOfType("PinkCloudSemisolidTop", 1, Vector3(cell_index.x, cell_index.y+1, cell_index.z), tile_orientation, 0)
   elif tile_name == "CloudSemisolid":
     var top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+1, cell_index.z)
     if top_neighbor_tile_type == -1: # no top neighbor
       setRandomTileNameOfType("CloudSemisolidTop", 4, cell_index, tile_orientation, 0)
     else:
       setRandomTileNameOfType("CloudSemisolid", 4, cell_index, tile_orientation, 0)
-  elif tile_name == "PinkCloudSemisolid":
-    var top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+1, cell_index.z)
-    if top_neighbor_tile_type == -1: # no top neighbor
-      setRandomTileNameOfType("PinkCloudSemisolid", 1, cell_index, tile_orientation, 0)
-      setRandomTileNameOfType("PinkCloudSemisolidTop", 1, Vector3(cell_index.x, cell_index.y+1, cell_index.z), tile_orientation, 0)
       
   elif tile_name == "Spikes":
     # var left_neighbor_tile_type = get_cell_item(cell_index.x-1, cell_index.y, cell_index.z)
@@ -530,7 +530,7 @@ func isTileFragileSolid(tile_type):
   if tile_type == GridMap.INVALID_CELL_ITEM:
     return false
   var tile_name = mesh_library.get_item_name(tile_type)
-  return "Fragile" in tile_name
+  return "Fragile" in tile_name or "SolidTransientTile" in tile_name
 
 func isTileTransientSolid(tile_type):
   if tile_type == GridMap.INVALID_CELL_ITEM:
@@ -736,14 +736,14 @@ func randomizeTile(cell_index, glitch_type = global.GlitchForm.NORMAL, debug = f
     setRandomTileNameOfType("BrickSolidBot", 9, cell_index, tile_orientation, 0, glitch_type)
   elif "BrickSolid" in tile_name:
     setRandomTileNameOfType("BrickSolid", 8, cell_index, tile_orientation, 0, glitch_type, debug)
+  elif "PinkCloudSemisolidTop" in tile_name:
+    setRandomTileNameOfType("PinkCloudSemisolidTop", 1, cell_index, tile_orientation)
+  elif "PinkCloudSemisolid" in tile_name:
+    setRandomTileNameOfType("PinkCloudSemisolid", 1, cell_index, tile_orientation)
   elif "CloudSemisolidTop" in tile_name:
     setRandomTileNameOfType("CloudSemisolidTop", 4, cell_index, tile_orientation)
   elif "CloudSemisolid" in tile_name:
-    setRandomTileNameOfType("CloudSemisolid", 4, cell_index, tile_orientation)
-  elif "PinkCloudSemisolid" in tile_name:
-    setRandomTileNameOfType("PinkCloudSemisolid", 1, cell_index, tile_orientation)
-  elif "PinkCloudSemisolidTop" in tile_name:
-    setRandomTileNameOfType("PinkCloudSemisolidTop", 1, cell_index, tile_orientation) 
+    setRandomTileNameOfType("CloudSemisolid", 4, cell_index, tile_orientation) 
   elif "SoftSandTop" in tile_name:
     setRandomTileNameOfType("SoftSandTop", 2, cell_index, tile_orientation) 
 
@@ -766,6 +766,12 @@ func unrandomizeTile(cell_index):
     setTileNameNum("BrickSolidCeil", 0, cell_index, tile_orientation)
   elif "BrickSolid" in tile_name:
     setTileNameNum("BrickSolid", 0, cell_index, tile_orientation)
+  elif "PinkCloudSemisolidTop" in tile_name:
+    setTileNameNum("PinkCloudSemisolidTop", 0, cell_index, tile_orientation)
+  elif "PinkCloudSemisolid" in tile_name:
+    setTileNameNum("PinkCloudSemisolid", 0, cell_index, tile_orientation)
+  elif "CloudSemisolidTop" in tile_name:
+    setTileNameNum("CloudSemisolidTop", 0, cell_index, tile_orientation)
   elif "CloudSemisolid" in tile_name:
     setTileNameNum("CloudSemisolid", 0, cell_index, tile_orientation)
   return true

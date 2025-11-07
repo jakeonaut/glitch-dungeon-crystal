@@ -1,4 +1,4 @@
-[gd_scene load_steps=14682 format=2]
+[gd_scene load_steps=14673 format=2]
 
 [ext_resource path="res://shaders/palette_swapper.shader" type="Shader" id=1]
 [ext_resource path="res://sceneObjects/tiles/tile_shader.tres" type="Shader" id=2]
@@ -27,7 +27,6 @@
 [ext_resource path="res://assets/textures/intangible_transient_black.png" type="Texture" id=25]
 [ext_resource path="res://assets/textures/intangible_transient_yellow.png" type="Texture" id=26]
 [ext_resource path="res://assets/textures/intangible_transient_red.png" type="Texture" id=27]
-[ext_resource path="res://assets/palettes/yellow_palette.png" type="Texture" id=28]
 [ext_resource path="res://addons/sprite_mesh/sprite_mesh.gd" type="Script" id=194]
 [ext_resource path="res://sceneObjects/tiles/tile_material.tres" type="Material" id=195]
 [ext_resource path="res://assets/textures/tiles_tiny0000.png" type="Texture" id=196]
@@ -158898,50 +158897,6 @@ script = ExtResource( 194 )
 meshes = [ SubResource( 15208 ), SubResource( 15209 ), SubResource( 15210 ), SubResource( 15211 ), SubResource( 15212 ), SubResource( 15213 ), SubResource( 15214 ), SubResource( 15215 ), SubResource( 15216 ), SubResource( 15217 ), SubResource( 15218 ), SubResource( 15219 ), SubResource( 15220 ), SubResource( 15221 ), SubResource( 15222 ), SubResource( 15223 ), SubResource( 15224 ), SubResource( 15225 ), SubResource( 15226 ), SubResource( 15227 ), SubResource( 15228 ), SubResource( 15229 ), SubResource( 15230 ), SubResource( 15231 ), SubResource( 15232 ), SubResource( 15233 ), SubResource( 15234 ), SubResource( 15235 ), SubResource( 15236 ), SubResource( 15237 ), SubResource( 15238 ), SubResource( 15239 ), SubResource( 15240 ), SubResource( 15241 ), SubResource( 15242 ), SubResource( 15243 ), SubResource( 15244 ), SubResource( 15245 ), SubResource( 15246 ), SubResource( 15247 ), SubResource( 15248 ), SubResource( 15249 ), SubResource( 15250 ), SubResource( 15251 ), SubResource( 15252 ), SubResource( 15253 ), SubResource( 15254 ), SubResource( 15255 ), SubResource( 15256 ), SubResource( 15257 ), SubResource( 15258 ), SubResource( 15259 ), SubResource( 15260 ), SubResource( 15261 ), SubResource( 15262 ), SubResource( 15263 ), SubResource( 15264 ), SubResource( 15265 ), SubResource( 15266 ), SubResource( 15267 ), SubResource( 15268 ), SubResource( 15269 ), SubResource( 15270 ), SubResource( 15271 ), SubResource( 15272 ), SubResource( 15273 ), SubResource( 15274 ), SubResource( 15275 ), SubResource( 15276 ), SubResource( 15277 ), SubResource( 15278 ), SubResource( 15279 ), SubResource( 15280 ), SubResource( 15281 ), SubResource( 15282 ), SubResource( 15283 ), SubResource( 15284 ), SubResource( 15285 ), SubResource( 15286 ), SubResource( 15287 ), SubResource( 15288 ), SubResource( 15289 ), SubResource( 15290 ), SubResource( 15291 ), SubResource( 15292 ), SubResource( 15293 ), SubResource( 15294 ), SubResource( 15295 ), SubResource( 15296 ), SubResource( 15297 ), SubResource( 15298 ), SubResource( 15299 ), SubResource( 15300 ), SubResource( 15301 ), SubResource( 15302 ), SubResource( 15303 ), SubResource( 15304 ), SubResource( 15305 ), SubResource( 15306 ), SubResource( 15307 ), SubResource( 15308 ), SubResource( 15309 ), SubResource( 15310 ), SubResource( 15311 ), SubResource( 15312 ), SubResource( 15313 ), SubResource( 15314 ), SubResource( 15315 ), SubResource( 15316 ), SubResource( 15317 ), SubResource( 15318 ), SubResource( 15319 ), SubResource( 15320 ), SubResource( 15321 ), SubResource( 15322 ), SubResource( 15323 ), SubResource( 15324 ), SubResource( 15325 ), SubResource( 15326 ), SubResource( 15327 ), SubResource( 15328 ), SubResource( 15329 ), SubResource( 15330 ), SubResource( 15331 ), SubResource( 15332 ), SubResource( 15333 ), SubResource( 15334 ), SubResource( 15335 ), SubResource( 15336 ), SubResource( 15337 ), SubResource( 15338 ), SubResource( 15339 ), SubResource( 15340 ), SubResource( 15341 ), SubResource( 15342 ), SubResource( 15343 ), SubResource( 15344 ), SubResource( 15345 ), SubResource( 15346 ), SubResource( 15347 ), SubResource( 15348 ), SubResource( 15349 ), SubResource( 15350 ), SubResource( 15351 ), SubResource( 15352 ), SubResource( 15353 ), SubResource( 15354 ), SubResource( 15355 ), SubResource( 15356 ), SubResource( 15357 ), SubResource( 15358 ), SubResource( 15359 ), SubResource( 15360 ), SubResource( 15361 ), SubResource( 15362 ), SubResource( 15363 ), SubResource( 15364 ), SubResource( 15365 ), SubResource( 15366 ), SubResource( 15367 ), SubResource( 15368 ), SubResource( 15369 ), SubResource( 15370 ), SubResource( 15371 ), SubResource( 15372 ), SubResource( 15373 ), SubResource( 15374 ), SubResource( 15375 ), SubResource( 15376 ), SubResource( 15377 ), SubResource( 15378 ), SubResource( 15379 ), SubResource( 15380 ), SubResource( 15381 ), SubResource( 15382 ), SubResource( 15383 ), SubResource( 15384 ), SubResource( 15385 ), SubResource( 15386 ), SubResource( 15387 ), SubResource( 15388 ), SubResource( 15389 ), SubResource( 15390 ), SubResource( 15391 ), SubResource( 15392 ), SubResource( 15393 ), SubResource( 15394 ), SubResource( 15395 ), SubResource( 15396 ), SubResource( 15397 ), SubResource( 15398 ), SubResource( 15399 ), SubResource( 15400 ), SubResource( 15401 ), SubResource( 15402 ), SubResource( 15403 ), SubResource( 15404 ), SubResource( 15405 ), SubResource( 15406 ), SubResource( 15407 ), SubResource( 15408 ), SubResource( 15409 ), SubResource( 15410 ), SubResource( 15411 ), SubResource( 15412 ), SubResource( 15413 ), SubResource( 15414 ), SubResource( 15415 ), SubResource( 15416 ), SubResource( 15417 ), SubResource( 15418 ), SubResource( 15419 ), SubResource( 15420 ), SubResource( 15421 ), SubResource( 15422 ), SubResource( 15423 ), SubResource( 15424 ), SubResource( 15425 ), SubResource( 15426 ), SubResource( 15427 ), SubResource( 15428 ), SubResource( 15429 ), SubResource( 15430 ), SubResource( 15431 ), SubResource( 15432 ), SubResource( 15433 ), SubResource( 15434 ), SubResource( 15435 ), SubResource( 15436 ), SubResource( 15437 ), SubResource( 15438 ), SubResource( 15439 ), SubResource( 15440 ), SubResource( 15441 ), SubResource( 15442 ), SubResource( 15443 ), SubResource( 15444 ), SubResource( 15445 ), SubResource( 15446 ), SubResource( 15447 ), SubResource( 15448 ), SubResource( 15449 ), SubResource( 15450 ), SubResource( 15451 ), SubResource( 15452 ), SubResource( 15453 ), SubResource( 15454 ), SubResource( 15455 ), SubResource( 15456 ), SubResource( 15457 ), SubResource( 15458 ), SubResource( 15207 ), SubResource( 15459 ), SubResource( 15460 ), SubResource( 15461 ), SubResource( 15462 ) ]
 material = SubResource( 1017 )
 
-[sub_resource type="ShaderMaterial" id=20018]
-shader = ExtResource( 2 )
-shader_param/alpha = 1.0
-shader_param/palettesize = 16
-shader_param/base_palette = ExtResource( 19 )
-
-[sub_resource type="SpatialMaterial" id=20019]
-next_pass = SubResource( 20018 )
-flags_unshaded = true
-albedo_texture = ExtResource( 196 )
-
-[sub_resource type="ShaderMaterial" id=20020]
-shader = ExtResource( 2 )
-shader_param/alpha = 1.0
-shader_param/palettesize = 16
-shader_param/base_palette = ExtResource( 5 )
-
-[sub_resource type="SpatialMaterial" id=20021]
-next_pass = SubResource( 20020 )
-flags_unshaded = true
-albedo_texture = ExtResource( 196 )
-
-[sub_resource type="ShaderMaterial" id=20022]
-shader = ExtResource( 2 )
-shader_param/alpha = 1.0
-shader_param/palettesize = 16
-shader_param/base_palette = ExtResource( 20 )
-
-[sub_resource type="SpatialMaterial" id=20023]
-next_pass = SubResource( 20022 )
-flags_unshaded = true
-albedo_texture = ExtResource( 196 )
-
-[sub_resource type="ShaderMaterial" id=20024]
-shader = ExtResource( 2 )
-shader_param/alpha = 1.0
-shader_param/palettesize = 16
-shader_param/base_palette = ExtResource( 28 )
-
-[sub_resource type="SpatialMaterial" id=20025]
-next_pass = SubResource( 20024 )
-flags_unshaded = true
-albedo_texture = ExtResource( 196 )
-
 [sub_resource type="ShaderMaterial" id=20010]
 shader = ExtResource( 6 )
 shader_param/albedo = null
@@ -178829,7 +178784,7 @@ generated_sprite_mesh = SubResource( 1018 )
 [node name="SolidTransientTile_red" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -1, 0 )
 mesh = SubResource( 19850 )
-material/0 = SubResource( 20019 )
+material/0 = SubResource( 1003 )
 script = ExtResource( 3 )
 texture = ExtResource( 196 )
 mesh_depth = 0.0
@@ -178853,7 +178808,7 @@ generated_sprite_mesh = SubResource( 1004 )
 [node name="SolidTransientTile_green" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7, -1, 0 )
 mesh = SubResource( 19865 )
-material/0 = SubResource( 20021 )
+material/0 = SubResource( 1003 )
 script = ExtResource( 3 )
 texture = ExtResource( 196 )
 mesh_depth = 0.0
@@ -178877,7 +178832,7 @@ generated_sprite_mesh = SubResource( 1004 )
 [node name="SolidTransientTile_black" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6, -2, 0 )
 mesh = SubResource( 19930 )
-material/0 = SubResource( 20023 )
+material/0 = SubResource( 1003 )
 script = ExtResource( 3 )
 texture = ExtResource( 196 )
 mesh_depth = 0.0
@@ -178901,7 +178856,7 @@ generated_sprite_mesh = SubResource( 1004 )
 [node name="SolidTransientTile_yellow" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7, -2, 0 )
 mesh = SubResource( 19945 )
-material/0 = SubResource( 20025 )
+material/0 = SubResource( 1003 )
 script = ExtResource( 3 )
 texture = ExtResource( 196 )
 mesh_depth = 0.0

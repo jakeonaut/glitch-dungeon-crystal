@@ -36,7 +36,9 @@ func setUpRoomInitializationOverride():
     for sprite in [player.mySprite, player.grandmaHatSprite, player.grandmaHandSprite]:
         sprite.material_override.set_shader_param("black_offset", 0)
     if not global.has_started_game:
+        print("dont hide the cat...")
         global.isOnMainMenu = true
+        overlayRect.visible = true
         player.normalGlitch()
         player.pauseInput = true
         show_dither_effect = false
@@ -58,7 +60,8 @@ func setUpRoomInitializationOverride():
     else:
         mainMenuState = MainMenuState.NORMAL_GAMEPLAY
         epilepsyWarning.visible = false
-        get_node("BabushkaCat").visible = false
+        self.remove_child(get_node("BabushkaCat"))
+        print("hide the cat?")
         logoSprite.visible = false
         overlayRect.visible = false
         mainMenuUi.visible = false
@@ -67,9 +70,6 @@ func setUpRoomInitializationOverride():
         var finalText = tr("NPC.Cow.2")
         cowNPC.textBox.text_final = finalText
         cowNPC.textBox.textNode.bbcode_text = finalText
-        if global.memory["clean_crystals"] >= 4:
-            towerSprite1.visible = true
-            towerSprite2.visible = true
     if global.pauseGame:
         transition.reverse_fade()
     uiLayer.remove_child(uiLayer.textBoxes)
