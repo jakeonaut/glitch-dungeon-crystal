@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://sceneObjects/_autoload/globalMap.gd" type="Script" id=1]
 [ext_resource path="res://assets/Chara_sheet.png" type="Texture" id=2]
@@ -6,7 +6,9 @@
 [ext_resource path="res://assets/npc_sheet0002.png" type="Texture" id=4]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=5]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=6]
-[ext_resource path="res://assets/palettes/violet_palette.png" type="Texture" id=7]
+[ext_resource path="res://assets/palettes/black_palette.png" type="Texture" id=7]
+[ext_resource path="res://assets/palettes/black_palette_alien.png" type="Texture" id=8]
+[ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=9]
 [ext_resource path="res://assets/enemy_sheet0000.png" type="Texture" id=10]
 [ext_resource path="res://assets/sprites/babaYagaHouse.png" type="Texture" id=14]
 [ext_resource path="res://assets/sprites/anglerFishBoss.png" type="Texture" id=15]
@@ -19,6 +21,42 @@
 [ext_resource path="res://assets/sprites/babaYagaBoss.png" type="Texture" id=23]
 [ext_resource path="res://assets/sprites/god_head.png" type="Texture" id=24]
 [ext_resource path="res://assets/sprites/babaYagaBossEye.png" type="Texture" id=25]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 6 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 9 )
+shader_param/base_palette = ExtResource( 5 )
+shader_param/target_palette = ExtResource( 7 )
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 6 )
@@ -54,7 +92,7 @@ shader_param/time_influence = 2.0
 shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 4 )
 shader_param/base_palette = ExtResource( 5 )
-shader_param/target_palette = ExtResource( 7 )
+shader_param/target_palette = ExtResource( 8 )
 
 [node name="globalMap" type="Spatial"]
 script = ExtResource( 1 )
@@ -79,9 +117,10 @@ hide_me_from_map = true
 
 [node name="PastoralSceneSecret" parent="PastoralScene" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0 )
+material_override = SubResource( 2 )
 pixel_size = 0.07
 frame = 18
-path = "res://levels/EndlessFantasy/gd1/PastoralScene03.tscn"
+path = "res://levels/EndlessFantasy/gd1/FakePastoralScene.tscn"
 can_nav_left = false
 hide_me_from_map = true
 
@@ -869,4 +908,11 @@ transform = Transform( 0.9, 0, 0, 0, 0.9, 0, 0, 0, 1, 0, 7, 0 )
 material_override = SubResource( 1 )
 pixel_size = 0.07
 path = "res://levels/EndlessFantasy/gd1DreamMemories/DreamGlitchTileIntro.tscn"
+can_nav_left = false
+
+[node name="DreamOutskirts" parent="DreamCity" instance=ExtResource( 3 )]
+transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.778, 1, 7, 0 )
+material_override = SubResource( 1 )
+pixel_size = 0.07
+path = "res://levels/EndlessFantasy/gd1DreamMemories/DreamOutskirts.tscn"
 can_nav_left = false
