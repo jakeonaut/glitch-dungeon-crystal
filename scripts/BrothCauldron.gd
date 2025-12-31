@@ -28,7 +28,7 @@ func _ready():
   mySprite2.material_override = mySprite2.material_override.duplicate()
 
 func _process(delta):
-  # if global.memory["glitch_world"] > 0 or path == "" or path == null:
+  # if global.memory["world_of_ruin"] > 0 or path == "" or path == null:
   #   var newBrothPotNPC = brothPotNPCRes.instance()
   #   level.add_child(newBrothPotNPC)
   #   newBrothPotNPC.global_transform.origin = self.global_transform.origin

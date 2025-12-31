@@ -82,9 +82,6 @@ func reindexGrandmaStatueCatalogue(is_start_of_level = false):
 
 var should_offset_ui = false 
 func _ready_impl():
-  # if not "0_1Haven" in self.getLevelName() and not global.memory["glitch_world"]:
-  #   self.purifyAllFragileBrickSolids(false)
-
   if not global.memory.has("roomPath") and not "MainMenu" in self.getLevelName() and not "IntroVideo" in self.getLevelName():
     global.has_started_game = true
     global.has_really_started_game = true
@@ -163,7 +160,7 @@ func _ready_impl():
   levelTiles.setTileset(tileset_type, false)
   levelTiles.buildRandomTiles()
   levelTiles.moveAllGlitchedTilesToTheDefaultZIndices()
-  if global.memory["currLevelZone"] != global.currLevelZone and not global.memory["glitch_world"]:
+  if global.memory["currLevelZone"] != global.currLevelZone and not global.memory["world_of_ruin"]:
     uiLayer.setDisplayTitle(global.getDisplayTitle(self.getLevelZoneName()))
   tryShowUIElements()
   trySpawnFollowers()

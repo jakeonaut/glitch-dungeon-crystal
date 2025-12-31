@@ -238,7 +238,7 @@ func _process(delta):
         # spawnChicken()
 
 func tryProcessGlitchedPath():
-  if glitched_path != "" and glitched_path != null and (global.memory["glitch_world"] > 0 or path == "" or path == null):
+  if glitched_path != "" and glitched_path != null and (global.memory["world_of_ruin"] > 0 or path == "" or path == null):
     self.path = self.glitched_path
     mySprite.material_override.set_shader_param("enable_glitch", true)
     is_glitched = true

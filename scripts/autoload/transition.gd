@@ -8,6 +8,7 @@ var was_i_interrupted = false
 var mapManagerRes = preload("res://sceneObjects/_autoload/globalMap.tscn")
 var glitchedMapManagerRes = preload("res://sceneObjects/_autoload/globalMap_glitched.tscn")
 var mapManager = null
+var is_using_world_of_ruin_map = false
 onready var colorRect = get_node("ColorRect")
 
 var time_max = 100 # msec
@@ -26,14 +27,14 @@ onready var aniPlayer = get_node("AnimationPlayer")
 func _ready():
   set_process(false) # no need to process when not background loading adjacent scenes...
   
-  # if global.memory["glitch_world"] > 0:
-  #   mapManager = glitchedMapManagerRes.instance()
-  #   is_using_glitched_map = true
-  # else:
-  mapManager = mapManagerRes.instance()
-  mapManager.visible = false
-  self.add_child(mapManager)
-  # self.add_child(secretGlitchedMapManager)
+  if global.memory["world_of_ruin"] > 0:
+    mapManager = glitchedMapManagerRes.instance()
+    is_using_world_of_ruin_map = true
+  else:
+    mapManager = mapManagerRes.instance()
+    mapManager.visible = false
+    self.add_child(mapManager)
+    # self.add_child(secretGlitchedMapManager)
   adjacent_level_loaders = [
     null, # RoomMap.EAST
     null, # RoomMap.WEST
@@ -53,16 +54,15 @@ func _ready():
   startAdjacentLevelLoading()
 
 func tryUpdateMapManagerToGlitchedMap():
-  return 
-  # if global.memory["glitch_world"] > 0 and not is_using_glitched_map:
+  pass
+  # if global.memory["world_of_ruin"] > 0 and not is_using_world_of_ruin_map:
   #   self.remove_child(mapManager)
   #   mapManager.queue_free()
   #   mapManager = glitchedMapManagerRes.instance()
   #   mapManager.visible = false
   #   self.add_child(mapManager)
-  #   is_using_glitched_map = true
+  #   is_using_world_of_ruin_map = true
 
-var is_using_glitched_map = false
 func _process(_delta):
   # tryUpdateMapManagerToGlitchedMap()
 

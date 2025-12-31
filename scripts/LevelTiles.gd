@@ -371,10 +371,10 @@ func _process(delta):
   randomize_timer += delta
   
   # if global.memory["priestess"] >= 2:
-  if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
-    randomize_timer = randomize_time_limit
-    randomize_num_counter = 0
-    randomize_num = 1
+  # if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["world_of_ruin"] > 0:
+  #   randomize_timer = randomize_time_limit
+  #   randomize_num_counter = 0
+  #   randomize_num = 1
   if randomize_timer >= randomize_time_limit and tile_dict.size() > 0:
     randomize_timer = 0
     if randomize_num > tile_dict.keys().size():
@@ -412,11 +412,11 @@ func _process(delta):
     if spike_infection_timer >= spike_infection_time_limit: 
       spike_infection_timer = 0
       global.incrementLevelZoneGlitchTiles(num_infected_spikes) # hm...
-      if global.memory["glitch_world"] == 0:
+      if global.memory["world_of_ruin"] == 0:
         tryToSayTidy()
       for _i in range(num_infected_spikes):
         var coords = infected_spikes.pop_front()
-        if global.memory["glitch_world"] > 0:
+        if global.memory["world_of_ruin"] > 0:
           reappearing_spikes.push_back(coords)
         else:
           var top_neighbor_coords = Vector3(coords.x, coords.y + 1, coords.z)
@@ -581,7 +581,7 @@ func infectSpikes(coords, play_sound = true):
     infected_spikes.append(coords)
     
     # TODO(jaketrower): If you want to only TEMPORARILY clear spikes, use this
-    if global.memory["glitch_world"] > 0:
+    if global.memory["world_of_ruin"] > 0:
       self.set_cell_item(coords.x, coords.y, coords.z, GridMap.INVALID_CELL_ITEM)
     else:
       removeTile(coords)
@@ -926,7 +926,7 @@ func setTileset(tileset_type, properly_set_tiles = true):
 func normalGlitch(_palette = null):
   moveAllGlitchedTilesToTheDefaultZIndices()
   # set_mesh_library(grey_tiles)
-  if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
+  if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["world_of_ruin"] > 0:
     properlySetTiles()
   changeColorPalette(grey_palette, grey_palette)
   if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(global.dark_grey_palette)
@@ -934,7 +934,7 @@ func normalGlitch(_palette = null):
 func floorGlitch(_palette = null):
   moveAllGlitchedTilesToTheDefaultZIndices(global.GlitchForm.FLOOR)
   if not level.dont_glitch_tiles:
-    if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
+    if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["world_of_ruin"] > 0:
       properlySetTiles()
     changeColorPalette(red_palette, red_palette)
     if cosmeticLevelTiles: cosmeticLevelTiles.floorGlitch(global.dark_red_palette)
@@ -943,7 +943,7 @@ func floorGlitch(_palette = null):
 func featherGlitch(_palette = null):
   moveAllGlitchedTilesToTheDefaultZIndices(global.GlitchForm.FEATHER)
   if not level.dont_glitch_tiles:
-    if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
+    if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["world_of_ruin"] > 0:
       properlySetTiles()
     changeColorPalette(green_palette, green_palette)
     if cosmeticLevelTiles: cosmeticLevelTiles.featherGlitch(global.dark_green_palette)
@@ -952,7 +952,7 @@ func featherGlitch(_palette = null):
 func invisibleGlitch(_palette = null):
   moveAllGlitchedTilesToTheDefaultZIndices(global.GlitchForm.INVISIBLE)
   if not level.dont_glitch_tiles:
-    if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
+    if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["world_of_ruin"] > 0:
       properlySetTiles()
     changeColorPalette(black_palette, black_palette)
     if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(global.dark_black_palette)
@@ -961,7 +961,7 @@ func invisibleGlitch(_palette = null):
 func ladderGlitch(_palette = null):
   moveAllGlitchedTilesToTheDefaultZIndices(global.GlitchForm.LADDER)
   if not level.dont_glitch_tiles:
-    if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
+    if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["world_of_ruin"] > 0:
       properlySetTiles()
     changeColorPalette(yellow_palette, yellow_palette)
     if cosmeticLevelTiles: cosmeticLevelTiles.ladderGlitch(global.dark_yellow_palette)
@@ -970,7 +970,7 @@ func ladderGlitch(_palette = null):
 func walkThroughWallsGlitch(_palette = null):
   moveAllGlitchedTilesToTheDefaultZIndices()
   if level.dont_glitch_tiles: return
-  if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["glitch_world"] > 0:
+  if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE or global.memory["world_of_ruin"] > 0:
     properlySetTiles()
   changeColorPalette(white_palette, white_palette)
   if cosmeticLevelTiles: cosmeticLevelTiles.normalGlitch(global.dark_white_palette)

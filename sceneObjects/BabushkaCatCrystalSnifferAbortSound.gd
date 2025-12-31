@@ -12,7 +12,7 @@ func activateScript():
     global.setLevelZoneThing("babushkaCatSniffed", 1)
     level.redrawMap()
 
-  elif global.memory["glitch_world"] > 0:
+  elif global.memory["world_of_ruin"] > 0:
     global.memory["currPet"] = global.PetFollower.CAT_BABUSHKA
     level.spawnPetFollower(NPC.global_transform.origin)
     global.memory["babushka_cat_story_hook"] = 3

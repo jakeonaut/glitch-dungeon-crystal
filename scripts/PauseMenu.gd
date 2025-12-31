@@ -588,6 +588,7 @@ func processQuitToMainLogic(_delta):
       else:
         # dedupe (ish) with "dev_demo_reset" above
         global.pauseGame = true
+        global.has_ever_seen_intro = true
         transition.reset_game("res://levels/EndlessFantasy/gd1/MainMenu.tscn")
     elif quitToMainOptionIndex == 1:
       pauseMenuState = PauseMenuState.NORMAL
@@ -871,7 +872,7 @@ func processInventoryLogic(_delta):
           localizedLevelZoneName = tr("LevelName.5")
         elif "primordial" in levelZoneName:
           localizedLevelZoneName = tr("LevelName.6")
-        popupText.bbcode_text = tr("NPC.AngelStatue.1") + " " + localizedLevelZoneName + " " + tr("UI.MainMenu.CreditsConfirm") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
+        popupText.bbcode_text = tr("NPC.AngelStatue.1") + " " + localizedLevelZoneName + " " + tr("UI.MainMenu.TeleportConfirm") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
   elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     angelStatueToTeleportTo = null
     if popupRect.visible:
@@ -1162,24 +1163,38 @@ func normalizeInventoryOptionIndex(y, x):
     menuMoveSound.play()
   else:
     level.player.noBroomSound.play()
+
+func normalizeMapCursorIndexToMapBounds(cursor):
+  var y = cursor.y
+  var x = cursor.x
+  if y >= MAP_HEIGHT:
+    y = 0
+  elif y < 0:
+    y = MAP_HEIGHT - 1
+  if x >= MAP_WIDTH:
+    x = 0
+  elif x < 0:
+    x = MAP_WIDTH - 1
+  return Vector2(x, y) 
     
 func normalizeMapCursorIndex(y_diff, x_diff):
   var mapGrid = transition.mapManager.gimmeMapGrid()
   mapCursorPosition.y += y_diff
   mapCursorPosition.x += x_diff
-  # wrap around
-  if mapCursorPosition.y >= MAP_HEIGHT: mapCursorPosition.y = 0
-  elif mapCursorPosition.y < 0: mapCursorPosition.y = MAP_HEIGHT - 1
-  if mapCursorPosition.x >= MAP_WIDTH: mapCursorPosition.x = 0
-  elif mapCursorPosition.x < 0: mapCursorPosition.x = MAP_WIDTH - 1
-
+  mapCursorPosition = normalizeMapCursorIndexToMapBounds(mapCursorPosition)
   var y = int(mapCursorPosition.y)
   var x = int(mapCursorPosition.x)
-  if not mapGrid.has(y) or not mapGrid[y].has(x):
-    return normalizeMapCursorIndex(y_diff, x_diff)
-  var mapRoom = mapGrid[y][x]
-  if not global.haveIBeenToThisLevelPath(mapRoom.path):
-    return normalizeMapCursorIndex(y_diff, x_diff)
+  var limit = 12
+  while not mapGrid.has(y) or not mapGrid[y].has(x) or not global.haveIBeenToThisLevelPath(mapGrid[y][x].path):
+    mapCursorPosition.y += y_diff
+    mapCursorPosition.x += x_diff
+    mapCursorPosition = normalizeMapCursorIndexToMapBounds(mapCursorPosition)
+    y = int(mapCursorPosition.y)
+    x = int(mapCursorPosition.x)
+
+    limit -= 1
+    if limit <= 0:
+      break
 
 
 onready var grimoireSprite = get_node("InventoryRect/GrimoireSprite")
@@ -1332,6 +1347,7 @@ var has_drawn_map = false
 var glitchSheetTex = preload("res://assets/sprites2D/glitchSheet.png")
 var spriteScript = preload("res://scripts/Sprite2D.gd")
 var mapCursorPosition = Vector2(0, 0) # TODO(jaketrower): findme
+var has_set_map_cursor_position = false
 func tryDrawMap():
   if has_drawn_map:
     return
@@ -1358,10 +1374,11 @@ func tryDrawMap():
         mapPlayerSprite.visible = true
         mapPlayerSprite.position = sprite.position
         mapCursorPosition = Vector2(j, i)
+        has_set_map_cursor_position = true
       if mapGrid[i][j].hide_me_from_map:
         sprite.frame = 0
         var haveIBeenToThisLevel = global.haveIBeenToThisLevelPath(mapRoom.path)
-        if haveIBeenToThisLevel or global.memory["glitch_world"] > 0:
+        if haveIBeenToThisLevel or global.memory["world_of_ruin"] > 0:
           sprite.texture = glitchSheetTex
           sprite.hframes = 12
           sprite.vframes = 8
@@ -1449,6 +1466,8 @@ func tryDrawMap():
       # if global.memory.has("prev_room") and global.memory["prev_room"] == mapRoom.path:
       #   sprite.material.set_shader_param("offset", 10)
   has_drawn_map = true
+  if not has_set_map_cursor_position:
+    mapCursorPosition = Vector2(5, 5)
 
 func getBabushkaCatSniffedVar(mapRoomPath):
   var tempLevelZone = global.currLevelZone
@@ -1462,7 +1481,7 @@ func setProperMapFrame(sprite, mapGrid, i, j):
   var mapRoom = mapGrid[i][j] # guaranteed to already have this room at least by the time that we get here.
   var mapPath = mapRoom.path
   var levelZoneName = global.getLevelZoneName(mapPath)
-  var haveIBeenToThisLevel = global.haveIBeenToThisLevelPath(mapPath) or global.memory["glitch_world"] > 0
+  var haveIBeenToThisLevel = global.haveIBeenToThisLevelPath(mapPath) or global.memory["world_of_ruin"] > 0
   sprite.frame = 0
   sprite.material = sprite.material.duplicate()
   sprite.material.set_shader_param("palette_out", global.white_palette2d)

@@ -23,8 +23,6 @@ func setUpRoomInitializationOverride():
   if global.memory["has_beat_the_game"] > 0:
     croneTeleportKeyTreasure.visible = true
 
-  if global.memory["priestess"] < 2 and global.memory["glitch_world"] > 0:
-    global.memory["glitch_world"] = 0
   # if global.memory.has("spellbookPage"):
   #   if door2.is_locked:
   #     door2.animationPlayer.clear_queue()
@@ -37,7 +35,7 @@ func setUpRoomInitializationOverride():
   #     door2.animationPlayer.stop()
   #     door2.animationPlayer.play("locked")
   #     door2.is_locked = true
-  if global.memory["glitch_world"] > 0 and babushkaCat.get_ref() != null:
+  if global.memory["world_of_ruin"] > 0 and babushkaCat.get_ref() != null:
     door2.lockMeUp(999)
     babushkaCat.get_ref().global_transform.origin.x = -1.035
     babushkaCat.get_ref().global_transform.origin.y = 7.041

@@ -34,9 +34,13 @@ func activateScript():
 
 func preActivateScript():
   # global.memory["forget_me_not"] = true
-  # global.memory["glitch_world"] = 1
-  transition.tryUpdateMapManagerToGlitchedMap()
   if not global.memory["glitched_grimoire"]:
+    global.memory["can_freely_teleport"] = true
+    global.memory["has_map_item"] = true
+    global.memory["world_of_ruin"] = 1
+    transition.tryUpdateMapManagerToGlitchedMap()
+    level.redrawMap()
+    global.memory["angel_flute"] = true
     global.memory["mole_cricket"] = 1
     global.memory["zora_flippers"] = 1
     global.memory["mushroom_soul"] = 1

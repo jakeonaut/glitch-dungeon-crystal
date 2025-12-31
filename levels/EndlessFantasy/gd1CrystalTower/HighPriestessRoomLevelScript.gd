@@ -46,7 +46,6 @@ func setUpRoomInitializationOverride():
   var croneAbortSound = croneNPC.textBox.get_node("AbortSound")
   if debug_start_boss_immediately and global.memory["priestess"] < 2:
     goop3.visible = true
-    global.memory["glitch_world"] = 1
     crystalsContainer.queue_free()
     gameCamera.initial_size = camera_size
     gameCamera.zoomed_size = camera_size
@@ -145,7 +144,6 @@ func _process(delta):
       goddess_cutscene_counter += 1
     elif goddess_cutscene_counter == 1:
       if global.activeInteractor == null:
-        # global.memory["glitch_world"] = 1
         goddess_cutscene_counter = 2
         # player.glitch_death_timer = 8
         # player.glitchTickle()
@@ -166,7 +164,6 @@ func _process(delta):
 
       if crystalSpinAmount > 1:
         goop3.visible = true
-        global.memory["glitch_world"] = 1
         goddess_cutscene_counter = -99
         yield(get_tree().create_timer(1.0), "timeout")
         player.glitch_death_timer = 8

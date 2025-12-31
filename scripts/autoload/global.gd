@@ -418,7 +418,7 @@ func resetMemory():
     memory["clean_crystals"] = 0
     memory["priestess"] = 0
     memory["has_beat_the_game"] = 0
-    memory["glitch_world"] = 0
+    memory["world_of_ruin"] = 0
     memory["glitched_grimoire"] = false
     memory["forget_me_not"] = false
     memory["glitched_grimoire2"] = false
@@ -503,7 +503,7 @@ func newGamePlusMemoryReset():
     memory["priestessShortcut"] = 0
     memory["priestess"] = 0
     memory["has_beat_the_game"] = 0
-    memory["glitch_world"] = 0
+    memory["world_of_ruin"] = 0
     memory["babushka_cat_story_hook"] = 0
     memory["fishing_rod_shortcut"] = 0
     memory["broom"] = 1

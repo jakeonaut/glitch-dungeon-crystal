@@ -30,7 +30,7 @@ func activateScript():
       textBox.textNode.bbcode_text = newText
       level.redrawMap()
 
-  elif global.memory["glitch_world"] > 0:
+  elif global.memory["world_of_ruin"] > 0:
     var newText = "*meow*, (seems like this place\nis falling apart. let's get out!!\ncheck your map?)"
     textBox.text_final = newText
     textBox.textNode.bbcode_text = newText

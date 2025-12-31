@@ -43,7 +43,7 @@ func processSpawningLogic(_delta):
     spawn()
 
 func isConditionActive():
-    return global.memory["glitch_world"] and am_i_in_range_of_player
+    return global.memory["world_of_ruin"] and am_i_in_range_of_player
 
 # @override
 func getNumForeignChildren():
