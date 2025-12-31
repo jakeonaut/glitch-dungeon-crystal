@@ -148,6 +148,12 @@ func _process(delta):
       is_smacked = false
       unsmack()
 
+func talkToMe():
+  textBox.hideInteractPrompt()
+  if not floating_text:
+    textBox.untinify()
+  textBox.interact(true) # was_smacked
+
 func unsmack():
   var material = mySprite.material_override
   if material is ShaderMaterial:
@@ -155,6 +161,11 @@ func unsmack():
     # material.set_shader_param("y_div", 2.3)
     material.set_shader_param("normal_offset", .02)
     mySprite.material_override = material
+  if was_smacked_and_should_talk and (
+    (global.activeInteractor == null and (textBox.text_final != "" or textBox.smackedBbText != "")) or (global.activeInteractor == textBox and global.pauseGame)
+  ):
+    talkToMe()
+  was_smacked_and_should_talk = false
 
 export var is_merchant = false
 func tryHideActiveInteractPrompt():
@@ -173,7 +184,7 @@ func tryHideActiveInteractPrompt():
     interactPrompt.visible = false
 
 func tryShowInteractPrompt(is_active_interact_prompt = false, is_comic_alert = false):
-  if interactPrompt == null:
+  if interactPrompt == null or was_smacked_and_should_talk:
     return
 
   # don't you love math
@@ -205,6 +216,7 @@ func fallthroughCollisionActivate(_friend):
   pass
 
 var should_i_respond_to_smacks = true
+var was_smacked_and_should_talk = false
 export var is_very_tiny = false
 func getSmacked(_broom_origin = null, _silently = false):
   # if not can_be_smacked:
@@ -237,12 +249,11 @@ func getSmacked(_broom_origin = null, _silently = false):
   # don't start dialog if you threw broom at me
   if not global.memory["broom"]:
     return true
-
-  if (global.activeInteractor == null and (textBox.text_final != "" or textBox.smackedBbText != "")) or (global.activeInteractor == textBox and global.pauseGame):
-    textBox.hideInteractPrompt()
-    if not floating_text:
-      textBox.untinify()
-    textBox.interact(true) # was_smacked
+  
+  if textBox.smackedBbText == "" or textBox.smackedBbText == null:
+    talkToMe()
+  else:
+    was_smacked_and_should_talk = true
 
 func setGlobalMemoryOfHasSpoken(set_vars = false):
   if set_vars:

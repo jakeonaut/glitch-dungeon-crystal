@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scripts/autoload/transition.gd" type="Script" id=1]
 [ext_resource path="res://shaders/ViewportGlitchShader.shader" type="Shader" id=2]
@@ -189,6 +189,22 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "longest_fade_no_change"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:material:shader_param/progress")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 1.0 ]
@@ -385,6 +401,7 @@ anims/RESET = SubResource( 9 )
 anims/granny_teleport = SubResource( 12 )
 anims/long_fade = SubResource( 3 )
 anims/long_fade_no_change = SubResource( 16 )
+anims/longest_fade_no_change = SubResource( 19 )
 anims/quick_hide = SubResource( 17 )
 anims/really_long_fade = SubResource( 4 )
 anims/really_really_long_fade_to = SubResource( 5 )

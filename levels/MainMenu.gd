@@ -7,6 +7,7 @@ onready var broomSound = get_node("BroomSound")
 onready var noBroomSound = get_node("NoBroomSound")
 onready var startDeleteSound = get_node("StartDeleteSound")
 onready var deleteSound = get_node("DeleteSound")
+onready var deleteSound2 = get_node("DeleteSound2")
 onready var reliefSound = get_node("ReliefSound")
 onready var bellSound = get_node("BellSound")
 # onready var towerSprite1 = get_node("TowerSprite1")
@@ -14,8 +15,11 @@ onready var bellSound = get_node("BellSound")
 var epilepsy_fade_timer = 0
 var EPILEPSY_SHOW_TIME_LIMIT = 80
 var epilepsy_cover_opacity = 1
+var splash_cover_opacity = 1
 
 enum MainMenuState {
+    SHOWING_PETSCLUB2_SPLASH,
+    HIDING_PETSCLUB2_SPLASH,
     SHOWING_EPILEPSY_WARNING,
     HIDING_EPILEPSY_WARNING,
     INTRO_VIDEO,
@@ -26,7 +30,9 @@ enum MainMenuState {
     NORMAL_GAMEPLAY,
     TRY_CONTINUE,
 }
-var mainMenuState = MainMenuState.SHOWING_EPILEPSY_WARNING
+var mainMenuState = MainMenuState.SHOWING_PETSCLUB2_SPLASH
+onready var petsClub2Splash = get_node("PetsClub2Splash")
+onready var petsClub2SplashSprite = get_node("PetsClub2Splash/Sprite3D")
 onready var epilepsyWarning = get_node("../../Viewport2/UILayer/EpilepsyWarning")
 onready var epilepsyWarningCoverup = get_node("../../Viewport2/UILayer/EpilepsyWarning/Coverup")
 onready var epilepsyWarningText = get_node("../../Viewport2/UILayer/EpilepsyWarning/Text")
@@ -43,23 +49,29 @@ func setUpRoomInitializationOverride():
         player.pauseInput = true
         show_dither_effect = false
         show_crt_effect = true
-        logoSprite.visible = true
 
         if not global.has_ever_seen_intro:
-            mainMenuState = MainMenuState.SHOWING_EPILEPSY_WARNING
+            logoSprite.visible = false
+            mainMenuState = MainMenuState.SHOWING_PETSCLUB2_SPLASH
             epilepsyWarningText.bbcode_text = tr("UI.Photosensitivity.Warning")
             has_finished_initial_initialization = true
             global.has_ever_seen_intro = true
             yield(TempTimer.idle_frame(self), "timeout")
             yield(TempTimer.idle_frame(self), "timeout")
-            epilepsyWarning.visible = true
+            petsClub2Splash.visible = true
+            uiLayer.visible = false
         else:
+            logoSprite.visible = true
             mainMenuState = MainMenuState.MAIN_MENU
+            uiLayer.visible = true
+            petsClub2Splash.visible = false
             epilepsyWarning.visible = false
             has_finished_initial_initialization = true
     else:
         mainMenuState = MainMenuState.NORMAL_GAMEPLAY
         epilepsyWarning.visible = false
+        petsClub2Splash.visible = false
+        uiLayer.visible = true
         self.remove_child(get_node("BabushkaCat"))
         print("hide the cat?")
         logoSprite.visible = false
@@ -372,8 +384,45 @@ export var camera_size = 30
 var updateMenuText = true
 func _process(delta):
     global.isEndOfGame = false
-    if mainMenuState == MainMenuState.SHOWING_EPILEPSY_WARNING or \
+    if mainMenuState == MainMenuState.SHOWING_PETSCLUB2_SPLASH or \
+       mainMenuState == MainMenuState.HIDING_PETSCLUB2_SPLASH:
+        player.sleepy_timer = 0
+        basicCrtEffectRect2.visible = global.userSettings["show_crt_effect"]
+        petsClub2Splash.visible = true
+        uiLayer.visible = false
+        if mainMenuState == MainMenuState.SHOWING_PETSCLUB2_SPLASH:
+            if not has_finished_initial_initialization:
+                return
+            splash_cover_opacity -= (delta)
+            if splash_cover_opacity < 0:
+                splash_cover_opacity = 0
+                epilepsy_fade_timer += (delta*11)
+                if epilepsy_fade_timer >= EPILEPSY_SHOW_TIME_LIMIT or (
+                    Input.is_action_just_pressed("sub_action_button") or \
+                    Input.is_action_just_pressed("jump_button") or \
+                    Input.is_action_just_pressed("ui_start") or \
+                    (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))
+                ):
+                    mainMenuState = MainMenuState.HIDING_PETSCLUB2_SPLASH
+                    petsClub2SplashSprite.material_override.set_shader_param("enable_glitch", true)
+                    petsClub2SplashSprite.material_override.set_shader_param("enable_glitch_3d", true)
+                    transition.aniPlayer.stop()
+                    transition.aniPlayer.play("longest_fade_no_change")
+                    splash_cover_opacity = -1
+        elif mainMenuState == MainMenuState.HIDING_PETSCLUB2_SPLASH:
+            splash_cover_opacity += (delta)
+            if splash_cover_opacity >= 1:
+                splash_cover_opacity = 1
+                transition.reverse_fade()
+                epilepsyWarning.visible = true
+                petsClub2Splash.visible = false
+                uiLayer.visible = true
+                mainMenuState = MainMenuState.SHOWING_EPILEPSY_WARNING
+        return
+    elif mainMenuState == MainMenuState.SHOWING_EPILEPSY_WARNING or \
        mainMenuState == MainMenuState.HIDING_EPILEPSY_WARNING:
+        logoSprite.visible = true
+        uiLayer.visible = true
         player.sleepy_timer = 0
         basicCrtEffectRect2.visible = false
         epilepsyWarning.visible = true
@@ -420,6 +469,7 @@ func _process(delta):
                 saved_games_cache[global.mainMenuPromptIndex] = {}
             mainMenuState = MainMenuState.MAIN_MENU
             deleteSound.play()
+            deleteSound2.play()
             updateMenuText = true
         elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
             reliefSound.play()

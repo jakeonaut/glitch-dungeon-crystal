@@ -106,6 +106,7 @@ pixel_size = 0.07
 frame = 18
 path = "res://levels/EndlessFantasy/gd1/MainMenu.tscn"
 can_nav_left = false
+can_nav_up = false
 
 [node name="PastoralScene3" parent="PastoralScene" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, 0 )
@@ -903,14 +904,14 @@ kill_after_glitch = true
 [node name="DreamCity" type="Spatial" parent="."]
 
 [node name="DreamGlitchTileIntro" parent="DreamCity" instance=ExtResource( 3 )]
-transform = Transform( 0.9, 0, 0, 0, 0.9, 0, 0, 0, 1, 0, 7, 0 )
+transform = Transform( 0.9, 0, 0, 0, 0.9, 0, 0, 0, 1, -2, 8, 0 )
 material_override = SubResource( 1 )
 pixel_size = 0.07
 path = "res://levels/EndlessFantasy/gd1DreamMemories/DreamGlitchTileIntro.tscn"
 can_nav_left = false
 
 [node name="DreamOutskirts" parent="DreamCity" instance=ExtResource( 3 )]
-transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.778, 1, 7, 0 )
+transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.778, -1, 8, 0 )
 material_override = SubResource( 1 )
 pixel_size = 0.07
 path = "res://levels/EndlessFantasy/gd1DreamMemories/DreamOutskirts.tscn"
