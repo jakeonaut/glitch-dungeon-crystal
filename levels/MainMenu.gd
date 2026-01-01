@@ -18,21 +18,19 @@ var epilepsy_cover_opacity = 1
 var splash_cover_opacity = 1
 
 enum MainMenuState {
-    SHOWING_PETSCLUB2_SPLASH,
-    HIDING_PETSCLUB2_SPLASH,
     SHOWING_EPILEPSY_WARNING,
     HIDING_EPILEPSY_WARNING,
-    INTRO_VIDEO,
+    PLAYING_INTRO_VIDEO,
+    HIDING_INTRO_VIDEO,
     MAIN_MENU,
     MAIN_MENU_FILE_ACTION,
     TRY_DELETE_FILE,
-    TRY_GO_CREDITS,
     NORMAL_GAMEPLAY,
     TRY_CONTINUE,
 }
-var mainMenuState = MainMenuState.SHOWING_PETSCLUB2_SPLASH
-onready var petsClub2Splash = get_node("PetsClub2Splash")
-onready var petsClub2SplashSprite = get_node("PetsClub2Splash/Sprite3D")
+var mainMenuState = MainMenuState.PLAYING_INTRO_VIDEO
+onready var videoPlayer = get_node("../../Viewport2/UILayer/VideoPlayer")
+var was_intro_video_playing = false
 onready var epilepsyWarning = get_node("../../Viewport2/UILayer/EpilepsyWarning")
 onready var epilepsyWarningCoverup = get_node("../../Viewport2/UILayer/EpilepsyWarning/Coverup")
 onready var epilepsyWarningText = get_node("../../Viewport2/UILayer/EpilepsyWarning/Text")
@@ -52,25 +50,26 @@ func setUpRoomInitializationOverride():
 
         if not global.has_ever_seen_intro:
             logoSprite.visible = false
-            mainMenuState = MainMenuState.SHOWING_PETSCLUB2_SPLASH
+            mainMenuState = MainMenuState.PLAYING_INTRO_VIDEO
             epilepsyWarningText.bbcode_text = tr("UI.Photosensitivity.Warning")
             has_finished_initial_initialization = true
             global.has_ever_seen_intro = true
             yield(TempTimer.idle_frame(self), "timeout")
             yield(TempTimer.idle_frame(self), "timeout")
-            petsClub2Splash.visible = true
-            uiLayer.visible = false
+            videoPlayer.visible = true
+            videoPlayer.play()
+            epilepsyWarning.visible = false
+            uiLayer.visible = true
         else:
             logoSprite.visible = true
             mainMenuState = MainMenuState.MAIN_MENU
             uiLayer.visible = true
-            petsClub2Splash.visible = false
+            videoPlayer.visible = false
             epilepsyWarning.visible = false
             has_finished_initial_initialization = true
     else:
         mainMenuState = MainMenuState.NORMAL_GAMEPLAY
         epilepsyWarning.visible = false
-        petsClub2Splash.visible = false
         uiLayer.visible = true
         self.remove_child(get_node("BabushkaCat"))
         print("hide the cat?")
@@ -104,8 +103,8 @@ onready var secretGlitchyNPC6 = get_node("SecretGlitchyNPC6")
 onready var croneNPC = get_node("CroneNPC")
 onready var cowNPC = get_node("NPC2")
 onready var doorToLoadingScreen = get_node("DoorToLoadingScreen")
-onready var logoSprite = get_node("../../Viewport2/CanvasLayer/LogoSprite")
-onready var demoSprite = get_node("../../Viewport2/CanvasLayer/LogoSprite/DemoSprite")
+onready var logoSprite = get_node("LogoSprite")
+# onready var demoSprite = get_node("../../Viewport2/CanvasLayer/LogoSprite/DemoSprite")
 var logoTex2 = preload("res://assets/sprites/logo2.png")
 var logoTex3 = preload("res://assets/sprites/logo3.png")
 var logo_default_pos = Vector2(308, 750)
@@ -378,49 +377,52 @@ var hideSkipPromptTimeLimit = 15
 
 # @override
 func canOpenPauseMenu():
-  return mainMenuState != MainMenuState.MAIN_MENU_FILE_ACTION and mainMenuState != MainMenuState.TRY_DELETE_FILE and mainMenuState != MainMenuState.TRY_GO_CREDITS
+  return mainMenuState == MainMenuState.MAIN_MENU or mainMenuState == MainMenuState.NORMAL_GAMEPLAY
 
 export var camera_size = 30
 var updateMenuText = true
 func _process(delta):
     global.isEndOfGame = false
-    if mainMenuState == MainMenuState.SHOWING_PETSCLUB2_SPLASH or \
-       mainMenuState == MainMenuState.HIDING_PETSCLUB2_SPLASH:
+    if mainMenuState == MainMenuState.PLAYING_INTRO_VIDEO:
+        videoPlayer.visible = true
+        logoSprite.visible = true
+        uiLayer.visible = true
         player.sleepy_timer = 0
-        basicCrtEffectRect2.visible = global.userSettings["show_crt_effect"]
-        petsClub2Splash.visible = true
-        uiLayer.visible = false
-        if mainMenuState == MainMenuState.SHOWING_PETSCLUB2_SPLASH:
-            if not has_finished_initial_initialization:
+        basicCrtEffectRect2.visible = true
+        logoSprite.visible = false
+        epilepsyWarning.visible = false
+        if not was_intro_video_playing:
+            if videoPlayer.is_playing():
+                was_intro_video_playing = true
+            return
+        else:
+            if not videoPlayer.is_playing() or (
+                Input.is_action_just_pressed("sub_action_button") or \
+                Input.is_action_just_pressed("jump_button") or \
+                Input.is_action_just_pressed("ui_start") or \
+                (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))
+            ):
+                mainMenuState = MainMenuState.HIDING_INTRO_VIDEO
+                transition.aniPlayer.stop()
+                transition.aniPlayer.play("longest_fade_no_change")
+                splash_cover_opacity = -1
                 return
-            splash_cover_opacity -= (delta)
-            if splash_cover_opacity < 0:
-                splash_cover_opacity = 0
-                epilepsy_fade_timer += (delta*11)
-                if epilepsy_fade_timer >= EPILEPSY_SHOW_TIME_LIMIT or (
-                    Input.is_action_just_pressed("sub_action_button") or \
-                    Input.is_action_just_pressed("jump_button") or \
-                    Input.is_action_just_pressed("ui_start") or \
-                    (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))
-                ):
-                    mainMenuState = MainMenuState.HIDING_PETSCLUB2_SPLASH
-                    petsClub2SplashSprite.material_override.set_shader_param("enable_glitch", true)
-                    petsClub2SplashSprite.material_override.set_shader_param("enable_glitch_3d", true)
-                    transition.aniPlayer.stop()
-                    transition.aniPlayer.play("longest_fade_no_change")
-                    splash_cover_opacity = -1
-        elif mainMenuState == MainMenuState.HIDING_PETSCLUB2_SPLASH:
-            splash_cover_opacity += (delta)
-            if splash_cover_opacity >= 1:
-                splash_cover_opacity = 1
-                transition.reverse_fade()
-                epilepsyWarning.visible = true
-                petsClub2Splash.visible = false
-                uiLayer.visible = true
-                mainMenuState = MainMenuState.SHOWING_EPILEPSY_WARNING
+        return
+    elif mainMenuState == MainMenuState.HIDING_INTRO_VIDEO:
+        player.sleepy_timer = 0
+        splash_cover_opacity += (delta)
+        if splash_cover_opacity >= 1:
+            splash_cover_opacity = 1
+            transition.fast_reverse_fade()
+            epilepsyWarning.visible = true
+            videoPlayer.visible = false
+            uiLayer.visible = true
+            mainMenuState = MainMenuState.SHOWING_EPILEPSY_WARNING
+            videoPlayer.stop()
         return
     elif mainMenuState == MainMenuState.SHOWING_EPILEPSY_WARNING or \
        mainMenuState == MainMenuState.HIDING_EPILEPSY_WARNING:
+        videoPlayer.visible = false
         logoSprite.visible = true
         uiLayer.visible = true
         player.sleepy_timer = 0
@@ -479,25 +481,6 @@ func _process(delta):
         elif Input.is_action_just_pressed("menu_delete"):
             noBroomSound.play()
         return
-    elif mainMenuState == MainMenuState.TRY_GO_CREDITS:
-        confirmationLayer.visible = true
-        fadeBackgroundLayer.visible = true
-        if confirmationLayerText.bbcode_text == "":
-            confirmationLayerText.bbcode_text = tr("UI.MainMenu.CreditsPrompt") + " " + tr("UI.MainMenu.CreditsConfirm") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
-        if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
-            global.has_really_started_game = true
-            global.okay_really_really_started_game = true
-            global.isEnteringRoom = true
-            transition.long_fade_to("res://levels/EndlessFantasy/gd1/EndCredits.tscn")
-            global.isRespawning = true
-        elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
-            # reliefSound.play()
-            broomSound.play()
-            yield(get_tree().create_timer(0.15), "timeout")
-            mainMenuState = MainMenuState.MAIN_MENU
-        elif Input.is_action_just_pressed("menu_delete"):
-            noBroomSound.play()
-        return
     fadeBackgroundLayer.visible = false
     confirmationLayer.visible = false
     confirmationLayerText.bbcode_text = ""
@@ -536,7 +519,7 @@ func _process(delta):
     if mainMenuState == MainMenuState.MAIN_MENU:
         global.spellCastPauseIndex = 0
         player.spellCastPauseIndex = 0
-        demoSprite.visible = global.demo_mode > 0
+        # demoSprite.visible = global.demo_mode > 0
         player.camera_y_offset = -20
         gameCamera.initial_size = camera_size
         gameCamera.zoomed_size = camera_size
@@ -548,7 +531,7 @@ func _process(delta):
         pressCText.bbcode_text = "[right]" + (tr("UI.MainMenu.3") % global.getInputText("menu_confirm")) + "    " + second_part + "[/right]"
         # TODO(MAIN MENU IMPROVEMENTS): Delete above, comment out below.
         # pressCText.bbcode_text = tr("UI.MainMenu.3") % global.getInputText("menu_confirm")
-        optionsMenuPrompt.bbcode_text = (tr("UI.MainMenu.1") % global.getInputText("ui_start")) + "\n[right]" + (global.getInputText("menu_cancel")) + ": " + tr("UI.MainMenu.CreditsPrompt") + "[/right]"
+        optionsMenuPrompt.bbcode_text = (tr("UI.MainMenu.1") % global.getInputText("ui_start"))
         selectTextPrompt.bbcode_text = global.getInputText("menu_confirm")
 
         if player.justPressedMenuDown():
@@ -631,9 +614,6 @@ func _process(delta):
                 startDeleteSound.play()
             else:
                 noBroomSound.play()
-        elif Input.is_action_just_pressed("menu_cancel"):
-            mainMenuState = MainMenuState.TRY_GO_CREDITS
-            broomSound.play()
     elif mainMenuState == MainMenuState.MAIN_MENU_FILE_ACTION:
         pass # TODO
     elif mainMenuState == MainMenuState.TRY_CONTINUE:

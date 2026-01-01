@@ -88,6 +88,7 @@ enum PauseMenuState {
   KEYBOARD_INPUT,
   CONTROLLER_OPTIONS,
   CONTROLLER_INPUT,
+  GO_TO_CREDITS,
   QUIT_TO_MAIN,
   TEMP,
   INVENTORY,
@@ -198,7 +199,8 @@ func _process(delta):
     cursorSprite.visible = true
     processLocaleLogic(delta)
   else:
-    normalMenuText.rect_position.y = 65
+    if pauseMenuState == PauseMenuState.NORMAL:
+      normalMenuText.rect_position.y = 25
     localeOptionIndex = 0
 
   if pauseMenuState == PauseMenuState.GRAPHICS:
@@ -220,6 +222,15 @@ func _process(delta):
     processSoundLogic(delta)
   else:
     soundOptionIndex = 0
+
+  if pauseMenuState == PauseMenuState.GO_TO_CREDITS:
+    pauseTitleRect.visible = true
+    largerPopup.visible = false
+    normalMenu.visible = true
+    cursorSprite.visible = true
+    processGoToCreditsLogic(delta)
+  else:
+    goToCreditsOptionIndex = 0
 
   if pauseMenuState == PauseMenuState.QUIT_TO_MAIN:
     pauseTitleRect.visible = true
@@ -319,7 +330,7 @@ func repositionInputCursorSprite(index, _showCondensedMenu):
 var normalOptionIndex = 0
 func processNormalLogic(_delta):
   var normalMenuOptions = [tr("UI.PauseMenu.1"), tr("UI.PauseMenu.2"), tr("UI.PauseMenu.3"), tr("UI.PauseMenu.4"), tr("UI.PauseMenu.5")]
-  var normalMenuOptionsOnMainMenu = [tr("UI.MainMenu.0"), tr("UI.PauseMenu.2"), tr("UI.PauseMenu.3"), tr("UI.PauseMenu.4"), tr("UI.PauseMenu.6")]
+  var normalMenuOptionsOnMainMenu = [tr("UI.MainMenu.0"), tr("UI.PauseMenu.2"), tr("UI.PauseMenu.3"), tr("UI.PauseMenu.4"), tr("UI.MainMenu.CreditsPrompt"), tr("UI.PauseMenu.6")]
   if global.isOnMainMenu:
     normalMenuOptions = normalMenuOptionsOnMainMenu
   pauseTitleText.bbcode_text = (tr("UI.PauseMenu.0") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")])
@@ -346,6 +357,7 @@ func processNormalLogic(_delta):
   elif normalOptionIndex >= len(normalMenuOptions):
     normalOptionIndex = 0
   repositionCursorSprite(normalOptionIndex)
+  cursorSprite.position.y -= 40
 
   if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     pauseMenuState = PauseMenuState.TEMP
@@ -361,16 +373,27 @@ func processNormalLogic(_delta):
         level.restartMusic()
     elif normalOptionIndex == 1:
       yield(get_tree().create_timer(0.1), "timeout")
+      normalMenuText.rect_position.y = 65
       pauseMenuState = PauseMenuState.TOP_INPUT
       topInputOptionIndex = 0
     elif normalOptionIndex == 2:
       yield(get_tree().create_timer(0.1), "timeout")
+      normalMenuText.rect_position.y = 65
       pauseMenuState = PauseMenuState.GRAPHICS
     elif normalOptionIndex == 3:
       yield(get_tree().create_timer(0.1), "timeout")
+      normalMenuText.rect_position.y = 65
       pauseMenuState = PauseMenuState.SOUND
     elif normalOptionIndex == 4:
       yield(get_tree().create_timer(0.1), "timeout")
+      normalMenuText.rect_position.y = 65
+      if global.isOnMainMenu:
+        pauseMenuState = PauseMenuState.GO_TO_CREDITS
+      else:
+        pauseMenuState = PauseMenuState.QUIT_TO_MAIN
+    elif normalOptionIndex == 5:
+      yield(get_tree().create_timer(0.1), "timeout")
+      normalMenuText.rect_position.y = 65
       pauseMenuState = PauseMenuState.QUIT_TO_MAIN
     # elif normalOptionIndex == 5:
     #   OS.shell_open("https://steamcommunity.com/app/1876850/discussions/0/")
@@ -549,6 +572,50 @@ func processSoundLogic(_delta):
     pauseMenuState = PauseMenuState.NORMAL
     shouldUpdateMenuText = true
 
+var goToCreditsOptionIndex = 0
+func processGoToCreditsLogic(_delta):
+  if not global.isOnMainMenu:
+    pauseMenuState = PauseMenuState.NORMAL
+    return
+  var goToCreditsOptions = [tr("UI.Confirmation"), tr("UI.Cancel")]
+  pauseTitleText.bbcode_text = tr("UI.MainMenu.CreditsPrompt") + " " + tr("UI.MainMenu.CreditsConfirm") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
+
+  if shouldUpdateMenuText:
+    var text = ""
+    for i in range(len(goToCreditsOptions)):
+      var option = goToCreditsOptions[i]
+      if i == goToCreditsOptionIndex:
+        text += "[wave]" + str(option) + "[/wave]\n" 
+      else:
+        text += "[color=gray]" + str(option) + "[/color]\n" 
+    normalMenuText.bbcode_text = text
+    shouldUpdateMenuText = false
+
+  if player.justPressedMenuDown():
+    goToCreditsOptionIndex += 1
+    shouldUpdateMenuText = true
+  elif player.justPressedMenuUp():
+    goToCreditsOptionIndex -= 1
+    shouldUpdateMenuText = true
+  if goToCreditsOptionIndex < 0:
+    goToCreditsOptionIndex = len(goToCreditsOptions) - 1
+  elif goToCreditsOptionIndex >= len(goToCreditsOptions):
+    goToCreditsOptionIndex = 0
+  repositionCursorSprite(goToCreditsOptionIndex)
+
+  if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
+    if goToCreditsOptionIndex == 0:
+      global.has_really_started_game = true
+      global.okay_really_really_started_game = true
+      global.isEnteringRoom = true
+      transition.long_fade_to("res://levels/EndlessFantasy/gd1/EndCredits.tscn")
+      global.isRespawning = true
+    elif goToCreditsOptionIndex == 1:
+      pauseMenuState = PauseMenuState.NORMAL
+      shouldUpdateMenuText = true
+  elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
+    pauseMenuState = PauseMenuState.NORMAL
+    shouldUpdateMenuText = true
 
 var quitToMainOptionIndex = 0
 func processQuitToMainLogic(_delta):

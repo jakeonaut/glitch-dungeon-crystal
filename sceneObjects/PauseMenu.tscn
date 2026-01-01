@@ -130,7 +130,6 @@ shader_param/palette_out = ExtResource( 22 )
 [sub_resource type="CanvasItemMaterial" id=72]
 
 [node name="PauseMenu" type="Control"]
-visible = false
 margin_left = -86.0
 margin_right = 640.0
 margin_bottom = 522.0

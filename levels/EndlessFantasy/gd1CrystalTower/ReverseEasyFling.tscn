@@ -452,6 +452,9 @@ path = "res://levels/EndlessFantasy/gd1CrystalTower/PastoralTowerHub.tscn"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 17, 0 )
 glitch_form = 1
 
+[node name="SavePoint4" parent="Viewport/level" instance=ExtResource( 33 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 5, 0 )
+
 [node name="Viewport2" parent="." instance=ExtResource( 37 )]
 
 [node name="ViewportTexture" type="TextureRect" parent="Viewport2"]
