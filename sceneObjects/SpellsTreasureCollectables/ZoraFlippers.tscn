@@ -15,7 +15,6 @@
 [ext_resource path="res://assets/sounds/eba_funny.wav" type="AudioStream" id=13]
 [ext_resource path="res://scripts/SpellsTreasures/FlippersAbortSound.gd" type="Script" id=14]
 [ext_resource path="res://assets/DELETEME/LA_Chest_Open.wav" type="AudioStream" id=15]
-[ext_resource path="res://assets/npcs/spellbookPagePortrait.png" type="Texture" id=16]
 [ext_resource path="res://assets/treasureChest.png" type="Texture" id=17]
 
 [sub_resource type="SphereShape" id=2]
@@ -563,7 +562,6 @@ script = ExtResource( 12 )
 grav = 0
 bbText = "•SOUL OF FISH
 try jumping in water"
-portrait = ExtResource( 16 )
 is_important = true
 can_activate = false
 can_move = false

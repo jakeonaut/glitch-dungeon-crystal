@@ -27,7 +27,6 @@
 [ext_resource path="res://scripts/SpellsTreasures/MimicAbortSound.gd" type="Script" id=42]
 [ext_resource path="res://scripts/SpellsTreasures/MimicDialogStartSound.gd" type="Script" id=43]
 [ext_resource path="res://assets/treasureChest.png" type="Texture" id=44]
-[ext_resource path="res://assets/npcs/spellbookPagePortrait.png" type="Texture" id=45]
 [ext_resource path="res://assets/DELETEME/LA_Chest_Open.wav" type="AudioStream" id=46]
 [ext_resource path="res://assets/treasureChestGirl.png" type="Texture" id=47]
 [ext_resource path="res://assets/sounds/eba_funny.wav" type="AudioStream" id=48]
@@ -867,7 +866,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.25 )
 script = ExtResource( 9 )
 grav = 0
 bbText = "NPC.Treasure.4"
-portrait = ExtResource( 45 )
 is_important = true
 can_activate = false
 can_move = false

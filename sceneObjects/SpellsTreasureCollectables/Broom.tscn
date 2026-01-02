@@ -5,7 +5,6 @@
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=3]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=4]
 [ext_resource path="res://assets/sounds/sfx004_meteors.wav" type="AudioStream" id=5]
-[ext_resource path="res://assets/npcs/spellbookPagePortrait.png" type="Texture" id=6]
 [ext_resource path="res://assets/sounds/sparkle.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=8]
 [ext_resource path="res://scripts/SpellsTreasures/BroomAbortSound.gd" type="Script" id=9]
@@ -111,7 +110,6 @@ script = ExtResource( 10 )
 grav = 0
 bbText = "•[wave]Enchanted Broom[/wave]
 GET!"
-portrait = ExtResource( 6 )
 is_important = true
 can_activate = false
 can_move = false

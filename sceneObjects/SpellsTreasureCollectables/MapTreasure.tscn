@@ -13,7 +13,6 @@
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=11]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=12]
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=13]
-[ext_resource path="res://assets/npcs/spellbookPagePortrait.png" type="Texture" id=14]
 [ext_resource path="res://assets/sounds/eba_funny.wav" type="AudioStream" id=15]
 [ext_resource path="res://assets/treasureChest.png" type="Texture" id=16]
 [ext_resource path="res://scripts/MapTreasureDialogStartSound.gd" type="Script" id=17]
@@ -452,7 +451,6 @@ shader_param/target_palette = ExtResource( 12 )
 script = ExtResource( 5 )
 grav = 0
 bbText = "NPC.Treasure.3"
-portrait = ExtResource( 14 )
 is_important = true
 can_activate = false
 can_move = false

@@ -12,7 +12,6 @@
 [ext_resource path="res://assets/sounds/smack.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/sounds/sfx004_meteors.wav" type="AudioStream" id=11]
 [ext_resource path="res://assets/sprites/spinning_cube_sheet.png" type="Texture" id=12]
-[ext_resource path="res://assets/npcs/spellbookPagePortrait.png" type="Texture" id=13]
 [ext_resource path="res://assets/treasureChest.png" type="Texture" id=14]
 [ext_resource path="res://scripts/SpellsTreasures/EnchantedBagAbortSound.gd" type="Script" id=15]
 [ext_resource path="res://assets/sounds/eba_funny.wav" type="AudioStream" id=16]
@@ -467,7 +466,6 @@ script = ExtResource( 8 )
 grav = 0
 bbText = "•BAG OF GOODIES
 HP is +1"
-portrait = ExtResource( 13 )
 is_important = true
 can_activate = false
 can_move = false

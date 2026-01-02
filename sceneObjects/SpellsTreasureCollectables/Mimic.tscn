@@ -21,7 +21,6 @@
 [ext_resource path="res://assets/sounds/sfx004_meteors.wav" type="AudioStream" id=19]
 [ext_resource path="res://assets/DELETEME/LA_Chest_Open.wav" type="AudioStream" id=20]
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=21]
-[ext_resource path="res://assets/npcs/spellbookPagePortrait.png" type="Texture" id=22]
 [ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=23]
 [ext_resource path="res://scripts/SpellsTreasures/TreasureCollectable.gd" type="Script" id=24]
 
@@ -562,7 +561,6 @@ script = ExtResource( 24 )
 grav = 0
 bbText = "•SLIPPERS
 now you can run"
-portrait = ExtResource( 22 )
 is_important = true
 can_activate = false
 can_move = false

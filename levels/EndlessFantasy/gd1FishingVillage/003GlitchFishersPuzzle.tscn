@@ -21,7 +21,6 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FishingRod.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sceneObjects/Environment/Fishy.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/Enemies/GlitchSlime.tscn" type="PackedScene" id=21]
-[ext_resource path="res://assets/npcs/frogwizportrait.png" type="Texture" id=22]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=25]
@@ -818,7 +817,6 @@ visible = false
 grav = 0
 bbText = "•use [SPACE] to switch between the
 last two colors!"
-portrait = ExtResource( 22 )
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC8/SmallInteractionArea" index="0"]

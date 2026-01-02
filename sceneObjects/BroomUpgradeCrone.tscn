@@ -16,7 +16,6 @@
 [ext_resource path="res://levels/EndlessFantasy/gd1/Haven2CroneDialogStartSound.gd" type="Script" id=14]
 [ext_resource path="res://assets/sounds/eba_speech_old_women.wav" type="AudioStream" id=15]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Frog.wav" type="AudioStream" id=16]
-[ext_resource path="res://assets/npcs/frogwizportrait.png" type="Texture" id=17]
 
 [sub_resource type="BoxShape" id=72]
 resource_local_to_scene = true
@@ -176,7 +175,6 @@ shape = SubResource( 81 )
 [node name="NPC TextBox" parent="." instance=ExtResource( 8 )]
 
 [node name="Portrait" parent="NPC TextBox/TextBox/PortraitColor/ColorRect2/ColorRect4" index="0"]
-texture = ExtResource( 17 )
 
 [node name="DialogStartSound" parent="NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 16 )

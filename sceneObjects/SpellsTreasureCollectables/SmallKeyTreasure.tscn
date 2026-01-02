@@ -15,7 +15,6 @@
 [ext_resource path="res://assets/sounds/eba_funny.wav" type="AudioStream" id=13]
 [ext_resource path="res://assets/DELETEME/LA_Chest_Open.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/treasureChest.png" type="Texture" id=16]
-[ext_resource path="res://assets/npcs/spellbookPagePortrait.png" type="Texture" id=17]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=18]
 
 [sub_resource type="SphereShape" id=2]
@@ -382,7 +381,6 @@ shader_param/target_palette = ExtResource( 1 )
 script = ExtResource( 11 )
 grav = 0
 bbText = "UI.Alert.0"
-portrait = ExtResource( 17 )
 is_important = true
 can_activate = false
 can_move = false

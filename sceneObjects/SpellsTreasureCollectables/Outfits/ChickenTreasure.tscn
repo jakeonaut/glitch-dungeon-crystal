@@ -14,7 +14,6 @@
 [ext_resource path="res://assets/treasureChest.png" type="Texture" id=12]
 [ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=13]
 [ext_resource path="res://assets/sprites/spinning_cube_sheet.png" type="Texture" id=14]
-[ext_resource path="res://assets/npcs/spellbookPagePortrait.png" type="Texture" id=15]
 [ext_resource path="res://assets/sounds/eba_funny.wav" type="AudioStream" id=16]
 [ext_resource path="res://assets/palettes/dark_grey_palette2.png" type="Texture" id=17]
 [ext_resource path="res://assets/DELETEME/LA_Chest_Open.wav" type="AudioStream" id=18]
@@ -477,7 +476,6 @@ shader_param/target_palette = ExtResource( 11 )
 script = ExtResource( 4 )
 grav = 0
 bbText = "NPC.Outfit.1"
-portrait = ExtResource( 15 )
 is_important = true
 can_activate = false
 can_move = false

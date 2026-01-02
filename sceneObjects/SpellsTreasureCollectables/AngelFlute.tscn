@@ -4,7 +4,6 @@
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=2]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=3]
 [ext_resource path="res://assets/treasureChest.png" type="Texture" id=4]
-[ext_resource path="res://assets/npcs/spellbookPagePortrait.png" type="Texture" id=5]
 [ext_resource path="res://assets/sounds/eba_funny.wav" type="AudioStream" id=6]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=7]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=8]
@@ -361,7 +360,6 @@ grav = 0
 bbText = "•You got \"Little Bird\".
 It can fly you to 
 angel statues."
-portrait = ExtResource( 5 )
 is_important = true
 can_activate = false
 can_move = false

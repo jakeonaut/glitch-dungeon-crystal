@@ -4,7 +4,6 @@
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=3]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=4]
-[ext_resource path="res://assets/npcs/spellbookPagePortrait.png" type="Texture" id=5]
 [ext_resource path="res://assets/treasureChest.png" type="Texture" id=6]
 [ext_resource path="res://assets/sounds/eba_funny.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/DELETEME/LA_Chest_Open.wav" type="AudioStream" id=8]
@@ -452,7 +451,6 @@ shader_param/target_palette = ExtResource( 2 )
 script = ExtResource( 13 )
 grav = 0
 bbText = "UI.Outfit.2"
-portrait = ExtResource( 5 )
 is_important = true
 can_activate = false
 can_move = false

@@ -14,7 +14,6 @@
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/sounds/smack.wav" type="AudioStream" id=13]
 [ext_resource path="res://assets/sounds/chesiremiao.wav" type="AudioStream" id=14]
-[ext_resource path="res://assets/npcs/catportrait2.png" type="Texture" id=15]
 [ext_resource path="res://assets/sounds/eba_speech_info.wav" type="AudioStream" id=16]
 [ext_resource path="res://sceneObjects/BabushkaCatCrystalSnifferAbortSound.gd" type="Script" id=17]
 [ext_resource path="res://assets/sounds/exhale.mp3" type="AudioStream" id=18]
@@ -171,7 +170,6 @@ shape = SubResource( 51 )
 
 [node name="Portrait" parent="NPC TextBox/TextBox/PortraitColor/ColorRect2/ColorRect4" index="0"]
 material = null
-texture = ExtResource( 15 )
 
 [node name="DialogStartSound" parent="NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 14 )

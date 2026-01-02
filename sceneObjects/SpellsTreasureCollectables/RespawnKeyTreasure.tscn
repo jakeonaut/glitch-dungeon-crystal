@@ -13,7 +13,6 @@
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=11]
 [ext_resource path="res://assets/DELETEME/LA_Chest_Open.wav" type="AudioStream" id=12]
 [ext_resource path="res://scripts/SpellsTreasures/RespawnKeyTreasureDialogStartSound.gd" type="Script" id=13]
-[ext_resource path="res://assets/npcs/spellbookPagePortrait.png" type="Texture" id=14]
 [ext_resource path="res://assets/treasureChest.png" type="Texture" id=15]
 [ext_resource path="res://scripts/SpellsTreasures/RespawnKeyTreasureAbortSound.gd" type="Script" id=16]
 [ext_resource path="res://assets/sounds/eba_funny.wav" type="AudioStream" id=17]
@@ -403,7 +402,6 @@ shader_param/target_palette = ExtResource( 2 )
 script = ExtResource( 10 )
 grav = 0
 bbText = "See RespawnKeyTreasureDialogStartSound.gd"
-portrait = ExtResource( 14 )
 is_important = true
 can_activate = false
 can_move = false

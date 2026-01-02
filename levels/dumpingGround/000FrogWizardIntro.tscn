@@ -15,7 +15,6 @@
 [ext_resource path="res://sceneObjects/NPC.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=15]
-[ext_resource path="res://assets/npcs/frogwizportrait.png" type="Texture" id=16]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=18]
 [ext_resource path="res://sceneObjects/Environment/Torch.tscn" type="PackedScene" id=19]
@@ -335,7 +334,6 @@ shape = SubResource( 24 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 23, 0 )
 grav = 0
 walk_speed = 6
-portrait = ExtResource( 16 )
 is_important = true
 is_really_important = true
 
@@ -369,7 +367,6 @@ shape = SubResource( 20 )
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 14, 0 )
 grav = 0
-portrait = ExtResource( 16 )
 is_important = true
 is_really_important = true
 

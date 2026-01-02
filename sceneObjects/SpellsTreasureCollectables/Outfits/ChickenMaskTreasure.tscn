@@ -1,6 +1,5 @@
 [gd_scene load_steps=29 format=2]
 
-[ext_resource path="res://assets/npcs/spellbookPagePortrait.png" type="Texture" id=1]
 [ext_resource path="res://assets/sounds/eba_funny.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/treasureChest.png" type="Texture" id=3]
 [ext_resource path="res://scripts/SpellsTreasures/Outfits/OutfitDialogAbortSound.gd" type="Script" id=4]
@@ -452,7 +451,6 @@ shader_param/target_palette = ExtResource( 5 )
 script = ExtResource( 9 )
 grav = 0
 bbText = "UI.Outfit.1"
-portrait = ExtResource( 1 )
 is_important = true
 can_activate = false
 can_move = false

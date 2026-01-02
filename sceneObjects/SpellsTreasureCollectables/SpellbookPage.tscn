@@ -10,7 +10,6 @@
 [ext_resource path="res://sceneObjects/TextBox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=9]
 [ext_resource path="res://assets/sounds/sfx004_meteors.wav" type="AudioStream" id=10]
-[ext_resource path="res://assets/npcs/spellbookPagePortrait.png" type="Texture" id=11]
 [ext_resource path="res://scripts/SpellsTreasures/SpellbookPageAbortSound.gd" type="Script" id=13]
 [ext_resource path="res://assets/sounds/OOT_Pot_Shatter.wav" type="AudioStream" id=14]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=15]
@@ -375,7 +374,6 @@ grav = 0
 bbText = "•You got \"Grimoire\"
 ..but it's missing a
 few pages"
-portrait = ExtResource( 11 )
 is_important = true
 can_activate = false
 can_move = false

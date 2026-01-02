@@ -2,7 +2,6 @@
 
 [ext_resource path="res://scripts/TextContainer.gd" type="Script" id=1]
 [ext_resource path="res://scripts/TextBox.gd" type="Script" id=2]
-[ext_resource path="res://assets/npcs/tadpoleportrait.png" type="Texture" id=3]
 [ext_resource path="res://dialogBodyFontTheme.tres" type="Theme" id=4]
 [ext_resource path="res://assets/sounds/pop.wav" type="AudioStream" id=5]
 [ext_resource path="res://scripts/AbortSound.gd" type="Script" id=6]
@@ -56,7 +55,6 @@ shader_param/shake_rate = 0.5
 shader_param/shake_speed = 5.0
 shader_param/shake_block_size_3d = 30.5
 shader_param/shake_color_rate_3d = 0.5
-shader_param/texture_albedo = ExtResource( 3 )
 shader_param/base_palette = ExtResource( 7 )
 
 [node name="TextContainer" type="CanvasLayer"]
@@ -119,7 +117,6 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 material = SubResource( 4 )
 position = Vector2( 41, 40.9 )
 scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 3 )
 script = ExtResource( 12 )
 max_frames = 1
 
@@ -289,13 +286,11 @@ vframes = 8
 frame = 41
 
 [node name="NextPrompt" type="Sprite" parent="TextBox"]
-material = SubResource( 3 )
 position = Vector2( 439.783, 103.343 )
 scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 9 )
 
 [node name="EndPrompt" type="Sprite" parent="TextBox"]
-material = SubResource( 3 )
 position = Vector2( 439.783, 103.343 )
 scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 10 )
