@@ -60,9 +60,9 @@ func _process(_delta):
     elif player.physics_state == player.PhysicsState.WAKING_UP:
       global.pauseMoveInput = true
     elif player.physics_state == player.PhysicsState.NORMAL and player.on_ground:
-      if innerPeaceReverseSound.is_playing():
-        innerPeaceReverseSound.stop()
-      innerPeaceSound.play()
+      # if innerPeaceReverseSound.is_playing():
+      #   innerPeaceReverseSound.stop()
+      # innerPeaceSound.play()
       global.pauseMoveInput = false
       global.shouldRenderAsCinematic = false
       player.textBox.interact()

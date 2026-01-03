@@ -162,15 +162,15 @@ func playDefeatBossJingle():
 
 func conductFromScenePath(path):
     print("path: " + path + ", " + str(global.has_ever_seen_intro))
-    if global.userSettings["stopAllMusic"] or path.find("000Intro") > 0 or path.find("IntroVideo") > 0 or (
-        path.find("MainMenu") > 0 and not global.has_ever_seen_intro
-    ):
+    if global.userSettings["stopAllMusic"] or path.find("000Intro") > 0 or path.find("IntroVideo") > 0:
         stopAll()
         return
     changeSongPitch(1.0)
     if path.find("0_0") > 0 and not global.okay_really_really_started_game and not path.find("Nullify") > 0:
         stopAll()
         return
+    elif path.find("MainMenu") > 0 and not global.has_ever_seen_intro:
+        tryToPlay(primordialOozeThemePlayer)
     elif path.find("preBossRoom") > 0 or \
        (path.find("HighPriestessRoom") > 0 and global.memory["priestess"] >= 2) or \
        path.find("MiniRestZone") > 0 or \

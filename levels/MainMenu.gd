@@ -60,7 +60,7 @@ func setUpRoomInitializationOverride():
             epilepsyWarning.visible = false
             uiLayer.visible = true
         else:
-            logoSprite.visible = true
+            # logoSprite.visible = true
             mainMenuState = MainMenuState.MAIN_MENU
             uiLayer.visible = true
             videoPlayer.visible = false
@@ -384,7 +384,6 @@ func _process(delta):
     global.isEndOfGame = false
     if mainMenuState == MainMenuState.PLAYING_INTRO_VIDEO:
         videoPlayer.visible = true
-        logoSprite.visible = true
         uiLayer.visible = true
         player.sleepy_timer = 0
         basicCrtEffectRect2.visible = true
@@ -422,7 +421,7 @@ func _process(delta):
     elif mainMenuState == MainMenuState.SHOWING_EPILEPSY_WARNING or \
        mainMenuState == MainMenuState.HIDING_EPILEPSY_WARNING:
         videoPlayer.visible = false
-        logoSprite.visible = true
+        # logoSprite.visible = true
         uiLayer.visible = true
         player.sleepy_timer = 0
         basicCrtEffectRect2.visible = false
