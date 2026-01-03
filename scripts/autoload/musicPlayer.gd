@@ -168,6 +168,8 @@ func conductFromScenePath(path):
     if path.find("0_0") > 0 and not global.okay_really_really_started_game and not path.find("Nullify") > 0:
         stopAll()
         return
+    elif path.find("MainMenu") > 0 and not global.has_ever_seen_intro:
+        tryToPlay(primordialOozeThemePlayer)
     elif path.find("preBossRoom") > 0 or \
        (path.find("HighPriestessRoom") > 0 and global.memory["priestess"] >= 2) or \
        path.find("MiniRestZone") > 0 or \
