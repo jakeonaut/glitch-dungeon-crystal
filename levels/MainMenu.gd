@@ -40,7 +40,6 @@ func setUpRoomInitializationOverride():
     for sprite in [player.mySprite, player.grandmaHatSprite, player.grandmaHandSprite]:
         sprite.material_override.set_shader_param("black_offset", 0)
     if not global.has_started_game:
-        print("dont hide the cat...")
         global.isOnMainMenu = true
         overlayRect.visible = true
         player.normalGlitch()
@@ -52,10 +51,10 @@ func setUpRoomInitializationOverride():
             logoSprite.visible = false
             mainMenuState = MainMenuState.PLAYING_INTRO_VIDEO
             epilepsyWarningText.bbcode_text = tr("UI.Photosensitivity.Warning")
+            yield(TempTimer.idle_frame(self), "timeout")
+            yield(TempTimer.idle_frame(self), "timeout")
             has_finished_initial_initialization = true
             global.has_ever_seen_intro = true
-            yield(TempTimer.idle_frame(self), "timeout")
-            yield(TempTimer.idle_frame(self), "timeout")
             videoPlayer.visible = true
             videoPlayer.play()
             epilepsyWarning.visible = false
@@ -735,6 +734,7 @@ func playMenuMusic():
     
 # @override
 func restartMusic():
+    print("main menu restart music")
     if not has_ever_started_music:
         musicPlayer.conductFromScenePath(getLevelName())
         has_ever_started_music = true

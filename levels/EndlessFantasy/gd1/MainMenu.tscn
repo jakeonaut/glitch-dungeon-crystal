@@ -3324,7 +3324,7 @@ texture = SubResource( 235 )
 mesh = SubResource( 348 )
 
 [node name="MeshInstance2" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="Camera" parent="Viewport2/UILayer/GlitchStatusRect/Viewport" index="1"]
 current = true
@@ -3643,11 +3643,11 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="VideoPlayer" type="VideoPlayer" parent="Viewport2/UILayer"]
 visible = false
-margin_left = -80.0
-margin_right = 680.0
+margin_left = -90.0
+margin_right = 690.0
 margin_bottom = 512.0
 stream = ExtResource( 75 )
-volume_db = -10.0
+volume_db = 10.0
 bus = "Sfx"
 
 [node name="IntroVideoFrames" type="Control" parent="Viewport2/UILayer"]
