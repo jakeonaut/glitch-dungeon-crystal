@@ -22,6 +22,8 @@ enum MainMenuState {
     HIDING_EPILEPSY_WARNING,
     PLAYING_INTRO_VIDEO,
     HIDING_INTRO_VIDEO,
+    SHOWING_PETSCLUB2_SPLASH,
+    HIDING_PETSCLUB2_SPLASH,
     MAIN_MENU,
     MAIN_MENU_FILE_ACTION,
     TRY_DELETE_FILE,
@@ -60,7 +62,7 @@ func setUpRoomInitializationOverride():
             epilepsyWarning.visible = false
             uiLayer.visible = true
         else:
-            # logoSprite.visible = true
+            logoSprite.visible = true
             mainMenuState = MainMenuState.MAIN_MENU
             uiLayer.visible = true
             videoPlayer.visible = false
@@ -71,7 +73,6 @@ func setUpRoomInitializationOverride():
         epilepsyWarning.visible = false
         uiLayer.visible = true
         self.remove_child(get_node("BabushkaCat"))
-        print("hide the cat?")
         logoSprite.visible = false
         overlayRect.visible = false
         mainMenuUi.visible = false
@@ -102,7 +103,7 @@ onready var secretGlitchyNPC6 = get_node("SecretGlitchyNPC6")
 onready var croneNPC = get_node("CroneNPC")
 onready var cowNPC = get_node("NPC2")
 onready var doorToLoadingScreen = get_node("DoorToLoadingScreen")
-onready var logoSprite = get_node("LogoSprite")
+onready var logoSprite = get_node("../../Viewport2/CanvasLayer/LogoSprite")
 # onready var demoSprite = get_node("../../Viewport2/CanvasLayer/LogoSprite/DemoSprite")
 var logoTex2 = preload("res://assets/sprites/logo2.png")
 var logoTex3 = preload("res://assets/sprites/logo3.png")
@@ -358,6 +359,8 @@ func loadGame(saveGameIndex):
 func quitGame():
     get_tree().quit()
 
+onready var petsClub2Splash = get_node("PetsClub2Splash")
+onready var petsClub2SplashSprite = get_node("PetsClub2Splash/Sprite3D")
 onready var mainMenuUi = get_node("../../Viewport2/UILayer/MainMenu")
 onready var optionsMenuPrompt = get_node("../../Viewport2/UILayer/MainMenu/OptionsMenuPrompt")
 onready var selectPrompt = get_node("../../Viewport2/UILayer/MainMenu/SelectPrompt")
@@ -402,7 +405,7 @@ func _process(delta):
             ):
                 mainMenuState = MainMenuState.HIDING_INTRO_VIDEO
                 transition.aniPlayer.stop()
-                transition.aniPlayer.play("longest_fade_no_change")
+                transition.aniPlayer.play("long_fade_no_change")
                 splash_cover_opacity = -1
                 return
         return
@@ -421,7 +424,6 @@ func _process(delta):
     elif mainMenuState == MainMenuState.SHOWING_EPILEPSY_WARNING or \
        mainMenuState == MainMenuState.HIDING_EPILEPSY_WARNING:
         videoPlayer.visible = false
-        # logoSprite.visible = true
         uiLayer.visible = true
         player.sleepy_timer = 0
         basicCrtEffectRect2.visible = false
@@ -448,15 +450,57 @@ func _process(delta):
                 epilepsy_cover_opacity = 1
                 transition.reverse_fade()
                 epilepsyWarning.visible = false
-                mainMenuState = MainMenuState.MAIN_MENU
+                mainMenuState = MainMenuState.SHOWING_PETSCLUB2_SPLASH
+                logoSprite.visible = false
                 # videoPlayer.play()
                 # musicPlayer.tryToPlay(musicPlayer.grannyPlayer)
+        epilepsyWarningCoverup.color = Color(0, 0, 0, epilepsy_cover_opacity)
+        return
+    if mainMenuState == MainMenuState.SHOWING_PETSCLUB2_SPLASH or \
+       mainMenuState == MainMenuState.HIDING_PETSCLUB2_SPLASH:
+        player.sleepy_timer = 0
+        basicCrtEffectRect2.visible = global.userSettings["show_crt_effect"]
+        petsClub2Splash.visible = true
+        uiLayer.visible = false
+        player.camera_y_offset = -10
+        gameCamera.initial_size = camera_size
+        gameCamera.zoomed_size = camera_size
+        gameCamera.size = camera_size
+        if mainMenuState == MainMenuState.SHOWING_PETSCLUB2_SPLASH:
+            if not has_finished_initial_initialization:
+                return
+            splash_cover_opacity -= (delta)
+            if splash_cover_opacity < 0:
+                splash_cover_opacity = 0
+                epilepsy_fade_timer += (delta*11)
+                if epilepsy_fade_timer >= EPILEPSY_SHOW_TIME_LIMIT or (
+                    Input.is_action_just_pressed("sub_action_button") or \
+                    Input.is_action_just_pressed("jump_button") or \
+                    Input.is_action_just_pressed("ui_start") or \
+                    (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))
+                ):
+                    mainMenuState = MainMenuState.HIDING_PETSCLUB2_SPLASH
+                    petsClub2Splash.mesh = null
+                    petsClub2SplashSprite.material_override.set_shader_param("enable_glitch", true)
+                    petsClub2SplashSprite.material_override.set_shader_param("enable_glitch_3d", true)
+                    # transition.aniPlayer.stop()
+                    # transition.aniPlayer.play("long_fade_no_change")
+                    splash_cover_opacity = 0
+        elif mainMenuState == MainMenuState.HIDING_PETSCLUB2_SPLASH:
+            splash_cover_opacity += (delta)
+            if splash_cover_opacity >= 1:
+                splash_cover_opacity = 1
+                # transition.reverse_fade()
+                epilepsyWarning.visible = false
+                petsClub2Splash.visible = false
+                uiLayer.visible = true
+                mainMenuState = MainMenuState.MAIN_MENU
+                logoSprite.visible = true
                 player.aniPlayer.stop()
                 player.aniPlayer.clear_queue()
                 player.aniPlayer.play("land")
                 player.aniPlayer.queue("stand")
                 player.aniPlayer.queue("happyStand")
-        epilepsyWarningCoverup.color = Color(0, 0, 0, epilepsy_cover_opacity)
         return
     elif mainMenuState == MainMenuState.TRY_DELETE_FILE:
         confirmationLayer.visible = true
@@ -518,7 +562,7 @@ func _process(delta):
         global.spellCastPauseIndex = 0
         player.spellCastPauseIndex = 0
         # demoSprite.visible = global.demo_mode > 0
-        player.camera_y_offset = -20
+        player.camera_y_offset = -10
         gameCamera.initial_size = camera_size
         gameCamera.zoomed_size = camera_size
         gameCamera.size = camera_size
