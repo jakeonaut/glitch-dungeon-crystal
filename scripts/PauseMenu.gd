@@ -323,7 +323,7 @@ func repositionInputCursorSprite(index, _showCondensedMenu):
   cursorSprite.scale = Vector2(3, 3)
   cursorSprite.position.x = 100
   #if showCondensedMenu:
-  cursorSprite.position.y = 15 + (31*index)
+  cursorSprite.position.y = 15 + (29*index)
   #else:
   #  cursorSprite.position.y = 114 + (44*index)
 
