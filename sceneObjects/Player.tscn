@@ -1,4 +1,4 @@
-[gd_scene load_steps=207 format=2]
+[gd_scene load_steps=209 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player/PlayerInteractionArea.gd" type="Script" id=2]
@@ -100,6 +100,8 @@
 [ext_resource path="res://assets/player_sheet_old_hand.png" type="Texture" id=98]
 [ext_resource path="res://assets/sounds/sporeJump.wav" type="AudioStream" id=99]
 [ext_resource path="res://assets/sounds/eb_menu1.wav" type="AudioStream" id=100]
+[ext_resource path="res://sceneObjects/SporeSavePoint.tscn" type="PackedScene" id=101]
+[ext_resource path="res://scripts/SavePoint.gd" type="Script" id=102]
 
 [sub_resource type="BoxShape" id=94]
 extents = Vector3( 0.36, 0.5, 1 )
@@ -5643,6 +5645,18 @@ tracks/2/keys = {
 "method": "getABroom"
 } ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/Sprite3DBroomAnimated:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.3, 0.5, 0.7, 0.9, 1.1, 1.3, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.125, 0, 0.7 ), Vector3( 1.125, 0, 0.7 ), Vector3( 1.125, 0, 0.7 ), Vector3( 1.125, 0, 0.7 ), Vector3( 1.125, 0, 0.7 ), Vector3( 1.125, 0, 0.7 ), Vector3( 1.125, 0, 0.7 ) ]
+}
 
 [sub_resource type="Animation" id=25]
 length = 0.3
@@ -8198,5 +8212,9 @@ frame = 59
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ExclamationSprite"]
 anims/RESET = SubResource( 126 )
 anims/exclaim = SubResource( 127 )
+
+[node name="SporeSavePoint" parent="." instance=ExtResource( 101 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 999 )
+script = ExtResource( 102 )
 
 [editable path="TextContainer"]

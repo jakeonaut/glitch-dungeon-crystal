@@ -9,11 +9,11 @@ onready var basicTadpoleEnemy2 = get_node("BasicTadpoleEnemy2")
 onready var basicTadpoleEnemy3 = get_node("BasicTadpoleEnemy3")
 onready var basicTadpoleEnemy4 = get_node("BasicTadpoleEnemy4")
 
-onready var npc3 = get_node("NPC3")
-onready var npc4 = get_node("NPC4")
-onready var fishingRod = get_node("FishingRod")
-onready var fishingRod2 = get_node("FishingRod2")
-onready var fishingRod3 = get_node("FishingRod3")
+onready var npc3 = weakref(get_node("NPC3"))
+onready var npc4 = weakref(get_node("NPC4"))
+onready var fishingRod = weakref(get_node("FishingRod"))
+onready var fishingRod2 = weakref(get_node("FishingRod2"))
+onready var fishingRod3 = weakref(get_node("FishingRod3"))
 var should_process_npcs = true
 
 onready var fishies = get_node("Fishies")
@@ -37,10 +37,10 @@ func setUpRoomInitializationOverride():
         anglerFishBoss.queue_free()
         fishies.queue_free()
         should_process_npcs = false
-        npc3.queue_free()
-        fishingRod.queue_free()
-        fishingRod2.queue_free()
-        fishingRod3.queue_free()
+        if npc3.get_ref() != null: npc3.get_ref().queue_free()
+        if fishingRod.get_ref() != null: fishingRod.get_ref().queue_free()
+        if fishingRod2.get_ref() != null: fishingRod2.get_ref().queue_free()
+        if fishingRod3.get_ref() != null: fishingRod3.get_ref().queue_free()
         yield(get_tree().create_timer(0.5), "timeout")
         summonSmokeClouds(shortcutDoor.global_transform.origin, 2, true, true)
         shortcutDoor.visible = true
@@ -59,8 +59,8 @@ func setUpRoomInitializationOverride():
 
 func _process(_delta):
     if should_process_npcs:
-        processNPCSprite(npc3)
-        processNPCSprite(npc4)
+        processNPCSprite(npc3.get_ref())
+        processNPCSprite(npc4.get_ref())
     # if global.memory["angler_seaman_boss"] >= 2:
     #     dreamOfDeceit.visible = true
     #     dreamOfDeceit.grav = 60

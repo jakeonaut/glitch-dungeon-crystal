@@ -2375,7 +2375,7 @@ margin_bottom = 1527.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="GameCamera" parent="Viewport/level" instance=ExtResource( 45 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, -1.077, 19.226 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 3, 19.226 )
 
 [node name="FakeLevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
@@ -2454,6 +2454,9 @@ texture = ExtResource( 72 )
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 50 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.1354, 0, 0 )
+
+[node name="SporeSavePoint" parent="Viewport/level/Player" index="18"]
+is_weird_soul_spore_save = null
 
 [node name="Sprite3D2" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5469, 2.36, -2 )
@@ -3407,8 +3410,8 @@ color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
 [node name="VideoPlayer" type="VideoPlayer" parent="Viewport2/UILayer"]
 visible = false
-margin_left = -130.0
-margin_right = 730.0
+margin_left = -140.0
+margin_right = 720.0
 margin_bottom = 512.0
 stream = ExtResource( 75 )
 volume_db = 24.0

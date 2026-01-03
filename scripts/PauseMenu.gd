@@ -1461,6 +1461,10 @@ func tryDrawMap():
             sprite.material.set_shader_param("offset", 11)
         continue
       setProperMapFrame(sprite, mapGrid, i, j)
+      var mapPath = mapRoom.path
+      var levelZoneName = global.getLevelZoneName(mapPath)
+      var levelName = global.getShortLevelName(mapPath)
+      var haveIBeenToThisLevel = global.haveIBeenToThisLevelPath(mapPath)
       # if mapRoom.has_angel_statue:
       #   print(mapRoom.path + ": " + str(getBabushkaCatSniffedVar(mapRoom.path)))
       #   if getBabushkaCatSniffedVar(mapRoom.path) > 0 or "0_1Haven" in mapRoom.path:
@@ -1478,16 +1482,16 @@ func tryDrawMap():
       #       else:
       #         sprite.material.set_shader_param("offset", 6)
       var numAngelEggs = mapRoom.has_angel_egg
-      var mapPath = mapRoom.path
-      var levelZoneName = global.getLevelZoneName(mapPath)
-      var levelName = global.getShortLevelName(mapPath)
       if global.memory.has(levelZoneName) and global.memory[levelZoneName].has(levelName):
         if global.memory[levelZoneName][levelName].has("AngelEgg"):
           numAngelEggs -= 1
         if global.memory[levelZoneName][levelName].has("AngelEgg2"):
           numAngelEggs -= 1
       if numAngelEggs > 0 and global.memory["has_eggs_marked"]:
-        sprite.material.set_shader_param("offset", 9)
+        if haveIBeenToThisLevel:
+          sprite.material.set_shader_param("offset", 9)
+        else:
+          sprite.material.set_shader_param("offset", 10)
         if numAngelEggs == 1:
           sprite.frame = 207
         elif numAngelEggs == 2:
@@ -1548,7 +1552,7 @@ func setProperMapFrame(sprite, mapGrid, i, j):
   var mapRoom = mapGrid[i][j] # guaranteed to already have this room at least by the time that we get here.
   var mapPath = mapRoom.path
   var levelZoneName = global.getLevelZoneName(mapPath)
-  var haveIBeenToThisLevel = global.haveIBeenToThisLevelPath(mapPath) or global.memory["world_of_ruin"] > 0
+  var haveIBeenToThisLevel = global.haveIBeenToThisLevelPath(mapPath)# or global.memory["world_of_ruin"] > 0
   sprite.frame = 0
   sprite.material = sprite.material.duplicate()
   sprite.material.set_shader_param("palette_out", global.white_palette2d)

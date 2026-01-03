@@ -553,7 +553,19 @@ func tryToRespawn():
     #   summonSmokeClouds(closest_extra_life.global_transform.origin, 3, true, true)
     #   closest_extra_life.queue_free()
     #   player.saveSound.play()
-    if global.memory.has("savePoint") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():
+    if global.memory.has("weird_active_save_point_x") and global.memory.has("weird_active_save_point_y"):
+      player.global_transform.origin = Vector3(
+        global.memory["weird_active_save_point_x"], 
+        global.memory["weird_active_save_point_y"], 
+        global.memory["weird_active_save_point_z"])
+      player.properlyApplyTransformation()
+      player.last_grounded_pos = Vector3(player.global_transform.origin)
+      global.memory.erase("weird_active_save_point_x")
+      global.memory.erase("weird_active_save_point_y")
+      global.memory.erase("weird_active_save_point_z")
+      player.mySporeSavePoint.global_transform.origin = Vector3(999, 999, 999)
+      player.mushroomClone()
+    elif global.memory.has("savePoint") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():
       var savePoint = get_node(global.memory["savePoint"])
       if savePoint != null:
         player.global_transform.origin = savePoint.global_transform.origin + Vector3(0, -1, 0)
@@ -597,6 +609,7 @@ func tryToRespawn():
           break
     else:
       player.global_transform.origin = player.spawn_origin
+      player.properlyApplyTransformation()
 
   if global.set_camera_position_on_respawn:
     player.camera_target_y_pos = player.global_transform.origin.y

@@ -2379,6 +2379,16 @@ __meta__ = {
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4736, -2.5856, 0 )
+lb = null
+rb = null
+tb = null
+bb = null
+glitch_form = null
+floor_glitch_walk_speed = null
+invisible_glitch_walk_speed = null
+time_influence = null
+y_div = null
+normal_offset = null
 
 [node name="HighPriestessBoss" parent="Viewport/level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.35282, 5.41128, 0 )
@@ -3020,6 +3030,7 @@ grav = 0
 
 [node name="GlitchedGeode" parent="Viewport/level" instance=ExtResource( 58 )]
 transform = Transform( 0.4, 0, 0, 0, 0.5, 0, 0, 0, 0.4, 6.89768, -1.9, 0 )
+spawn_an_elder = false
 
 [node name="CubeContainer" parent="Viewport/level/GlitchedGeode" index="0"]
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )

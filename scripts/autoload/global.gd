@@ -1821,12 +1821,22 @@ func compare2D(sourceVec3, targetVec3, closeness_amt = 0.5):
     var targetVec2 = vec3ToVec2(targetVec3)
     return (sourceVec2 - targetVec2).length() < closeness_amt    
 
-func saveMySpot(savePoint, position, level):
-    global.memory["savePoint"] = savePoint
-    global.memory["active_save_point_x"] = position.x
-    global.memory["active_save_point_y"] = position.y
-    global.memory["active_save_point_z"] = position.z
-    global.memory["savedRoomPath"] = level.getLevelName()
+func saveMySpot(savePoint, position, level, is_weird_soul_spore_save):
+    global.memory.erase("weird_active_save_point_x")
+    global.memory.erase("weird_active_save_point_y")
+    global.memory.erase("weird_active_save_point_z")
+
+    if is_weird_soul_spore_save:
+        global.memory["weird_active_save_point_x"] = position.x
+        global.memory["weird_active_save_point_y"] = position.y
+        global.memory["weird_active_save_point_z"] = position.z
+    else:
+        level.player.mySporeSavePoint.global_transform.origin = Vector3(999, 999, 999)
+        global.memory["savePoint"] = savePoint
+        global.memory["active_save_point_x"] = position.x
+        global.memory["active_save_point_y"] = position.y
+        global.memory["active_save_point_z"] = position.z
+        global.memory["savedRoomPath"] = level.getLevelName()
 
 func broomSmackSound():
     if global.memory["currBroom"] == global.GrandmaBroom.FRYING_PAN:

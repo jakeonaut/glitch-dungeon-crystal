@@ -216,7 +216,7 @@ theme = ExtResource( 20 )
 
 [node name="InputLabels" type="RichTextLabel" parent="InputMenu/ScrollContainer"]
 margin_top = -44.0
-margin_right = 286.0
+margin_right = 420.0
 margin_bottom = 399.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -256,9 +256,9 @@ text = "•move left:
 scroll_active = false
 
 [node name="ButtonInputs" type="RichTextLabel" parent="InputMenu/ScrollContainer"]
-margin_left = 256.0
+margin_left = 360.0
 margin_top = -53.0
-margin_right = 518.0
+margin_right = 538.0
 margin_bottom = 439.0
 grow_horizontal = 2
 grow_vertical = 2

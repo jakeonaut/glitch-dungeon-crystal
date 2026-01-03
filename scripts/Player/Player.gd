@@ -1119,13 +1119,6 @@ func applyGlitchDeathEffects(x):
 func tryRotateCamera(_delta):
   pass
 
-var is_currently_on_save_point = false
-func isOnSavePoint():
-  if not global.memory.has("active_save_point_x"):
-    return false
-    
-  return smallInteractionArea.is_touching_save_point
-
 func nullify():
   glitchTickle(false)
   if global.memory["forget_me_not"]:
@@ -1605,6 +1598,7 @@ func processMoleLogic(delta):
     #   if dig_direction.x < 0 and pressingMoveLeft():
     #     processMoleDigTimer(Vector3(-2, 0, 0))
   elif transformation == TransformationState.UNDERGROUND_RETURNING:
+    getCoveredInDirt()
     if returning_to_save_point > 0:
       getMoleCured()
       return
@@ -1653,6 +1647,7 @@ func processMoleLogic(delta):
         self.was_fallthrough_area_collision_triggered = false
       getMoleCured()
   elif transformation == TransformationState.UNDERGROUND:
+    getCoveredInDirt()
     if returning_to_save_point > 0:
       getMoleCured()
       return
@@ -1705,6 +1700,26 @@ func processMoleLogic(delta):
     # if moleSprite.visible and not aniPlayer.assigned_animation == "revertFromMole":
     #   allSpritesBackToNormal([mySprite, grandmaHatSprite, grandmaHandSprite])
     #   getABroom()
+    if is_covered_in_dirt:
+      is_covered_in_dirt_timer += (delta*11)
+      if is_covered_in_dirt_timer >= is_covered_in_dirt_time_limit:
+        cleanUpDirtCoverage()
+
+func getCoveredInDirt():
+  is_covered_in_dirt_timer = 0
+  if is_covered_in_dirt:
+    return
+  var temp_palette = what_was_my_last_palette
+  changeSpriteColorPalette(global.yellow_player_palette)
+  what_was_my_last_palette = temp_palette
+  is_covered_in_dirt = true
+
+func cleanUpDirtCoverage():
+  is_covered_in_dirt = false
+  is_covered_in_dirt_timer = 0
+  # glitchTickle()
+  if what_was_my_last_palette != null:
+    changeSpriteColorPalette(what_was_my_last_palette)
 
 func applyGravity(delta):
   if dig_timer > 0 and (pressingJump() or glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall()) and can_dig_up and (on_ceiling or was_on_ceiling):
@@ -1876,9 +1891,10 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   tryToApplySpellAssist(global.GlitchForm.INVISIBLE)
   if transitioning or global.isEnteringRoom:
     return
-  if isOnSavePoint():
-    return
   var no_trust_me_guys = Input.is_action_just_pressed("restart_key")
+  # TODO(jaketrower): 1901
+  if isOnSavePoint(no_trust_me_guys):
+    return
   if not no_trust_me_guys and (physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.GLITCH_RECOVERY):
     return
 
@@ -1931,7 +1947,12 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   else:
     hurtSound.pitch_scale = hurtSound_pitch_scale
     hurtSound.play()
-  if not no_trust_me_guys:
+  if no_trust_me_guys:
+    global.memory.erase("weird_active_save_point_x")
+    global.memory.erase("weird_active_save_point_y")
+    global.memory.erase("weird_active_save_point_z")
+    mySporeSavePoint.global_transform.origin = Vector3(999, 999, 999)
+  else:
     bumpSound.pitch_scale = hurtSound_pitch_scale
     bumpSound.play()
   global.pauseGame = true
@@ -1981,21 +2002,21 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     nesting_doll_state = global.NestingDoll.GRANDMA
     updateNestingDoll(nesting_doll_state)
     global.pauseMoveInput = false
-  elif nesting_doll_state == global.NestingDoll.GRANDMA and global.memory["mushroom_soul"] >= 1 and global.memory["mushroom_soul_enabled"] and not should_immediately_die and whichBoss == null:
-    global.memory["hp"] += 1
-    physics_state = PhysicsState.GLITCH_HURT
-    glitchTickle(true)
-    getSmacked()
-    glitch_death_timer = 0
-    shroomAniPlayer.stop()
-    shroomAniPlayer.clear_queue()
-    shroomAniPlayer.play("RESET")
-    shroomAniPlayer.queue("shrink")
-    shroomAniPlayer.queue("adjust")
-    nesting_doll_state = global.NestingDoll.BABY
-    global.memory["nesting_doll"] = global.NestingDoll.BABY
-    updateNestingDoll(global.NestingDoll.BABY)
-    loseBroom()
+  # elif nesting_doll_state == global.NestingDoll.GRANDMA and global.memory["mushroom_soul"] >= 1 and global.memory["mushroom_soul_enabled"] and not should_immediately_die and whichBoss == null:
+  #   global.memory["hp"] += 1
+  #   physics_state = PhysicsState.GLITCH_HURT
+  #   glitchTickle(true)
+  #   getSmacked()
+  #   glitch_death_timer = 0
+  #   shroomAniPlayer.stop()
+  #   shroomAniPlayer.clear_queue()
+  #   shroomAniPlayer.play("RESET")
+  #   shroomAniPlayer.queue("shrink")
+  #   shroomAniPlayer.queue("adjust")
+  #   nesting_doll_state = global.NestingDoll.BABY
+  #   global.memory["nesting_doll"] = global.NestingDoll.BABY
+  #   updateNestingDoll(global.NestingDoll.BABY)
+  #   loseBroom()
   elif global.memory["hp"] <= 0 or should_immediately_die or (whichBoss != null and whichBoss.num_granny_hits == 0):
     if summonedBroom:
       broomStop()
@@ -2151,7 +2172,13 @@ func tumbleFall(direction_vector, is_corrupted = false):
 
 # @override
 func isFeatherLike():
-  return glitch_form == global.GlitchForm.FEATHER and physics_state != PhysicsState.BEING_TOSSED
+  return glitch_form == global.GlitchForm.FEATHER and physics_state != PhysicsState.BEING_TOSSED and not isHeavy()
+
+var is_covered_in_dirt = false
+var is_covered_in_dirt_timer = 0
+var is_covered_in_dirt_time_limit = 5
+func isHeavy():
+  return glitch_form == global.GlitchForm.LADDER or is_covered_in_dirt
 
 func corruptAllSprites():
   corruptSprite(mySprite)
@@ -2207,6 +2234,14 @@ func processBroomLogic(delta):
   if global.pauseMoveInput or aniPlayer.assigned_animation == "getItem":
     return
 
+  if should_respawn_broom:
+    respawn_broom_timer += (delta*11)
+    if respawn_broom_timer >= respawn_broom_time_limit:
+      respawn_broom_timer = 0
+      should_respawn_broom = false
+      level.summonSmokeClouds(self.global_transform.origin, 1, false, true)
+      global.memory["broom"] = true
+
 
   var can_throw_broom = global.memory["broomerang"] and not isItWeird() and global.memory["broomerang_enabled"]
 
@@ -2234,6 +2269,8 @@ func processBroomLogic(delta):
       # if nesting_doll_state == global.NestingDoll.BABY:
       #   tryToRevertFromBaby()
       #   return
+      if global.memory["broomerang"] >= 2:
+        return
       var found_fallen_broom = false
       var fallenBroomArray = self.get_tree().get_nodes_in_group("fallen_broom_group")
       for fallenBroom in fallenBroomArray:
@@ -2790,6 +2827,9 @@ var fallenBroomRef = null
 func iFellFlat():
   summonFallenBroom(false, true, false)
 
+var respawn_broom_timer = 0
+var respawn_broom_time_limit = 3
+var should_respawn_broom = false
 func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = true):
   if not global.memory["broom"] or not broomSpriteVisible.visible or isTextboxPausingMe():
     return null
@@ -2861,7 +2901,10 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
     #     bubble.my_original_pos = bubble.global_transform.origin.x
     #     bubble.my_target_pos = bubble.global_transform.origin.x  + rand_range(-1, 1)
 
-  global.memory["broom"] = false
+  global.memory["broom"] = false # global.memory["broomerang"] >= 2
+  if global.memory["broomerang"] >= 2 and was_thrown:
+    should_respawn_broom = true
+    respawn_broom_timer = 0
   # var fallenBroomArray = self.get_tree().get_nodes_in_group("fallen_broom_group")
   # if was_thrown and fallenBroomArray.size() < global.memory["broomerang"]:
   #   global.memory["broom"] = true

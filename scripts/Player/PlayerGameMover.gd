@@ -64,6 +64,7 @@ var remembered_walk_speed = 7
 var remembered_feather_glitch_walk_speed = 6
 var remembered_invisible_glitch_walk_speed = 5
 var camera_y_offset = 1
+onready var mySporeSavePoint = get_node("SporeSavePoint")
 
 func _ready():
   set_physics_process(false)
@@ -72,6 +73,8 @@ func _ready():
   should_do_middle_sensor = true
   should_do_simple_sensor_probe = false
   camera_target_y_pos = global_transform.origin.y
+  mySporeSavePoint.global_transform.origin = Vector3(999, 999, 999)
+  mySporeSavePoint.is_weird_soul_spore_save = true
 
 func ladderUpdateTargetLastGroundedY():
   camera_target_y_pos = global_transform.origin.y
@@ -349,7 +352,10 @@ onready var chickenSprite = get_node("SpriteContainer/InnerSpriteContainer/Chick
 onready var fishySprite = get_node("SpriteContainer/InnerSpriteContainer/FishySprite")
 onready var moleSprite = get_node("SpriteContainer/InnerSpriteContainer/MoleSprite")
 var the_proper_palette = null
+
+var what_was_my_last_palette = null
 func changeSpriteColorPalette(palette):
+  what_was_my_last_palette = palette
   if level.spellbook_forbidden:
     return
 
@@ -523,6 +529,28 @@ func landed():
   has_sweeped_glitch = false
   global.num_cherries_eaten = global.num_cherries_gained
   has_mushroom_double_jumped = false
+
+  if self.is_a_parent_of(mySporeSavePoint): 
+    self.remove_child(mySporeSavePoint)
+    level.add_child(mySporeSavePoint)
+  #  not self.was_fallthrough_area_collision_triggered and \
+  if global.memory["mushroom_soul"] >= 1 and global.memory["mushroom_soul_enabled"] and \
+     not self.isOnSavePoint() and \
+     physics_state == PhysicsState.NORMAL:
+    global.memory.erase("weird_active_save_point_x")
+    global.memory.erase("weird_active_save_point_y")
+    global.memory.erase("weird_active_save_point_z")
+    mySporeSavePoint.global_transform.origin = self.global_transform.origin
+    mySporeSavePoint.passiveActivate(0, true)
+
+func isOnSavePoint(forced_respawn = false):
+  if forced_respawn and global.memory.has("weird_active_save_point_x"):
+    return false
+
+  if not global.memory.has("weird_active_save_point_x") and not global.memory.has("active_save_point_x"):
+    return false
+    
+  return smallInteractionArea.is_touching_save_point
 
 func isTextboxPausingMe():
   return global.activeInteractor != null and (global.activeInteractor.showYesNoOptions or (
@@ -1155,19 +1183,19 @@ func processJumpInputs(delta):
     .processJumpInputs(delta)
     return
 
-  if not is_touching_ladder and not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
-    var triedToDoubleJump = justPressedJump() and not should_magic_jump and not global.pauseMoveInput
-    if triedToDoubleJump and has_used_magic_lantern < MAX_DOUBLE_JUMPS and global.memory["mushroom_soul"] > 0 and global.memory["mushroom_soul_enabled"]:
-      doubleJump()
-      for _i in range(5):
-        spawnASpore(self.global_transform.origin, false)
-      glitchTickle(false)
-      sporeJumpSound.pitch_scale = rand_range(0.9, 1.2)
-      sporeJumpSound.play()
-      has_used_magic_lantern += 1
-      if has_used_magic_lantern >= MAX_DOUBLE_JUMPS:
-        for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite]:
-          sprite.get_material_override().set_shader_param("enable_remove_skin_tone", true)
+  # if not is_touching_ladder and not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
+    # var triedToDoubleJump = justPressedJump() and not should_magic_jump and not global.pauseMoveInput
+    # if triedToDoubleJump and has_used_magic_lantern < MAX_DOUBLE_JUMPS and global.memory["mushroom_soul"] > 0 and global.memory["mushroom_soul_enabled"]:
+    #   doubleJump()
+    #   for _i in range(5):
+    #     spawnASpore(self.global_transform.origin, false)
+    #   glitchTickle(false)
+    #   sporeJumpSound.pitch_scale = rand_range(0.9, 1.2)
+    #   sporeJumpSound.play()
+    #   has_used_magic_lantern += 1
+    #   if has_used_magic_lantern >= MAX_DOUBLE_JUMPS:
+    #     for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite]:
+    #       sprite.get_material_override().set_shader_param("enable_remove_skin_tone", true)
     # if global.memory["mushroom_soul"] >= 1 and global.memory["mushroom_soul_enabled"] and nesting_doll_state == global.NestingDoll.GRANDMA and triedToDoubleJump:
     #   gravitySound.play()
     #   # level.flipGravity(-1 * (self.grav / abs(self.grav)))
@@ -1302,6 +1330,7 @@ func unglitchTickleSprite(sprite):
   sprite.material_override.set_shader_param("normal_offset", .02)
 
 var sporeRes = preload("res://sceneObjects/Environment/CatSpore.tscn")
+
 func spawnASpore(where_origin, inverse):
   var spore = sporeRes.instance()
   level.add_child(spore)

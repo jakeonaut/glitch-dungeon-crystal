@@ -177,26 +177,27 @@ func _process(delta):
             on_ground = false
 
 func warpToIt():
-    if global.memory["broomerang"] >= 2 and can_warp:
-        if not level.player.can_broomerang_warp and level.player.teleport_to == null:
-            level.player.tickleSound.play()
-        else:
-            if level.player.teleport_to == null:
-                level.player.teleport_to = weakref(self)
-                level.player.teleport_to_origin = self.global_transform.origin
-                level.player.startTeleport()
-            # put spore teleport here?
-            # level.player.global_transform.origin = global_transform.origin
-            # level.player.global_transform.origin.y -= 1
-            level.player.camera_target_y_pos = self.global_transform.origin.y
-            # level.player.gravitySound.play()
-            # level.player.linear_velocity = self.linear_velocity
-            # level.player.lv = self.lv
-            # level.player.vv = self.vv
-            # level.player.hv = self.hv
-            # level.player.tryClearFallthroughCollisionSolid(self.global_transform.origin)
-            abortSound.activateScript()
-            level.player.can_broomerang_warp = false
+    pass
+    # if global.memory["broomerang"] >= 2 and can_warp:
+    #     if not level.player.can_broomerang_warp and level.player.teleport_to == null:
+    #         level.player.tickleSound.play()
+    #     else:
+    #         if level.player.teleport_to == null:
+    #             level.player.teleport_to = weakref(self)
+    #             level.player.teleport_to_origin = self.global_transform.origin
+    #             level.player.startTeleport()
+    #         # put spore teleport here?
+    #         # level.player.global_transform.origin = global_transform.origin
+    #         # level.player.global_transform.origin.y -= 1
+    #         level.player.camera_target_y_pos = self.global_transform.origin.y
+    #         # level.player.gravitySound.play()
+    #         # level.player.linear_velocity = self.linear_velocity
+    #         # level.player.lv = self.lv
+    #         # level.player.vv = self.vv
+    #         # level.player.hv = self.hv
+    #         # level.player.tryClearFallthroughCollisionSolid(self.global_transform.origin)
+    #         abortSound.activateScript()
+    #         level.player.can_broomerang_warp = false
 
 func oneMoreHit(delta):
     # give me one last chance to hit QuestionBlocks and anything else that's clustered up
@@ -222,7 +223,7 @@ func die():
     is_dying = true
     if self.is_in_group("fallen_broom_group"):
         self.remove_from_group("fallen_broom_group")
-    if not global.memory["broom"] and returning:
+    if not global.memory["broom"] and returning and not level.player.should_respawn_broom:
         global.memory["broom"] = true
     
 func tryReturnIfTooFarFromPlayer():

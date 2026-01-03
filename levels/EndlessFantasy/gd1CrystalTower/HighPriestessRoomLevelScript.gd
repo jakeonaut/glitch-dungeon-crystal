@@ -28,7 +28,7 @@ onready var highpriestessCrystal4 = get_node("CrystalsContainer/HighpriestessCry
 onready var highpriestessCrystal5 = get_node("CrystalsContainer/HighpriestessCrystal5")
 onready var goop3 = get_node("Goop3")
 onready var gruesomeChildNPC = get_node("GruesomeChildNPC")
-onready var glitchedGeode = get_node("GlitchedGeode")
+onready var glitchedGeode = weakref(get_node("GlitchedGeode"))
 
 var has_boss_started = false
 var debug_start_boss_immediately = false
@@ -92,9 +92,13 @@ func setUpRoomInitializationOverride():
       #   savePoint.visible = true
 
   yield(get_tree().create_timer(0.1), "timeout")
-  glitchedGeode.applyGlitchMaterial(0)
+  if glitchedGeode.get_ref() == null:
+    return
+  glitchedGeode.get_ref().applyGlitchMaterial(0)
   yield(get_tree().create_timer(0.1), "timeout")
-  glitchedGeode.visible = false
+  if glitchedGeode.get_ref() == null:
+    return
+  glitchedGeode.get_ref().visible = false
     
 # @override
 func playMenuMusic():

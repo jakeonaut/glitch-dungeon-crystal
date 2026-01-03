@@ -3,7 +3,7 @@ extends Spatial
 func _ready():
   set_process(true)
 
-func _process(delta):
+func _process(_delta):
   if amITouchingGlitchTile(getLevelTiles()):
     for child in self.get_children():
       child.visible = true

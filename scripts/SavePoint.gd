@@ -6,6 +6,7 @@ onready var saveDiskSprite = get_node("TriangleContainer/Sprite3D")
 onready var saveSound = get_node("SaveSound")
 onready var aniPlayer = get_node("AnimationPlayer")
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
+var is_weird_soul_spore_save = false
 
 var inactive_triangle_rotation_direction = 1
 var id = null
@@ -42,17 +43,22 @@ func _process(delta):
         is_active = true
         was_on_save_point = true
     else:
-        triangleContainer.scale.x = 1
-        triangleContainer.scale.y = 1
-        was_on_save_point = false
+        if is_weird_soul_spore_save and was_on_save_point:
+            global_transform.origin = Vector3(999, 999, 999)
+        
         triangleContainer.rotation_degrees.y += delta*22*inactive_triangle_rotation_direction
         if triangleContainer.rotation_degrees.y >= 45 and inactive_triangle_rotation_direction == 1:
             inactive_triangle_rotation_direction = -1
         elif triangleContainer.rotation_degrees.y <= -45 and inactive_triangle_rotation_direction == -1:
             inactive_triangle_rotation_direction = 1
-        disablePaletteCycle()
         is_active = false
         aniPlayer.play("default")
+        if global.memory.has("weird_active_save_point_x") and was_on_save_point:
+            return
+        triangleContainer.scale.x = 1
+        triangleContainer.scale.y = 1
+        disablePaletteCycle()
+        was_on_save_point = false
 
     # if is_active and triangleContainer.visible:
     #     spawn_timer += (delta*22)
@@ -77,6 +83,19 @@ func _process(delta):
     #             spawn_timer = 0
 
 func isOnSavePoint():
+    if is_weird_soul_spore_save:
+        if not global.memory.has("weird_active_save_point_x"):
+            return false
+        var origin = self.global_transform.origin
+        var x = origin.x
+        var y = origin.y
+        var z = origin.z
+        return int(round(x)) == int(round(global.memory["weird_active_save_point_x"])) and \
+                int(round(y) - 1) == int(round(global.memory["weird_active_save_point_y"])) and \
+                int(round(z)) == int(round(global.memory["weird_active_save_point_z"]))
+    elif not is_weird_soul_spore_save and global.memory.has("weird_active_save_point_x"):
+        return false
+
     if global.memory.has("savePoint") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == level.getLevelName():
         var relativePathFromLevelToSavePoint = global.memory["savePoint"]
         return self == level.get_node(relativePathFromLevelToSavePoint)
@@ -132,10 +151,15 @@ func passiveActivate(_delta, is_player):
                 saveSound.volume_db = -38
             else:
                 saveSound.volume_db = -32
+            if is_weird_soul_spore_save:
+                saveSound.volume_db -= 16
             saveSound.play()
-        global.saveMySpot(global.getNameRelativeToLevel(level, self), global_transform.origin + Vector3(0, -1, 0), level)
-        global.memory.erase("player_y_offset")
-        level.saveTheGame()
+        if is_weird_soul_spore_save:
+            global.saveMySpot("SporeSavePoint", level.player.global_transform.origin + Vector3(0, -1, 0), level, is_weird_soul_spore_save)
+        else:
+            global.saveMySpot(global.getNameRelativeToLevel(level, self), global_transform.origin + Vector3(0, -1, 0), level, false)
+            global.memory.erase("player_y_offset")
+            level.saveTheGame()
     is_currently_on_save_point = true
 
 func justStopPassiveActivate():

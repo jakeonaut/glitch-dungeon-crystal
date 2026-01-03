@@ -146,6 +146,9 @@ var weak_feather_dbl_jump = false
 func isFeatherLike():
   return glitch_form == global.GlitchForm.FEATHER
 
+func isHeavy():
+  return glitch_form == global.GlitchForm.LADDER
+
 # Physics variables
 export var feather_glitch_walk_speed = 9
 export var floor_glitch_walk_speed = 3
@@ -459,7 +462,7 @@ func createG(delta):
   else:
     if pressingDown():
       g = Vector3(0, -grav*1.5, 0)
-    elif glitch_form == global.GlitchForm.LADDER:
+    elif isHeavy():
       g = Vector3(0, -grav*1.1, 0)
     else:
       g = Vector3(0, -grav, 0)
@@ -493,7 +496,7 @@ func applyTerminalVelocity(_delta):
       terminal_vel = true_terminal_vel / 2
   elif pressingDown():
     terminal_vel = true_terminal_vel * 1.25
-  elif glitch_form == global.GlitchForm.LADDER:
+  elif isHeavy():
     terminal_vel = true_terminal_vel * 1.1
   # elif glitch_form == global.GlitchForm.LADDER and not on_ground and not isWalkingIntoWall():
   #   terminal_vel = true_terminal_vel * 1.5
@@ -950,7 +953,7 @@ func actuallyApplyJump(play_sound = true):
       vv = (1.58*jump_force)/3
   elif glitch_form == global.GlitchForm.INVISIBLE:
     vv = invisible_jump_force
-  elif glitch_form == global.GlitchForm.LADDER and not has_just_glitch_swapped:
+  elif isHeavy() and not has_just_glitch_swapped:
     vv = jump_force * 0.5
   else:
     # rocket boost boots
@@ -1261,7 +1264,7 @@ func handleCollisionsAndMove(local_lv, delta):
     var max_jumps = turn_based_jump_max
     if isFeatherLike():
       max_jumps *= 2
-    if glitch_form == global.GlitchForm.LADDER:
+    if isHeavy():
       max_jumps /= 2
     if isKindOfOnGround():
       turn_based_jump_count = 1
