@@ -22,9 +22,11 @@ func _ready():
         if global.getStaticLevelZoneLevelVar(level, self) == 2:
             has_spawned = true
 
-func spawnEffect(child):
-    level.summonSmokeClouds(child.global_transform.origin, 2, true, true)
+func spawnEffect(child, with_flare):
+    if with_flare:
+        level.summonSmokeClouds(child.global_transform.origin, 2, true, true)
 
+var should_spawn_with_flare = false
 # @override
 func processSpawningLogic(_delta):
     if has_spawned:
@@ -40,7 +42,9 @@ func processSpawningLogic(_delta):
             child.visible = false
         return
 
-    spawn()
+    spawn(should_spawn_with_flare)
+    if not should_spawn_with_flare:
+        should_spawn_with_flare = true
 
 func isConditionActive():
     return global.getLevelZoneThing("crystal_geode")

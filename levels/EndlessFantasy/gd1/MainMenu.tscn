@@ -2659,6 +2659,7 @@ __meta__ = {
 
 [node name="LogoSprite" type="Sprite3D" parent="Viewport/level"]
 transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 1, 14.7515, -7.22767, 12 )
+visible = false
 material_override = SubResource( 345 )
 texture = ExtResource( 72 )
 

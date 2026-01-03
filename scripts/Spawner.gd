@@ -65,14 +65,14 @@ func getNumForeignChildren():
             count += 1
     return count
 
-func spawnEffect(_child):
+func spawnEffect(_child, _with_flare):
     if should_shake_screen:
         level.gameCamera.miniShakeScreen()
         
-func spawn(_with_flare = true):
+func spawn(with_flare = true):
     for child in self.get_foreign_children():
         child.visible = true
-        spawnEffect(child)
+        spawnEffect(child, with_flare)
     if spawned_object_res == null:
         return
 
@@ -87,7 +87,7 @@ func spawn(_with_flare = true):
         newObject.is_static_in_level = should_staticify_children # this breaks dynamically created SmallKeys
         # newObject.is_static_in_level = false
     add_child(newObject)
-    spawnEffect(newObject)
+    spawnEffect(newObject, with_flare)
     if newObject.has_method("setAsParent"):
         newObject.setAsParent(self)
     spawned_object_instance = newObject
