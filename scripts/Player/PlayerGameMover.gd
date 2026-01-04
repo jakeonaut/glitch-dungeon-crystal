@@ -518,6 +518,7 @@ func playLandSound():
     .playLandSound()
 
 var can_broomerang_warp = true
+var can_spawn_broomerang_bubbles = true
 var should_big_bump = false
 # @override
 func landed():
@@ -526,6 +527,7 @@ func landed():
   .landed()
   # chicken_jumps = 0
   can_broomerang_warp = true
+  can_spawn_broomerang_bubbles = true
   has_sweeped_glitch = false
   global.num_cherries_eaten = global.num_cherries_gained
   has_mushroom_double_jumped = false
@@ -536,7 +538,12 @@ func landed():
   #  not self.was_fallthrough_area_collision_triggered and \
   if global.memory["mushroom_soul"] >= 1 and global.memory["mushroom_soul_enabled"] and \
      not self.isOnSavePoint() and \
-     physics_state == PhysicsState.NORMAL:
+     physics_state == PhysicsState.NORMAL and \
+     transformation != TransformationState.CHICKEN and \
+     transformation != TransformationState.MOLE_DIGGING and \
+     transformation != TransformationState.UNDERGROUND and \
+     transformation != TransformationState.UNDERGROUND_RETURNING and \
+     transformation != TransformationState.BUBBLE:
     global.memory.erase("weird_active_save_point_x")
     global.memory.erase("weird_active_save_point_y")
     global.memory.erase("weird_active_save_point_z")
@@ -1246,6 +1253,7 @@ func getChickenCured():
   if transformation != TransformationState.CHICKEN:
     return
   can_broomerang_warp = true
+  can_spawn_broomerang_bubbles = true
   transformation = TransformationState.NORMAL
   aniPlayer.stop()
   aniPlayer.clear_queue()
@@ -1277,6 +1285,7 @@ func mushroomClone(_trigger_another = true):
       crumbled_carcass.get_ref().queue_free()
   infectSound.play()
   glitchTickle()
+  global_transform.origin.y += 1
   # if trigger_another:
   #   yield(get_tree().create_timer(0.1), "timeout")
   #   mushroomClone(false)

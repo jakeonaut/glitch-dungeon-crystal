@@ -467,7 +467,7 @@ func tryToHide(delta):
       hideTextbox()
       hide_textbox_timer = 0
     
-func InteractActivate(_is_player=true):
+func InteractActivate(_is_player=true, _is_local_broom=false):
   return interact()
     
 func interact(wasSmacked = false):

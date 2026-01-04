@@ -64,7 +64,7 @@ func moveTargetToHook(delta):
 func isActive(_debug=false):
   return true
 
-func activate(is_player):
+func activate(is_player, _is_local_broom = false):
   if anglerFish == null or anglerFish.get_ref() == null:
     return false
 
@@ -72,7 +72,7 @@ func activate(is_player):
     return false
   anglerFish.get_ref().startBossFight(is_player)
 
-func passiveActivate(_delta, is_player):
+func passiveActivate(_delta, is_player, _is_local_broom = false):
   if anglerFish == null or anglerFish.get_ref() == null:
     return false
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scripts/Enemies/GlitchEnemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/base_palette_pink.png" type="Texture" id=2]
@@ -15,7 +15,6 @@
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=13]
 [ext_resource path="res://assets/Chara_sheet.png" type="Texture" id=14]
 [ext_resource path="res://assets/palettes/green_palette.png" type="Texture" id=15]
-[ext_resource path="res://assets/sprites/glitch_obelisk_sheet_sans.png" type="Texture" id=16]
 [ext_resource path="res://assets/sprites/obelisk_sheet_sans.png" type="Texture" id=17]
 
 [sub_resource type="ShaderMaterial" id=7]
@@ -320,7 +319,7 @@ shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 1.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 16 )
+shader_param/texture_albedo = ExtResource( 17 )
 shader_param/base_palette = ExtResource( 9 )
 shader_param/target_palette = ExtResource( 15 )
 

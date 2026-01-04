@@ -1025,7 +1025,6 @@ func canIGetCaught(can_they_catch_invis = false):
   
   return true
   
-  
 func processGlitchHurtRecovery(delta):
   if physics_state == PhysicsState.GLITCH_HURT:
     global.pauseGame = true
@@ -1036,7 +1035,10 @@ func processGlitchHurtRecovery(delta):
 
     var material = level.glitchScreenEffect.get_material()
     if material is ShaderMaterial:
-      material.set_shader_param("shake_color_rate", 0.01 + (glitch_death_timer*.002))
+      var shakeColorRate = 0.01 + (glitch_death_timer*0.002)
+      if did_force_respawn:
+        shakeColorRate /= 4
+      material.set_shader_param("shake_color_rate", shakeColorRate)
     if glitch_death_timer >= 10:
       global.pauseGame = false
       global.pauseMoveInput = false
@@ -1058,7 +1060,10 @@ func processGlitchHurtRecovery(delta):
 
     var material = level.glitchScreenEffect.get_material()
     if material is ShaderMaterial:
-      material.set_shader_param("shake_color_rate", 0.01 + (glitch_death_timer*.002))
+      var shakeColorRate = 0.01 + (glitch_death_timer*0.002)
+      if did_force_respawn:
+        shakeColorRate /= 4
+      material.set_shader_param("shake_color_rate", shakeColorRate)
     if glitch_death_timer >= 10:
       global.pauseGame = false
       level.tryToRespawn()
@@ -1113,8 +1118,13 @@ func applyGlitchDeathEffects(x):
 
   var material = level.glitchScreenEffect.get_material()
   if material is ShaderMaterial:
-    material.set_shader_param("shake_power", -.00005*pow(x-25, 2) + .005)
-    material.set_shader_param("shake_color_rate", -.0001*pow(x-25, 2) + .005)
+    var shakePower = -.00005*pow(x-25, 2) + .005
+    var shakeColorRate = -.0001*pow(x-25, 2) + .005
+    if did_force_respawn:
+      shakePower /= 4
+      shakeColorRate /= 4
+    material.set_shader_param("shake_power", shakePower)
+    material.set_shader_param("shake_color_rate", shakeColorRate)
 
 func tryRotateCamera(_delta):
   pass
@@ -1771,7 +1781,7 @@ func collideWithCeiling(local_lv):
     not pressingJump() or
     (dig_timer == 0 and ((pressingMoveLeft() or pressingMoveRight()) and not pressingMoveUp())) or 
     areAnyTilesAboveMeFragileBrickSolid or
-    (transformation != TransformationState.NORMAL and transformation != TransformationState.MOLE_DIGGING)
+    (transformation == TransformationState.CHICKEN or transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.BUBBLE)
     or (glitch_form != global.GlitchForm.INVISIBLE and areAnyTilesAboveMeSpikes)
   ):
     local_lv.y = 0
@@ -1884,6 +1894,7 @@ func getMushroomCured():
 var remembered_feather_jump_timer = 0
 var remembered_y_vel = 0
 var remembered_on_ground = false
+var did_force_respawn = false
 # @override
 # aka func ouchies():
 func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_die = false):
@@ -1892,7 +1903,6 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   if transitioning or global.isEnteringRoom:
     return
   var no_trust_me_guys = Input.is_action_just_pressed("restart_key")
-  # TODO(jaketrower): 1901
   if isOnSavePoint(no_trust_me_guys):
     return
   if not no_trust_me_guys and (physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.GLITCH_RECOVERY):
@@ -1903,6 +1913,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     glitchTickle(true)
     return
 
+  did_force_respawn = false
   # if is_mushroom_infected:
   #   getABroom()
   #   for _i in range(5):
@@ -1948,6 +1959,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     hurtSound.pitch_scale = hurtSound_pitch_scale
     hurtSound.play()
   if no_trust_me_guys:
+    did_force_respawn = true
     global.memory.erase("weird_active_save_point_x")
     global.memory.erase("weird_active_save_point_y")
     global.memory.erase("weird_active_save_point_z")
@@ -2066,7 +2078,7 @@ export var normal_offset = .15
 var is_smacked = false
 var smack_timer = 0
 var smack_time_limit = 4
-func getSmacked(_broom_origin = null, _silently = false):
+func getSmacked(_broom_origin = null, _silently = false, _is_local_broom = false):
   if is_smacked or physics_state == PhysicsState.BEING_TOSSED:
     return
   for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite]:
@@ -2235,12 +2247,17 @@ func processBroomLogic(delta):
     return
 
   if should_respawn_broom:
-    respawn_broom_timer += (delta*11)
-    if respawn_broom_timer >= respawn_broom_time_limit:
-      respawn_broom_timer = 0
+    if glitch_form != global.GlitchForm.INVISIBLE and (
+          physics_state == PhysicsState.NORMAL or physics_state == PhysicsState.GLITCH_RECOVERY or physics_state == PhysicsState.GLITCH_HURT
+    ) and not global.memory["broom"]:
+      respawn_broom_timer += (delta*11)
+      if respawn_broom_timer >= respawn_broom_time_limit:
+        respawn_broom_timer = 0
+        should_respawn_broom = false
+        level.summonSmokeClouds(self.global_transform.origin, 1, false, true)
+        global.memory["broom"] = true
+    else:
       should_respawn_broom = false
-      level.summonSmokeClouds(self.global_transform.origin, 1, false, true)
-      global.memory["broom"] = true
 
 
   var can_throw_broom = global.memory["broomerang"] and not isItWeird() and global.memory["broomerang_enabled"]
@@ -2884,22 +2901,24 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
     elif x_direction != 0:
       fallenBroom.walk_direction.x = x_direction
     fallenBroom.thrown_direction.x = fallenBroom.walk_direction.x
-    # if global.memory["zora_flippers"] > 0 and global.memory["zora_flippers_enabled"]:
-    #   for _i in range(3):
-    #     var bubble = bubbleRes.instance()
-    #     # bubble.mySprite.material_override.set_shader_param("enable_no_transparency", true)
-    #     bubble.can_broom_pop_me = false
-    #     level.add_child(bubble)
-    #     bubble.setAsParent(self)
-    #     bubble.global_transform.origin = global_transform.origin
-    #     bubble.global_transform.origin.x += rand_range(-1, 1)
-    #     bubble.global_transform.origin.y += rand_range(0, 1)
-    #     if mySprite.flip_h:
-    #       bubble.global_transform.origin.x -= 2
-    #     else:
-    #       bubble.global_transform.origin.x += 2
-    #     bubble.my_original_pos = bubble.global_transform.origin.x
-    #     bubble.my_target_pos = bubble.global_transform.origin.x  + rand_range(-1, 1)
+    if global.memory["zora_flippers"] > 0 and global.memory["zora_flippers_enabled"] and can_spawn_broomerang_bubbles:
+      can_spawn_broomerang_bubbles = false
+      for _i in range(3):
+        var bubble = bubbleRes.instance()
+        # bubble.mySprite.material_override.set_shader_param("enable_no_transparency", true)
+        bubble.can_broom_pop_me = false
+        level.add_child(bubble)
+        bubble.setAsParent(self)
+        bubble.global_transform.origin = global_transform.origin
+        bubble.global_transform.origin.x += rand_range(-1, 1)
+        bubble.global_transform.origin.y += rand_range(0, 1)
+        if mySprite.flip_h:
+          bubble.global_transform.origin.x -= 3
+        else:
+          bubble.global_transform.origin.x += 3
+        bubble.global_transform.origin.y -= 1
+        bubble.my_original_pos = bubble.global_transform.origin.x
+        bubble.my_target_pos = bubble.global_transform.origin.x  + rand_range(-1, 1)
 
   global.memory["broom"] = false # global.memory["broomerang"] >= 2
   if global.memory["broomerang"] >= 2 and was_thrown:

@@ -32,11 +32,10 @@ func isActive(_debug=false):
     return parent.has_method("isActive") and parent.isActive()
 
 # for use with PlayerSmallInteractionArea
-func PassiveInteractActivate(delta, is_player = true):
+func PassiveInteractActivate(delta, is_player = true, is_local_broom = false):
     if parent.has_method("passiveActivate"):
-        # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
-        # TODO(jaketrower): Will be not true when broomerang >= 2
-        parent.passiveActivate(delta, is_player)
+        # if you want to check from the area if it is a SummonedBroom or Thrown, just check is_local_broom = false
+        parent.passiveActivate(delta, is_player, is_local_broom)
     touchingPlayer = is_player
     if is_in_group("enemies") and not is_in_group("no_pushems") and is_player:
         getPlayer().enemyPushMe(delta, self.global_transform.origin, parent.glitch_form)
@@ -47,7 +46,7 @@ func OtherPassiveInteractActivate(delta, gameMover):
         parent.otherPassiveActivate(delta, gameMover)
 
 
-func PassivePassiveInteractActivate(_delta, is_player = true):
+func PassivePassiveInteractActivate(_delta, is_player = true, is_local_broom = false):
     touchingPlayer = is_player
 
 func playerActivationAreaPassiveActivate():

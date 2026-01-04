@@ -16,7 +16,7 @@ func glitchSetSpritesAndCollision():
 func actuallyDieToOffscreenCamera(_delta):
   pass
 
-func getSmacked(broom_origin = null, silently = false):
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
   if (
     anglerFish.boss_phase == anglerFish.BossPhase.STUN_IDLE or 
     anglerFish.boss_phase == anglerFish.BossPhase.GNASH_ATTACK_PREP or 
@@ -45,5 +45,5 @@ func getSmacked(broom_origin = null, silently = false):
           anglerFish.cubeCrystal.get_ref().getHitSound3.play()
     if anglerFish.num_hits >= anglerFish.MAX_NUM_HITS:
         anglerFish.yaBeatMe()
-    .getSmacked(broom_origin, silently)
+    .getSmacked(broom_origin, silently, is_local_broom)
     return true

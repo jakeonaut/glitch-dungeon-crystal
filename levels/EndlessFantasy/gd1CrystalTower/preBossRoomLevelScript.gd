@@ -16,7 +16,7 @@ onready var croneTeleportKeyTreasure = get_node("CroneTeleportKeyTreasure")
 func setUpRoomInitializationOverride():
   if global.getLevelZoneThing("angel_statue") == null:
     global.setLevelZoneThing("angel_statue", [
-      global.getDisplayTitle(self.getLevelZoneName(), tr("LevelName.1")),
+      global.getDisplayTitle(self.getLevelZoneName(), self.getLevelName()),
       self.getLevelName()
     ])
 

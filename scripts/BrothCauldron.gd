@@ -123,7 +123,7 @@ export var smack_time_limit = 5
 var time_influence = 35
 var y_div = 2.3
 var normal_offset = .15
-func getSmacked(broom_origin = null):
+func getSmacked(broom_origin = null, _silently = false, _is_local_broom = false):
   if is_smacked:
     return
   smackSound.pitch_scale = rand_range(0.6, 1.0)

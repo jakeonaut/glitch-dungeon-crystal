@@ -1077,7 +1077,7 @@ func getAngelStatuesArr():
     if not mapGrid.has(y) or not mapGrid[y].has(x):
       return []
     var path = mapGrid[y][x].path
-    return [[global.getDisplayTitle(global.getLevelZoneName(path)), path]]
+    return [[global.getDisplayTitle(global.getLevelZoneName(path), path), path]]
   return global.getThingArrayFromAllLevelZonez("angel_statue")
 
 func getAngelStatueIndex():

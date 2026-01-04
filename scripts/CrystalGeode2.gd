@@ -151,7 +151,7 @@ func fakify():
         lightAniPlayer.play("fadeIn")
 
 var ok_byebye = false
-func getSmacked(_broom_origin):
+func getSmacked(_broom_origin = null, _silently = false, _is_local_broom = false):
     if is_smacked or ok_byebye:
         return
     is_smacked = true
@@ -243,7 +243,7 @@ func getPurified():
     level.purifyAllFragileBrickSolids()
     if global.getLevelZoneThing("angel_statue") == null:
         global.setLevelZoneThing("angel_statue", [
-            global.getDisplayTitle(level.getLevelZoneName(), tr("LevelName.1")),
+            global.getDisplayTitle(level.getLevelZoneName(), level.getLevelName()),
             level.getLevelName()
         ])
     # if level.has_node("SavePoint"):

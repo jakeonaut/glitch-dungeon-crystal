@@ -218,7 +218,7 @@ func fallthroughCollisionActivate(_friend):
 var should_i_respond_to_smacks = true
 var was_smacked_and_should_talk = false
 export var is_very_tiny = false
-func getSmacked(_broom_origin = null, _silently = false):
+func getSmacked(_broom_origin = null, _silently = false, is_local_broom = true):
   # if not can_be_smacked:
   #   return false
   if not visible or is_very_tiny:
@@ -226,7 +226,7 @@ func getSmacked(_broom_origin = null, _silently = false):
   if is_smacked:
     return false
   # don't get smacked if we're on the wrong side of a wind up
-  if level.player.mySprite.flip_h != which_side_is_player_on and global.memory["broom"]:
+  if level.player.mySprite.flip_h != which_side_is_player_on and is_local_broom:
     return false
 
   if global.pauseGame or global.shouldRenderAsCinematic:
@@ -247,7 +247,7 @@ func getSmacked(_broom_origin = null, _silently = false):
   if floating_text or not is_active: 
     return false
   # don't start dialog if you threw broom at me
-  if not global.memory["broom"]:
+  if not is_local_broom:
     return true
   
   if textBox.smackedBbText == "" or textBox.smackedBbText == null:
@@ -272,11 +272,12 @@ func glitchOut():
   glitchEnemy.glitchOut()
   queue_free()
 
-func activate(is_player):
+func activate(is_player, is_local_broom = false):
   if textBox.text_final == "":
     can_be_smacked = true
     return false
-  if not is_player:
+  print("try activate: " + str(is_player) + ", " + str(is_local_broom))
+  if not is_player: # and not is_local_broom:
     return false
   if global.activeInteractor == null:
     textBox.hideInteractPrompt()
@@ -287,7 +288,7 @@ func activate(is_player):
   return false
 
 var which_side_is_player_on = false
-func passiveActivate(delta, is_player):
+func passiveActivate(delta, is_player, is_local_broom = false):
   if not is_player:
     return
   if can_move and level.player.global_transform.origin.y < self.global_transform.origin.y + 0.5:

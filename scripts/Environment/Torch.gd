@@ -35,7 +35,7 @@ var is_extinguished = false
 func isActive():
   return visible and not is_extinguished
 
-func getSmacked(_broom_origin):
+func getSmacked(_broom_origin, _silently = false, _is_local_broom = false):
   print("smack torch")
   if is_extinguished:
     return

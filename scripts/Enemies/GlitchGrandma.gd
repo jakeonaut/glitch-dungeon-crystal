@@ -211,7 +211,7 @@ func isActive(_debug=false):
   return visible and summonedBroom == null # and glitch_form == level.player.glitch_form
 
 # @override ?
-func passiveActivate(_delta, is_player):
+func passiveActivate(_delta, is_player, _is_local_broom = false):
   if not is_player:
     # TODO(jaketrower): clone GlitchEnemies too
     return

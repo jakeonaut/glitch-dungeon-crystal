@@ -63,10 +63,10 @@ func _ready():
     myOtherSprite.material_override = myOtherSprite.material_override.duplicate() # make unique
     myOtherSprite.global_transform.origin.y = self.global_transform.origin.y + 0.2
 
-func getSmacked(broom_origin = null, silently = false):
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
     if has_ever_been_smacked or mole_state == MoleState.RESPAWN:
         return
-    .getSmacked(broom_origin, silently)
+    .getSmacked(broom_origin, silently, is_local_broom)
     walk_speed = 0
     grav = 0
     walk_direction.x = -1
@@ -340,8 +340,8 @@ func isFarFromHome():
     return abs(global_transform.origin.x - spawn_origin.x) > far_from_home_dist
 
 # @override
-func passiveActivate(delta, is_player):
-    .passiveActivate(delta, is_player)
+func passiveActivate(delta, is_player, is_local_broom = false):
+    .passiveActivate(delta, is_player, is_local_broom)
     # myOtherSprite.flip_h = (level.player.global_transform.origin.x <= global_transform.origin.x)
 
 # @override, not really until GlitchEnemy gets one

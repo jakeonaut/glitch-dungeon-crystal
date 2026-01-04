@@ -77,7 +77,7 @@ func glitchSetSpritesAndCollision():
   pass
 
 # @override 
-func getSmacked(_broom_origin = null, _silently = false):
+func getSmacked(_broom_origin = null, _silently = false, _is_local_broom = false):
   pass
 
 func popFromFollowers():

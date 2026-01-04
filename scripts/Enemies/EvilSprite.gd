@@ -40,11 +40,11 @@ func _ready():
     set_physics_process(false)
     
 # @override
-func activate(_is_player):
+func activate(_is_player, _is_local_broom = false):
     pass
 
-func passiveActivate(delta, is_player):
-    .passiveActivate(delta, is_player) # let NPC.gd handle facing player... but is_active = false so no textbox
+func passiveActivate(delta, is_player, is_local_broom = false):
+    .passiveActivate(delta, is_player, is_local_broom) # let NPC.gd handle facing player... but is_active = false so no textbox
     delta = delta * global.time_dilation_multiplier
 
     spawn_timer += (delta*22)

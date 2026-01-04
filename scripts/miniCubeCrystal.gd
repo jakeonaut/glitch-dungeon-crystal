@@ -72,7 +72,7 @@ func iAmAGhost():
 func isActive(_debug=false):
   return visible and not disappearing2
 
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, _is_player, _is_local_broom = false):
   # musicPlayer.stopAll()
   if not disappearing2:
     if is_negative:

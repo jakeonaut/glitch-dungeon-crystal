@@ -161,7 +161,7 @@ func _ready_impl():
   levelTiles.buildRandomTiles()
   levelTiles.moveAllGlitchedTilesToTheDefaultZIndices()
   if global.memory["currLevelZone"] != global.currLevelZone and not global.memory["world_of_ruin"]:
-    uiLayer.setDisplayTitle(global.getDisplayTitle(self.getLevelZoneName()))
+    uiLayer.setDisplayTitle(global.getDisplayTitle(self.getLevelZoneName(), self.getLevelName()))
   tryShowUIElements()
   trySpawnFollowers()
   for sprite in [player.mySprite, player.grandmaHatSprite, player.grandmaHandSprite]:
@@ -565,6 +565,7 @@ func tryToRespawn():
       global.memory.erase("weird_active_save_point_z")
       player.mySporeSavePoint.global_transform.origin = Vector3(999, 999, 999)
       player.mushroomClone()
+      player.on_ground = false
     elif global.memory.has("savePoint") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():
       var savePoint = get_node(global.memory["savePoint"])
       if savePoint != null:

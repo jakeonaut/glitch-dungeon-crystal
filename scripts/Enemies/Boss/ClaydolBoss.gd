@@ -303,7 +303,7 @@ func unsmack():
     smack_time_limit = 10
 
 onready var sillySound = get_node("Sounds/SillySound")
-func getSmacked(broom_origin = null, silently = false):
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
     should_modify_glitch_shader_vars = false
     if is_smacked or boss_phase == BossPhase.DRILL_DREIDEL_SPIN or boss_phase == BossPhase.DIZZY:
         return false
@@ -338,7 +338,7 @@ func getSmacked(broom_origin = null, silently = false):
     elif boss_phase == BossPhase.DEFEATED:
         pass
 
-    return .getSmacked(broom_origin, silently)
+    return .getSmacked(broom_origin, silently, is_local_broom)
 
 var drillCharging = false
 # @override

@@ -51,7 +51,7 @@ func get_foreign_children():
 func isActive(_debug=false):
   return not has_been_hit and not is_locked
   
-func passiveActivate(_delta, is_player):
+func passiveActivate(_delta, is_player, _is_local_broom = false):
   if not has_been_hit and not hit_cooldown > 0:
     if (not player.on_ground) or player.justPressedJump() or not is_player:
       if not is_player:

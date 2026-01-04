@@ -12,7 +12,7 @@ func _ready():
 func isActive(_debug=false):
   return not has_animated
 
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, _is_player, _is_local_broom = false):
   has_animated = true
   level.get_node("AnimationPlayer").play("judgement")
   level.get_node("AnimationPlayer").queue("skullChatter")

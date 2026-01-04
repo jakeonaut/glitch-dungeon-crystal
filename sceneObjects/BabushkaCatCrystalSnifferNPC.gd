@@ -5,9 +5,9 @@ func _ready():
     queue_free()
 
 # @override
-func activate(is_player):
+func activate(is_player, is_local_broom = false):
   var jump_val = 10.0
   linear_velocity.y = jump_val
   lv.y = jump_val
   vv = up.dot(lv)
-  return .activate(is_player)
+  return .activate(is_player, is_local_broom)

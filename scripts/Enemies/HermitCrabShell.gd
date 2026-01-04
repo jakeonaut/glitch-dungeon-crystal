@@ -230,10 +230,10 @@ func becomeACrab():
     visible = false
 
 # @override
-func getSmacked(broom_origin = null, silently = false):
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
   die_offscreen_timer = 0
   # if should_big_bump:
-  #   .getSmacked(broom_origin, silently)
+  #   .getSmacked(broom_origin, silently, is_local_broom)
   #   dieSound.play()
   #   notDieSound.stop()
   #   return
@@ -249,7 +249,7 @@ func getSmacked(broom_origin = null, silently = false):
     vv = up.dot(lv)
   if is_extra_bouncy:
     behavior_jumping = true
-  return .getSmacked(broom_origin, silently)
+  return .getSmacked(broom_origin, silently, is_local_broom)
 
 var die_offscreen_timer = 0
 var die_offscreen_time_limit = 10
@@ -301,7 +301,7 @@ func glitchTilesAroundMe(margin = 0.25, rand_timer = false):
 
 
 # @override
-func activate(_is_player):
+func activate(_is_player, _is_local_broom = false):
   if is_extra_bouncy:
     return false
   if global.activeInteractor == null:
@@ -328,7 +328,7 @@ var is_tiny = false
 var is_important = false
 var can_camera_zoom = false
 var textboxCameraTarget = null
-func InteractActivate():
+func InteractActivate(_is_player=true, _is_local_broom=false):
   if global.activeInteractor == self:
     global.activeInteractor = null
     level.player.getABroom()

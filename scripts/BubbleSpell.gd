@@ -133,14 +133,14 @@ func isActive(_debug=false):
   return true
 
 var can_broom_pop_me = true
-func passiveActivate(_delta, is_player):
+func passiveActivate(_delta, is_player, is_local_broom = false):
   if didja_get_me or global.pauseGame or (is_player and (level.player.transformation == level.player.TransformationState.BUBBLE or level.player.glitch_form == global.GlitchForm.BUBBLE)):
     return
 
   if not is_player and not can_broom_pop_me:
     return
   bubbleStartPop()
-  if not is_player and not global.memory["broom"]:
+  if not is_player and not is_local_broom:
     return
 
   if getPlayer().transformation == getPlayer().TransformationState.FISHY:
@@ -250,7 +250,7 @@ func hitStuff(_delta):
   # erase glitch tiles...
   trySweepUpGlitchTiles(purifyShape)
 
-func getSmacked():
+func getSmacked(_broom_origin = null, _silently = false, _is_local_broom = false):
   bubbleStartPop()
 
 func glitchTickle():

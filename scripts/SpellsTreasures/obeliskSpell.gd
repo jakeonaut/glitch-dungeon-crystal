@@ -158,11 +158,11 @@ func isActive(debug=false):
 func isPlayerPassiveActive():
   return true
 
-func activate(is_player):
-  passiveActivate(0, is_player)
+func activate(is_player, is_local_broom = false):
+  passiveActivate(0, is_player, is_local_broom)
   return false
 
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, _is_player, _is_local_broom = false):
   if is_locked:
     return
 

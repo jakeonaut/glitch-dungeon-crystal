@@ -143,7 +143,7 @@ var is_active = true
 func isActive(_debug=false):
     return is_active
 
-func passiveActivate(_delta, is_player):
+func passiveActivate(_delta, is_player, _is_local_broom = false):
     if not is_player:
         return
     if not didja_get_me:

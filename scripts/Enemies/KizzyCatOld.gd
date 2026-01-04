@@ -36,8 +36,8 @@ func landed():
   behavior_walking = false
 
 # @override
-func getSmacked(broom_origin = null, _silently = false):
-  .getSmacked(broom_origin)
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
+  .getSmacked(broom_origin, silently, is_local_broom)
   behavior_jumping = true
   behavior_walking = true
   jump_timer = 0

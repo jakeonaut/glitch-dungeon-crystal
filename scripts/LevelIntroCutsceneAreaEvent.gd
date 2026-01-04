@@ -15,7 +15,7 @@ var has_activated = false
 onready var player = get_node("../Player") if has_node("../Player") else null
 var transition_timer = 0
 var transition_time_limit = 60
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, _is_player, _is_local_broom = false):
   if has_activated:
     return
 

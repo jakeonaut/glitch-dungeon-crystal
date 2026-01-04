@@ -108,10 +108,10 @@ func landed():
 var basicShroomEnemyRes = preload("res://sceneObjects/Enemies/BasicShroomEnemy.tscn")
 var my_shroom = null
 # @override
-func getSmacked(broom_origin = null, silently = false):
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
   if is_smacked or am_i_dying:
     return false
-  .getSmacked(broom_origin, silently)
+  .getSmacked(broom_origin, silently, is_local_broom)
   how_many_times_did_u_hit_me += 1
   if dieSound:
     dieSound.pitch_scale = rand_range(0.8, 1.2)
@@ -127,7 +127,7 @@ func getSmacked(broom_origin = null, silently = false):
         level.player.errorSound.play()
         level.player.getChickenInfected()
         level.player.chicken_timer = 0
-  .getSmacked(broom_origin, silently)
+  .getSmacked(broom_origin, silently, is_local_broom)
   if my_shroom != null and my_shroom.get_ref() != null:
     my_shroom.get_ref().queue_free()
     my_shroom = null

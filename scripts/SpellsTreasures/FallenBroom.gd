@@ -365,7 +365,7 @@ func hitStuff(_delta):
         elif area.is_in_group("corporeal_body"):
             var areaParent = area.get_node("..")
             if canActivate(area) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive() and areaParent.visible and not returning:
-                var smackResult = areaParent.getSmacked(global_transform.origin)
+                var smackResult = areaParent.getSmacked(global_transform.origin, false, false)
                 if smackResult != false:
                     global.broomSmackSound()
                 if areaParent.has_method("imAnNpc") and smackResult == null and not returning:
@@ -381,7 +381,7 @@ func hitStuff(_delta):
         elif area.is_in_group("bug") and is_active:
             var areaParent = area.get_node("..")
             if canActivate(area) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
-                var smackResult = areaParent.getSmacked(global_transform.origin)
+                var smackResult = areaParent.getSmacked(global_transform.origin, false, false)
                 if smackResult != false:
                     global.broomSmackSound()
                 if not (area.is_in_group("tadpole") and smackResult == null):
@@ -392,14 +392,12 @@ func hitStuff(_delta):
                         #     my_broom_owner.teleport_to_origin = area.get_parent().global_transform.origin
                     has_hit_something = true
         elif area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate"):
-            # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
-            # TODO(jaketrower): Will be not true when broomerang >= 2
+            # if you want to check from the area if it is a SummonedBroom or Thrown, just check is_local_broom = false
             if not area.is_in_group("door") and not area.is_in_group("true_small_door") and not area.is_in_group("npc"):
-                has_hit_something = area.InteractActivate(false)
+                has_hit_something = area.InteractActivate(false, false)
         elif area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"):
-            # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
-            # TODO(jaketrower): Will be not true when broomerang >= 2
-            area.PassiveInteractActivate(0, false)
+            # if you want to check from the area if it is a SummonedBroom or Thrown, just check is_local_broom = false
+            area.PassiveInteractActivate(0, false, false)
       
         # erase glitch tiles...
         var x = collisionShape.global_transform.origin.x

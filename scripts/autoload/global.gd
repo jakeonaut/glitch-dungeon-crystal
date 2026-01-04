@@ -770,12 +770,17 @@ func getLevelZoneName(longLevelName):
         return null
     return segments[segments.size() - 2]
 
-func getDisplayTitle(levelZoneName, gd1TutorialName = "???"):
+func getDisplayTitle(levelZoneName, path = null):
+    if path != null:
+        if "0_1Haven" in path or "entrance_to_tower" in path:
+            return tr("LevelName.1")
+        elif "MainMenu" in path:
+            return tr("LevelName.Home")
     match levelZoneName:
         "gd1":
             return "???" # basically "null"
         "gd1TutorialDungeon":
-            return gd1TutorialName if not global.memory["can_freely_teleport"] else tr("LevelName.0")
+            return tr("LevelName.0")
         "gd1FishingVillage":
             return tr("LevelName.2")
         "gd1ToxicJungle":
@@ -1514,7 +1519,9 @@ func doFallthroughObjectCollision(gameMover, area, debug = false):
     if not gameMover.should_collide_fallthrough_area:
         return false
 
-    if gameMover.physics_state != gameMover.PhysicsState.NORMAL:
+    var ps = gameMover.physics_state
+    var PS = gameMover.PhysicsState
+    if not (ps == PS.NORMAL or ps == PS.GLITCH_HURT or ps == PS.GLITCH_RECOVERY):
         return false
 
     var x = gameMover.global_transform.origin.x
@@ -1888,7 +1895,7 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
     elif area.is_in_group("corporeal_body") and is_active:
       var areaParent = area.get_node("..")
       if canActivate(area, smacked_npc, have_i_smacked_an_npc) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive() and areaParent.visible:
-        var smackResult = areaParent.getSmacked(global_transform.origin)
+        var smackResult = areaParent.getSmacked(global_transform.origin, false, true)
         if smackResult != false:
             broomSmackSound()
         if areaParent == level.player and my_broom_owner and my_broom_owner != level.player and my_broom_owner.summonedBroom and my_broom_owner.summonedBroom.is_evil:
@@ -1906,7 +1913,7 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
     elif area.is_in_group("bug") and is_active:
       var areaParent = area.get_node("..")
       if canActivate(area, smacked_npc, have_i_smacked_an_npc) and areaParent != my_broom_owner and areaParent.has_method("isActive") and areaParent.isActive():
-        var smackResult = areaParent.getSmacked(global_transform.origin)
+        var smackResult = areaParent.getSmacked(global_transform.origin, false, true)
         if smackResult != false:
             broomSmackSound()
         if not (area.is_in_group("tadpole") and smackResult == null):
@@ -1916,13 +1923,11 @@ func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, 
             #     my_broom_owner.teleport_to = weakref(area.get_parent())
             #     my_broom_owner.teleport_to_origin = area.get_parent().global_transform.origin
     elif canActivate(area, smacked_npc, have_i_smacked_an_npc) and not area.is_in_group("door") and not area.is_in_group("true_small_door") and area.has_method("isActive") and area.isActive() and area.has_method("InteractActivate") and is_active:
-      # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
-      # TODO(jaketrower): Will be not true when broomerang >= 2
-      area.InteractActivate(false)
+      # if you want to check from the area if it is a SummonedBroom or Thrown, just check is_local_broom = false
+      area.InteractActivate(false, true)
     elif canActivate(area, smacked_npc, have_i_smacked_an_npc) and area.has_method("isActive") and area.isActive() and area.has_method("PassiveInteractActivate"): 
-      # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
-      # TODO(jaketrower): Will be not true when broomerang >= 2
-      area.PassiveInteractActivate(0, false)
+      # if you want to check from the area if it is a SummonedBroom or Thrown, just check is_local_broom = false
+      area.PassiveInteractActivate(0, false, true)
   return smacked_npc
 
 

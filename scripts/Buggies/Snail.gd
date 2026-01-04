@@ -128,13 +128,13 @@ var is_active = true
 func isActive(_debug=false):
     return visible and is_active
 
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, _is_player, _is_local_broom = false):
     pass
 
 var didja_get_me = false
 var opacity = 1.0
 onready var smackSound = get_node("Sounds/SmackSound")
-func getSmacked(_broom_origin = null, _silently = false):
+func getSmacked(_broom_origin = null, _silently = false, _is_local_broom = false):
     if is_smacked:
         return
 

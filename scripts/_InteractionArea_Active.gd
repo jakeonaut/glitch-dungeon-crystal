@@ -11,11 +11,10 @@ func _ready():
 func isActive(_debug=false):
     return get_parent().has_method("isActive") and get_parent().isActive()
 
-func InteractActivate(is_player=true):
+func InteractActivate(is_player=true, is_local_broom=false):
     if get_parent().has_method("activate"):
-        # if you want to check from the area if it is a SummonedBroom or Thrown, just check global.memory["broom"] = false
-        # TODO(jaketrower): Will be not true when broomerang >= 2
-        return get_parent().activate(is_player)
+        # if you want to check from the area if it is a SummonedBroom or Thrown, just check is_local_broom = false
+        return get_parent().activate(is_player, is_local_broom)
     return false
 
 func playerActivationAreaPassiveActivate():

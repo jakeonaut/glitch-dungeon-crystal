@@ -98,7 +98,7 @@ func reelItIn(_delta):
 func isActive(_debug=false):
   return tongueCollisionShape.visible
 
-func passiveActivate(_delta, is_player):
+func passiveActivate(_delta, is_player, _is_local_broom = false):
   if not hooked and is_player and level.player.canIGetCaught():
     level.clearOtherGrabbers(level.player)
     hooked = true

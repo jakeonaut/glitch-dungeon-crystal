@@ -89,7 +89,7 @@ var time_influence = 35
 var y_div = 2.3
 var normal_offset = .15
 export var grav_direction = 1
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, _is_player, _is_local_broom = false):
   if grav_direction > 0 and level.player.grav > 0:
     return
   elif grav_direction < 0 and level.player.grav < 0:

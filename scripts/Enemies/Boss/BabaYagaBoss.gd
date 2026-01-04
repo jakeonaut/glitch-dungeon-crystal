@@ -130,7 +130,7 @@ var smack_timer = 0
 var smack_time_limit = 10
 var smack_recovery_time_limit = 12
 onready var sillySound = get_node("Sounds/SillySound")
-func getSmacked(_broom_origin = null):
+func getSmacked(_broom_origin = null, _silently = false, _is_local_broom = false):
     if boss_phase == BossPhase.DEFEATED or boss_phase == BossPhase.HURT:
         return false
 

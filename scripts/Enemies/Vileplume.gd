@@ -55,17 +55,17 @@ func glitchSwitchSprite(_delta):
   pass
 
 # @override
-func getSmacked(broom_origin = null, silently = false):
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
   if is_smacked or is_in_cooldown:
     return
   is_in_cooldown = true
   cooldown_timer = 0
-  .getSmacked(broom_origin, silently)
+  .getSmacked(broom_origin, silently, is_local_broom)
   var smokeOrigin = Vector3(global_transform.origin.x, global_transform.origin.y + 1, 0)
   level.summonSmokeClouds(smokeOrigin, 3)
   spawnFiveSpores()
 
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, _is_player, _is_local_broom = false):
   # getSmacked(self.global_transform.origin)
   # getPlayer().getMushroomInfected()
   # getPlayer().tryDieToEnemy(delta, true, false, false)

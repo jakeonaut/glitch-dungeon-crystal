@@ -47,7 +47,7 @@ func setVars():
     textBox.floating_text = floating_text
     textBox.showYesNoOptions = showYesNoOptions
 
-func InteractActivate(_is_player=true):
+func InteractActivate(_is_player=true, _is_local_broom=false):
     return interact()
         
 func interact():

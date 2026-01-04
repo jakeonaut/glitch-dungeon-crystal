@@ -194,7 +194,7 @@ func glitchSetSpritesAndCollision():
     pass
 
 # @override
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, _is_player, _is_local_broom = false):
     if am_i_dying or not visible or not mySprite.visible: return # or is_smacked: return
         
     # var aniPlayer = get_node("HeartSprite/AnimationPlayer")
@@ -210,10 +210,10 @@ func processDeath():
 func stopJumping():
   behavior_jumping = false
 
-func getSmacked(broom_origin = null, silently = false):
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
   if is_smacked or am_i_dying:
     return false
-  .getSmacked(broom_origin, silently)
+  .getSmacked(broom_origin, silently, is_local_broom)
   if not am_i_dying and zombie_state != ZombieState.CONSUMING:
     ouchies(broom_origin)
         

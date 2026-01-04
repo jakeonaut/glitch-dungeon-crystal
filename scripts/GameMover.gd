@@ -706,7 +706,7 @@ func processNotWallLadderWalking(_delta):
   pass
 
 # dummy
-func getSmacked(_broom_origin = null, _silently = false):
+func getSmacked(_broom_origin = null, _silently = false, _is_local_broom = false):
   pass
 
 # dummy

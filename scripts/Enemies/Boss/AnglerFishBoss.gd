@@ -462,7 +462,7 @@ func tryDieToOffscreenCamera(_delta):
 # var bubbleHP = 5 # should slowly "glitch" the crystal and then corrupt him??
 # @override
 onready var sillySound = get_node("Sounds/SillySound")
-func getSmacked(broom_origin = null, silently = false):
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
     if boss_phase == BossPhase.DEFEATED or boss_phase == BossPhase.HURT or boss_phase == BossPhase.CHARGING or boss_phase == BossPhase.CHARGING_BACKWARDS:
         return false
 
@@ -474,7 +474,7 @@ func getSmacked(broom_origin = null, silently = false):
     time_influence = 35
     y_div = 5
     normal_offset = 0.5
-    return .getSmacked(broom_origin, silently)
+    return .getSmacked(broom_origin, silently, is_local_broom)
 
     # boss_phase = BossPhase.EAT_IT
     # secretAniPlayer.stop()

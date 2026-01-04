@@ -42,7 +42,7 @@ func _process(delta):
 func isActive(_debug=false):
     return is_active and visible
 
-func passiveActivate(_delta, is_player):
+func passiveActivate(_delta, is_player, _is_local_broom = false):
     if is_player:
         getPlayer().nullify()
         if global.memory["forget_me_not"]:

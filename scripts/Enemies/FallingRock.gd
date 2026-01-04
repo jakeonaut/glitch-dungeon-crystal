@@ -55,7 +55,7 @@ func landed():
 
 
 # @override
-func getSmacked(broom_origin = null, silently = false):
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
   if is_big:
     return
   if not silently:
@@ -69,7 +69,7 @@ func getSmacked(broom_origin = null, silently = false):
     linear_velocity.y = jump_val
     lv.y = jump_val
     vv = up.dot(lv)
-  return .getSmacked(broom_origin, silently)
+  return .getSmacked(broom_origin, silently, is_local_broom)
 
 
 func byeBye():

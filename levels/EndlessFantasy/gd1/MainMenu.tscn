@@ -2455,9 +2455,6 @@ texture = ExtResource( 72 )
 [node name="Player" parent="Viewport/level" instance=ExtResource( 50 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.1354, 0, 0 )
 
-[node name="SporeSavePoint" parent="Viewport/level/Player" index="18"]
-is_weird_soul_spore_save = null
-
 [node name="Sprite3D2" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5469, 2.36, -2 )
 material_override = SubResource( 36 )
@@ -3091,7 +3088,7 @@ texture = SubResource( 235 )
 mesh = SubResource( 350 )
 
 [node name="MeshInstance2" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="Camera" parent="Viewport2/UILayer/GlitchStatusRect/Viewport" index="1"]
 current = true

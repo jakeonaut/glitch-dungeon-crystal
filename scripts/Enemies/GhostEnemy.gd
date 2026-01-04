@@ -117,7 +117,7 @@ func randomizeTargetPos():
 
   mySprite.flip_h = (target_pos.x < global_transform.origin.x)
 
-func getSmacked(broom_origin = null, silently = false):
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
   if not is_smacked:
     booSound.play()
     var speed = 8
@@ -132,10 +132,10 @@ func getSmacked(broom_origin = null, silently = false):
     scared_timer = 0
     just_a_figment = true
     mySprite.material_override.set_shader_param("enable_glitch_3d", false)
-    .getSmacked(broom_origin, silently)
+    .getSmacked(broom_origin, silently, is_local_broom)
     secretAniPlayer.play("scary")
 
-# func passiveActivate(_delta, is_player):
+# func passiveActivate(_delta, is_player, _is_local_broom = false):
 #   if just_a_figment or is_following_player:
 #     return
 #   if is_player and not level.player.malware_infected and not is_following_player and not level.player.isOnSavePoint() and not just_a_figment:

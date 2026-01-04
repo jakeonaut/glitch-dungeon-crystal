@@ -85,7 +85,7 @@ var is_active = true
 func isActive(_debug=false):
     return visible and is_active
 
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, _is_player, _is_local_broom = false):
     if not is_swimmin_away:
         is_swimmin_away = true
         
@@ -112,7 +112,7 @@ export var time_influence = 35
 export var y_div = 2.3
 export var normal_offset = .15
 var can_i_spawn_crystal = true
-func getSmacked(broom_origin = null):
+func getSmacked(broom_origin = null, _silently = false, _is_local_broom = false):
     if is_smacked:
         return
 

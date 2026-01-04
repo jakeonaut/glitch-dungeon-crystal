@@ -18,6 +18,7 @@ func activateScript():
     level.player.getABroom()
     if level.player.truly_on_ground:
         level.player.can_broomerang_warp = true
+        level.player.can_spawn_broomerang_bubbles = true
     level.player.textBox.hideTextbox()
     if not global.memory.has("spellbookPage") and level.getLevelName().find("MainMenu") > 0 and level.has_node("PastoralGrannyNPC"):
         level.player.pauseInput = true

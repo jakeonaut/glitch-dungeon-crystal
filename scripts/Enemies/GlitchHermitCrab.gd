@@ -113,7 +113,7 @@ func setAnimationAndChangeStateWhenItEnds(aniName, next_state):
     if next_state != null:
       crab_state = next_state
 
-func getSmacked(broom_origin = null, silently = false):
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
   secretAniPlayer.stop()
   secretAniPlayer.clear_queue()
   if (broom_origin != null and broom_origin.x <= self.global_transform.origin.x) or (broom_origin == null and not level.player.mySprite.flip_h):
@@ -123,7 +123,7 @@ func getSmacked(broom_origin = null, silently = false):
   summonHermitCrabShell()
   var hermitCrabShell = myHermitCrabShell.get_ref()
   hermitCrabShell.global_transform.origin.y -= 1
-  hermitCrabShell.getSmacked(broom_origin, silently)
+  hermitCrabShell.getSmacked(broom_origin, silently, is_local_broom)
   hermitCrabShell.pauseAnimation = false
   myHermitCrabShell = null
   visible = false
@@ -160,7 +160,7 @@ func updateMyHermitCrabShellPos():
 
 # @override
 # only let you pick up and throw the shell if it's already in a prone state...
-# func activate(_is_player):
+# func activate(_is_player, _is_local_broom = false):
 #   if global.activeInteractor == null:
 #     summonHermitCrabShell()
 #     var hermitCrabShell = myHermitCrabShell.get_ref()

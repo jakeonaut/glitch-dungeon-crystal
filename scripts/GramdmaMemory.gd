@@ -30,11 +30,11 @@ func _process(delta):
 func generateId():
   return get_name()
 
-func activate(_is_player):
+func activate(_is_player, _is_local_broom = false):
   if global.activeInteractor == null:
     goThroughDoor()
 
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, _is_player, _is_local_broom = false):
   goThroughDoor()
 
 # TODO(jaketrower): Should probably put this onto transition as well

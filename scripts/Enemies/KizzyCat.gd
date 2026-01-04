@@ -86,21 +86,21 @@ func tryDieToOffscreenCamera(_delta):
 var should_flip = true
 var my_shroom = null
 # @override
-func getSmacked(broom_origin = null, silently = false):
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
   if is_smacked or has_ever_been_smacked:
     return false
   spawnGlitchSprout()
   poofSound.play()
-  .getSmacked(broom_origin, silently)
+  .getSmacked(broom_origin, silently, is_local_broom)
   # if getPlayer().glitch_form == global.GlitchForm.INVISIBLE:
   #   behavior_jumping = true
   pauseSelf = true
   # on_ground = true
   notDieSound.play()
-  if global.memory["broom"] and should_flip:
+  if is_local_broom and should_flip:
     playerInhale()
 
-func passiveActivate(_delta, is_player):
+func passiveActivate(_delta, is_player, _is_local_broom = false):
   if is_player:
     should_flip = false
     getSmacked()

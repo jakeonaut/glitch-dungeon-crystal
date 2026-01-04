@@ -740,7 +740,7 @@ func landed():
 func isActive(_debug=false):
     return not is_smacked and visible and not behavior_evolve and not is_frozen and not am_i_dying and (glitch_form == global.GlitchForm.NORMAL or glitch_form == getPlayer().glitch_form)
 
-func activate(_is_player):
+func activate(_is_player, _is_local_broom = false):
     if smallInteractionArea != null and smallInteractionArea.is_in_group("weak_enemies"):
         # this conditional needs to go first cuz almost every weak_enemies is also in enemies, but not vice-versa
         var result = ouchies(null)
@@ -773,7 +773,7 @@ func activate(_is_player):
         return result
     return false
 
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, _is_player, _is_local_broom = false):
     pass
 
 func stopPassiveActivate():
@@ -877,7 +877,7 @@ export var y_div = 2.3
 export var normal_offset = .15
 var smacked_palette = global.white_palette
 var should_modify_glitch_shader_vars = true
-func getSmacked(_broom_origin = null, silently = false):
+func getSmacked(_broom_origin = null, silently = false, is_local_broom = false):
     if is_smacked or am_i_dying:
         return false
 

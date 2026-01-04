@@ -92,7 +92,7 @@ func isActive(_debug=false):
   return visible
 
 # @override ?
-func passiveActivate(_delta, is_player):
+func passiveActivate(_delta, is_player, _is_local_broom = false):
   if not is_player:
     # TODO(jaketrower): clone GlitchEnemies too
     return
@@ -106,7 +106,7 @@ func passiveActivate(_delta, is_player):
     level.player.nesting_doll_state = global.NestingDoll.MATRIARCH
     global.memory["nesting_doll"] = global.NestingDoll.MATRIARCH
     # level.player.updateNestingDoll(global.NestingDoll.BABY)
-    # if global.memory["broom"] or level.player.fallenBroomRef:
+    # if is_local_broom or level.player.fallenBroomRef:
     #   if level.player.fallenBroomRef and level.player.fallenBroomRef.get_ref():
     #     level.player.fallenBroomRef.get_ref().queue_free()
     #     level.player.fallenBroomRef = null

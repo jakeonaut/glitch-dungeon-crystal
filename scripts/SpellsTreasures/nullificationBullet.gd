@@ -93,7 +93,7 @@ func tryDieToOffscreenCamera(_delta):
 func isActive(_debug=false):
     return is_active
 
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, _is_player, _is_local_broom = false):
     if getPlayer().glitch_form != global.GlitchForm.NORMAL:
         transformSound.play()
         getPlayer().applyGlitch(global.GlitchForm.NORMAL, true)

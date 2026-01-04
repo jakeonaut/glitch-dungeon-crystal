@@ -66,7 +66,7 @@ func pressingMoveRight():
 func glitchSwitchSprite(_delta):
   pass
 
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, _is_player, _is_local_broom = false):
   pass
 
 # @override
@@ -116,10 +116,10 @@ func spawnASpore():
 onready var bounceSound = get_node("Sounds/BounceSound")
 
 # @override
-func getSmacked(broom_origin = null, silently = false):
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
   if has_ever_been_smacked:
     return
-  .getSmacked(broom_origin, silently)
+  .getSmacked(broom_origin, silently, is_local_broom)
   walk_speed = 0
   grav = 0
   walk_direction.x = -1

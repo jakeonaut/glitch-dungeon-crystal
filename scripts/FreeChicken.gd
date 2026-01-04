@@ -101,10 +101,10 @@ func landed():
 var MAX_NUM_HITS = 5
 
 # @override
-func getSmacked(broom_origin = null, silently = false):
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
   if is_smacked or am_i_dying:
     return false
-  .getSmacked(broom_origin, silently)
+  .getSmacked(broom_origin, silently, is_local_broom)
   how_many_times_did_u_hit_me += 1
   if dieSound:
     dieSound.pitch_scale = rand_range(0.8, 1.2)

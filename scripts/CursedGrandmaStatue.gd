@@ -109,11 +109,11 @@ func fallthroughCollisionActivate(_friend):
 
 var should_move_left = false
 var should_move_right = false
-func getSmacked(broom_origin = null, _silently = false):
+func getSmacked(broom_origin = null, _silently = false, is_local_broom = false):
   if is_smacked:
     return false
   # don't get smacked if we're on the wrong side of a wind up
-  if level.player.mySprite.flip_h != which_side_is_player_on and global.memory["broom"]:
+  if level.player.mySprite.flip_h != which_side_is_player_on and is_local_broom:
     return false
     
   if smackSound: smackSound.play()
@@ -143,7 +143,7 @@ func getSmacked(broom_origin = null, _silently = false):
     handleCollisionsAndMove(Vector3(1, 0, 0), 1)
     should_collide_horizontally = false
 
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, _is_player, _is_local_broom = false):
   pass
 
 export var max_dist_to_player = 30

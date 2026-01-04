@@ -51,7 +51,7 @@ func _process(delta):
 func isActive(_debug=false):
     return false
 
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, _is_player, _is_local_broom = false):
     pass
 
 func stopPassiveActivate():

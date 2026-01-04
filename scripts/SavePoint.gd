@@ -123,7 +123,7 @@ func generateId():
     return get_tree().get_root().get_node("Game/Viewport/level").getLevelName() + ":" + get_name()
 
 var is_currently_on_save_point = false
-func passiveActivate(_delta, is_player):
+func passiveActivate(_delta, is_player, _is_local_broom = false):
     if not visible: return false
 
     if is_player:

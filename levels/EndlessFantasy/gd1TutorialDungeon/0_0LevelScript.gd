@@ -28,8 +28,8 @@ func setUpRoomInitializationOverride():
     var outfitTreasure = croneHatTreasureRes.instance()
     self.add_child(outfitTreasure)
     outfitTreasure.global_transform.origin = Vector3(24, 7, 0)
-  if global.memory["clean_crystals"] >= 4:
-    towerSprite1.visible = true
+  # if global.memory["clean_crystals"] >= 4:
+  #   towerSprite1.visible = true
   has_decided = true
   
 var showInstructions = false

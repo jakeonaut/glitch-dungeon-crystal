@@ -107,7 +107,7 @@ func glitchSetSpritesAndCollision():
     pass
 
 # @override
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, _is_player, _is_local_broom = false):
     if am_i_dying or not visible: return
         
 # @override

@@ -70,6 +70,7 @@ func setUpRoomInitializationOverride():
             has_finished_initial_initialization = true
     else:
         mainMenuState = MainMenuState.NORMAL_GAMEPLAY
+        videoPlayer.visible = false
         epilepsyWarning.visible = false
         uiLayer.visible = true
         self.remove_child(get_node("BabushkaCat"))
@@ -81,6 +82,7 @@ func setUpRoomInitializationOverride():
         var finalText = tr("NPC.Cow.2")
         cowNPC.textBox.text_final = finalText
         cowNPC.textBox.textNode.bbcode_text = finalText
+        transition.reverse_fade()
     if global.pauseGame:
         transition.reverse_fade()
     uiLayer.remove_child(uiLayer.textBoxes)
@@ -343,6 +345,15 @@ func loadGame(saveGameIndex):
         global.okay_really_really_started_game = true
         global.isRespawning = true
         global.setLevelZoneThing("start_time", null)
+        if global.memory.has("current_glitch") and global.memory.has("spellbookPage") and global.memory["spellbookPage"] != null:
+            player.spellCastPauseIndex = 0
+            if global.memory["current_glitch"] == 0:
+                player.spellCastPauseIndex = len(global.memory["spellbookPage"])
+            else:
+                var spellCastPauseIndex = global.memory["spellbookPage"].find(global.memory["current_glitch"])
+                if spellCastPauseIndex > -1:
+                    player.spellCastPauseIndex = spellCastPauseIndex
+            global.spellCastPauseIndex = player.spellCastPauseIndex
         if global.memory.has("savedRoomPath") or global.memory.has("roomPath"):
             var roomPath = global.memory["savedRoomPath"] if global.memory.has("savedRoomPath") else global.memory["roomPath"]
             # sanitize the roomPath...
@@ -406,7 +417,7 @@ func _process(delta):
                 mainMenuState = MainMenuState.HIDING_INTRO_VIDEO
                 transition.aniPlayer.stop()
                 transition.aniPlayer.play("long_fade_no_change")
-                splash_cover_opacity = -1
+                splash_cover_opacity = 0
                 return
         return
     elif mainMenuState == MainMenuState.HIDING_INTRO_VIDEO:
@@ -481,8 +492,9 @@ func _process(delta):
                 ):
                     mainMenuState = MainMenuState.HIDING_PETSCLUB2_SPLASH
                     petsClub2Splash.mesh = null
-                    petsClub2SplashSprite.material_override.set_shader_param("enable_glitch", true)
-                    petsClub2SplashSprite.material_override.set_shader_param("enable_glitch_3d", true)
+                    if global.userSettings["canGlitchScreen"]:
+                        petsClub2SplashSprite.material_override.set_shader_param("enable_glitch", true)
+                        petsClub2SplashSprite.material_override.set_shader_param("enable_glitch_3d", true)
                     # transition.aniPlayer.stop()
                     # transition.aniPlayer.play("long_fade_no_change")
                     splash_cover_opacity = 0

@@ -257,7 +257,8 @@ UI.File.NewGamePlus,New Game +,New Game +,New Game +,New Game +,New Game +,New G
 UI.File.Continue,Continue,Continue,Continue,Continue,Continue,Continue,Continue,Continue,Continue,Continue,Continue,Continue,Continue
 UI.File.Delete,Delete,Delete,Delete,Delete,Delete,Delete,Delete,Delete,Delete,Delete,Delete,Delete,Delete
 NPC.Treasure.1_2,?!!?\npress %s to Return\ntravel everywhere on map,？？？？\n按 %s返回上一存档点,"????\nНажмите %s, чтобы «вернуться».",????\naperte %s para retornar,"????\nappuyez sur %s pour Retourner",????\n %s 戻る,????\npulsa %s para Regresar,"????\n premi %s per Ritornare",????\nnaciśnij %s aby wrócić do punktu zapisu,"????\nDrücke %s, um es erneut zu versuchen","????\n%s 키를 눌러 돌아가기","????\nНатисніть %s, щоб повернутися",????\ngeri dönmek için %s tuşuna bas
-LevelName.0,dungeon,dungeon,dungeon,dungeon,dungeon,dungeon,dungeon,dungeon,dungeon,dungeon,dungeon,dungeon,dungeon
+LevelName.Home,home,home,home,home,home,home,home,home,home,home,home,home,home
+LevelName.0,basement,basement,basement,basement,basement,basement,basement,basement,basement,basement,basement,basement,basement
 LevelName.7,"dream city","dream city","dream city","dream city","dream city","dream city","dream city","dream city","dream city","dream city","dream city","dream city","dream city"
 UI.Outfit.Title,"OUTFIT GET:","OUTFIT GET:","OUTFIT GET:","OUTFIT GET:","OUTFIT GET:","OUTFIT GET:","OUTFIT GET:","OUTFIT GET:","OUTFIT GET:","OUTFIT GET:","OUTFIT GET:","OUTFIT GET:","OUTFIT GET:"
 NPC.Outfit.Prompt,"change it in inventory!","change it in inventory!","change it in inventory!","change it in inventory!","change it in inventory!","change it in inventory!","change it in inventory!","change it in inventory!","change it in inventory!","change it in inventory!","change it in inventory!","change it in inventory!","change it in inventory!"

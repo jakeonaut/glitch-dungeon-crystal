@@ -24,7 +24,7 @@ var is_smacked = false
 var smack_timer = 0
 var smack_time_limit = 10
 onready var smackSound = get_node("SmackSound") if has_node("SmackSound") else null
-func getSmacked(_broom_origin = null, silently = false):
+func getSmacked(_broom_origin = null, silently = false, _is_local_broom = false):
   if not silently and smackSound: smackSound.play()
   var material = mySprite.material_override
   if material is ShaderMaterial:
@@ -184,7 +184,7 @@ var cooldown_time_limit = 5
 func isActive(_debug=false):
     return cooldown_timer >= cooldown_time_limit
 
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, _is_player, _is_local_broom = false):
     pass
     # if is_player and level.player.nesting_doll_state == global.NestingDoll.BABY:
     #     level.player.shroomAniPlayer.queue("grow")

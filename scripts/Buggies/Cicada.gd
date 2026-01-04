@@ -73,7 +73,7 @@ func playerActivationAreaPassiveActivate():
         mySprite.updateBaseFrame(1, 4)
 
 
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, _is_player, _is_local_broom = false):
     if not didja_get_me:
         catchSound.play()
         if global.memory.has("cicadas"):

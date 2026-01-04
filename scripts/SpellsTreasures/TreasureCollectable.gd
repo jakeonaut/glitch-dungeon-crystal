@@ -141,8 +141,8 @@ func alignMySprite():
   pass
 
 # @override
-func activate(_is_player):
-  return false # passiveActivate(0, is_player)
+func activate(_is_player, _is_local_broom = false):
+  return false # passiveActivate(0, is_player, is_local_broom)
   
 # @override
 func isActive(_debug=false):
@@ -153,9 +153,9 @@ func isActive(_debug=false):
          (on_ground or grav == 0)
 
 # @override
-func passiveActivate(_delta, is_player):
+func passiveActivate(_delta, is_player, is_local_broom = false):
   if not is_player:
-    getSmacked(self.global_transform.origin)
+    getSmacked(self.global_transform.origin, false, is_local_broom)
     return false
   if okay_im_done:
     return false
@@ -191,7 +191,7 @@ func collectMe():
 var time_influence = 35
 var y_div = 2.3
 var normal_offset = .15
-func getSmacked(_broom_origin = null, _silently = false):
+func getSmacked(_broom_origin = null, _silently = false, _is_local_broom = false):
   return false
 
 # @override

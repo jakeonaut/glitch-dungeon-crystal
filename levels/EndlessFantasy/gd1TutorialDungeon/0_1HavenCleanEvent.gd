@@ -10,7 +10,7 @@ func isActive(_debug=false):
   return true
 
 var has_played_animation = false
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, _is_player, _is_local_broom = false):
   if not has_played_animation:
     has_played_animation = true
     if npc.get_ref():

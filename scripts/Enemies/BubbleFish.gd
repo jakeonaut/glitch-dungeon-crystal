@@ -86,10 +86,10 @@ func randomizeTargetPos():
     # myOtherSprite.flip_h = mySprite.flip_h
 
 # @override
-func getSmacked(broom_origin = null, silently = false):
-  .getSmacked(broom_origin, silently)
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
+  .getSmacked(broom_origin, silently, is_local_broom)
   if bubble_fish_state == BubbleFishState.PUFFED_UP_IDLE:
-    # if global.memory["broom"]:
+    # if is_local_broom:
     #   bubble_fish_state = BubbleFishState.SPITTING_BUBBLE_CLOSE
     # else:
     bubble_fish_state = BubbleFishState.SPITTING_BUBBLE

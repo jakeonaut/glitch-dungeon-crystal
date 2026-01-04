@@ -44,11 +44,11 @@ func _process(delta):
 func isActive(_debug=false):
     return false # self.visible
 
-func passiveActivate(_delta, _is_player):
+func passiveActivate(_delta, _is_player, _is_local_broom = false):
     pass
     # if not is_angel_activated:
     #     global.setLevelZoneThing("angel_statue", [
-    #         global.getDisplayTitle(level.getLevelZoneName(), tr("LevelName.1")),
+    #         global.getDisplayTitle(level.getLevelZoneName(), level.getLevelName()),
     #         level.getLevelName()
     #     ])
     #     is_angel_activated = true

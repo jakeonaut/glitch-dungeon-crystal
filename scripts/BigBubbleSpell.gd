@@ -127,15 +127,12 @@ func _process(delta):
 func isActive(_debug=false):
   return true
 
-func passiveActivate(_delta, is_player):
+func passiveActivate(_delta, is_player, is_local_broom = false):
   if didja_get_me or global.pauseGame or (is_player and (level.player.transformation == level.player.TransformationState.BUBBLE or level.player.glitch_form == global.GlitchForm.BUBBLE)):
     return
-
   bubbleStartPop()
-  if not is_player and not global.memory["broom"]:
+  if not is_player and not is_local_broom:
     return
-    
-
   level.player.getBubbleInfected()
 
 func bubbleStartPop():
@@ -206,7 +203,7 @@ func setAsParent(parent):
   mySprite.changeSpriteColorPaletteToLevelPalette()
   my_parent = parent
 
-func getSmacked():
+func getSmacked(_broom_origin = null, _silently = false, _is_local_broom = false):
   bubbleStartPop()
 
 func glitchTickle():

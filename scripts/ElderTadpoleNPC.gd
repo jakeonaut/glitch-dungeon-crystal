@@ -171,7 +171,7 @@ func tryShowInteractPrompt(is_active_interact_prompt = false, is_comic_alert = f
   .tryShowInteractPrompt(is_active_interact_prompt, is_comic_alert)
 
 # @override
-func getSmacked(broom_origin = null, silently = false):
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
   if global.hasGottenLevelGeode or global.hasLevelGeodeBeenSmacked:
     return
   # if not can_be_smacked:
@@ -179,7 +179,7 @@ func getSmacked(broom_origin = null, silently = false):
   if is_smacked:
     return false
   # don't get smacked if we're on the wrong side of a wind up
-  if level.player.mySprite.flip_h != which_side_is_player_on and global.memory["broom"]:
+  if level.player.mySprite.flip_h != which_side_is_player_on and is_local_broom:
     return false
     
   if smackSound: smackSound.play()
@@ -193,11 +193,11 @@ func getSmacked(broom_origin = null, silently = false):
   is_smacked = true
 
   # well... if you threw it at me.. i'm going to ignore that..
-  if not global.memory["broom"]:
+  if not is_local_broom:
     return false
 
   if not can_smack_back:
-    .getSmacked(broom_origin, silently)
+    .getSmacked(broom_origin, silently, is_local_broom)
     return true
 
   secretAniPlayer.stop()

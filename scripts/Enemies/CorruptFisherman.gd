@@ -82,14 +82,14 @@ func isActive(_debug=false):
   return visible and not behavior_evolve and not is_frozen and not am_i_dying and (glitch_form == global.GlitchForm.NORMAL or glitch_form == getPlayer().glitch_form)
 
 # @override
-func getSmacked(broom_origin = null, silently = false):
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
   if is_smacked or am_i_dying:
     return false
-  .getSmacked(broom_origin, silently)
+  .getSmacked(broom_origin, silently, is_local_broom)
 
 var gulping = false
 var nowWhoAmIEating = null
-func passiveActivate(_delta, is_player):
+func passiveActivate(_delta, is_player, _is_local_broom = false):
   if gulping or am_i_dying:
     return
   if is_player and level.player.canIGetCaught():

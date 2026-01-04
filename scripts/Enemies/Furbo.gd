@@ -58,11 +58,11 @@ func shouldIDoCollisions():
     should_collide_horizontally = true
 
 # @override
-func getSmacked(broom_origin = null, silently = false):
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
   smacked_palette = global.weird_base_palette
   if is_smacked:
     return false
-  .getSmacked(broom_origin, silently)
+  .getSmacked(broom_origin, silently, is_local_broom)
   pauseSelf = true
   on_ground = true
   notDieSound.play()

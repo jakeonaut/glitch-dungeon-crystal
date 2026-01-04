@@ -26,13 +26,13 @@ func isActive(_debug=false):
          level.player.physics_state != level.player.PhysicsState.COLLAPSED and \
          level.player.physics_state != level.player.PhysicsState.IGNORE_PHYSICS
 
-func activate(is_player):
-  passiveActivate(0, is_player)
+func activate(is_player, is_local_broom = false):
+  passiveActivate(0, is_player, is_local_broom)
 
 var has_awakened = false
-func passiveActivate(delta, is_player):
-  if not is_player and not global.memory["broom"]:
-    mimicNPC.getSmacked(self.global_transform.origin)
+func passiveActivate(delta, is_player, is_local_broom = false):
+  if not is_player and not is_local_broom:
+    mimicNPC.getSmacked(self.global_transform.origin, false, is_local_broom)
     return
 
   if not mimicNPC.is_active and not has_awakened:
@@ -43,7 +43,7 @@ func passiveActivate(delta, is_player):
     mimicNPC.mySprite.trySetFrame(3)
 
   if not is_player:
-    mimicNPC.getSmacked(self.global_transform.origin)
+    mimicNPC.getSmacked(self.global_transform.origin, false, is_local_broom)
     return
   mimicNPC.passiveActivate(delta, true)
  

@@ -31,7 +31,7 @@ func unsmack():
     material.set_shader_param("normal_offset", .02)
     mySprite.material_override = material
 
-func getSmacked(_broom_origin = null, _silently = false):
+func getSmacked(_broom_origin = null, _silently = false, _is_local_broom = false):
   # if not can_be_smacked:
   #   return false
   if is_smacked:

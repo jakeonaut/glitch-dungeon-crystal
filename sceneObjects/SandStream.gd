@@ -11,7 +11,7 @@ func _process(_delta):
 func isActive(_debug=false):
   return true
 
-func passiveActivate(delta, is_player):
+func passiveActivate(delta, is_player, _is_local_broom = false):
   if not is_player or level.player.truly_on_ground:
     return
   level.player.camera_target_y_pos = level.player.global_transform.origin.y

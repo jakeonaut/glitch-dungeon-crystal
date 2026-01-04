@@ -103,10 +103,10 @@ func landed():
 
 export var can_deactivate_fan = true
 # @override
-func getSmacked(broom_origin = null, silently = false):
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
   if is_smacked or am_i_dying:
     return false
-  .getSmacked(broom_origin, silently)
+  .getSmacked(broom_origin, silently, is_local_broom)
 
   if not can_deactivate_fan:
     return

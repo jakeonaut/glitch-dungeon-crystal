@@ -41,7 +41,7 @@ var is_active = true
 func isActive():
     return true
 
-func passiveActivate(_delta, is_player):
+func passiveActivate(_delta, is_player, _is_local_broom = false):
     if is_player and is_active and level.player.canIGetCaught(true):
         level.clearOtherGrabbers(level.player)
         reactivate_timer = 0
@@ -135,7 +135,7 @@ export var normal_offset = .15
 var smacked_palette = global.white_palette
 var last_palette = global.base_palette
 onready var notDieSound = get_node("NotDieSound")
-func getSmacked(_broom_origin = null):
+func getSmacked(_broom_origin = null, _silently = false, _is_local_broom = false):
     if is_smacked:
         return false
 

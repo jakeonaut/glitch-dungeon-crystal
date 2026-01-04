@@ -360,11 +360,11 @@ func unsmack():
 export var can_jump = true
 export var can_licker_be_flipped = true
 # @override
-func getSmacked(broom_origin = null, silently = false):
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
   if is_smacked or am_i_dying:
     return false
 
-  .getSmacked(broom_origin, silently)
+  .getSmacked(broom_origin, silently, is_local_broom)
   if is_infected:
     ouchies(broom_origin)
   if notDieSound and not notDieSound.is_playing() and not silently:
@@ -378,7 +378,7 @@ func getSmacked(broom_origin = null, silently = false):
     tongueAniPlayer.clear_queue()
     if gulpin:
       if tongueController and tongueController.hookTarget and tongueController.hookTarget.get_ref() != level.player:
-        tongueController.hookTarget.get_ref().getSmacked(broom_origin, silently)
+        tongueController.hookTarget.get_ref().getSmacked(broom_origin, silently, is_local_broom)
       tongueAniPlayer.play("spitOut")
     else:
       if tongueController != null:

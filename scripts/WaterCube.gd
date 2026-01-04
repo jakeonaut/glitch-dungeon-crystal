@@ -85,7 +85,7 @@ func becomePoisonous():
 func isActive(_debug=false):
   return true
   
-func passiveActivate(delta, is_player):
+func passiveActivate(delta, is_player, _is_local_broom):
   if not is_player:
     return
   if not getPlayer().was_touching_water and can_splash:

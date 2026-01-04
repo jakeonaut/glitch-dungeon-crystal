@@ -322,7 +322,7 @@ func isActive(care_about_facing=false):
 func generateId():
   return get_name()
 
-func activate(is_player):
+func activate(is_player, _is_local_broom = false):
   if not is_player:
     return false
     
@@ -455,7 +455,7 @@ export var is_sneaky = false
 export var dlc_locked = false
 export var gravity_flip = false
 export var only_active_if_chicken = false
-func passiveActivate(_delta, is_player):
+func passiveActivate(_delta, is_player, _is_local_broom = false):
   if not dlc_locked and is_sneaky and is_passive and is_player and (
     not only_active_if_chicken or
     only_active_if_chicken and getPlayer().transformation == getPlayer().TransformationState.CHICKEN

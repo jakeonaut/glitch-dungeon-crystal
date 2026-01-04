@@ -24,7 +24,7 @@ func touchingPlayer():
     return false
     
 # TO BE OVERRIDDEN
-func passiveActivate(delta, _is_player):
+func passiveActivate(delta, _is_player, _is_local_broom = false):
     if not hasActivated:
         var npc = get_parent().get_node("NPC")
         npc.visible = false
