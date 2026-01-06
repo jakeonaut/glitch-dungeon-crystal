@@ -276,7 +276,6 @@ func activate(is_player, is_local_broom = false):
   if textBox.text_final == "":
     can_be_smacked = true
     return false
-  print("try activate: " + str(is_player) + ", " + str(is_local_broom))
   if not is_player: # and not is_local_broom:
     return false
   if global.activeInteractor == null:

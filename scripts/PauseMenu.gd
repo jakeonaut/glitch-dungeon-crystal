@@ -1001,6 +1001,8 @@ func updateOutfitPopupText():
       outfitSprite.frame = 26
     global.GrandmaOutfit.BUG_WINGS:
       outfitSprite.frame = 27
+    global.GrandmaOutfit.COZY_WINTER_SCARF:
+      outfitSprite.frame = 12
   popupOutfitRect.visible = true
   if global.userSettings.has("allMyOutfits") and global.userSettings["allMyOutfits"].size() > 1:
     popupText.bbcode_text += "\n" + global.getInputText("menu_left") + " " + global.getInputText("menu_right")

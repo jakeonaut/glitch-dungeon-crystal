@@ -211,6 +211,8 @@ func getOutfitDialogText(outfit):
             return tr("UI.Outfit.12")
         global.GrandmaOutfit.BUG_WINGS:
             return tr("UI.Outfit.13")
+        global.GrandmaOutfit.COZY_WINTER_SCARF:
+            return tr("UI.Outfit.14")
 
 enum GrandmaBroom {
     NORMAL,                     # 0

@@ -345,6 +345,7 @@ func normalGlitch():
   # mySprite.setNormalClothes()
 
 onready var grandmaHatSprite = get_node("SpriteContainer/InnerSpriteContainer/Sprite3D/HatSprite")
+onready var grandmaFishHatSprite = get_node("SpriteContainer/InnerSpriteContainer/FishySprite/HatSprite")
 onready var grandmaHandSprite = get_node("SpriteContainer/InnerSpriteContainer/Sprite3D/HandSprite")
 onready var broomSpriteVisible = get_node("SpriteContainer/Sprite3DBroomVisible") 
 onready var bubbleSprite = get_node("SpriteContainer/InnerSpriteContainer/BubbleSprite")
@@ -364,6 +365,7 @@ func changeSpriteColorPalette(palette):
   #   return
   mySprite.material_override.set_shader_param("target_palette", palette)
   grandmaHatSprite.material_override.set_shader_param("target_palette", palette)
+  grandmaFishHatSprite.material_override.set_shader_param("target_palette", palette)
   grandmaHandSprite.material_override.set_shader_param("target_palette", palette)
   fishySprite.material_override.set_shader_param("target_palette", palette)
   chickenSprite.material_override.set_shader_param("target_palette", palette)
@@ -376,15 +378,16 @@ var witchHatTex = preload("res://assets/outfits/player_sheet_witch_face.png")
 var elderMaskTex = preload("res://assets/outfits/player_sheet_elder_face.png")
 var grubFaceTex = preload("res://assets/outfits/player_sheet_glitchface.png")
 var glitchFaceTex = preload("res://assets/outfits/player_sheet_glitchface2.png")
-var fishermanTex = preload("res://assets/outfits/player_sheet_fisherman.png")
+var fishermanTex = preload("res://assets/outfits/player_sheet_elder_fish.png")
 var skeletonTex = preload("res://assets/outfits/player_sheet_skeleton.png")
 var frogCroneTex = preload("res://assets/outfits/player_sheet_frogcrone.png")
 var catEarsTex = preload("res://assets/outfits/player_sheet_kitty.png")
-var mushroomHatTex = preload("res://assets/outfits/player_sheet_mushroomhead.png")
+var mushroomHatTex = preload("res://assets/outfits/player_sheet_elder_shroom.png")
 var yubabaTex = preload("res://assets/outfits/player_sheet_yababa.png")
 var wasteWitchTex = preload("res://assets/outfits/player_sheet_waste.png")
 var chickenSuitTex = preload("res://assets/outfits/player_sheet_chicken.png")
-var bugWingsTex = preload("res://assets/outfits/player_sheet_bozoid.png")
+var bugWingsTex = preload("res://assets/outfits/player_sheet_elder_worm.png")
+var cozyWinterTex = preload("res://assets/outfits/player_sheet_cozy.png")
 func getOutfitTexture(outfit):
   match outfit:
     global.GrandmaOutfit.NO_HAT:
@@ -415,6 +418,8 @@ func getOutfitTexture(outfit):
       return chickenSuitTex
     global.GrandmaOutfit.BUG_WINGS:
       return bugWingsTex
+    global.GrandmaOutfit.COZY_WINTER_SCARF:
+      return cozyWinterTex
     _:
       return babushkaScarfTex
 
@@ -435,6 +440,8 @@ func getOutfitOffset(outfit):
     global.GrandmaOutfit.CHICKEN_MASK:
       return Vector2(0, 2)
     global.GrandmaOutfit.BUG_WINGS:
+      return Vector2(0, 2)
+    global.GrandmaOutfit.COZY_WINTER_SCARF:
       return Vector2(0, 2)
     _:
       return Vector2(0, 0)
@@ -472,6 +479,10 @@ func changeOutfit(outfit, should_play_sound = true):
   grandmaHatSprite.texture = getOutfitTexture(outfit)
   grandmaHatSprite.material_override.set_shader_param("texture_albedo", getOutfitTexture(outfit))
   grandmaHatSprite.offset = getOutfitOffset(outfit)
+  
+  grandmaFishHatSprite.texture = getOutfitTexture(outfit)
+  grandmaFishHatSprite.material_override.set_shader_param("texture_albedo", getOutfitTexture(outfit))
+  grandmaFishHatSprite.offset = getOutfitOffset(outfit)
   # spellbookGlitchSprite.visible = getOutfitIsSpellGlitchSpriteVisible(outfit)
   spellbookGlitchSprite.offset = getOutfitIsSpellGlitchSpriteOffset(outfit)
   if should_play_sound:
@@ -1201,7 +1212,7 @@ func processJumpInputs(delta):
     #   sporeJumpSound.play()
     #   has_used_magic_lantern += 1
     #   if has_used_magic_lantern >= MAX_DOUBLE_JUMPS:
-    #     for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite]:
+    #     for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite, grandmaFishHatSprite]:
     #       sprite.get_material_override().set_shader_param("enable_remove_skin_tone", true)
     # if global.memory["mushroom_soul"] >= 1 and global.memory["mushroom_soul_enabled"] and nesting_doll_state == global.NestingDoll.GRANDMA and triedToDoubleJump:
     #   gravitySound.play()
@@ -1315,6 +1326,7 @@ func glitchTickle(play_sound = true):
   glitchTickleSprite(mySprite)
   glitchTickleSprite(grandmaHatSprite)
   glitchTickleSprite(grandmaHandSprite)
+  glitchTickleSprite(grandmaFishHatSprite)
   if play_sound:
     if malware_infected:
       malwareSound.play()

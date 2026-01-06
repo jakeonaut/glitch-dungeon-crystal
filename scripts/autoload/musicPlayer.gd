@@ -184,6 +184,8 @@ func conductFromScenePath(path):
             tryToPlay(windPlayer)
     elif path.find("BossRoom") > 0:
         tryToPlay(bossThemePlayer)
+    elif path.find("TheDoorBefore") > 0:
+        tryToPlay(crystalThemePlayer)
     elif path.find("MainMenu") > 0:
         tryToPlay(titleThemePlayer)
         changeSongPitch(0.9)

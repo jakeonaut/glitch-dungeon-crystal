@@ -40,7 +40,7 @@
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=38]
 [ext_resource path="res://assets/sprites/doors.png" type="Texture" id=39]
 
-[sub_resource type="ArrayMesh" id=122]
+[sub_resource type="ArrayMesh" id=126]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -53,7 +53,7 @@ surfaces/0 = {
 "vertex_count": 8
 }
 
-[sub_resource type="ArrayMesh" id=123]
+[sub_resource type="ArrayMesh" id=127]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -2615,7 +2615,7 @@ viewport_path = NodePath("Viewport")
 [sub_resource type="ViewportTexture" id=28]
 viewport_path = NodePath("Viewport2")
 
-[sub_resource type="ArrayMesh" id=126]
+[sub_resource type="ArrayMesh" id=128]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -2726,11 +2726,11 @@ transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/AnglerFishBoss/CubeCrystal/CubeContainer" index="0"]
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
-mesh = SubResource( 122 )
+mesh = SubResource( 126 )
 
 [node name="MeshInstance3" parent="Viewport/level/AnglerFishBoss/CubeCrystal/CubeContainer" index="1"]
 transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
-mesh = SubResource( 123 )
+mesh = SubResource( 127 )
 
 [node name="MeshInstance2" parent="Viewport/level/AnglerFishBoss/CubeCrystal/CubeContainer" index="2"]
 transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )
@@ -2790,7 +2790,7 @@ vframes = 2
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 48.6343, -6.9911, 0 )
-path = "res://levels/EndlessFantasy/gd1FishingVillage/FrogBossHaven.tscn"
+path = "res://levels/EndlessFantasy/gd1FishingVillage/TheDoorBefore.tscn"
 
 [node name="Sprite3D" parent="Viewport/level/Door" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, -2.1 )
@@ -3285,18 +3285,22 @@ pixel_size = 0.0001
 
 [node name="BasicTadpoleEnemy" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, -32, 0 )
+walk_speed = 8.0
 only_activate_in_range = false
 
 [node name="BasicTadpoleEnemy2" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 58, -33, 0 )
+walk_speed = 8.0
 only_activate_in_range = false
 
 [node name="BasicTadpoleEnemy3" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33, -30, 0 )
+walk_speed = 8.0
 only_activate_in_range = false
 
 [node name="BasicTadpoleEnemy4" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 67, -30, 0 )
+walk_speed = 8.0
 only_activate_in_range = false
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 28 )]
@@ -3539,10 +3543,10 @@ flip_v = true
 [node name="UILayer" parent="." instance=ExtResource( 16 )]
 
 [node name="MeshInstance" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 126 )
+mesh = SubResource( 128 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [editable path="Viewport/level/AnglerFishBoss"]
 [editable path="Viewport/level/AnglerFishBoss/CubeCrystal"]

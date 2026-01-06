@@ -193,7 +193,7 @@ func _process(delta):
         newWeakEye.is_permanent = true
         level.add_child(newWeakEye)
         newWeakEye.global_transform.origin = self.global_transform.origin
-        newWeakEye.global_transform.origin.y += 4
+        newWeakEye.global_transform.origin.y += ((4 * weakeye_direction) if weakeye_direction == 1 or weakeye_direction == -1 else 4)
         newWeakEye.reenemize(true)
         weakEyeRef = weakref(newWeakEye)
     elif weakEyeRef == null or weakEyeRef.get_ref() == null or weakEyeRef.get_ref().am_i_dying:
@@ -455,6 +455,7 @@ export var is_sneaky = false
 export var dlc_locked = false
 export var gravity_flip = false
 export var only_active_if_chicken = false
+export var weakeye_direction = 1
 func passiveActivate(_delta, is_player, _is_local_broom = false):
   if not dlc_locked and is_sneaky and is_passive and is_player and (
     not only_active_if_chicken or

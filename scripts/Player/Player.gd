@@ -467,6 +467,7 @@ func _process(delta):
     mySprite.get_material_override().set_shader_param("opacity", spriteOpacity)
     grandmaHatSprite.get_material_override().set_shader_param("opacity", spriteOpacity)
     grandmaHandSprite.get_material_override().set_shader_param("opacity", spriteOpacity)
+    grandmaFishHatSprite.get_material_override().set_shader_param("opacity", spriteOpacity)
     broomSpriteVisible.get_material_override().set_shader_param("opacity", spriteOpacity)
   if "nterDoor" in aniPlayer.assigned_animation:
     spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x
@@ -608,6 +609,7 @@ func _process(delta):
       unglitchTickleSprite(mySprite)
       unglitchTickleSprite(grandmaHatSprite)
       unglitchTickleSprite(grandmaHandSprite)
+      unglitchTickleSprite(grandmaFishHatSprite)
   
   processPoisonWaterLogic(delta)
   if pressingJump():
@@ -631,6 +633,7 @@ func _process(delta):
 func updateGrandmaHatHandSprites():
   grandmaHatSprite.frame = mySprite.frame
   grandmaHatSprite.flip_h = mySprite.flip_h
+  grandmaFishHatSprite.flip_h = mySprite.flip_h
   grandmaHandSprite.frame = mySprite.frame
   grandmaHandSprite.flip_h = mySprite.flip_h
 
@@ -656,7 +659,7 @@ func unsmack():
   if not global.hasLevelGeodeBeenSmacked and not is_mushroom_prefected:
     pauseSelf = false
 
-  for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite]:
+  for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite, grandmaFishHatSprite]:
     sprite.material_override.set_shader_param("time_influence", 3)
     sprite.material_override.set_shader_param("y_div", 2.3)
     sprite.material_override.set_shader_param("normal_offset", .02)
@@ -1102,7 +1105,7 @@ func processGlitchHurtRecovery(delta):
         global.isRespawning = false
         if nesting_doll_state == global.NestingDoll.BABY and has_used_magic_lantern >= MAX_DOUBLE_JUMPS:
           return true
-        for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite]:
+        for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite, grandmaFishHatSprite]:
           sprite.material_override.set_shader_param("enable_glitch", false)
           sprite.material_override.set_shader_param("enable_remove_skin_tone", false)
 
@@ -1112,7 +1115,7 @@ func applyGlitchDeathEffects(x):
   if global.userSettings["canChangeSongPitch"] and (x < 0 or x > 20):
     musicPlayer.changeSongPitch(abs(sin(x*.05)+.02))
   if x > 10:
-    for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite]:
+    for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite, grandmaFishHatSprite]:
       sprite.material_override.set_shader_param("enable_glitch", self.physics_state == PhysicsState.GLITCH_RECOVERY)
       sprite.material_override.set_shader_param("enable_remove_skin_tone", self.physics_state == PhysicsState.GLITCH_RECOVERY)
 
@@ -1179,6 +1182,7 @@ func allSpritesBackToNormal(spritesToBeVisible):
   spriteBackToNormal(mySprite)
   spriteBackToNormal(grandmaHatSprite)
   spriteBackToNormal(grandmaHandSprite)
+  spriteBackToNormal(grandmaFishHatSprite)
   spriteBackToNormal(fishySprite)
   spriteBackToNormal(moleSprite)
   spriteBackToNormal(chickenSprite)
@@ -1204,7 +1208,7 @@ func processFishyLogic(_delta):
     if transformation == TransformationState.FISHY:
       getFishyCured()
     elif fishySprite.visible and not aniPlayer.assigned_animation == "revertFromFishy":
-      allSpritesBackToNormal([mySprite, grandmaHatSprite, grandmaHandSprite])
+      allSpritesBackToNormal([mySprite, grandmaHatSprite, grandmaHandSprite, grandmaFishHatSprite])
     return
 
   var has_been_in_water = (is_touching_water and was_touching_water) or (is_touching_sandstream and was_touching_sandstream)
@@ -1217,8 +1221,9 @@ func processFishyLogic(_delta):
     fishFormSound.play()
   elif transformation == TransformationState.FISHY:
     if not fishySprite.visible and not aniPlayer.assigned_animation == "transformToFishy":
-      allSpritesBackToNormal([fishySprite])
+      allSpritesBackToNormal([fishySprite, grandmaFishHatSprite])
     fishySprite.flip_h = mySprite.flip_h
+    grandmaFishHatSprite.flip_h = mySprite.flip_h
     physics_vars.should_apply_gravity = pressingDown()
     glitchTilesAroundMe(-2)
     if (not is_touching_water and not was_touching_water and not is_touching_sandstream and not was_touching_sandstream) or physics_state == PhysicsState.BEING_TOSSED:
@@ -1230,7 +1235,7 @@ func processFishyLogic(_delta):
     # aniPlayer.clear_queue()
     # aniPlayer.play("revertFromFishy")
     # aniPlayer.queue("land")
-    allSpritesBackToNormal([mySprite, grandmaHatSprite, grandmaHandSprite])
+    allSpritesBackToNormal([mySprite, grandmaHatSprite, grandmaHandSprite, grandmaFishHatSprite])
 
 
   # weird recovery
@@ -1411,7 +1416,7 @@ func processChickenLogic(delta):
       getChickenCured()
       gravitySound.play()
   elif chickenSprite.visible and not aniPlayer.assigned_animation == "revertFromChicken":
-    allSpritesBackToNormal([mySprite, grandmaHatSprite, grandmaHandSprite])
+    allSpritesBackToNormal([mySprite, grandmaHatSprite, grandmaHandSprite, grandmaFishHatSprite])
 
 func getChickenInfected():
   if is_mushroom_infected or nesting_doll_state == global.NestingDoll.MATRIARCH or transformation == TransformationState.CHICKEN:
@@ -1708,7 +1713,7 @@ func processMoleLogic(delta):
     if not pressingJump() and on_ground:
       can_dig_up = true
     # if moleSprite.visible and not aniPlayer.assigned_animation == "revertFromMole":
-    #   allSpritesBackToNormal([mySprite, grandmaHatSprite, grandmaHandSprite])
+    #   allSpritesBackToNormal([mySprite, grandmaHatSprite, grandmaHandSprite, grandmaFishHatSprite])
     #   getABroom()
     if is_covered_in_dirt:
       is_covered_in_dirt_timer += (delta*11)
@@ -1802,7 +1807,7 @@ func getMoleCured():
     summonSmokeClouds(3, true, true, 0)
     digSound2.play()
     global_transform.origin.y += 2
-    for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite]:
+    for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite, grandmaFishHatSprite]:
       sprite.visible = true
     pauseAnimation = false
     can_update_last_grounded_pos = true
@@ -1817,7 +1822,7 @@ func getMoleCured():
     summonSmokeClouds(3, true, true, 0)
     digSound2.play()
     global_transform.origin.y -= 2
-    for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite]:
+    for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite, grandmaFishHatSprite]:
       sprite.visible = true
     pauseAnimation = false
     can_update_last_grounded_pos = true
@@ -1974,7 +1979,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
 
   level.glitchScreenEffect.material.set_shader_param("shake_power", 0.01)
   level.glitchScreenEffect.material.set_shader_param("shake_color_rate", 0.01)
-  for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite]:
+  for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite, grandmaFishHatSprite]:
     sprite.material_override.set_shader_param("enable_glitch", true)
     sprite.material_override.set_shader_param("enable_remove_skin_tone", true)
   
@@ -2081,7 +2086,7 @@ var smack_time_limit = 4
 func getSmacked(_broom_origin = null, _silently = false, _is_local_broom = false):
   if is_smacked or physics_state == PhysicsState.BEING_TOSSED:
     return
-  for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite]:
+  for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite, grandmaFishHatSprite]:
     sprite.material_override.set_shader_param("time_influence", time_influence)
     sprite.material_override.set_shader_param("y_div", y_div)
     sprite.material_override.set_shader_param("normal_offset", normal_offset)
@@ -2196,6 +2201,7 @@ func corruptAllSprites():
   corruptSprite(mySprite)
   corruptSprite(grandmaHatSprite)
   corruptSprite(grandmaHandSprite)
+  corruptSprite(grandmaFishHatSprite)
   corruptSprite(fishySprite)
   corruptSprite(moleSprite)
   corruptSprite(chickenSprite)
@@ -2206,6 +2212,7 @@ func uncorruptAllSprites():
   uncorruptSprite(mySprite)
   uncorruptSprite(grandmaHatSprite)
   uncorruptSprite(grandmaHandSprite)
+  uncorruptSprite(grandmaFishHatSprite)
   uncorruptSprite(fishySprite)
   uncorruptSprite(moleSprite)
   uncorruptSprite(chickenSprite)
@@ -2669,7 +2676,7 @@ func processBroomRenderLogic(_delta):
     broomSpriteVisible.visible = false
     if nesting_doll_state == global.NestingDoll.GRANDMA:
       mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
-      for sprite in [self.mySprite, self.grandmaHatSprite, self.grandmaHandSprite]:
+      for sprite in [self.mySprite, self.grandmaHatSprite, self.grandmaHandSprite, self.grandmaFishHatSprite]:
         sprite.material_override.set_shader_param("black_offset", 0)
   elif summonedBroom != null:
     adjustSummonedBroomSpritePosition()
@@ -2677,13 +2684,13 @@ func processBroomRenderLogic(_delta):
     broomSpriteVisible.visible = true
     if nesting_doll_state == global.NestingDoll.GRANDMA:
       mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
-      for sprite in [self.mySprite, self.grandmaHatSprite, self.grandmaHandSprite]:
+      for sprite in [self.mySprite, self.grandmaHatSprite, self.grandmaHandSprite, self.grandmaFishHatSprite]:
         sprite.material_override.set_shader_param("black_offset", 0 if (level.getLevelName().find("MainMenu") > 0 and global.has_started_game) else 1)
   else:
     broomSpriteVisible.visible = false
     if nesting_doll_state == global.NestingDoll.GRANDMA and not isHoldingMultiBroom():
       mySprite.material_override.set_shader_param("texture_albedo", spriteSheetNoBroom)
-      for sprite in [self.mySprite, self.grandmaHatSprite, self.grandmaHandSprite]:
+      for sprite in [self.mySprite, self.grandmaHatSprite, self.grandmaHandSprite, self.grandmaFishHatSprite]:
         sprite.material_override.set_shader_param("black_offset", 0)
 
 func processBagRenderLogic(_delta):
@@ -2784,7 +2791,7 @@ func landed():
 
   has_used_magic_lantern = 0
   if glitch_tickle_timer <= 0:
-    for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite]:
+    for sprite in [mySprite, grandmaHatSprite, grandmaHandSprite, grandmaFishHatSprite]:
       sprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
   # if nesting_doll_state == global.NestingDoll.BABY and not Input.is_action_pressed("jump_button"):
   #   tryToRevertFromBaby()
@@ -2902,7 +2909,7 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
       fallenBroom.walk_direction.x = x_direction
     fallenBroom.thrown_direction.x = fallenBroom.walk_direction.x
     if global.memory["zora_flippers"] > 0 and global.memory["zora_flippers_enabled"] and can_spawn_broomerang_bubbles:
-      can_spawn_broomerang_bubbles = false
+      can_spawn_broomerang_bubbles = on_ground
       for _i in range(3):
         var bubble = bubbleRes.instance()
         # bubble.mySprite.material_override.set_shader_param("enable_no_transparency", true)

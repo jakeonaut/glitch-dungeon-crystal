@@ -31,7 +31,8 @@ enum MainMenuState {
     TRY_CONTINUE,
 }
 var mainMenuState = MainMenuState.PLAYING_INTRO_VIDEO
-onready var videoPlayer = get_node("../../Viewport2/UILayer/VideoPlayer")
+onready var titleCardVideoPlayer = get_node("../../Viewport2/UILayer/TitlecardVideoPlayer")
+onready var fadeOutVideoPlayer = get_node("../../Viewport2/UILayer/FadeOutVideoPlayer")
 var was_intro_video_playing = false
 onready var epilepsyWarning = get_node("../../Viewport2/UILayer/EpilepsyWarning")
 onready var epilepsyWarningCoverup = get_node("../../Viewport2/UILayer/EpilepsyWarning/Coverup")
@@ -39,7 +40,7 @@ onready var epilepsyWarningText = get_node("../../Viewport2/UILayer/EpilepsyWarn
 var has_finished_initial_initialization = false
 
 func setUpRoomInitializationOverride():
-    for sprite in [player.mySprite, player.grandmaHatSprite, player.grandmaHandSprite]:
+    for sprite in [player.mySprite, player.grandmaHatSprite, player.grandmaHandSprite, player.grandmaFishHatSprite]:
         sprite.material_override.set_shader_param("black_offset", 0)
     if not global.has_started_game:
         global.isOnMainMenu = true
@@ -57,20 +58,24 @@ func setUpRoomInitializationOverride():
             yield(TempTimer.idle_frame(self), "timeout")
             has_finished_initial_initialization = true
             global.has_ever_seen_intro = true
-            videoPlayer.visible = true
-            videoPlayer.play()
+            titleCardVideoPlayer.visible = true
+            print("PLAY!!! ???")
+            titleCardVideoPlayer.play()
+            fadeOutVideoPlayer.visible = false
             epilepsyWarning.visible = false
             uiLayer.visible = true
         else:
             logoSprite.visible = true
             mainMenuState = MainMenuState.MAIN_MENU
             uiLayer.visible = true
-            videoPlayer.visible = false
+            titleCardVideoPlayer.visible = false
+            fadeOutVideoPlayer.visible = false
             epilepsyWarning.visible = false
             has_finished_initial_initialization = true
     else:
         mainMenuState = MainMenuState.NORMAL_GAMEPLAY
-        videoPlayer.visible = false
+        titleCardVideoPlayer.visible = false
+        fadeOutVideoPlayer.visible = false
         epilepsyWarning.visible = false
         uiLayer.visible = true
         self.remove_child(get_node("BabushkaCat"))
@@ -397,44 +402,52 @@ var updateMenuText = true
 func _process(delta):
     global.isEndOfGame = false
     if mainMenuState == MainMenuState.PLAYING_INTRO_VIDEO:
-        videoPlayer.visible = true
+        print("playing?")
+        titleCardVideoPlayer.visible = true
+        fadeOutVideoPlayer.visible = false
         uiLayer.visible = true
         player.sleepy_timer = 0
         basicCrtEffectRect2.visible = true
         logoSprite.visible = false
         epilepsyWarning.visible = false
         if not was_intro_video_playing:
-            if videoPlayer.is_playing():
+            if titleCardVideoPlayer.is_playing():
                 was_intro_video_playing = true
+                print("playing!!")
             return
         else:
-            if not videoPlayer.is_playing() or (
+            print("why")
+            if not titleCardVideoPlayer.is_playing() or (
                 Input.is_action_just_pressed("sub_action_button") or \
                 Input.is_action_just_pressed("jump_button") or \
                 Input.is_action_just_pressed("ui_start") or \
                 (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))
             ):
+                print("STOP!!")
+                titleCardVideoPlayer.visible = false
+                titleCardVideoPlayer.stop()
+                fadeOutVideoPlayer.visible = true
+                fadeOutVideoPlayer.play()
                 mainMenuState = MainMenuState.HIDING_INTRO_VIDEO
-                transition.aniPlayer.stop()
-                transition.aniPlayer.play("long_fade_no_change")
-                splash_cover_opacity = 0
                 return
         return
     elif mainMenuState == MainMenuState.HIDING_INTRO_VIDEO:
+        print("hiding???")
         player.sleepy_timer = 0
-        splash_cover_opacity += (delta)
-        if splash_cover_opacity >= 1:
+        if not fadeOutVideoPlayer.is_playing():
             splash_cover_opacity = 1
+            transition.setProgressTo(1)
             transition.fast_reverse_fade()
             epilepsyWarning.visible = true
-            videoPlayer.visible = false
+            titleCardVideoPlayer.visible = false
+            fadeOutVideoPlayer.visible = false
             uiLayer.visible = true
             mainMenuState = MainMenuState.SHOWING_EPILEPSY_WARNING
-            videoPlayer.stop()
         return
     elif mainMenuState == MainMenuState.SHOWING_EPILEPSY_WARNING or \
        mainMenuState == MainMenuState.HIDING_EPILEPSY_WARNING:
-        videoPlayer.visible = false
+        titleCardVideoPlayer.visible = false
+        fadeOutVideoPlayer.visible = false
         uiLayer.visible = true
         player.sleepy_timer = 0
         basicCrtEffectRect2.visible = false
@@ -463,7 +476,7 @@ func _process(delta):
                 epilepsyWarning.visible = false
                 mainMenuState = MainMenuState.SHOWING_PETSCLUB2_SPLASH
                 logoSprite.visible = false
-                # videoPlayer.play()
+                # titleCardVideoPlayer.play()
                 # musicPlayer.tryToPlay(musicPlayer.grannyPlayer)
         epilepsyWarningCoverup.color = Color(0, 0, 0, epilepsy_cover_opacity)
         return

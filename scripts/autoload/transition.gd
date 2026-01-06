@@ -135,6 +135,9 @@ func startAdjacentLevelLoading():
       adjacent_level_loaders[RoomMap.SOUTH] = ResourceLoader.load_interactive(roomPath_south)
     set_process(true) # so that we can "interactively load"
 
+func setProgressTo(progress_amt):
+  colorRect.material.set_shader_param("progress", progress_amt)
+
 # PUBLIC FUNCTION. CALLED WHENEVER YOU WANT TO CHANGE SCENE
 func edge_fade_to(scn_path):
   long_fade_to(scn_path)

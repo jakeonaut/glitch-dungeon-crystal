@@ -164,7 +164,7 @@ func _ready_impl():
     uiLayer.setDisplayTitle(global.getDisplayTitle(self.getLevelZoneName(), self.getLevelName()))
   tryShowUIElements()
   trySpawnFollowers()
-  for sprite in [player.mySprite, player.grandmaHatSprite, player.grandmaHandSprite]:
+  for sprite in [player.mySprite, player.grandmaHatSprite, player.grandmaHandSprite, player.grandmaFishHatSprite]:
     sprite.material_override.set_shader_param("black_offset", 1)
   setUpRoomInitializationOverride()
   restartMusic()
@@ -182,7 +182,7 @@ func _ready_impl():
   else:
     pass
   global.activeThrowableObjectPath = null
-  for sprite in [player.mySprite, player.grandmaHatSprite, player.grandmaHandSprite]:
+  for sprite in [player.mySprite, player.grandmaHatSprite, player.grandmaHandSprite, player.grandmaFishHatSprite]:
     sprite.get_material_override().set_shader_param("enable_glitch", false)
     sprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
   if global.memory["mushroom_soul"] > 0 and global.memory["mushroom_soul_ver"] == 0:
@@ -567,7 +567,7 @@ func tryToRespawn():
       player.mushroomClone()
       player.on_ground = false
     elif global.memory.has("savePoint") and global.memory.has("savedRoomPath") and global.memory["savedRoomPath"] == getLevelName():
-      var savePoint = get_node(global.memory["savePoint"])
+      var savePoint = get_node(global.memory["savePoint"]) if global.memory["savePoint"] != null else null
       if savePoint != null:
         player.global_transform.origin = savePoint.global_transform.origin + Vector3(0, -1, 0)
       gameCamera.rotation_degrees.y = global.cameraRotation

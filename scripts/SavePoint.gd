@@ -123,7 +123,7 @@ func generateId():
     return get_tree().get_root().get_node("Game/Viewport/level").getLevelName() + ":" + get_name()
 
 var is_currently_on_save_point = false
-func passiveActivate(_delta, is_player, _is_local_broom = false):
+func passiveActivate(_delta, is_player, is_local_broom = false):
     if not visible: return false
 
     if is_player:
@@ -139,9 +139,6 @@ func passiveActivate(_delta, is_player, _is_local_broom = false):
             global.memory["nesting_doll"] = global.NestingDoll.GRANDMA
             level.player.updateNestingDoll(global.NestingDoll.GRANDMA)
             level.player.getABroom()
-    else:
-        spin_dir *= -1
-        saveSound.stop()
 
     global.memory["hp"] = global.memory["max_hp"]
     if not global.isRespawning and (not isOnSavePoint() or not is_player):

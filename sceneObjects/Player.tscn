@@ -101,7 +101,6 @@
 [ext_resource path="res://assets/sounds/sporeJump.wav" type="AudioStream" id=99]
 [ext_resource path="res://assets/sounds/eb_menu1.wav" type="AudioStream" id=100]
 [ext_resource path="res://sceneObjects/SporeSavePoint.tscn" type="PackedScene" id=101]
-[ext_resource path="res://scripts/SavePoint.gd" type="Script" id=102]
 
 [sub_resource type="BoxShape" id=94]
 extents = Vector3( 0.36, 0.5, 1 )
@@ -158,7 +157,7 @@ shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
-shader_param/shake_power = 0.01
+shader_param/shake_power = 0.05
 shader_param/shake_block_size = 20.0
 shader_param/shake_color_rate = 0.0
 shader_param/no_palette_swap = false
@@ -172,7 +171,7 @@ shader_param/offset = 0
 shader_param/black_offset = 1
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
-shader_param/disable_glitch_dither = true
+shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 4.0
 shader_param/enable_glitch_3d = false
@@ -259,6 +258,42 @@ shader_param/y_div = 2.87
 shader_param/texture_albedo = ExtResource( 68 )
 shader_param/base_palette = ExtResource( 5 )
 shader_param/target_palette = ExtResource( 69 )
+
+[sub_resource type="ShaderMaterial" id=134]
+shader = ExtResource( 4 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.005
+shader_param/shake_block_size = 20.0
+shader_param/shake_color_rate = 0.0
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 1
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 4.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 97 )
+shader_param/base_palette = ExtResource( 5 )
+shader_param/target_palette = ExtResource( 48 )
 
 [sub_resource type="ShaderMaterial" id=122]
 shader = ExtResource( 4 )
@@ -1536,7 +1571,7 @@ tracks/35/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.125 ]
+"values": [ 0.0001 ]
 }
 tracks/36/type = "value"
 tracks/36/path = NodePath("Sounds/PoisonWaterReverseSound:playing")
@@ -1729,6 +1764,54 @@ tracks/51/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ false ]
+}
+tracks/52/type = "value"
+tracks/52/path = NodePath("SpriteContainer/InnerSpriteContainer/FishySprite/HatSprite:pixel_size")
+tracks/52/interp = 1
+tracks/52/loop_wrap = true
+tracks/52/imported = false
+tracks/52/enabled = true
+tracks/52/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.125 ]
+}
+tracks/53/type = "value"
+tracks/53/path = NodePath("SpriteContainer/InnerSpriteContainer/FishySprite/HatSprite:material_override:shader_param/enable_glitch")
+tracks/53/interp = 1
+tracks/53/loop_wrap = true
+tracks/53/imported = false
+tracks/53/enabled = true
+tracks/53/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/54/type = "value"
+tracks/54/path = NodePath("SpriteContainer/InnerSpriteContainer/FishySprite/HatSprite:material_override:shader_param/shake_power")
+tracks/54/interp = 1
+tracks/54/loop_wrap = true
+tracks/54/imported = false
+tracks/54/enabled = true
+tracks/54/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.005 ]
+}
+tracks/55/type = "value"
+tracks/55/path = NodePath("SpriteContainer/InnerSpriteContainer/FishySprite/HatSprite:translation")
+tracks/55/interp = 1
+tracks/55/loop_wrap = true
+tracks/55/imported = false
+tracks/55/enabled = true
+tracks/55/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.1, 0.1 ) ]
 }
 
 [sub_resource type="Animation" id=46]
@@ -3743,10 +3826,46 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0001 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("SpriteContainer/InnerSpriteContainer/FishySprite/HatSprite:pixel_size")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
 "times": PoolRealArray( 0, 0.1, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.12, 0.06, 0.12 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("SpriteContainer/InnerSpriteContainer/FishySprite/HatSprite:material_override:shader_param/enable_glitch")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("SpriteContainer/InnerSpriteContainer/FishySprite/HatSprite:material_override:shader_param/shake_power")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.01, 0.05 ]
 }
 
 [sub_resource type="Animation" id=121]
@@ -4939,10 +5058,46 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0001 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("SpriteContainer/InnerSpriteContainer/FishySprite/HatSprite:pixel_size")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
 "times": PoolRealArray( 0.1, 0.2, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.12, 0.2, 0.125 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("SpriteContainer/InnerSpriteContainer/FishySprite/HatSprite:material_override:shader_param/enable_glitch")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("SpriteContainer/InnerSpriteContainer/FishySprite/HatSprite:material_override:shader_param/shake_power")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.05, 0.005 ]
 }
 
 [sub_resource type="Animation" id=110]
@@ -7496,13 +7651,28 @@ automatically_change_color = false
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.75 )
 visible = false
 material_override = SubResource( 107 )
-pixel_size = 0.125
+pixel_size = 0.0001
 texture = ExtResource( 68 )
 hframes = 8
 vframes = 10
 frame = 24
 script = ExtResource( 10 )
 frame_delay = 0.3
+
+[node name="HatSprite" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/FishySprite"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0.1 )
+material_override = SubResource( 134 )
+pixel_size = 0.125
+transparent = false
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 97 )
+hframes = 8
+vframes = 8
+frame = 20
+script = ExtResource( 10 )
+frame_delay = 0.3
+automatically_change_color = false
 
 [node name="MalwareSprite" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.75 )
@@ -8215,6 +8385,5 @@ anims/exclaim = SubResource( 127 )
 
 [node name="SporeSavePoint" parent="." instance=ExtResource( 101 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 999 )
-script = ExtResource( 102 )
 
 [editable path="TextContainer"]
