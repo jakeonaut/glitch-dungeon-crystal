@@ -2005,6 +2005,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   #   lv.y = 0
   #   global.pauseMoveInput = false 
   #   glitch_death_timer = 10
+  var GRANNY_BOSS_HP_CUTOFF = -1 if global.memory.has("weird_active_save_point_x") and global.memory.has("weird_active_save_point_y") else 0
   if nesting_doll_state == global.NestingDoll.MATRIARCH:
     global.memory["hp"] += 1
     physics_state = PhysicsState.GLITCH_HURT
@@ -2034,7 +2035,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
   #   global.memory["nesting_doll"] = global.NestingDoll.BABY
   #   updateNestingDoll(global.NestingDoll.BABY)
   #   loseBroom()
-  elif global.memory["hp"] <= 0 or should_immediately_die or (whichBoss != null and whichBoss.num_granny_hits == 0):
+  elif global.memory["hp"] <= 0 or should_immediately_die or (whichBoss != null and whichBoss.num_granny_hits <= GRANNY_BOSS_HP_CUTOFF):
     if summonedBroom:
       broomStop()
     summonFallenBroom(false, true, false)
@@ -2051,6 +2052,19 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
       summonSmokeClouds(3, true, true, -1)
       enchantedBagSpriteVisible.visible = false
     # self.nullify()
+    if whichBoss != null and global.memory.has("weird_active_save_point_x") and global.memory.has("weird_active_save_point_y"):
+      global_transform.origin = Vector3(
+        global.memory["weird_active_save_point_x"], 
+        global.memory["weird_active_save_point_y"], 
+        global.memory["weird_active_save_point_z"])
+      properlyApplyTransformation()
+      last_grounded_pos = Vector3(global_transform.origin)
+      global.memory.erase("weird_active_save_point_x")
+      global.memory.erase("weird_active_save_point_y")
+      global.memory.erase("weird_active_save_point_z")
+      mySporeSavePoint.global_transform.origin = Vector3(999, 999, 999)
+      mushroomClone()
+      on_ground = false
   remembered_feather_jump_timer = self.feather_jump_timer
   remembered_y_vel = lv.y
   remembered_on_ground = on_ground

@@ -168,8 +168,14 @@ func conductFromScenePath(path):
     if path.find("0_0") > 0 and not global.okay_really_really_started_game and not path.find("Nullify") > 0:
         stopAll()
         return
-    elif path.find("MainMenu") > 0 and not global.has_ever_seen_intro:
-        tryToPlay(primordialOozeThemePlayer)
+    elif path.find("MainMenu") > 0:
+        if global.has_ever_seen_intro:
+            tryToPlay(titleThemePlayer)
+            changeSongPitch(0.9)
+            default_song_pitch = 0.9
+            return
+        else:
+            tryToPlay(primordialOozeThemePlayer)
     elif path.find("preBossRoom") > 0 or \
        (path.find("HighPriestessRoom") > 0 and global.memory["priestess"] >= 2) or \
        path.find("MiniRestZone") > 0 or \
@@ -186,11 +192,6 @@ func conductFromScenePath(path):
         tryToPlay(bossThemePlayer)
     elif path.find("TheDoorBefore") > 0:
         tryToPlay(crystalThemePlayer)
-    elif path.find("MainMenu") > 0:
-        tryToPlay(titleThemePlayer)
-        changeSongPitch(0.9)
-        default_song_pitch = 0.9
-        return
     elif path.find("StoryHook") > 0 or path.find("NullificationPurgatory") > 0 or path.find("NullifyIntro") > 0 or path.find("LadderIntro") > 0 or path.find("GhostIntro") > 0:
         tryToPlay(dungeonThemePlayer)
         changeSongPitch(1.0)

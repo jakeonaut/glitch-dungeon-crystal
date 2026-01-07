@@ -2809,7 +2809,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 5, 0 )
 visible = false
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 42 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -2.68362, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -11.6836, 0 )
 visible = false
 
 [node name="ElderTadpoleNPC" parent="Viewport/level" instance=ExtResource( 18 )]
@@ -3001,8 +3001,7 @@ frame_delay = 0.3
 max_frames = 4
 
 [node name="Goop3" type="Sprite3D" parent="Viewport/level" groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.56156, 1.38546, -2.08 )
-visible = false
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.56156, 1.38546, -3.08 )
 material_override = SubResource( 318 )
 pixel_size = 0.125
 texture = ExtResource( 54 )

@@ -59,7 +59,6 @@ func setUpRoomInitializationOverride():
             has_finished_initial_initialization = true
             global.has_ever_seen_intro = true
             titleCardVideoPlayer.visible = true
-            print("PLAY!!! ???")
             titleCardVideoPlayer.play()
             fadeOutVideoPlayer.visible = false
             epilepsyWarning.visible = false
@@ -402,7 +401,6 @@ var updateMenuText = true
 func _process(delta):
     global.isEndOfGame = false
     if mainMenuState == MainMenuState.PLAYING_INTRO_VIDEO:
-        print("playing?")
         titleCardVideoPlayer.visible = true
         fadeOutVideoPlayer.visible = false
         uiLayer.visible = true
@@ -413,17 +411,14 @@ func _process(delta):
         if not was_intro_video_playing:
             if titleCardVideoPlayer.is_playing():
                 was_intro_video_playing = true
-                print("playing!!")
             return
         else:
-            print("why")
             if not titleCardVideoPlayer.is_playing() or (
                 Input.is_action_just_pressed("sub_action_button") or \
                 Input.is_action_just_pressed("jump_button") or \
                 Input.is_action_just_pressed("ui_start") or \
                 (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))
             ):
-                print("STOP!!")
                 titleCardVideoPlayer.visible = false
                 titleCardVideoPlayer.stop()
                 fadeOutVideoPlayer.visible = true
@@ -432,7 +427,6 @@ func _process(delta):
                 return
         return
     elif mainMenuState == MainMenuState.HIDING_INTRO_VIDEO:
-        print("hiding???")
         player.sleepy_timer = 0
         if not fadeOutVideoPlayer.is_playing():
             splash_cover_opacity = 1
@@ -520,6 +514,7 @@ func _process(delta):
                 petsClub2Splash.visible = false
                 uiLayer.visible = true
                 mainMenuState = MainMenuState.MAIN_MENU
+                musicPlayer.conductFromScenePath(getLevelName())
                 logoSprite.visible = true
                 player.aniPlayer.stop()
                 player.aniPlayer.clear_queue()
@@ -792,17 +787,14 @@ func normalizeMainMenuPromptIndex(change):
     if global.mainMenuPromptIndex < 0:
         global.mainMenuPromptIndex = global.save_game_files.size() - 1
 
-var has_ever_started_music = false
 # @override
 func playMenuMusic():
+    musicPlayer.conductFromScenePath(getLevelName())
+    musicPlayer.changeSongPitch(0.5)
     # if not musicPlayer.currentlyPlayingTheme:
     #     musicPlayer.conductFromScenePath(getLevelName())
     # musicPlayer.tryToPlay(musicPlayer.restZonePlayer)
-    pass
     
 # @override
 func restartMusic():
-    print("main menu restart music")
-    if not has_ever_started_music:
-        musicPlayer.conductFromScenePath(getLevelName())
-        has_ever_started_music = true
+    musicPlayer.conductFromScenePath(getLevelName())

@@ -58,10 +58,10 @@ func _process(delta):
     scared_timer += (delta*11)
     global_transform.origin = level.player.global_transform.origin
     if level.player.mySprite.flip_h:
-      global_transform.origin.x += 5
+      global_transform.origin.x += 8
     else:
-      global_transform.origin.x -= 5
-    global_transform.origin.y += 5
+      global_transform.origin.x -= 8
+    global_transform.origin.y += 8
     mySprite.flip_h = (level.player.global_transform.origin.x < global_transform.origin.x)
     mySprite.material_override.set_shader_param("opacity", 0)
     my_opacity = 0

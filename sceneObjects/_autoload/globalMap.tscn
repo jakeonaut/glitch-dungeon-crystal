@@ -584,7 +584,6 @@ can_nav_right = false
 can_nav_up = false
 can_nav_down = false
 kill_after_glitch = true
-has_angel_egg = 1
 
 [node name="ToxicJungle" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 7, 0 )
@@ -906,7 +905,6 @@ can_nav_left = false
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false
-has_angel_egg = 1
 
 [node name="CrystalTower" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )

@@ -462,8 +462,6 @@ func getOutfitIsSpellGlitchSpriteOffset(outfit):
       return Vector2(0, 4)
     global.GrandmaOutfit.CHICKEN_MASK:
       return Vector2(0, 4)
-    global.GrandmaOutfit.BUG_WINGS:
-      return Vector2(0, 4)
     _:
       return Vector2(0, 0)
 
@@ -546,20 +544,22 @@ func landed():
   if self.is_a_parent_of(mySporeSavePoint): 
     self.remove_child(mySporeSavePoint)
     level.add_child(mySporeSavePoint)
-  #  not self.was_fallthrough_area_collision_triggered and \
-  if global.memory["mushroom_soul"] >= 1 and global.memory["mushroom_soul_enabled"] and \
-     not self.isOnSavePoint() and \
-     physics_state == PhysicsState.NORMAL and \
-     transformation != TransformationState.CHICKEN and \
-     transformation != TransformationState.MOLE_DIGGING and \
-     transformation != TransformationState.UNDERGROUND and \
-     transformation != TransformationState.UNDERGROUND_RETURNING and \
-     transformation != TransformationState.BUBBLE:
-    global.memory.erase("weird_active_save_point_x")
-    global.memory.erase("weird_active_save_point_y")
-    global.memory.erase("weird_active_save_point_z")
-    mySporeSavePoint.global_transform.origin = self.global_transform.origin
-    mySporeSavePoint.passiveActivate(0, true)
+  var whichBoss = level.getBoss()
+  if whichBoss == null or whichBoss.num_granny_hits > 0:
+    #  not self.was_fallthrough_area_collision_triggered and \
+    if global.memory["mushroom_soul"] >= 1 and global.memory["mushroom_soul_enabled"] and \
+      not self.isOnSavePoint() and \
+      physics_state == PhysicsState.NORMAL and \
+      transformation != TransformationState.CHICKEN and \
+      transformation != TransformationState.MOLE_DIGGING and \
+      transformation != TransformationState.UNDERGROUND and \
+      transformation != TransformationState.UNDERGROUND_RETURNING and \
+      transformation != TransformationState.BUBBLE:
+      global.memory.erase("weird_active_save_point_x")
+      global.memory.erase("weird_active_save_point_y")
+      global.memory.erase("weird_active_save_point_z")
+      mySporeSavePoint.global_transform.origin = self.global_transform.origin
+      mySporeSavePoint.passiveActivate(0, true)
 
 func isOnSavePoint(forced_respawn = false):
   if forced_respawn and global.memory.has("weird_active_save_point_x"):
