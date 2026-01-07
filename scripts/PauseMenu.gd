@@ -1502,37 +1502,37 @@ func tryDrawMap():
         if "AnglerFish" in mapRoom.path:
           if global.memory["angler_seaman_boss"] >= 3:
             sprite.frame = 238
-          elif global.memory["angler_seaman_boss"] >= 2:
-            sprite.frame = 239
+          elif global.memory["zora_flippers"] <= 0:
+            sprite.frame = 94
           else:
             sprite.frame = 217
             sprite.material.set_shader_param("offset", 0)
         if "Claydol" in mapRoom.path:
           if global.memory["dogu_matryoshka_boss"] >= 3:
             sprite.frame = 238
-          elif global.memory["dogu_matryoshka_boss"] >= 2:
-            sprite.frame = 239
+          elif global.memory["mole_cricket"] <= 0:
+            sprite.frame = 94
           else:
             sprite.frame = 217
             sprite.material.set_shader_param("offset", 0)
         if "BabaYaga" in mapRoom.path:
           if global.memory["baba_yaga_boss"] >= 3:
             sprite.frame = 238
-          elif global.memory["baba_yaga_boss"] >= 2:
-            sprite.frame = 239
+          elif global.memory["mushroom_soul"] <= 0:
+            sprite.frame = 94
           else:
             sprite.frame = 217
             sprite.material.set_shader_param("offset", 0)
       elif mapRoom.has_mole_memory: # and getBabushkaCatSniffedVar(mapRoom.path) >= 2:
-        sprite.frame = 90 if not flowerPotSprite.visible else 91
+        sprite.frame = 248 if not flowerPotSprite.visible else 91
         # map_cricketSoulSprite.visible = true
         # map_cricketSoulSprite.position = sprite.position
       elif mapRoom.has_baba_memory: # and getBabushkaCatSniffedVar(mapRoom.path) >= 2:
-        sprite.frame = 90 if not cutePetSprite.visible else 91
+        sprite.frame = 248 if not cutePetSprite.visible else 91
         # map_mushroomSoulSprite.visible = true
         # map_mushroomSoulSprite.position = sprite.position
       elif mapRoom.has_fish_memory: # and getBabushkaCatSniffedVar(mapRoom.path) >= 2:
-        sprite.frame = 90 if not fishingRodSprite.visible else 91
+        sprite.frame = 248 if not fishingRodSprite.visible else 91
         # map_fishSoulSprite.visible = true
         # map_fishSoulSprite.position = sprite.position
       
