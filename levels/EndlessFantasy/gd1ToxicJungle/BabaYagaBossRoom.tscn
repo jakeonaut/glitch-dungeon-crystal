@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=2]
+[gd_scene load_steps=112 format=2]
 
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=1]
 [ext_resource path="res://levels/EndlessFantasy/gd1ToxicJungle/BabaYagaLevelScript.gd" type="Script" id=2]
@@ -39,7 +39,6 @@
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/InvisibleSpell.tscn" type="PackedScene" id=37]
 [ext_resource path="res://assets/mushroom.png" type="Texture" id=38]
 [ext_resource path="res://assets/palettes/pseudo_greyscale.png" type="Texture" id=39]
-[ext_resource path="res://sceneObjects/Enemies/EvilGlitchSlime.tscn" type="PackedScene" id=40]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=41]
 [ext_resource path="res://sceneObjects/KizzyCat.tscn" type="PackedScene" id=42]
 
@@ -2286,48 +2285,6 @@ material_override = SubResource( 265 )
 [node name="CollisionShape" parent="Viewport/level/Mushroom15/FallthroughSolid" index="0"]
 shape = SubResource( 266 )
 
-[node name="Mushroom16" parent="Viewport/level" instance=ExtResource( 26 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.902, -6.98224, -1 )
-
-[node name="Sprite3D" parent="Viewport/level/Mushroom16" index="0"]
-material_override = SubResource( 265 )
-
-[node name="Sprite3D12" parent="Viewport/level/Mushroom16" index="1"]
-material_override = SubResource( 265 )
-
-[node name="Sprite3D2" parent="Viewport/level/Mushroom16" index="2"]
-material_override = SubResource( 265 )
-
-[node name="Sprite3D3" parent="Viewport/level/Mushroom16" index="3"]
-material_override = SubResource( 265 )
-
-[node name="Sprite3D4" parent="Viewport/level/Mushroom16" index="4"]
-material_override = SubResource( 265 )
-
-[node name="Sprite3D5" parent="Viewport/level/Mushroom16" index="5"]
-material_override = SubResource( 265 )
-
-[node name="Sprite3D9" parent="Viewport/level/Mushroom16" index="6"]
-material_override = SubResource( 265 )
-
-[node name="Sprite3D10" parent="Viewport/level/Mushroom16" index="7"]
-material_override = SubResource( 265 )
-
-[node name="Sprite3D11" parent="Viewport/level/Mushroom16" index="8"]
-material_override = SubResource( 265 )
-
-[node name="Sprite3D6" parent="Viewport/level/Mushroom16" index="9"]
-material_override = SubResource( 265 )
-
-[node name="Sprite3D7" parent="Viewport/level/Mushroom16" index="10"]
-material_override = SubResource( 265 )
-
-[node name="Sprite3D8" parent="Viewport/level/Mushroom16" index="11"]
-material_override = SubResource( 265 )
-
-[node name="CollisionShape" parent="Viewport/level/Mushroom16/FallthroughSolid" index="0"]
-shape = SubResource( 266 )
-
 [node name="Mushroom17" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.902, -1.98224, -1 )
 
@@ -2609,12 +2566,6 @@ frame = 27
 [node name="InvisibleSpell" parent="Viewport/level" instance=ExtResource( 37 )]
 transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 22, 18.5997, 0 )
 
-[node name="GlitchSlime" parent="Viewport/level" instance=ExtResource( 40 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -7, 0 )
-grav = 0
-walk_speed = 3.0
-only_activate_in_range = false
-
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.53131, 25.3749, 0 )
 parter_door_id = "Door3"
@@ -2759,7 +2710,6 @@ material = SubResource( 44 )
 [editable path="Viewport/level/EldestMonkeyNPC/TreasureSpellCollectable/NPC TextBox"]
 [editable path="Viewport/level/Mushroom14"]
 [editable path="Viewport/level/Mushroom15"]
-[editable path="Viewport/level/Mushroom16"]
 [editable path="Viewport/level/Mushroom17"]
 [editable path="Viewport/level/Mushroom18"]
 [editable path="Viewport/level/Mushroom19"]

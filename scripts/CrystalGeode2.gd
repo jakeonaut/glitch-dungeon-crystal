@@ -268,13 +268,11 @@ func getPurified():
 export var spawn_an_elder = true
 # actually "spawn elderNPC" but the animations are already calling it...
 func freeUpPlayer():
-    # print("?")
     is_active = false
 
     if is_fake or not spawn_an_elder or high_priestess_crystal or (global.memory["priestess"] > 0 and global.justAngelWarped):
         return
 
-    # print("??")
     var elderNPC = npcRes.instance()
     level.add_child(elderNPC)
     level.summonSmokeClouds(global_transform.origin, 3, true, true)

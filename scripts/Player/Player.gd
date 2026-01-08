@@ -413,6 +413,12 @@ func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
 
+  if Input.is_action_just_pressed("swap_english_and_russian"):
+    if global.userSettings["locale"] == "en":
+      global.changeLocale("ru", true)
+    else:
+      global.changeLocale("en", true)
+
   if is_in_mini_cutscene and Input.is_action_just_pressed("sub_action_button"):
     finishCutsceneIntroAni()
   # is_turn_based = malware_infected and not physics_state == PhysicsState.BEING_TOSSED
