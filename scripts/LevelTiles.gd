@@ -295,6 +295,7 @@ func getRandomGlitchType():
     return global.GlitchForm.LADDER
 
 func _process(delta):
+  var trueDelta = delta
   delta = delta * global.time_dilation_multiplier
 
   if sausageNewLevelTiles != null and (sausage_fading_away_indices.size() > 0 or fading_in_sausage_indices.size() > 0):
@@ -408,7 +409,7 @@ func _process(delta):
   # process infected tiles, and spread infection.
   var num_infected_spikes = len(infected_spikes)
   if num_infected_spikes > 0:
-    spike_infection_timer += (delta*22)
+    spike_infection_timer += (trueDelta*22)
     if spike_infection_timer >= spike_infection_time_limit: 
       spike_infection_timer = 0
       global.incrementLevelZoneGlitchTiles(num_infected_spikes) # hm...
@@ -438,7 +439,7 @@ func _process(delta):
 
   var num_reappearing_spikes = len(reappearing_spikes)
   if num_reappearing_spikes > 0:
-    reappear_spike_infection_timer += (delta*22)
+    reappear_spike_infection_timer += (trueDelta*22)
     if reappear_spike_infection_timer >= reappear_spike_infection_time_limit:
       reappear_spike_infection_timer = 0
       for _i in range(num_reappearing_spikes):

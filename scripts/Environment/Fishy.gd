@@ -23,7 +23,7 @@ func _ready():
     mySprite.material_override = mySprite.material_override.duplicate()
 
 func _process(delta):
-    delta = delta * global.time_dilation_multiplier
+    # delta = delta * global.time_dilation_multiplier # i'm exempt!
     
     var step = 1
     if is_swimmin_away:

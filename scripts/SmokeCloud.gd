@@ -33,7 +33,7 @@ func _ready():
         randomizeFrame()
 
 func _process(delta):
-    delta = delta * global.time_dilation_multiplier
+    # delta = delta * global.time_dilation_multiplier # i'm exempt!
     
     # if global.pauseGame: return
     if target_x != -9999:

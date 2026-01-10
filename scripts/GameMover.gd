@@ -38,6 +38,8 @@ var animation_speed_multiplier = 1.0
 onready var mySprite = get_node("SpriteContainer/InnerSpriteContainer/Sprite3D") if has_node("SpriteContainer/InnerSpriteContainer/Sprite3D") else get_node("Sprite3D")
 
 var is_turn_based = false
+var is_pseudo_turn_based = false
+var can_turn_move = false
 export var true_terminal_vel = 32
 var true_terminal_feather_vel = 2 
 var water_terminal_vel = 4
@@ -198,15 +200,23 @@ func _ready():
   spawn_origin = Vector3(global_transform.origin.x, global_transform.origin.y, global_transform.origin.z)
   last_grounded_pos = Vector3(spawn_origin.x, spawn_origin.y, spawn_origin.z)
 
-var secret_delta = 0
+var secret_trueDelta = 0
+var should_process_respect_time_dilation = true
+var should_aniPlayer_respect_time_dilation = true
 func _process(delta):
-  secret_delta = delta
+  secret_trueDelta = delta
+  if should_process_respect_time_dilation:
+    delta = delta * global.time_dilation_multiplier
+
   if mySprite.has_method("glitchyTrySetFrame"):
     mySprite.is_really_glitchy = is_really_glitchy 
   # TODO(jaketrower): It would be much better to get an aniPlayer class / hook that could be used.
   # rather than have to do this conditional check every time
   if aniPlayer:
-    aniPlayer.playback_speed = global.time_dilation_multiplier * animation_speed_multiplier
+    if should_aniPlayer_respect_time_dilation:
+      aniPlayer.playback_speed = global.time_dilation_multiplier * animation_speed_multiplier
+    else:
+      aniPlayer.playback_speed = animation_speed_multiplier
 
   if (global.pauseGame and not can_i_personally_ignore_game_pause) or pauseSelf: return
   if jump_force == null: jump_force = 16
@@ -228,8 +238,17 @@ func _process(delta):
     has_water_double_jumped = false
 
   DNUMHORZ = 65.0 * global.time_dilation_multiplier
-  DNUMSKID_BASE = 7.0 / global.time_dilation_multiplier
-  processPhysics(delta * global.time_dilation_multiplier)
+  DNUMSKID_BASE = (7.0 / global.time_dilation_multiplier) if global.time_dilation_multiplier != 0 else 7.0
+
+  processPhysics(delta)
+
+  was_pressing_horizontal_input = is_pressing_horizontal_input
+  if not is_pressing_horizontal_input and num_horizontal_input_presses > 0:
+    horizontal_input_reset_timer += (secret_trueDelta*11)
+    if horizontal_input_reset_timer >= horizontal_input_reset_time_limit:
+      num_horizontal_input_presses = 0
+  else:
+    horizontal_input_reset_timer = 0
 
   if not on_ground and translation.y < (last_grounded_pos.y - falling_y_offset) and not transitioning:
     is_falling = true
@@ -262,6 +281,9 @@ func processPhysics(delta):
   if physics_state == PhysicsState.IGNORE_PHYSICS or ignorePhysics:
     return
 
+  is_turn_based = global.memory["is_turn_based"]
+  can_turn_move = level.can_turn_move
+  is_pseudo_turn_based = global.memory["is_pseudo_turn_based"]
   lv = linear_velocity
 
   applyGravity(delta)
@@ -355,13 +377,6 @@ func processPhysics(delta):
       was_just_on_ground_timer += (delta*22)
       # if glitch_form == global.GlitchForm.FEATHER and not should_magic_jump:
       #   was_just_on_ground_timer += (delta*22)
-  was_pressing_horizontal_input = is_pressing_horizontal_input
-  if not is_pressing_horizontal_input and num_horizontal_input_presses > 0:
-    horizontal_input_reset_timer += (delta*11)
-    if horizontal_input_reset_timer >= horizontal_input_reset_time_limit:
-      num_horizontal_input_presses = 0
-  else:
-    horizontal_input_reset_timer = 0
   prev_glitch_form = glitch_form
 
 func resetVelocity():
@@ -1238,9 +1253,6 @@ func normalizeLv(lv_to_normalize):
   return lv_to_normalize
 
 var is_a_physics_particle = false
-var turn_based_timer = 0
-var turn_based_time_limit = 4
-var can_turn_move = false
 var turn_based_jump_count = 0
 var turn_based_jump_max = 2
 # http://higherorderfun.com/blog/2012/05/20/the-guide-to-implementing-2d-platformers/
@@ -1248,17 +1260,6 @@ var turn_based_jump_max = 2
 func handleCollisionsAndMove(local_lv, delta):
   if delta == 0 or physics_state == PhysicsState.OCCUPIED:
     return local_lv
-
-  can_turn_move = false
-  if justPressedDown() or justPressedJump() or justPressedMoveLeft() or justPressedMoveRight():
-    turn_based_timer = 0
-    can_turn_move = true
-  elif pressingDown() or pressingJump() or pressingMoveLeft() or pressingMoveRight():
-    turn_based_timer += (delta*22)
-    if pressingRun(): turn_based_timer += (delta*22) # double it
-    if turn_based_timer >= turn_based_time_limit:
-      turn_based_timer = 0
-      can_turn_move = true
 
   if is_turn_based and can_turn_move and pressingJump() and physics_state == PhysicsState.NORMAL:
     var max_jumps = turn_based_jump_max
@@ -1272,7 +1273,7 @@ func handleCollisionsAndMove(local_lv, delta):
       on_ground = false
     elif turn_based_jump_count < max_jumps:
       turn_based_jump_count += 1
-      print("jump_count++ => " + str(turn_based_jump_count))
+      # print("jump_count++ => " + str(turn_based_jump_count))
       local_lv.y = 1
     elif local_lv.y > 0:
       local_lv.y = 0
@@ -1658,8 +1659,8 @@ func playBounce(aniName, aniNameQueue = [], speed = 1.0):
 onready var miniSplashSound = get_node("Sounds/MiniSplashSound") if has_node("Sounds/MiniSplashSound") else null
 func playLandSound():
   if is_touching_water and miniSplashSound:
-    if not canSwim():
-      miniSplashSound.play()
+    # if not canSwim():
+    miniSplashSound.play()
   elif landSound:
     landSound.play()
 

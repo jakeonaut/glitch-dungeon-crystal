@@ -67,6 +67,8 @@ func evilSetAsParent(_owner):
   is_infected = true
 
 func _process(delta):
+  delta = delta * global.time_dilation_multiplier
+  
   if not visible:
     return
 
@@ -76,6 +78,7 @@ func _process(delta):
     if lickedGameMover == level.player:
       level.player.processCastingLogic(delta)
     if tongueAniPlayer != null and tongueAniPlayer.assigned_animation != "spitOut":
+      # tongueAniPlayer.playback_speed = global.time_dilation_multiplier
       # if Input.is_action_pressed("ui_left"):
       #   mySprite.flip_h = true
       # elif Input.is_action_pressed("ui_right"):
@@ -343,6 +346,8 @@ func ouchies(broom_origin):
   if degaussAniPlayer:
     smack_timer = -10
     degaussAniPlayer.play("degauss")
+  else:
+    mySprite.get_material_override().set_shader_param("offset", 0)
   if dieSound and not dieSound.is_playing():
     dieSound.pitch_scale = rand_range(0.8, 1.2)
     dieSound.play()

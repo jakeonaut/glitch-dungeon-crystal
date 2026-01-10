@@ -159134,7 +159134,7 @@ shader_param/enable_no_transparency = false
 shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
-shader_param/offset = 8
+shader_param/offset = 2
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = false
 shader_param/disable_glitch_dither = false
@@ -159148,7 +159148,7 @@ shader_param/shake_block_size_3d = 30.5
 shader_param/shake_color_rate_3d = 0.5
 shader_param/texture_albedo = ExtResource( 18 )
 shader_param/base_palette = ExtResource( 13 )
-shader_param/real_base_palette = ExtResource( 12 )
+shader_param/real_base_palette = ExtResource( 17 )
 
 [sub_resource type="QuadMesh" id=19746]
 material = SubResource( 19745 )

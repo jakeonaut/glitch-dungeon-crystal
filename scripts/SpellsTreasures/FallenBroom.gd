@@ -33,19 +33,23 @@ func _ready():
     set_process(true)
     set_physics_process(false)
     if is_static_in_level:
-        get_node("SecretAnimationPlayer").play("isStaticInLevel")
+        secretAniPlayer.play("isStaticInLevel")
         grav = 0
 
     should_collide_ceil = true
     should_collide_floor = true
     should_collide_horizontally = true
     is_sprite_flipped = false # need to reset this from NPC UGH
+    should_process_respect_time_dilation = false
 
 var doing_a_final_hit = false
 var can_return_via_input = false
 var can_return_via_input_timer = 0
 var can_return_via_input_time_limit = 3
 func _process(delta):
+    # delta = delta * global.time_dilation_multiplier # i'm exempt!
+    # secretAniPlayer.playback_speed = global.time_dilation_multiplier # i'm exempt!
+
     global.updateBroomSpriteTexture(mySpriteReal, true)
     if global.shouldRenderAsCinematic:
         global.memory["broom"] = true
@@ -56,13 +60,13 @@ func _process(delta):
         was_projectile = false
         return
 
-    if get_node("SecretAnimationPlayer").assigned_animation == "die" and not get_node("SecretAnimationPlayer").is_playing():
+    if secretAniPlayer.assigned_animation == "die" and not secretAniPlayer.is_playing():
         queue_free()
 
     if not level.player.can_broomerang_warp:
         mySpriteReal.material_override.set_shader_param("target_palette", global.black_player_palette)
     else:
-        mySpriteReal.material_override.set_shader_param("target_palette", global.player_red_palette)
+        mySpriteReal.material_override.set_shader_param("target_palette", global.red_palette)
 
     if not can_return_via_input:
         can_return_via_input_timer += (delta*11)
@@ -85,9 +89,9 @@ func _process(delta):
         behavior_was_thrown = false
         behavior_walking = false
         if walk_direction.x == 1:
-            get_node("SecretAnimationPlayer").play("AirSpinReverse")
+            secretAniPlayer.play("AirSpinReverse")
         else:
-            get_node("SecretAnimationPlayer").play("AirSpin")
+            secretAniPlayer.play("AirSpin")
 
         var pos = global_transform.origin
         var playerPos = level.player.global_transform.origin
@@ -122,7 +126,7 @@ func _process(delta):
             behavior_was_thrown = false
             behavior_walking = false
             true_terminal_vel = 16
-            get_node("SecretAnimationPlayer").play("isStaticInLevel")
+            secretAniPlayer.play("isStaticInLevel")
             projectile = false
             was_projectile = true
             if taking_the_player_with_me:
@@ -202,7 +206,7 @@ func warpToIt():
 func oneMoreHit(delta):
     # give me one last chance to hit QuestionBlocks and anything else that's clustered up
     # var prev_origin = global_transform.origin
-    # get_node("SecretAnimationPlayer").play("finalHit")
+    # secretAniPlayer.play("finalHit")
     collisionShape.translation = Vector3(0, 0, 0)
     collisionShape.shape.height = 3
     collisionShape.shape.radius = 1.5
@@ -213,7 +217,7 @@ func oneMoreHit(delta):
 func die():
     if is_dying:
         return
-    get_node("SecretAnimationPlayer").play("die")
+    secretAniPlayer.play("die")
     behavior_walking = false
     behavior_was_thrown = false
     grav = 0
@@ -307,12 +311,12 @@ func alignMySprite():
 
 func landed():
     if not projectile:
-        get_node("SecretAnimationPlayer").play("land")
+        secretAniPlayer.play("land")
     if should_die_on_land:
         die()
 
 func collectMe():
-    get_node("SecretAnimationPlayer").play("GET")
+    secretAniPlayer.play("GET")
     grav = 0
     getGameCamera().initial_target = level.player.get_node("CameraTarget")
     getGameCamera().actual_target = weakref(getGameCamera().initial_target)

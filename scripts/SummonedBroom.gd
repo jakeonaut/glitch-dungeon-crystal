@@ -31,10 +31,15 @@ func _ready():
 
 var can_stop_player = true
 func _process(delta):
-  delta = delta * global.time_dilation_multiplier
-  global.updateBroomSpriteTexture(mySprite, true)
+  # delta = delta * global.time_dilation_multiplier # i'm exempt!
+  # if is_evil:
+  #   aniPlayer.playback_speed = 4.0 * global.time_dilation_multiplier
+  # else:
+  #   aniPlayer.playback_speed = global.time_dilation_multiplier
   if is_evil:
     aniPlayer.playback_speed = 4.0
+
+  global.updateBroomSpriteTexture(mySprite, true)
   
   # if global.pauseGame: return
   hitStuff(delta)
@@ -44,7 +49,7 @@ func _process(delta):
   if not level.player.can_broomerang_warp:
       mySprite.material_override.set_shader_param("target_palette", global.black_player_palette)
   else:
-      mySprite.material_override.set_shader_param("target_palette", global.player_red_palette)
+      mySprite.material_override.set_shader_param("target_palette", global.red_palette)
   broom_active_timer += (delta*22)
   if broom_active_timer >= broom_active_time_limit:
     # broom_active_timer = 0

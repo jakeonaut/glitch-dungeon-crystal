@@ -136,8 +136,6 @@ func tryPlayFootstepSound():
     return
   if transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.UNDERGROUND:
     return
-  if transformation == TransformationState.FISHY:
-    return
   if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
     return
 
@@ -148,7 +146,7 @@ func tryPlayFootstepSound():
 
   if on_ground or glitch_form == global.GlitchForm.LADDER:
     var whichFootStepSound = footstepSound
-    if is_touching_water:
+    if is_touching_water or transformation == TransformationState.FISHY:
       whichFootStepSound = waterFootstepSound
     elif (not (on_ground and not (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall()))) or (glitch_form == global.GlitchForm.FLOOR and not truly_on_ground):
       whichFootStepSound = sporeSound
@@ -413,6 +411,11 @@ func _process(delta):
   # ._process(delta) #NOTE: this super method is called automatically 
   # https://github.com/godotengine/godot/issues/6500
 
+  var trueDelta = delta
+  if should_process_respect_time_dilation:
+    delta = delta * global.time_dilation_multiplier
+  should_aniPlayer_respect_time_dilation = not "broomSmack" in aniPlayer.current_animation
+
   if Input.is_action_just_pressed("swap_english_and_russian"):
     if global.userSettings["locale"] == "en":
       global.changeLocale("ru", true)
@@ -455,9 +458,7 @@ func _process(delta):
     respawn_key_hp = global.memory["hp"]
     if global.activeInteractor != null:
       global.activeInteractor.hideTextbox()
-    tryDieToEnemy(delta, true, true, true)
-  
-  delta = delta * global.time_dilation_multiplier
+    tryDieToEnemy(trueDelta, true, true, true)
 
   var newSpriteOpacity = spriteOpacity
   if aniPlayer.assigned_animation == "returning":
@@ -492,7 +493,7 @@ func _process(delta):
       spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x + 0.25
   spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.userSettings["colorblindMode"] and transformation == TransformationState.NORMAL# and getOutfitIsSpellGlitchSpriteVisible(global.memory["currOutfit"])
 
-  processSleepyLogic(delta)
+  processSleepyLogic(trueDelta)
   if global.isPauseMenuOpen:
     updateGrandmaHatHandSprites()
     return
@@ -528,7 +529,7 @@ func _process(delta):
       returning_to_save_point = 0
       global.pauseMoveInput = false
       global.pauseGame = false
-  if not processGlitchHurtRecovery(delta):
+  if not processGlitchHurtRecovery(trueDelta):
     updateGrandmaHatHandSprites()
     return
 
@@ -609,7 +610,7 @@ func _process(delta):
       add_child(newCrystalCube)
 
   if glitch_tickle_timer > 0:
-    glitch_tickle_timer += (delta * 22)
+    glitch_tickle_timer += (trueDelta * 22)
     if glitch_tickle_timer >= glitch_tickle_time_limit:
       glitch_tickle_timer = 0
       unglitchTickleSprite(mySprite)
@@ -622,7 +623,7 @@ func _process(delta):
     tryClearFallthroughCollisionSolid(self.global_transform.origin)
 
   if is_smacked:
-    smack_timer += (delta * 22)
+    smack_timer += (trueDelta * 22)
     if smack_timer >= smack_time_limit:
         unsmack()
 
@@ -912,6 +913,7 @@ func tryDieToOffscreenCamera(_delta):
       global.prepareForTransition(level)
       transition.edge_fade_to(next_room)
       global.isEnteringRoom = true
+      global.memory["on_ground"] = self.on_ground
       global.memory["transformation"] = self.transformation
       global.memory["player_flip_h"] = mySprite.flip_h
       global.memory["feather_jump_timer"] = feather_jump_timer
@@ -930,7 +932,6 @@ func tryDieToOffscreenCamera(_delta):
         DEATH_MARGIN = -1
         just_pacman_flipped_timer = 0
         was_walk_direction_flipped = shouldFlipWalkingDirection()
-        # print("was_walk_dir_flipped: " + str(was_walk_direction_flipped))
         if global.roomEdgeVector == Vector3(1, 0, 0):
           global_transform.origin.x = getGameCamera().leftmost_x - DEATH_MARGIN
           if pressingMoveRight() or pressingMoveLeft():
@@ -1482,7 +1483,7 @@ func getCurseCured():
 
 var snoring = false
 var sleepy_timer = 0
-var sleepy_time_limit = 90
+var sleepy_time_limit = 360
 func processSleepyLogic(delta):
   if global.shouldRenderAsCinematic:
     sleepy_timer = 0
@@ -2054,9 +2055,9 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     glitch_death_timer = 0
     global.pauseMoveInput = false 
 
-    if global.memory["hp"] <= 1 and enchantedBagSpriteVisible.visible:
-      summonSmokeClouds(3, true, true, -1)
-      enchantedBagSpriteVisible.visible = false
+    # if global.memory["hp"] <= 1 and enchantedBagSpriteVisible.visible:
+    #   summonSmokeClouds(3, true, true, -1)
+    #   enchantedBagSpriteVisible.visible = false
     # self.nullify()
     if whichBoss != null and global.memory.has("weird_active_save_point_x") and global.memory.has("weird_active_save_point_y"):
       global_transform.origin = Vector3(
@@ -2512,13 +2513,13 @@ func getSnorePitchMin():
     return 2.5
   if nesting_doll_state == global.NestingDoll.MATRIARCH:
     return 0.4
-  return 0.8
+  return 0.6
 func getSnorePitchMax():
   if nesting_doll_state == global.NestingDoll.BABY:
     return 3.0
   if nesting_doll_state == global.NestingDoll.MATRIARCH:
-    return 0.8
-  return 1.2
+    return 0.7
+  return 0.9
 
 func breathInSnore():
   snoreSound.pitch_scale = rand_range(getSnorePitchMin(), getSnorePitchMax())
@@ -2677,7 +2678,7 @@ func processBroomRenderLogic(_delta):
   if not can_broomerang_warp:
     broomSpriteVisible.material_override.set_shader_param("target_palette", global.black_player_palette)
   else:
-    broomSpriteVisible.material_override.set_shader_param("target_palette", global.player_red_palette)
+    broomSpriteVisible.material_override.set_shader_param("target_palette", global.red_palette)
   if mySprite.flip_h:
     broomSpriteVisible.flip_h = true
     broomSpriteVisible.translation.x *= -1
@@ -2723,7 +2724,8 @@ func processBagRenderLogic(_delta):
     
   # if summonedBroom != null:
   #   adjustSummonedBroomSpritePosition()
-  if global.memory["hp"] > 1 and transformation != TransformationState.UNDERGROUND_RETURNING and transformation != TransformationState.UNDERGROUND:
+  var shouldShowBag = false
+  if shouldShowBag and transformation != TransformationState.UNDERGROUND_RETURNING and transformation != TransformationState.UNDERGROUND:
     enchantedBagSpriteVisible.visible = true
   else:
     enchantedBagSpriteVisible.visible = false

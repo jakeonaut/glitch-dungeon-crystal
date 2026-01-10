@@ -523,7 +523,7 @@ text = "--equip--"
 scroll_active = false
 
 [node name="BroomSprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 95, 123 )
+position = Vector2( 75, 123 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
@@ -531,7 +531,7 @@ vframes = 5
 frame = 27
 
 [node name="HatSprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 150, 123 )
+position = Vector2( 130, 123 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
@@ -539,7 +539,7 @@ vframes = 5
 frame = 7
 
 [node name="ReturnSprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 206, 123 )
+position = Vector2( 186, 123 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
@@ -547,7 +547,7 @@ vframes = 5
 frame = 9
 
 [node name="MapSprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 262, 123 )
+position = Vector2( 242, 123 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
@@ -555,12 +555,20 @@ vframes = 5
 frame = 2
 
 [node name="BagSprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 318, 123 )
+position = Vector2( 298, 123 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
 frame = 22
+
+[node name="PlayerSprite" type="Sprite" parent="InventoryRect/BagSprite"]
+position = Vector2( 6, 2 )
+scale = Vector2( 0.5, 1 )
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 5
+frame = 4
 
 [node name="SoulLabel" type="RichTextLabel" parent="InventoryRect"]
 margin_left = -19.0
@@ -697,7 +705,7 @@ bbcode_text = "1"
 text = "1"
 
 [node name="SelectionSprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 280, 287 )
+position = Vector2( 320, 122 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
@@ -836,9 +844,9 @@ color = Color( 0, 0, 0, 0.501961 )
 
 [node name="MapRect" type="ColorRect" parent="."]
 visible = false
-margin_left = 480.0
+margin_left = 450.0
 margin_top = 131.0
-margin_right = 743.0
+margin_right = 713.0
 margin_bottom = 394.0
 grow_horizontal = 2
 grow_vertical = 2

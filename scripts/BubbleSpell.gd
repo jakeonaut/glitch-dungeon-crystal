@@ -137,7 +137,7 @@ func passiveActivate(_delta, is_player, is_local_broom = false):
   if didja_get_me or global.pauseGame or (is_player and (level.player.transformation == level.player.TransformationState.BUBBLE or level.player.glitch_form == global.GlitchForm.BUBBLE)):
     return
 
-  if not is_player and not can_broom_pop_me:
+  if not is_player and not is_local_broom and not can_broom_pop_me:
     return
   bubbleStartPop()
   if not is_player and not is_local_broom:
@@ -182,7 +182,7 @@ func bubbleStartPop():
   global_transform.origin.y += .625
 
 func touchCorporealBody(body):
-  if body != my_parent:
+  if body == level.player.smallInteractionArea:
     bubbleStartPop()
 
 var my_diff_max = 2

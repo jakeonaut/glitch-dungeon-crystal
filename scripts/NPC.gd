@@ -106,7 +106,6 @@ func setupTextBoxStuff():
 
   if is_static_in_level and my_memory:
     if (typeof(my_memory) == TYPE_INT or typeof(my_memory) == TYPE_REAL) and my_memory == global.DELETE_ME:
-      print("bye?")
       queue_free()
     else:
       can_camera_zoom = false
@@ -126,6 +125,10 @@ func setupTextBoxStuff():
 
 func _process(delta):
   # super._process(delta) implicit
+  var trueDelta = delta
+  if should_process_respect_time_dilation:
+    delta = delta * global.time_dilation_multiplier
+
   if global.pauseGame:
     tryHideActiveInteractPrompt()
 
@@ -143,7 +146,7 @@ func _process(delta):
       fallthroughSolid.add_to_group("fallthrough")
 
   if is_smacked:
-    smack_timer += (delta * 22)
+    smack_timer += (trueDelta * 22)
     if smack_timer >= smack_time_limit:
       is_smacked = false
       unsmack()

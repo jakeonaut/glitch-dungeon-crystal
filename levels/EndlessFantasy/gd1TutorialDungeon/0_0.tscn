@@ -574,6 +574,7 @@ viewport_path = NodePath("Viewport2")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 8 )
 show_crt_effect = true
+is_turn_based = true
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 3 )]
 
@@ -907,7 +908,7 @@ flip_v = true
 mesh = SubResource( 212 )
 
 [node name="MeshInstance2" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="PressC" type="RichTextLabel" parent="Viewport2/UILayer"]
 visible = false

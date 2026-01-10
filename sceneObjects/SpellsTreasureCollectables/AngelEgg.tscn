@@ -155,6 +155,7 @@ script = ExtResource( 2 )
 frame_delay = 1.0
 max_frames = 6
 should_animate = false
+is_exempt_from_time_dilation = true
 automatically_change_color = false
 
 [node name="SecretAnimationPlayer" type="AnimationPlayer" parent="."]
@@ -226,5 +227,6 @@ pixel_size = 0.12
 texture = ExtResource( 15 )
 hframes = 8
 script = ExtResource( 2 )
+is_exempt_from_time_dilation = true
 
 [editable path="NPC TextBox"]

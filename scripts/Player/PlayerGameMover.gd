@@ -102,10 +102,15 @@ var holding_up_time_limit = 5
 var stupid_joystick_memory = [false, false, false, false] # lb, rb, tb ,bb
 var just_pressed_joystick = [false, false, false, false] # lb, rb, tb , bb
 func _process(delta):
+  # ._process(delta) implicit
+  var trueDelta = delta
+  if should_process_respect_time_dilation:
+    delta = delta * global.time_dilation_multiplier
+
   # weird failsafe
   global_transform.origin.z = 0
   if just_pacman_flipped:
-    just_pacman_flipped_timer += (delta*11)
+    just_pacman_flipped_timer += (trueDelta*11)
     if just_pacman_flipped_timer >= just_pacman_flipped_time_limit:
       just_pacman_flipped_timer = 0
       just_pacman_flipped = false
@@ -126,7 +131,6 @@ func _process(delta):
     physics_state = PhysicsState.NORMAL
     should_free_when_falling = false
     pauseAnimation = false
-  delta = delta * global.time_dilation_multiplier
   processPauseAnimation()
   if smokeCloudThrottleTimer < smokeCloudThrottleTimeLimit:
     smokeCloudThrottleTimer += (delta*11)
@@ -149,7 +153,9 @@ func _process(delta):
         broomStop()
       doubleJump()
 
-  if glitch_form == global.GlitchForm.FLOOR and on_ground and not truly_on_ground and was_pressing_horizontal_input and not was_walking_into_wall:
+  if glitch_form == global.GlitchForm.FLOOR and on_ground and not truly_on_ground and (
+    rawJustPressedMoveLeft() or rawJustPressedMoveRight() or was_pressing_horizontal_input
+  ) and not was_walking_into_wall:
     spawnSparkles(delta)
   elif glitch_form == global.GlitchForm.FEATHER and (pressingJump() or pressingMoveUp()) and not on_ground and feather_jump_timer > feather_jump_time_limit / 3:
     spawnSparkles(delta)
@@ -179,7 +185,7 @@ func _process(delta):
     cameraTarget.transform.origin.x = camera_target_origin_x_target
   if override_camera_y == null:
     cameraTarget.global_transform.origin.y = camera_target_y_pos + camera_y_offset
-    if not global.pauseGame:
+    if not global.pauseGame and not global.memory["is_turn_based"] and not global.memory["is_pseudo_turn_based"]:
       if pressingMoveUp() and on_ground:
         if holding_up_timer < holding_up_time_limit:
           holding_up_timer += (delta*11)
@@ -577,6 +583,8 @@ func isTextboxPausingMe():
 
 func rawJustPressedAnalogDown():
   return just_pressed_joystick[3]
+func rawJustPressedMoveDown():
+  return Input.is_action_just_pressed("ui_down") or rawJustPressedAnalogDown()
 func rawPressingAnalogDown():
   return global.userSettings["use_joystick"] > 0 and (
     Input.get_joy_axis(0, JOY_AXIS_1) > global.getDeadzone() or # vertical leftstick
@@ -596,6 +604,8 @@ func pressingMoveDown():
 
 func rawJustPressedAnalogUp():
   return just_pressed_joystick[2]
+func rawJustPressedMoveUp():
+  return Input.is_action_just_pressed("ui_up") or rawJustPressedAnalogUp()
 func rawPressingAnalogUp():
   return global.userSettings["use_joystick"] > 0 and (
     Input.get_joy_axis(0, JOY_AXIS_1) < -global.getDeadzone() or # vertical leftstick
@@ -621,15 +631,20 @@ func shouldFlipWalkingDirection():
 var override_stop_left_input = false
 func rawJustPressedAnalogLeft():
   return just_pressed_joystick[0]
+func rawJustPressedMoveLeft():
+  return Input.is_action_just_pressed("ui_left") or rawJustPressedAnalogLeft()
 func rawPressingAnalogLeft():
   return global.userSettings["use_joystick"] > 0 and (
     Input.get_joy_axis(0, JOY_AXIS_0) < -global.getDeadzone() or # horizontal leftstick
     Input.get_joy_axis(0, JOY_AXIS_2) < -global.getDeadzone() # horizontal rightstick
   )
-func rawJustPressedAnalogRight():
-  return just_pressed_joystick[1]
 func rawPressingMoveLeft():
   return Input.is_action_pressed("ui_left") or rawPressingAnalogLeft()
+
+func rawJustPressedAnalogRight():
+  return just_pressed_joystick[1]
+func rawJustPressedMoveRight():
+  return Input.is_action_just_pressed("ui_right") or rawJustPressedAnalogRight()
 func rawPressingAnalogRight():
   return global.userSettings["use_joystick"] > 0 and (
     Input.get_joy_axis(0, JOY_AXIS_0) > global.getDeadzone() or # horizontal leftstick
@@ -686,13 +701,13 @@ func justPressedDown():
 func justPressedMoveLeft():
   # if malware_infected:
   #   return pressingMoveLeft() and Input.is_action_just_pressed("ui_right")
-  return pressingMoveLeft() and (Input.is_action_just_pressed("ui_left") or rawJustPressedAnalogLeft())
+  return pressingMoveLeft() and rawJustPressedMoveLeft()
 
 # @override
 func justPressedMoveRight():
   # if malware_infected:
   #   return pressingMoveRight() and Input.is_action_just_pressed("ui_left")
-  return pressingMoveRight() and (Input.is_action_just_pressed("ui_right") or rawJustPressedAnalogRight())
+  return pressingMoveRight() and rawJustPressedMoveRight()
 
 func justPressedMenuUp():
   return rawJustPressedAnalogUp() or Input.is_action_just_pressed("menu_up")
@@ -702,20 +717,9 @@ func justPressedMenuLeft():
   return rawJustPressedAnalogLeft() or Input.is_action_just_pressed("menu_left")
 func justPressedMenuRight():
   return rawJustPressedAnalogRight() or Input.is_action_just_pressed("menu_right")
-  
 
-# @override
-func justPressedJump():
-  if isItWeird():
-    return false
-  if transformation == TransformationState.CHICKEN:
-    return should_magic_jump or ((pressingMoveRight() or pressingMoveLeft()) and truly_on_ground) or Input.is_action_just_pressed("jump_button")
-  # if is_mushroom_infected:
-  #   return false
-  if Input.is_action_just_pressed("talk_button") and global.activeInteractor != null:
-    return should_magic_jump
+func rawJustPressedJump():
   return (
-    (
       Input.is_action_just_pressed("jump_button") or
       # TODO(jaketrower): this could be generalized for sweep and other stuff more elegantly...
       (
@@ -729,7 +733,20 @@ func justPressedJump():
           (global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_UP and just_pressed_joystick[2]) or
           (global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_DOWN and just_pressed_joystick[3]))
         )
-    ) and
+    )  
+
+# @override
+func justPressedJump():
+  if isItWeird():
+    return false
+  if transformation == TransformationState.CHICKEN:
+    return should_magic_jump or ((pressingMoveRight() or pressingMoveLeft()) and truly_on_ground) or Input.is_action_just_pressed("jump_button")
+  # if is_mushroom_infected:
+  #   return false
+  if Input.is_action_just_pressed("talk_button") and global.activeInteractor != null:
+    return should_magic_jump
+  return (
+    rawJustPressedJump() and
     (not pauseInput or has_sweeped_glitch) and not isTextboxPausingMe()
   ) or should_magic_jump
   
@@ -813,7 +830,7 @@ func processMoleDigTimer(digDirection):
     dig_timer = 0
     return
 
-  dig_timer += (secret_delta*11)
+  dig_timer += (secret_trueDelta*11)
   # on_ground = true
   # mySprite.flip_h = not mySprite.flip_h
   dig_direction = digDirection
@@ -879,6 +896,22 @@ func glitchTilesAroundMe(margin = 0.25, rand_timer = false):
       var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
       lt.rerandomizeTile(coords, lt.getRandomGlitchType(), rand_timer)
 
+func rawPressingJump():
+  return (
+          Input.is_action_pressed("jump_button") or \
+          # TODO(jaketrower): this could be generalized for sweep and other stuff more elegantly...
+          ((
+            global.userSettings["controls_config"] != null and 
+            global.userSettings["controls_config"][global.JUMP_INDEX] != null and
+            global.userSettings["controls_config"][global.JUMP_INDEX].has("button_index")
+          ) and 
+            ((global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_LEFT and rawPressingAnalogLeft()) or \
+            (global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_RIGHT and rawPressingAnalogRight()) or \
+            (global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_UP and rawPressingAnalogUp()) or \
+            (global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_DOWN and rawPressingAnalogDown()))
+          )
+        )
+
 # @override
 func pressingJump():
   if isItWeird():
@@ -894,20 +927,7 @@ func pressingJump():
   # if is_mushroom_infected:
   #   return false
   var is_pressing_jump = (
-        (
-          Input.is_action_pressed("jump_button") or \
-          # TODO(jaketrower): this could be generalized for sweep and other stuff more elegantly...
-          ((
-            global.userSettings["controls_config"] != null and 
-            global.userSettings["controls_config"][global.JUMP_INDEX] != null and
-            global.userSettings["controls_config"][global.JUMP_INDEX].has("button_index")
-          ) and 
-            ((global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_LEFT and rawPressingAnalogLeft()) or \
-            (global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_RIGHT and rawPressingAnalogRight()) or \
-            (global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_UP and rawPressingAnalogUp()) or \
-            (global.userSettings["controls_config"][global.JUMP_INDEX].button_index == JOY_DPAD_DOWN and rawPressingAnalogDown()))
-          )
-        ) and \
+        rawPressingJump() and \
         (not pauseInput or summonedBroom != null) and \
         not isTextboxPausingMe()
       ) or should_magic_jump

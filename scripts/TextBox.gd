@@ -186,7 +186,7 @@ func _process(delta):
     var sweep_button_text = global.getLargeInputText("talk_button")
     textPrompt.bbcode_text = "[center][wave]" + sweep_button_text + "[/wave][/center]"
   if text_final == "•": text_final = ""
-  delta = delta * global.time_dilation_multiplier
+  # delta = delta * global.time_dilation_multiplier # i'm exempt
 
   if textboxParent.get_ref() and textboxParent.get_ref().is_active:
     textboxParent.get_ref().idleTalk()

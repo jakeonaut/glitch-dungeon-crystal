@@ -13,7 +13,7 @@ func _ready():
 
 func _process(delta):
     # super._process(delta) implicit
-    delta = delta * global.time_dilation_multiplier
+    # delta = delta * global.time_dilation_multiplier # i'm exempt
     
     if not visible:
         pass

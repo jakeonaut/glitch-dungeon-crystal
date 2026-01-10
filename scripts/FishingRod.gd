@@ -23,6 +23,8 @@ func _ready():
   set_process(true)
 
 func _process(delta):
+  delta = delta * global.time_dilation_multiplier
+  
   var diff = self.global_transform.origin.y - hookInteractionArea.global_transform.origin.y + 1
   lineSprite.global_transform.origin.y = self.global_transform.origin.y - (diff) / 2
   lineSprite.scale.y = (diff - .75) / 2

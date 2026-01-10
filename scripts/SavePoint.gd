@@ -27,8 +27,9 @@ func _ready():
 var was_on_save_point = false
 var spin_dir = 1
 func _process(delta):
-    delta = delta * global.time_dilation_multiplier
-    aniPlayer.playback_speed = global.time_dilation_multiplier * animation_speed_multiplier
+    # delta = delta * global.time_dilation_multiplier # i'm exempt!
+    # aniPlayer.playback_speed = global.time_dilation_multiplier * animation_speed_multiplier # i'm excempt!
+    
     if global.pauseGame or not visible or global.isEnteringRoom:
         return
     
@@ -123,7 +124,7 @@ func generateId():
     return get_tree().get_root().get_node("Game/Viewport/level").getLevelName() + ":" + get_name()
 
 var is_currently_on_save_point = false
-func passiveActivate(_delta, is_player, is_local_broom = false):
+func passiveActivate(_delta, is_player, _is_local_broom = false):
     if not visible: return false
 
     if is_player:
@@ -140,7 +141,6 @@ func passiveActivate(_delta, is_player, is_local_broom = false):
             level.player.updateNestingDoll(global.NestingDoll.GRANDMA)
             level.player.getABroom()
 
-    global.memory["hp"] = global.memory["max_hp"]
     if not global.isRespawning and (not isOnSavePoint() or not is_player):
         was_on_save_point = false
         if not saveSound.is_playing():
@@ -152,8 +152,11 @@ func passiveActivate(_delta, is_player, is_local_broom = false):
                 saveSound.volume_db -= 16
             saveSound.play()
         if is_weird_soul_spore_save:
+            if not is_player:
+                return
             global.saveMySpot("SporeSavePoint", level.player.global_transform.origin + Vector3(0, -1, 0), level, is_weird_soul_spore_save)
         else:
+            global.memory["hp"] = global.memory["max_hp"]
             global.saveMySpot(global.getNameRelativeToLevel(level, self), global_transform.origin + Vector3(0, -1, 0), level, false)
             global.memory.erase("player_y_offset")
             level.saveTheGame()

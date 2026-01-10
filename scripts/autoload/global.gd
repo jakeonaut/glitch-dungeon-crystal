@@ -441,10 +441,12 @@ func resetMemory():
     # STORY OR LEVEL STATE
     memory["babushka_cat_story_hook"] = 0
     memory["fishing_rod_shortcut"] = 0
+    memory["has_eggs_marked"] = false
 
     # POWERUPS
+    memory["is_turn_based"] = 0
+    memory["is_pseudo_turn_based"] = 0
     # memory["spellbookPage"] = [] # we check if the key exists to see if we have it... -_-
-    memory["has_eggs_marked"] = false
     memory["can_force_respawn"] = 0
     memory["has_map_item"] = false
     memory["broomerang"] = 0
@@ -473,7 +475,7 @@ func resetMemory():
     memory["magic_lantern"] = 0 # 1 # aka chesire's blessing
     memory["can_nest"] = 0
     memory["mario_nesting_doll"] = false
-    memory["broom_flight"] = false
+    memory["broom_flight"] = false # funny but too powerful or useless # also I canned broomerang warp too
     memory["goddess_dream3"] = false
 
     # PERMANENT SPELLS
@@ -638,17 +640,20 @@ func resetUserSettings():
     userSettings["allMyBags"] = [GrandmaBag.NORMAL]
     userSettings["hasEverBeatenGame"] = false
 
+    # a11y
+    userSettings["spellAssist"] = false
+    userSettings["colorblindMode"] = true
+    userSettings["show_crt_effect"] = true
+    userSettings["canGlitchScreen"] = true
+    # unused I think
+    userSettings["show_palette_swap_color_blind_filter"] = false
+
     # settings?
     userSettings["use_joystick"] = 1
     userSettings["deadzone_real"] = 50 # out of 100. can't figure out floats...
-    userSettings["show_crt_effect"] = true
-    userSettings["show_palette_swap_color_blind_filter"] = false
-    userSettings["canGlitchScreen"] = true
-    userSettings["colorblindMode"] = true
     userSettings["stopAllMusic"] = false
     userSettings["canChangeSongPitch"] = true
     userSettings["stopAllSfx"] = false
-    userSettings["spellAssist"] = false
     userSettings["glyphType"] = GlyphType.XBOX
     userSettings["locale"] = normalizeLocale(OS.get_locale_language())
     userSettings["doorDir"] = -1
@@ -722,7 +727,6 @@ func prepareForTransition(level, enteredDoor = null):
         # a little hack. 0*0 = 0, 1*1 = 1, but 2*2 > 2!!!!!!!
         global.num_horizontal_input_presses = level.player.num_horizontal_input_presses*level.player.num_horizontal_input_presses
     return
-
 
 func _process(delta):
     delta = delta * time_dilation_multiplier
@@ -1139,6 +1143,8 @@ func getKeyCodeStr(keycode, useSpecialChar = true):
             return "E" if useSpecialChar else "Enter"
         "Control":
             return "C" if useSpecialChar else "Ctrl"
+        "Command", "command":
+            return "Cmd"
         "CapsLock", "Capslock", "Caps Lock", "Caps lock":
             return "O" if useSpecialChar else "Caps"
         "PageUp":
@@ -1230,7 +1236,7 @@ func resetControlsConfigLabels():
         { "label_str": tr("UI.InputMenu.Action.9_0") % "2" },
         { "label_str": tr("UI.InputMenu.Action.9_0") % "3" },
         { "label_str": tr("UI.InputMenu.Action.9_0") % "4" },
-        { "label_str": tr("UI.InputMenu.Action.10") },
+        { "label_str": tr("UI.InputMenu.Action.10") }
     ]
     for i in range(len(controlConfigLabels)):
         global.controlsConfig[i]["label_str"] = controlConfigLabels[i]["label_str"]
@@ -1254,7 +1260,7 @@ func initializeControlsConfig():
     { "input_action": "spell_2" },
     { "input_action": "spell_3" },
     { "input_action": "spell_4" },
-    { "input_action": "open_map" },
+    { "input_action": "open_map" }
   ]
   resetControlsConfigLabels()
   if global.userSettings.has("controls_config"):

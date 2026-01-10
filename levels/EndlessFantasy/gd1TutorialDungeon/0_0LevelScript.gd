@@ -10,6 +10,13 @@ onready var innerPeaceReverseSound = get_node("InnerPeaceReverseSound")
 onready var towerSprite1 = get_node("TowerSprite1")
 var croneHatTreasureRes = preload("res://sceneObjects/SpellsTreasureCollectables/Outfits/CroneHatTreasure.tscn")
 
+# @override
+func tryInitializeFromDebug(): 
+  if global.memory["initialized_from_debug"]:
+    return
+  else:
+    global.okay_really_really_started_game = true
+  .tryInitializeFromDebug()
 
 # @override
 func setUpRoomInitializationOverride():

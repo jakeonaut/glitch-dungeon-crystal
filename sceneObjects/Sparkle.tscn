@@ -52,3 +52,4 @@ vframes = 16
 frame = 42
 script = ExtResource( 5 )
 frame_delay = 0.1
+is_exempt_from_time_dilation = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=2]
+[gd_scene load_steps=100 format=2]
 
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=1]
 [ext_resource path="res://sceneObjects/Lilypad.tscn" type="PackedScene" id=2]
@@ -693,6 +693,7 @@ show_crt_effect = true
 starting_glitch_type = 1
 tileset_type = 2
 has_spellbook_page = true
+is_turn_based = true
 spellbook_spells = [ 1, 2 ]
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 15 )]

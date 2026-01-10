@@ -30,11 +30,18 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 8
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 3.0
 shader_param/y_div = 2.87
@@ -59,11 +66,18 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 8
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 3.0
 shader_param/y_div = 2.87
@@ -122,21 +136,21 @@ max_frames = 5
 should_fizzle_out = true
 
 [node name="SplashSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 6 )
 volume_db = -25.0
 pitch_scale = 2.0
+bus = "Sfx"
 
 [node name="MiniSplashSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -6.0
 pitch_scale = 1.5
+bus = "Sfx"
 
 [node name="MiniSplashSound2" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -6.0
+bus = "Sfx"
 
 [node name="WaterFilter" type="Control" parent="."]
 

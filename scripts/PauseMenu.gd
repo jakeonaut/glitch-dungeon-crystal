@@ -860,7 +860,12 @@ func processInventoryLogic(_delta):
         inventoryOptionIndex = 4
         inventoryOptionIndexX = 0
       elif inventoryOptionIndexX == 4:
-        popupText.bbcode_text = "an enchanted bag\nlets you take another hit"
+        # popupText.bbcode_text = "an enchanted bag\nlets you take another hit"
+        popupRect.visible = false
+        if global.memory["pegasus_shoes"] < 1:
+          global.memory["pegasus_shoes"] = 2
+        else:
+          global.memory["pegasus_shoes"] = 0.5
     elif inventoryOptionIndex == 2:
       popupRect.visible = not popupRect.visible
       shouldShowPopupYesNoOptions = true
@@ -1151,7 +1156,9 @@ func normalizeInventoryOptionIndex(y, x):
     if x >= 0:
       if inventoryOptionIndexX == 2 and not returnSprite.visible:
         inventoryOptionIndexX = 3
-      if inventoryOptionIndexX > (3 if mapSprite.visible else 2 if returnSprite.visible else 1): # (inventoryOptionIndexX == 3 and not bagSprite.visible) or inventoryOptionIndexX > 3:
+      if inventoryOptionIndexX == 3 and not mapSprite.visible:
+        inventoryOptionIndexX = 4
+      if inventoryOptionIndexX > (4 if bagSprite.visible else 3 if mapSprite.visible else 2 if returnSprite.visible else 1):
         # if hasAngelFlute:
         #   inventoryOptionIndex = 4
         #   menuConfirmSound.play()
@@ -1162,12 +1169,14 @@ func normalizeInventoryOptionIndex(y, x):
         # else:
         inventoryOptionIndexX = 0
     elif x < 0:
+      if inventoryOptionIndexX == 4 and not bagSprite.visible:
+        inventoryOptionIndexX = 3
       if inventoryOptionIndexX == 3 and not mapSprite.visible:
         inventoryOptionIndexX = 2
       if inventoryOptionIndexX == 2 and not returnSprite.visible:
         inventoryOptionIndexX = 1
       if inventoryOptionIndexX < 0:
-        inventoryOptionIndexX = 3 if mapSprite.visible else 2 if returnSprite.visible else 1
+        inventoryOptionIndexX = 4 if bagSprite.visible else 3 if mapSprite.visible else 2 if returnSprite.visible else 1
       
   if inventoryOptionIndex == 2:
     inventoryOptionIndexX += x
@@ -1272,6 +1281,7 @@ onready var playerGlitchHatSprite = get_node("InventoryRect/PlayerSprite/PlayerG
 onready var forgetMeNotSprite = get_node("InventoryRect/FlowerSprite")
 onready var broomSprite = get_node("InventoryRect/BroomSprite")
 onready var bagSprite = get_node("InventoryRect/BagSprite")
+onready var bagPlayerSprite = get_node("InventoryRect/BagSprite/PlayerSprite")
 onready var mapSprite = get_node("InventoryRect/MapSprite")
 onready var returnSprite = get_node("InventoryRect/ReturnSprite")
 # onready var bagLabel = get_node("InventoryRect/BagLabel")
@@ -1293,13 +1303,15 @@ func processInventoryRender(_delta):
   elif inventoryOptionIndex == 1:
     invSelectionSprite.position.y = 122
     if inventoryOptionIndexX == 0:
-      invSelectionSprite.position.x = 94
+      invSelectionSprite.position.x = 74
     elif inventoryOptionIndexX == 1:
-      invSelectionSprite.position.x = 150
+      invSelectionSprite.position.x = 130
     elif inventoryOptionIndexX == 2:
-      invSelectionSprite.position.x = 209
+      invSelectionSprite.position.x = 189
     elif inventoryOptionIndexX == 3:
-      invSelectionSprite.position.x = 265
+      invSelectionSprite.position.x = 245
+    elif inventoryOptionIndexX == 4:
+      invSelectionSprite.position.x = 300
   elif inventoryOptionIndex == 2:
     invSelectionSprite.position.y = 204
     if inventoryOptionIndexX == -1:
@@ -1377,7 +1389,8 @@ func processInventoryRender(_delta):
 
   forgetMeNotSprite.visible = global.memory["angel_flute"]
   broomSprite.scale = Vector2(3, 3) if global.memory["broomerang_enabled"] else Vector2(1.5, 1.5)
-  bagSprite.visible = global.memory["hp"] > 1
+  bagSprite.visible = global.memory["pegasus_shoes"]
+  bagPlayerSprite.scale.x = global.memory["pegasus_shoes"]
   returnSprite.visible = global.memory["can_force_respawn"] or global.memory["can_freely_teleport"]
   returnSprite.frame = 10 if global.memory["can_freely_teleport"] else 9
   mapSprite.visible = global.memory["has_map_item"]

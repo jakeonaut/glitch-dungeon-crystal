@@ -44,8 +44,8 @@ func _ready():
   meshInstance2.material_override = meshInstance2.material_override.duplicate()
 
 func _process(delta):
-  delta = delta * global.time_dilation_multiplier
-  aniPlayer.playback_speed = global.time_dilation_multiplier
+  # delta = delta * global.time_dilation_multiplier # i'm exempt
+  # aniPlayer.playback_speed = global.time_dilation_multiplier # i'm exempt
 
   if visible:
     if disappearing2:

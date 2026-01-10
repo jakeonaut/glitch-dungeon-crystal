@@ -517,7 +517,7 @@ func processGlitchFormGlitchiness():
             mySprite.material_override.set_shader_param("opacity", 1.0)
             if myOtherSprite:
                 myOtherSprite.material_override.set_shader_param("opacity", 1.0)
-            mySprite.material_override.set_shader_param("enable_glitch", true)
+            mySprite.material_override.set_shader_param("enable_glitch", false)
             mySprite.material_override.set_shader_param("enable_palette_cycle", false)
             mySprite.global_transform.origin.z = 1
             smallInteractionArea.add_to_group("enemies")
@@ -877,7 +877,7 @@ export var y_div = 2.3
 export var normal_offset = .15
 var smacked_palette = global.white_palette
 var should_modify_glitch_shader_vars = true
-func getSmacked(_broom_origin = null, silently = false, is_local_broom = false):
+func getSmacked(_broom_origin = null, silently = false, _is_local_broom = false):
     if is_smacked or am_i_dying:
         return false
 

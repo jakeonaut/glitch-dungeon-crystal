@@ -94,6 +94,12 @@ func getMyVariable():
 
 var preyTarget = null
 func _process(delta):
+    # ._process(delta) implicit
+    if boss_phase != BossPhase.WAKING_UP:
+        delta = delta * global.time_dilation_multiplier
+        secretAniPlayer.playback_speed = global.time_dilation_multiplier
+        weakPointAniPlayer.playback_speed = global.time_dilation_multiplier
+
     if not visible or boss_phase == BossPhase.NULL: return
 
     # need to be before global.pauseGame check so we can unpause

@@ -35,6 +35,8 @@ func _process(_delta):
                 continue
             if player.glitch_form == global.GlitchForm.FLOOR and player.on_ground and (prev_fallthrough_collision_area == null or not prev_fallthrough_collision_area.get_ref()):
                 continue
+            if player.transformation == player.TransformationState.BUBBLE:
+                continue
             if global.doFallthroughObjectCollision(player, area):
                 # last fallthrough object overrides this value
                 fallthrough_collision_area = area

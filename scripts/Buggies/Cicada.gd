@@ -27,7 +27,7 @@ func _ready():
     mySprite.material_override = mySprite.material_override.duplicate()
 
 func _process(delta):
-    delta = delta * global.time_dilation_multiplier
+    # delta = delta * global.time_dilation_multiplier # i'm exempt!
 
     if is_awake:
         global_transform.origin = global_transform.origin + (target_pos - global_transform.origin) * (delta*5)

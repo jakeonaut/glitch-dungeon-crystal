@@ -48,7 +48,8 @@ func tryShowInteractPrompt(_is_active_interact_prompt = false, _is_comic_alert =
   interactPrompt.visible = false
   
 func _process(delta):
-  delta = delta * global.time_dilation_multiplier
+  if should_process_respect_time_dilation:
+    delta = delta * global.time_dilation_multiplier
 
   # i love not using FSMs -_-
   if okay_im_really_done_bye:

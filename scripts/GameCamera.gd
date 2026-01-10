@@ -97,7 +97,7 @@ func setCameraPositionNow():
   global_transform.origin.y = initial_target.global_transform.origin.y
 
 func _process(delta):
-  delta = delta * global.time_dilation_multiplier
+  # delta = delta * global.time_dilation_multiplier
   
   if not actual_target.get_ref():
     actual_target = weakref(initial_target)

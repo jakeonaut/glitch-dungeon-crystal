@@ -36,6 +36,7 @@ export var spellbook_forbidden = false
 # TODO(jaketrower): Make a debug global section???
 export var has_spellbook_page = false
 export var has_glitched_grimoire = false
+export var is_turn_based = false
 export(Array, int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var spellbook_spells = []
 
 export var display_title = "???"
@@ -53,6 +54,7 @@ func _ready():
   # stupid workaround https://godotengine.org/qa/23950/_ready-call-order-is-reversed-from-typical-inheritance#:~:text=When%20inheriting%2C%20typically%20the%20child,the%20parent%2C%20then%20the%20child.
   _ready_impl()
   # ditherPaletteEffectRect2.material = ditherPaletteEffectRectMaterial
+  set_process_priority(-1)
 
 export var is_randomizing = false
 # this will be a map of global.GlitchForm => weakref(instance)
@@ -160,7 +162,7 @@ func _ready_impl():
   levelTiles.setTileset(tileset_type, false)
   levelTiles.buildRandomTiles()
   levelTiles.moveAllGlitchedTilesToTheDefaultZIndices()
-  if global.memory["currLevelZone"] != global.currLevelZone and not global.memory["world_of_ruin"]:
+  if global.memory["currLevelZone"] != global.currLevelZone and not global.memory["world_of_ruin"] and global.has_started_game and global.okay_really_really_started_game:
     uiLayer.setDisplayTitle(global.getDisplayTitle(self.getLevelZoneName(), self.getLevelName()))
   tryShowUIElements()
   trySpawnFollowers()
@@ -269,13 +271,18 @@ func randomizeARandomGameFrameBgSprite():
     bgSprite.totallyRandomizeFrame()
 
 func tryInitializeFromDebug():
-  return
+  # return 
   if global.memory["initialized_from_debug"]:
-    pass
+    return
   else:
     global.memory["initialized_from_debug"] = true
     global.memory["priestess"] = 0
+    if is_turn_based: 
+      # global.memory["is_turn_based"] = true
+      global.memory["is_pseudo_turn_based"] = true
     if (has_spellbook_page or has_glitched_grimoire) and not global.memory.has("spellbookPage"):
+      global.memory["broomerang"] = 1
+      global.memory["can_force_respawn"] = true
       global.memory["spellbookPage"] = []
       for spellbook_spell in spellbook_spells:
         global.memory["spellbookPage"].push_back(spellbook_spell)
@@ -352,7 +359,59 @@ func adjustViewportShaderVisibility():
   basicCrtEffectRect2.visible = global.userSettings["show_crt_effect"] and show_crt_effect
   paletteSwapColorBlindEffectRect2.visible = global.userSettings["show_palette_swap_color_blind_filter"]
 
+var can_turn_move = false
+var can_pseudo_turn_move = false
+var turn_based_timer = 0
+var turn_based_time_limit = 4
+func processTurnBasedTimer(delta):
+  can_turn_move = false
+  if player.rawJustPressedMoveUp() or player.rawJustPressedJump() or player.rawJustPressedMoveLeft() or player.rawJustPressedMoveRight() or player.rawJustPressedMoveDown():
+    turn_based_timer = 0
+    can_turn_move = true
+  elif player.rawPressingMoveUp() or player.rawPressingJump() or player.rawPressingMoveLeft() or player.rawPressingMoveRight() or player.rawPressingMoveDown():
+    turn_based_timer += (delta*11)
+    if player.pressingRun(): turn_based_timer += (delta*11) # double it
+    if turn_based_timer >= turn_based_time_limit:
+      turn_based_timer = 0
+      can_turn_move = true
+
+func processPseudoTurnBasedMovement(_delta):
+  if not global.memory["is_pseudo_turn_based"]:
+    return
+  can_pseudo_turn_move = (
+    player.rawPressingMoveUp() or player.rawPressingJump() or
+    player.rawPressingMoveLeft() or player.rawPressingMoveRight() or
+    player.rawPressingMoveDown() # or
+    # Input.is_action_pressed("sub_action_button")
+  )
+  
+func processTimeDilation(_delta):
+  pass
+  # this unfortunately causes a crash since somewhere I must be dividing by delta (???)
+  if global.memory["is_turn_based"] and not can_turn_move:
+    global.time_dilation_multiplier = 0
+  elif global.memory["is_pseudo_turn_based"] and not can_pseudo_turn_move:
+    global.time_dilation_multiplier = 0.05 # 0.0
+  else:
+    global.time_dilation_multiplier = 1.0
+
+    # TOGGLE MODE
+    # if global.memory["pegasus_shoes"]: 
+    #   if Input.is_action_just_pressed("run_button"):
+    #     if int(floor(global.time_dilation_multiplier)) == 1:
+    #       global.time_dilation_multiplier = global.memory["pegasus_shoes"]
+    #     else:
+    #       global.time_dilation_multiplier = 1
+    # HOLD MODE
+    # global.time_dilation_multiplier = 1.0
+    # if Input.is_action_pressed("run_button"):
+    #   global.time_dilation_multiplier = 0.5
+
 func _process(delta):
+  processTurnBasedTimer(delta)
+  processPseudoTurnBasedMovement(delta)
+  processTimeDilation(delta)
+
   delta = delta * global.time_dilation_multiplier
   if should_adjust_player:
     adjustPlayerForEdgeTransition()
@@ -620,6 +679,7 @@ func tryToRespawn():
 
   global.justAngelWarped = global.angelWarping
   if global.memory.has("on_ground"): player.on_ground = global.memory["on_ground"]
+  player.was_just_on_ground_timer = player.was_just_on_ground_time_limit + 1
   if global.isEnteringRoom:
     # levelTiles.tryToSayTidy()
     if global.malware_infected:

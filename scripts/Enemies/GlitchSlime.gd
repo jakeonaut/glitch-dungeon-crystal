@@ -34,7 +34,10 @@ func _process(delta):
     if not visible: return
     
     delta = delta * global.time_dilation_multiplier
-    dieAniPlayer.playback_speed = global.time_dilation_multiplier
+    if smallInteractionArea.is_in_group("enemies"):
+        dieAniPlayer.playback_speed = global.time_dilation_multiplier
+    else:
+        dieAniPlayer.playback_speed = 1.0
 
     if am_i_dying:
         return

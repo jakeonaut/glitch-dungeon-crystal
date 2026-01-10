@@ -66,9 +66,9 @@
 [ext_resource path="res://assets/sounds/chesiremiao.wav" type="AudioStream" id=64]
 [ext_resource path="res://assets/palettes/inkpink-1x.png" type="Texture" id=65]
 [ext_resource path="res://assets/palettes/kirokaze-gameboy-1x.png" type="Texture" id=66]
+[ext_resource path="res://assets/sounds/151RetroMonsters/Dragon.wav" type="AudioStream" id=67]
 [ext_resource path="res://petsclub2.png" type="Texture" id=72]
 [ext_resource path="res://assets/palettes/johto-redrawn-modernised-gbc-1x.png" type="Texture" id=73]
-[ext_resource path="res://assets/sounds/broomThrow.wav" type="AudioStream" id=74]
 [ext_resource path="res://titlecard.ogv" type="VideoStream" id=75]
 
 [sub_resource type="ShaderMaterial" id=345]
@@ -3338,14 +3338,14 @@ volume_db = -30.0
 bus = "Sfx"
 
 [node name="DeleteSound" type="AudioStreamPlayer" parent="Viewport/level"]
-stream = ExtResource( 74 )
-volume_db = 5.0
-pitch_scale = 0.5
+stream = ExtResource( 67 )
+volume_db = -20.0
+pitch_scale = 1.5
 bus = "Sfx"
 
 [node name="DeleteSound2" type="AudioStreamPlayer" parent="Viewport/level"]
 stream = ExtResource( 30 )
-volume_db = -10.0
+volume_db = -20.0
 bus = "Sfx"
 
 [node name="ReliefSound" type="AudioStreamPlayer" parent="Viewport/level"]

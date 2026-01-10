@@ -40,7 +40,7 @@ func _ready():
         can_i_spawn_crystal = false
 
 func _process(delta):
-    delta = delta * global.time_dilation_multiplier
+    # delta = delta * global.time_dilation_multiplier # i'm exempt!
     
     global_transform.origin = global_transform.origin + (target_pos - global_transform.origin) * (delta*5)
     if didja_get_me:

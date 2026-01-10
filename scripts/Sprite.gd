@@ -18,6 +18,7 @@ export var should_fizzle_out = false
 var should_soft_fizzle_out = false
 export var should_animate = true # set this to false if you handle animation through an AnimationPlayer
 export var reversed = false
+export var is_exempt_from_time_dilation = false
 
 export(String, FILE) var overwritten_green_palette_path = null
 var overwritten_green_palette = null
@@ -72,14 +73,16 @@ func preProcess():
     pass
 
 func _process(delta):
+    var trueDelta = delta
     delta = delta * global.time_dilation_multiplier
+
     if not global.userSettings["canGlitchScreen"] and material_override and material_override is ShaderMaterial:
         material_override.set_shader_param("enable_glitch", false)
         material_override.set_shader_param("enable_glitch_3d", false)
     
     preProcess()
     if visible and should_animate:
-        animate(delta)
+        animate(trueDelta if is_exempt_from_time_dilation else delta)
 
     if should_fly_somewhere and not has_reached_fly_dest:
         global_transform.origin.x = global_transform.origin.x + (fly_pos.x - global_transform.origin.x) * (delta*fly_speed)

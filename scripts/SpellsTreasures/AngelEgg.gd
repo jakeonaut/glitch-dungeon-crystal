@@ -28,6 +28,8 @@ func _ready():
         landSound.play()
 
 func _process(delta):
+    # delta = delta * global.time_dilation_multiplier # i'm exempt!
+
     pauseSelf = not visible
     if pauseSelf:
       return
