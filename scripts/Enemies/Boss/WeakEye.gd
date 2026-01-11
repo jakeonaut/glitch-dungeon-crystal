@@ -34,7 +34,9 @@ func _ready():
 
 var spawn_timer = 0
 var spawn_time_limit = 5
-func _process(delta): 
+func _process(delta):
+  delta = delta * global.time_dilation_multiplier
+  
   if not global.userSettings["canGlitchScreen"]:
     spikes3.mesh.material.set_shader_param("enable_glitch", false)
     spikes3.mesh.material.set_shader_param("enable_glitch_3d", false)

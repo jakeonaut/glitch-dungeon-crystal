@@ -693,7 +693,6 @@ show_crt_effect = true
 starting_glitch_type = 1
 tileset_type = 2
 has_spellbook_page = true
-is_turn_based = true
 spellbook_spells = [ 1, 2 ]
 
 [node name="UILayer" parent="Viewport/level" instance=ExtResource( 15 )]

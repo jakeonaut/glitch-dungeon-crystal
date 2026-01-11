@@ -55,8 +55,9 @@ script = ExtResource( 2 )
 frame_delay = 0.2
 max_frames = 3
 should_fizzle_out = true
+is_exempt_from_time_dilation = true
 
 [node name="CleanGlitchSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 6 )
 volume_db = -25.0
+bus = "Sfx"

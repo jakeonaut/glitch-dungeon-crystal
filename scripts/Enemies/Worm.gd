@@ -31,6 +31,9 @@ func _ready():
 func _process(delta):
   if not visible: return
 
+  if should_process_respect_time_dilation:
+    delta = delta * global.time_dilation_multiplier
+
   if is_in_cooldown:
     cooldown_timer += (delta*22)
   if cooldown_timer >= cooldown_time_limit:
@@ -117,6 +120,8 @@ onready var bounceSound = get_node("Sounds/BounceSound")
 
 # @override
 func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
+  should_aniPlayer_respect_time_dilation = false
+  should_process_respect_time_dilation = false
   if has_ever_been_smacked:
     return
   .getSmacked(broom_origin, silently, is_local_broom)

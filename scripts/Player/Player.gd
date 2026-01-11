@@ -414,7 +414,7 @@ func _process(delta):
   var trueDelta = delta
   if should_process_respect_time_dilation:
     delta = delta * global.time_dilation_multiplier
-  should_aniPlayer_respect_time_dilation = not "broomSmack" in aniPlayer.current_animation
+  should_aniPlayer_respect_time_dilation = not "broomSmack" in aniPlayer.current_animation and not "getItem" in aniPlayer.current_animation
 
   if Input.is_action_just_pressed("swap_english_and_russian"):
     if global.userSettings["locale"] == "en":

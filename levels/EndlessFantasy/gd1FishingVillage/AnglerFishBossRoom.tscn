@@ -2721,6 +2721,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47.9, -6, 0 )
 [node name="AnglerFishBoss" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 58.1339, -25.8473, 0 )
 
+[node name="CubeContainer" parent="Viewport/level/AnglerFishBoss/CubeCrystal" index="0"]
+transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
+
 [node name="MeshInstance" parent="Viewport/level/AnglerFishBoss/CubeCrystal/CubeContainer" index="0"]
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -1.15202e-07, 0, 0, 0 )
 mesh = SubResource( 126 )
@@ -2728,6 +2731,9 @@ mesh = SubResource( 126 )
 [node name="MeshInstance3" parent="Viewport/level/AnglerFishBoss/CubeCrystal/CubeContainer" index="1"]
 transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
 mesh = SubResource( 127 )
+
+[node name="MeshInstance2" parent="Viewport/level/AnglerFishBoss/CubeCrystal/CubeContainer" index="2"]
+transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )
 
 [node name="landings" type="Spatial" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43, -24.7462, 0 )

@@ -14,6 +14,7 @@ onready var dangleContainer = get_node("DangleContainer")
 onready var screamSound = get_node("Sounds/ScreamSound")
 onready var chargeSound = get_node("Sounds/ChargeSound")
 var basicFrogEnemyRes = preload("res://sceneObjects/Enemies/BasicFrogEnemy.tscn")
+var cautionWarningRes = preload("res://sceneObjects/Enemies/Boss/CautionWarning.tscn")
 var basicFrogEnemies = []
 var crystalGeodeRes = preload("res://sceneObjects/CrystalGeode2.tscn")
 
@@ -58,6 +59,7 @@ var crystalLandings = []
 var which_three = []
 var gnash_charge_position = null
 var how_many_final_charges = 0
+var cautionWarning = null
 
 onready var spawnSound = get_node("Sounds/SpawnSound")
 func _ready():
@@ -92,6 +94,23 @@ func unsmack():
 func getMyVariable():
     return global.memory["angler_seaman_boss"]
 
+func enableAndPositionCautionWarning():
+    if cautionWarning == null:
+        cautionWarning = cautionWarningRes.instance()
+        level.add_child(cautionWarning)
+    var xPosition = level.player.global_transform.origin.x
+    if level.player.global_transform.origin.x > self.global_transform.origin.x:
+        xPosition -= 2
+    elif level.player.global_transform.origin.x < self.global_transform.origin.x:
+        xPosition += 2
+    cautionWarning.global_transform.origin = Vector3(xPosition, global_transform.origin.y, 0)
+
+func tryToDeleteCautionWarning():
+    if cautionWarning != null:
+        level.remove_child(cautionWarning)
+        cautionWarning.queue_free()
+        cautionWarning = null
+
 var preyTarget = null
 func _process(delta):
     # ._process(delta) implicit
@@ -99,6 +118,9 @@ func _process(delta):
         delta = delta * global.time_dilation_multiplier
         secretAniPlayer.playback_speed = global.time_dilation_multiplier
         weakPointAniPlayer.playback_speed = global.time_dilation_multiplier
+    else:
+        secretAniPlayer.playback_speed = 1
+        weakPointAniPlayer.playback_speed = 1
 
     if not visible or boss_phase == BossPhase.NULL: return
 
@@ -173,6 +195,8 @@ func _process(delta):
         # this position is stupid and specific to the level I'm in... oh well
         moveToSpecificPosition(delta, Vector3(65, level.player.global_transform.origin.y, 0), 1.5, false)
         idle_timer += (delta*11)
+        if idle_timer >= charging_time_limit - 15:
+            enableAndPositionCautionWarning()
         if idle_timer >= charging_time_limit:
             idle_timer = 0
             boss_phase = BossPhase.CHARGING
@@ -181,6 +205,7 @@ func _process(delta):
             secretAniPlayer.play("charging")
             chargeSound.play()
     elif boss_phase == BossPhase.CHARGING:
+        enableAndPositionCautionWarning()
         behavior_walking = true
         walk_speed = 24
         walk_direction.x = -1
@@ -216,6 +241,7 @@ func _process(delta):
                 mySprite.translation.z = 2 # from -2
                 chargeSound.play()
     elif boss_phase == BossPhase.CHARGING_BACKWARDS:
+        enableAndPositionCautionWarning()
         walk_speed = 36
         behavior_walking = true
         walk_direction.x = 1
@@ -298,6 +324,7 @@ func _process(delta):
             boss_phase = BossPhase.IDLE
             idle_timer = 0
     elif boss_phase == BossPhase.STUN_FALL:
+        tryToDeleteCautionWarning()
         behavior_walking = false
         on_ground = false
         if global_transform.origin.y <= -30:
@@ -314,6 +341,7 @@ func _process(delta):
             secretAniPlayer.play("stunIdle")
             stun_timer = 0
     elif boss_phase == BossPhase.STUN_IDLE:
+        tryToDeleteCautionWarning()
         if not is_weakpoint_attached:
             moveAbout(delta, true) # move the baby
         stun_timer += (delta * 11)
@@ -328,6 +356,7 @@ func _process(delta):
             weakPointAniPlayer.clear_queue()
             weakPointAniPlayer.play("idle")
     elif boss_phase == BossPhase.HURT:
+        tryToDeleteCautionWarning()
         has_already_hidden = false
         moveToSpecificPosition(delta, Vector3(52.134, -19.847, 0), 1, false)
         if not secretAniPlayer.is_playing():

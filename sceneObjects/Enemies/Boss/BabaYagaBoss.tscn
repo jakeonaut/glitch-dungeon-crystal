@@ -5431,7 +5431,7 @@ bus = "Sfx"
 
 [node name="EyeBlinkSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 23 )
-volume_db = -15.0
+volume_db = -25.0
 pitch_scale = 2.0
 bus = "Sfx"
 

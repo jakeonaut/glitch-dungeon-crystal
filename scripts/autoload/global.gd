@@ -7,6 +7,9 @@ var INTERNAL_VIEWPORT_HEIGHT = 540
 var SMALLER_VIEWPORT_WIDTH = 640
 var SMALLER_VIEWPORT_HEIGHT = 512
 
+var objects_2d = preload("res://assets/sprites/objects_2d.png")
+var objects_2d_grayscale = preload("res://assets/sprites/objects_2d_grayscale.png")
+
 var kirokaze_palette = preload("res://assets/palettes/kirokaze-gameboy-1x.png")
 
 var all_palette = preload("res://assets/palettes/all_palette.png")
@@ -395,6 +398,7 @@ func resetMemory():
     memory["mole_cricket_enabled"] = true
     memory["zora_flippers_enabled"] = true
     memory["broomerang_enabled"] = true
+    memory["pseudo_time_enabled"] = true
     memory["pegasus_shoes_enabled"] = true
 
     # game stuff

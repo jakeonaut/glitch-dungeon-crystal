@@ -156,6 +156,13 @@ func unsmack():
 # var sprite3dShader = preload("res://shaders/Sprite3D_noglitch.shader")
 func _process(delta):
     if not visible or boss_phase == BossPhase.NULL: return
+
+    var trueDelta = delta
+    if boss_phase != BossPhase.WAKEUP:
+        delta = delta * global.time_dilation_multiplier
+        secretAniPlayer.playback_speed = global.time_dilation_multiplier
+    else:
+        secretAniPlayer.playback_speed = 1
     
     # if global.userSettings["canGlitchScreen"]:
     #     mySprite.material_override.shader = sprite3dShader

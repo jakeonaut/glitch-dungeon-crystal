@@ -1158,7 +1158,7 @@ func normalizeInventoryOptionIndex(y, x):
         inventoryOptionIndexX = 3
       if inventoryOptionIndexX == 3 and not mapSprite.visible:
         inventoryOptionIndexX = 4
-      if inventoryOptionIndexX > (4 if bagSprite.visible else 3 if mapSprite.visible else 2 if returnSprite.visible else 1):
+      if inventoryOptionIndexX > (4 if timeSprite.visible else 3 if mapSprite.visible else 2 if returnSprite.visible else 1):
         # if hasAngelFlute:
         #   inventoryOptionIndex = 4
         #   menuConfirmSound.play()
@@ -1169,14 +1169,14 @@ func normalizeInventoryOptionIndex(y, x):
         # else:
         inventoryOptionIndexX = 0
     elif x < 0:
-      if inventoryOptionIndexX == 4 and not bagSprite.visible:
+      if inventoryOptionIndexX == 4 and not timeSprite.visible:
         inventoryOptionIndexX = 3
       if inventoryOptionIndexX == 3 and not mapSprite.visible:
         inventoryOptionIndexX = 2
       if inventoryOptionIndexX == 2 and not returnSprite.visible:
         inventoryOptionIndexX = 1
       if inventoryOptionIndexX < 0:
-        inventoryOptionIndexX = 4 if bagSprite.visible else 3 if mapSprite.visible else 2 if returnSprite.visible else 1
+        inventoryOptionIndexX = 4 if timeSprite.visible else 3 if mapSprite.visible else 2 if returnSprite.visible else 1
       
   if inventoryOptionIndex == 2:
     inventoryOptionIndexX += x
@@ -1280,8 +1280,8 @@ onready var playerSprite = get_node("InventoryRect/PlayerSprite")
 onready var playerGlitchHatSprite = get_node("InventoryRect/PlayerSprite/PlayerGlitchHatSprite")
 onready var forgetMeNotSprite = get_node("InventoryRect/FlowerSprite")
 onready var broomSprite = get_node("InventoryRect/BroomSprite")
-onready var bagSprite = get_node("InventoryRect/BagSprite")
-onready var bagPlayerSprite = get_node("InventoryRect/BagSprite/PlayerSprite")
+onready var timeSprite = get_node("InventoryRect/TimeSprite")
+# onready var bagPlayerSprite = get_node("InventoryRect/BagSprite/PlayerSprite")
 onready var mapSprite = get_node("InventoryRect/MapSprite")
 onready var returnSprite = get_node("InventoryRect/ReturnSprite")
 # onready var bagLabel = get_node("InventoryRect/BagLabel")
@@ -1388,23 +1388,25 @@ func processInventoryRender(_delta):
     grandmaFaceSprite4.visible = false
 
   forgetMeNotSprite.visible = global.memory["angel_flute"]
-  broomSprite.scale = Vector2(3, 3) if global.memory["broomerang_enabled"] else Vector2(1.5, 1.5)
-  bagSprite.visible = global.memory["pegasus_shoes"]
-  bagPlayerSprite.scale.x = global.memory["pegasus_shoes"]
+  broomSprite.texture = global.objects_2d if global.memory["broomerang_enabled"] else global.objects_2d_grayscale
+  timeSprite.visible = global.memory["is_pseudo_turn_based"]
+  timeSprite.texture = global.objects_2d if global.memory["pseudo_time_enabled"] else global.objects_2d_grayscale
+  # bagSprite.visible = global.memory["pegasus_shoes"]
+  # bagPlayerSprite.scale.x = global.memory["pegasus_shoes"]
   returnSprite.visible = global.memory["can_force_respawn"] or global.memory["can_freely_teleport"]
   returnSprite.frame = 10 if global.memory["can_freely_teleport"] else 9
   mapSprite.visible = global.memory["has_map_item"]
 
   heartSprite.visible = (global.getNumGrannyHearts(true) > 0)
-  heartSprite.scale = Vector2(3, 3) if global.memory["hearts_enabled"] else Vector2(1.5, 1.5)
+  heartSprite.texture = global.objects_2d if global.memory["hearts_enabled"] else global.objects_2d_grayscale
   heartLabel.visible = heartSprite.visible
   heartLabel.bbcode_text = "[right]" + str(global.getNumGrannyHearts(true)) + "[/right]"
   soulSprite1.visible = global.memory["zora_flippers"]
-  soulSprite1.scale = Vector2(3, 3) if global.memory["zora_flippers_enabled"] else Vector2(1.5, 1.5)
+  soulSprite1.texture = global.objects_2d if global.memory["zora_flippers_enabled"] else global.objects_2d_grayscale
   soulSprite2.visible = global.memory["mole_cricket"]
-  soulSprite2.scale = Vector2(3, 3) if global.memory["mole_cricket_enabled"] else Vector2(1.5, 1.5)
+  soulSprite2.texture = global.objects_2d if global.memory["mole_cricket_enabled"] else global.objects_2d_grayscale
   soulSprite3.visible = global.memory["mushroom_soul"]
-  soulSprite3.scale = Vector2(3, 3) if global.memory["mushroom_soul_enabled"] else Vector2(1.5, 1.5)
+  soulSprite3.texture = global.objects_2d if global.memory["mushroom_soul_enabled"] else global.objects_2d_grayscale
   soulLabel.visible = heartSprite.visible or soulSprite1.visible or soulSprite2.visible or soulSprite3.visible
   var numEggs = global.getThingFromAllLevelZonez("angelEgg")
   angelEggSprite.visible = numEggs > 0

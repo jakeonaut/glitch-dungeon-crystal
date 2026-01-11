@@ -203,8 +203,8 @@ func _process(delta):
   if is_passive:
     mySprite.visible = false
     mySprite2.visible = false
-  delta = delta * global.time_dilation_multiplier
-  animationPlayer.playback_speed = global.time_dilation_multiplier
+  # delta = delta * global.time_dilation_multiplier # i'm exempt
+  # animationPlayer.playback_speed = global.time_dilation_multiplier  # i'm exempt
 
   if (is_passive or not mySprite2.visible) and fallthroughSolid.is_in_group("fallthrough"):
     fallthroughSolid.remove_from_group("fallthrough")

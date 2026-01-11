@@ -554,21 +554,13 @@ hframes = 6
 vframes = 5
 frame = 2
 
-[node name="BagSprite" type="Sprite" parent="InventoryRect"]
+[node name="TimeSprite" type="Sprite" parent="InventoryRect"]
 position = Vector2( 298, 123 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
-frame = 22
-
-[node name="PlayerSprite" type="Sprite" parent="InventoryRect/BagSprite"]
-position = Vector2( 6, 2 )
-scale = Vector2( 0.5, 1 )
-texture = ExtResource( 1 )
-hframes = 6
-vframes = 5
-frame = 4
+frame = 18
 
 [node name="SoulLabel" type="RichTextLabel" parent="InventoryRect"]
 margin_left = -19.0
@@ -705,7 +697,7 @@ bbcode_text = "1"
 text = "1"
 
 [node name="SelectionSprite" type="Sprite" parent="InventoryRect"]
-position = Vector2( 320, 122 )
+position = Vector2( 300, 122 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 hframes = 6

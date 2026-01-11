@@ -72,6 +72,12 @@ func getMyVariable():
 
 func _process(delta):
     if not visible or boss_phase == BossPhase.NULL: return
+
+    if boss_phase != BossPhase.WAKEUP:
+        delta = delta * global.time_dilation_multiplier
+        secretAniPlayer.playback_speed = global.time_dilation_multiplier
+    else:
+        secretAniPlayer.playback_speed = 1
     
     noseSprite.flip_h = mySprite.flip_h
     # need to be before global.pauseGame check so we can unpause

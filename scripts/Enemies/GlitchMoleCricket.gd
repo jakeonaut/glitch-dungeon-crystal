@@ -66,6 +66,8 @@ func _ready():
 func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
     if has_ever_been_smacked or mole_state == MoleState.RESPAWN:
         return
+    should_aniPlayer_respect_time_dilation = false
+    should_process_respect_time_dilation = false
     .getSmacked(broom_origin, silently, is_local_broom)
     walk_speed = 0
     grav = 0
@@ -92,8 +94,11 @@ func _process(delta):
     if is_builder:
         mole_state_dig_time_limit = 3
     
-    delta = delta * global.time_dilation_multiplier
-    aniPlayer.playback_speed = global.time_dilation_multiplier
+    if is_smacked:
+       should_process_respect_time_dilation = false
+       should_aniPlayer_respect_time_dilation = false 
+    if should_process_respect_time_dilation:
+        delta = delta * global.time_dilation_multiplier
 
     checkForFlyPathOverrides()
     should_collide_horizontally = mole_state != MoleState.OVERRIDE_FLYING
@@ -125,9 +130,13 @@ func _process(delta):
                     mole_state = MoleState.DIG_IDLE
 
         if has_been_smacked:
+            should_process_respect_time_dilation = false
+            should_aniPlayer_respect_time_dilation = false
             has_been_smacked = false
             startDigging()
     elif mole_state == MoleState.DIG or mole_state == MoleState.DIG_IDLE:
+        should_process_respect_time_dilation = false
+        should_aniPlayer_respect_time_dilation = false
         # falling
         if not on_ground and has_dug and my_up_vector.y == 1:
             mole_state_timer += (delta*22)

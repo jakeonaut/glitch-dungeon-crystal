@@ -72,6 +72,8 @@ script = ExtResource( 3 )
 show_crt_effect = true
 starting_glitch_type = 4
 tileset_type = 4
+has_spellbook_page = true
+spellbook_spells = [ 4, 1 ]
 pacman_wrapping = true
 weird_pacman_wrapping = true
 

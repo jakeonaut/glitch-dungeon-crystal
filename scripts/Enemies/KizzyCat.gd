@@ -22,7 +22,8 @@ var teleport_timer = 0
 var teleport_time_limit = 30
 var teleport_time_limit2 = 45
 func _process(delta):
-
+  delta = delta * global.time_dilation_multiplier
+  
   if linear_velocity.y > 0:
     mySprite.frame_delay = 0.2
   else:

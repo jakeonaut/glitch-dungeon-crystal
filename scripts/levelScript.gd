@@ -387,11 +387,15 @@ func processPseudoTurnBasedMovement(_delta):
   
 func processTimeDilation(_delta):
   pass
-  # this unfortunately causes a crash since somewhere I must be dividing by delta (???)
-  if global.memory["is_turn_based"] and not can_turn_move:
+  if global.shouldRenderAsCinematic:
+    global.time_dilation_multiplier = 1.0
+  elif global.memory["is_turn_based"] and not can_turn_move:
     global.time_dilation_multiplier = 0
-  elif global.memory["is_pseudo_turn_based"] and not can_pseudo_turn_move:
-    global.time_dilation_multiplier = 0.05 # 0.0
+  elif global.memory["is_pseudo_turn_based"]:
+    if can_pseudo_turn_move:
+      global.time_dilation_multiplier = 2.0
+    else:
+      global.time_dilation_multiplier = 0.001 # 0.0
   else:
     global.time_dilation_multiplier = 1.0
 

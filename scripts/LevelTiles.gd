@@ -831,7 +831,7 @@ func changeColorPalette(palette, _palette_alt = null):
       continue
     var mesh = mesh_library.get_item_mesh(item_id)
     var tile_name = mesh_library.get_item_name(item_id)
-    if tile_name == "GlitchSpikes" or "Pink" in tile_name:
+    if "Pink" in tile_name or "Spikes" in tile_name:
       continue
     var palette_to_use = curr_palette
     # if "Fragile" in tile_name:

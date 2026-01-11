@@ -413,7 +413,8 @@ func glitchOut():
         am_i_dying = true
 
 func _process(delta):
-    delta = delta * global.time_dilation_multiplier
+    if should_process_respect_time_dilation:
+        delta = delta * global.time_dilation_multiplier
     # if global.userSettings["canGlitchScreen"]:
     #     mySprite.material_override.shader = sprite3dShader
     # else:

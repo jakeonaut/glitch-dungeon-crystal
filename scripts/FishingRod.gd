@@ -23,6 +23,7 @@ func _ready():
   set_process(true)
 
 func _process(delta):
+  var trueDelta = delta
   delta = delta * global.time_dilation_multiplier
   
   var diff = self.global_transform.origin.y - hookInteractionArea.global_transform.origin.y + 1
@@ -45,12 +46,12 @@ func _process(delta):
     hookTarget.get_ref().vv = 0
     hookTarget.get_ref().lv.y = 0
     hookTarget.get_ref().linear_velocity.y = 0
-    moveTargetToHook(delta)
+    moveTargetToHook(trueDelta)
     if not is_reeled_in:
-      reelItIn(delta)
+      reelItIn(trueDelta)
 
   elif is_reeled_in:
-    reelItOut(delta)
+    reelItOut(trueDelta)
 
 func restorePlayer(_got_to_top):
   if hookTarget == null or hookTarget.get_ref() == null:
