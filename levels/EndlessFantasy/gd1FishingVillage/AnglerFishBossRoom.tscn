@@ -2725,7 +2725,7 @@ transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 58.1339, -25.8473, 0 )
 transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="Viewport/level/AnglerFishBoss/CubeCrystal/CubeContainer" index="0"]
-transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -1.15202e-07, 0, 0, 0 )
+transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
 mesh = SubResource( 126 )
 
 [node name="MeshInstance3" parent="Viewport/level/AnglerFishBoss/CubeCrystal/CubeContainer" index="1"]
@@ -3546,7 +3546,7 @@ flip_v = true
 mesh = SubResource( 128 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [editable path="Viewport/level/AnglerFishBoss"]
 [editable path="Viewport/level/AnglerFishBoss/CubeCrystal"]

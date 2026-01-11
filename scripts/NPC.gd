@@ -225,15 +225,15 @@ func getSmacked(_broom_origin = null, _silently = false, is_local_broom = true):
   # if not can_be_smacked:
   #   return false
   if not visible or is_very_tiny:
-    return false
+    return null
   if is_smacked:
-    return false
+    return null
   # don't get smacked if we're on the wrong side of a wind up
   if level.player.mySprite.flip_h != which_side_is_player_on and is_local_broom:
     return false
 
   if global.pauseGame or global.shouldRenderAsCinematic:
-    return false
+    return null
     
   if smackSound: smackSound.play()
   var material = mySprite.material_override
@@ -246,12 +246,12 @@ func getSmacked(_broom_origin = null, _silently = false, is_local_broom = true):
   is_smacked = true
 
   if (textBox.text_final == "" or textBox.text_final == null) and (textBox.smackedBbText == "" or textBox.smackedBbText == null):
-    return false
+    return null
   if floating_text or not is_active: 
-    return false
+    return null
   # don't start dialog if you threw broom at me
   if not is_local_broom:
-    return true
+    return null
   
   if textBox.smackedBbText == "" or textBox.smackedBbText == null:
     talkToMe()

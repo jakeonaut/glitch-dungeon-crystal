@@ -845,27 +845,26 @@ func processInventoryLogic(_delta):
       popupRect.visible = not popupRect.visible
       shouldShowPopupYesNoOptions = false
       popupYesNoOptions = false
-    elif inventoryOptionIndex == 1:
+    elif inventoryOptionIndex == 1: 
       popupRect.visible = not popupRect.visible
       shouldShowPopupYesNoOptions = false
-      if inventoryOptionIndexX == 0:
+      if inventoryOptionIndexX == 0: # broom
         updateBroomPopupText()
-      elif inventoryOptionIndexX == 1:
+      elif inventoryOptionIndexX == 1: # little hat
         updateOutfitPopupText()
-      elif inventoryOptionIndexX == 2:
+      elif inventoryOptionIndexX == 2: # kill yourself ability
         popupText.bbcode_text = tr("NPC.Treasure.1") % global.getInputText("restart_key")
-      elif inventoryOptionIndexX == 3:
-        # popupText.bbcode_text = "pet follower\nin progress..."
+      elif inventoryOptionIndexX == 3: # the map
         popupRect.visible = false
         inventoryOptionIndex = 4
         inventoryOptionIndexX = 0
-      elif inventoryOptionIndexX == 4:
-        # popupText.bbcode_text = "an enchanted bag\nlets you take another hit"
-        popupRect.visible = false
-        if global.memory["pegasus_shoes"] < 1:
-          global.memory["pegasus_shoes"] = 2
+      elif inventoryOptionIndexX == 4: # the time keeper
+        shouldShowPopupYesNoOptions = true
+        popupText.bbcode_text = tr("NPC.Treasure.11")
+        if popupRect.visible:
+          popupYesNoOptions = global.memory["secret_bauble_enabled"]
         else:
-          global.memory["pegasus_shoes"] = 0.5
+          global.memory["secret_bauble_enabled"] = popupYesNoOptions
     elif inventoryOptionIndex == 2:
       popupRect.visible = not popupRect.visible
       shouldShowPopupYesNoOptions = true
@@ -1389,8 +1388,8 @@ func processInventoryRender(_delta):
 
   forgetMeNotSprite.visible = global.memory["angel_flute"]
   broomSprite.texture = global.objects_2d if global.memory["broomerang_enabled"] else global.objects_2d_grayscale
-  timeSprite.visible = global.memory["is_pseudo_turn_based"]
-  timeSprite.texture = global.objects_2d if global.memory["pseudo_time_enabled"] else global.objects_2d_grayscale
+  timeSprite.visible = global.memory["secret_bauble"]
+  timeSprite.texture = global.objects_2d if global.memory["secret_bauble_enabled"] else global.objects_2d_grayscale
   # bagSprite.visible = global.memory["pegasus_shoes"]
   # bagPlayerSprite.scale.x = global.memory["pegasus_shoes"]
   returnSprite.visible = global.memory["can_force_respawn"] or global.memory["can_freely_teleport"]

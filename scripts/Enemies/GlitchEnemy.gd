@@ -414,7 +414,7 @@ func glitchOut():
 
 func _process(delta):
     if should_process_respect_time_dilation:
-        delta = delta * global.time_dilation_multiplier
+        delta = delta * global.time_dilation_multiplier * delta_time_dilation
     # if global.userSettings["canGlitchScreen"]:
     #     mySprite.material_override.shader = sprite3dShader
     # else:

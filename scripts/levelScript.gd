@@ -282,6 +282,7 @@ func tryInitializeFromDebug():
       global.memory["is_pseudo_turn_based"] = true
     if (has_spellbook_page or has_glitched_grimoire) and not global.memory.has("spellbookPage"):
       global.memory["broomerang"] = 1
+      global.memory["secret_bauble"] = 1
       global.memory["can_force_respawn"] = true
       global.memory["spellbookPage"] = []
       for spellbook_spell in spellbook_spells:

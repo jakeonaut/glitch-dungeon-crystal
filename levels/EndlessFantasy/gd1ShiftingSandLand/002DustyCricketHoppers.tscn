@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=1]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=2]
@@ -15,7 +15,7 @@
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=15]
-[ext_resource path="res://levels/EndlessFantasy/PreBossFightMainLevelScript.gd" type="Script" id=16]
+[ext_resource path="res://scripts/levelScript.gd" type="Script" id=16]
 [ext_resource path="res://assets/miniAdventures.png" type="Texture" id=17]
 [ext_resource path="res://assets/palettes/gold_palette.png" type="Texture" id=18]
 [ext_resource path="res://assets/backgrounds/cave_layer_0.png" type="Texture" id=19]
@@ -39,7 +39,6 @@
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=38]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=41]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/LadderSpell.tscn" type="PackedScene" id=42]
-[ext_resource path="res://sceneObjects/HeartMimic.tscn" type="PackedScene" id=43]
 
 [sub_resource type="Animation" id=22]
 resource_name = "doorClose"
@@ -277,7 +276,6 @@ viewport_path = NodePath("Viewport2")
 script = ExtResource( 16 )
 show_crt_effect = true
 tileset_type = 4
-boss_var_name = "dogu_matryoshka_boss"
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 20 )]
 
@@ -702,10 +700,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 70, -8.60734, 0 )
 
 [node name="LadderSpell" parent="Viewport/level" instance=ExtResource( 42 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 84, -8.42128, 0 )
-
-[node name="HeartMimic" parent="Viewport/level" instance=ExtResource( 43 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 64.0677, -0.37226, 0 )
-visible = false
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 77, -3, 0 )

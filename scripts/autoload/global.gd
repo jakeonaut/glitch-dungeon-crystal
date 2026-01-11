@@ -312,6 +312,7 @@ var collectable_key_recently_got_time_limit = 40
 var malware_infected = false
 
 var time_dilation_multiplier = 1.0
+var SLOW_BOSS_MULTIPLIER = 0.6
 
 var mini_cube_crystal_pitch_min = 0.5
 var mini_cube_crystal_pitch_max = 2.0
@@ -400,6 +401,7 @@ func resetMemory():
     memory["broomerang_enabled"] = true
     memory["pseudo_time_enabled"] = true
     memory["pegasus_shoes_enabled"] = true
+    memory["secret_bauble_enabled"] = true
 
     # game stuff
     memory["hasEverTouchedObelisk"] = false
@@ -450,6 +452,7 @@ func resetMemory():
     # POWERUPS
     memory["is_turn_based"] = 0
     memory["is_pseudo_turn_based"] = 0
+    memory["secret_bauble"] = 0
     # memory["spellbookPage"] = [] # we check if the key exists to see if we have it... -_-
     memory["can_force_respawn"] = 0
     memory["has_map_item"] = false

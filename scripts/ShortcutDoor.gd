@@ -17,5 +17,5 @@ func _ready():
 
     if global.demo_mode:
         self.path = "res://levels/EndlessFantasy/gd1/00000EndOfDemo.tscn"
-    elif not global.memory["has_teleported"]:
+    elif not global.memory["has_teleported"] and global.memory["has_map_item"]:
         self.path = "res://levels/EndlessFantasy/gd1TutorialDungeon/LiminalAngelFluteRoom.tscn"

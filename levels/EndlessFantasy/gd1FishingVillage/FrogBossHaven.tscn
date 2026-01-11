@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
@@ -7,7 +7,7 @@
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=5]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=6]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=7]
-[ext_resource path="res://levels/EndlessFantasy/PreBossFightMainLevelScript.gd" type="Script" id=8]
+[ext_resource path="res://scripts/levelScript.gd" type="Script" id=8]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=9]
 [ext_resource path="res://assets/npc_sheet0000.png" type="Texture" id=10]
 [ext_resource path="res://sceneObjects/GrandmaStatue.tscn" type="PackedScene" id=11]
@@ -34,7 +34,6 @@
 [ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=33]
 [ext_resource path="res://assets/backgrounds/holy_forest.png" type="Texture" id=34]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=35]
-[ext_resource path="res://sceneObjects/HeartMimic.tscn" type="PackedScene" id=36]
 [ext_resource path="res://assets/miniAdventures.png" type="Texture" id=37]
 [ext_resource path="res://assets/palettes/swamp_water_palette.png" type="Texture" id=38]
 [ext_resource path="res://assets/sounds/chesiremiao.wav" type="AudioStream" id=39]
@@ -370,7 +369,6 @@ tileset_type = 6
 has_spellbook_page = true
 is_turn_based = true
 spellbook_spells = [ 2, 1 ]
-boss_var_name = "angler_seaman_boss"
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 26 )]
 
@@ -631,9 +629,6 @@ is_extra_life = true
 
 [node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 33, 0 )
-
-[node name="HeartMimic" parent="Viewport/level" instance=ExtResource( 36 )]
-visible = false
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 6, 0 )

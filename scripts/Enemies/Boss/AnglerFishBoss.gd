@@ -113,11 +113,13 @@ func tryToDeleteCautionWarning():
 
 var preyTarget = null
 func _process(delta):
+    delta_time_dilation = global.SLOW_BOSS_MULTIPLIER if global.memory["secret_bauble"] and global.memory["secret_bauble_enabled"] else 1.0
+
     # ._process(delta) implicit
-    if boss_phase != BossPhase.WAKING_UP:
-        delta = delta * global.time_dilation_multiplier
-        secretAniPlayer.playback_speed = global.time_dilation_multiplier
-        weakPointAniPlayer.playback_speed = global.time_dilation_multiplier
+    if boss_phase != BossPhase.WAKING_UP and boss_phase != BossPhase.HURT and boss_phase != BossPhase.DEFEATED:
+        delta = delta * global.time_dilation_multiplier * delta_time_dilation
+        secretAniPlayer.playback_speed = global.time_dilation_multiplier * delta_time_dilation
+        weakPointAniPlayer.playback_speed = global.time_dilation_multiplier * delta_time_dilation
     else:
         secretAniPlayer.playback_speed = 1
         weakPointAniPlayer.playback_speed = 1
@@ -242,7 +244,7 @@ func _process(delta):
                 chargeSound.play()
     elif boss_phase == BossPhase.CHARGING_BACKWARDS:
         enableAndPositionCautionWarning()
-        walk_speed = 36
+        walk_speed = 48
         behavior_walking = true
         walk_direction.x = 1
         # if global_transform.origin.y - 2 > level.player.global_transform.origin.y:

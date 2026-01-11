@@ -551,7 +551,6 @@ can_nav_left = false
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false
-has_angel_statue = true
 
 [node name="Sprite3D" type="Sprite3D" parent="FishingVillage/AnglerFishBossRoom"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.89229, 0.587093, 0 )
@@ -584,6 +583,7 @@ can_nav_right = false
 can_nav_up = false
 can_nav_down = false
 kill_after_glitch = true
+has_angel_statue = true
 
 [node name="ToxicJungle" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 7, 0 )
@@ -724,7 +724,6 @@ can_nav_left = false
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false
-has_angel_statue = true
 
 [node name="Sprite3D" type="Sprite3D" parent="ToxicJungle/BabaYagaBossRoom"]
 transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, -0.004, 1 )
@@ -769,6 +768,7 @@ can_nav_right = false
 can_nav_up = false
 can_nav_down = false
 kill_after_glitch = true
+has_angel_statue = true
 
 [node name="CricketCaves" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 0 )
@@ -892,7 +892,6 @@ can_nav_left = false
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false
-has_angel_statue = true
 
 [node name="TheDoorBefore" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 4, 0, 0 )
@@ -905,6 +904,7 @@ can_nav_left = false
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false
+has_angel_statue = true
 
 [node name="CrystalTower" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
@@ -974,6 +974,7 @@ path = "res://levels/EndlessFantasy/gd1CrystalTower/preBossRoom.tscn"
 can_nav_left = false
 can_nav_up = false
 can_nav_down = false
+has_angel_statue = true
 
 [node name="BossLevel" parent="CrystalTower" instance=ExtResource( 3 )]
 transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1, 6, 11, -1 )
@@ -1001,7 +1002,6 @@ can_nav_right = false
 can_nav_up = false
 can_nav_down = false
 hide_me_from_map = true
-has_angel_statue = true
 
 [node name="BubblegloopSwamp" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 6, 0 )

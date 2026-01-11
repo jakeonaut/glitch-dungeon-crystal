@@ -73,9 +73,10 @@ func getMyVariable():
 func _process(delta):
     if not visible or boss_phase == BossPhase.NULL: return
 
-    if boss_phase != BossPhase.WAKEUP:
-        delta = delta * global.time_dilation_multiplier
-        secretAniPlayer.playback_speed = global.time_dilation_multiplier
+    delta_time_dilation = global.SLOW_BOSS_MULTIPLIER if global.memory["secret_bauble"] and global.memory["secret_bauble_enabled"] else 1.0
+    if boss_phase != BossPhase.WAKEUP and boss_phase != BossPhase.HURT and boss_phase != BossPhase.DEFEATED:
+        delta = delta * global.time_dilation_multiplier * delta_time_dilation
+        secretAniPlayer.playback_speed = global.time_dilation_multiplier * delta_time_dilation
     else:
         secretAniPlayer.playback_speed = 1
     

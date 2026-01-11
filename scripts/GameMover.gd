@@ -34,7 +34,6 @@ onready var smallInteractionArea = get_node("SmallInteractionArea") if has_node(
 onready var interactionArea = get_node("InteractionArea") if has_node("InteractionArea") else null
 onready var aniPlayer = get_node("AnimationPlayer") if has_node("AnimationPlayer") else null
 onready var bounceAniPlayer = get_node("BounceAnimationPlayer") if has_node("BounceAnimationPlayer") else null
-var animation_speed_multiplier = 1.0
 onready var mySprite = get_node("SpriteContainer/InnerSpriteContainer/Sprite3D") if has_node("SpriteContainer/InnerSpriteContainer/Sprite3D") else get_node("Sprite3D")
 
 var is_turn_based = false
@@ -203,10 +202,13 @@ func _ready():
 var secret_trueDelta = 0
 var should_process_respect_time_dilation = true
 var should_aniPlayer_respect_time_dilation = true
+
+var animation_speed_multiplier = 1.0
+var delta_time_dilation = 1.0
 func _process(delta):
   secret_trueDelta = delta
   if should_process_respect_time_dilation:
-    delta = delta * global.time_dilation_multiplier
+    delta = delta * global.time_dilation_multiplier * delta_time_dilation
 
   if mySprite.has_method("glitchyTrySetFrame"):
     mySprite.is_really_glitchy = is_really_glitchy 
@@ -214,7 +216,7 @@ func _process(delta):
   # rather than have to do this conditional check every time
   if aniPlayer:
     if should_aniPlayer_respect_time_dilation:
-      aniPlayer.playback_speed = global.time_dilation_multiplier * animation_speed_multiplier
+      aniPlayer.playback_speed = global.time_dilation_multiplier * animation_speed_multiplier * delta_time_dilation
     else:
       aniPlayer.playback_speed = animation_speed_multiplier
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
+[ext_resource path="res://scripts/levelScript.gd" type="Script" id=2]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=3]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=4]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=5]
@@ -21,7 +22,6 @@
 [ext_resource path="res://sceneObjects/Enemies/FanPlant.tscn" type="PackedScene" id=23]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=24]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=25]
-[ext_resource path="res://levels/EndlessFantasy/PreBossFightMainLevelScript.gd" type="Script" id=26]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=27]
 [ext_resource path="res://assets/palettes/pseudo_greyscale.png" type="Texture" id=28]
 [ext_resource path="res://sceneObjects/MushroomNPC.tscn" type="PackedScene" id=29]
@@ -31,7 +31,6 @@
 [ext_resource path="res://assets/backgrounds/shroom_layer_0.png" type="Texture" id=34]
 [ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=35]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=36]
-[ext_resource path="res://sceneObjects/HeartMimic.tscn" type="PackedScene" id=37]
 
 [sub_resource type="BoxShape" id=34]
 resource_local_to_scene = true
@@ -279,14 +278,13 @@ viewport_path = NodePath("Viewport2")
 [node name="Viewport" parent="." instance=ExtResource( 13 )]
 
 [node name="level" type="Node" parent="Viewport"]
-script = ExtResource( 26 )
+script = ExtResource( 2 )
 show_crt_effect = true
 starting_glitch_type = 3
 tileset_type = 7
 has_spellbook_page = true
 spellbook_spells = [ 3, 2 ]
 pacman_wrapping = true
-boss_var_name = "baba_yaga_boss"
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 11 )]
 
@@ -848,10 +846,6 @@ texture = ExtResource( 35 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -10 )
 material_override = SubResource( 82 )
 texture = ExtResource( 35 )
-
-[node name="HeartMimic" parent="Viewport/level" instance=ExtResource( 37 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.0677, 6.62774, 0 )
-visible = false
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 18, 0 )
