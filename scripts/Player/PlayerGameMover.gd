@@ -186,23 +186,23 @@ func _process(delta):
   if override_camera_y == null:
     cameraTarget.global_transform.origin.y = camera_target_y_pos + camera_y_offset
     if not global.pauseGame and not global.memory["is_turn_based"] and not global.memory["is_pseudo_turn_based"]:
-      if pressingMoveUp() and on_ground:
+      if pressingMoveUp() and on_ground and not (pressingMoveLeft() or pressingMoveRight() or justPressedDown() or justPressedJump() or Input.is_action_just_pressed("sub_action_button")):
         if holding_up_timer < holding_up_time_limit:
           holding_up_timer += (delta*11)
       else:
-        if not (holding_up_timer >= holding_up_time_limit and pressingMoveUp()):
-          holding_up_timer = 0
-        if pressingDown() and on_ground:
+        holding_up_timer = 0
+        if pressingDown() and on_ground and not (pressingMoveLeft() or pressingMoveRight() or Input.is_action_just_pressed("ui_up") or justPressedJump() or Input.is_action_just_pressed("sub_action_button")):
+          print("increment")
           if holding_down_timer < holding_down_time_limit:
             holding_down_timer += (delta*11)
         else:
-          if not (holding_down_timer >= holding_down_time_limit and pressingDown()):
-            holding_down_timer = 0
+          print("reset")
+          holding_down_timer = 0
 
       if holding_up_timer >= holding_up_time_limit:
-        cameraTarget.global_transform.origin.y += 10
+        cameraTarget.global_transform.origin.y += 15
       elif holding_down_timer >= holding_down_time_limit:
-        cameraTarget.global_transform.origin.y -= 10
+        cameraTarget.global_transform.origin.y -= 15
   else:
     cameraTarget.global_transform.origin.y = override_camera_y
 
