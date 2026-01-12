@@ -27,13 +27,13 @@ shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
 shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = true
-shader_param/enable_no_transparency = true
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
 shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 5
-shader_param/black_offset = 0
+shader_param/black_offset = 2
 shader_param/enable_glitch = true
 shader_param/enable_color_glitch = false
 shader_param/disable_glitch_dither = false
@@ -85,11 +85,12 @@ grav = 0
 stop_all_music = false
 display_textbox = false
 message = "NPC.Crystal.6"
+should_rotate = true
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.277278, 0.625 )
+transform = Transform( -0.996195, 0, -0.0871556, 0, 1, 0, 0.0871556, 0, -0.996195, 0, 0.277278, 0.625 )
 material_override = SubResource( 55 )
-pixel_size = 0.125
+pixel_size = 0.1
 texture = ExtResource( 13 )
 hframes = 12
 vframes = 10
@@ -143,6 +144,7 @@ volume_db = -10.0
 [node name="AbortSound" parent="NPC TextBox/TextBox" index="13"]
 stream = null
 script = ExtResource( 14 )
+is_mimic = false
 
 [node name="CollectSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )

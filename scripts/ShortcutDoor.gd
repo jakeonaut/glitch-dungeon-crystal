@@ -12,6 +12,12 @@ func _ready():
         yield(get_tree().create_timer(0.5), "timeout")
         level.summonSmokeClouds(self.global_transform.origin, 3, true, true)
         visible = true
+
+        if global.getLevelZoneThing("angel_statue") == null:
+            global.setLevelZoneThing("angel_statue", [
+                global.getDisplayTitle(level.getLevelZoneName(), level.getLevelName()),
+                level.getLevelName()
+            ])
     else:
         visible = false
 

@@ -11,30 +11,21 @@ onready var npc7 = weakref(get_node("NPC7"))
 onready var npc8 = weakref(get_node("NPC8"))
 onready var npc9 = weakref(get_node("NPC9"))
 onready var croneTeleportKeyTreasure = get_node("CroneTeleportKeyTreasure")
+onready var timeKeeper = get_node("TimeKeeper") if has_node("TimeKeeper") else null
 
 # @override
 func setUpRoomInitializationOverride():
-  if global.getLevelZoneThing("angel_statue") == null:
-    global.setLevelZoneThing("angel_statue", [
-      global.getDisplayTitle(self.getLevelZoneName(), self.getLevelName()),
-      self.getLevelName()
-    ])
+  if global.memory["priestess"] >= 1 and global.memory["priestess"] < 3 and global.memory["hard_mode"] == 0 and timeKeeper and not global.memory["secret_bauble"]:
+    timeKeeper.visible = false
+    yield(get_tree().create_timer(1.0), "timeout")
+    self.summonSmokeClouds(timeKeeper.global_transform.origin, 3, true, true)
+    timeKeeper.visible = true
+  elif timeKeeper:
+    timeKeeper.queue_free()
 
   if global.memory["has_beat_the_game"] > 0:
     croneTeleportKeyTreasure.visible = true
 
-  # if global.memory.has("spellbookPage"):
-  #   if door2.is_locked:
-  #     door2.animationPlayer.clear_queue()
-  #     door2.animationPlayer.stop()
-  #     door2.animationPlayer.play("doorOpen")
-  #     door2.is_locked = false
-  # else:
-  #   if not door2.is_locked:
-  #     door2.animationPlayer.clear_queue()
-  #     door2.animationPlayer.stop()
-  #     door2.animationPlayer.play("locked")
-  #     door2.is_locked = true
   if global.memory["world_of_ruin"] > 0 and babushkaCat.get_ref() != null:
     door2.lockMeUp(999)
     babushkaCat.get_ref().global_transform.origin.x = -1.035

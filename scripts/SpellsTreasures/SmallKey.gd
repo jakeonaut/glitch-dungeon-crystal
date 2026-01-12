@@ -2,6 +2,7 @@ extends "TreasureCollectable.gd"
 
 export var behavior_walking = true
 export var behavior_was_thrown = true
+export var should_rotate = false
 
 var land_count = 0
 var land_count_limit = 3
@@ -17,6 +18,10 @@ func _ready():
         visible = false
         landSound.volume_db = -80
         grav = 0
+
+func _process(delta):
+    if should_rotate:
+        mySprite.rotation_degrees.y += delta*77
 
 # @override
 func collideWithWall(local_lv):

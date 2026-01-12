@@ -29,7 +29,7 @@ func activateScript():
     # level.spawnKeyFollower(level.player.global_transform.origin)
     level.player.pauseInput = false
     level.player.aniPlayer.play("stand")
-    level.player.sayThis(tr("NPC.Crystal.6") + " +1\n")
+    # level.player.sayThis(tr("NPC.Crystal.6") + " +1\n")
     if not is_mimic:
         heart.okay_im_done = true
         heart.queue_free()

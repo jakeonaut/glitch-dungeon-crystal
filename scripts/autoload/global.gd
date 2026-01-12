@@ -312,7 +312,7 @@ var collectable_key_recently_got_time_limit = 40
 var malware_infected = false
 
 var time_dilation_multiplier = 1.0
-var SLOW_BOSS_MULTIPLIER = 0.6
+var SLOW_BOSS_MULTIPLIER = 0.5
 
 var mini_cube_crystal_pitch_min = 0.5
 var mini_cube_crystal_pitch_max = 2.0

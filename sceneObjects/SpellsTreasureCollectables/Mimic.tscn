@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=1]
 [ext_resource path="res://assets/treasureChest.png" type="Texture" id=2]
@@ -530,6 +530,7 @@ is_important = true
 is_really_important = true
 dont_recolor_me = true
 showYesNoOptions = true
+is_merchant = true
 
 [node name="CollisionShape" parent="MimicNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 20 )

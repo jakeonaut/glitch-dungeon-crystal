@@ -534,6 +534,7 @@ is_really_important = true
 can_move = false
 dont_recolor_me = true
 showYesNoOptions = true
+is_merchant = true
 
 [node name="CollisionShape" parent="MimicNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 20 )

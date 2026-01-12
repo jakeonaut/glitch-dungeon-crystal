@@ -101,6 +101,37 @@ func _ready():
 func getMyVariable():
     return global.memory["priestess"]
 
+var gameCamera = null
+func getGameCamera():
+    if gameCamera == null:
+        gameCamera = level.gameCamera
+    return gameCamera
+
+var cautionWarningRes = preload("res://sceneObjects/Enemies/Boss/CautionWarning.tscn")
+var cautionWarning = null
+func enableAndPositionCautionWarning():
+    if cautionWarning == null:
+        cautionWarning = cautionWarningRes.instance()
+        level.add_child(cautionWarning)
+    
+    var unprojectedPosition = getGameCamera().unproject_position(self.global_transform.origin)
+    if boss_phase == BossPhase.PREPARING_CHARGE:
+        unprojectedPosition.x = 1280 - 96
+    else:
+        if level.player.global_transform.origin.x > self.global_transform.origin.x:
+            unprojectedPosition.x = 96
+        else:
+            unprojectedPosition.x = 1280 - 96
+        
+    cautionWarning.global_transform.origin = getGameCamera().project_position(unprojectedPosition, 0)
+    cautionWarning.global_transform.origin.z = 10
+
+func tryToDeleteCautionWarning():
+    if cautionWarning != null:
+        level.remove_child(cautionWarning)
+        cautionWarning.queue_free()
+        cautionWarning = null
+
 func getHurt():
     mySprite.visible = true
     secretAniPlayer.stop()

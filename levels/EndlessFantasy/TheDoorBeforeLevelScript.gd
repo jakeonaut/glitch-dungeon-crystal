@@ -5,7 +5,7 @@ export(String, "angler_seaman_boss", "dogu_matryoshka_boss", "baba_yaga_boss") v
 
 # @override
 func setUpRoomInitializationOverride():
-  if global.memory[boss_var_name] >= 1 and global.memory["hard_mode"] == 0 and timeKeeper:
+  if global.memory[boss_var_name] >= 1 and global.memory[boss_var_name] < 3 and global.memory["hard_mode"] == 0 and timeKeeper and not global.memory["secret_bauble"]:
     timeKeeper.visible = false
     yield(get_tree().create_timer(1.0), "timeout")
     self.summonSmokeClouds(timeKeeper.global_transform.origin, 3, true, true)

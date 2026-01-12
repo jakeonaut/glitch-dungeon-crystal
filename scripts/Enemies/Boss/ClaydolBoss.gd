@@ -70,6 +70,31 @@ func isActive(debug = false):
 func getMyVariable():
     return global.memory["dogu_matryoshka_boss"]
 
+var cautionWarningRes = preload("res://sceneObjects/Enemies/Boss/CautionWarning.tscn")
+var cautionWarning = null
+func enableAndPositionCautionWarning():
+    if cautionWarning == null:
+        cautionWarning = cautionWarningRes.instance()
+        level.add_child(cautionWarning)
+    
+    var unprojectedPosition = getGameCamera().unproject_position(self.global_transform.origin)
+    if boss_phase == BossPhase.PREPARING_CHARGE:
+        unprojectedPosition.x = 1280 - 96
+    else:
+        if level.player.global_transform.origin.x > self.global_transform.origin.x:
+            unprojectedPosition.x = 96
+        else:
+            unprojectedPosition.x = 1280 - 96
+        
+    cautionWarning.global_transform.origin = getGameCamera().project_position(unprojectedPosition, 0)
+    cautionWarning.global_transform.origin.z = 10
+
+func tryToDeleteCautionWarning():
+    if cautionWarning != null:
+        level.remove_child(cautionWarning)
+        cautionWarning.queue_free()
+        cautionWarning = null
+
 func _process(delta):
     if not visible or boss_phase == BossPhase.NULL: return
 
@@ -198,7 +223,14 @@ func _process(delta):
                 global_transform.origin.y -= 4
                 spawnWeakEye()
         else:
-            pass
+            idle_stomp_timer += (delta*11)
+            if idle_stomp_timer >= idle_stomp_time_limit:
+                idle_stomp_timer = 0
+                level.gameCamera.miniShakeScreen()
+                var newBigRock = spawnFallingRock(global_transform.origin.x)
+                newBigRock.scale = Vector3(2, 2, 1)
+                newBigRock.is_big = true
+                myBigRock = weakref(newBigRock)
     elif boss_phase == BossPhase.HURT:
         if not secretAniPlayer.is_playing():
             dizzy_timer = 0
@@ -381,15 +413,13 @@ func landed():
         secretAniPlayer.queue("idleStomp")
         idle_stomp_timer = 0
         if big_rock_counter >= big_rock_count_max:
+            idle_stomp_timer = 0
             boss_phase = BossPhase.SPAWN_BIG_ROCK
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
-            secretAniPlayer.play("idleStomp")
+            secretAniPlayer.play("idleLand")
+            secretAniPlayer.queue("idleStomp")
             level.gameCamera.miniShakeScreen()
-            var newBigRock = spawnFallingRock(global_transform.origin.x)
-            newBigRock.scale = Vector3(2, 2, 1)
-            newBigRock.is_big = true
-            myBigRock = weakref(newBigRock)
 
         var tiles_underfoot = getTilesBelow(getLevelTiles())
         for tile_coords in tiles_underfoot:

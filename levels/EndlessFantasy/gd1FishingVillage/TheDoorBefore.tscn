@@ -228,7 +228,6 @@ frame = 27
 
 [node name="TimeKeeper" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.563, 9, 0 )
-num_gems_needed = 5
 
 [node name="Viewport2" parent="." instance=ExtResource( 17 )]
 

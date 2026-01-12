@@ -60,6 +60,7 @@ var which_three = []
 var gnash_charge_position = null
 var how_many_final_charges = 0
 var cautionWarning = null
+var which_direction = -1
 
 onready var spawnSound = get_node("Sounds/SpawnSound")
 func _ready():
@@ -98,12 +99,18 @@ func enableAndPositionCautionWarning():
     if cautionWarning == null:
         cautionWarning = cautionWarningRes.instance()
         level.add_child(cautionWarning)
-    var xPosition = level.player.global_transform.origin.x
-    if level.player.global_transform.origin.x > self.global_transform.origin.x:
-        xPosition -= 2
-    elif level.player.global_transform.origin.x < self.global_transform.origin.x:
-        xPosition += 2
-    cautionWarning.global_transform.origin = Vector3(xPosition, global_transform.origin.y, 0)
+    
+    var unprojectedPosition = getGameCamera().unproject_position(self.global_transform.origin)
+    if boss_phase == BossPhase.PREPARING_CHARGE:
+        unprojectedPosition.x = 1280 - 96
+    else:
+        if level.player.global_transform.origin.x > self.global_transform.origin.x:
+            unprojectedPosition.x = 96
+        else:
+            unprojectedPosition.x = 1280 - 96
+        
+    cautionWarning.global_transform.origin = getGameCamera().project_position(unprojectedPosition, 0)
+    cautionWarning.global_transform.origin.z = 10
 
 func tryToDeleteCautionWarning():
     if cautionWarning != null:
@@ -188,17 +195,19 @@ func _process(delta):
             weakPointAniPlayer.clear_queue()
             weakPointAniPlayer.play("idle")
     elif boss_phase == BossPhase.PREPARING_CHARGE:
+        which_direction = -1
         how_many_final_charges = 0
         if secretAniPlayer.assigned_animation != "openUp" and secretAniPlayer.assigned_animation != "openIdle":
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("openUp")
             secretAniPlayer.queue("openIdle")
-        # this position is stupid and specific to the level I'm in... oh well
-        moveToSpecificPosition(delta, Vector3(65, level.player.global_transform.origin.y, 0), 1.5, false)
         idle_timer += (delta*11)
-        if idle_timer >= charging_time_limit - 15:
+        if idle_timer >= charging_time_limit - 45:
             enableAndPositionCautionWarning()
+        if idle_timer < charging_time_limit - 15:
+            # this position is stupid and specific to the level I'm in... oh well
+            moveToSpecificPosition(delta, Vector3(70, level.player.global_transform.origin.y, 0), 1.5, false)
         if idle_timer >= charging_time_limit:
             idle_timer = 0
             boss_phase = BossPhase.CHARGING
@@ -207,6 +216,7 @@ func _process(delta):
             secretAniPlayer.play("charging")
             chargeSound.play()
     elif boss_phase == BossPhase.CHARGING:
+        which_direction = -1
         enableAndPositionCautionWarning()
         behavior_walking = true
         walk_speed = 24
@@ -242,16 +252,20 @@ func _process(delta):
                 crystals.translation.z = 2.13 # from -2.13
                 mySprite.translation.z = 2 # from -2
                 chargeSound.play()
+                secretAniPlayer.stop()
+                secretAniPlayer.clear_queue()
+                secretAniPlayer.play("charging_backwards")
     elif boss_phase == BossPhase.CHARGING_BACKWARDS:
+        which_direction = 1
         enableAndPositionCautionWarning()
-        walk_speed = 48
+        walk_speed = 56
         behavior_walking = true
         walk_direction.x = 1
         # if global_transform.origin.y - 2 > level.player.global_transform.origin.y:
         #     global_transform.origin.y -= delta
         # elif global_transform.origin.y + 2 < level.player.global_transform.origin.y:
         #     global_transform.origin.y += delta
-        if global_transform.origin.x >= 66:
+        if global_transform.origin.x >= 68:
             if how_many_final_charges >= num_hits:
                 behavior_walking = false
                 dir = Vector3(0, 0, 0)
@@ -276,6 +290,9 @@ func _process(delta):
                 dangleContainer.translation.z = 0 # from 6
                 crystals.translation.z = -2.13 # from 2.13
                 mySprite.translation.z = -2 # from 2
+                secretAniPlayer.stop()
+                secretAniPlayer.clear_queue()
+                secretAniPlayer.play("charging")
                 chargeSound.play()
     elif boss_phase == BossPhase.GNASH_ATTACK_PREP:
         idle_timer += (delta*11)
@@ -353,10 +370,14 @@ func _process(delta):
             idle_timer = 0
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
-            secretAniPlayer.play("idle")
+            if which_direction == 1:
+                secretAniPlayer.queue("turnRightToLeft")
+            secretAniPlayer.queue("idle")
             weakPointAniPlayer.stop()
             weakPointAniPlayer.clear_queue()
-            weakPointAniPlayer.play("idle")
+            if which_direction == 1:
+                weakPointAniPlayer.queue("turnRightToLeft")
+            weakPointAniPlayer.queue("idle")
     elif boss_phase == BossPhase.HURT:
         tryToDeleteCautionWarning()
         has_already_hidden = false

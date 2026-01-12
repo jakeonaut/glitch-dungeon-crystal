@@ -1114,6 +1114,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -2, 0 )
 grav = 0
 bbText = "NPC.LostSoul.1"
 can_move = false
+is_merchant = true
 
 [node name="CollisionShape" parent="Viewport/level/LostSoulsNPC/MimicNPC/SmallInteractionArea" index="0"]
 shape = SubResource( 233 )
