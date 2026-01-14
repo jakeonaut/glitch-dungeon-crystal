@@ -19,6 +19,10 @@ onready var secretAniPlayer = get_node("SecretAniPlayer")
 func _ready():
   scared_timer = scared_time_limit
 
+# @override
+func tryDieToOffscreenCamera(_delta):
+  return
+
 func _process(delta):
   # ._process(delta) implicit
   if not visible or global.pauseGame: return
@@ -78,11 +82,20 @@ func _process(delta):
       if mySprite.should_animate: secretAniPlayer.play("shy")
       return
     mySprite.flip_h = (level.player.global_transform.origin.x < global_transform.origin.x)
-    if mySprite.flip_h != level.player.mySprite.flip_h:
-      if mySprite.should_animate: secretAniPlayer.play("shy")
+    if mySprite.flip_h != level.player.mySprite.flip_h or level.player.smallInteractionArea.is_touching_save_point:
+      var distance = level.player.global_transform.origin.distance_to(self.global_transform.origin)
+      if distance < 18:
+        var step = 1
+        var directionVector = (level.player.global_transform.origin - global_transform.origin).normalized()
+        global_transform.origin -= directionVector * (delta*step)
+      if mySprite.should_animate:
+        secretAniPlayer.play("shy")
+        mySprite.rotation_degrees.y = 180
       return
       
-    if not mySprite.should_animate: secretAniPlayer.play("scary")
+    if not mySprite.should_animate:
+      secretAniPlayer.play("scary")
+      mySprite.rotation_degrees.y = 0
     var step = 2
     var directionVector = (level.player.global_transform.origin - global_transform.origin).normalized()
     global_transform.origin += directionVector * (delta*step)
@@ -133,6 +146,7 @@ func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
     just_a_figment = true
     mySprite.material_override.set_shader_param("enable_glitch_3d", false)
     .getSmacked(broom_origin, silently, is_local_broom)
+    mySprite.rotation_degrees.y = 0
     secretAniPlayer.play("scary")
 
 # func passiveActivate(_delta, is_player, _is_local_broom = false):

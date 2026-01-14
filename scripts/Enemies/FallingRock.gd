@@ -5,6 +5,9 @@ onready var particleSprite1 = get_node("ParticleSprite1")
 onready var particleSprite2 = get_node("ParticleSprite2")
 onready var particleSprite3 = get_node("ParticleSprite3")
 onready var particleSprite4 = get_node("ParticleSprite4")
+onready var cautionWarning = weakref(get_node("CautionWarning"))
+var caution_timer = 0
+var caution_time_limit = 5
 var is_big = false
 
 func _ready():
@@ -24,7 +27,34 @@ func _process(delta):
   # ._process(delta) implicit
   if not visible: return
   
-  delta = delta * global.time_dilation_multiplier
+  delta_time_dilation = global.SLOW_BOSS_MULTIPLIER if global.memory["secret_bauble"] and global.memory["secret_bauble_enabled"] else 1.0
+  delta = delta * global.time_dilation_multiplier * delta_time_dilation
+  secretAniPlayer.playback_speed = delta_time_dilation
+
+  if cautionWarning != null and cautionWarning.get_ref() != null and not mySprite.visible:
+    grav = 0
+    caution_timer += (delta * 11)
+    placeCautionWarning()
+    if caution_timer >= caution_time_limit:
+      mySprite.visible = true
+      var prevOrigin = cautionWarning.get_ref().global_transform.origin
+      self.remove_child(cautionWarning.get_ref())
+      level.add_child(cautionWarning.get_ref())
+      cautionWarning.get_ref().global_transform.origin = prevOrigin
+      cautionWarning.get_ref().aniPlayer.stop()
+      cautionWarning.get_ref().aniPlayer.clear_queue()
+      cautionWarning.get_ref().aniPlayer.play("byebye")
+      cautionWarning = null
+  elif cautionWarning == null and mySprite.visible:
+    grav = 30
+
+func placeCautionWarning():
+  if cautionWarning == null or cautionWarning.get_ref() == null:
+    return
+  var unprojectedPosition = getGameCamera().unproject_position(self.global_transform.origin + Vector3(0, 1, 0))
+  unprojectedPosition.y = max(32, unprojectedPosition.y)
+  cautionWarning.get_ref().global_transform.origin = getGameCamera().project_position(unprojectedPosition, 0)
+  cautionWarning.get_ref().global_transform.origin.z = 10
 
 func isActive(_debug = false):
     return visible and mySprite.visible

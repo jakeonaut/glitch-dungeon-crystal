@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/sprites/objects.png" type="Texture" id=10]
 [ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=11]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=12]
+[ext_resource path="res://sceneObjects/Enemies/Boss/CautionWarning.tscn" type="PackedScene" id=13]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -220,7 +221,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ true ]
+"values": [ false ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("ParticleSprite1:visible")
@@ -697,9 +698,10 @@ tracks/0/keys = {
 [node name="FallingRock" type="Spatial"]
 script = ExtResource( 9 )
 true_terminal_vel = 24
-grav = 30
+grav = 0
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
+visible = false
 material_override = SubResource( 1 )
 pixel_size = 0.15
 texture = ExtResource( 10 )
@@ -764,27 +766,27 @@ should_animate = false
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -13.0
 pitch_scale = 0.5
+bus = "Sfx"
 
 [node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -30.0
 pitch_scale = 1.5
+bus = "Sfx"
 
 [node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 6 )
 volume_db = -15.0
+bus = "Sfx"
 
 [node name="StartEvolveSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 5 )
 volume_db = -10.0
 pitch_scale = 0.5
+bus = "Sfx"
 
 [node name="PassiveInteractionArea" type="Area" parent="." groups=["enemies"]]
 script = ExtResource( 12 )
@@ -798,3 +800,7 @@ anims/RESET = SubResource( 4 )
 anims/crackAndShatter = SubResource( 7 )
 anims/fallClockwise = SubResource( 5 )
 anims/fallCounterClockwise = SubResource( 6 )
+
+[node name="CautionWarning" parent="." instance=ExtResource( 13 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 1, 0 )
+is_fast = true

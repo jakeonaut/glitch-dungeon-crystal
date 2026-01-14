@@ -499,18 +499,25 @@ func isNeighborOfInfectedSpikes(neighborCoords):
       return true
   return false
 
-func tryToSayTidy():
+func isTidy():
   var spike_id_array = [51, 52, 53, 54, 55, 329, 330, 331, 332, 333]
   for spike_id in spike_id_array:
     if get_used_cells_by_item(spike_id).size() > 0:
-      return
+      return false
   if level.get_tree().get_nodes_in_group("nonviolent_enemies").size() > 0:
-    return
+    return false
   if level.get_tree().get_nodes_in_group("weak_enemies").size() > 0:
-    return
+    return false
   if level.get_tree().get_nodes_in_group("enemies").size() > 0:
-    return
-  level.displayMessageText(tr("UI.Alert.2"))
+    return false
+  var whichBoss = level.getBoss()
+  if whichBoss != null:
+    return false
+  return true
+
+func tryToSayTidy():
+  if isTidy():
+    level.displayMessageText(tr("UI.Alert.2"))
 
 func tryToCountAndIncrementTotalGlitchTiles():
   var levelZone = level.getLevelZoneName()

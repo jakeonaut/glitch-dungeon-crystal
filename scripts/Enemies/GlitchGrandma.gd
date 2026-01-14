@@ -49,6 +49,7 @@ func glitchSwitchSprite(_delta):
 
 func reallyDie():
   level.summonSmokeClouds(global_transform.origin, 3, true, true)
+  level.levelTiles.tryToSayTidy()
   queue_free()
 
 # @override

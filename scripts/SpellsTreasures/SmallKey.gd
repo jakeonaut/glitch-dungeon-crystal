@@ -6,6 +6,7 @@ export var should_rotate = false
 
 var land_count = 0
 var land_count_limit = 3
+var y_pos_to_stop = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,6 +23,10 @@ func _ready():
 func _process(delta):
     if should_rotate:
         mySprite.rotation_degrees.y += delta*77
+    if y_pos_to_stop != null and global_transform.origin.y <= y_pos_to_stop:
+        global_transform.origin.y = y_pos_to_stop
+        on_ground = true
+        landed()
 
 # @override
 func collideWithWall(local_lv):
@@ -54,6 +59,9 @@ func landed():
     land_count += 1
     if land_count >= land_count_limit:
         behavior_was_thrown = false
+        if y_pos_to_stop != null:
+            on_ground = true
+            grav = 0
 
 func collectMe():
     get_node("SecretAnimationPlayer").play("GET")

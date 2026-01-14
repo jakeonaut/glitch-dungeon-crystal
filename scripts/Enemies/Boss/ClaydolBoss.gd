@@ -72,28 +72,33 @@ func getMyVariable():
 
 var cautionWarningRes = preload("res://sceneObjects/Enemies/Boss/CautionWarning.tscn")
 var cautionWarning = null
+var rememberedCautionWarningPos = null
 func enableAndPositionCautionWarning():
     if cautionWarning == null:
-        cautionWarning = cautionWarningRes.instance()
-        level.add_child(cautionWarning)
+        cautionWarning = weakref(cautionWarningRes.instance())
+        level.add_child(cautionWarning.get_ref())
     
-    var unprojectedPosition = getGameCamera().unproject_position(self.global_transform.origin)
-    if boss_phase == BossPhase.PREPARING_CHARGE:
-        unprojectedPosition.x = 1280 - 96
-    else:
-        if level.player.global_transform.origin.x > self.global_transform.origin.x:
-            unprojectedPosition.x = 96
+    var unprojectedPosition = getGameCamera().unproject_position(Vector3(8, self.global_transform.origin.y + 0, 0))
+    if boss_phase == BossPhase.START_DRILL_ATTACK or boss_phase == BossPhase.DRILL_DREIDEL_SPIN:
+        if rememberedCautionWarningPos == null:
+            rememberedCautionWarningPos = unprojectedPosition
         else:
-            unprojectedPosition.x = 1280 - 96
+            unprojectedPosition = rememberedCautionWarningPos
+        cautionWarning.get_ref().scale = Vector3(1.5, 1.5, 1)
+    elif boss_phase == BossPhase.IDLE_STOMP:
+        unprojectedPosition = getGameCamera().unproject_position(self.global_transform.origin)
+        cautionWarning.get_ref().scale = Vector3(1, 1, 1)
         
-    cautionWarning.global_transform.origin = getGameCamera().project_position(unprojectedPosition, 0)
-    cautionWarning.global_transform.origin.z = 10
+    cautionWarning.get_ref().global_transform.origin = getGameCamera().project_position(unprojectedPosition, 0)
+    cautionWarning.get_ref().global_transform.origin.z = 10
 
 func tryToDeleteCautionWarning():
-    if cautionWarning != null:
-        level.remove_child(cautionWarning)
-        cautionWarning.queue_free()
+    if cautionWarning != null and cautionWarning.get_ref() != null:
+        cautionWarning.get_ref().aniPlayer.stop()
+        cautionWarning.get_ref().aniPlayer.clear_queue()
+        cautionWarning.get_ref().aniPlayer.play("byebye")
         cautionWarning = null
+        rememberedCautionWarningPos = null
 
 func _process(delta):
     if not visible or boss_phase == BossPhase.NULL: return
@@ -185,6 +190,7 @@ func _process(delta):
             secretAniPlayer.play("idleStomp")
             idle_stomp_timer = 0
     elif boss_phase == BossPhase.IDLE_STOMP:
+        # enableAndPositionCautionWarning()
         behavior_walking = false
         behavior_should_fall_rocks = ("idleStomp" in secretAniPlayer.assigned_animation) or ("waddle" in secretAniPlayer.assigned_animation)
         if behavior_should_fall_rocks:
@@ -215,6 +221,7 @@ func _process(delta):
                 bigRock.is_big = false
                 bigRock.landed()
                 myBigRock = null
+                tryToDeleteCautionWarning()
                 secretAniPlayer.stop()
                 secretAniPlayer.clear_queue()
                 secretAniPlayer.play("dizzy")
@@ -271,6 +278,7 @@ func _process(delta):
                 secretAniPlayer.clear_queue()
                 secretAniPlayer.play("jumpFallEvil")
     elif boss_phase == BossPhase.START_DRILL_ATTACK:
+        enableAndPositionCautionWarning()
         if not secretAniPlayer.is_playing():
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
@@ -279,6 +287,7 @@ func _process(delta):
     elif boss_phase == BossPhase.DRILL_FALL:
         pass
     elif boss_phase == BossPhase.DRILL_DREIDEL_SPIN:
+        enableAndPositionCautionWarning()
         smokeCloudTimer += (delta*11)
         if smokeCloudTimer >= 1:
             smokeCloudTimer = 0
@@ -303,6 +312,7 @@ func _process(delta):
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("idleStand")
+            tryToDeleteCautionWarning()
             behavior_should_drill = false
             boss_phase = BossPhase.IDLE
             spawnWorm()
@@ -336,6 +346,7 @@ func queueUpAJump():
     secretBounceAniPlayer.clear_queue()
     secretBounceAniPlayer.play("jumpSquat")
     boss_phase = BossPhase.JUMP_SQUAT
+    tryToDeleteCautionWarning()
 
 func unsmack():
     .unsmack()
@@ -544,6 +555,7 @@ func spawnFallingRock(specific_x = null):
     else:
         fallingRock.global_transform.origin.x = randi() % 34 - 7 # -7 to 24
     fallingRock.global_transform.origin.y = 16
+    fallingRock.get_node("CautionWarning").scale = Vector3(0.7, 0.7, 1)
     return fallingRock
 
 var ghostEnemies = []
@@ -568,6 +580,7 @@ func spawnWorm():
     level.add_child(worm)
     worm.global_transform.origin.x = self.global_transform.origin.x
     worm.global_transform.origin.y = self.global_transform.origin.y + 13
+    worm.global_transform.origin.z = 0
 
 func spawnWeakEye():
     var weakEye = weakEyeRes.instance()
@@ -629,11 +642,14 @@ func okayImDead():
     global.pauseGame = false
     global.shouldRenderAsCinematic = false
 
+    level.gameCamera.initial_size = 30
+    level.gameCamera.zoomed_size = 30
     var newRealCrystal = crystalGeodeRes.instance()
     level.add_child(newRealCrystal)
     newRealCrystal.global_transform.origin = Vector3(8, -2, 0)
     level.summonSmokeClouds(newRealCrystal.global_transform.origin, 3, true, true, false)
     # level.door.visible = true
+    level.levelTiles.tryToSayTidy()
     queue_free()
 
 func updateFallthroughSolids():

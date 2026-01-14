@@ -80,10 +80,17 @@ func spawnHeartContainer():
   level.add_child(newHeartContainer)
   newHeartContainer.global_transform.origin = self.global_transform.origin
   newHeartContainer.global_transform.origin.y += 2
-  newHeartContainer.on_ground = true
+  newHeartContainer.y_pos_to_stop = newHeartContainer.global_transform.origin.y
+  var jump_val = 36
+  newHeartContainer.grav = 15
+  newHeartContainer.linear_velocity.y = jump_val
+  newHeartContainer.lv.y = jump_val
+  newHeartContainer.vv = newHeartContainer.up.dot(newHeartContainer.lv)
+  newHeartContainer.on_ground = false
   have_i_spawned_heart = true
 
 func _process(delta):
+  ignorePhysics = global.hasGottenLevelGeode or global.hasLevelGeodeBeenSmacked
   is_active = not global.hasGottenLevelGeode and not global.hasLevelGeodeBeenSmacked
   if render_cane:
     processBroomRenderLogic(delta)

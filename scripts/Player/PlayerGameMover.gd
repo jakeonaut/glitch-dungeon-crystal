@@ -160,7 +160,7 @@ func _process(delta):
   elif glitch_form == global.GlitchForm.FEATHER and (pressingJump() or pressingMoveUp()) and not on_ground and feather_jump_timer > feather_jump_time_limit / 3:
     spawnSparkles(delta)
   elif glitch_form == global.GlitchForm.LADDER and was_walking_into_wall:
-    spawnSparkles(delta)
+    spawnSparkles(delta * 1.5)
   elif glitch_form == global.GlitchForm.INVISIBLE:
     pass
   else:
@@ -192,11 +192,9 @@ func _process(delta):
       else:
         holding_up_timer = 0
         if pressingDown() and on_ground and not (pressingMoveLeft() or pressingMoveRight() or Input.is_action_just_pressed("ui_up") or justPressedJump() or Input.is_action_just_pressed("sub_action_button")):
-          print("increment")
           if holding_down_timer < holding_down_time_limit:
             holding_down_timer += (delta*11)
         else:
-          print("reset")
           holding_down_timer = 0
 
       if holding_up_timer >= holding_up_time_limit:

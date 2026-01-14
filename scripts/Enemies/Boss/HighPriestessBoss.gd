@@ -111,8 +111,8 @@ var cautionWarningRes = preload("res://sceneObjects/Enemies/Boss/CautionWarning.
 var cautionWarning = null
 func enableAndPositionCautionWarning():
     if cautionWarning == null:
-        cautionWarning = cautionWarningRes.instance()
-        level.add_child(cautionWarning)
+        cautionWarning = weakref(cautionWarningRes.instance())
+        level.add_child(cautionWarning.get_ref())
     
     var unprojectedPosition = getGameCamera().unproject_position(self.global_transform.origin)
     if boss_phase == BossPhase.PREPARING_CHARGE:
@@ -123,13 +123,14 @@ func enableAndPositionCautionWarning():
         else:
             unprojectedPosition.x = 1280 - 96
         
-    cautionWarning.global_transform.origin = getGameCamera().project_position(unprojectedPosition, 0)
-    cautionWarning.global_transform.origin.z = 10
+    cautionWarning.get_ref().global_transform.origin = getGameCamera().project_position(unprojectedPosition, 0)
+    cautionWarning.get_ref().global_transform.origin.z = 10
 
 func tryToDeleteCautionWarning():
-    if cautionWarning != null:
-        level.remove_child(cautionWarning)
-        cautionWarning.queue_free()
+    if cautionWarning != null and cautionWarning.get_ref() != null:
+        cautionWarning.get_ref().aniPlayer.stop()
+        cautionWarning.get_ref().aniPlayer.clear_queue()
+        cautionWarning.get_ref().aniPlayer.play("byebye")
         cautionWarning = null
 
 func getHurt():

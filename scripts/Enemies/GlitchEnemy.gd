@@ -615,6 +615,7 @@ func tryDieToBody():
         var areaParent = area.get_parent()
         if area.is_in_group("corporeal_body") and areaParent.has_method("isActive") and areaParent.isActive() and areaParent.visible:
             level.summonSmokeClouds(global_transform.origin, 3)
+            level.levelTiles.tryToSayTidy()
             queue_free()
 
 func bulletTryDieToSolids():
@@ -658,6 +659,7 @@ func actuallyDieToOffscreenCamera(_delta):
     if is_static_in_level:
         setGlobalMemoryOfHasBeenDefeated()
         trySpawnACrystal()
+    level.levelTiles.tryToSayTidy()
     queue_free()
     
 var override_am_i_in_range_of_player = false
@@ -675,6 +677,7 @@ func processPhysics(delta):
 
 func processDeath():
     if dieSound == null or not dieSound.is_playing():
+        level.levelTiles.tryToSayTidy()
         queue_free()
 
 # func glitchSwitchSprite(delta):

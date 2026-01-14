@@ -94,6 +94,7 @@ func passiveActivate(_delta, _is_player, _is_local_broom = false):
 func processDeath():
     if not visible: return
     if not myOtherSprite.visible:
+        level.levelTiles.tryToSayTidy()
         queue_free()
         
 # @override

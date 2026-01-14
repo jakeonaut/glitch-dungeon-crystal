@@ -58,6 +58,7 @@ func processDeath():
   if not dieSound.is_playing():
     no_longer_glitched = true
     pauseSelf = false
+    level.levelTiles.tryToSayTidy()
     
 func ouchies(_broom_origin):
   .ouchies(_broom_origin)

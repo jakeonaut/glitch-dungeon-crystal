@@ -92,6 +92,7 @@ func _process(delta):
     mySprite.material_override.set_shader_param("opacity", opacity)
     hatSprite.material_override.set_shader_param("opacity", opacity)
     if opacity < 0:
+      level.levelTiles.tryToSayTidy()
       queue_free()
   elif crow_state == CrowState.NOTICED_PLAYER:
     mySprite.flip_h = level.player.global_transform.origin.x < self.global_transform.origin.x

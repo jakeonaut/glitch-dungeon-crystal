@@ -81,7 +81,7 @@ radius = 0.8
 [node name="HeartContainer" type="Spatial"]
 script = ExtResource( 15 )
 true_terminal_vel = 8
-grav = 0
+grav = 30
 stop_all_music = false
 display_textbox = false
 message = "NPC.Crystal.6"
@@ -90,7 +90,7 @@ should_rotate = true
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( -0.996195, 0, -0.0871556, 0, 1, 0, 0.0871556, 0, -0.996195, 0, 0.277278, 0.625 )
 material_override = SubResource( 55 )
-pixel_size = 0.1
+pixel_size = 0.125
 texture = ExtResource( 13 )
 hframes = 12
 vframes = 10

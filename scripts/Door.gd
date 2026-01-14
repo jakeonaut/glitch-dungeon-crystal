@@ -196,10 +196,16 @@ func _process(delta):
         newWeakEye.global_transform.origin.y += ((4 * weakeye_direction) if weakeye_direction == 1 or weakeye_direction == -1 else 4)
         newWeakEye.reenemize(true)
         weakEyeRef = weakref(newWeakEye)
-    elif weakEyeRef == null or weakEyeRef.get_ref() == null or weakEyeRef.get_ref().am_i_dying:
+    elif level.levelTiles.isTidy():
       startDoorUnlock()
       is_locked = false
       locked_to_weakeye = false
+  if is_locked and key_type == global.KeyItem.CRYSTAL:
+    var has_special_key = global.memory["clean_crystals"] >= num_keys_unlock
+    if has_special_key and global.hasGottenLevelGeode:
+      startDoorUnlock()
+      is_locked = false
+
   if is_passive:
     mySprite.visible = false
     mySprite2.visible = false
@@ -385,6 +391,8 @@ func activate(is_player, _is_local_broom = false):
           npc.activate(is_player)
 
 func unpause():
+  if global.hasGottenLevelGeode or global.hasLevelGeodeBeenSmacked:
+    return
   global.pauseMoveInput = false
 
 var is_unlocking = false
@@ -414,7 +422,7 @@ func startDoorUnlock():
   npc.is_active = false
   is_locked = false
   setGlobalMemoryOfHasUnlocked()
-  if locked_to_monsters or locked_to_weakeye:
+  if locked_to_monsters or locked_to_weakeye or key_type == global.KeyItem.CRYSTAL:
     npc.textBox.hideTextbox()
     animationPlayer.clear_queue()
     animationPlayer.stop()

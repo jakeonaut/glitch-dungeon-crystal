@@ -6299,7 +6299,7 @@ vframes = 6
 frame = 27
 
 [node name="ClaydolShortcutDoor" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.91075, -24.0493, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9108, -24.0493, 0 )
 visible = false
 script = ExtResource( 44 )
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/TheDoorBefore.tscn"
@@ -6316,7 +6316,7 @@ vframes = 6
 frame = 27
 
 [node name="ClaydolShortcutDoor2" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.91075, -37.4493, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9108, -37.4493, 0 )
 visible = false
 script = ExtResource( 44 )
 path = "res://levels/EndlessFantasy/gd1ShiftingSandLand/ClaydolBossRoom.tscn"
@@ -6431,7 +6431,7 @@ flip_v = true
 mesh = SubResource( 424 )
 
 [node name="MeshInstance2" parent="UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [editable path="Viewport/level/GameCamera"]
 [editable path="Viewport/level/Player"]

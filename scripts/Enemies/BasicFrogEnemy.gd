@@ -348,6 +348,7 @@ func ouchies(broom_origin):
     degaussAniPlayer.play("degauss")
   else:
     mySprite.get_material_override().set_shader_param("offset", 0)
+  level.levelTiles.tryToSayTidy()
   if dieSound and not dieSound.is_playing():
     dieSound.pitch_scale = rand_range(0.8, 1.2)
     dieSound.play()
