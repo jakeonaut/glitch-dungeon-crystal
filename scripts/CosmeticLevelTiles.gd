@@ -1,11 +1,13 @@
 extends GridMap
 
 # resources is loaded at compile time with preload
+var test_all_cosmetic_tiles = preload("res://sceneObjects/tiles/test_all_cosmetic_tiles.tres")
 var grey_cosmetic_tiles = preload("res://sceneObjects/tiles/grey_cosmetic_tiles.tres")
 var green_cosmetic_tiles = preload("res://sceneObjects/tiles/green_cosmetic_tiles.tres")
 var red_cosmetic_tiles = preload("res://sceneObjects/tiles/red_cosmetic_tiles.tres")
 var yellow_cosmetic_tiles = preload("res://sceneObjects/tiles/yellow_cosmetic_tiles.tres")
 
+var tileset_type_color = global.GlitchForm.NORMAL
 var tile_name_dict = {}
 
 #########################################################
@@ -14,84 +16,62 @@ var tile_name_dict = {}
 #########################################################
 #########################################################
 
-func setTileNameNum(newName, num, cell_index):
-    if num != 0:
-        newName = newName + str(num+1) # 0 index, so add one
+func setTileNameNum(newName, cell_index):
     var new_tile_type = mesh_library.find_item_by_name(newName)
     set_cell_item(cell_index.x, cell_index.y, cell_index.z, new_tile_type)
+    tile_name_dict[cell_index] = newName
 
-func setTileset(tileset_type, properly_set_tiles = true):
-    if tileset_type == global.TilesetType.HOUSE or tileset_type == global.TilesetType.POISON_HOUSE:
-        set_mesh_library(red_cosmetic_tiles)
-    elif tileset_type == global.TilesetType.FOREST or tileset_type == global.TilesetType.POISON_FOREST or tileset_type == global.TilesetType.AUTUMN_FOREST:
-        set_mesh_library(green_cosmetic_tiles)
-    elif tileset_type == global.TilesetType.DESERT:
-        set_mesh_library(yellow_cosmetic_tiles)
-    elif tileset_type == global.TilesetType.BEACH:
-        set_mesh_library(green_cosmetic_tiles)
-    elif tileset_type == global.TilesetType.ALIEN:
-        set_mesh_library(yellow_cosmetic_tiles)
+func setTileset(_tileset_type, properly_set_tiles = true):
+    set_mesh_library(test_all_cosmetic_tiles)
+    # if tileset_type == global.TilesetType.HOUSE or tileset_type == global.TilesetType.POISON_HOUSE:
+    #     set_mesh_library(red_cosmetic_tiles)
+    # elif tileset_type == global.TilesetType.FOREST or tileset_type == global.TilesetType.POISON_FOREST or tileset_type == global.TilesetType.AUTUMN_FOREST:
+    #     set_mesh_library(green_cosmetic_tiles)
+    # elif tileset_type == global.TilesetType.DESERT:
+    #     set_mesh_library(yellow_cosmetic_tiles)
+    # elif tileset_type == global.TilesetType.BEACH:
+    #     set_mesh_library(green_cosmetic_tiles)
+    # elif tileset_type == global.TilesetType.ALIEN:
+    #     set_mesh_library(yellow_cosmetic_tiles)
     
     if properly_set_tiles:
         properlySetTiles()
 
-func _ready():
+func buildTilesFromScratch(color_suffix_glitch):
     var cell_indices = get_used_cells()
     for i in range(len(cell_indices)):
         var cell_index = cell_indices[i]
         var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
         var tile_name = mesh_library.get_item_name(tile_type)
         if tile_name == "Column":
-            setTileNameNum("Column", 0, cell_index)
-            tile_name_dict[cell_index] = "Column"
-            setTileNameNum("ColumnTopRight", 0, Vector3(cell_index.x+1, cell_index.y, cell_index.z))
-            tile_name_dict[Vector3(cell_index.x+1, cell_index.y, cell_index.z)] = "ColumnTopRight"
-            setTileNameNum("ColumnMidTopLeft", 0, Vector3(cell_index.x, cell_index.y-1, cell_index.z))
-            tile_name_dict[Vector3(cell_index.x, cell_index.y-1, cell_index.z)] = "ColumnMidTopLeft"
-            setTileNameNum("ColumnMidTopRight", 0, Vector3(cell_index.x+1, cell_index.y-1, cell_index.z))
-            tile_name_dict[Vector3(cell_index.x+1, cell_index.y-1, cell_index.z)] = "ColumnMidTopRight"
-            setTileNameNum("ColumnMidLeft", 0, Vector3(cell_index.x, cell_index.y-2, cell_index.z))
-            tile_name_dict[Vector3(cell_index.x, cell_index.y-2, cell_index.z)] = "ColumnMidLeft"
-            setTileNameNum("ColumnMidRight", 0, Vector3(cell_index.x+1, cell_index.y-2, cell_index.z))
-            tile_name_dict[Vector3(cell_index.x+1, cell_index.y-2, cell_index.z)] = "ColumnMidRight"
-            setTileNameNum("ColumnMidBotLeft", 0, Vector3(cell_index.x, cell_index.y-3, cell_index.z))
-            tile_name_dict[Vector3(cell_index.x, cell_index.y-3, cell_index.z)] = "ColumnMidBotLeft"
-            setTileNameNum("ColumnMidBotRight", 0, Vector3(cell_index.x+1, cell_index.y-3, cell_index.z))
-            tile_name_dict[Vector3(cell_index.x+1, cell_index.y-3, cell_index.z)] = "ColumnMidBotRight"
-            setTileNameNum("ColumnBotLeft", 0, Vector3(cell_index.x, cell_index.y-4, cell_index.z))
-            tile_name_dict[Vector3(cell_index.x, cell_index.y-4, cell_index.z)] = "ColumnBotLeft"
-            setTileNameNum("ColumnBotRight", 0, Vector3(cell_index.x+1, cell_index.y-4, cell_index.z))
-            tile_name_dict[Vector3(cell_index.x+1, cell_index.y-4, cell_index.z)] = "ColumnBotRight"
+            setTileNameNum("Column" + color_suffix_glitch, cell_index)
+            setTileNameNum("ColumnTopRight" + color_suffix_glitch, Vector3(cell_index.x+1, cell_index.y, cell_index.z))
+            setTileNameNum("ColumnMidTopLeft" + color_suffix_glitch, Vector3(cell_index.x, cell_index.y-1, cell_index.z))
+            setTileNameNum("ColumnMidTopRight" + color_suffix_glitch, Vector3(cell_index.x+1, cell_index.y-1, cell_index.z))
+            setTileNameNum("ColumnMidLeft" + color_suffix_glitch, Vector3(cell_index.x, cell_index.y-2, cell_index.z))
+            setTileNameNum("ColumnMidRight" + color_suffix_glitch, Vector3(cell_index.x+1, cell_index.y-2, cell_index.z))
+            setTileNameNum("ColumnMidBotLeft" + color_suffix_glitch, Vector3(cell_index.x, cell_index.y-3, cell_index.z))
+            setTileNameNum("ColumnMidBotRight" + color_suffix_glitch, Vector3(cell_index.x+1, cell_index.y-3, cell_index.z))
+            setTileNameNum("ColumnBotLeft" + color_suffix_glitch, Vector3(cell_index.x, cell_index.y-4, cell_index.z))
+            setTileNameNum("ColumnBotRight" + color_suffix_glitch, Vector3(cell_index.x+1, cell_index.y-4, cell_index.z))
             
         if tile_name == "Chandelier":
-            setTileNameNum("Chandelier", 0, cell_index)
-            tile_name_dict[cell_index] = "Chandelier"
-            setTileNameNum("ChandelierMid", 0, Vector3(cell_index.x, cell_index.y-1, cell_index.z))
-            tile_name_dict[Vector3(cell_index.x, cell_index.y-1, cell_index.z)] = "ChandelierMid"
-            setTileNameNum("ChandelierMidRight", 0, Vector3(cell_index.x+1, cell_index.y-1, cell_index.z))
-            tile_name_dict[Vector3(cell_index.x+1, cell_index.y-1, cell_index.z)] = "ChandelierMidRight"
-            setTileNameNum("ChandelierBot", 0, Vector3(cell_index.x, cell_index.y-2, cell_index.z))
-            tile_name_dict[Vector3(cell_index.x, cell_index.y-2, cell_index.z)] = "ChandelierBot"
-            setTileNameNum("ChandelierBotLeft", 0, Vector3(cell_index.x-1, cell_index.y-2, cell_index.z))
-            tile_name_dict[Vector3(cell_index.x-1, cell_index.y-2, cell_index.z)] = "ChandelierBotLeft"
-            setTileNameNum("ChandelierBotRight", 0, Vector3(cell_index.x+1, cell_index.y-2, cell_index.z))
-            tile_name_dict[Vector3(cell_index.x+1, cell_index.y-2, cell_index.z)] = "ChandelierBotRight"
+            setTileNameNum("Chandelier" + color_suffix_glitch, cell_index)
+            setTileNameNum("ChandelierMid" + color_suffix_glitch, Vector3(cell_index.x, cell_index.y-1, cell_index.z))
+            setTileNameNum("ChandelierMidRight" + color_suffix_glitch, Vector3(cell_index.x+1, cell_index.y-1, cell_index.z))
+            setTileNameNum("ChandelierBot" + color_suffix_glitch, Vector3(cell_index.x, cell_index.y-2, cell_index.z))
+            setTileNameNum("ChandelierBotLeft" + color_suffix_glitch, Vector3(cell_index.x-1, cell_index.y-2, cell_index.z))
+            setTileNameNum("ChandelierBotRight" + color_suffix_glitch, Vector3(cell_index.x+1, cell_index.y-2, cell_index.z))
             
         if tile_name == "FloorDecor":
-            setTileNameNum("FloorDecor", 0, cell_index)
-            tile_name_dict[cell_index] = "FloorDecor"
-            setTileNameNum("FloorDecorRight", 0, Vector3(cell_index.x+1, cell_index.y, cell_index.z))
-            tile_name_dict[Vector3(cell_index.x+1, cell_index.y, cell_index.z)] = "FloorDecorRight"
+            setTileNameNum("FloorDecor" + color_suffix_glitch, cell_index)
+            setTileNameNum("FloorDecorRight" + color_suffix_glitch, Vector3(cell_index.x+1, cell_index.y, cell_index.z))
 
         if tile_name == "FloorDecor2":
-            setTileNameNum("FloorDecor2", 0, cell_index)
-            tile_name_dict[cell_index] = "FloorDecor2"
-            setTileNameNum("FloorDecor2Right", 0, Vector3(cell_index.x+1, cell_index.y, cell_index.z))
-            tile_name_dict[Vector3(cell_index.x+1, cell_index.y, cell_index.z)] = "FloorDecor2Right"
-            setTileNameNum("FloorDecor2Top", 0, Vector3(cell_index.x, cell_index.y+1, cell_index.z))
-            tile_name_dict[Vector3(cell_index.x, cell_index.y+1, cell_index.z)] = "FloorDecor2Top"
-            setTileNameNum("FloorDecor2TopRight", 0, Vector3(cell_index.x+1, cell_index.y+1, cell_index.z))
-            tile_name_dict[Vector3(cell_index.x+1, cell_index.y+1, cell_index.z)] = "FloorDecor2TopRight"
+            setTileNameNum("FloorDecor2" + color_suffix_glitch, cell_index)
+            setTileNameNum("FloorDecor2Right" + color_suffix_glitch, Vector3(cell_index.x+1, cell_index.y, cell_index.z))
+            setTileNameNum("FloorDecor2Top" + color_suffix_glitch, Vector3(cell_index.x, cell_index.y+1, cell_index.z))
+            setTileNameNum("FloorDecor2TopRight" + color_suffix_glitch, Vector3(cell_index.x+1, cell_index.y+1, cell_index.z))
 
 func properlySetTiles():
     var tile_cell_indices = tile_name_dict.keys()

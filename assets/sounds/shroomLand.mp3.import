@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/shroomLand.mp3-0bfd07d343bf9c69ca54b4da5e9e124d.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/shroomLand.mp3"
+dest_files=[ "res://.import/shroomLand.mp3-0bfd07d343bf9c69ca54b4da5e9e124d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

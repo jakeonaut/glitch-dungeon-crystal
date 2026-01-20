@@ -450,7 +450,7 @@ onready var colorblindPlayers = get_node("ColorblindPlayers")
 onready var colorblindHats = get_node("ColorblindPlayers/ColorblindHats")
 var graphicsOptionIndex = 0
 func processGraphicsLogic(_delta):
-  var graphicsOptions = [tr("UI.GraphicsMenu.1"), tr("UI.GraphicsMenu.2"), tr("UI.GraphicsMenu.3"), tr("UI.GraphicsMenu.4")] # , tr("UI.GraphicsMenu.5")]
+  var graphicsOptions = [tr("UI.GraphicsMenu.1"), tr("UI.GraphicsMenu.2"), tr("UI.GraphicsMenu.3"), tr("UI.GraphicsMenu.4")]
   pauseTitleText.bbcode_text = tr("UI.InputMenu.13_0") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
 
   if shouldUpdateMenuText:
@@ -510,11 +510,11 @@ func processGraphicsLogic(_delta):
 func processGlitchScreen(delta):
   if glitch_death_timer != 0:
     glitch_death_timer += (delta*22)
-    getPlayer().applyGlitchDeathEffects(abs(glitch_death_timer))
+    getPlayer().applyGlitchDeathEffects(abs(glitch_death_timer) / 2)
     if global.userSettings["canChangeSongPitch"]:
       musicPlayer.changeSongPitch(abs(sin((glitch_death_timer)*.05)+.02))
     level.glitchScreenEffect.visible = global.userSettings["canGlitchScreen"]
-    if glitch_death_timer >= 40:
+    if glitch_death_timer >= 20:
       musicPlayer.changeSongPitch(musicPlayer.default_song_pitch)
       level.glitchScreenEffect.visible = false
       glitch_death_timer = 0

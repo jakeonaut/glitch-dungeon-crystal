@@ -46,7 +46,7 @@ func _process(delta):
     rejump_timer = 0
 
 # @override
-func landed():
+func landed(_was_on_fallthrough_solid = false):
   .landed()
   # behavior_jumping = false
   rejump_timer = 0

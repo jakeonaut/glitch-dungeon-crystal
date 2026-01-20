@@ -73,7 +73,7 @@ func _process(delta):
 func glitchSwitchSprite(_delta):
   pass
 
-func landed():
+func landed(_was_on_fallthrough_solid = false):
   .landed()
   behavior_jumping = false
   if is_evil:
@@ -101,11 +101,9 @@ func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
   if is_local_broom and should_flip:
     playerInhale()
 
-func passiveActivate(_delta, is_player, _is_local_broom = false):
+func passiveActivate(_delta, is_player, is_local_broom = false):
   if is_player:
-    should_flip = false
-    getSmacked()
-    should_flip = true
+    getSmacked(null, false, is_local_broom)
     playerInhale()
     if is_evil:
       pass
@@ -175,7 +173,7 @@ func fallthroughCollisionActivate(friend):
   who_is_standing_on_me[friend.name] = [friend, 0, relativePosition]
   
 
-func fallthroughCollisionClear(exFriend):
+func fallthroughCollisionClear(exFriend, _was_it_a_jump = false):
   who_is_standing_on_me.erase(exFriend.name)
 
 func moveMyFriends(delta):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=22]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=24]
+[ext_resource path="res://sceneObjects/BabushkaCatCrystalSniffer.tscn" type="PackedScene" id=25]
 [ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=26]
 [ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=27]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=29]
@@ -418,6 +419,61 @@ shader_param/texture_albedo = ExtResource( 11 )
 shader_param/base_palette = ExtResource( 10 )
 shader_param/target_palette = ExtResource( 9 )
 
+[sub_resource type="BoxShape" id=74]
+resource_local_to_scene = true
+extents = Vector3( 2, 1.3, 1.3 )
+
+[sub_resource type="Animation" id=75]
+resource_name = "default"
+length = 0.1
+
+[sub_resource type="Animation" id=76]
+resource_name = "fall"
+length = 0.1
+
+[sub_resource type="Animation" id=77]
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=78]
+resource_name = "jump"
+length = 0.001
+
+[sub_resource type="Animation" id=79]
+resource_name = "land"
+length = 0.1
+
+[sub_resource type="Animation" id=80]
+resource_name = "stand"
+length = 0.1
+
+[sub_resource type="BoxShape" id=81]
+resource_local_to_scene = true
+extents = Vector3( 0.5, 0.24, 1 )
+
 [sub_resource type="ViewportTexture" id=23]
 viewport_path = NodePath("Viewport")
 
@@ -503,7 +559,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 65526, 0, 1, 65527, 0, 1, 65528, 0, 1, 65531, 0, 37, 65532, 0, 37, 65533, 0, 37, 65534, 0, 37, 65545, 0, 37, 65546, 0, 37, 65547, 0, 37, 65548, 0, 37, 131066, 0, 37, 131067, 0, 37, 131068, 0, 37, 131069, 0, 37, 131070, 0, 37, 131071, 0, 37, 131080, 0, 37, 131081, 0, 37, 131082, 0, 37, 131083, 0, 37, 131084, 0, 37, 131085, 0, 37, 196602, 0, 37, 196603, 0, 37, 196604, 0, 37, 196605, 0, 37, 196606, 0, 37, 196607, 0, 37, 196616, 0, 37, 196617, 0, 37, 196618, 0, 37, 196619, 0, 37, 196620, 0, 37, 196621, 0, 37, 262139, 0, 37, 262140, 0, 37, 262141, 0, 37, 262142, 0, 37, 262153, 0, 37, 262154, 0, 37, 262155, 0, 37, 262156, 0, 37, 589824, 0, 1, 589827, 0, 1, 589828, 0, 1, 589829, 0, 1, 655358, 0, 1, 655359, 0, 1, 655360, 0, 1, 655361, 0, 1, 655362, 0, 1, 655363, 0, 1, 655365, 0, 1, 720894, 0, 1, 720896, 0, 1, 720897, 0, 1, 720898, 0, 1, 720899, 0, 1, 720900, 0, 1, 720901, 0, 1, 786430, 0, 1, 786431, 0, 1, 1048565, 0, 1, 1048566, 0, 1, 1048567, 0, 1, 1114101, 0, 1, 1114103, 0, 1, 1179637, 0, 1, 1179638, 0, 1, 1179639, 0, 1, -458751, 0, 1, -458750, 0, 1, -458749, 0, 1, -458748, 0, 1, -458747, 0, 1, -458746, 0, 1, -458745, 0, 1, -458744, 0, 1, -458743, 0, 1, -458742, 0, 1, -458741, 0, 1, -458740, 0, 1, -458739, 0, 1, -458738, 0, 1, -458737, 0, 1, -458736, 0, 1, -458735, 0, 1, -458734, 0, 1, -458733, 0, 1, -458732, 0, 1, -393227, 0, 1, -393226, 0, 1, -393225, 0, 1, -393224, 0, 1, -393223, 0, 1, -393222, 0, 1, -393221, 0, 1, -393220, 0, 1, -393219, 0, 1, -393215, 0, 1, -393214, 0, 1, -393213, 0, 1, -393212, 0, 1, -393211, 0, 1, -393210, 0, 1, -393209, 0, 1, -393208, 0, 1, -393207, 0, 1, -393206, 0, 1, -393205, 0, 1, -393204, 0, 1, -393203, 0, 1, -393202, 0, 1, -393201, 0, 1, -393200, 0, 1, -393199, 0, 1, -393198, 0, 1, -393196, 0, 1, -327691, 0, 1, -327689, 0, 1, -327688, 0, 1, -327687, 0, 1, -327686, 0, 1, -327685, 0, 1, -327684, 0, 1, -327683, 0, 1, -327679, 0, 1, -327678, 0, 1, -327677, 0, 1, -327676, 0, 1, -327675, 0, 1, -327674, 0, 1, -327673, 0, 1, -327672, 0, 1, -327671, 0, 1, -327670, 0, 1, -327669, 0, 1, -327668, 0, 1, -327667, 0, 1, -327666, 0, 1, -327665, 0, 1, -327664, 0, 1, -327663, 0, 1, -327662, 0, 1, -327661, 0, 1, -327660, 0, 1, -262155, 0, 1, -262154, 0, 1, -262153, 0, 1, -262152, 0, 1, -262151, 0, 1, -262150, 0, 1, -262149, 0, 1, -262148, 0, 1, -262147, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -10, 0, 1, -8, 0, 1 )
+"cells": PoolIntArray( 65531, 0, 37, 65532, 0, 37, 65533, 0, 37, 65534, 0, 37, 65545, 0, 37, 65546, 0, 37, 65547, 0, 37, 65548, 0, 37, 131066, 0, 37, 131067, 0, 37, 131068, 0, 37, 131069, 0, 37, 131070, 0, 37, 131071, 0, 37, 131080, 0, 37, 131081, 0, 37, 131082, 0, 37, 131083, 0, 37, 131084, 0, 37, 131085, 0, 37, 196598, 0, 1, 196599, 0, 1, 196600, 0, 1, 196602, 0, 37, 196603, 0, 37, 196604, 0, 37, 196605, 0, 37, 196606, 0, 37, 196607, 0, 37, 196616, 0, 37, 196617, 0, 37, 196618, 0, 37, 196619, 0, 37, 196620, 0, 37, 196621, 0, 37, 262134, 0, 1, 262136, 0, 1, 262139, 0, 37, 262140, 0, 37, 262141, 0, 37, 262142, 0, 37, 262153, 0, 37, 262154, 0, 37, 262155, 0, 37, 262156, 0, 37, 327670, 0, 1, 327671, 0, 1, 327672, 0, 1, 589824, 0, 1, 589827, 0, 1, 589828, 0, 1, 589829, 0, 1, 655358, 0, 1, 655359, 0, 1, 655360, 0, 1, 655361, 0, 1, 655362, 0, 1, 655363, 0, 1, 655365, 0, 1, 720894, 0, 1, 720896, 0, 1, 720897, 0, 1, 720898, 0, 1, 720899, 0, 1, 720900, 0, 1, 720901, 0, 1, 786430, 0, 1, 786431, 0, 1, 1048565, 0, 1, 1048566, 0, 1, 1048567, 0, 1, 1114101, 0, 1, 1114103, 0, 1, 1179637, 0, 1, 1179638, 0, 1, 1179639, 0, 1, -458751, 0, 1, -458750, 0, 1, -458749, 0, 1, -458748, 0, 1, -458747, 0, 1, -458746, 0, 1, -458745, 0, 1, -458744, 0, 1, -458743, 0, 1, -458742, 0, 1, -458741, 0, 1, -458740, 0, 1, -458739, 0, 1, -458738, 0, 1, -458737, 0, 1, -458736, 0, 1, -458735, 0, 1, -458734, 0, 1, -458733, 0, 1, -458732, 0, 1, -393227, 0, 1, -393226, 0, 1, -393225, 0, 1, -393224, 0, 1, -393223, 0, 1, -393222, 0, 1, -393221, 0, 1, -393220, 0, 1, -393219, 0, 1, -393215, 0, 1, -393214, 0, 1, -393213, 0, 1, -393212, 0, 1, -393211, 0, 1, -393210, 0, 1, -393209, 0, 1, -393208, 0, 1, -393207, 0, 1, -393206, 0, 1, -393205, 0, 1, -393204, 0, 1, -393203, 0, 1, -393202, 0, 1, -393201, 0, 1, -393200, 0, 1, -393199, 0, 1, -393198, 0, 1, -393196, 0, 1, -327691, 0, 1, -327689, 0, 1, -327688, 0, 1, -327687, 0, 1, -327686, 0, 1, -327685, 0, 1, -327684, 0, 1, -327683, 0, 1, -327679, 0, 1, -327678, 0, 1, -327677, 0, 1, -327676, 0, 1, -327675, 0, 1, -327674, 0, 1, -327673, 0, 1, -327672, 0, 1, -327671, 0, 1, -327670, 0, 1, -327669, 0, 1, -327668, 0, 1, -327667, 0, 1, -327666, 0, 1, -327665, 0, 1, -327664, 0, 1, -327663, 0, 1, -327662, 0, 1, -327661, 0, 1, -327660, 0, 1, -262155, 0, 1, -262154, 0, 1, -262153, 0, 1, -262152, 0, 1, -262151, 0, 1, -262150, 0, 1, -262149, 0, 1, -262148, 0, 1, -262147, 0, 1 )
 }
 script = ExtResource( 7 )
 __meta__ = {
@@ -532,7 +588,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.7, 7.1, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 6, 0 )
-parter_door_id = "Door3"
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods3.tscn"
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
 shape = SubResource( 62 )
@@ -551,7 +607,7 @@ shape = SubResource( 49 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 12, 0 )
-path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods4.tscn"
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/001PoisonShroomCove.tscn"
 
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
 anims/RESET = SubResource( 50 )
@@ -578,7 +634,7 @@ shape = SubResource( 49 )
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 5, 0 )
-parter_door_id = "Door"
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods3.tscn"
 
 [node name="AnimationPlayer" parent="Viewport/level/Door3" index="6"]
 anims/RESET = SubResource( 56 )
@@ -619,12 +675,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -3, 0 )
 bbText = "NPC.SporeCreature.2"
 
-[node name="MushroomNPC2" parent="Viewport/level" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, 0 )
-bbText = "NPC.SporeCreature.2"
-
 [node name="MushroomNPC3" parent="Viewport/level" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 13, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, -3, 0 )
 bbText = "NPC.ClayWorker.9"
 
 [node name="ParallaxBackground2" parent="Viewport/level" instance=ExtResource( 24 )]
@@ -639,6 +691,29 @@ texture = ExtResource( 18 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -10 )
 material_override = SubResource( 73 )
 texture = ExtResource( 18 )
+
+[node name="BabushkaCat" parent="Viewport/level" instance=ExtResource( 25 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2433, 6.0414, 0 )
+grav = 0
+
+[node name="CollisionShape" parent="Viewport/level/BabushkaCat/SmallInteractionArea" index="0"]
+shape = SubResource( 74 )
+
+[node name="AnimationPlayer" parent="Viewport/level/BabushkaCat" index="4"]
+anims/default = SubResource( 75 )
+anims/fall = SubResource( 76 )
+anims/flickerOn = SubResource( 77 )
+anims/jump = SubResource( 78 )
+anims/land = SubResource( 79 )
+anims/stand = SubResource( 80 )
+
+[node name="CollisionShape" parent="Viewport/level/BabushkaCat/FallthroughSolid" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 0.806777, 0 )
+shape = SubResource( 81 )
+
+[node name="MushroomNPC2" parent="Viewport/level" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 0 )
+bbText = "NPC.SporeCreature.1"
 
 [node name="Viewport2" parent="." instance=ExtResource( 22 )]
 
@@ -676,5 +751,7 @@ material = SubResource( 44 )
 [editable path="Viewport/level/Door3"]
 [editable path="Viewport/level/Door3/NPC/NPC TextBox"]
 [editable path="Viewport/level/ParallaxBackground2"]
+[editable path="Viewport/level/BabushkaCat"]
+[editable path="Viewport/level/BabushkaCat/NPC TextBox"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

@@ -450,14 +450,16 @@ func processHiscoreRenderLogic(delta):
     var time_aged = total_time if total_time != null else tr("NPC.Crystal.NULL")
     if not global.isEndOfGame and total_time != null and stupidTimeAgedStartTimeTemp != null:
       time_aged += (Time.get_unix_time_from_system() - stupidTimeAgedStartTimeTemp)
-    # @warning_ignore("integer_division")
     var SECONDS_IN_MINUTE = 60
     var SECONDS_IN_HOUR = SECONDS_IN_MINUTE * SECONDS_IN_MINUTE
+    # warning-ignore:integer_division
     var hours = int(time_aged) / int(SECONDS_IN_HOUR)
     time_aged -= (hours * SECONDS_IN_HOUR)
+    # warning-ignore:integer_division
     var minutes = int(time_aged) / int(SECONDS_IN_MINUTE)
     var optional_minute_zero = "" if minutes >= 10 else "0"
     time_aged -= (minutes * SECONDS_IN_MINUTE)
+    # warning-ignore:integer_division
     var seconds = int(time_aged) / 1
     var optional_second_zero = "" if seconds >= 10 else "0"
     var time_aged_formatted = str(hours) + ":" + optional_minute_zero + str(minutes) + ":" + optional_second_zero + str(seconds)

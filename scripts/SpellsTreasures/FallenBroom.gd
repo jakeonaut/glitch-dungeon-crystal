@@ -309,7 +309,7 @@ func isKindOfOnGround():
 func alignMySprite():
     pass
 
-func landed():
+func landed(_was_on_fallthrough_solid = false):
     if not projectile:
         secretAniPlayer.play("land")
     if should_die_on_land:

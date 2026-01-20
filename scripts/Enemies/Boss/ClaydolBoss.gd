@@ -392,7 +392,7 @@ func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
 
 var drillCharging = false
 # @override
-func landed():
+func landed(_was_on_fallthrough_solid = false):
     .landed()
     # getLevelTiles().purifyAllSoftSandSolids()
 
@@ -529,7 +529,7 @@ func tryGetStunnedByWalls(margin = 0.25):
   for i in range(int(floor(bb)), int(ceil(tb))):
     for j in range(int(floor(lb)), int(ceil(rb))):
       var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
-      # lt.rerandomizeTile(coords, lt.getRandomGlitchType(), rand_timer)
+      # lt.rerandomizeTile(coords, lt.getRandomColorSuffix(), rand_timer)
       var tile_type = getLevelTiles().get_cell_item(coords.x, coords.y, coords.z)
       if lt.isTileSoftSand(tile_type):
         thudSound.play()

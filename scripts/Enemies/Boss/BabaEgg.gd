@@ -50,7 +50,7 @@ func isActive(_debug = false):
   return not is_smacked and visible
 
 var has_landed = false
-func landed():
+func landed(_was_on_fallthrough_solid = false):
   .landed()
   if not has_landed:
     secretAniPlayer.stop()

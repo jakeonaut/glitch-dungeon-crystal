@@ -62,7 +62,7 @@ func _process(delta):
       BubbleFishState.BLOW_UP:
         setAnimationAndChangeStateWhenItEnds("blowUp", BubbleFishState.PUFFED_UP_IDLE)
 
-func landed():
+func landed(_was_on_fallthrough_solid = false):
   spawn_origin = self.global_transform.origin
   .landed()
 

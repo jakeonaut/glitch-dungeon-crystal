@@ -31,7 +31,7 @@ func _process(delta):
 func glitchSwitchSprite(_delta):
   pass
 
-func landed():
+func landed(_was_on_fallthrough_solid = false):
   .landed()
   behavior_walking = false
 

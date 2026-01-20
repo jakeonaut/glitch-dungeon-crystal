@@ -4,6 +4,7 @@ func _ready():
     set_process(true)
 
 var prev_fallthrough_collision_area = null
+var prev_prev_fallthrough_collision_area = null
 var has_activated_something = false
 var prev_nearest_area = null
 func _process(_delta):
@@ -119,4 +120,8 @@ func postProcessFallthroughCollisionArea(fallthrough_collision_area):
     else:
         player.was_fallthrough_area_collision_triggered = false
 
-    prev_fallthrough_collision_area = weakref(fallthrough_collision_area)
+    prev_prev_fallthrough_collision_area = prev_fallthrough_collision_area
+    if fallthrough_collision_area != null:
+        prev_fallthrough_collision_area = weakref(fallthrough_collision_area)
+    else:
+        prev_fallthrough_collision_area = null

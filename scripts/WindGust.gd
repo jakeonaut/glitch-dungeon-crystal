@@ -9,7 +9,7 @@ func _ready():
 var cloud_timer = 0
 var cloud_time_limit = 5
 func _process(delta):
-  if not is_active:
+  if not is_active: # or not visible:
     return
 
   cloud_timer += (delta*22)

@@ -100,7 +100,7 @@ func _process(delta):
     moveMyFriends(delta)
     lastPosition = self.global_transform.origin
 
-func landed():
+func landed(_was_on_fallthrough_solid = false):
   spawn_origin = self.global_transform.origin
   .landed()
 
@@ -224,7 +224,7 @@ func fallthroughCollisionActivate(friend):
   var relativePosition = self.global_transform.origin - friend.global_transform.origin
   who_is_standing_on_me[friend.name] = [friend, 0, relativePosition]
 
-func fallthroughCollisionClear(exFriend):
+func fallthroughCollisionClear(exFriend, _was_it_a_jump = false):
   who_is_standing_on_me.erase(exFriend.name)
 
 func moveMyFriends(delta):

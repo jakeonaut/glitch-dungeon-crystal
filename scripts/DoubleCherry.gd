@@ -85,7 +85,7 @@ func processPhysics(delta):
         .processPhysics(delta)
         
 # @override
-func landed():
+func landed(_was_on_fallthrough_solid = false):
     .landed()
 
     if secretAniPlayer.assigned_animation != "eaten" and secretAniPlayer.assigned_animation != "shrivel":

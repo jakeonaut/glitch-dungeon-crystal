@@ -141,7 +141,7 @@ func _process(delta):
             should_i_move_up = false
             
 # @override
-func landed():
+func landed(_was_on_fallthrough_solid = false):
     .landed()
 
     secretAniPlayer.stop()

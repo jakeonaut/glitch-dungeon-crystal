@@ -241,30 +241,54 @@ enum Locale {
 }
 var currLocale = Locale.ENGLISH
 
-func getGlitchTypeFromTileName(tile_name):
-    if "_red" in tile_name:
-        return GlitchForm.FLOOR
-    if "_green" in tile_name:
-        return GlitchForm.FEATHER
-    if "_black" in tile_name:
-        return GlitchForm.INVISIBLE
-    if "_yellow" in tile_name:
-        return GlitchForm.LADDER
+var _grey = ""
+var _red = "_red"
+var _green = "_green"
+var _yellow = "_yellow"
+var _black = "_black"
+var _white = "_white"
 
-func getColorSuffixFromTilesetType(type):
+func getColorSuffixFromTileName(tile_name):
+    if _red in tile_name:
+        return _red
+    if _green in tile_name:
+        return _green
+    if _black in tile_name:
+        return _black
+    if _yellow in tile_name:
+        return _yellow
+    if _white in tile_name:
+        return _white
+
+func getColorSuffixFromTilesetType(type, player_glitch_type):
     if type == TilesetType.DUNGEON:
-        return ""
-    if type == TilesetType.HOUSE or type == TilesetType.POISON_HOUSE:
-        return "_red"
+        return _grey
+    if type == TilesetType.HOUSE or type == TilesetType.POISON_HOUSE or type == TilesetType.FARM_HOUSE:
+        return _red
     if type == TilesetType.FOREST or type == TilesetType.BEACH or type == TilesetType.POISON_FOREST or type == TilesetType.AUTUMN_FOREST:
-        return "_green"
+        return _green
     if type == TilesetType.ALIEN:
-        return "_black"
-    if type == TilesetType.DESERT:
-        return "_yellow"
+        return _black
+    if type == TilesetType.DESERT or type == TilesetType.TOMB:
+        return _yellow
     if type == TilesetType.GLITCH_WORLD:
-        return "_white"
-    return ""
+        return _white
+    if type == TilesetType.PRIMORDIAL_OOZE:
+        if player_glitch_type == global.GlitchForm.NORMAL:
+            return _grey
+        if player_glitch_type == global.GlitchForm.FEATHER:
+            return _green
+        if player_glitch_type == global.GlitchForm.FLOOR:
+            # return _red
+            return _grey
+        if player_glitch_type == global.GlitchForm.LADDER:
+            return _yellow
+        if player_glitch_type == global.GlitchForm.INVISIBLE:
+            return _black
+        if player_glitch_type == global.GlitchForm.WALK_THROUGH_WALLS:
+            return _white
+        return _white
+    return _grey
 
 var memory = {}
 var userSettings = {}
@@ -1576,7 +1600,7 @@ func doFallthroughObjectCollision(gameMover, area, debug = false):
         x + lb, y + bb + tb_diff, x + rb, y + bb + bb_diff, debug
     ) and (lv < 0 or (lv == 0 and gameMover.glitch_form == global.GlitchForm.FLOOR)):
         gameMover.was_fallthrough_area_collision_triggered = true
-        gameMover.fallthrough_area_collision_y = ay + atb - bb
+        gameMover.fallthrough_area_collision_y = ay + atb - bb if gameMover.grav >= 0 else ay + abb - bb
         gameMover.linear_velocity = gameMover.collideWithFloor(gameMover.linear_velocity)
         gameMover.truly_on_ground = truly_on_ground_memory
         
@@ -1584,7 +1608,7 @@ func doFallthroughObjectCollision(gameMover, area, debug = false):
         gameMover.global_transform.origin.y = gameMover.fallthrough_area_collision_y
 
         if not gameMover.was_on_ground:
-            gameMover.processLand()
+            gameMover.processLand(true)
         gameMover.truly_on_ground = true
         return true
 

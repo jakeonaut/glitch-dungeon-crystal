@@ -195,7 +195,7 @@ func teleport():
     cat_state = CatState.TELEPORT_IN
         
 # @override
-func landed():
+func landed(_was_on_fallthrough_solid = false):
     .landed()
     if cat_state != CatState.HIDDEN and cat_state != CatState.FLICKER_ON:
         behavior_jumping = false

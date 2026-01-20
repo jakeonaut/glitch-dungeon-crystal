@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/mushroom.png" type="Texture" id=1]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=2]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=3]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=4]
 [ext_resource path="res://assets/sounds/assets_sfx_jumpcartoon.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/shroomLand.wav" type="AudioStream" id=6]
 [ext_resource path="res://scripts/Environment/Mushroom.gd" type="Script" id=7]
 
 [sub_resource type="ShaderMaterial" id=2]
@@ -177,4 +178,9 @@ shape = SubResource( 1 )
 [node name="BounceSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 volume_db = -30.0
+bus = "Sfx"
+
+[node name="BounceLandSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -15.0
 bus = "Sfx"

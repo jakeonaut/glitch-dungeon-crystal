@@ -29,7 +29,6 @@ script = ExtResource( 3 )
 show_crt_effect = true
 starting_glitch_type = 1
 has_spellbook_page = true
-is_turn_based = true
 spellbook_spells = [ 1, 2 ]
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 17 )]

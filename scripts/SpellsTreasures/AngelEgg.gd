@@ -79,7 +79,7 @@ func alignMySprite():
 
 var landSoundCounter = 0
 var landSoundCountLimit = 3
-func landed():
+func landed(_was_on_fallthrough_solid = false):
     get_node("SecretAnimationPlayer").play("land")
     if landSoundCounter < landSoundCountLimit:
         landSound.play()

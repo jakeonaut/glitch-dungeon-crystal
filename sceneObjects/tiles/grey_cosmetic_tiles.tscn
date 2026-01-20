@@ -1173,409 +1173,498 @@ mesh = SubResource( 198 )
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.72908, -2.5, 0 )
 mesh = SubResource( 198 )
 
-[node name="GreenTiles" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.11255, 0, 0 )
-
-[node name="Column" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+[node name="Column_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.11255, 0, 0 )
 mesh = SubResource( 171 )
+skeleton = NodePath("")
 
-[node name="ColumnTopRight" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 0, 0 )
+[node name="ColumnTopRight_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.61255, 0, 0 )
 mesh = SubResource( 173 )
+skeleton = NodePath("")
 
-[node name="ColumnMidTopLeft" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.5, 0 )
+[node name="ColumnMidTopLeft_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.11255, -0.5, 0 )
 mesh = SubResource( 175 )
+skeleton = NodePath("")
 
-[node name="ColumnMidTopRight" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -0.5, 0 )
+[node name="ColumnMidTopRight_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.61255, -0.5, 0 )
 mesh = SubResource( 177 )
+skeleton = NodePath("")
 
-[node name="ColumnMidLeft" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, 0 )
+[node name="ColumnMidLeft_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.11255, -1, 0 )
 mesh = SubResource( 179 )
+skeleton = NodePath("")
 
-[node name="ColumnMidRight" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -1, 0 )
+[node name="ColumnMidRight_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.61255, -1, 0 )
 mesh = SubResource( 181 )
+skeleton = NodePath("")
 
-[node name="ColumnMidBotLeft" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1.5, 0 )
+[node name="ColumnMidBotLeft_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.11255, -1.5, 0 )
 mesh = SubResource( 183 )
+skeleton = NodePath("")
 
-[node name="ColumnMidBotRight" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -1.5, 0 )
+[node name="ColumnMidBotRight_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.61255, -1.5, 0 )
 mesh = SubResource( 185 )
+skeleton = NodePath("")
 
-[node name="ColumnBotLeft" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -2, 0 )
+[node name="ColumnBotLeft_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.11255, -2, 0 )
 mesh = SubResource( 187 )
+skeleton = NodePath("")
 
-[node name="ColumnBotRight" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -2, 0 )
+[node name="ColumnBotRight_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.61255, -2, 0 )
 mesh = SubResource( 189 )
+skeleton = NodePath("")
 
-[node name="Column2" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.11392, 0, 0 )
+[node name="Column2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.22647, 0, 0 )
 mesh = SubResource( 171 )
+skeleton = NodePath("")
 
-[node name="ColumnTopRight2" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.61392, 0, 0 )
+[node name="ColumnTopRight2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.72647, 0, 0 )
 mesh = SubResource( 173 )
+skeleton = NodePath("")
 
-[node name="ColumnMidTopLeft2" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.11392, -0.5, 0 )
+[node name="ColumnMidTopLeft2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.22647, -0.5, 0 )
 mesh = SubResource( 175 )
+skeleton = NodePath("")
 
-[node name="ColumnMidTopRight2" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.61392, -0.5, 0 )
+[node name="ColumnMidTopRight2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.72647, -0.5, 0 )
 mesh = SubResource( 177 )
+skeleton = NodePath("")
 
-[node name="ColumnMidLeft2" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.11392, -1, 0 )
+[node name="ColumnMidLeft2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.22647, -1, 0 )
 mesh = SubResource( 179 )
+skeleton = NodePath("")
 
-[node name="ColumnMidRight2" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.61392, -1, 0 )
+[node name="ColumnMidRight2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.72647, -1, 0 )
 mesh = SubResource( 181 )
+skeleton = NodePath("")
 
-[node name="ColumnMidBotLeft2" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.11392, -1.5, 0 )
+[node name="ColumnMidBotLeft2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.22647, -1.5, 0 )
 mesh = SubResource( 183 )
+skeleton = NodePath("")
 
-[node name="ColumnMidBotRight2" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.61392, -1.5, 0 )
+[node name="ColumnMidBotRight2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.72647, -1.5, 0 )
 mesh = SubResource( 185 )
+skeleton = NodePath("")
 
-[node name="ColumnBotRight2" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.61392, -2, 0 )
+[node name="ColumnBotRight2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.72647, -2, 0 )
 mesh = SubResource( 189 )
+skeleton = NodePath("")
 
-[node name="ColumnBotLeft2" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.11392, -2, 0 )
+[node name="ColumnBotLeft2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.22647, -2, 0 )
 mesh = SubResource( 187 )
+skeleton = NodePath("")
 
-[node name="Chandelier" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 0, 0 )
+[node name="Chandelier_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.11255, 0, 0 )
 mesh = SubResource( 191 )
+skeleton = NodePath("")
 
-[node name="ChandelierMid" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, -0.5, 0 )
+[node name="ChandelierMid_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.11255, -0.5, 0 )
 mesh = SubResource( 192 )
+skeleton = NodePath("")
 
-[node name="ChandelierMidRight" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, -0.5, 0 )
+[node name="ChandelierMidRight_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.61255, -0.5, 0 )
 mesh = SubResource( 194 )
+skeleton = NodePath("")
 
-[node name="ChandelierBot" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, -1, 0 )
+[node name="ChandelierBot_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.11255, -1, 0 )
 mesh = SubResource( 196 )
+skeleton = NodePath("")
 
-[node name="ChandelierBotLeft" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5, -1, 0 )
+[node name="ChandelierBotLeft_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 8.61255, -1, 0 )
 mesh = SubResource( 198 )
+skeleton = NodePath("")
 
-[node name="ChandelierBotRight" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, -1, 0 )
+[node name="ChandelierBotRight_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.61255, -1, 0 )
 mesh = SubResource( 200 )
+skeleton = NodePath("")
 
-[node name="Chandelier2" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.58687, 0, 0 )
+[node name="Chandelier2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 10.6994, 0, 0 )
 mesh = SubResource( 47 )
+skeleton = NodePath("")
 
-[node name="ChandelierMid2" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.58687, -0.5, 0 )
+[node name="ChandelierMid2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 10.6994, -0.5, 0 )
 mesh = SubResource( 49 )
+skeleton = NodePath("")
 
-[node name="ChandelierMidRight2" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.08687, -0.5, 0 )
+[node name="ChandelierMidRight2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 11.1994, -0.5, 0 )
 mesh = SubResource( 51 )
+skeleton = NodePath("")
 
-[node name="ChandelierBot2" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.58687, -1, 0 )
+[node name="ChandelierBot2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 10.6994, -1, 0 )
 mesh = SubResource( 53 )
+skeleton = NodePath("")
 
-[node name="ChandelierBotRight2" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.08687, -1, 0 )
+[node name="ChandelierBotRight2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 11.1994, -1, 0 )
 mesh = SubResource( 55 )
+skeleton = NodePath("")
 
-[node name="ChandelierBotLeft2" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.08687, -1, 0 )
+[node name="ChandelierBotLeft2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 10.1994, -1, 0 )
 mesh = SubResource( 198 )
+skeleton = NodePath("")
 
-[node name="FloorDecor" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -3, 0 )
+[node name="FloorDecor_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 8.11255, -3, 0 )
 mesh = SubResource( 42 )
+skeleton = NodePath("")
 
-[node name="FloorDecorRight" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5, -3, 0 )
+[node name="FloorDecorRight_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 8.61255, -3, 0 )
 mesh = SubResource( 44 )
+skeleton = NodePath("")
 
-[node name="FloorDecor2" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.22908, -3, 0 )
+[node name="FloorDecor2_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.34163, -3, 0 )
 mesh = SubResource( 202 )
+skeleton = NodePath("")
 
-[node name="FloorDecor2Right" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.72908, -3, 0 )
+[node name="FloorDecor2Right_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.84163, -3, 0 )
 mesh = SubResource( 204 )
+skeleton = NodePath("")
 
-[node name="FloorDecor2Top" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.22908, -2.5, 0 )
+[node name="FloorDecor2Top_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.34163, -2.5, 0 )
 mesh = SubResource( 205 )
+skeleton = NodePath("")
 
-[node name="FloorDecor2TopRight" type="MeshInstance" parent="GreenTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.72908, -2.5, 0 )
+[node name="FloorDecor2TopRight_green" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.84163, -2.5, 0 )
 mesh = SubResource( 207 )
+skeleton = NodePath("")
 
-[node name="RedTiles" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.16893, 0 )
-
-[node name="Column" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+[node name="Column_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -4.16893, 0 )
 mesh = SubResource( 209 )
+skeleton = NodePath("")
 
-[node name="ColumnTopRight" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 0, 0 )
+[node name="ColumnTopRight_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -4.16893, 0 )
 mesh = SubResource( 211 )
+skeleton = NodePath("")
 
-[node name="ColumnMidTopLeft" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.5, 0 )
+[node name="ColumnMidTopLeft_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -4.66893, 0 )
 mesh = SubResource( 213 )
+skeleton = NodePath("")
 
-[node name="ColumnMidTopRight" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -0.5, 0 )
+[node name="ColumnMidTopRight_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -4.66893, 0 )
 mesh = SubResource( 215 )
+skeleton = NodePath("")
 
-[node name="ColumnMidLeft" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, 0 )
+[node name="ColumnMidLeft_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -5.16893, 0 )
 mesh = SubResource( 217 )
+skeleton = NodePath("")
 
-[node name="ColumnMidRight" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -1, 0 )
+[node name="ColumnMidRight_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -5.16893, 0 )
 mesh = SubResource( 219 )
+skeleton = NodePath("")
 
-[node name="ColumnMidBotLeft" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1.5, 0 )
+[node name="ColumnMidBotLeft_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -5.66893, 0 )
 mesh = SubResource( 221 )
+skeleton = NodePath("")
 
-[node name="ColumnMidBotRight" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -1.5, 0 )
+[node name="ColumnMidBotRight_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -5.66893, 0 )
 mesh = SubResource( 223 )
+skeleton = NodePath("")
 
-[node name="ColumnBotLeft" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -2, 0 )
+[node name="ColumnBotLeft_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -6.16893, 0 )
 mesh = SubResource( 225 )
+skeleton = NodePath("")
 
-[node name="ColumnBotRight" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -2, 0 )
+[node name="ColumnBotRight_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -6.16893, 0 )
 mesh = SubResource( 227 )
+skeleton = NodePath("")
 
-[node name="Chandelier" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 0, 0 )
+[node name="Chandelier_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, -4.16893, 0 )
 mesh = SubResource( 229 )
+skeleton = NodePath("")
 
-[node name="ChandelierMid" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, -0.5, 0 )
+[node name="ChandelierMid_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, -4.66893, 0 )
 mesh = SubResource( 231 )
+skeleton = NodePath("")
 
-[node name="ChandelierMidRight" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, -0.5, 0 )
+[node name="ChandelierMidRight_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, -4.66893, 0 )
 mesh = SubResource( 233 )
+skeleton = NodePath("")
 
-[node name="ChandelierBot" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, -1, 0 )
+[node name="ChandelierBot_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, -5.16893, 0 )
 mesh = SubResource( 235 )
+skeleton = NodePath("")
 
-[node name="ChandelierBotLeft" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5, -1, 0 )
+[node name="ChandelierBotLeft_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5, -5.16893, 0 )
 mesh = SubResource( 237 )
+skeleton = NodePath("")
 
-[node name="ChandelierBotRight" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, -1, 0 )
+[node name="ChandelierBotRight_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, -5.16893, 0 )
 mesh = SubResource( 239 )
+skeleton = NodePath("")
 
-[node name="FloorDecor" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -3, 0 )
+[node name="FloorDecor_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -7.16893, 0 )
 visible = false
 mesh = SubResource( 198 )
+skeleton = NodePath("")
 
-[node name="FloorDecorRight" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5, -3, 0 )
+[node name="FloorDecorRight_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5, -7.16893, 0 )
 visible = false
 mesh = SubResource( 198 )
+skeleton = NodePath("")
 
-[node name="FloorDecor2" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.22908, -3, 0 )
+[node name="FloorDecor2_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.22908, -7.16893, 0 )
 visible = false
 mesh = SubResource( 198 )
+skeleton = NodePath("")
 
-[node name="FloorDecor2Right" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.72908, -3, 0 )
+[node name="FloorDecor2Right_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.72908, -7.16893, 0 )
 visible = false
 mesh = SubResource( 198 )
+skeleton = NodePath("")
 
-[node name="FloorDecor2Top" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.22908, -2.5, 0 )
+[node name="FloorDecor2Top_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.22908, -6.66893, 0 )
 visible = false
 mesh = SubResource( 198 )
+skeleton = NodePath("")
 
-[node name="FloorDecor2TopRight" type="MeshInstance" parent="RedTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.72908, -2.5, 0 )
+[node name="FloorDecor2TopRight_red" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.72908, -6.66893, 0 )
 visible = false
 mesh = SubResource( 198 )
+skeleton = NodePath("")
 
-[node name="YellowTiles" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.17969, -4.18717, 0 )
-
-[node name="Column" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+[node name="Column_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.17969, -4.18717, 0 )
 mesh = SubResource( 252 )
+skeleton = NodePath("")
 
-[node name="ColumnTopRight" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 0, 0 )
+[node name="ColumnTopRight_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.67969, -4.18717, 0 )
 mesh = SubResource( 94 )
+skeleton = NodePath("")
 
-[node name="ColumnMidTopLeft" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.5, 0 )
+[node name="ColumnMidTopLeft_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.17969, -4.68717, 0 )
 mesh = SubResource( 96 )
+skeleton = NodePath("")
 
-[node name="ColumnMidTopRight" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -0.5, 0 )
+[node name="ColumnMidTopRight_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.67969, -4.68717, 0 )
 mesh = SubResource( 98 )
+skeleton = NodePath("")
 
-[node name="ColumnMidLeft" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, 0 )
+[node name="ColumnMidLeft_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.17969, -5.18717, 0 )
 mesh = SubResource( 100 )
+skeleton = NodePath("")
 
-[node name="ColumnMidRight" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -1, 0 )
+[node name="ColumnMidRight_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.67969, -5.18717, 0 )
 mesh = SubResource( 102 )
+skeleton = NodePath("")
 
-[node name="ColumnMidBotLeft" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1.5, 0 )
+[node name="ColumnMidBotLeft_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.17969, -5.68717, 0 )
 mesh = SubResource( 104 )
+skeleton = NodePath("")
 
-[node name="ColumnMidBotRight" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -1.5, 0 )
+[node name="ColumnMidBotRight_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.67969, -5.68717, 0 )
 mesh = SubResource( 106 )
+skeleton = NodePath("")
 
-[node name="ColumnBotLeft" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -2, 0 )
+[node name="ColumnBotLeft_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.17969, -6.18717, 0 )
 mesh = SubResource( 108 )
+skeleton = NodePath("")
 
-[node name="ColumnBotRight" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -2, 0 )
+[node name="ColumnBotRight_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.67969, -6.18717, 0 )
 mesh = SubResource( 110 )
+skeleton = NodePath("")
 
-[node name="Column2" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.11392, 0, 0 )
+[node name="Column2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.29361, -4.18717, 0 )
 mesh = SubResource( 64 )
+skeleton = NodePath("")
 
-[node name="ColumnTopRight2" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.61392, 0, 0 )
+[node name="ColumnTopRight2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.79361, -4.18717, 0 )
 mesh = SubResource( 65 )
+skeleton = NodePath("")
 
-[node name="ColumnMidTopLeft2" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.11392, -0.5, 0 )
+[node name="ColumnMidTopLeft2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.29361, -4.68717, 0 )
 mesh = SubResource( 66 )
+skeleton = NodePath("")
 
-[node name="ColumnMidTopRight2" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.61392, -0.5, 0 )
+[node name="ColumnMidTopRight2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.79361, -4.68717, 0 )
 mesh = SubResource( 67 )
+skeleton = NodePath("")
 
-[node name="ColumnMidLeft2" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.11392, -1, 0 )
+[node name="ColumnMidLeft2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.29361, -5.18717, 0 )
 mesh = SubResource( 68 )
+skeleton = NodePath("")
 
-[node name="ColumnMidRight2" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.61392, -1, 0 )
+[node name="ColumnMidRight2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.79361, -5.18717, 0 )
 mesh = SubResource( 69 )
+skeleton = NodePath("")
 
-[node name="ColumnMidBotLeft2" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.11392, -1.5, 0 )
+[node name="ColumnMidBotLeft2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.29361, -5.68717, 0 )
 mesh = SubResource( 70 )
+skeleton = NodePath("")
 
-[node name="ColumnMidBotRight2" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.61392, -1.5, 0 )
+[node name="ColumnMidBotRight2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.79361, -5.68717, 0 )
 mesh = SubResource( 71 )
+skeleton = NodePath("")
 
-[node name="ColumnBotLeft2" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.11392, -2, 0 )
+[node name="ColumnBotLeft2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.29361, -6.18717, 0 )
 mesh = SubResource( 72 )
+skeleton = NodePath("")
 
-[node name="ColumnBotRight2" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.61392, -2, 0 )
+[node name="ColumnBotRight2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.79361, -6.18717, 0 )
 mesh = SubResource( 73 )
+skeleton = NodePath("")
 
-[node name="Chandelier" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, 0, 0 )
+[node name="Chandelier_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.17969, -4.18717, 0 )
 mesh = SubResource( 112 )
+skeleton = NodePath("")
 
-[node name="ChandelierMid" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, -0.5, 0 )
+[node name="ChandelierMid_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.17969, -4.68717, 0 )
 mesh = SubResource( 114 )
+skeleton = NodePath("")
 
-[node name="ChandelierMidRight" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, -0.5, 0 )
+[node name="ChandelierMidRight_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.67969, -4.68717, 0 )
 mesh = SubResource( 116 )
+skeleton = NodePath("")
 
-[node name="ChandelierBot" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3, -1, 0 )
+[node name="ChandelierBot_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.17969, -5.18717, 0 )
 mesh = SubResource( 118 )
+skeleton = NodePath("")
 
-[node name="ChandelierBotLeft" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5, -1, 0 )
+[node name="ChandelierBotLeft_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 8.67969, -5.18717, 0 )
 mesh = SubResource( 78 )
+skeleton = NodePath("")
 
-[node name="ChandelierBotRight" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, -1, 0 )
+[node name="ChandelierBotRight_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.67969, -5.18717, 0 )
 mesh = SubResource( 120 )
+skeleton = NodePath("")
 
-[node name="Chandelier2" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.58687, 0, 0 )
+[node name="Chandelier2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 10.7666, -4.18717, 0 )
 mesh = SubResource( 122 )
+skeleton = NodePath("")
 
-[node name="ChandelierMid2" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.58687, -0.5, 0 )
+[node name="ChandelierMid2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 10.7666, -4.68717, 0 )
 mesh = SubResource( 124 )
+skeleton = NodePath("")
 
-[node name="ChandelierMidRight2" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.08687, -0.5, 0 )
+[node name="ChandelierMidRight2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 11.2666, -4.68717, 0 )
 mesh = SubResource( 126 )
+skeleton = NodePath("")
 
-[node name="ChandelierBot2" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.58687, -1, 0 )
+[node name="ChandelierBot2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 10.7666, -5.18717, 0 )
 mesh = SubResource( 128 )
+skeleton = NodePath("")
 
-[node name="ChandelierBotRight2" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.08687, -1, 0 )
+[node name="ChandelierBotRight2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 11.2666, -5.18717, 0 )
 mesh = SubResource( 130 )
+skeleton = NodePath("")
 
-[node name="ChandelierBotLeft2" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.08687, -1, 0 )
+[node name="ChandelierBotLeft2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 10.2666, -5.18717, 0 )
 mesh = SubResource( 85 )
+skeleton = NodePath("")
 
-[node name="FloorDecor" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, -3, 0 )
+[node name="FloorDecor_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 8.17969, -7.18717, 0 )
 mesh = SubResource( 132 )
+skeleton = NodePath("")
 
-[node name="FloorDecorRight" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5, -3, 0 )
+[node name="FloorDecorRight_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 8.67969, -7.18717, 0 )
 mesh = SubResource( 134 )
+skeleton = NodePath("")
 
-[node name="FloorDecor2" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.22908, -3, 0 )
+[node name="FloorDecor2_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.40877, -7.18717, 0 )
 mesh = SubResource( 136 )
+skeleton = NodePath("")
 
-[node name="FloorDecor2Right" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.72908, -3, 0 )
+[node name="FloorDecor2Right_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.90877, -7.18717, 0 )
 mesh = SubResource( 138 )
+skeleton = NodePath("")
 
-[node name="FloorDecor2Top" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.22908, -2.5, 0 )
+[node name="FloorDecor2Top_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.40877, -6.68717, 0 )
 mesh = SubResource( 140 )
+skeleton = NodePath("")
 
-[node name="FloorDecor2TopRight" type="MeshInstance" parent="YellowTiles"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.72908, -2.5, 0 )
+[node name="FloorDecor2TopRight_yellow" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.90877, -6.68717, 0 )
 mesh = SubResource( 142 )
+skeleton = NodePath("")

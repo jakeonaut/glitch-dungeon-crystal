@@ -730,7 +730,7 @@ func isKindOfOnGround():
         return .isKindOfOnGround()
     
 # @override
-func landed():
+func landed(_was_on_fallthrough_solid = false):
     .landed()
     if behavior_flip_on_land:
         walk_direction.x = -walk_direction.x
@@ -744,14 +744,14 @@ func landed():
 func isActive(_debug=false):
     return not is_smacked and visible and not behavior_evolve and not is_frozen and not am_i_dying and (glitch_form == global.GlitchForm.NORMAL or glitch_form == getPlayer().glitch_form)
 
-func activate(_is_player, _is_local_broom = false):
+func activate(_is_player, is_local_broom = false):
     if smallInteractionArea != null and smallInteractionArea.is_in_group("weak_enemies"):
         # this conditional needs to go first cuz almost every weak_enemies is also in enemies, but not vice-versa
         var result = ouchies(null)
         getPlayer().has_sweeped_glitch = true
         getPlayer().glitchTickle()
         level.summonSmokeClouds(global_transform.origin, 5, true, true)
-        getPlayer().getSmacked()
+        getPlayer().getSmacked(null, false, is_local_broom)
         # if getPlayer().teleport_to == null:
         #     getPlayer().teleport_to = weakref(self)
         #     getPlayer().teleport_to_origin = self.global_transform.origin
@@ -759,18 +759,18 @@ func activate(_is_player, _is_local_broom = false):
     elif smallInteractionArea != null and smallInteractionArea.is_in_group("enemies"):
         if global.memory["glitched_broom"]:
             var result  = ouchies(null)
-            getPlayer().getSmacked()
+            getPlayer().getSmacked(null, false, is_local_broom)
             getPlayer().has_sweeped_glitch = true
             getPlayer().glitchTickle()
             return result
         elif notOuchies(null):
-            getPlayer().getSmacked()
+            getPlayer().getSmacked(null, false, is_local_broom)
             getPlayer().has_sweeped_glitch = true
             getPlayer().glitchTickle()
             return true
     else:
-        var result = getSmacked(null)
-        getPlayer().getSmacked()
+        var result = getSmacked(null, false, is_local_broom)
+        getPlayer().getSmacked(null, false, is_local_broom)
         if getPlayer().teleport_to == null:
             getPlayer().teleport_to = weakref(self)
             getPlayer().teleport_to_origin = self.global_transform.origin

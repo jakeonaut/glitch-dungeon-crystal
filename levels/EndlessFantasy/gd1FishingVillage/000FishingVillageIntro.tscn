@@ -1058,6 +1058,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9649, 8.04138, 0 )
 shape = SubResource( 111 )
 
 [node name="CollisionShape" parent="Viewport/level/BabushkaCatCrystalSniffer/FallthroughSolid" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.755521, 0 )
 shape = SubResource( 112 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 42 )]

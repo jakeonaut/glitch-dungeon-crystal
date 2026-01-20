@@ -474,7 +474,7 @@ func digTiles(solidTiles, should_summon_clouds, is_fake_tiles = false):
     return tiles_dug > 0
 
 # @override
-func landed():
+func landed(_was_on_fallthrough_solid = false):
     .landed()
     if is_mushroom_infected:
         for _i in range(3):

@@ -113,7 +113,7 @@ func fallthroughCollisionActivate(friend):
   swallowSound.play()
   spit_out_timer = 0
 
-func fallthroughCollisionClear(exFriend):
+func fallthroughCollisionClear(exFriend, _was_it_a_jump = false):
   maybe_friend_refs.erase(exFriend.name)
   has_popped_out = false
 
@@ -123,7 +123,7 @@ export var smack_time_limit = 5
 var time_influence = 35
 var y_div = 2.3
 var normal_offset = .15
-func getSmacked(broom_origin = null, _silently = false, _is_local_broom = false):
+func getSmacked(_broom_origin = null, _silently = false, _is_local_broom = false):
   if is_smacked:
     return
   smackSound.pitch_scale = rand_range(0.6, 1.0)

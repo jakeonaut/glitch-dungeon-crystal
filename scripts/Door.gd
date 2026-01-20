@@ -165,7 +165,7 @@ export var locked_to_weakeye = false
 var has_spawned_weakeye = false
 onready var meshInstance2 = get_node("MeshInstance2")
 func _process(delta):
-  if is_locked and key_type == global.KeyItem.NORMAL and not locked_to_weakeye and not locked_to_monsters:
+  if is_locked and (key_type == global.KeyItem.NORMAL or key_type == global.KeyItem.CRYSTAL) and not locked_to_weakeye and not locked_to_monsters:
     label3D.visible = true
     label3D.text = str(num_keys_unlock)
   tryProcessGlitchedPath()

@@ -59,7 +59,7 @@ func placeCautionWarning():
 func isActive(_debug = false):
     return visible and mySprite.visible
 
-func landed():
+func landed(_was_on_fallthrough_solid = false):
   if not is_big:
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()

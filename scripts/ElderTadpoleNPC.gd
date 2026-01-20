@@ -231,7 +231,7 @@ func setGlobalMemoryOfHasSpoken(set_vars = false):
 
 var have_i_spawned_heart = false
 # @override
-func landed():
+func landed(_was_on_fallthrough_solid = false):
   if have_i_spawned_heart:
     return
   if not have_i_processed:

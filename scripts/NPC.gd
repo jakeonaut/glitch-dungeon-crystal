@@ -221,7 +221,7 @@ func fallthroughCollisionActivate(_friend):
 var should_i_respond_to_smacks = true
 var was_smacked_and_should_talk = false
 export var is_very_tiny = false
-func getSmacked(_broom_origin = null, _silently = false, is_local_broom = true):
+func getSmacked(_broom_origin = null, silently = false, is_local_broom = true):
   # if not can_be_smacked:
   #   return false
   if not visible or is_very_tiny:
@@ -235,7 +235,7 @@ func getSmacked(_broom_origin = null, _silently = false, is_local_broom = true):
   if global.pauseGame or global.shouldRenderAsCinematic:
     return null
     
-  if smackSound: smackSound.play()
+  if smackSound and not silently: smackSound.play()
   var material = mySprite.material_override
   if material is ShaderMaterial:
     material.set_shader_param("time_influence", 35)
@@ -275,7 +275,7 @@ func glitchOut():
   glitchEnemy.glitchOut()
   queue_free()
 
-func activate(is_player, is_local_broom = false):
+func activate(is_player, _is_local_broom = false):
   if textBox.text_final == "":
     can_be_smacked = true
     return false
@@ -290,7 +290,7 @@ func activate(is_player, is_local_broom = false):
   return false
 
 var which_side_is_player_on = false
-func passiveActivate(delta, is_player, is_local_broom = false):
+func passiveActivate(delta, is_player, _is_local_broom = false):
   if not is_player:
     return
   if can_move and level.player.global_transform.origin.y < self.global_transform.origin.y + 0.5:

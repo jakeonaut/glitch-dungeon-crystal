@@ -207,6 +207,6 @@ func unsmack():
     chestSprite.material_override.set_shader_param("shake_power", 0.03)
   is_smacked = false
 
-func landed():
+func landed(_was_on_fallthrough_solid = false):
   override_press_move_left = false
   override_press_move_right = false

@@ -160,7 +160,7 @@ func collideWithWall(local_lv):
 #   return .collideWithCeiling(local_lv)
 
 var glitch_tiles_around_me = false
-func landed():
+func landed(_was_on_fallthrough_solid = false):
   .landed()
 
   if not is_extra_bouncy:
@@ -297,7 +297,7 @@ func glitchTilesAroundMe(margin = 0.25, rand_timer = false):
   for i in range(int(floor(bb)), int(ceil(tb))):
     for j in range(int(floor(lb)), int(ceil(rb))):
       var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
-      lt.rerandomizeTile(coords, lt.getRandomGlitchType(), rand_timer)
+      lt.rerandomizeTile(coords, lt.getRandomColorSuffix(), rand_timer)
 
 
 # @override

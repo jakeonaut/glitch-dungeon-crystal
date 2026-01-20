@@ -619,8 +619,8 @@ func _process(delta):
       unglitchTickleSprite(grandmaFishHatSprite)
   
   processPoisonWaterLogic(delta)
-  if pressingJump():
-    tryClearFallthroughCollisionSolid(self.global_transform.origin)
+  # if pressingJump():
+  #   tryClearFallthroughCollisionSolid(self.global_transform.origin)
 
   if is_smacked:
     smack_timer += (trueDelta * 22)
@@ -932,6 +932,7 @@ func tryDieToOffscreenCamera(_delta):
         DEATH_MARGIN = -1
         just_pacman_flipped_timer = 0
         was_walk_direction_flipped = shouldFlipWalkingDirection()
+        fall_timer = 0
         if global.roomEdgeVector == Vector3(1, 0, 0):
           global_transform.origin.x = getGameCamera().leftmost_x - DEATH_MARGIN
           if pressingMoveRight() or pressingMoveLeft():
@@ -945,18 +946,18 @@ func tryDieToOffscreenCamera(_delta):
         if global.roomEdgeVector == Vector3(0, 1, 0):
           global_transform.origin.y = getGameCamera().botmost_y - DEATH_MARGIN
 
-        if level.weird_pacman_wrapping:
-          just_pacman_flipped = true
-          gravitySound.pitch_scale = rand_range(0.8, 1.2)
-          gravitySound.play()
-          glitchTickle()
-          level.flipGravity(-1 * (grav / abs(grav)))
-          if glitch_form == global.GlitchForm.FEATHER:
-            lv.y *= 2
-            vv *= 2
-            linear_velocity.y *= 2
-        else:
-          glitchTickle()
+        # if level.weird_pacman_wrapping:
+        #   just_pacman_flipped = true
+        #   gravitySound.pitch_scale = rand_range(0.8, 1.2)
+        #   gravitySound.play()
+        #   glitchTickle()
+        #   level.flipGravity(-1 * (grav / abs(grav)))
+        #   if glitch_form == global.GlitchForm.FEATHER:
+        #     lv.y *= 2
+        #     vv *= 2
+        #     linear_velocity.y *= 2
+        # else:
+        glitchTickle()
         global.roomEdgeVector = null
         return
 
@@ -2792,7 +2793,7 @@ func processPoisonWaterLogic(_delta):
     
 var has_landed_since_recovering = true
 # @override
-func landed():
+func landed(_was_on_fallthrough_solid = false):
   if dig_direction == null or not dig_direction.y <= 0 or not pressingDown():
     dig_timer = 0
   .landed()
@@ -2823,11 +2824,11 @@ func landed():
     for _i in range(4):
       var tiles = getTilesBelow(lt)
       if tiles[0] != null:
-        lt.rerandomizeTile(tiles[0], lt.getRandomGlitchType())
+        lt.rerandomizeTile(tiles[0], lt.getRandomColorSuffix())
       if tiles[1] != null:
-        lt.rerandomizeTile(tiles[1], lt.getRandomGlitchType())
+        lt.rerandomizeTile(tiles[1], lt.getRandomColorSuffix())
       if tiles[2] != null:
-        lt.rerandomizeTile(tiles[2], lt.getRandomGlitchType())
+        lt.rerandomizeTile(tiles[2], lt.getRandomColorSuffix())
       global_transform.origin.y -= 1
     global_transform.origin.y = original_y
 

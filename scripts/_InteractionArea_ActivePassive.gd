@@ -42,7 +42,7 @@ func PassiveInteractActivate(delta, is_player = true, is_local_broom = false):
     if is_in_group("enemies") and not is_in_group("no_pushems") and is_player:
         getPlayer().enemyPushMe(delta, self.global_transform.origin, parent.glitch_form)
 
-func PassivePassiveInteractActivate(_delta, is_player = true, is_local_broom = false):
+func PassivePassiveInteractActivate(_delta, is_player = true, _is_local_broom = false):
     touchingPlayer = is_player
 
 func playerActivationAreaPassiveActivate():

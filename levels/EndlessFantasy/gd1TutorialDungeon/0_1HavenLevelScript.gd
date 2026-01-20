@@ -16,17 +16,17 @@ onready var anglerShortcut = get_node("AnglerShortcutDoor")
 onready var babaShortcut = get_node("BabaShortcutDoor")
 onready var claydolShortcut = get_node("ClaydolShortcutDoor")
 
-onready var glitchEnemy = get_node("GlitchEnemy")
-onready var glitchEnemy2 = get_node("GlitchEnemy2")
+# onready var glitchEnemy = get_node("GlitchEnemy")
+# onready var glitchEnemy2 = get_node("GlitchEnemy2")
 
 # @override
 func setUpRoomInitializationOverride():
   if not global.memory.has("anglerShortcut") or not global.memory["anglerShortcut"]:
     anglerShortcut.visible = false
-    featherSpell.visible = false
+    # featherSpell.visible = false
   else:
     anglerShortcut.visible = true
-    featherSpell.visible = true
+    # featherSpell.visible = true
   if not global.memory.has("babaShortcut") or not global.memory["babaShortcut"]:
     babaShortcut.visible = false
     invisibleSpell.visible = false
@@ -43,9 +43,9 @@ func setUpRoomInitializationOverride():
   if global.memory["hard_mode"] > 0:
     mapTreasure.visible = false
 
-  if global.demo_mode <= 0:
-    glitchEnemy.queue_free()
-    glitchEnemy2.queue_free()
+  # if global.demo_mode <= 0:
+  #   glitchEnemy.queue_free()
+  #   glitchEnemy2.queue_free()
 
   if global.memory["broomerang"] >= 2:
     broomUpgradeCrone.is_merchant = false

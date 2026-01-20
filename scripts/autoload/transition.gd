@@ -108,6 +108,7 @@ func startAdjacentLevelLoading():
   return
 
   # clear prev adjacent levels & loaders
+  # warning-ignore:UNREACHABLE_CODE
   for i in len(adjacent_levels):
     var prev_adjacent_level = adjacent_levels[i]
     if prev_adjacent_level != null and prev_adjacent_level.get_node("Viewport/level").getLevelName() != self.path:
@@ -144,6 +145,7 @@ func edge_fade_to(scn_path):
   return
 
   # aniPlayer.play("long_fade_no_change", -1, 2.0) # play the long transition animation
+  # warning-ignore:UNREACHABLE_CODE
   was_i_interrupted = false
   self.path = scn_path # store the scene path
   if global.roomEdgeVector != null:

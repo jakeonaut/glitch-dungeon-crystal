@@ -312,7 +312,7 @@ func pressingJump():
   return .pressingJump()
 
 # @override
-func landed():
+func landed(_was_on_fallthrough_solid = false):
   .landed()
   behavior_walking = false
   mySprite.max_frames = 2
@@ -437,7 +437,7 @@ func corruptMyself():
   level.player.visible = true
   queue_free()
 
-func fallthroughCollisionClear(exFriend):
+func fallthroughCollisionClear(exFriend, _was_it_a_jump = false):
   who_is_standing_on_me.erase(exFriend.name)
 
 func moveMyFriends(delta):

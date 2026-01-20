@@ -81,10 +81,7 @@ func performSpawn():
     for child in self.get_foreign_children():
       if myDynamicSpawnedChild and child == myDynamicSpawnedChild.get_ref():
         continue
-      bonkSound.play()
-      child.visible = true
-      if child.has_method("passiveActivate"):
-          child.passiveActivate(33, false)
+      activateChild(child)
 
     if spawned_object_res != null:
       if (myDynamicSpawnedChild == null or not myDynamicSpawnedChild.get_ref()):
@@ -97,12 +94,16 @@ func performSpawn():
             newObject.setAsParent(self)
         myDynamicSpawnedChild = weakref(newObject)
   else:
-    bonkSound.play()
-    var child = self.get_foreign_children()[num_hits - 1]
-    child.visible = true
-    if child.has_method("passiveActivate"):
-        child.passiveActivate(33, false)
+    activateChild(self.get_foreign_children()[num_hits - 1])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 # pass
+
+func activateChild(child):
+  bonkSound.play()
+  child.visible = true
+  if child.has_method("getSmacked") and not (child.smallInteractionArea != null and child.smallInteractionArea.is_in_group("enemies")):
+    child.getSmacked()
+  elif child.has_method("passiveActivate"):
+      child.passiveActivate(33, false)

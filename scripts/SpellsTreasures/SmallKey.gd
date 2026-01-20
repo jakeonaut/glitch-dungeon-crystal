@@ -52,7 +52,7 @@ func justPressedJump():
 func alignMySprite():
     pass
 
-func landed():
+func landed(_was_on_fallthrough_solid = false):
     get_node("SecretAnimationPlayer").play("land")
     landSound.play()
     jump_force /= 2

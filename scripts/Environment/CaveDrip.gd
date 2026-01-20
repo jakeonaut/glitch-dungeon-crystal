@@ -10,7 +10,7 @@ func _ready():
     true_terminal_vel = 45
         
 # @override
-func landed():
+func landed(_was_on_fallthrough_solid = false):
     .landed()
     queue_free()
     

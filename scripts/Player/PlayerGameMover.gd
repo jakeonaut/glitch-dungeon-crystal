@@ -534,7 +534,7 @@ var can_broomerang_warp = true
 var can_spawn_broomerang_bubbles = true
 var should_big_bump = false
 # @override
-func landed():
+func landed(_was_on_fallthrough_solid = false):
   if physics_state == PhysicsState.BEING_TOSSED:
     bigBump()
   .landed()
@@ -892,7 +892,7 @@ func glitchTilesAroundMe(margin = 0.25, rand_timer = false):
   for i in range(int(floor(bb)), int(ceil(tb))):
     for j in range(int(floor(lb)), int(ceil(rb))):
       var coords = getLevelTiles().world_to_map(Vector3(j, i, 0))
-      lt.rerandomizeTile(coords, lt.getRandomGlitchType(), rand_timer)
+      lt.rerandomizeTile(coords, lt.getRandomColorSuffix(), rand_timer)
 
 func rawPressingJump():
   return (
@@ -946,6 +946,7 @@ func actuallyApplyJump(play_sound = true):
 func jumpVvModification():
   if not isFeatherLike() and nesting_doll_state == global.NestingDoll.BABY and has_used_magic_lantern > 0:
     vv *= 1.1
+  .jumpVvModification()
 
 func magicJump():
   if physics_state == PhysicsState.BEING_TOSSED:

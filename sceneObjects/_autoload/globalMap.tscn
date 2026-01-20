@@ -582,8 +582,8 @@ can_nav_left = false
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false
-kill_after_glitch = true
 has_angel_statue = true
+kill_after_glitch = true
 
 [node name="ToxicJungle" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 7, 0 )
@@ -767,8 +767,8 @@ can_nav_left = false
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false
-kill_after_glitch = true
 has_angel_statue = true
+kill_after_glitch = true
 
 [node name="CricketCaves" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 0 )

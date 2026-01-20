@@ -17,7 +17,10 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 var player = null
 func getPlayer():
   if player == null:
-    player = level.player
+    if level.player == null:
+      player = level.get_node("Player") 
+    else:
+      player = level.player
   return player
 
 var tile_dict = {}
@@ -42,13 +45,12 @@ var reappear_spike_infection_time_limit = 5
 var stone_corrosion_timer = 0
 var stone_corrosion_time_limit = 5
 var my_tileset_type = global.TilesetType.DUNGEON
-var my_tileset_glitch_type = global.GlitchForm.NORMAL
 
-func setRandomTileNameOfType(newName, num_rand, cell_index, tile_orientation, offset = 0, glitch_type = global.GlitchForm.NORMAL, debug = false):
+func setRandomTileNameOfType(newName, num_rand, cell_index, tile_orientation, offset = 0, color_suffix_glitch = global._grey, debug = false):
   if "Cloud" in newName or "cloud" in newName:
     return
   if debug:
-    print("hey!!!: " + str(cell_index) + ", " + str(num_rand) + ", " + str(glitch_type))
+    print("hey!!!: " + str(cell_index) + ", " + str(num_rand) + ", " + str(color_suffix_glitch))
   var rand_int = randi() % num_rand
   # make forest spirals and yellow holes spawn a little less often
   if newName == "BrickSolid" and rand_int == 2:
@@ -58,25 +60,14 @@ func setRandomTileNameOfType(newName, num_rand, cell_index, tile_orientation, of
   if "TransientTile" in newName:
     newName = "SolidTransientTile"
     rand_int = 0
-  setTileNameNum(newName, rand_int + offset, cell_index, tile_orientation, glitch_type, debug)
+  setTileNameNum(newName, rand_int + offset, cell_index, tile_orientation, color_suffix_glitch, debug)
 
-func setTileNameNum(newName, num, cell_index, tile_orientation, glitch_type = global.GlitchForm.NORMAL, debug = false):
+func setTileNameNum(newName, num, cell_index, tile_orientation, color_suffix_glitch = global._grey, debug = false):
   if num != 0:
     newName = newName + str(num+1) # 0 index, so add one
 
   if not "FragileBrickSolid" in newName and not "TransparentGlitchTile" in newName:
-    # TODO(jaketrower): BE WARNED, this is a bit confusing, we are using glitch_type here to set the tileset type
-    # and we named them "_green", etc. but it's more like "_forest" etc. 
-    if glitch_type == global.GlitchForm.FEATHER:
-      newName = newName + "_green"
-    elif glitch_type == global.GlitchForm.FLOOR:
-      newName = newName + "_red"
-    elif glitch_type == global.GlitchForm.LADDER:
-      newName = newName + "_yellow"
-    elif glitch_type == global.GlitchForm.INVISIBLE:
-      newName = newName + "_black"
-    elif glitch_type == global.GlitchForm.WALK_THROUGH_WALLS: 
-      newName = newName + "_white"
+    newName = newName + color_suffix_glitch
 
   var new_tile_type = mesh_library.find_item_by_name(newName)
   if debug:
@@ -131,26 +122,29 @@ func queueSausageDreamFadeAwayDifference(newLevelTiles, should_fade_away = true,
   sausageNewLevelTiles = newLevelTiles
 
 func buildRandomTiles():
+  var color_suffix_glitch = global.getColorSuffixFromTilesetType(my_tileset_type, getPlayer().glitch_form)
+  if cosmeticLevelTiles: cosmeticLevelTiles.buildTilesFromScratch(color_suffix_glitch)
+
   var cell_indices = get_used_cells()
   for i in range(len(cell_indices)):
     var cell_index = cell_indices[i]
-    buildSingleRandomTile(cell_index, my_tileset_glitch_type)
+    buildSingleRandomTile(cell_index, color_suffix_glitch)
 
 func setTileDictAndGlitchSpecificDict(index, name, tile_orientation):
   tile_dict[index] = [name, tile_orientation]
   
   if 0 == index.z and not "TransientTile" in name:
     normalGlitch_tiles[index] = [name, tile_orientation]
-  elif -1 == index.z or global.getGlitchTypeFromTileName(name) == global.GlitchForm.FLOOR:
+  elif -1 == index.z or global.getColorSuffixFromTileName(name) == global._red:
     floorGlitch_tiles[index] = [name, tile_orientation]
-  elif -2 == index.z or global.getGlitchTypeFromTileName(name) == global.GlitchForm.FEATHER:
+  elif -2 == index.z or global.getColorSuffixFromTileName(name) == global._green:
     featherGlitch_tiles[index] = [name, tile_orientation]
-  elif -3 == index.z or global.getGlitchTypeFromTileName(name) == global.GlitchForm.INVISIBLE:
+  elif -3 == index.z or global.getColorSuffixFromTileName(name) == global._black:
     invisibleGlitch_tiles[index] = [name, tile_orientation]
-  elif -4 == index.z or global.getGlitchTypeFromTileName(name) == global.GlitchForm.LADDER:
+  elif -4 == index.z or global.getColorSuffixFromTileName(name) == global._yellow:
     ladderGlitch_tiles[index] = [name, tile_orientation]
 
-func buildSingleRandomTile(cell_index, glitch_type):
+func buildSingleRandomTile(cell_index, color_suffix_glitch):
   var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
   if tile_type == INVALID_CELL_ITEM:
     return
@@ -163,18 +157,18 @@ func buildSingleRandomTile(cell_index, glitch_type):
     if bottom_neighbor_tile_type != -1: # we have a bottom neighbor!!!
       if top_neighbor_tile_type == -1 and grow_tile_upward: # we have no top neighbor...
         var new_index = Vector3(cell_index.x, cell_index.y+1, cell_index.z)
-        setRandomTileNameOfType("BrickSolidRoof", 7, new_index, tile_orientation, 0, glitch_type)
+        setRandomTileNameOfType("BrickSolidRoof", 7, new_index, tile_orientation, 0, color_suffix_glitch)
         var type = get_cell_item(new_index.x, new_index.y, new_index.z)
         if type != INVALID_CELL_ITEM:
           var name = mesh_library.get_item_name(type)
           setTileDictAndGlitchSpecificDict(new_index, name, tile_orientation)
-      setRandomTileNameOfType("BrickSolid", 8, cell_index, tile_orientation, 0, glitch_type)
+      setRandomTileNameOfType("BrickSolid", 8, cell_index, tile_orientation, 0, color_suffix_glitch)
     else:
-      setRandomTileNameOfType("BrickSolidCeil", 6, cell_index, tile_orientation, 0, glitch_type)
+      setRandomTileNameOfType("BrickSolidCeil", 6, cell_index, tile_orientation, 0, color_suffix_glitch)
   elif tile_name == "FragileBrickSolid":
     setRandomTileNameOfType("FragileBrickSolid", 8, cell_index, tile_orientation, 0)
   elif "TransientTile" in tile_name:
-    setRandomTileNameOfType(tile_name, 1, cell_index, tile_orientation, 0, global.getGlitchTypeFromTileName(tile_name))
+    setRandomTileNameOfType(tile_name, 1, cell_index, tile_orientation, 0, global.getColorSuffixFromTileName(tile_name))
   elif tile_name == "BrickSolid":
     var skip_level_top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+2, cell_index.z)
     var skip_top_name = mesh_library.get_item_name(skip_level_top_neighbor_tile_type) if skip_level_top_neighbor_tile_type != -1 else ""
@@ -195,26 +189,26 @@ func buildSingleRandomTile(cell_index, glitch_type):
       var left_neighbor_tile_type = get_cell_item(cell_index.x-1, cell_index.y, cell_index.z)
       var right_neighbor_tile_type = get_cell_item(cell_index.x+1, cell_index.y, cell_index.z)
       if left_neighbor_tile_type == -1: # no left neighbor
-        setRandomTileNameOfType("BrickSolidTopLeft", 2, cell_index, tile_orientation, 0, glitch_type)
+        setRandomTileNameOfType("BrickSolidTopLeft", 2, cell_index, tile_orientation, 0, color_suffix_glitch)
       elif right_neighbor_tile_type == -1: # no right neighbor
-        setRandomTileNameOfType("BrickSolidTopRight", 2, cell_index, tile_orientation, 0, glitch_type)
+        setRandomTileNameOfType("BrickSolidTopRight", 2, cell_index, tile_orientation, 0, color_suffix_glitch)
       else:
-        setRandomTileNameOfType("BrickSolidTop", 8, cell_index, tile_orientation, 0, glitch_type)
+        setRandomTileNameOfType("BrickSolidTop", 8, cell_index, tile_orientation, 0, color_suffix_glitch)
     # we have a top neighbor, but no bottom neighbor
     elif bottom_neighbor_tile_type == -1 and skip_level_bottom_neighbor_tile_type == -1: 
-      setRandomTileNameOfType("BrickSolidBot", 9, cell_index, tile_orientation, 0, glitch_type)
+      setRandomTileNameOfType("BrickSolidBot", 9, cell_index, tile_orientation, 0, color_suffix_glitch)
       # DESERT MODIFICATION 
       # if my_tileset_type == global.TilesetType.DESERT:
       #   skip_level_bottom_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y-2, cell_index.z)
       #   if skip_level_bottom_neighbor_tile_type != -1: # we have a skip level bottom... neighbor...
       #     var new_index = Vector3(cell_index.x, cell_index.y-1, cell_index.z)
-      #     setRandomTileNameOfType("BrickSolidBot", 9, new_index, tile_orientation, 0, glitch_type)
+      #     setRandomTileNameOfType("BrickSolidBot", 9, new_index, tile_orientation, 0, color_suffix_glitch)
       #     var type = get_cell_item(new_index.x, new_index.y, new_index.z)
       #     if type != INVALID_CELL_ITEM:
       #       var name = mesh_library.get_item_name(type)
       #       setTileDictAndGlitchSpecificDict(new_index, name, tile_orientation)
     else:
-      setRandomTileNameOfType("BrickSolid", 8, cell_index, tile_orientation, 0, glitch_type)
+      setRandomTileNameOfType("BrickSolid", 8, cell_index, tile_orientation, 0, color_suffix_glitch)
   elif tile_name == "PinkCloudSemisolid":
     var top_neighbor_tile_type = get_cell_item(cell_index.x, cell_index.y+1, cell_index.z)
     if top_neighbor_tile_type == -1: # no top neighbor
@@ -281,18 +275,18 @@ var DISSOLVING_STONE1 = 325
 var DISSOLVING_STONE2 = 326
 var DISSOLVING_STONE3 = 327
 
-func getRandomGlitchType():
+func getRandomColorSuffix():
   if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE:
-    return level.player.glitch_form if level.player.glitch_form != global.GlitchForm.FLOOR else global.GlitchForm.NORMAL
+    return global.getColorSuffixFromTilesetType(my_tileset_type, getPlayer().glitch_form)
   var rand_int = randi() % 4
   if rand_int == 0:
-    return global.GlitchForm.NORMAL
+    return global._grey
   if rand_int == 1:
-    return global.GlitchForm.FEATHER
+    return global._green
   if rand_int == 2:
-    return global.GlitchForm.FLOOR
+    return global._red
   if rand_int == 3:
-    return global.GlitchForm.LADDER
+    return global._yellow
 
 func _process(delta):
   var trueDelta = delta
@@ -309,14 +303,14 @@ func _process(delta):
         var cell_index = fading_in_sausage_indices.pop_back()
         var item = sausageNewLevelTiles.get_cell_item(cell_index.x, cell_index.y, cell_index.z)
         set_cell_item(cell_index.x, cell_index.y, cell_index.z, item)
-        randomizeTile(cell_index, getRandomGlitchType())
+        randomizeTile(cell_index, getRandomColorSuffix())
       else:
         # TODO(jaketrower): FADE OUT GAME MOVERS, GameMovers in new scene can have .should_fade_in = true
         pass
 
   # rerandomize_timer += (delta * 22)
   # if rerandomize_timer >= rerandomize_time_limit:
-  #   rerandomizeTile(Vector3(0, 0, 0), getRandomGlitchType())
+  #   rerandomizeTile(Vector3(0, 0, 0), getRandomColorSuffix())
   #   rerandomize_timer = 0
   
   # TODO(jake): This Cutscene stuff is only for hitting the end of level geode
@@ -325,7 +319,7 @@ func _process(delta):
     if unrandomize_timer >= unrandomize_time_limit:
       unrandomize_timer = 0
       unrandomized_num += unrandomized_num_counter
-      if level.player.pressingDown():
+      if getPlayer().pressingDown():
         unrandomized_num += 1
       for _i in range(floor(unrandomized_num)):
         var cell_index = unrandomize_cell_indices[unrandomize_cell_index]
@@ -353,7 +347,7 @@ func _process(delta):
     unrandomize_timer += (delta*22)
     if unrandomize_timer >= unrandomize_time_limit:
       unrandomize_timer = 0
-      if not level.player.pressingDown():
+      if not getPlayer().pressingDown():
         unrandomized_num -= unrandomized_num_counter/2
       for _i in range(ceil(unrandomized_num)):
         var cell_index = unrandomize_cell_indices[unrandomize_cell_index]
@@ -380,11 +374,11 @@ func _process(delta):
     randomize_timer = 0
     if randomize_num > tile_dict.keys().size():
       for i in range(tile_dict.keys().size()):
-          randomizeTile(tile_dict.keys()[i], getRandomGlitchType())
+          randomizeTile(tile_dict.keys()[i], getRandomColorSuffix())
     else:
       for _i in range(randomize_num):
         var rand_key = tile_dict.keys()[randi() % tile_dict.size()]
-        randomizeTile(rand_key, getRandomGlitchType())
+        randomizeTile(rand_key, getRandomColorSuffix())
       randomize_num += randomize_num_counter
   # TODO(jaketrower): if we want color palette changing to happen over time, it should happen here
 
@@ -647,7 +641,7 @@ func purifyAllFragileBrickSolids(summon_smoke_clouds = true):
     var tile_orientation = get_cell_item_orientation(cell_index.x, cell_index.y, cell_index.z)
     if isTileFragileSolid(tile_type):
       # removeTile(cell_index)
-      setTileNameNum("TransparentGlitchTile", 0, cell_index, tile_orientation, global.GlitchForm.NORMAL)
+      setTileNameNum("TransparentGlitchTile", 0, cell_index, tile_orientation, global._grey)
       var tile_pos = self.map_to_world(cell_index.x, cell_index.y, cell_index.z)
       if summon_smoke_clouds:
         level.summonSmokeClouds(tile_pos, 2, false, true)
@@ -685,7 +679,8 @@ func sweepUpSand(coords):
 
 func addTile(tile_id, target, _addToLevelZone = true, is_transient = false, transient_time_start = 0):
   set_cell_item(target.x, target.y, target.z, tile_id)
-  randomizeTile(target, my_tileset_glitch_type)
+  var color_suffix_glitch = global.getColorSuffixFromTilesetType(my_tileset_type, getPlayer().glitch_form)
+  randomizeTile(target, color_suffix_glitch)
   var name = mesh_library.get_item_name(tile_id)
   tile_dict[target] = [name, 0]
   if is_transient:
@@ -702,7 +697,8 @@ func removeTile(key, removeFromLevelZone = true):
 
 func cloneTile(source, target, is_transient = false, transient_time_start = 0):
   set_cell_item(target.x, target.y, target.z, get_cell_item(source.x, source.y, source.z))
-  randomizeTile(target, my_tileset_glitch_type)
+  var color_suffix_glitch = global.getColorSuffixFromTilesetType(my_tileset_type, getPlayer().glitch_form)
+  randomizeTile(target, color_suffix_glitch)
   tile_dict[target] = tile_dict[source]
   if is_transient:
     transient_tiles.append([target, transient_time_start])
@@ -717,7 +713,7 @@ func tempGlitchMoveTile(source, target):
   removeTile(source, false)
   return true
 
-func randomizeTile(cell_index, glitch_type = global.GlitchForm.NORMAL, debug = false):
+func randomizeTile(cell_index, color_suffix_glitch = global._grey, debug = false):
   var tile_type = get_cell_item(cell_index.x, cell_index.y, cell_index.z)
   if debug:
     print("tile_type: " + str(tile_type))
@@ -731,19 +727,19 @@ func randomizeTile(cell_index, glitch_type = global.GlitchForm.NORMAL, debug = f
   if "FragileBrickSolid" in tile_name:
     setRandomTileNameOfType("FragileBrickSolid", 8, cell_index, tile_orientation, 0)
   elif "BrickSolidRoof" in tile_name:
-    setRandomTileNameOfType("BrickSolidRoof", 7, cell_index, tile_orientation, 0, glitch_type)
+    setRandomTileNameOfType("BrickSolidRoof", 7, cell_index, tile_orientation, 0, color_suffix_glitch)
   elif "BrickSolidCeil" in tile_name:
-    setRandomTileNameOfType("BrickSolidCeil", 6, cell_index, tile_orientation, 0, glitch_type)
+    setRandomTileNameOfType("BrickSolidCeil", 6, cell_index, tile_orientation, 0, color_suffix_glitch)
   elif "BrickSolidTopLeft" in tile_name:
-    setRandomTileNameOfType("BrickSolidTopLeft", 2, cell_index, tile_orientation, 0, glitch_type)
+    setRandomTileNameOfType("BrickSolidTopLeft", 2, cell_index, tile_orientation, 0, color_suffix_glitch)
   elif "BrickSolidTopRight" in tile_name:
-    setRandomTileNameOfType("BrickSolidTopRight", 2, cell_index, tile_orientation, 0, glitch_type)
+    setRandomTileNameOfType("BrickSolidTopRight", 2, cell_index, tile_orientation, 0, color_suffix_glitch)
   elif "BrickSolidTop" in tile_name:
-    setRandomTileNameOfType("BrickSolidTop", 8, cell_index, tile_orientation, 0, glitch_type)
+    setRandomTileNameOfType("BrickSolidTop", 8, cell_index, tile_orientation, 0, color_suffix_glitch)
   elif "BrickSolidBot" in tile_name:
-    setRandomTileNameOfType("BrickSolidBot", 9, cell_index, tile_orientation, 0, glitch_type)
+    setRandomTileNameOfType("BrickSolidBot", 9, cell_index, tile_orientation, 0, color_suffix_glitch)
   elif "BrickSolid" in tile_name:
-    setRandomTileNameOfType("BrickSolid", 8, cell_index, tile_orientation, 0, glitch_type, debug)
+    setRandomTileNameOfType("BrickSolid", 8, cell_index, tile_orientation, 0, color_suffix_glitch, debug)
   elif "PinkCloudSemisolidTop" in tile_name:
     setRandomTileNameOfType("PinkCloudSemisolidTop", 1, cell_index, tile_orientation)
   elif "PinkCloudSemisolid" in tile_name:
@@ -791,18 +787,18 @@ func clearRandomTileTimers():
     if randTileTimerRef and randTileTimerRef.get_ref():
       randTileTimerRef.get_ref().queue_free()
 
-func rerandomizeTile(cell_index, glitch_type, rand_timer = false):
+func rerandomizeTile(cell_index, color_suffix_glitch, rand_timer = false):
   if rand_timer: 
     var timer = Timer.new() # get_tree().create_timer(rand_range(0, 1))
     add_child(timer)
     timer.wait_time = rand_range(0, 1)
     timer.one_shot = true
     timer.start()
-    timer.connect("timeout", self, "rerandomizeTile", [ cell_index, glitch_type, false ])
+    timer.connect("timeout", self, "rerandomizeTile", [ cell_index, color_suffix_glitch, false ])
     rand_tile_timers.push_back(weakref(timer))
     return
   if unrandomizeTile(cell_index):
-    randomizeTile(cell_index, glitch_type)
+    randomizeTile(cell_index, color_suffix_glitch)
   
 export var can_change_color = true
 func changeColorPalette(palette, _palette_alt = null):
@@ -845,11 +841,11 @@ func changeColorPalette(palette, _palette_alt = null):
     #   palette_to_use = white_palette
 
     var material = mesh.surface_get_material(0)
-    var color_suffix = global.getColorSuffixFromTilesetType(my_tileset_type)
+    var color_suffix = global.getColorSuffixFromTilesetType(my_tileset_type, getPlayer().glitch_form)
     if material != null and material is SpatialMaterial:
       var next_material = material.next_pass
       if next_material != null and next_material is ShaderMaterial:
-        if (color_suffix == "" and not "_" in tile_name) or (color_suffix in tile_name):
+        if (color_suffix == global._grey and not "_" in tile_name) or (color_suffix in tile_name):
           next_material.set_shader_param("base_palette", palette_to_use)
     # mesh.set_material(material)
     # mesh_library.set_item_mesh(item_id, mesh)
@@ -874,18 +870,16 @@ func setTileset(tileset_type, properly_set_tiles = true):
     red_palette = global.red_tidepool_palette
     yellow_palette = global.yellow_dungeon_palette
     black_palette = global.black_dungeon_palette
-  elif tileset_type == global.TilesetType.PRIMORDIAL_OOZE:
-    my_tileset_glitch_type = level.player.glitch_form
+  # elif tileset_type == global.TilesetType.PRIMORDIAL_OOZE:
+  #   my_tileset_glitch_type = getPlayer().glitch_form
   elif tileset_type == global.TilesetType.HOUSE:
-    # TODO(jaketrower): BE WARNED, this is a bit confusing, we are using glitch_type here to set the tileset type
+    # TODO(jaketrower): BE WARNED, this is a bit confusing, we are using color_suffix_glitch here to set the tileset type
     # and we named them "_green", etc. but it's more like "_forest" etc. 
-    my_tileset_glitch_type = global.GlitchForm.FLOOR
     grey_palette = global.grey_palette_town
     green_palette = global.green_tidepool_palette
     # black_palette = global.black_palette_town
     black_palette = global.black_tidepool_palette
   elif tileset_type == global.TilesetType.FARM_HOUSE:
-    my_tileset_glitch_type = global.GlitchForm.FLOOR
     grey_palette = global.red_palette
     green_palette = global.red_palette
     red_palette = global.red_palette
@@ -893,36 +887,31 @@ func setTileset(tileset_type, properly_set_tiles = true):
     yellow_palette = global.red_palette
     black_palette = global.red_palette
   elif tileset_type == global.TilesetType.POISON_HOUSE:
-    my_tileset_glitch_type = global.GlitchForm.FLOOR
     grey_palette = global.grey_black_palette
     green_palette = global.green_black_palette
     red_palette = global.red_black_palette
     yellow_palette = global.yellow_black_palette
     black_palette = global.black_palette
-  elif tileset_type == global.TilesetType.FOREST or tileset_type == global.TilesetType.AUTUMN_FOREST:
-    my_tileset_glitch_type = global.GlitchForm.FEATHER
+  # elif tileset_type == global.TilesetType.FOREST or tileset_type == global.TilesetType.AUTUMN_FOREST:
+  #   my_tileset_glitch_type = global.GlitchForm.FEATHER
   elif tileset_type == global.TilesetType.DESERT:
-    my_tileset_glitch_type = global.GlitchForm.LADDER
     green_palette = global.green_tidepool_palette
   elif tileset_type == global.TilesetType.BEACH:
-    my_tileset_glitch_type = global.GlitchForm.FEATHER
     grey_palette = global.tidepool_palette
     green_palette = global.green_tidepool_palette
     red_palette = global.red_tidepool_palette
     yellow_palette = global.yellow_tidepool_palette
     black_palette = global.black_tidepool_palette
   elif tileset_type == global.TilesetType.POISON_FOREST:
-    my_tileset_glitch_type = global.GlitchForm.FEATHER
     grey_palette = global.grey_black_palette
     green_palette = global.green_black_palette
     red_palette = global.red_black_palette
     yellow_palette = global.yellow_black_palette
     black_palette = global.black_palette
-  elif tileset_type == global.TilesetType.ALIEN:
-    my_tileset_glitch_type = global.GlitchForm.INVISIBLE
-    # black_palette = global.black_palette_alien
+  # elif tileset_type == global.TilesetType.ALIEN:
+  #   my_tileset_glitch_type = global.GlitchForm.INVISIBLE
+  #   # black_palette = global.black_palette_alien
   elif tileset_type == global.TilesetType.GLITCH_WORLD:
-    my_tileset_glitch_type = global.GlitchForm.WALK_THROUGH_WALLS
     level.setTorchSpriteFrame(3)
 
   if properly_set_tiles:

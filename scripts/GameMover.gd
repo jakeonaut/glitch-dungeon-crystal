@@ -32,6 +32,7 @@ func getGameCamera():
 
 onready var smallInteractionArea = get_node("SmallInteractionArea") if has_node("SmallInteractionArea") else null
 onready var interactionArea = get_node("InteractionArea") if has_node("InteractionArea") else null
+var kinda_on_ground_fallthrough_solid = null
 onready var aniPlayer = get_node("AnimationPlayer") if has_node("AnimationPlayer") else null
 onready var bounceAniPlayer = get_node("BounceAnimationPlayer") if has_node("BounceAnimationPlayer") else null
 onready var mySprite = get_node("SpriteContainer/InnerSpriteContainer/Sprite3D") if has_node("SpriteContainer/InnerSpriteContainer/Sprite3D") else get_node("Sprite3D")
@@ -355,8 +356,14 @@ func processPhysics(delta):
         # else:
         aniPlayer.queue("fall" if isFeatherLike() else "jump")
 
+  if short_lived_vv_multiplier != 1.0 and short_lived_vv_multiplier_timer < short_lived_vv_multiplier_time_limit:
+    short_lived_vv_multiplier_timer += (delta*11)
+    if short_lived_vv_multiplier_timer >= short_lived_vv_multiplier_time_limit:
+      short_lived_vv_multiplier = 1.0
+
   if was_on_ground and not on_ground: # I just fell off platform!
     was_just_on_ground_timer = 0
+    kinda_on_ground_fallthrough_solid = interactionArea.prev_prev_fallthrough_collision_area if interactionArea and interactionArea.prev_prev_fallthrough_collision_area != null else null
     if prev_glitch_form == global.GlitchForm.FLOOR and glitch_form != global.GlitchForm.FLOOR:
       was_just_on_ground_timer = -8
     if "jump" in aa:
@@ -368,6 +375,7 @@ func processPhysics(delta):
     if can_turn_move:
       if on_ground:
         was_just_on_ground_timer = 0
+        kinda_on_ground_fallthrough_solid = interactionArea.prev_prev_fallthrough_collision_area if interactionArea and interactionArea.prev_prev_fallthrough_collision_area != null else null
       elif was_just_on_ground_timer == 0:
         # print("1 was_just_on_ground_timer 1")
         was_just_on_ground_timer = 1
@@ -375,8 +383,10 @@ func processPhysics(delta):
         # print("MAX was_just_on_ground_timer MAX")
         was_just_on_ground_timer = was_just_on_ground_time_limit + 1
   else:
-    if was_just_on_ground_timer <= was_just_on_ground_time_limit:
+    if was_just_on_ground_timer < was_just_on_ground_time_limit:
       was_just_on_ground_timer += (delta*22)
+      if was_just_on_ground_timer >= was_just_on_ground_time_limit:
+        kinda_on_ground_fallthrough_solid = null
       # if glitch_form == global.GlitchForm.FEATHER and not should_magic_jump:
       #   was_just_on_ground_timer += (delta*22)
   prev_glitch_form = glitch_form
@@ -395,17 +405,22 @@ func playLandAnimation():
   aniPlayer.clear_queue()
   aniPlayer.play("land", -1, 0.5 if isFeatherLike() else 1.5)
 
-func tryClearFallthroughCollisionSolid(_mostlyIgnoredOriginPosition):
+func tryClearFallthroughCollisionSolid(_mostlyIgnoredOriginPosition, was_it_a_jump = false):
   if self != level.player:
     return
   was_fallthrough_area_collision_triggered = false
   if interactionArea and interactionArea.prev_fallthrough_collision_area != null and interactionArea.prev_fallthrough_collision_area.get_ref() and \
       interactionArea.prev_fallthrough_collision_area.get_ref().get_node("..").has_method("fallthroughCollisionClear"):
-    interactionArea.prev_fallthrough_collision_area.get_ref().get_node("..").fallthroughCollisionClear(self)
+    var prevFallthroughCollisionArea = interactionArea.prev_fallthrough_collision_area.get_ref()
+    interactionArea.prev_fallthrough_collision_area = null
+    prevFallthroughCollisionArea.get_node("..").fallthroughCollisionClear(self, was_it_a_jump)
+  elif kinda_on_ground_fallthrough_solid != null and kinda_on_ground_fallthrough_solid.get_ref() != null:
+    kinda_on_ground_fallthrough_solid.get_ref().get_node("..").fallthroughCollisionClear(self, was_it_a_jump)
+  kinda_on_ground_fallthrough_solid = null
 
 var can_update_last_grounded_pos = true
-func processLand():
-  landed()
+func processLand(was_on_fallthrough_solid = false):
+  landed(was_on_fallthrough_solid)
   if (can_update_last_grounded_pos and getGameCamera().rightmost_x == -999 or not (
     global_transform.origin.y > getGameCamera().topmost_y - 1 or \
     global_transform.origin.x > getGameCamera().rightmost_x - 1 or \
@@ -690,6 +705,7 @@ func processInputs(delta):
     else:
       vv = 0
       was_just_on_ground_timer = 0
+    kinda_on_ground_fallthrough_solid = null
     was_just_walking_on_wall = true
     was_just_walking_on_wall_timer = 0
   if not was_walking_into_wall and isWalkingIntoWall() and glitch_form == global.GlitchForm.LADDER:
@@ -950,7 +966,7 @@ var has_just_glitch_swapped = false
 var has_just_glitch_swapped_timer = 0
 var has_just_glitch_swapped_time_limit = 5
 func actuallyApplyJump(play_sound = true):
-  tryClearFallthroughCollisionSolid(self.global_transform.origin)
+  tryClearFallthroughCollisionSolid(self.global_transform.origin, true)
   if isFeatherLike():
     vv = jump_force / 1.1 # jump_force / 1.9
     # if not weak_feather_dbl_jump and feather_jump_timer < 5:
@@ -987,8 +1003,12 @@ func actuallyApplyJump(play_sound = true):
   was_fallthrough_area_collision_triggered = false
   has_just_jumped_timer = 0 
 
+var short_lived_vv_multiplier = 1.0
+var short_lived_vv_multiplier_timer = 0
+var short_lived_vv_multiplier_time_limit = 10
 func jumpVvModification():
-  pass
+  if short_lived_vv_multiplier != 1.0:
+    vv *= short_lived_vv_multiplier
 
 func playJumpSound():
   jumpSound.play()
@@ -1667,7 +1687,8 @@ func playLandSound():
     landSound.play()
 
 var has_water_double_jumped = false
-func landed():
+func landed(was_on_fallthrough_solid = false):
+  short_lived_vv_multiplier = 1.0
   jump_squat_jump_input_timer = 0
   has_water_double_jumped = false
   var quiet_the_fall_sound = true
@@ -1677,7 +1698,7 @@ func landed():
     pauseAnimation = false
   if not pauseAnimation and aniPlayer != null and not global.pauseGame and last_vv < 1 and aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart":
     aniPlayer.clear_queue()
-    if fall_timer > fall_time_max and not glitch_form == global.GlitchForm.FEATHER:
+    if fall_timer > fall_time_max and not glitch_form == global.GlitchForm.FEATHER and not was_on_fallthrough_solid:
       quiet_the_fall_sound = false
       aniPlayer.stop()
       aniPlayer.clear_queue()

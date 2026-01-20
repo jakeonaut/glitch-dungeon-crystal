@@ -94,7 +94,7 @@ func isFarFromHome():
     
 
 # @override
-func landed():
+func landed(_was_on_fallthrough_solid = false):
     .landed()
     if chicken_state == ChickenState.AFRAID:
         return

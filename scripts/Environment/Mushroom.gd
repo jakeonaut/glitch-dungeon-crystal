@@ -8,6 +8,7 @@ var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
 onready var mySprite = get_node("Sprite3D")
 onready var fallthroughSolid = get_node("FallthroughSolid")
 onready var bounceSound = get_node("BounceSound")
+onready var landSound = get_node("BounceLandSound")
 var had_already_been_collided = false
 var is_being_collided = false
 var should_wiggle = false
@@ -32,35 +33,32 @@ func _ready():
 
 
 func fallthroughCollisionActivate(possible_game_mover):
-    possible_game_mover.landed()
+    # possible_game_mover.landed()
     if not possible_game_mover.was_on_ground and not should_wiggle:
         wiggle(possible_game_mover)
-        # if level.player.nesting_doll_state == global.NestingDoll.BABY:
-        if possible_game_mover != null and possible_game_mover == level.player and not level.player.pressingDown():
+        landSound.play()
+
+func fallthroughCollisionClear(exFriend, was_it_a_jump = false):
+    if was_it_a_jump:
+        if not should_wiggle: wiggle(exFriend)
+        if exFriend != null and exFriend == getPlayer() and not getPlayer().pressingDown():
             getPlayer().camera_target_y_pos = getPlayer().global_transform.origin.y
-            var jump_val = 14
             if is_mini:
-                jump_val = 7
-            elif getPlayer().nesting_doll_state == global.NestingDoll.MATRIARCH:
-                jump_val = 18
-            if possible_game_mover.grav < 0:
-                jump_val *= -1
-            if not getPlayer().pressingJump():
-                jump_val *= 0.75
-            if getPlayer().nesting_doll_state == global.NestingDoll.BABY and not getPlayer().glitch_form == global.GlitchForm.LADDER:
-                jump_val *= 2
-            possible_game_mover.magicJump()
-            getPlayer().linear_velocity.y = jump_val
-            getPlayer().lv.y = jump_val
-            getPlayer().vv = getPlayer().up.dot(getPlayer().lv)
-            # getPlayer().physics_vars.applyHalfGrav = true
-            # getPlayer().physics_vars.applyHalfGravTimer = 3
+                exFriend.short_lived_vv_multiplier = 1.5
+            else:
+                exFriend.short_lived_vv_multiplier = 1.75
+            exFriend.short_lived_vv_multiplier_timer = 0
+            exFriend.short_lived_vv_multiplier_time_limit = 0.5
+            if exFriend.glitch_form == global.GlitchForm.FEATHER:
+                exFriend.short_lived_vv_multiplier_time_limit = 5.0
+                exFriend.short_lived_vv_multiplier *= 0.75
             if is_mini:
                 bounceSound.pitch_scale = rand_range(1.5, 2.0)
             else:
                 bounceSound.pitch_scale = rand_range(0.8, 1.5)
             bounceSound.play()
             getPlayer().camera_target_y_pos = getPlayer().global_transform.origin.y
+
 
 func wiggle(_possible_game_mover):
     should_wiggle = true

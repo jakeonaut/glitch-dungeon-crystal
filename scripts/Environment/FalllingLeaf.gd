@@ -67,7 +67,7 @@ func _process(delta):
             queue_free()
 
 # @override
-func landed():
+func landed(_was_on_fallthrough_solid = false):
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("disappear")
