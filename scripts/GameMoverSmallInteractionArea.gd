@@ -3,6 +3,8 @@ extends Area
 onready var parent = get_parent()
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
+var prev_fallthrough_collision_area = null
+var prev_prev_fallthrough_collision_area = null
 var is_touching_enemy = false
 var is_touching_water = false
 var is_touching_waterfall = false

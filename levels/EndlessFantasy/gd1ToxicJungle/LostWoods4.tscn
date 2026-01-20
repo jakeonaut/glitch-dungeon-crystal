@@ -667,10 +667,10 @@ __meta__ = {
 }
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 23 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.86146, -2.9, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.86146, 0.0999999, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.1384, -4, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1384, -1, 0 )
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/001PoisonShroomCove.tscn"
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
@@ -751,13 +751,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6371, -3, 0 )
 bbText = "NPC.SporeCreature.7"
 
 [node name="Furbo" parent="Viewport/level" instance=ExtResource( 28 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3, 0 )
 
 [node name="Furbo2" parent="Viewport/level" instance=ExtResource( 28 )]
 grav = 0
 
 [node name="FanPlant" parent="Viewport/level" instance=ExtResource( 30 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -3, 0 )
 is_fan_spinning = true
 
 [node name="Mushroom4" parent="Viewport/level" instance=ExtResource( 25 )]

@@ -2,6 +2,8 @@ extends Spatial
 
 #extends "res://scripts/_InteractionAreaEvent_template.gd"
 
+var prev_fallthrough_collision_area = null
+var prev_prev_fallthrough_collision_area = null
 func isActive(_debug=false):
     # @override me #.isActive()
     return true

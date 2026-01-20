@@ -1,5 +1,7 @@
 extends Area
 
+var prev_fallthrough_collision_area = null
+var prev_prev_fallthrough_collision_area = null
 var touchingPlayer = false
 var wasTouchingPlayer = false
 var is_touching_water = false

@@ -13,6 +13,8 @@ var was_touching_carcass = false
 onready var parent = get_parent()
 export var handlePlayerInteraction = true
 export var ignore_water = false
+var prev_fallthrough_collision_area = null
+var prev_prev_fallthrough_collision_area = null
 
 onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 

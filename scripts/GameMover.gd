@@ -383,9 +383,9 @@ func processPhysics(delta):
         # print("MAX was_just_on_ground_timer MAX")
         was_just_on_ground_timer = was_just_on_ground_time_limit + 1
   else:
-    if was_just_on_ground_timer < was_just_on_ground_time_limit:
+    if was_just_on_ground_timer <= was_just_on_ground_time_limit:
       was_just_on_ground_timer += (delta*22)
-      if was_just_on_ground_timer >= was_just_on_ground_time_limit:
+      if was_just_on_ground_timer - (delta*22) < was_just_on_ground_time_limit and was_just_on_ground_timer >= was_just_on_ground_time_limit:
         kinda_on_ground_fallthrough_solid = null
       # if glitch_form == global.GlitchForm.FEATHER and not should_magic_jump:
       #   was_just_on_ground_timer += (delta*22)
@@ -414,7 +414,7 @@ func tryClearFallthroughCollisionSolid(_mostlyIgnoredOriginPosition, was_it_a_ju
     var prevFallthroughCollisionArea = interactionArea.prev_fallthrough_collision_area.get_ref()
     interactionArea.prev_fallthrough_collision_area = null
     prevFallthroughCollisionArea.get_node("..").fallthroughCollisionClear(self, was_it_a_jump)
-  elif kinda_on_ground_fallthrough_solid != null and kinda_on_ground_fallthrough_solid.get_ref() != null:
+  elif kinda_on_ground_fallthrough_solid != null and kinda_on_ground_fallthrough_solid.get_ref() != null and kinda_on_ground_fallthrough_solid.get_ref().get_node("..").has_method("fallthroughCollisionClear"):
     kinda_on_ground_fallthrough_solid.get_ref().get_node("..").fallthroughCollisionClear(self, was_it_a_jump)
   kinda_on_ground_fallthrough_solid = null
 
