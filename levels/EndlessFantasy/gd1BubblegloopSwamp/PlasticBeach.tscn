@@ -2476,7 +2476,7 @@ anims/wiggle = SubResource( 27 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 36 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 39, 0 )
-grav = 0
+grav = Vector2(0, 0)
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]

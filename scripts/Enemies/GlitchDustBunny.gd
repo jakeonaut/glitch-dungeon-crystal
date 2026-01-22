@@ -15,7 +15,7 @@ func _ready():
     # ._ready() implicit
     walk_speed = 4
     jump_force = 10
-    grav = 40
+    grav = Vector2(0, 40)
 
 func _process(delta):
     # ._process(delta) implicit

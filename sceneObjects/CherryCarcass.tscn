@@ -249,7 +249,7 @@ tracks/1/keys = {
 [node name="CherryCarcass" type="Spatial"]
 script = ExtResource( 2 )
 true_terminal_vel = 10
-grav = 10
+grav = Vector2(0, 10)
 
 [node name="CarcassArea" type="Area" parent="." groups=["carcass"]]
 

@@ -858,7 +858,7 @@ bbText = "NPC.SporeCreature.6"
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 0 )
-path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods3.tscn"
+path = "res://levels/EndlessFantasy/gd1ToxicJungle/LostWoods2.tscn"
 key_type = 6
 
 [node name="ActiveCollisionShape" parent="Viewport/level/Door/InteractionArea" index="0"]
@@ -892,7 +892,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 1, 0 )
 [node name="PyramidKey" parent="Viewport/level" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.4817, 9.44254, 0 )
 visible = false
-grav = 0
+grav = Vector2( 0, 0 )
 
 [node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 23, 0 )
@@ -912,7 +912,7 @@ texture = ExtResource( 32 )
 
 [node name="EldestMonkeyNPC" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.23302, 2.84108, 0 )
-grav = 0
+grav = Vector2( 0, 0 )
 bbText = "NPC.SporeCreature.3"
 can_move = false
 

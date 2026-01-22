@@ -473,7 +473,7 @@ shape = SubResource( 21 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7, 0.0347237, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.Cow.2"
 can_camera_zoom = false
 dont_recolor_me = true
@@ -500,7 +500,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9, 1.93472, 0 )
-grav = 0
+grav = Vector2(0, 0)
 can_camera_zoom = false
 dont_recolor_me = true
 is_a_body = false
@@ -527,7 +527,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 6.8347, 0 )
-grav = 0
+grav = Vector2(0, 0)
 is_really_important = true
 can_activate = false
 can_camera_zoom = false

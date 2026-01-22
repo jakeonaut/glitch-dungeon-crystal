@@ -754,7 +754,7 @@ bbText = "NPC.SporeCreature.7"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3, 0 )
 
 [node name="Furbo2" parent="Viewport/level" instance=ExtResource( 28 )]
-grav = 0
+grav = Vector2( 0, 0 )
 
 [node name="FanPlant" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -3, 0 )

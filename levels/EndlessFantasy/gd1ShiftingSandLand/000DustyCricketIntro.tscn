@@ -522,7 +522,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6, 24, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9, 1.5914, 0 )
 
 [node name="NPC" parent="Viewport/level/DustFarmer" index="0"]
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.ClayWorker.2"
 
 [node name="CollisionShape" parent="Viewport/level/DustFarmer/NPC/SmallInteractionArea" index="0"]

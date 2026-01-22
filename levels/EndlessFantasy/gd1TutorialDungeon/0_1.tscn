@@ -1037,7 +1037,7 @@ anims/walkStop = SubResource( 52 )
 
 [node name="NPC" parent="Viewport/level/Player2" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•one day, a glitch appeared.  
 •we could not make it go away, 
 
@@ -1134,7 +1134,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0 )
 
 [node name="NPC" parent="Viewport/level/QuestionBlock" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -3, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•*purrr*..."
 can_move = false
 tiny_textbox = true

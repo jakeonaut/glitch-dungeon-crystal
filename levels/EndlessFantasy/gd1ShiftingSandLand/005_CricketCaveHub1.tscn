@@ -361,7 +361,7 @@ walk_direction = Vector2( -1, 0 )
 
 [node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 1, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="Viewport2" parent="." instance=ExtResource( 18 )]
 

@@ -63,7 +63,7 @@ func _process(_delta):
         processNPCSprite(npc4.get_ref())
     # if global.memory["angler_seaman_boss"] >= 2:
     #     dreamOfDeceit.visible = true
-    #     dreamOfDeceit.grav = 60
+    #     dreamOfDeceit.grav = Vector2(0, 60)
 
 func processNPCSprite(npc):
     if global.memory["angler_seaman_boss"] > 0 and global.memory["angler_seaman_boss"] < 2:

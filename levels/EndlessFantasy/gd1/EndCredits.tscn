@@ -2635,7 +2635,7 @@ spawned_object_path = ""
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.1182, 3.14345, 0 )
-grav = 0
+grav = Vector2(0, 0)
 can_move = false
 can_camera_zoom = false
 is_a_body = false

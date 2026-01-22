@@ -192,11 +192,11 @@ should_animate = false
 
 [node name="MemoryPage" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 12, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="MemoryPage2" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2915, 1, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="SpellbookPage" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.62358, 0, 0 )

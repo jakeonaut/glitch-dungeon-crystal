@@ -1193,7 +1193,7 @@ lb = -0.72
 rb = 0.72
 tb = 1.0
 bb = -1.0
-grav = 60
+grav = Vector2(0, 60)
 walk_speed = 8.0
 run_speed = 10
 glitch_form = 0
@@ -1356,7 +1356,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 6, 0 )
 
 [node name="GlitchSlime5" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 17, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="Sprite3D" parent="Viewport/level/GlitchSlime5" index="0"]
 flip_v = true

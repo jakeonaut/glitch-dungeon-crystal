@@ -449,7 +449,7 @@ shader_param/target_palette = ExtResource( 2 )
 
 [node name="NoHatTreasure" type="Spatial"]
 script = ExtResource( 4 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "UI.Outfit.0"
 is_important = true
 can_activate = false

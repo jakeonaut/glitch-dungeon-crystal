@@ -34,7 +34,7 @@ func _ready():
     set_physics_process(false)
     if is_static_in_level:
         secretAniPlayer.play("isStaticInLevel")
-        grav = 0
+        grav = Vector2(0, 0)
 
     should_collide_ceil = true
     should_collide_floor = true
@@ -85,7 +85,7 @@ func _process(delta):
         is_active = true
         # is_active = false
         okay_im_really_done_bye = true
-        grav = 0
+        grav = Vector2(0, 0)
         behavior_was_thrown = false
         behavior_walking = false
         if walk_direction.x == 1:
@@ -117,7 +117,7 @@ func _process(delta):
         if doing_a_final_hit:
             oneMoreHit(delta)
             landSound.play()
-            grav = 60
+            grav = Vector2(0, 60)
             walk_direction = Vector2(0, 0)
             just_pressed_jump = false
             pressing_jump = false
@@ -220,7 +220,7 @@ func die():
     secretAniPlayer.play("die")
     behavior_walking = false
     behavior_was_thrown = false
-    grav = 0
+    grav = Vector2(0, 0)
     vv = 0
     linear_velocity.y = 0
     lv.y = 0
@@ -295,7 +295,7 @@ func isActive(_debug=false):
 
 # @override
 func justPressedJump():
-    return not returning and ((behavior_was_thrown and grav > 10 and not walk_direction.y == -1) or (behavior_walking and walk_direction.y == 1))
+    return not returning and ((behavior_was_thrown and grav.y > 10 and not walk_direction.y == -1) or (behavior_walking and walk_direction.y == 1))
 
 # @override
 func pressingJump():
@@ -317,7 +317,7 @@ func landed(_was_on_fallthrough_solid = false):
 
 func collectMe():
     secretAniPlayer.play("GET")
-    grav = 0
+    grav = Vector2(0, 0)
     getGameCamera().initial_target = level.player.get_node("CameraTarget")
     getGameCamera().actual_target = weakref(getGameCamera().initial_target)
 

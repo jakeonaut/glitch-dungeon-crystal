@@ -34,7 +34,7 @@ func purifyAllWeakEnemies(summon_smoke_clouds = true):
 func _process(_delta):
     # if global.memory["dogu_matryoshka_boss"] >= 2:
     #     dreamOfDeath.visible = true
-    #     dreamOfDeath.grav = 60
+    #     dreamOfDeath.grav = Vector2(0, 60)
     pass
   
 # @override

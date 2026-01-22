@@ -194,7 +194,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 12, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4861, 10, 0 )
 visible = false
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.Tutorial.6"
 can_be_activated_invisibly = true
 
@@ -215,7 +215,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 9, 0 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.Tutorial.13"
 
 [node name="Viewport2" parent="." instance=ExtResource( 3 )]

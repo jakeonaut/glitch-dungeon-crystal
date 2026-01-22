@@ -449,7 +449,7 @@ shader_param/target_palette = ExtResource( 9 )
 
 [node name="CozyScarfTreasure" type="Spatial"]
 script = ExtResource( 6 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "UI.Outfit.14"
 is_important = true
 can_activate = false

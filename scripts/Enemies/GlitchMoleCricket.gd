@@ -32,7 +32,7 @@ export var permanently_alter_tiles = false
 export var is_mushroom_infected = false
 onready var mushroomSprite = get_node("MushroomSprite")
 export var can_hop = false
-var initial_grav = 60
+var initial_grav = Vector2(0, 60)
 var initial_true_terminal_vel = 32
 var flight_anchor = null
 var do_i_care_about_time_limit = false
@@ -70,7 +70,7 @@ func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
     should_process_respect_time_dilation = false
     .getSmacked(broom_origin, silently, is_local_broom)
     walk_speed = 0
-    grav = 0
+    grav = Vector2(0, 0)
     walk_direction.x = -1
     if level.player.mySprite.flip_h:
         walk_direction.x = 1
@@ -177,7 +177,7 @@ func _process(delta):
             if do_i_care_about_time_limit:
                 building_timer += (delta * 11)
                 if building_timer >= building_time_limit:
-                    grav = 0
+                    grav = Vector2(0, 0)
                     linear_velocity.y = 0
                     vv = 0
                     aniPlayer.stop()
@@ -201,21 +201,21 @@ func _process(delta):
             aniPlayer.clear_queue()
             aniPlayer.play("idle")
     elif mole_state == MoleState.OVERRIDE_FLY_START:
-        if has_been_smacked or (on_ground and grav != 0):
-            grav = 0
+        if has_been_smacked or (on_ground and grav.y != 0):
+            grav = Vector2(0, 0)
             aniPlayer.stop()
             aniPlayer.clear_queue()
             aniPlayer.queue("suddenly_fly")
             if has_been_smacked:
                 mole_state = MoleState.OVERRIDE_FLYING
-        elif grav == 0 and flight_anchor != null:
+        elif grav == Vector2(0, 0) and flight_anchor != null:
             global_transform.origin = global_transform.origin + (flight_anchor.global_transform.origin - global_transform.origin) * (delta*5)
             var step = .5
             if stepify(global_transform.origin.x, step) == stepify(flight_anchor.global_transform.origin.x, step) and \
                stepify(global_transform.origin.y, step) == stepify(flight_anchor.global_transform.origin.y, step):
                 mole_state = MoleState.OVERRIDE_FLYING
                 myOtherSprite.material_override.set_shader_param("enable_glitch", true)
-        elif grav == 0 and should_fade_away:
+        elif grav == Vector2(0, 0) and should_fade_away:
             mole_state = MoleState.OVERRIDE_FLYING
     elif mole_state == MoleState.OVERRIDE_FLYING:
         tryFadeAway(delta)
@@ -225,7 +225,7 @@ func _process(delta):
             walk_speed = 5
 
         if has_been_smacked:
-            grav = 0
+            grav = Vector2(0, 0)
             behavior_walking = true
             myOtherSprite.flip_h = walk_direction.x == -1
             walk_speed = 2
@@ -234,7 +234,7 @@ func _process(delta):
         elif flight_anchor != null and flight_anchor.frame == 0: # DOWN
             behavior_walking = true
             walk_direction.x = -1
-            grav = 50
+            grav = Vector2(0, 50)
             true_terminal_vel = 5
         elif flight_anchor != null and flight_anchor.frame == 1: # RIGHT
             myOtherSprite.flip_h = false
@@ -255,7 +255,7 @@ func _process(delta):
         has_ever_been_smacked = false
         behavior_jumping = false
         behavior_walking = false
-        grav = 0
+        grav = Vector2(0, 0)
         flight_anchor = null
         if not amITouchingSolidTiles(getLevelTiles()):
             if respawn_timer >= respawn_time_limit:
@@ -330,9 +330,9 @@ func checkForFlyPathOverrides():
                 aniPlayer.add_animation("jumpSquat", aniPlayer.get_animation("jumpStart"))
             behavior_walking = false
             if mole_state != MoleState.OVERRIDE_FLYING:
-                grav = 60
+                grav = Vector2(0, 60)
             else:
-                grav = 0
+                grav = Vector2(0, 0)
                 linear_velocity.y = 0
                 vv = 0
                 aniPlayer.stop()
@@ -373,7 +373,7 @@ func unsmack():
     .unsmack()
     has_been_smacked = true
     if not (mole_state == MoleState.OVERRIDE_FLY_START or mole_state == MoleState.OVERRIDE_FLYING or mole_state == MoleState.DIG):
-        grav = 60
+        grav = Vector2(0, 60)
     
 
 var SOFT_SAND_TOP_TILE = 275

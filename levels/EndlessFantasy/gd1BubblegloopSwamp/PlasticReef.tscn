@@ -755,41 +755,41 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 2, 0 )
 
 [node name="GlitchFish" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 0 )
-grav = 0
+grav = Vector2(0, 0)
 floor_glitch_walk_speed = 5
 invisible_glitch_walk_speed = 5
 swimming_walk_speed = 5
 
 [node name="GlitchFish3" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44, -22, 0 )
-grav = 0
+grav = Vector2(0, 0)
 floor_glitch_walk_speed = 5
 invisible_glitch_walk_speed = 5
 swimming_walk_speed = 5
 
 [node name="GlitchFish2" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, -18, 0 )
-grav = 0
+grav = Vector2(0, 0)
 floor_glitch_walk_speed = 6
 
 [node name="GlitchFish5" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, -7, 0 )
-grav = 0
+grav = Vector2(0, 0)
 floor_glitch_walk_speed = 6
 
 [node name="GlitchFish6" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49, -4, 0 )
-grav = 0
+grav = Vector2(0, 0)
 floor_glitch_walk_speed = 6
 
 [node name="GlitchFish8" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, -14, 0 )
-grav = 0
+grav = Vector2(0, 0)
 floor_glitch_walk_speed = 6
 
 [node name="GlitchFish10" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -24, 0 )
-grav = 0
+grav = Vector2(0, 0)
 floor_glitch_walk_speed = 6
 
 [node name="Door3" parent="Viewport/level" instance=ExtResource( 13 )]

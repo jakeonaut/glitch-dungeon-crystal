@@ -370,7 +370,7 @@ shader_param/target_palette = ExtResource( 16 )
 
 [node name="SpellbookPage" type="Spatial"]
 script = ExtResource( 7 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•You got \"Grimoire\"
 ..but it's missing a
 few pages"

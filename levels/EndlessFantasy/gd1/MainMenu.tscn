@@ -3011,7 +3011,7 @@ automatically_change_color = false
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 53 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.7, 0.0751328, 0 )
-grav = 0
+grav = Vector2(0, 0)
 smackedBbText = "NPC.Cow.1"
 is_really_important = true
 can_camera_zoom = false
@@ -3377,7 +3377,7 @@ texture = ExtResource( 48 )
 
 [node name="SecretGlitchyNPC" parent="Viewport/level" instance=ExtResource( 53 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 4, 0 )
-grav = 0
+grav = Vector2(0, 0)
 is_very_tiny = true
 
 [node name="CollisionShape" parent="Viewport/level/SecretGlitchyNPC/SmallInteractionArea" index="0"]
@@ -3394,7 +3394,7 @@ shape = SubResource( 283 )
 
 [node name="SecretGlitchyNPC2" parent="Viewport/level" instance=ExtResource( 53 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 31, 7, 0 )
-grav = 0
+grav = Vector2(0, 0)
 is_very_tiny = true
 
 [node name="CollisionShape" parent="Viewport/level/SecretGlitchyNPC2/SmallInteractionArea" index="0"]
@@ -3421,7 +3421,7 @@ shape = SubResource( 283 )
 
 [node name="SecretGlitchyNPC4" parent="Viewport/level" instance=ExtResource( 53 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 4, 0 )
-grav = 0
+grav = Vector2(0, 0)
 is_very_tiny = true
 
 [node name="CollisionShape" parent="Viewport/level/SecretGlitchyNPC4/SmallInteractionArea" index="0"]
@@ -3448,7 +3448,7 @@ shape = SubResource( 283 )
 
 [node name="SecretGlitchyNPC3" parent="Viewport/level" instance=ExtResource( 53 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 3, 0 )
-grav = 0
+grav = Vector2(0, 0)
 is_very_tiny = true
 
 [node name="CollisionShape" parent="Viewport/level/SecretGlitchyNPC3/SmallInteractionArea" index="0"]
@@ -3475,7 +3475,7 @@ shape = SubResource( 283 )
 
 [node name="SecretGlitchyNPC5" parent="Viewport/level" instance=ExtResource( 53 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 2, 0 )
-grav = 0
+grav = Vector2(0, 0)
 is_very_tiny = true
 
 [node name="CollisionShape" parent="Viewport/level/SecretGlitchyNPC5/SmallInteractionArea" index="0"]
@@ -3502,7 +3502,7 @@ shape = SubResource( 283 )
 
 [node name="SecretGlitchyNPC6" parent="Viewport/level" instance=ExtResource( 53 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 28, 4, 0 )
-grav = 0
+grav = Vector2(0, 0)
 is_very_tiny = true
 
 [node name="CollisionShape" parent="Viewport/level/SecretGlitchyNPC6/SmallInteractionArea" index="0"]
@@ -3541,7 +3541,7 @@ vframes = 8
 
 [node name="Signpost" parent="Viewport/level" instance=ExtResource( 53 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50, -7, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.Signpost.1"
 can_move = false
 bring_to_front = false

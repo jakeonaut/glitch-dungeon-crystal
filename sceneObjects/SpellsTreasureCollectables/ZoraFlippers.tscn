@@ -559,7 +559,7 @@ shader_param/target_palette = ExtResource( 4 )
 
 [node name="Flippers" type="Spatial"]
 script = ExtResource( 12 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•SOUL OF FISH
 try jumping in water"
 is_important = true

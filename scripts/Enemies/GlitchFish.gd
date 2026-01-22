@@ -10,10 +10,10 @@ var no_longer_glitched = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
   # ._ready() implicit
-  grav = 0
+  grav = Vector2(0, 0)
   
   if behavior_jumping:
-    grav = 60
+    grav = Vector2(0, 60)
     jump_force = weak_fish_jump_force
     should_collide_horizontally = false
   else:
@@ -46,12 +46,12 @@ func _process(delta):
     if smallInteractionArea.is_touching_water:
       behavior_walking = false
       behavior_jumping = true
-      grav = 60
+      grav = Vector2(0, 60)
       jump_force = weak_fish_jump_force
     else:
       behavior_walking = false
       behavior_jumping = false
-      grav = 0
+      grav = Vector2(0, 0)
       behavior_mini_explore = true
 
 func processDeath():

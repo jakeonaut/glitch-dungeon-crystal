@@ -116,7 +116,14 @@ func playerInhale():
   level.player.gravitySound.pitch_scale = rand_range(0.8, 1.2)
   level.player.gravitySound.play()
   level.player.glitchTickle()
-  level.flipGravity(-1 * (level.player.grav / abs(level.player.grav)))
+  if rotation_degrees.z == -90:
+    level.flipGravity(Vector2(-1, 0))
+  elif rotation_degrees.z == 90:
+    level.flipGravity(Vector2(1, 0))
+  elif rotation_degrees.z == 180 or rotation_degrees.z == -180:
+    level.flipGravity(Vector2(0, -1))
+  else:
+    level.flipGravity(-1 * (level.player.grav / level.player.grav.abs()))
   for _i in range(5):
     level.player.spawnASpore(level.player.global_transform.origin, false)
 
@@ -228,7 +235,7 @@ func spawnGlitchSprout():
     var newGlitchEnemy = glitchEnemyRes.instance()
     newGlitchEnemy.is_static_in_level = false
     newGlitchEnemy.visible = true
-    newGlitchEnemy.grav = 0
+    newGlitchEnemy.grav = Vector2(0, 0)
     newGlitchEnemy.get_node("Sprite3D").frame_delay = 0.2
     # newGlitchEnemy.behavior_evolve = true
     # newGlitchEnemy.behavior_fizzle_out_after_evolve = true

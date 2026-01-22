@@ -498,10 +498,10 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
     getPlayer().global_transform.origin = self.global_transform.origin
     if getPlayer().nesting_doll_state == global.NestingDoll.BABY:
       getPlayer().global_transform.origin.y += 0.5
-      if getPlayer().grav < 0:
+      if getPlayer().grav.y < 0:
         getPlayer().global_transform.origin.y += 1
     else:
-      if getPlayer().grav < 0:
+      if getPlayer().grav.y < 0:
         getPlayer().global_transform.origin.y -= 1
       else:
         getPlayer().global_transform.origin.y += 1
@@ -547,7 +547,7 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
         getPlayer().gravitySound.pitch_scale = rand_range(0.8, 1.2)
         getPlayer().gravitySound.play()
         getPlayer().glitchTickle()
-        level.flipGravity(-1 * (getPlayer().grav / abs(getPlayer().grav)))
+        level.flipGravity(-1 * (getPlayer().grav / getPlayer().grav.abs()))
         if getPlayer().glitch_form == global.GlitchForm.FEATHER:
           getPlayer().lv.y *= 2
           getPlayer().vv *= 2
@@ -640,7 +640,7 @@ func land(should_change_shader_params = true, should_play_transition = false):
     # SNEAKY SNEAKY
     # global.saveMySpot(self.translation, level) 
     getPlayer().playBounce("land")
-    if not (global.memory.has("grav_direction") and global.memory["grav_direction"] == -1):
+    if not (global.memory.has("grav_direction") and global.memory["grav_direction"].y == -1):
       getPlayer().on_ground = false
     if should_change_shader_params:
       greyMeOut()

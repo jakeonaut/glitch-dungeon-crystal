@@ -2,7 +2,7 @@ extends "GlitchEnemy.gd"
 
 onready var thudSound = get_node("Sounds/ThudSound")
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
-var SHELL_GRAV = 28
+var SHELL_GRAV = Vector2(0, 28)
 var should_big_bump = false
 onready var myManager = get_node("..")
 
@@ -66,7 +66,7 @@ func doVerticalWalkingBehavior():
   if behavior_walking and walk_direction.y != 0:
     if not on_ground and linear_velocity.y == 0:
       walk_direction.y = -1
-      grav = 60
+      grav = Vector2(0, 60)
       if should_big_bump:
         glitch_tiles_around_me = true
         getSmacked(null, true)
@@ -90,14 +90,14 @@ func tumbleFall(direction_vector, is_corrupted = false):
   elif direction_vector.y > 0:
     secretAniPlayer.play("spinForward")
     jump_val = 10
-    grav = 0
+    grav = Vector2(0, 0)
   elif direction_vector.y < 0:
     secretAniPlayer.play("spinForwardReverse")
     jump_val = -10
 
   if is_corrupted:
     unsmack()
-    grav = 0
+    grav = Vector2(0, 0)
     on_ground = false
     should_big_bump = true
     x_val *= 1.5
@@ -275,7 +275,7 @@ func actuallyDieToOffscreenCamera(delta):
 
 # @override
 func unsmack():
-  if grav == 0:
+  if grav == Vector2(0, 0):
     grav = SHELL_GRAV
   .unsmack()
   glitch_tiles_around_me = false

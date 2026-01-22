@@ -965,7 +965,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 3.33878, 0 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -25, 6, 0 )
 visible = false
-grav = 0
+grav = Vector2(0, 0)
 bbText = "don't forget about me.
 don't forget who you were."
 can_move = false

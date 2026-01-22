@@ -597,7 +597,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1, 0 )
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2, 0.0999999, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•you look so familiar
 •something in your eyes
 •do you know this place?"
@@ -655,7 +655,7 @@ shape = SubResource( 22 )
 
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.6, 7.4, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•high priestess will
 only meet those
 who know magick"
@@ -766,7 +766,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4, 1.4, 0 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2, 0.4, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•gramdma's guidance:
 smack everything"
 can_camera_zoom = false
@@ -823,11 +823,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.1, 17.1, 0 )
 
 [node name="AirwalkPage" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9, 1.8, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="FeatherPage" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.9, 9, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.3, 13.4, 0 )

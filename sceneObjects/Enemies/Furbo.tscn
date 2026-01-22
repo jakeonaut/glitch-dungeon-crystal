@@ -562,7 +562,7 @@ tracks/1/keys = {
 [node name="Furbo" type="Spatial"]
 script = ExtResource( 12 )
 true_terminal_vel = 12
-grav = 15
+grav = Vector2(0, 15)
 walk_speed = 6
 jump_force = 10
 behavior_walking = true

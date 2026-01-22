@@ -52,7 +52,7 @@ extents = Vector3( 22, 24, 1 )
 [node name="FreeChicken" type="Spatial" groups=["keys"]]
 script = ExtResource( 11 )
 true_terminal_vel = 8
-grav = 15
+grav = Vector2(0, 15)
 walk_speed = 2.0
 jump_force = 4
 sprite_offset_y = 0.4

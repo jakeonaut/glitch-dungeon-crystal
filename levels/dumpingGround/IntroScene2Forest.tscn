@@ -96,7 +96,7 @@ path = "res://levels/IntroDungeon/IntroScene3HellDungeon.tscn"
 
 [node name="GlitchEnemy3" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -1, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -0.0315791, 0 )
@@ -106,7 +106,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 7.95583, 0 )
 
 [node name="NPC5" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.004, 2, 0 )
-grav = 0
+grav = Vector2(0, 0)
 tiny_textbox = true
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 11 )]
@@ -123,13 +123,13 @@ script = ExtResource( 13 )
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6545, 17, 0 )
-grav = 0
+grav = Vector2(0, 0)
 tiny_textbox = true
 
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 7, 0 )
 visible = false
-grav = 0
+grav = Vector2(0, 0)
 is_important = true
 is_really_important = true
 

@@ -419,12 +419,12 @@ func getRandomSpawnPosition(theMax = 10):
     var randY = rand_range(-theMax, theMax)
     return Vector3(pos.x + randX, pos.y + randY, pos.z)
 
-func spawnAttack(which_spawn, spawn_on_player):
+func spawnAttack(_which_spawn, _spawn_on_player):
     return
     # var newGlitchEnemy = glitchEnemyRes.instance()
     # newGlitchEnemy.is_static_in_level = false
     # newGlitchEnemy.visible = true
-    # newGlitchEnemy.grav = 0
+    # newGlitchEnemy.grav = Vector2(0, 0)
     # newGlitchEnemy.get_node("Sprite3D").frame_delay = 0.2
     # newGlitchEnemy.behavior_evolve = true
     # newGlitchEnemy.behavior_fizzle_out_after_evolve = true

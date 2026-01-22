@@ -18,7 +18,7 @@ func _ready():
     if is_static_in_level and memory:
         visible = false
         landSound.volume_db = -80
-        grav = 0
+        grav = Vector2(0, 0)
 
 func _process(delta):
     if should_rotate:
@@ -61,11 +61,11 @@ func landed(_was_on_fallthrough_solid = false):
         behavior_was_thrown = false
         if y_pos_to_stop != null:
             on_ground = true
-            grav = 0
+            grav = Vector2(0, 0)
 
 func collectMe():
     get_node("SecretAnimationPlayer").play("GET")
-    grav = 0
+    grav = Vector2(0, 0)
     getGameCamera().initial_target = level.player.get_node("CameraTarget")
     getGameCamera().actual_target = weakref(getGameCamera().initial_target)
     collectSound.play()

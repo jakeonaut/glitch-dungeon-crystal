@@ -19,7 +19,7 @@ func _ready():
     if is_static_in_level and self.getMyStaticLevelZoneVar():
         visible = false
 
-    if grav == 0 and visible:
+    if grav == Vector2(0, 0) and visible:
         landSoundCounter = 3
         landSound.play()
         yield(get_tree().create_timer(0.3), "timeout")
@@ -91,7 +91,7 @@ func landed(_was_on_fallthrough_solid = false):
 
 func collectMe():
     get_node("SecretAnimationPlayer").play("GET")
-    grav = 0
+    grav = Vector2(0, 0)
     getGameCamera().initial_target = level.player.get_node("CameraTarget")
     getGameCamera().actual_target = weakref(getGameCamera().initial_target)
     collectSound.play()

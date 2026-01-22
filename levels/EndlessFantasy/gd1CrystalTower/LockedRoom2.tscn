@@ -981,7 +981,7 @@ anims/disintegrate = SubResource( 49 )
 
 [node name="SmallKey" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 15, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )

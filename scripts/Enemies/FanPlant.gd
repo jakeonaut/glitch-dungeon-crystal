@@ -15,7 +15,7 @@ var far_from_home_dist = 5
 export var is_fan_spinning = false
 
 export var can_hop = false
-var initial_grav = 60
+var initial_grav = Vector2(0, 60)
 var initial_true_terminal_vel = 32
 onready var fanAnimationPlayer = get_node("FanAnimationPlayer")
 onready var windGust = get_node("WindGust")
@@ -119,7 +119,7 @@ func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
     notDieSound.play()
   mySprite.updateBaseFrame(6, 3)
 
-  if grav != 0:
+  if grav.y != 0:
     behavior_jumping = true
   walk_direction.x = 1
   if level.player.mySprite.flip_h:

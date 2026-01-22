@@ -770,7 +770,7 @@ jump_force = 2
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.1, -10.9, 0 )
 visible = false
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•hmm.. what's going on?
 i'll tend to the chickens.
 •you always had
@@ -838,7 +838,7 @@ spawned_object_path = ""
 
 [node name="NPC3" parent="Viewport/level/GlitchTileSpawner" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300001, -0.985172, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.Crone.1"
 needs_to_talk_normal_first = true
 dont_recolor_me = true

@@ -694,7 +694,7 @@ texture = ExtResource( 18 )
 
 [node name="BabushkaCat" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2433, 6.0414, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="CollisionShape" parent="Viewport/level/BabushkaCat/SmallInteractionArea" index="0"]
 shape = SubResource( 74 )

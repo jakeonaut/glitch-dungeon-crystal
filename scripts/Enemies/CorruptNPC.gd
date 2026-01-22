@@ -56,11 +56,11 @@ func _process(delta):
   if zombie_state == ZombieState.IDLE:
     reenemize()
     windGust.is_active = false
-    grav = 60
+    grav = Vector2(0, 60)
     zombie_state = ZombieState.SLIME_WALK
   elif zombie_state == ZombieState.SLIME_WALK:
     windGust.is_active = false
-    grav = 60
+    grav = Vector2(0, 60)
     walk_speed = slow_walk_speed
     behavior_jumping = false
     if am_i_really_in_range_of_player and level.player.nesting_doll_state == global.NestingDoll.GRANDMA:
@@ -147,7 +147,7 @@ func _process(delta):
       death_timer = 0
       unsmack()
     if secretAniPlayer.assigned_animation == "die" and not secretAniPlayer.is_playing():
-      grav = 60
+      grav = Vector2(0, 60)
   elif zombie_state == ZombieState.REVIVING:
     unenemize()
     behavior_jumping = false
@@ -166,11 +166,11 @@ func _process(delta):
       if not secretAniPlayer.is_playing():
         unsmack()
         zombie_state = ZombieState.IDLE
-        grav = 60
+        grav = Vector2(0, 60)
   elif zombie_state == ZombieState.CONSUMING:
     behavior_jumping = false
     behavior_walking = false
-    grav = 0
+    grav = Vector2(0, 0)
     vv = 0
     hv = Vector3(0, 0, 0)
     dir = Vector3(0, 0, 0)
@@ -180,9 +180,9 @@ func _process(delta):
     if not secretAniPlayer.is_playing():
       unsmack()
       zombie_state = ZombieState.IDLE
-      grav = 60
+      grav = Vector2(0, 60)
   elif zombie_state == ZombieState.GRANDMA_FORM:
-    grav = 30
+    grav = Vector2(0, 30)
 
 # @override
 func unsmack():
@@ -239,7 +239,7 @@ func ouchies(broom_origin):
       lv = Vector3(0, 0, 0)
       linear_velocity = Vector3(0, 0, 0)
       vv = 0
-      grav = 0
+      grav = Vector2(0, 0)
       hv = Vector3(0, 0, 0)
       slime_state = SlimeState.NULL
       # yield(get_tree().create_timer(0.5), "timeout")

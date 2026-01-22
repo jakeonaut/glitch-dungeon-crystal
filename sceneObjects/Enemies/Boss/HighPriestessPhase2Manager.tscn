@@ -13228,7 +13228,7 @@ vframes = 2
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0 )
 visible = false
 script = ExtResource( 46 )
-grav = 0
+grav = Vector2(0, 0)
 walk_speed = 12.0
 only_activate_in_range = false
 behavior_walk_flip = false
@@ -13901,7 +13901,7 @@ shape = SubResource( 234 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0 )
 visible = false
 script = ExtResource( 62 )
-grav = 15
+grav = Vector2(0, 15)
 jump_force = 12
 only_activate_in_range = false
 

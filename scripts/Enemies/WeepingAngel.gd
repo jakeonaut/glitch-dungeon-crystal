@@ -126,7 +126,7 @@ func _process(delta):
             if behavior_summon_glitch:
                 var newGlitchEnemy = GlitchEnemyResource.instance()
                 newGlitchEnemy.visible = true
-                newGlitchEnemy.grav = 0
+                newGlitchEnemy.grav = Vector2(0, 0)
                 newGlitchEnemy.get_node("Sprite3D").frame_delay = 0.2
                 newGlitchEnemy.behavior_evolve = true
                 newGlitchEnemy.behavior_fizzle_out_after_evolve = true

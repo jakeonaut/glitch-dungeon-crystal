@@ -2274,7 +2274,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4625, 0 )
 
 [node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9375, 16.8381, 0 )
-grav = 0
+grav = Vector2(0, 0)
 is_static = true
 is_licker = true
 

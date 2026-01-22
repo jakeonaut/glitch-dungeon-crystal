@@ -194,7 +194,7 @@ transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, -3, 11,
 
 [node name="KizzyCat" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 7, 8.71539, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="CollisionShape" parent="Viewport/level/KizzyCat/FallthroughSolid" index="0"]
 shape = SubResource( 27 )

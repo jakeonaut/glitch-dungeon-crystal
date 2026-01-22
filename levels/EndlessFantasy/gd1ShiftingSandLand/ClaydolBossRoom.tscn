@@ -1102,7 +1102,7 @@ script = ExtResource( 36 )
 
 [node name="MimicNPC" parent="Viewport/level/LostSoulsNPC" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -2, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.LostSoul.1"
 can_move = false
 is_merchant = true

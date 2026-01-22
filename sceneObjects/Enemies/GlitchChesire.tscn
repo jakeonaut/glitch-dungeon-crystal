@@ -784,7 +784,7 @@ tracks/1/keys = {
 [node name="GlitchChesire" type="Spatial"]
 script = ExtResource( 9 )
 true_terminal_vel = 8
-grav = 30
+grav = Vector2(0, 30)
 walk_speed = 3
 invisible_glitch_walk_speed = 3
 swimming_walk_speed = 4

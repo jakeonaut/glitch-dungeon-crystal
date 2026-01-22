@@ -227,7 +227,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 0 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8, 0.957091, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.Tutorial.5"
 smackedBbText = "NPC.Tutorial.5_2"
 needs_to_talk_normal_first = true

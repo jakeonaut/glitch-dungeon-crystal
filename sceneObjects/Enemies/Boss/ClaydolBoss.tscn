@@ -3523,21 +3523,21 @@ void vertex() {
 
 void fragment() {
 // ColorUniform:4;
-	vec3 n_out4p0 = our_color;
+  vec3 n_out4p0 = our_color;
 
 // ScalarUniform:2
-	float n_out2p0 = HowShiny;
+  float n_out2p0 = HowShiny;
 
 // ScalarUniform:3
-	float n_out3p0 = Roughness;
+  float n_out3p0 = Roughness;
 
   if (should_use_vertex_color) {
-	 ALBEDO = our_color;
+   ALBEDO = our_color;
   } else {
     ALBEDO = texture(texture_albedo, UV).rgb;
   }
-	METALLIC = n_out2p0;
-	ROUGHNESS = n_out3p0;
+  METALLIC = n_out2p0;
+  ROUGHNESS = n_out3p0;
   ALPHA = alpha2;
 
 }
@@ -4643,7 +4643,7 @@ tracks/6/keys = {
 
 [node name="ClaydolBoss" type="Spatial"]
 script = ExtResource( 7 )
-grav = 15
+grav = Vector2(0, 15)
 jump_force = 12
 only_activate_in_range = false
 

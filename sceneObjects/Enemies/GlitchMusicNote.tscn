@@ -360,7 +360,7 @@ shader_param/target_palette = ExtResource( 3 )
 
 [node name="GlitchMusicNote" type="Spatial"]
 script = ExtResource( 1 )
-grav = 0
+grav = Vector2(0, 0)
 walk_speed = 5.0
 only_activate_in_range = false
 behavior_walking = true

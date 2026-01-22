@@ -120,7 +120,7 @@ func _process(delta):
 
   if should_big_bump and not physics_state == PhysicsState.BEING_TOSSED:
     should_big_bump = false
-    if grav == 0:
+    if grav == Vector2(0, 0):
       grav = PLAYER_GRAV
     aniPlayer.stop()
     aniPlayer.clear_queue()
@@ -136,9 +136,16 @@ func _process(delta):
     smokeCloudThrottleTimer += (delta*11)
 
   if is_touching_water or is_touching_ladder or \
-     (grav > 0 and global_transform.origin.y < camera_target_y_pos) or \
-     (grav < 0 and global_transform.origin.y > camera_target_y_pos):
-    camera_target_y_pos = global_transform.origin.y
+     (grav.y != 0 and (
+      (grav.y > 0 and global_transform.origin.y < camera_target_y_pos) or \
+      (grav.y < 0 and global_transform.origin.y > camera_target_y_pos))) or \
+     (grav.x != 0 and (
+      (grav.x > 0 and global_transform.origin.x < camera_target_y_pos) or \
+      (grav.x < 0 and global_transform.origin.x > camera_target_y_pos))):
+    if grav.x != 0:
+      camera_target_y_pos = global_transform.origin.x
+    else:
+      camera_target_y_pos = global_transform.origin.y
   
   if jump_press_timer <= jump_press_broom_time_limit:
     jump_press_timer += 1
@@ -167,20 +174,20 @@ func _process(delta):
     sparkle_timer = sparkle_time_limit - 2
     
   # this is a little weird but fixes the fallthrough area situation:
-  if grav > 0:
-    if linear_velocity.y < 0:
-      if nesting_doll_state == global.NestingDoll.BABY:
-        interactionArea.transform.origin.y = -0.5
-      else:
-        interactionArea.transform.origin.y = -2
-    else:
-      interactionArea.transform.origin.y = 0
-  else:
+  if grav.y < 0:
     if linear_velocity.y > 0:
       if nesting_doll_state == global.NestingDoll.BABY:
         interactionArea.transform.origin.y = 0.5
       else:
         interactionArea.transform.origin.y = 2
+    else:
+      interactionArea.transform.origin.y = 0
+  else:
+    if linear_velocity.y < 0:
+      if nesting_doll_state == global.NestingDoll.BABY:
+        interactionArea.transform.origin.y = -0.5
+      else:
+        interactionArea.transform.origin.y = -2
     else:
       interactionArea.transform.origin.y = 0
       
@@ -292,7 +299,7 @@ func adjustStuffForNestingDolls():
     spriteYAlignment = 0.25
     innerSpriteContainer.scale = Vector3(1.0, 1.0, 1.0)
 
-  if grav < 0:
+  if grav.y < 0:
     spriteYAlignment = 0 - spriteYAlignment
   
   tileCollisionShape.shape.extents.x = rb
@@ -302,20 +309,37 @@ func adjustStuffForNestingDolls():
 func spawnOneSparkle(xdiff, above_the_head = false):
   var newSparkle = sparkleRes.instance()
   level.add_child(newSparkle)
-  if grav < 0:
-    newSparkle.grav_multiplier = -1
+  if grav.y < 0:
+    newSparkle.grav_multiplier = Vector2(0, -1)
+  elif grav.x < 0:
+    newSparkle.grav_multiplier = Vector2(-1, 0)
+  elif grav.x > 0:
+    newSparkle.grav_multiplier = Vector2(1, 0)
+  else:
+    newSparkle.grav_multiplier = Vector2(0, 1)
+    
   newSparkle.global_transform.origin = self.global_transform.origin
   newSparkle.global_transform.origin.x -= xdiff - (hv.x / 20)
-  if grav > 0:
-    if above_the_head:
-      newSparkle.global_transform.origin.y += 2.3
-    else:
-      newSparkle.global_transform.origin.y -= 1.3
-  else:
+  if grav.y < 0:
     if above_the_head:
       newSparkle.global_transform.origin.y -= 2.3
     else:
       newSparkle.global_transform.origin.y += 1.3
+  elif grav.x < 0:
+    if above_the_head:
+      newSparkle.global_transform.origin.x -= 2.3
+    else:
+      newSparkle.global_transform.origin.x += 1.3
+  elif grav.x > 0:
+    if above_the_head:
+      newSparkle.global_transform.origin.x += 2.3
+    else:
+      newSparkle.global_transform.origin.x -= 1.3
+  else:
+    if above_the_head:
+      newSparkle.global_transform.origin.y += 2.3
+    else:
+      newSparkle.global_transform.origin.y -= 1.3
   newSparkle.global_transform.origin.z -= 5.0
   newSparkle.get_material_override().set_shader_param(
     "target_palette", 
@@ -770,7 +794,7 @@ func tryingToWakeUp():
   return Input.is_action_just_pressed("sub_action_button")
 
 var malware_infected = false
-var PLAYER_GRAV = 28
+var PLAYER_GRAV = Vector2(0, 28)
 onready var digSound2 = get_node("Sounds/DigSound2")
 var dig_timer = 0
 var dig_time_limit = 4
@@ -793,7 +817,7 @@ func collideWithWall(local_lv):
     bigBump()
     getABroom()
   
-  if grav == 0:
+  if grav == Vector2(0, 0):
     grav = PLAYER_GRAV
   var tile_buffer = 0.5 if glitch_form == global.GlitchForm.INVISIBLE else 0.1
   if pressingMoveLeft():
@@ -860,7 +884,7 @@ func processMoleDigTimer(digDirection):
 
 var glitch_death_timer = 0
 func bigBump():
-  if grav == 0:
+  if grav == Vector2(0, 0):
     grav = PLAYER_GRAV
   bumpSound2.play()
   # var prev_hp = global.memory["hp"]
@@ -1244,7 +1268,7 @@ func processJumpInputs(delta):
     #       sprite.get_material_override().set_shader_param("enable_remove_skin_tone", true)
     # if global.memory["mushroom_soul"] >= 1 and global.memory["mushroom_soul_enabled"] and nesting_doll_state == global.NestingDoll.GRANDMA and triedToDoubleJump:
     #   gravitySound.play()
-    #   # level.flipGravity(-1 * (self.grav / abs(self.grav)))
+    #   # level.flipGravity(-1 * (self.grav / self.grav.abs()))
     #   level.player.loseBroom()
     #   mushroomClone()
     #   has_used_magic_lantern += 1

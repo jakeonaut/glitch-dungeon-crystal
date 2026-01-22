@@ -419,7 +419,7 @@ shader_param/target_palette = ExtResource( 4 )
 
 [node name="GlitchedGrimoire" type="Spatial"]
 script = ExtResource( 7 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•Grimoire's missing pages!
 Now you can use all spells.
 Try [font=res://DarkInputFont.tres]1[/font][font=res://DarkInputFont.tres]2[/font][font=res://DarkInputFont.tres]3[/font][font=res://DarkInputFont.tres]4[/font]"

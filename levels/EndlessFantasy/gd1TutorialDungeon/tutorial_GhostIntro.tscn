@@ -239,7 +239,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -1, 0 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 12, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.Tutorial.11"
 smackedBbText = "NPC.Tutorial.101"
 

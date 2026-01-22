@@ -32,7 +32,7 @@ func _process(delta):
   secretAniPlayer.playback_speed = delta_time_dilation
 
   if cautionWarning != null and cautionWarning.get_ref() != null and not mySprite.visible:
-    grav = 0
+    grav = Vector2(0, 0)
     caution_timer += (delta * 11)
     placeCautionWarning()
     if caution_timer >= caution_time_limit:
@@ -46,7 +46,7 @@ func _process(delta):
       cautionWarning.get_ref().aniPlayer.play("byebye")
       cautionWarning = null
   elif cautionWarning == null and mySprite.visible:
-    grav = 30
+    grav = Vector2(0, 30)
 
 func placeCautionWarning():
   if cautionWarning == null or cautionWarning.get_ref() == null:
@@ -67,7 +67,7 @@ func landed(_was_on_fallthrough_solid = false):
     notDieSound.play()
     behavior_walking = false
     on_ground = true
-    grav = 0
+    grav = Vector2(0, 0)
     linear_velocity.y = 0
     lv.y = 0
     vv = 0

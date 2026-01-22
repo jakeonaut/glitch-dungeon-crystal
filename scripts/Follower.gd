@@ -17,8 +17,8 @@ func _process(delta):
   # super._process(delta) implicit?
   if gameMoverTarget == null or gameMoverTarget.get_ref() == null:
     return
-  # if gameMoverTarget.get_ref().grav != 0:
-  #   var posOrNeg = round(abs(gameMoverTarget.get_ref().grav) / gameMoverTarget.get_ref().grav)
+  # if gameMoverTarget.get_ref().grav.y != 0:
+  #   var posOrNeg = round(gameMoverTarget.get_ref().grav.abs() / gameMoverTarget.get_ref().grav)
   #   grav = grav * posOrNeg
   var targetOrigin = gameMoverTarget.get_ref().global_transform.origin
 

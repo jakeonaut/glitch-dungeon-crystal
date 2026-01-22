@@ -117,7 +117,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9, 2.1, 0 )
 
 [node name="BabushkaCat" parent="Viewport/level" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0351, 1.04138, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="CollisionShape" parent="Viewport/level/BabushkaCat/SmallInteractionArea" index="0"]
 shape = SubResource( 24 )

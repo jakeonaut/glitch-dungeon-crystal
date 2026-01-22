@@ -150,11 +150,17 @@ func _ready_impl():
 
   player.changeOutfit(global.memory["currOutfit"], false)
 
-  if global.memory.has("grav_direction") and global.memory["grav_direction"] < 0:
-    if global.isRespawning:
-      global.memory["grav_direction"] = 1
-    else:
-      flipGravity(-1)
+  # TODO(gravity): 
+  if global.memory.has("grav_direction"):
+    var grav_direction = global.memory["grav_direction"]
+    if typeof(grav_direction) == TYPE_INT or typeof(grav_direction) == TYPE_REAL:
+      grav_direction = Vector2(0, grav_direction)
+
+    if grav_direction.y < 0:
+      if global.isRespawning:
+        global.memory["grav_direction"] = Vector2(0, 1)
+      else:
+        flipGravity(Vector2(0, -1))
   
   tryToRespawn()
   global.tryInitializeLevelZone(self.getLevelZoneName(), true)
@@ -1075,18 +1081,29 @@ func summonSmokeClouds(pos, num_clouds, play_sound = false, is_glitchy = false, 
   return smokeClouds
 
 func flipGravity(specific_dir = null):
-  if specific_dir == 1:
+  if specific_dir.y == 1:
     player.grav = player.PLAYER_GRAV
-  elif specific_dir == -1:
+  elif specific_dir.y == -1:
     player.grav = -player.PLAYER_GRAV
+  elif specific_dir.x == 1:
+    player.grav = Vector2(player.PLAYER_GRAV.y, 0)
+  elif specific_dir.x == -1:
+    player.grav = Vector2(-player.PLAYER_GRAV.y, 0)
   elif specific_dir == null:
     player.grav = -1 * player.PLAYER_GRAV
   else:
     player.grav = specific_dir
-  if player.grav >= 0:
-    global.memory["grav_direction"] = 1
-  elif player.grav < 0:
-    global.memory["grav_direction"] = -1
+
+  if player.grav.y > 0:
+    global.memory["grav_direction"] = Vector2(0, 1)
+  elif player.grav.y < 0:
+    global.memory["grav_direction"] = Vector2(0, -1)
+  elif player.grav.x > 0:
+    global.memory["grav_directin"] = Vector2(1, 0)
+  elif player.grav.x > 0:
+    global.memory["grav_directin"] = Vector2(-1, 0)
+  else:
+    global.memory["grav_direction"] = Vector2(0, 1)
 
 func clearOtherGrabbers(gameMover):
   var grabbers = self.get_tree().get_nodes_in_group("grabber")

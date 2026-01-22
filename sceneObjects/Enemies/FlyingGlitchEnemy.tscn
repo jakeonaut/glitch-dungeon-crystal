@@ -62,7 +62,7 @@ radius = 10.0
 
 [node name="FlyingGlitchEnemy" type="Spatial"]
 script = ExtResource( 1 )
-grav = 30
+grav = Vector2(0, 30)
 behavior_walking = true
 behavior_jumping = true
 behavior_flip_on_land = true

@@ -463,7 +463,7 @@ shader_param/target_palette = ExtResource( 3 )
 
 [node name="EnchantedBag" type="Spatial"]
 script = ExtResource( 8 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•BAG OF GOODIES
 HP is +1"
 is_important = true

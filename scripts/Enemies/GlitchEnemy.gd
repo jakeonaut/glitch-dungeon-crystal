@@ -93,7 +93,7 @@ func _ready():
         can_spawn_mini_crystal = false
     
     if my_up_vector.y <= 0:
-        grav = 0
+        grav = Vector2(0, 0)
 
     if walk_speed == 8:
         walk_speed = 3 # ????????????????????? TODO(jaketrower): Why?
@@ -107,12 +107,12 @@ func _ready():
     
     if walk_direction.y != 0:
         jump_force = 3
-        grav = 0
+        grav = Vector2(0, 0)
         terminal_vel = 3
         water_terminal_vel = 3
         true_terminal_vel = 3
-    if behavior_jumping and grav == 0:
-        grav = 60
+    if behavior_jumping and grav == Vector2(0, 0):
+        grav = Vector2(0, 60)
 
     if behavior_evolve:
         mySprite.hframes = mySprite.hframes * 2
@@ -320,7 +320,7 @@ func alignStickyWallWalkerSprite():
 
 var last_sticky_wall_walk_alignment_pos = null
 func alignStickyWallWalker(new_up_vector, new_walk_direction, should_snap_to_last = true):
-    grav = 0
+    grav = Vector2(0, 0)
     resetVelocity()
     my_up_vector = new_up_vector
     # print("alignStickyWallWalker, B&A: " + str(walk_direction) + ", " + str(new_walk_direction) + ", " + str(global_transform.origin) + ", " + str(last_sticky_wall_walk_alignment_pos))
@@ -577,7 +577,7 @@ var sine_velocity = 16
 func doSineMovementBehavior(delta):
     var temp_vv = 0
     if behavior_sine_movement:
-        grav = 0
+        grav = Vector2(0, 0)
         if is_smacked and should_smack_pause_me:
             temp_vv = 0
         else:
@@ -594,18 +594,18 @@ func doVerticalWalkingBehavior():
         jump_force = walk_speed
         if walk_direction.y > 0:
             on_ground = false
-            grav = 0
+            grav = Vector2(0, 0)
             if myOtherSprite:
                 myOtherSprite.flip_v = not myOtherSprite.flip_v
         elif walk_direction.y < 0:
-            grav = 60
+            grav = Vector2(0, 60)
             if myOtherSprite:
                 myOtherSprite.flip_v = not myOtherSprite.flip_v
     elif not behavior_walking:
         vv = 0
         lv.y = 0
         linear_velocity.y = 0
-        grav = 0
+        grav = Vector2(0, 0)
                 
 func tryDieToBody():
     if smallInteractionArea == null or behavior_phase_through_bodies:
@@ -669,7 +669,7 @@ func processPhysics(delta):
         return
     elif only_activate_in_range and not am_i_in_range_of_player and not override_am_i_in_range_of_player:
         return
-    elif grav == 0 and not behavior_walking and not behavior_intermittent_walking and not behavior_jumping and not behavior_was_thrown:
+    elif grav == Vector2(0, 0) and not behavior_walking and not behavior_intermittent_walking and not behavior_jumping and not behavior_was_thrown:
         return
     else:
         # call GameMover.gd super method
@@ -934,7 +934,7 @@ func unsmack():
         mySprite.translation.z = 0
         mySprite.should_animate = false
         mySprite.restart()
-        # grav = 20
+        # grav = Vector2(0, 20)
         on_ground = false
         is_frozen = true
     else:

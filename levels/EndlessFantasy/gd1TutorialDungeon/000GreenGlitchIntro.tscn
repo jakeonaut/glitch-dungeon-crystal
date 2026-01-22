@@ -788,7 +788,7 @@ shape = SubResource( 52 )
 [node name="NPC" type="Spatial" parent="Viewport/level" groups=["npc"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.8, 0.991713, 0 )
 script = ExtResource( 39 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.Tutorial.1"
 can_camera_zoom = false
 is_a_body = false

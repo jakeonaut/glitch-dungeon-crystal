@@ -449,7 +449,7 @@ shader_param/target_palette = ExtResource( 12 )
 
 [node name="MapTreasure" type="Spatial"]
 script = ExtResource( 5 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.Treasure.3"
 is_important = true
 can_activate = false

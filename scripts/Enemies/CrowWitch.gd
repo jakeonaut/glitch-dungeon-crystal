@@ -121,7 +121,7 @@ func _process(delta):
           # spawn a baby glitch that will evolve to a normal one that should fizzle out
           var newGlitchEnemy = GlitchEnemyResource.instance()
           newGlitchEnemy.visible = true
-          newGlitchEnemy.grav = 0
+          newGlitchEnemy.grav = Vector2(0, 0)
           newGlitchEnemy.get_node("Sprite3D").frame_delay = 0.2
           newGlitchEnemy.behavior_evolve = true
           newGlitchEnemy.behavior_fizzle_out_after_evolve = true

@@ -712,7 +712,7 @@ tracks/7/keys = {
 
 [node name="GlitchAngel" type="Spatial"]
 script = ExtResource( 14 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["glitchSprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )

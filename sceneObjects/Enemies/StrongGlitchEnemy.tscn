@@ -273,7 +273,7 @@ extents = Vector3( 0.5, 0.24, 1 )
 
 [node name="GlitchEnemy" type="Spatial"]
 script = ExtResource( 10 )
-grav = 0
+grav = Vector2(0, 0)
 kill_invis = true
 kill_immediately = true
 time_influence = 20

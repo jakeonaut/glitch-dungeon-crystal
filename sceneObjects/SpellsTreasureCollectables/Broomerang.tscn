@@ -398,7 +398,7 @@ tracks/0/keys = {
 
 [node name="Broomerang" type="Spatial"]
 script = ExtResource( 9 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•BROOM UPGRADE
 sweep twice to throw"
 is_important = true

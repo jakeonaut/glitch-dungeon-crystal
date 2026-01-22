@@ -94,7 +94,7 @@ radius = 0.8
 
 [node name="GlitchFlyingBugBody" type="Spatial"]
 script = ExtResource( 3 )
-grav = 0
+grav = Vector2(0, 0)
 behavior_intermittent_walking = true
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

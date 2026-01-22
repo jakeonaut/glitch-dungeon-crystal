@@ -30,7 +30,7 @@ func _process(_delta):
     for area in areas:
         if area.is_in_group("fallthrough"):
             var fallthroughParent = area.get_node("..")
-            if (player.grav > 0 and player.pressingDown()) or (player.grav < 0 and player.pressingMoveUp()):
+            if player.pressingDown():
                 continue
             if fallthroughParent.has_method("isFallthroughCollisionActive") and not fallthroughParent.isFallthroughCollisionActive():
                 continue

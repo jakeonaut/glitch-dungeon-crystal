@@ -774,7 +774,7 @@ script = ExtResource( 15 )
 true_terminal_vel = 16
 tb = 0.8
 bb = -0.8
-grav = 28
+grav = Vector2(0, 28)
 walk_speed = 5.0
 only_activate_in_range = false
 

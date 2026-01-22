@@ -343,7 +343,7 @@ shader_param/target_palette = ExtResource( 2 )
 
 [node name="Lantern" type="Spatial"]
 script = ExtResource( 6 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•MAGIC LANTERN
 jump twice to
 flip gravity"

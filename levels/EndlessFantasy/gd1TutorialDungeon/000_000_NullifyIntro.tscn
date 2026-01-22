@@ -180,7 +180,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2457, 13.4382, 0 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.Tutorial.12"
 can_camera_zoom = false
 

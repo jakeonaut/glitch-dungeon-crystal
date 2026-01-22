@@ -108,7 +108,7 @@ tracks/1/keys = {
 
 [node name="MoltFruit" type="Spatial"]
 script = ExtResource( 10 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•\"MOLT FRUIT\" get!!!
 wow, good job
 

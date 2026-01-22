@@ -3254,7 +3254,7 @@ script = ExtResource( 34 )
 
 [node name="MimicNPC" parent="Viewport/level/BigFishNPC" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -7, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.BigFisherman.1"
 is_merchant = true
 
@@ -3300,7 +3300,7 @@ only_activate_in_range = false
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 67.9663, -12.043, 0 )
-grav = 0
+grav = Vector2(0, 0)
 can_move = false
 can_camera_zoom = false
 is_a_body = false
@@ -3399,7 +3399,7 @@ anims/getItem = SubResource( 98 )
 
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 56.9663, -11.043, 0 )
-grav = 0
+grav = Vector2(0, 0)
 can_move = false
 can_camera_zoom = false
 is_a_body = false

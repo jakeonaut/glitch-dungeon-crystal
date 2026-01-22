@@ -299,7 +299,7 @@ script = ExtResource( 18 )
 
 [node name="NPC4" parent="Viewport/level/FloatingCrone" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.2524, 59, -1 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="CollisionShape" parent="Viewport/level/FloatingCrone/NPC4/SmallInteractionArea" index="0"]
 shape = SubResource( 48 )

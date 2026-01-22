@@ -90,7 +90,7 @@ var has_already_hidden = false
 func unsmack():
     .unsmack()
     if boss_phase == BossPhase.STUN_FALL:
-        grav = 60
+        grav = Vector2(0, 60)
 
 func getMyVariable():
     return global.memory["angler_seaman_boss"]
@@ -348,7 +348,7 @@ func _process(delta):
         behavior_walking = false
         on_ground = false
         if global_transform.origin.y <= -30:
-            grav = 0
+            grav = Vector2(0, 0)
             linear_velocity.y = 0
             lv.y = 0
             vv = 0
@@ -450,7 +450,7 @@ func barfRandomSnail():
     basicFrogEnemy.global_transform.origin = self.global_transform.origin + Vector3(-3.333, 0.265, 0)
     basicFrogEnemy.jump_time_limit = 5
     basicFrogEnemy.jump_timer = 0
-    basicFrogEnemy.grav = 20
+    basicFrogEnemy.grav = Vector2(0, 20)
     basicFrogEnemy.jump_force = 15
     basicFrogEnemy.on_ground = true
     basicFrogEnemy.behavior_walking = true

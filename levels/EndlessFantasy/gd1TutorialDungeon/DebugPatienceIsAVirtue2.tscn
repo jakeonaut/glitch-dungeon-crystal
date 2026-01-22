@@ -276,7 +276,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4.11107, -0.203964 )
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.92235, 5.68293, 0 )
 visible = false
-grav = 0
+grav = Vector2(0, 0)
 bbText = "hi so much!
 press SPACE to switch
 between spells"

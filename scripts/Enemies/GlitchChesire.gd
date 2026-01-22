@@ -121,7 +121,7 @@ func _process(delta):
             secretAniPlayer.play("stonify")
             behavior_jumping = false
             behavior_walking = false
-            grav = 0
+            grav = Vector2(0, 0)
             lv = Vector3(0, 0, 0)
             linear_velocity = Vector3(0, 0, 0)
         if not am_i_in_range_of_player and on_ground:
@@ -131,7 +131,7 @@ func _process(delta):
             secretAniPlayer.play("teleportOut")
             behavior_jumping = false
             behavior_walking = false
-            grav = 0
+            grav = Vector2(0, 0)
             lv = Vector3(0, 0, 0)
             linear_velocity = Vector3(0, 0, 0)
 
@@ -156,7 +156,7 @@ func respawn():
     behavior_walking = false
     behavior_jumping = false
     
-    grav = 30
+    grav = Vector2(0, 30)
     on_ground = true
     walk_speed = proper_walk_speed
     floor_glitch_walk_speed = proper_walk_speed
@@ -182,7 +182,7 @@ func teleport():
     behavior_walking = false
     behavior_jumping = false
     
-    grav = 30
+    grav = Vector2(0, 30)
     on_ground = true
     walk_speed = proper_walk_speed
     floor_glitch_walk_speed = proper_walk_speed

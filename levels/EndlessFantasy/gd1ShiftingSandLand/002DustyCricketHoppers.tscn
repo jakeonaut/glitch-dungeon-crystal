@@ -693,7 +693,7 @@ should_shake_screen = true
 
 [node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 34 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, -9, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 41 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 70, -8.60734, 0 )

@@ -394,7 +394,7 @@ script = ExtResource( 23 )
 shape = SubResource( 21 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 19 )]
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•make this tunnel taller,
 also add a mini red spike pit
 before the tunnel."

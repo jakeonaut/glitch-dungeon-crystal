@@ -21,7 +21,7 @@ func _ready():
     if is_wall_snail:
         should_collide_horizontally = false
         jump_force = 1
-        grav = 0
+        grav = Vector2(0, 0)
         terminal_vel = 1
         water_terminal_vel = 1
         true_terminal_vel = 1
@@ -38,7 +38,7 @@ func doVerticalWalkingBehavior():
         if on_ground:
             on_ground = false
             walk_direction.y = 1
-            grav = 5
+            grav = Vector2(0, 5)
             slime_state_timer = 0
             slime_state = SlimeState.WALK
             scoochSound2.play()
@@ -48,7 +48,7 @@ func doVerticalWalkingBehavior():
             has_reached_top_of_wall = slime_state == SlimeState.WALK and slime_state_timer > slime_walk_time_limit/2
             if has_reached_top_of_wall:
                 walk_direction.y = -1
-                grav = 60
+                grav = Vector2(0, 60)
                 if myOtherSprite:
                     myOtherSprite.flip_v = true
                 has_reached_top_of_wall = false

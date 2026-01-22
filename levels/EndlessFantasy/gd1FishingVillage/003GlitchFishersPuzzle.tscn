@@ -814,7 +814,7 @@ visible = false
 [node name="NPC8" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 155, 45, 0 )
 visible = false
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•use [SPACE] to switch between the
 last two colors!"
 tiny_textbox = true
@@ -848,7 +848,7 @@ shape = SubResource( 19 )
 [node name="NPC9" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 18, 0 )
 visible = false
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•wow. i'm surprised
 you made it over here"
 is_important = true
@@ -860,7 +860,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 6, 0 )
 
 [node name="NPC2" parent="Viewport/level/QuestionBlock" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1182, 2.14345, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.Fisherman.4"
 can_move = false
 can_camera_zoom = false
@@ -1094,7 +1094,7 @@ anims/getItem = SubResource( 142 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 71.7818, 16.0596, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.Fisherman.5"
 can_move = false
 can_camera_zoom = false
@@ -1122,7 +1122,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.21877, -1 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 64.7818, 27.1513, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.Fisherman.6"
 can_move = false
 can_camera_zoom = false
@@ -1416,11 +1416,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53, 3.20147, 0 )
 
 [node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 45 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, -3, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="AngelEgg2" parent="Viewport/level" instance=ExtResource( 45 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 18, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="SavePoint3" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 25, 0 )

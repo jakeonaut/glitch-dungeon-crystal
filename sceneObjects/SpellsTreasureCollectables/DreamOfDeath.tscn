@@ -379,7 +379,7 @@ shader_param/target_palette = ExtResource( 3 )
 
 [node name="DreamOfDeath" type="Spatial"]
 script = ExtResource( 12 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•You got:
 Goddess Dream of Death"
 is_important = true

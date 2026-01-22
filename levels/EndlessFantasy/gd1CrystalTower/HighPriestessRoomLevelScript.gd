@@ -82,7 +82,7 @@ func setUpRoomInitializationOverride():
       # if crystalGeode.get_ref() != null:
       #   crystalGeode.get_ref().visible = false
       pacman_wrapping = false
-      # glitchedGrimoire.grav = 20
+      # glitchedGrimoire.grav = Vector2(0, 20)
       # glitchedGrimoire.visible = true
       # glitchedGrimoire.global_transform.origin.y = -4
       # theGoddess.get_node("AnimationPlayer").play("bubbleUp")
@@ -231,14 +231,14 @@ func _process(delta):
 
   if is_defeated and not is_really_defeated:
     player.pauseSelf = true
-    player.grav = 0
+    player.grav = Vector2(0, 0)
     if not player.aniPlayer.assigned_animation == "fall":
         player.aniPlayer.stop()
         player.aniPlayer.clear_queue()
         player.aniPlayer.play("fall")
   elif is_defeated and is_really_defeated:
     player.pauseSelf = false
-    player.grav = 28
+    player.grav = Vector2(0, 28)
 
   if (highPriestessBoss.get_ref() != null) and (highPriestessBoss.get_ref().visible or goddess_cutscene_counter >= 0):
     random_tiles_timer += (delta*11)
@@ -255,7 +255,7 @@ func addNPCToCrystal(npcRef, crystal):
   theGoddess.get_node("CrystalSound").play()
   summonSmokeClouds(crystal.global_transform.origin, 2)
   crystal.visible = true
-  npcRef.get_ref().grav = 0
+  npcRef.get_ref().grav = Vector2(0, 0)
   self.remove_child(npcRef.get_ref())
   crystal.add_child(npcRef.get_ref())
   npcRef.get_ref().scale = Vector3(0.5, 0.5, 0.5)
@@ -319,7 +319,7 @@ func glitchNextGrandmaStatue(glitch_form):
 func showTheGruesomeChild():
   summonSmokeClouds(gruesomeChildNPC.global_transform.origin, 3, true, true)
   gruesomeChildNPC.visible = true
-  gruesomeChildNPC.grav = 60
+  gruesomeChildNPC.grav = Vector2(0, 60)
 
 func enterMemoryZone():
   is_really_defeated = true
@@ -333,11 +333,11 @@ func enterMemoryZone():
   # global.shouldRenderAsCinematic = false
   # highPriestessBoss.get_ref().queue_free()
   # self.summonSmokeClouds(glitchedGrimoire.global_transform.origin, 5, true, true)
-  # glitchedGrimoire.grav = 20
+  # glitchedGrimoire.grav = Vector2(0, 20)
   # glitchedGrimoire.visible = true
   global.pauseGame = false
   global.shouldRenderAsCinematic = false
-  # croneNPC.grav = 20
+  # croneNPC.grav = Vector2(0, 20)
   # croneNPC.mySprite.updateBaseFrame(6, 7)
   # croneNPC.is_active = true
   # self.pacman_wrapping = false

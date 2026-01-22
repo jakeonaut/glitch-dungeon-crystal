@@ -474,7 +474,7 @@ shader_param/target_palette = ExtResource( 11 )
 
 [node name="ChickenTreasure" type="Spatial"]
 script = ExtResource( 4 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.Outfit.1"
 is_important = true
 can_activate = false

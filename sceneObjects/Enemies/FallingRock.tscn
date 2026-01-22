@@ -698,7 +698,7 @@ tracks/0/keys = {
 [node name="FallingRock" type="Spatial"]
 script = ExtResource( 9 )
 true_terminal_vel = 24
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 visible = false

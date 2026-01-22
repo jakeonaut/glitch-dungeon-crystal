@@ -107,7 +107,7 @@ tracks/1/keys = {
 
 [node name="Broom" type="Spatial"]
 script = ExtResource( 10 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•[wave]Enchanted Broom[/wave]
 GET!"
 is_important = true

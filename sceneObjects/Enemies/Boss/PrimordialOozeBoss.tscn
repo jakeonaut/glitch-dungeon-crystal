@@ -391,7 +391,7 @@ visible = true
 
 [node name="PrimordialOozeNPC" parent="." instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 12, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "WHO. HAS. AWOKEN. ME?
 YOU WISH FOR A CLEAN SLATE?
 what do you think
@@ -425,7 +425,7 @@ shape = SubResource( 15 )
 
 [node name="EndOfGameNPC" parent="." instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 12, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.Crone.9"
 
 [node name="CollisionShape" parent="EndOfGameNPC/SmallInteractionArea" index="0"]

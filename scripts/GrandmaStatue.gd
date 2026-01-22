@@ -61,7 +61,7 @@ func _process(delta):
   processRendering(delta)
   if is_extra_life:
     on_ground = true
-    grav = 0
+    grav = Vector2(0, 0)
   processGlitchFormTeleportation()
 
   if is_smacked:

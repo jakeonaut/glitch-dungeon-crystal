@@ -5655,7 +5655,7 @@ anims/walkStop = SubResource( 52 )
 
 [node name="NPC" parent="Viewport/level/Player2" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•one day, a glitch appeared.  
 •we could not make it go away, 
 
@@ -5758,7 +5758,7 @@ visible = false
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -37.192, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•fellow wise one,
 may I ask a favor of thee?
 
@@ -6061,7 +6061,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -13, -4 )
 
 [node name="FishElderNPC" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.1332, -6, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "just [X] more Crystals to awaken! 
 our prayers are stronger
 together."
@@ -6356,7 +6356,7 @@ transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -16, -9
 [node name="FryingPanNPC" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 1, 0 )
 visible = false
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.FryingPan.1"
 needs_to_talk_normal_first = true
 is_a_body = false

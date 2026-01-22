@@ -6479,7 +6479,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 9, 0 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.9182, 12.061, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.Fisherman.7"
 can_move = false
 can_camera_zoom = false

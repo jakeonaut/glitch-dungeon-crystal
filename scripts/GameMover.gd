@@ -83,7 +83,6 @@ export var lb = -0.72
 export var rb = .72
 export var tb = 1.0
 export var bb = -1.0
-var grav_direction = Vector3(0, -1, 0)
 
 
 var jumpSmokeCloudRes = preload("res://sceneObjects/JumpSmokeCloud.tscn")
@@ -115,8 +114,8 @@ var lv = linear_velocity
 var velocity_dampener = 1.0
 var pauseAnimation = false
 
-export var grav = 60
-var g = Vector3(0, -grav, 0) if grav != 0 else Vector3(0, -1, 0)
+export var grav = Vector2(0, 60)
+var g = Vector3(-grav.x, -grav.y, 0) if grav.y != 0 or grav.x != 0 else Vector3(0, -1, 0)
 
 # TODO(jaketrower): Maybe should remove dir, and only rely on linear_velocity ?
 var dir = Vector3(0, 0, 0)
@@ -223,8 +222,6 @@ func _process(delta):
 
   if (global.pauseGame and not can_i_personally_ignore_game_pause) or pauseSelf: return
   if jump_force == null: jump_force = 16
-  # if (jump_force > 0 and grav < 0) or (jump_force < 0 and grav > 0):
-  #   jump_force *= -1
 
   if has_just_glitch_swapped:
     has_just_glitch_swapped_timer += (delta*11)
@@ -279,7 +276,7 @@ func tryingToWakeUp():
   return false
 
 func processPhysics(delta):
-  if grav == null: grav = 0 # ???
+  if grav == null: grav = Vector2(0, 0) # ??? # it's the = null .tscn script desync save bug
 
   if physics_state == PhysicsState.IGNORE_PHYSICS or ignorePhysics:
     return
@@ -290,7 +287,7 @@ func processPhysics(delta):
   lv = linear_velocity
 
   applyGravity(delta)
-  g = Vector3(0, -grav, 0) if grav != 0 else Vector3(0, -1, 0)
+  g = Vector3(-grav.x, -grav.y, 0) if grav.y != 0 or grav.x != 0 else Vector3(0, -1, 0)
   
   up = -g.normalized() # (up is against gravity)
   vv = up.dot(lv) # vertical velocity
@@ -425,8 +422,7 @@ func processLand(was_on_fallthrough_solid = false):
     global_transform.origin.y > getGameCamera().topmost_y - 1 or \
     global_transform.origin.x > getGameCamera().rightmost_x - 1 or \
     global_transform.origin.x < getGameCamera().leftmost_x + 1 or \
-    global_transform.origin.y < getGameCamera().botmost_y + 1)) and not level.isAnyMoleDigging() \
-    and not grav < 0:
+    global_transform.origin.y < getGameCamera().botmost_y + 1)) and not level.isAnyMoleDigging():
       last_grounded_pos = Vector3(global_transform.origin)
   just_landed = true
     
@@ -481,23 +477,23 @@ func createG(delta):
       physics_vars.applyHalfGrav = 0
 
   if is_touching_water or physics_vars.applyHalfGrav:
-    g = Vector3(0, -grav/3, 0)
+    g = Vector3(-grav.x/3, -grav.y/3, 0)
     if is_touching_waterfall:
-      g = Vector3(0, -grav/2, 0)
+      g = Vector3(-grav.x/2, -grav.y/2, 0)
     if fallSound:
       fallSound.stop()
   elif isFeatherLike():
     if pressingDown():
-      g = Vector3(0, -grav*2, 0)
+      g = Vector3(-grav.x*2, -grav.y*2, 0)
     else:
-      g = Vector3(0, -grav/1.5, 0)
+      g = Vector3(-grav.x/1.5, -grav.y/1.5, 0)
   else:
     if pressingDown():
-      g = Vector3(0, -grav*1.5, 0)
+      g = Vector3(-grav.x*1.5, -grav.y*1.5, 0)
     elif isHeavy():
-      g = Vector3(0, -grav*1.1, 0)
+      g = Vector3(-grav.x*1.1, -grav.y*1.1, 0)
     else:
-      g = Vector3(0, -grav, 0)
+      g = Vector3(-grav.x, -grav.y, 0)
       
 var override_terminal_vel = null
 func applyTerminalVelocity(_delta):
@@ -808,6 +804,7 @@ func justPressedMoveRight():
 func pressingMoveRight():
   return override_press_move_right
 
+# TODO(jaketrower): TopsyTurvy # TODO(gravity):
 func processLadderInputs(_delta):
   if global.pauseMoveInput: return
 
@@ -856,6 +853,7 @@ func processLadderInputs(_delta):
           aniPlayer.clear_queue()
           aniPlayer.play("climbStop")
     
+# TODO(jaketrower): TopsyTurvy # TODO(gravity):
 func processJumpInputs(delta):
   if is_climbing_ladder or global.pauseMoveInput: return
 
@@ -956,7 +954,7 @@ func addJumpSmokeCloud(flip_flip_h = false):
     newSmokeCloud.flip_h = not mySprite.flip_h
   else:
     newSmokeCloud.flip_h = mySprite.flip_h
-  if grav < 0:
+  if grav.y < 0:
     newSmokeCloud.flip_v = true
     newSmokeCloud.global_transform.origin.y = self.global_transform.origin.y + 0.24
   newSmokeCloud.get_material_override().set_shader_param("target_palette", level.current_sprite_palette)
@@ -1019,7 +1017,7 @@ func isKindOfOnGround():
   
 func isKindaSortaOfOnGround():
   # I'm on the ground or just fell off a platform...
-  return on_ground or (was_just_on_ground_timer <= was_just_on_ground_time_limit and ((vv < 0 and grav > 0) or vv > 0 and grav < 0))
+  return on_ground or (was_just_on_ground_timer <= was_just_on_ground_time_limit and ((vv < 0 and (grav.y > 0 or grav.x > 0)) or vv > 0 and (grav.y < 0 or grav.x < 0)))
 
 func getRunAdd():
   if not pressingRun():
@@ -1046,6 +1044,8 @@ var horizontal_multiplier = 1
 var horizontal_addition = 0
 var is_sprite_flipped = false
 var should_always_stop_walking_immediately = false
+
+# TODO(jaketrower): TopsyTurvy # TODO(gravity):
 func processHorizontalInputs(delta):
   if is_climbing_ladder: return
   var prevFlipH = mySprite.flip_h
@@ -1056,6 +1056,7 @@ func processHorizontalInputs(delta):
 
   is_pressing_horizontal_input = pressingMoveLeft() or pressingMoveRight()
 
+  # TODO(jaketrower): TopsyTurvy # TODO(gravity):
   var is_pressing_opposite_horizontal_input = (pressingMoveLeft() and (dir.x > 0 or (flip_h == is_sprite_flipped))) or (pressingMoveRight() and (dir.x < 0 or (flip_h != is_sprite_flipped)))
   if is_pressing_opposite_horizontal_input and num_horizontal_input_presses <= 2:
     num_horizontal_input_presses = 1
@@ -1065,8 +1066,8 @@ func processHorizontalInputs(delta):
     num_horizontal_input_presses += 1
 
   # Forward as "seen" by the camera (OpenGL convention)
-  var view_forward = -getGameCamera().get_transform().basis.z
-  var view_right = -getGameCamera().get_transform().basis.x
+  var view_forward = -getGameCamera().get_transform().basis.z  # TODO(jaketrower): TopsyTurvy # TODO(gravity):
+  var view_right = -getGameCamera().get_transform().basis.x  # TODO(jaketrower): TopsyTurvy # TODO(gravity):
   # Forward as "seen" by the player
   var forward = Vector3(view_forward.x, 0.0, view_forward.z).normalized()
   var right = view_right
@@ -1368,22 +1369,161 @@ func handleCollisionsAndMove(local_lv, delta):
   local_lv.y /= delta*DNUM
   return local_lv
 
-func isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords):
-  var checking_for_floor_collisions = is_vertical and sensor_direction == -1
-  if tile_type == GridMap.INVALID_CELL_ITEM:
-    return false
-  var tile_name = getLevelTiles().mesh_library.get_item_name(tile_type)
-  if glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
-    return not pressingDown() and checking_for_floor_collisions and (global.isTileSolid(tile_type, getLevelTiles().mesh_library) or isTileFallthroughSolidTop(tile_type, tile_pos_coords))
-  else:
-    return (global.isTileSolid(tile_type, getLevelTiles().mesh_library) or (not pressingDown() and checking_for_floor_collisions and isTileFallthroughSolidTop(tile_type, tile_pos_coords))) and (not "Spikes" in tile_name or glitch_form == global.GlitchForm.INVISIBLE)
+func handleHorizontalCollisions(local_lv):
+  self.horizontal_collision = false
+  var TILE_WIDTH = getLevelTiles().cell_size.x
+
+  # check for left collisions
+  if shouldCheckForLeftCollisions(local_lv):
+    # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
+    local_lv = performCollisionCheck(false, local_lv, lb - 0.2, -1, TILE_WIDTH, grav.x > 0)
+    # TODO(jaketrower): TopsyTurvy 0.2
+
+  # check for right collisions
+  if shouldCheckForRightCollisions(local_lv):
+    # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
+    local_lv = performCollisionCheck(false, local_lv, rb + 0.2, 1, 0, grav.x < 0)
+    # TODO(jaketrower): TopsyTurvy 0.2
+  return local_lv
   
-func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
+func handleVerticalCollisions(local_lv):
+  self.vertical_collision = false
+  var TILE_HEIGHT = getLevelTiles().cell_size.y
+
+  # check for bottom collisions
+  if shouldCheckForBottomCollisions(local_lv):
+    # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
+    local_lv = performCollisionCheck(true, local_lv, bb, -1, TILE_HEIGHT, grav.y > 0)
+    # TODO(jaketrower): TopsyTurvy 0.2!!
+
+  # check for top collisions
+  if shouldCheckForTopCollisions(local_lv):
+    # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
+    local_lv = performCollisionCheck(true, local_lv, tb, 1, 0, grav.y < 0)
+    # TODO(jaketrower): TopsyTurvy 0.2!!!
+  return local_lv
+
+func shouldCheckForLeftCollisions(local_lv):
+  if grav.y != 0 and grav.x == 0:
+    return local_lv.x < 0 or pressingMoveLeft()
+  if grav.x > 0:
+    return should_collide_floor and (on_ground or local_lv.x <= 0) and not (physics_state == PhysicsState.BEING_TOSSED and grav.x == 0 and local_lv.x == 0)
+  if grav.x < 0:
+    return should_collide_ceil and (not on_ground or (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall())) and local_lv.x < 0
+
+func shouldCheckForRightCollisions(local_lv):
+  if grav.y != 0 and grav.x == 0:
+    return local_lv.x > 0 or pressingMoveRight()
+  if grav.x < 0:
+    return should_collide_floor and (on_ground or local_lv.x >= 0) and not (physics_state == PhysicsState.BEING_TOSSED and grav.x == 0 and local_lv.x == 0)
+  if grav.x > 0:
+    return should_collide_ceil and (not on_ground or (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall())) and local_lv.x > 0
+
+func shouldCheckForBottomCollisions(local_lv):
+  if grav.y == 0:
+    if grav.x > 0:
+      return local_lv.y < 0 or pressingMoveRight()
+    elif grav.x < 0:
+      return local_lv.y < 0 or pressingMoveLeft()
+  if grav.y > 0:
+    return should_collide_floor and (on_ground or local_lv.y <= 0) and not (physics_state == PhysicsState.BEING_TOSSED and grav.y == 0 and local_lv.y == 0)
+  if grav.y < 0:
+    return should_collide_ceil and (not on_ground or (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall())) and local_lv.y < 0
+
+func shouldCheckForTopCollisions(local_lv):
+  if grav.y == 0:
+    if grav.x > 0:
+      return local_lv.y > 0 or pressingMoveLeft()
+    elif grav.x < 0:
+      return local_lv.y < 0 or pressingMoveRight()
+  if grav.y < 0:
+    return should_collide_floor and (on_ground or local_lv.y >= 0) and not (physics_state == PhysicsState.BEING_TOSSED and grav.y == 0 and local_lv.y == 0)
+  if grav.y > 0:
+    return should_collide_ceil and (not on_ground or (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall())) and local_lv.y > 0
+
+var cheating_horizontal_offset = 0
+func performCollisionCheck(is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug = false):
+  var x = global_transform.origin.x
   var y = global_transform.origin.y
-  var is_above_top_of_tile = y + bb > tile_pos_coords.y
-  var tile_name = getLevelTiles().mesh_library.get_item_name(tile_type)
-  return is_above_top_of_tile and (("Semisolid" in tile_name and not "SemisolidTop" in tile_name) or (glitch_form == global.GlitchForm.WALK_THROUGH_WALLS and global.isTileSolid(tile_type, getLevelTiles().mesh_library)))
+
+  if not should_only_do_middle_sensor:
+    # Check for sensor A
+    var sensor_A = Vector2(x+lb, y+sensor_anchor) if is_vertical else Vector2(x+sensor_anchor, y+bb+0.2)
+    var tile_pos_and_distance_and_type_A = probeSensorForTileDistance(sensor_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
+    var tile_pos_A = tile_pos_and_distance_and_type_A.x
+    var tile_distance_A = tile_pos_and_distance_and_type_A.y
+    var tile_type_A = tile_pos_and_distance_and_type_A.z
+
+    # Check for sensor B
+    var sensor_B = Vector2(x+rb, y+sensor_anchor) if is_vertical else Vector2(x+sensor_anchor, y+tb-0.2)
+    var tile_pos_and_distance_and_type_B = probeSensorForTileDistance(sensor_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
+    var tile_pos_B = tile_pos_and_distance_and_type_B.x
+    var tile_distance_B = tile_pos_and_distance_and_type_B.y
+    var tile_type_B = tile_pos_and_distance_and_type_B.z
+
+    if should_do_middle_sensor:
+      # Check for middle sensor
+      
+      var middle_sensor = Vector2(x, y+sensor_anchor) if is_vertical else Vector2(x+sensor_anchor, y)
+      var tile_pos_and_distance_and_type_middle = probeSensorForTileDistance(middle_sensor, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
+      var middle_tile_pos = tile_pos_and_distance_and_type_middle.x
+      var middle_tile_distance = tile_pos_and_distance_and_type_middle.y
+      var middle_tile_type = tile_pos_and_distance_and_type_middle.z
+
+      if debug:
+        print(
+          str(is_vertical) + 
+          " (x, y): " + str(x) + ", " + str(y) +
+          ";; sensor_A_distance: " + str(tile_distance_A) + ", " + str(tile_pos_A) +
+          ";; sensor_B_distance: " + str(tile_distance_B) + ", " + str(tile_pos_B) + 
+          ";; middle_tile_distance: " + str(middle_tile_distance) + ", " + str(middle_tile_pos)
+        )
+
+      # Compare left and right collision tile distances
+      if tile_distance_A <= tile_distance_B and tile_distance_A <= middle_tile_distance:
+        local_lv = reactToPotentialCollisions(tile_type_A, tile_distance_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+      elif tile_distance_B < tile_distance_A and tile_distance_B <= middle_tile_distance:
+        local_lv = reactToPotentialCollisions(tile_type_B, tile_distance_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+      else:
+        local_lv = reactToPotentialCollisions(middle_tile_type, middle_tile_distance, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+      return local_lv
+    else:
+      # Compare left and right collision tile distances
+      if tile_distance_A <= tile_distance_B:
+        local_lv = reactToPotentialCollisions(tile_type_A, tile_distance_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+      elif tile_distance_B < tile_distance_A:
+        local_lv = reactToPotentialCollisions(tile_type_B, tile_distance_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+      return local_lv
+  else:
+    var middle_sensor = Vector2(x, y+sensor_anchor) if is_vertical else Vector2(x+sensor_anchor, y+cheating_horizontal_offset)
+    var tile_pos_and_distance_and_type_middle = probeSensorForTileDistance(middle_sensor, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
+    var middle_tile_distance = tile_pos_and_distance_and_type_middle.y
+    var middle_tile_type = tile_pos_and_distance_and_type_middle.z
+
+    local_lv = reactToPotentialCollisions(middle_tile_type, middle_tile_distance, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+    return local_lv
   
+func probeSensorForTileDistance(sensor, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor):
+  var x = global_transform.origin.x
+  var y = global_transform.origin.y
+  
+  if is_vertical:
+    # add y speed to collision checking if we're in the air
+    sensor.y += local_lv.y
+    if local_lv.y == 0 and glitch_form == global.GlitchForm.FLOOR: # TODO(jaketrower): TopsyTurvy # TODO(gravity):
+      sensor.y -= 0.125
+    # if local_lv.y == 0 and glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall():
+    #   sensor.y += 0.125
+  else:
+    sensor.x += local_lv.x
+  var tile_pos_and_type = doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor)
+  var tile_pos = tile_pos_and_type.x
+  var tile_type = tile_pos_and_type.y
+  var tile_distance = (tile_pos*sensor_direction) - ((x+sensor_anchor) * sensor_direction)
+  if is_vertical:
+    tile_distance = (tile_pos*sensor_direction) - ((y+sensor_anchor) * sensor_direction)
+  return Vector3(tile_pos, tile_distance, tile_type)
+
 func doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor, _debug = false):
   var z = 0 # global_transform.origin.z
   var TILE_WIDTH = getLevelTiles().cell_size.x
@@ -1431,31 +1571,71 @@ func doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor, _debug = 
     # else: # We found no tile collision on this side! Just use default :)
   return Vector2(tile_pos, tile_type)
 
-func probeSensorForTileDistance(sensor, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor):
-  var x = global_transform.origin.x
-  var y = global_transform.origin.y
-  
-  if is_vertical:
-    # add y speed to collision checking if we're in the air
-    sensor.y += local_lv.y
-    if local_lv.y == 0 and glitch_form == global.GlitchForm.FLOOR:
-      sensor.y -= 0.125
-    # if local_lv.y == 0 and glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall():
-    #   sensor.y += 0.125
-  else:
-    sensor.x += local_lv.x
-  var tile_pos_and_type = doSensorProbe(is_vertical, sensor, sensor_direction, tile_anchor)
-  var tile_pos = tile_pos_and_type.x
-  var tile_type = tile_pos_and_type.y
-  var tile_distance = (tile_pos*sensor_direction) - ((x+sensor_anchor) * sensor_direction)
-  if is_vertical:
-    tile_distance = (tile_pos*sensor_direction) - ((y+sensor_anchor) * sensor_direction)
-  return Vector3(tile_pos, tile_distance, tile_type)
+func reactToPotentialCollisions(_tile_type, tile_distance, is_vertical, local_lv, _sensor_anchor, sensor_direction, _tile_anchor, should_collide_with_floor, debug = false):
+  if tile_distance <= 0:
+    if debug:
+      print("collide sensor A...")
+      if not is_vertical: get_tree().paused = true
+    # push player out of the tile!
+    if is_vertical:
+      # print("1INCREMENT Y POS BY: " + str(tile_distance * sensor_direction))
+      global_transform.origin.y += tile_distance * sensor_direction
+      if grav.y != 0 and grav.x == 0:
+        if should_collide_with_floor:
+          local_lv = collideWithFloor(local_lv)
+        else:
+          local_lv = collideWithCeiling(local_lv)
+          if feather_jump_timer < feather_jump_partial_time_limit:
+            feather_jump_timer = feather_jump_partial_time_limit
+      else:
+        collideWithWall(local_lv)
+        local_lv.y = 0
+    else:
+      if grav.y != 0 and grav.x == 0:
+        # print("1INCREMENT X POS BY: " + str(tile_distance * sensor_direction))
+        global_transform.origin.x += tile_distance * sensor_direction
+        collideWithWall(local_lv)
+        local_lv.x = 0
+      else:
+        if should_collide_with_floor:
+          local_lv = collideWithFloor(local_lv)
+        else:
+          local_lv = collideWithCeiling(local_lv)
+          if feather_jump_timer < feather_jump_partial_time_limit:
+            feather_jump_timer = feather_jump_partial_time_limit
+  elif is_vertical and tile_distance < local_lv.y * sensor_direction:
+    global_transform.origin.y += tile_distance * sensor_direction
+    if grav.y != 0 and grav.x == 0:
+      # print("2INCREMENT Y POS BY: " + str(tile_distance * sensor_direction))
+      if should_collide_with_floor:
+        local_lv = collideWithFloor(local_lv)
+      else:
+        local_lv = collideWithCeiling(local_lv)
+        if feather_jump_timer < feather_jump_partial_time_limit:
+          feather_jump_timer = feather_jump_partial_time_limit
+    else:
+      collideWithWall(local_lv)
+      local_lv.y = 0
+  elif not is_vertical and tile_distance < local_lv.x * sensor_direction:
+    global_transform.origin.x += tile_distance * sensor_direction
+    if grav.y != 0 and grav.x == 0:
+      # print("2INCREMENT X POS BY: " + str(tile_distance * sensor_direction))
+      collideWithWall(local_lv)
+      local_lv.x = 0
+    else:
+      if should_collide_with_floor:
+        local_lv = collideWithFloor(local_lv)
+      else:
+        local_lv = collideWithCeiling(local_lv)
+        if feather_jump_timer < feather_jump_partial_time_limit:
+          feather_jump_timer = feather_jump_partial_time_limit
+  return local_lv
 
 var can_collide_with_floor = true
 func collideWithFloor(local_lv):
-  # TODO(jaketrower): TopsyTurvy
-  local_lv.y = 0
+  if grav.y != 0 and grav.x == 0:
+    local_lv.y = 0
+  else: local_lv.x = 0
   if can_collide_with_floor:
     on_ground = true
     truly_on_ground = true
@@ -1467,48 +1647,16 @@ func collideWithCeiling(local_lv):
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
     pauseAnimation = false
-  local_lv.y = 0
+
+  if grav.y != 0 and grav.x == 0:
+    local_lv.y = 0
+  else: local_lv.x = 0
   on_ceiling = true
   return local_lv
 
-func reactToPotentialCollisions(_tile_type, tile_distance, is_vertical, local_lv, _sensor_anchor, sensor_direction, _tile_anchor, should_collide_with_floor, debug = false):
-  if tile_distance <= 0:
-    if debug:
-      print("collide sensor A...")
-      if not is_vertical: get_tree().paused = true
-    # push player out of the tile! # TODO(jaketrower): TopsyTurvy
-    if is_vertical:
-      # print("1INCREMENT Y POS BY: " + str(tile_distance * sensor_direction))
-      global_transform.origin.y += tile_distance * sensor_direction
-      if should_collide_with_floor:
-        local_lv = collideWithFloor(local_lv) # TODO(jaketrower): TopsyTurvy
-      else:
-        local_lv = collideWithCeiling(local_lv)
-        if feather_jump_timer < feather_jump_partial_time_limit:
-          feather_jump_timer = feather_jump_partial_time_limit
-    else:
-      # print("1INCREMENT X POS BY: " + str(tile_distance * sensor_direction))
-      global_transform.origin.x += tile_distance * sensor_direction
-      collideWithWall(local_lv)
-      local_lv.x = 0
-  elif is_vertical and tile_distance < local_lv.y * sensor_direction: # TODO(jaketrower): TopsyTurvy
-    global_transform.origin.y += tile_distance * sensor_direction
-    # print("2INCREMENT Y POS BY: " + str(tile_distance * sensor_direction))
-    if should_collide_with_floor:
-      local_lv = collideWithFloor(local_lv) # TODO(jaketrower): TopsyTurvy
-    else:
-      local_lv = collideWithCeiling(local_lv)
-      if feather_jump_timer < feather_jump_partial_time_limit:
-        feather_jump_timer = feather_jump_partial_time_limit
-  elif not is_vertical and tile_distance < local_lv.x * sensor_direction: # TODO(jaketrower): TopsyTurvy
-    global_transform.origin.x += tile_distance * sensor_direction
-    # print("2INCREMENT X POS BY: " + str(tile_distance * sensor_direction))
-    collideWithWall(local_lv) # TODO(jaketrower): TopsyTurvy
-    local_lv.x = 0
-  return local_lv
-
-# TODO(jaketrower): TopsyTurvy
 func collideWithWall(local_lv):
+  var xish = local_lv.x if grav.y != 0 and grav.x == 0 else local_lv.y
+  var yish = local_lv.y if grav.y != 0 and grav.x == 0 else local_lv.x
   self.horizontal_collision = true
   if physics_state == PhysicsState.BEING_TOSSED and glitch_form == global.GlitchForm.FLOOR:
     on_ground = false
@@ -1518,16 +1666,16 @@ func collideWithWall(local_lv):
   var bumpSpeed = 0.06
   if not on_ground and glitch_form != global.GlitchForm.FEATHER:
     bumpSpeed = 0.10
-  var should_play_bump = abs(local_lv.x) > bumpSpeed or just_pressed_horizontal_input or switched_to_red_from_yellow or switched_to_yellow
+  var should_play_bump = abs(xish) > bumpSpeed or just_pressed_horizontal_input or switched_to_red_from_yellow or switched_to_yellow
   var bump_ani_speed = 1.0
-  if abs(local_lv.x) < 0.16 and not (just_pressed_horizontal_input or switched_to_red_from_yellow or switched_to_yellow):
+  if abs(xish) < 0.16 and not (just_pressed_horizontal_input or switched_to_red_from_yellow or switched_to_yellow):
     bump_ani_speed = 0.75
 
   var ladder_glitch = glitch_form == global.GlitchForm.LADDER
   if not pauseAnimation and aniPlayer != null and should_play_bump:
     var aa = aniPlayer.assigned_animation
     if not was_on_ground and not is_touching_water:
-      if local_lv.y > 0 and aa != "jumpBump" and aa != "jumpSquat" and not ladder_glitch and not was_walking_into_wall:
+      if yish > 0 and aa != "jumpBump" and aa != "jumpSquat" and not ladder_glitch and not was_walking_into_wall:
         aniPlayer.stop()
         aniPlayer.clear_queue()
         playLandSound()
@@ -1535,7 +1683,7 @@ func collideWithWall(local_lv):
         # if glitch_form == global.GlitchForm.LADDER:
         #   aniPlayer.queue("walk")
         # else: aniPlayer.queue("fall" if isFeatherLike() else "jump")
-      elif local_lv.y < 0 and aa != "fallBump" and aa != "fallFar" and not ladder_glitch and not was_walking_into_wall:
+      elif yish < 0 and aa != "fallBump" and aa != "fallFar" and not ladder_glitch and not was_walking_into_wall:
         aniPlayer.stop()
         aniPlayer.clear_queue()
         playLandSound()
@@ -1552,9 +1700,9 @@ func collideWithWall(local_lv):
       if glitch_form == global.GlitchForm.LADDER:
         aniPlayer.play("walk")
         bounceAniPlayer.stop()
-        if local_lv.x > 0:
+        if xish > 0:
           bounceAniPlayer.play("bumpRight", -1, bump_ani_speed)
-        if local_lv.x < 0:
+        if xish < 0:
           bounceAniPlayer.play("bumpLeft", -1, bump_ani_speed)
       else:
         aniPlayer.play("walkBump", -1, bump_ani_speed)
@@ -1562,107 +1710,23 @@ func collideWithWall(local_lv):
   dir = Vector3(0, 0, 0)
   num_horizontal_input_presses = 0
 
-var cheating_horizontal_offset = 0
-func performCollisionCheck(is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug = false):
-  var x = global_transform.origin.x
-  var y = global_transform.origin.y
-
-  if not should_only_do_middle_sensor:
-    # Check for sensor A
-    var sensor_A = Vector2(x+sensor_anchor, y+bb+0.2)
-    if is_vertical: sensor_A = Vector2(x+lb, y+sensor_anchor)
-    var tile_pos_and_distance_and_type_A = probeSensorForTileDistance(sensor_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
-    var tile_pos_A = tile_pos_and_distance_and_type_A.x
-    var tile_distance_A = tile_pos_and_distance_and_type_A.y
-    var tile_type_A = tile_pos_and_distance_and_type_A.z
-
-    # Check for sensor B
-    var sensor_B = Vector2(x+sensor_anchor, y+tb-0.2)
-    if is_vertical: sensor_B = Vector2(x+rb, y+sensor_anchor)
-    var tile_pos_and_distance_and_type_B = probeSensorForTileDistance(sensor_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
-    var tile_pos_B = tile_pos_and_distance_and_type_B.x
-    var tile_distance_B = tile_pos_and_distance_and_type_B.y
-    var tile_type_B = tile_pos_and_distance_and_type_B.z
-
-    if should_do_middle_sensor:
-      # Check for middle sensor
-      
-      var middle_sensor = Vector2(x+sensor_anchor, y)
-      if is_vertical: middle_sensor = Vector2(x, y+sensor_anchor)
-      var tile_pos_and_distance_and_type_middle = probeSensorForTileDistance(middle_sensor, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
-      var middle_tile_pos = tile_pos_and_distance_and_type_middle.x
-      var middle_tile_distance = tile_pos_and_distance_and_type_middle.y
-      var middle_tile_type = tile_pos_and_distance_and_type_middle.z
-
-      if debug:
-        print(
-          str(is_vertical) + 
-          " (x, y): " + str(x) + ", " + str(y) +
-          ";; sensor_A_distance: " + str(tile_distance_A) + ", " + str(tile_pos_A) +
-          ";; sensor_B_distance: " + str(tile_distance_B) + ", " + str(tile_pos_B) + 
-          ";; middle_tile_distance: " + str(middle_tile_distance) + ", " + str(middle_tile_pos)
-        )
-
-      # Compare left and right collision tile distances
-      if tile_distance_A <= tile_distance_B and tile_distance_A <= middle_tile_distance:
-        local_lv = reactToPotentialCollisions(tile_type_A, tile_distance_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
-      elif tile_distance_B < tile_distance_A and tile_distance_B <= middle_tile_distance:
-        local_lv = reactToPotentialCollisions(tile_type_B, tile_distance_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
-      else:
-        local_lv = reactToPotentialCollisions(middle_tile_type, middle_tile_distance, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
-      return local_lv
-    else:
-      # Compare left and right collision tile distances
-      if tile_distance_A <= tile_distance_B:
-        local_lv = reactToPotentialCollisions(tile_type_A, tile_distance_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
-      elif tile_distance_B < tile_distance_A:
-        local_lv = reactToPotentialCollisions(tile_type_B, tile_distance_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
-      return local_lv
+func isTileSolid(tile_type, is_vertical, sensor_direction, tile_pos_coords):
+  var checking_for_floor_collisions = is_vertical and sensor_direction == -1
+  if tile_type == GridMap.INVALID_CELL_ITEM:
+    return false
+  var tile_name = getLevelTiles().mesh_library.get_item_name(tile_type)
+  if glitch_form == global.GlitchForm.WALK_THROUGH_WALLS:
+    return not pressingDown() and checking_for_floor_collisions and (global.isTileSolid(tile_type, getLevelTiles().mesh_library) or isTileFallthroughSolidTop(tile_type, tile_pos_coords))
   else:
-    var middle_sensor = Vector2(x+sensor_anchor, y+cheating_horizontal_offset)
-    if is_vertical: middle_sensor = Vector2(x, y+sensor_anchor)
-    var tile_pos_and_distance_and_type_middle = probeSensorForTileDistance(middle_sensor, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor)
-    var middle_tile_distance = tile_pos_and_distance_and_type_middle.y
-    var middle_tile_type = tile_pos_and_distance_and_type_middle.z
-
-    local_lv = reactToPotentialCollisions(middle_tile_type, middle_tile_distance, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
-    return local_lv
-
-func handleHorizontalCollisions(local_lv):
-  self.horizontal_collision = false
-  var TILE_WIDTH = getLevelTiles().cell_size.x
-
-  # check for left collisions
-  if local_lv.x < 0 or pressingMoveLeft():
-    # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
-    local_lv = performCollisionCheck(false, local_lv, lb - 0.2, -1, TILE_WIDTH, false)
-    # TODO(jaketrower): TopsyTurvy is_vertical
-
-  # check for right collisions
-  if local_lv.x > 0 or pressingMoveRight():
-    # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
-    local_lv = performCollisionCheck(false, local_lv, rb + 0.2, 1, 0, false)
-    # TODO(jaketrower): TopsyTurvy is_vertical
-  return local_lv
+    return (global.isTileSolid(tile_type, getLevelTiles().mesh_library) or (not pressingDown() and checking_for_floor_collisions and isTileFallthroughSolidTop(tile_type, tile_pos_coords))) and (not "Spikes" in tile_name or glitch_form == global.GlitchForm.INVISIBLE)
   
-  
-func handleVerticalCollisions(local_lv):
-  self.vertical_collision = false
-  var TILE_HEIGHT = getLevelTiles().cell_size.y
+func isTileFallthroughSolidTop(tile_type, tile_pos_coords):
+   # TODO(jaketrower): TopsyTurvy # TODO(gravity):
+  var y = global_transform.origin.y
+  var is_above_top_of_tile = y + bb > tile_pos_coords.y
+  var tile_name = getLevelTiles().mesh_library.get_item_name(tile_type)
+  return is_above_top_of_tile and (("Semisolid" in tile_name and not "SemisolidTop" in tile_name) or (glitch_form == global.GlitchForm.WALK_THROUGH_WALLS and global.isTileSolid(tile_type, getLevelTiles().mesh_library)))
 
-  # check for bottom collisions
-  if should_collide_floor and (on_ground or local_lv.y <= 0) and not (physics_state == PhysicsState.BEING_TOSSED and grav == 0 and local_lv.y == 0):
-    # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
-    local_lv = performCollisionCheck(true, local_lv, bb, -1, TILE_HEIGHT, grav >= 0)
-    # TODO(jaketrower): TopsyTurvy is_vertical
-
-  # check for top collisions
-  if should_collide_ceil and (not on_ground or (glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall())) and local_lv.y > 0:
-    # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
-    local_lv = performCollisionCheck(true, local_lv, tb, 1, 0, grav < 0)
-    # TODO(jaketrower): TopsyTurvy is_vertical
-  
-  return local_lv
   
 func handleSpikeCollisions(_delta):
   pass

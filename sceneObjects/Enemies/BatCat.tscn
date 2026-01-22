@@ -209,7 +209,7 @@ shader_param/target_palette = ExtResource( 14 )
 [node name="BatCat" type="Spatial"]
 script = ExtResource( 16 )
 true_terminal_vel = 8
-grav = 30
+grav = Vector2(0, 30)
 walk_speed = 3
 invisible_glitch_walk_speed = 3
 swimming_walk_speed = 4

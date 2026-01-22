@@ -252,7 +252,7 @@ func adjustSummonedBroomSpritePosition():
     summonedBroom.global_transform.origin.x = self.global_transform.origin.x + xAddition
     summonedBroom.rotation_degrees = Vector3(0, 0, 0)
 
-  if self.grav < 0:
+  if self.grav.y < 0:
     summonedBroom.rotation_degrees.x = 180
     yAddition *= -1
     # yAddition -= 3.146
@@ -290,7 +290,7 @@ func glitchTickle():
 #   unenemize()
       
 #   am_i_dying = true
-#   grav = 0
+#   grav = Vector2(0, 0)
 #   if summonedBroom:
 #     broomStop()
 #   summonFallenBroom(broom_origin)
@@ -315,12 +315,12 @@ func summonFallenBroom(_broom_origin):
   fallenBroom.walk_direction = Vector2(which_direction, 0)
 
   if fallenBroom.walk_direction.x < 0:
-    if grav > 0:
+    if grav.y > 0:
       fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin")
     else:
       fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse")
   else:
-    if grav > 0:
+    if grav.y > 0:
       fallenBroom.get_node("SecretAnimationPlayer").play("AirSpinReverse")
     else:
       fallenBroom.get_node("SecretAnimationPlayer").play("AirSpin")

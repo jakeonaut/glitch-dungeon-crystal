@@ -42,7 +42,7 @@ func startSpinning(tadpole_index_, num_tadpoles_, target, immediately_evolve = f
   self.num_tadpoles = num_tadpoles_
   walk_direction = Vector2(0, 0)
   aniPlayer = null
-  grav = 0
+  grav = Vector2(0, 0)
   unsmack()
   mySprite.should_animate = true
   mySprite.updateBaseFrame(0, 0)

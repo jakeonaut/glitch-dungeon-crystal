@@ -748,11 +748,11 @@ anims/openUp = SubResource( 43 )
 
 [node name="Furbo" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -5, 13, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 11.2355, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="Viewport2" parent="." instance=ExtResource( 15 )]
 

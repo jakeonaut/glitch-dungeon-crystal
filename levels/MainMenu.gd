@@ -312,16 +312,16 @@ func startGame(saveGameIndex, shouldResetMemory = true):
   player.doBroomAttack(1)
   yield(get_tree().create_timer(0.5), "timeout")
   player.mySprite.flip_h = not player.mySprite.flip_h
-  player.grav = 0
+  player.grav = Vector2(0, 0)
   player.global_transform.origin = Vector3(24.635, 2, 0)
   player.doBroomAttack(1)
   yield(get_tree().create_timer(0.5), "timeout")
   player.mySprite.flip_h = not player.mySprite.flip_h
-  player.grav = 0
+  player.grav = Vector2(0, 0)
   player.global_transform.origin = Vector3(23.135, 4, 0)
   player.doBroomAttack(1)
   yield(get_tree().create_timer(0.5), "timeout")
-  player.grav = 28
+  player.grav = Vector2(0, 28)
 
   yield(get_tree().create_timer(1.1), "timeout")
   global.shouldRenderAsCinematic = false
@@ -735,7 +735,7 @@ func processSkipPrompt(delta):
         if Input.is_action_just_pressed(which_input_to_skip):
             skipPrompt.visible = false
             was_intro_cutscene_skipped = 2
-            player.grav = 28
+            player.grav = Vector2(0, 28)
             global.shouldRenderAsCinematic = false
             player.pauseInput = false
             player.override_press_move_left = false

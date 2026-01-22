@@ -68,7 +68,7 @@ extents = Vector3( 1, 0.24, 1 )
 [node name="BigFrogEnemy" type="Spatial"]
 script = ExtResource( 11 )
 true_terminal_vel = 8
-grav = 30
+grav = Vector2(0, 30)
 jump_force = 12
 sprite_offset_y = 0.55
 

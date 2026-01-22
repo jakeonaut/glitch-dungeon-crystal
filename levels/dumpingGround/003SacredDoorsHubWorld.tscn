@@ -780,7 +780,7 @@ visible = false
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42, -17, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 37 )
@@ -794,7 +794,7 @@ shape = SubResource( 38 )
 
 [node name="FungusNPC" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8352, -5.63366, 0 )
-grav = 0
+grav = Vector2(0, 0)
 is_important = true
 is_really_important = true
 can_activate = false
@@ -830,7 +830,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.54265, -1 )
 [node name="FungusNPC2" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.47699, -5.55142, 0 )
 visible = false
-grav = 0
+grav = Vector2(0, 0)
 can_activate = false
 can_move = false
 dont_recolor_me = true
@@ -869,7 +869,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.61558, -1 )
 [node name="FungusNPC3" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8539, -8.52389, 0 )
 visible = false
-grav = 0
+grav = Vector2(0, 0)
 can_activate = false
 can_move = false
 dont_recolor_me = true
@@ -905,7 +905,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 2.51476, -1 )
 
 [node name="GlitchSlime" parent="Viewport/level" instance=ExtResource( 22 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -18, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="WallTorch" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8936, -7.94293, 0 )
@@ -933,7 +933,7 @@ frame = 298
 
 [node name="Snail" parent="Viewport/level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -18.2876, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="Dragonfly" parent="Viewport/level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.9224, -2.62553, 0 )

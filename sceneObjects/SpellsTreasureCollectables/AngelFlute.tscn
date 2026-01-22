@@ -356,7 +356,7 @@ shader_param/target_palette = ExtResource( 1 )
 
 [node name="AngelFlute" type="Spatial"]
 script = ExtResource( 11 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•You got \"Little Bird\".
 It can fly you to 
 angel statues."

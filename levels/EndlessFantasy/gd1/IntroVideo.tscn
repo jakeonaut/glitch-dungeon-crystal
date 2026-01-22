@@ -161,7 +161,7 @@ lb = -1.44
 rb = 1.44
 tb = 2.0
 bb = -2.0
-grav = 0
+grav = Vector2(0, 0)
 walk_speed = 13.0
 jump_force = 18
 

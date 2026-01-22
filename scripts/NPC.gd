@@ -82,7 +82,7 @@ func setupTextBoxStuff():
   textBoxContainer.floating_text = floating_text
   textBoxContainer.showYesNoOptions = showYesNoOptions
   if floating_text:
-    grav = 0
+    grav = Vector2(0, 0)
   if nextTextBoxPath != null and not nextTextBoxPath.is_empty() and textBoxContainer.nextTextBoxPath.is_empty():
     var nextTextBoxPathStr = "../"
     for i in range(nextTextBoxPath.get_name_count()):
@@ -330,7 +330,7 @@ func alignMySprite():
 
 # @override
 func processPhysics(delta):
-  if grav == 0 and not just_pressed_jump and not pressing_jump and not override_press_move_left and not override_press_move_right:
+  if grav == Vector2(0, 0) and not just_pressed_jump and not pressing_jump and not override_press_move_left and not override_press_move_right:
     return
   else:
     # call GameMover.gd super method

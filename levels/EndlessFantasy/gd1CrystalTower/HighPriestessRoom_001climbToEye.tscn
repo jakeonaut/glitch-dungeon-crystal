@@ -502,7 +502,7 @@ shape = SubResource( 49 )
 
 [node name="GrandmaStatue" parent="Viewport/level/GrandmaStatues" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -4.95191, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="CollisionShape" parent="Viewport/level/GrandmaStatues/GrandmaStatue/SmallInteractionArea" index="0"]
 shape = SubResource( 59 )
@@ -541,7 +541,7 @@ shape = SubResource( 67 )
 
 [node name="GrandmaStatue2" parent="Viewport/level/GrandmaStatues" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -4.95191, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="CollisionShape" parent="Viewport/level/GrandmaStatues/GrandmaStatue2/SmallInteractionArea" index="0"]
 shape = SubResource( 59 )

@@ -130,7 +130,7 @@ shader_param/target_palette = ExtResource( 2 )
 
 [node name="GrandmaCrystal" type="Spatial" groups=["npc"]]
 script = ExtResource( 10 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="CubeContainer" type="Spatial" parent="."]
 transform = Transform( 2, 0, 0, 0, 2, 5.96044e-08, 0, -5.96044e-08, 2, 0, 0.756568, 1 )

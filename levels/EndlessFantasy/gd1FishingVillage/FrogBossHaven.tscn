@@ -462,7 +462,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.4, 9.5, 0 )
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2, 17.1, 0 )
 visible = false
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•'ello dearie. oi'm the fishin' guru.
 •and i'm 200 years old
 •oi'll teach ya to fish for 30 crystals"

@@ -646,7 +646,7 @@ shape = SubResource( 52 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 21.1, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 27 )
@@ -659,7 +659,7 @@ shape = SubResource( 53 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42.9, 22, 0 )
-grav = 0
+grav = Vector2(0, 0)
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
@@ -677,7 +677,7 @@ shape = SubResource( 54 )
 
 [node name="NPC3" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9, 42, 0 )
-grav = 0
+grav = Vector2(0, 0)
 tiny_textbox = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC3/SmallInteractionArea" index="0"]
@@ -699,11 +699,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 0 )
 
 [node name="GlitchSlime" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.959714, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="GlitchSlime2" parent="Viewport/level" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.040286, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="WaterCube3" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 7.99875, -4 )

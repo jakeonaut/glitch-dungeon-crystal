@@ -254,7 +254,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.48445, 0, 0 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 12.3129, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.Tutorial.2"
 can_camera_zoom = false
 is_a_body = false
@@ -268,7 +268,7 @@ shape = SubResource( 23 )
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.66313, 1.3129, 0 )
 visible = false
-grav = 0
+grav = Vector2(0, 0)
 bbText = "are you stuck?"
 can_be_activated_invisibly = true
 can_camera_zoom = false

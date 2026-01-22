@@ -22,7 +22,7 @@ var far_from_home_dist = 5
 var how_many_times_did_u_hit_me = 0
 
 export var can_hop = true
-var initial_grav = 60
+var initial_grav = Vector2(0, 60)
 var initial_true_terminal_vel = 32
 
 var opacity = 1.0

@@ -3204,7 +3204,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 [node name="FrogCroneNPC" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0351, -7.92412, 0 )
 visible = false
-grav = 0
+grav = Vector2(0, 0)
 is_really_important = true
 can_activate = false
 dont_recolor_me = true
@@ -3265,7 +3265,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.61704, 18.9551, 0 )
 
 [node name="ChickenNPC2" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5312, 1.09428, 0 )
-grav = 0
+grav = Vector2(0, 0)
 is_really_important = true
 can_camera_zoom = false
 dont_recolor_me = true
@@ -3296,7 +3296,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="ChickenNPC3" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3732, 2.09451, 0 )
-grav = 0
+grav = Vector2(0, 0)
 is_really_important = true
 can_camera_zoom = false
 dont_recolor_me = true
@@ -3327,7 +3327,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="ChickenNPC4" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8882, 3.63161, 0 )
-grav = 0
+grav = Vector2(0, 0)
 is_really_important = true
 can_camera_zoom = false
 dont_recolor_me = true
@@ -3360,7 +3360,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0303373, 1.51877, -1 )
 
 [node name="ChickenNPC5" parent="Viewport/level" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4015, 4.92171, 0 )
-grav = 0
+grav = Vector2(0, 0)
 is_really_important = true
 can_camera_zoom = false
 dont_recolor_me = true
@@ -3451,7 +3451,7 @@ visible = false
 
 [node name="BasicFrogEnemy" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2.7981, 0 )
-grav = 0
+grav = Vector2(0, 0)
 is_static = true
 is_licker = true
 

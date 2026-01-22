@@ -156,7 +156,7 @@ shader_param/target_palette = ExtResource( 2 )
 [node name="BroomUpgradeCrone" type="Spatial" groups=["npc"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3649, 10.1759, 0 )
 script = ExtResource( 10 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.Crone.3"
 smackedBbText = "NPC.Crone.2"
 showYesNoOptions = true

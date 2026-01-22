@@ -305,7 +305,7 @@ num_keys_unlock = 1
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 52, 0.0999994, 0 )
-grav = 0
+grav = Vector2(0, 0)
 is_really_important = true
 can_move = false
 can_camera_zoom = false
@@ -329,7 +329,7 @@ shape = SubResource( 28 )
 
 [node name="NPC4" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60.9, 1.6, 0 )
-grav = 0
+grav = Vector2(0, 0)
 is_really_important = true
 can_move = false
 can_camera_zoom = false
@@ -352,7 +352,7 @@ shape = SubResource( 28 )
 
 [node name="AngelEgg2" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1, 7.5, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="COBOL" parent="Viewport/level" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 56.7, 0, 0 )

@@ -774,7 +774,7 @@ extents = Vector3( 0.5, 0.24, 1 )
 
 [node name="AnglerFish" type="Spatial"]
 script = ExtResource( 15 )
-grav = 0
+grav = Vector2(0, 0)
 sprite_offset_y = 0.5
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

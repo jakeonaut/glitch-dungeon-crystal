@@ -114,7 +114,7 @@ shader_param/target_palette = ExtResource( 1 )
 
 [node name="EvilSprite" type="Spatial" groups=["npc"]]
 script = ExtResource( 3 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "•die!!!!!!!!!!!"
 is_active = false
 tiny_textbox = true

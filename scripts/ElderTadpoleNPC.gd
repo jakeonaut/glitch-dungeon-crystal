@@ -82,7 +82,7 @@ func spawnHeartContainer():
   newHeartContainer.global_transform.origin.y += 2
   newHeartContainer.y_pos_to_stop = newHeartContainer.global_transform.origin.y
   var jump_val = 36
-  newHeartContainer.grav = 15
+  newHeartContainer.grav = Vector2(0, 15)
   newHeartContainer.linear_velocity.y = jump_val
   newHeartContainer.lv.y = jump_val
   newHeartContainer.vv = newHeartContainer.up.dot(newHeartContainer.lv)
@@ -134,12 +134,7 @@ func adjustSummonedBroomSpritePosition():
     summonedBroom.global_transform.origin.x = self.global_transform.origin.x + xAddition
     summonedBroom.rotation_degrees = Vector3(0, 0, 0)
 
-  if self.grav < 0:
-    summonedBroom.rotation_degrees.x = 180
-    yAddition *= -1
-    # yAddition -= 3.146
-  else:
-    summonedBroom.rotation_degrees.x = 0
+  summonedBroom.rotation_degrees.x = 0
 
   summonedBroom.global_transform.origin.y = self.global_transform.origin.y + yAddition
   summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 1.5

@@ -909,7 +909,7 @@ radius = 0.8
 [node name="FallenBroom" type="Spatial" groups=["fallen_broom_group"]]
 script = ExtResource( 1 )
 true_terminal_vel = 8
-grav = 30
+grav = Vector2(0, 30)
 jump_force = 8
 invisible_jump_force = 8
 bbText = "•\"BROOM\" get!!!

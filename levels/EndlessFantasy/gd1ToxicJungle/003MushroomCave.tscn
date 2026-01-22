@@ -690,7 +690,7 @@ is_fan_spinning = true
 
 [node name="FanPlant2" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 23, 23, 0 )
-grav = 0
+grav = Vector2( 0, 0 )
 is_fan_spinning = true
 
 [node name="FanAnimationPlayer" parent="Viewport/level/FanPlant2" index="5"]
@@ -716,7 +716,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 14, 0 )
 
 [node name="Furbo2" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 35, 0 )
-grav = 0
+grav = Vector2( 0, 0 )
 
 [node name="ParallaxBackground2" parent="Viewport/level" instance=ExtResource( 31 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 10.4407, 0 )

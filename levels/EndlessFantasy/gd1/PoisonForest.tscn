@@ -521,11 +521,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 0 )
 
 [node name="GlitchSlime" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -0.959714, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="GlitchSlime2" parent="Viewport/level" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.040286, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="WaterCube4" parent="Viewport/level" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33, -3, -4 )

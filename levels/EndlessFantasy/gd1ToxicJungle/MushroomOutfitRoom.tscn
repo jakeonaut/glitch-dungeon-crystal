@@ -564,7 +564,7 @@ anims/exclaim = SubResource( 45 )
 
 [node name="MushroomNPC3" parent="Viewport/level" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 10.7365, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.SporeCreature.9"
 
 [node name="CollisionShape" parent="Viewport/level/MushroomNPC3/SmallInteractionArea" index="0"]

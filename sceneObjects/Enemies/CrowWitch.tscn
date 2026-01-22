@@ -311,7 +311,7 @@ tracks/1/keys = {
 
 [node name="CrowWitch" type="Spatial"]
 script = ExtResource( 13 )
-grav = 0
+grav = Vector2(0, 0)
 walk_speed = 7.0
 only_activate_in_range = false
 sprite_offset_y = 0.4

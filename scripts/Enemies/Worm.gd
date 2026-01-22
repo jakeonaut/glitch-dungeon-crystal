@@ -126,7 +126,7 @@ func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
     return
   .getSmacked(broom_origin, silently, is_local_broom)
   walk_speed = 0
-  grav = 0
+  grav = Vector2(0, 0)
   walk_direction.x = -1
   if level.player.mySprite.flip_h:
     walk_direction.x = 1
@@ -145,7 +145,7 @@ func unsmack():
   evolvedSelf.is_builder = not is_hungry
   evolvedSelf.behavior_stick_to_walls = true
   evolvedSelf.do_i_care_about_time_limit = true
-  evolvedSelf.grav = 0
+  evolvedSelf.grav = Vector2(0, 0)
   evolvedSelf.on_ground = true
   evolvedSelf.my_up_vector = self.my_up_vector
   evolvedSelf.building_time_limit = building_time_limit

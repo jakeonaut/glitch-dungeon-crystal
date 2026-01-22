@@ -232,7 +232,7 @@ size = Vector3( 1, 1, 1 )
 [node name="InfectedKizzy" type="Spatial"]
 script = ExtResource( 14 )
 true_terminal_vel = 14
-grav = 28
+grav = Vector2(0, 28)
 walk_speed = 5
 run_speed = 7
 feather_glitch_walk_speed = 7

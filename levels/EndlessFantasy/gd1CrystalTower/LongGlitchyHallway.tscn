@@ -215,7 +215,7 @@ transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 48, -2, 0 )
 
 [node name="SmallKey" parent="Viewport/level" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 12, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41, 2.38254, 0 )
@@ -247,7 +247,7 @@ max_frames = 4
 
 [node name="GrandmaStatue" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 7, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="SavePoint" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02549, 0 )

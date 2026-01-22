@@ -41,7 +41,7 @@ func _process(delta):
       is_sparkle_smacked = false
 
   if sparkleSprite != null:
-    if (level.player.grav > 0 and grav_direction < 0) or (level.player.grav < 0 and grav_direction > 0):
+    if (level.player.grav.y > 0 and grav_direction < 0) or (level.player.grav.y < 0 and grav_direction > 0):
       spawn_timer += (delta*22)
       if spawn_timer >= spawn_time_limit:
         var newSprite = sparkleSprite.duplicate()
@@ -90,16 +90,16 @@ var y_div = 2.3
 var normal_offset = .15
 export var grav_direction = 1
 func passiveActivate(_delta, _is_player, _is_local_broom = false):
-  if grav_direction > 0 and level.player.grav > 0:
+  if grav_direction > 0 and level.player.grav.y > 0:
     return
-  elif grav_direction < 0 and level.player.grav < 0:
+  elif grav_direction < 0 and level.player.grav.y < 0:
     return
 
   collectSound.play()
   if grav_direction > 0: 
-    level.flipGravity(1)
+    level.flipGravity(Vector2(0, 1))
   else:
-    level.flipGravity(-1)
+    level.flipGravity(Vector2(0, -1))
 
   for sprite in [level.player.mySprite, level.player.grandmaHatSprite, level.player.grandmaHandSprite, level.player.grandmaFishHatSprite]:
     sprite.material_override.set_shader_param("enable_palette_cycle", true)

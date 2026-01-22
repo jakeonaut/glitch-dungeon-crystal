@@ -215,7 +215,7 @@ func _process(delta):
             var bigRock = myBigRock.get_ref()
             var correctYPos = global_transform.origin.y + 11.5
             if bigRock.global_transform.origin.y <= correctYPos:
-                bigRock.grav = 0
+                bigRock.grav = Vector2(0, 0)
                 bigRock.on_ground = true
                 bigRock.global_transform.origin.y = correctYPos
                 bigRock.is_big = false

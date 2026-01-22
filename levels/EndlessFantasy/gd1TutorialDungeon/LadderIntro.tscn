@@ -193,7 +193,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 11, 0 )
 
 [node name="GlitchSlime3" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0 )
-grav = 0
+grav = Vector2(0, 0)
 behavior_phase_through_walls = true
 
 [node name="GlitchSlime2" parent="Viewport/level" instance=ExtResource( 24 )]
@@ -207,7 +207,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.58321, 2, 0 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 12, 0 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "NPC.Tutorial.10"
 
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]

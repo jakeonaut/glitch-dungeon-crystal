@@ -1923,7 +1923,7 @@ shader_param/target_palette = ExtResource( 26 )
 [node name="BasicFrogEnemy" type="Spatial"]
 script = ExtResource( 1 )
 true_terminal_vel = 8
-grav = 30
+grav = Vector2(0, 30)
 jump_force = 13
 
 [node name="SpriteContainer" type="Spatial" parent="."]

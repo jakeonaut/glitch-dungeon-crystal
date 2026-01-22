@@ -151,7 +151,7 @@ func isActive(_debug=false):
          level.player.physics_state != PhysicsState.OCCUPIED and \
          level.player.physics_state != PhysicsState.COLLAPSED and \
          level.player.physics_state != PhysicsState.IGNORE_PHYSICS and \
-         (on_ground or grav == 0)
+         (on_ground or grav == Vector2(0, 0))
 
 # @override
 func passiveActivate(_delta, is_player, is_local_broom = false):

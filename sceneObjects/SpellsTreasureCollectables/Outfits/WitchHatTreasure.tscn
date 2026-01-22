@@ -449,7 +449,7 @@ shader_param/target_palette = ExtResource( 5 )
 
 [node name="WitchHatTreasure" type="Spatial"]
 script = ExtResource( 9 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "UI.Outfit.1"
 is_important = true
 can_activate = false

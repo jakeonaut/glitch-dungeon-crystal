@@ -599,7 +599,7 @@ bbText = "NPC.SporeCreature.1"
 
 [node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 5, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="ParallaxBackground2" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -2.55927, 0 )

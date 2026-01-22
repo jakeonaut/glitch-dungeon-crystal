@@ -82,7 +82,7 @@ shader_param/target_palette = ExtResource( 6 )
 [node name="ChickenKizzy" type="Spatial" groups=["keys"]]
 script = ExtResource( 2 )
 true_terminal_vel = 8
-grav = 15
+grav = Vector2(0, 15)
 walk_speed = 2.0
 jump_force = 4
 sprite_offset_y = 0.4

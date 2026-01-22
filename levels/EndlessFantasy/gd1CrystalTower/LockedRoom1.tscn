@@ -245,7 +245,7 @@ transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 5, 12, 
 
 [node name="SmallKey" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 10.4579, 0 )
-grav = 0
+grav = Vector2(0, 0)
 
 [node name="Viewport2" parent="." instance=ExtResource( 4 )]
 

@@ -7,7 +7,7 @@ var is_heavy = false
 
 func _process(delta):
   if not has_fallen:
-    grav = 0
+    grav = Vector2(0, 0)
     fallen_angel_timer += (delta*11)
     if fallen_angel_timer >= fallen_angel_time_limit:
       fallen_angel_timer = 0
@@ -25,5 +25,5 @@ func _process(delta):
 
 func getHeavy():
   is_heavy = true
-  grav = 30
+  grav = Vector2(0, 30)
   on_ground = false

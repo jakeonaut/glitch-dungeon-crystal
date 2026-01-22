@@ -400,7 +400,7 @@ shader_param/target_palette = ExtResource( 2 )
 
 [node name="RespawnKeyTreasure" type="Spatial"]
 script = ExtResource( 10 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "See RespawnKeyTreasureDialogStartSound.gd"
 is_important = true
 can_activate = false

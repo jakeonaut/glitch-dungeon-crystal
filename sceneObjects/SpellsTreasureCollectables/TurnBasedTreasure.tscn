@@ -400,7 +400,7 @@ shader_param/target_palette = ExtResource( 5 )
 
 [node name="TurnBasedTreasure" type="Spatial"]
 script = ExtResource( 4 )
-grav = 0
+grav = Vector2(0, 0)
 bbText = "See TurnBasedTreasureDialogStartSound.gd"
 is_important = true
 can_activate = false

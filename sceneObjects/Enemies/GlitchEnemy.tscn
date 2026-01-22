@@ -325,7 +325,7 @@ shader_param/target_palette = ExtResource( 15 )
 
 [node name="GlitchEnemy" type="Spatial"]
 script = ExtResource( 1 )
-grav = 0
+grav = Vector2(0, 0)
 time_influence = 20
 y_div = 0.9
 normal_offset = 0.5
