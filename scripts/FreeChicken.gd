@@ -37,7 +37,7 @@ func _process(delta):
     
     delta = delta * global.time_dilation_multiplier
 
-    should_collide_horizontally = true
+    should_collide_with_walls = true
     
     if chicken_state == ChickenState.AFRAID:
         behavior_jumping = true

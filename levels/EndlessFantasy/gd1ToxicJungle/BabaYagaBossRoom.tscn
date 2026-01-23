@@ -1947,19 +1947,19 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6758, -6.95296, 0 )
 
 [node name="GrandmaStatue6" parent="Viewport/level/GrandmaStatues" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.7891, -5.95191, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 is_extra_life = true
 max_dist_to_player = 999
 
 [node name="GrandmaStatue8" parent="Viewport/level/GrandmaStatues" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.64747, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 is_extra_life = true
 max_dist_to_player = 999
 
 [node name="GrandmaStatue7" parent="Viewport/level/GrandmaStatues" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 5.59668, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 is_extra_life = true
 max_dist_to_player = 999
 
@@ -2155,7 +2155,7 @@ script = ExtResource( 33 )
 
 [node name="MimicNPC" parent="Viewport/level/EldestMonkeyNPC" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -4, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 bbText = "NPC.EldestCreature.1"
 interact_prompt_offset = -35
 is_merchant = true
@@ -2540,13 +2540,13 @@ shape = SubResource( 266 )
 
 [node name="FanPlant3" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 5, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 is_fan_spinning = true
 can_deactivate_fan = false
 
 [node name="FanPlant4" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 8, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 is_fan_spinning = true
 can_deactivate_fan = false
 
@@ -2637,19 +2637,19 @@ shape = SubResource( 273 )
 
 [node name="Furbo" parent="Viewport/level" instance=ExtResource( 42 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.69737, 0, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 
 [node name="Furbo2" parent="Viewport/level" instance=ExtResource( 42 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.3026, -2, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 
 [node name="Furbo3" parent="Viewport/level" instance=ExtResource( 42 )]
 transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 9.98356, 13, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 
 [node name="Furbo4" parent="Viewport/level" instance=ExtResource( 42 )]
 transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -5.64739, 16, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 17 )]
 

@@ -72,7 +72,7 @@ func _ready():
     is_sprite_flipped = true
     should_collide_floor = false
     should_collide_ceil = false
-    should_collide_horizontally = false
+    should_collide_with_walls = false
     should_collide_fallthrough_area = false
     # Wait two frames cuz idk
     yield(TempTimer.idle_frame(self), "timeout")

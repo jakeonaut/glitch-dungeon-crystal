@@ -150,17 +150,19 @@ func _ready_impl():
 
   player.changeOutfit(global.memory["currOutfit"], false)
 
-  # TODO(gravity): 
   if global.memory.has("grav_direction"):
     var grav_direction = global.memory["grav_direction"]
     if typeof(grav_direction) == TYPE_INT or typeof(grav_direction) == TYPE_REAL:
       grav_direction = Vector2(0, grav_direction)
 
-    if grav_direction.y < 0:
-      if global.isRespawning:
-        global.memory["grav_direction"] = Vector2(0, 1)
-      else:
-        flipGravity(Vector2(0, -1))
+    if global.isRespawning:
+      global.memory["grav_direction"] = Vector2(0, 1)
+    elif grav_direction.y < 0:
+      flipGravity(Vector2(0, -1))
+    elif grav_direction.x < 0:
+      flipGravity(Vector2(-1, 0))
+    elif grav_direction.x > 0:
+      flipGravity(Vector2(1, 0))
   
   tryToRespawn()
   global.tryInitializeLevelZone(self.getLevelZoneName(), true)
@@ -1081,6 +1083,7 @@ func summonSmokeClouds(pos, num_clouds, play_sound = false, is_glitchy = false, 
   return smokeClouds
 
 func flipGravity(specific_dir = null):
+  var prev_grav = player.grav
   if specific_dir.y == 1:
     player.grav = player.PLAYER_GRAV
   elif specific_dir.y == -1:
@@ -1104,6 +1107,13 @@ func flipGravity(specific_dir = null):
     global.memory["grav_directin"] = Vector2(-1, 0)
   else:
     global.memory["grav_direction"] = Vector2(0, 1)
+
+  # if prev_grav.y == 0 or player.grav.y == 0:
+  # reset to 0 for idk
+  player.linear_velocity = Vector3(0, 0, 0)
+  player.lv = Vector3(0, 0, 0)
+  player.vv = player.up.dot(player.lv)
+  player.hv = player.lv - player.up * player.vv
 
 func clearOtherGrabbers(gameMover):
   var grabbers = self.get_tree().get_nodes_in_group("grabber")

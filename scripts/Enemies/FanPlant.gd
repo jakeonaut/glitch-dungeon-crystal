@@ -35,7 +35,7 @@ func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
   windGust.is_active = is_fan_spinning
-  should_collide_horizontally = true
+  should_collide_with_walls = true
   if not can_deactivate_fan:
     mySprite.material_override.set_shader_param("target_palette", smacked_palette)
     notDieSound.pitch_scale = 0.5

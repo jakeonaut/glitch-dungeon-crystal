@@ -101,7 +101,7 @@ func _process(delta):
         delta = delta * global.time_dilation_multiplier
 
     checkForFlyPathOverrides()
-    should_collide_horizontally = mole_state != MoleState.OVERRIDE_FLYING
+    should_collide_with_walls = mole_state != MoleState.OVERRIDE_FLYING
     
     if mole_state == MoleState.IDLE:
         if not aniPlayer.is_playing():

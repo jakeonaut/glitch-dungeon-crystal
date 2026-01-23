@@ -48,7 +48,7 @@ func OtherPassiveInteractActivate(delta, gameMover):
         parent.otherPassiveActivate(delta, gameMover)
 
 
-func PassivePassiveInteractActivate(_delta, is_player = true, is_local_broom = false):
+func PassivePassiveInteractActivate(_delta, is_player = true, _is_local_broom = false):
     touchingPlayer = is_player
 
 func playerActivationAreaPassiveActivate():

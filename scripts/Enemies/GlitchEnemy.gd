@@ -176,7 +176,7 @@ func ladderUpdateTargetLastGroundedY():
 func shouldIDoCollisions():
     should_collide_floor = (not on_ground or behavior_walking or behavior_jumping or behavior_was_thrown) and not behavior_phase_through_walls
     should_collide_ceil = (not on_ground or (behavior_walking and walk_direction.y == 1) or behavior_jumping or behavior_was_thrown) and not behavior_phase_through_walls
-    should_collide_horizontally = behavior_walking and walk_direction.x != 0 and not behavior_phase_through_walls
+    should_collide_with_walls = behavior_walking and walk_direction.x != 0 and not behavior_phase_through_walls
 
 export var my_up_vector = Vector2(0, 1)
 func collideWithWall(local_lv):
@@ -293,25 +293,25 @@ func alignStickyWallWalkerSprite():
         if walk_direction.x > 0:
             mySprite.rotation_degrees.y = 180
         should_collide_ceil = false
-        should_collide_horizontally = true
+        should_collide_with_walls = true
         should_collide_floor = false
     elif my_up_vector.y < 0:
         mySprite.rotation_degrees = Vector3(0, 0, 180)
         should_collide_ceil = false
-        should_collide_horizontally = true
+        should_collide_with_walls = true
         should_collide_floor = false
     elif my_up_vector.x > 0:
         mySprite.rotation_degrees = Vector3(0, 0, 270)
         # we can do this for vertical walking cuz GameMover isn't engaging the mySprite.flip_h from processHorizontalInputs
         mySprite.flip_h = walk_direction.y < 0
         should_collide_ceil = walk_direction.y > 0
-        should_collide_horizontally = false
+        should_collide_with_walls = false
         should_collide_floor = walk_direction.y < 0
     elif my_up_vector.x < 0:
         mySprite.rotation_degrees = Vector3(0, 0, 90)
         mySprite.flip_h = walk_direction.y > 0
         should_collide_ceil = walk_direction.y > 0
-        should_collide_horizontally = false
+        should_collide_with_walls = false
         should_collide_floor = walk_direction.y < 0
 
     if myOtherSprite:
@@ -439,7 +439,7 @@ func _process(delta):
             on_ground = false
         should_collide_floor = false
         should_collide_ceil = false
-        should_collide_horizontally = false
+        should_collide_with_walls = false
         was_fallthrough_area_collision_triggered = false
         is_a_physics_particle = true
     else:

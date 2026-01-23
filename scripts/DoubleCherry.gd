@@ -18,7 +18,7 @@ var my_parent = null
 func _ready():
     set_process(true)
     should_collide_ceil = false
-    should_collide_horizontally = false
+    should_collide_with_walls = false
     should_only_do_middle_sensor = true
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()

@@ -131,7 +131,7 @@ var smack_time_limit = 10
 var smack_recovery_time_limit = 12
 onready var sillySound = get_node("Sounds/SillySound")
 func getSmacked(_broom_origin = null, _silently = false, _is_local_broom = false):
-    if boss_phase == BossPhase.DEFEATED or boss_phase == BossPhase.HURT:
+    if boss_phase == BossPhase.DEFEATED or boss_phase == BossPhase.GOT_HURT:
         return false
 
     if is_smacked:
@@ -191,7 +191,7 @@ func _process(delta):
     if not visible or boss_phase == BossPhase.NULL: return
 
     delta_time_dilation = global.SLOW_BOSS_MULTIPLIER if global.memory["secret_bauble"] and global.memory["secret_bauble_enabled"] else 1.0
-    if boss_phase != BossPhase.WAKEUP and boss_phase != BossPhase.HURT and boss_phase != BossPhase.DEFEATED:
+    if boss_phase != BossPhase.WAKEUP and boss_phase != BossPhase.GOT_HURT and boss_phase != BossPhase.DEFEATED:
         delta = delta * global.time_dilation_multiplier * delta_time_dilation
         secretAniPlayer.playback_speed = global.time_dilation_multiplier * delta_time_dilation
     else:

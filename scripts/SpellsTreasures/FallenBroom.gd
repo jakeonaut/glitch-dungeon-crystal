@@ -38,7 +38,7 @@ func _ready():
 
     should_collide_ceil = true
     should_collide_floor = true
-    should_collide_horizontally = true
+    should_collide_with_walls = true
     is_sprite_flipped = false # need to reset this from NPC UGH
     should_process_respect_time_dilation = false
 

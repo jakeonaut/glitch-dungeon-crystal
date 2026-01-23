@@ -19,7 +19,7 @@ func _ready():
     
     should_only_do_middle_sensor = true
     if is_wall_snail:
-        should_collide_horizontally = false
+        should_collide_with_walls = false
         jump_force = 1
         grav = Vector2(0, 0)
         terminal_vel = 1

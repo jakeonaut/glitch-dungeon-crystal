@@ -4,7 +4,7 @@ extends "res://scripts/GameMover.gd"
 func _ready():
     set_process(true)
     should_collide_ceil = false
-    should_collide_horizontally = false
+    should_collide_with_walls = false
     should_only_do_middle_sensor = true
     grav = rand_range(5, 15)
     true_terminal_vel = 45

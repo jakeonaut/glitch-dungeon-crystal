@@ -654,7 +654,7 @@ var just_pacman_flipped_timer = 0
 var just_pacman_flipped_time_limit = 0
 var was_walk_direction_flipped = false
 func shouldFlipWalkingDirection():
-  return false
+  return grav.x < 0
   # if just_pacman_flipped:
   #   return was_walk_direction_flipped
   # return (grav < 0 and not transformation == TransformationState.BUBBLE) or malware_infected
@@ -880,7 +880,7 @@ func processMoleDigTimer(digDirection):
     physics_vars.should_apply_gravity = false
     should_collide_floor = false
     should_collide_ceil = false
-    should_collide_horizontally = false
+    should_collide_with_walls = false
 
 var glitch_death_timer = 0
 func bigBump():
@@ -1326,7 +1326,7 @@ func getChickenCured():
   physics_vars.should_apply_gravity = true
   should_collide_floor = true
   should_collide_ceil = true
-  should_collide_horizontally = true
+  should_collide_with_walls = true
 
 var my_carcasses = []
 func mushroomClone(_trigger_another = true):

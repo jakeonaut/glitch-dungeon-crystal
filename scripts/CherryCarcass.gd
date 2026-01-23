@@ -18,7 +18,7 @@ var should_i_move_up = true
 func _ready():
     mySprite.material_override = mySprite.material_override.duplicate()
     should_collide_ceil = false
-    should_collide_horizontally = false
+    should_collide_with_walls = false
 
 var is_smacked = false
 var smack_timer = 0

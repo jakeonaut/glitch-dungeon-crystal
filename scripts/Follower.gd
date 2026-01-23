@@ -68,11 +68,11 @@ func _process(delta):
 # @override
 func shouldIDoCollisions():
   if gameMoverTarget == null or gameMoverTarget.get_ref() == null:
-    should_collide_horizontally = true
+    should_collide_with_walls = true
     return
   var targetOrigin = gameMoverTarget.get_ref().global_transform.origin
   should_collide_ceil = false
-  should_collide_horizontally = false
+  should_collide_with_walls = false
   should_collide_floor = targetOrigin.y >= self.global_transform.origin.y
 
 # @override

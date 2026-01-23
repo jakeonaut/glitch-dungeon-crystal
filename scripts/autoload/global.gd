@@ -1005,8 +1005,8 @@ func tryDeleteGame(saveGameIndex):
     var file = File.new()
     if not file.file_exists(save_game_file):
         return false # Error! We don't have a save to load.
-    var dir = Directory.new()
-    dir.remove(save_game_file)
+    var directory = Directory.new()
+    directory.remove(save_game_file)
 
 func turnRealIntoIntRecursive(obj):
     if typeof(obj) == TYPE_STRING:
@@ -1435,10 +1435,10 @@ func getEnterDoorDirection():
     return -1
 
 func toggleEnterDoorDirection():
-    var dir = getEnterDoorDirection()
-    if dir == 1:
+    var doorDir = getEnterDoorDirection()
+    if doorDir == 1:
         userSettings["doorDir"] = -1
-    elif dir == -1:
+    elif doorDir == -1:
         userSettings["doorDir"] = 1
 
 func isGamepadConnected():

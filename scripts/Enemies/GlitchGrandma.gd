@@ -114,7 +114,7 @@ func processNotWallLadderWalking(_delta):
 func shouldIDoCollisions():
   should_collide_floor = true
   should_collide_ceil = true
-  should_collide_horizontally = true
+  should_collide_with_walls = true
 
 func processGrandmaBehavior(_delta):
   if not isActive() or global.pauseGame:

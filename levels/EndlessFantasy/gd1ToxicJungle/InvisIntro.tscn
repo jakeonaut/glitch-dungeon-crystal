@@ -783,7 +783,7 @@ viewport_path = NodePath("Viewport")
 [sub_resource type="ViewportTexture" id=14]
 viewport_path = NodePath("Viewport")
 
-[node name="Game2" type="Spatial"]
+[node name="Game" type="Spatial"]
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 1280, 1024 )

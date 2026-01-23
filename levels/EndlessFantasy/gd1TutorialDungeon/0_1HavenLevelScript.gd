@@ -76,6 +76,7 @@ func setUpRoomInitializationOverride():
 var heartContainerRes = preload("res://sceneObjects/SpellsTreasureCollectables/HeartContainer.tscn")
 func spawnHeartContainer(position, override_level_zone):
   var newHeartContainer = heartContainerRes.instance()
+  newHeartContainer.name = "HeartContainer_" + override_level_zone 
   self.add_child(newHeartContainer)
   newHeartContainer.global_transform.origin = position
   newHeartContainer.global_transform.origin.y += 2

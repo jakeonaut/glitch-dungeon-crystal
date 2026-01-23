@@ -82,22 +82,22 @@ func _process(delta):
     # Only allow collision for whichever body part is about to hit the wall...
     #############################
     if bugHead.walk_direction == body1.walk_direction:
-        bugHead.should_collide_horizontally = true
-        body1.should_collide_horizontally = false
-    #     body2.should_collide_horizontally = false
+        bugHead.should_collide_with_walls = true
+        body1.should_collide_with_walls = false
+    #     body2.should_collide_with_walls = false
     elif bugHead.walk_direction != body1.walk_direction:
-        bugHead.should_collide_horizontally = false
-        body1.should_collide_horizontally = true
-        # body2.should_collide_horizontally = false
+        bugHead.should_collide_with_walls = false
+        body1.should_collide_with_walls = true
+        # body2.should_collide_with_walls = false
     # elif bugHead.walk_direction == body1.walk_direction and body1.walk_direction != body2.walk_direction:
-    #     bugHead.should_collide_horizontally = false
-    #     body1.should_collide_horizontally = false
-    #     body2.should_collide_horizontally = true
+    #     bugHead.should_collide_with_walls = false
+    #     body1.should_collide_with_walls = false
+    #     body2.should_collide_with_walls = true
     # else:
     #     # should theoretically never get here...
-    #     bugHead.should_collide_horizontally = true
-    #     body1.should_collide_horizontally = true
-    #     body2.should_collide_horizontally = true
+    #     bugHead.should_collide_with_walls = true
+    #     body1.should_collide_with_walls = true
+    #     body2.should_collide_with_walls = true
 
     #############################
     # NEED TO MAKE SURE HEAD IS BEFORE BODY1 AND BODY1 IS BEFORE BODY2

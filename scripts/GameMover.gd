@@ -69,7 +69,7 @@ var last_grounded_pos = Vector3(0, 0, 0)
 var falling_y_offset = 16
 var fall_timer = 0
 var fall_time_max = 50
-var should_collide_horizontally = true
+var should_collide_with_walls = true
 var should_collide_floor = true 
 var should_collide_ceil = true
 var should_collide_fallthrough_area = true
@@ -119,10 +119,8 @@ var g = Vector3(-grav.x, -grav.y, 0) if grav.y != 0 or grav.x != 0 else Vector3(
 
 # TODO(jaketrower): Maybe should remove dir, and only rely on linear_velocity ?
 var dir = Vector3(0, 0, 0)
-var prev_dir = dir
 var up = -g.normalized() # (up is against gravity)
 var vv = up.dot(lv) # vertical velocity
-var last_vv = vv
 var hv = lv - up * vv # horizontal velocity
 
 export(float) var walk_speed = 8.0
@@ -287,7 +285,6 @@ func processPhysics(delta):
   lv = linear_velocity
 
   applyGravity(delta)
-  g = Vector3(-grav.x, -grav.y, 0) if grav.y != 0 or grav.x != 0 else Vector3(0, -1, 0)
   
   up = -g.normalized() # (up is against gravity)
   vv = up.dot(lv) # vertical velocity
@@ -317,19 +314,11 @@ func processPhysics(delta):
       jump_squat_jump_input_timer = 0
       feather_jump_timer = 0
       should_magic_jump = false
-  # elif physics_state == PhysicsState.BEING_TOSSED:
-  #   if (lv.x == 0 and lv.y == 0) or (vertical_collision and vv < 0) or (truly_on_ground):
-  #     print("WEIRD BEING_TOSSED BUG")
-  #     fall_timer = 0
-  #     landed()
     
   lv = hv + (up * vv)
-  
-  linear_velocity = handleCollisionsAndMove(normalizeLv(lv), delta)
-  last_vv = vv
+  linear_velocity = unnormalizeLv(handleCollisionsAndMove(normalizeLv(lv), delta))
 
   postProcessInputs(delta)
-  prev_dir = dir
   
   just_landed = false
   if not was_on_ground and on_ground: # I just landed!!
@@ -368,24 +357,25 @@ func processPhysics(delta):
   was_touching_sandstream = is_touching_sandstream
   was_touching_water = is_touching_water
 
-  if is_turn_based:
-    if can_turn_move:
-      if on_ground:
-        was_just_on_ground_timer = 0
-        kinda_on_ground_fallthrough_solid = interactionArea.prev_prev_fallthrough_collision_area if interactionArea and interactionArea.prev_prev_fallthrough_collision_area != null else null
-      elif was_just_on_ground_timer == 0:
-        # print("1 was_just_on_ground_timer 1")
-        was_just_on_ground_timer = 1
-      else:
-        # print("MAX was_just_on_ground_timer MAX")
-        was_just_on_ground_timer = was_just_on_ground_time_limit + 1
-  else:
-    if was_just_on_ground_timer <= was_just_on_ground_time_limit:
-      was_just_on_ground_timer += (delta*22)
-      if was_just_on_ground_timer - (delta*22) < was_just_on_ground_time_limit and was_just_on_ground_timer >= was_just_on_ground_time_limit:
-        kinda_on_ground_fallthrough_solid = null
-      # if glitch_form == global.GlitchForm.FEATHER and not should_magic_jump:
-      #   was_just_on_ground_timer += (delta*22)
+  # if is_turn_based:
+  #   if can_turn_move:
+  #     if on_ground:
+  #       was_just_on_ground_timer = 0
+  #       kinda_on_ground_fallthrough_solid = interactionArea.prev_prev_fallthrough_collision_area if interactionArea and interactionArea.prev_prev_fallthrough_collision_area != null else null
+  #     elif was_just_on_ground_timer == 0:
+  #       # print("1 was_just_on_ground_timer 1")
+  #       was_just_on_ground_timer = 1
+  #     else:
+  #       # print("MAX was_just_on_ground_timer MAX")
+  #       was_just_on_ground_timer = was_just_on_ground_time_limit + 1
+  # else:
+  if was_just_on_ground_timer <= was_just_on_ground_time_limit:
+    was_just_on_ground_timer += (delta*22)
+    if was_just_on_ground_timer - (delta*22) < was_just_on_ground_time_limit and was_just_on_ground_timer >= was_just_on_ground_time_limit:
+      kinda_on_ground_fallthrough_solid = null
+    # if glitch_form == global.GlitchForm.FEATHER and not should_magic_jump:
+    #   was_just_on_ground_timer += (delta*22)
+
   prev_glitch_form = glitch_form
 
 func resetVelocity():
@@ -427,20 +417,18 @@ func processLand(was_on_fallthrough_solid = false):
   just_landed = true
     
 func applyGravity(delta):
+  createG(delta)
   if not physics_vars.should_apply_gravity:
     return
 
-  createG(delta)
-
   if not is_climbing_ladder and (not on_ground or glitch_form != global.GlitchForm.FLOOR):
+    # if is_turn_based:
+    #   if can_turn_move:
+    #     lv.y = g.y * delta
+    # else:
+    lv += g * delta
 
-    if is_turn_based:
-      if can_turn_move:
-        lv.y = g.y * delta
-    else:
-      lv += g * delta
-
-    if on_ground or physics_state == PhysicsState.OCCUPIED or is_turn_based:
+    if on_ground or physics_state == PhysicsState.OCCUPIED: # or is_turn_based:
       fall_timer = 0
     elif physics_state == PhysicsState.BEING_TOSSED or (glitch_form != global.GlitchForm.FEATHER and vv < -1 and not is_touching_water):
       fall_timer += (delta*22)
@@ -476,24 +464,26 @@ func createG(delta):
       physics_vars.applyHalfGravTimer = 0
       physics_vars.applyHalfGrav = 0
 
+  var gVarToUse = grav.x if grav.x != 0 else grav.y
+
   if is_touching_water or physics_vars.applyHalfGrav:
-    g = Vector3(-grav.x/3, -grav.y/3, 0)
+    g = Vector3(0, -gVarToUse/3, 0)
     if is_touching_waterfall:
-      g = Vector3(-grav.x/2, -grav.y/2, 0)
+      g = Vector3(0, -gVarToUse/2, 0)
     if fallSound:
       fallSound.stop()
   elif isFeatherLike():
     if pressingDown():
-      g = Vector3(-grav.x*2, -grav.y*2, 0)
+      g = Vector3(0, -gVarToUse*2, 0)
     else:
-      g = Vector3(-grav.x/1.5, -grav.y/1.5, 0)
+      g = Vector3(0, -gVarToUse/1.5, 0)
   else:
     if pressingDown():
-      g = Vector3(-grav.x*1.5, -grav.y*1.5, 0)
+      g = Vector3(0, -gVarToUse*1.5, 0)
     elif isHeavy():
-      g = Vector3(-grav.x*1.1, -grav.y*1.1, 0)
+      g = Vector3(0, -gVarToUse*1.1, 0)
     else:
-      g = Vector3(-grav.x, -grav.y, 0)
+      g = Vector3(0, -gVarToUse, 0)
       
 var override_terminal_vel = null
 func applyTerminalVelocity(_delta):
@@ -696,11 +686,11 @@ func processInputs(delta):
   if vv > jump_force*2:
     vv = jump_force*2
   if was_walking_into_wall and not isWalkingIntoWall() and glitch_form == global.GlitchForm.LADDER:
-    if not is_turn_based:
-      vv = 1
-    else:
-      vv = 0
-      was_just_on_ground_timer = 0
+    # if not is_turn_based:
+    vv = 1
+    # else:
+    #   vv = 0
+    #   was_just_on_ground_timer = 0
     kinda_on_ground_fallthrough_solid = null
     was_just_walking_on_wall = true
     was_just_walking_on_wall_timer = 0
@@ -923,7 +913,7 @@ func processJumpInputs(delta):
         actuallyApplyJump(false)
       elif feather_jump_timer < 4 and (pressingJump() or (isFeatherLike() and pressingMoveUp())) and (aniPlayer == null or pauseAnimation or aniPlayer.assigned_animation != "jumpSquat"):
         feather_jump_timer += (delta*22)
-        if feather_jump_timer > 3: 
+        if feather_jump_timer > 3:
           actuallyApplyJump(false)
       elif (pressingJump() or (isFeatherLike() and pressingMoveUp())) and feather_jump_timer < feather_jump_partial_time_limit: 
         feather_jump_timer += (delta*22)
@@ -942,6 +932,8 @@ func processJumpInputs(delta):
     should_magic_jump = false
 
 var is_really_glitchy = false
+# TODO(jaketrower): TopsyTurvy
+# TODO(gravity): 
 func addJumpSmokeCloud(flip_flip_h = false):
   if is_touching_water: return
 
@@ -1017,7 +1009,7 @@ func isKindOfOnGround():
   
 func isKindaSortaOfOnGround():
   # I'm on the ground or just fell off a platform...
-  return on_ground or (was_just_on_ground_timer <= was_just_on_ground_time_limit and ((vv < 0 and (grav.y > 0 or grav.x > 0)) or vv > 0 and (grav.y < 0 or grav.x < 0)))
+  return on_ground or (was_just_on_ground_timer <= was_just_on_ground_time_limit and ((vv < 0 and (grav.y > 0 or grav.x > 0)) or (vv > 0 and (grav.y < 0 or grav.x < 0))))
 
 func getRunAdd():
   if not pressingRun():
@@ -1045,6 +1037,21 @@ var horizontal_addition = 0
 var is_sprite_flipped = false
 var should_always_stop_walking_immediately = false
 
+func isPressingOppositeHorizontalInput():
+  var flip_h = mySprite.flip_h
+  # if grav.x != 0 and grav.y == 0: # horizontal gravity
+  #   return (
+  #     pressingMoveUp() and (dir.y > 0)
+  #   ) or (
+  #     pressingMoveDown() and (dir.y < 0)
+  #   )
+  # else: # vertical gravity
+  return (
+    pressingMoveLeft() and (dir.x > 0 or (flip_h == is_sprite_flipped))
+  ) or (
+    pressingMoveRight() and (dir.x < 0 or (flip_h != is_sprite_flipped))
+  )
+
 # TODO(jaketrower): TopsyTurvy # TODO(gravity):
 func processHorizontalInputs(delta):
   if is_climbing_ladder: return
@@ -1054,10 +1061,14 @@ func processHorizontalInputs(delta):
     startRun()
   was_running = pressingRun()
 
-  is_pressing_horizontal_input = pressingMoveLeft() or pressingMoveRight()
+  is_pressing_horizontal_input = pressingMoveLeft() or pressingMoveRight() # (
+  #   pressingMoveUp() or pressingMoveDown() # horizontal gravity
+  # ) if (grav.x != 0 and grav.y == 0) else (
+  #   pressingMoveLeft() or pressingMoveRight() # vertical gravity
+  # )
 
   # TODO(jaketrower): TopsyTurvy # TODO(gravity):
-  var is_pressing_opposite_horizontal_input = (pressingMoveLeft() and (dir.x > 0 or (flip_h == is_sprite_flipped))) or (pressingMoveRight() and (dir.x < 0 or (flip_h != is_sprite_flipped)))
+  var is_pressing_opposite_horizontal_input = isPressingOppositeHorizontalInput()
   if is_pressing_opposite_horizontal_input and num_horizontal_input_presses <= 2:
     num_horizontal_input_presses = 1
   elif is_pressing_opposite_horizontal_input and num_horizontal_input_presses > 2:
@@ -1069,28 +1080,32 @@ func processHorizontalInputs(delta):
   var view_forward = -getGameCamera().get_transform().basis.z  # TODO(jaketrower): TopsyTurvy # TODO(gravity):
   var view_right = -getGameCamera().get_transform().basis.x  # TODO(jaketrower): TopsyTurvy # TODO(gravity):
   # Forward as "seen" by the player
-  var forward = Vector3(view_forward.x, 0.0, view_forward.z).normalized()
-  var right = view_right
+  var forwardVec = Vector3(view_forward.x, 0.0, view_forward.z).normalized()
+  var rightVec = view_right # this is (-1, 0, 0) with normal gravity, so....
+  # if grav.x > 0:
+  #   rightVec = Vector3(0, 1, 0)
+  # elif grav.x < 0:
+  #   rightVec = Vector3(0, -1, 0)
 
   if glitch_form == global.GlitchForm.FEATHER and not (pauseAnimation and aniPlayer != null and aniPlayer.assigned_animation == "jumpSquat"):
     if on_ground:
       # TODO(jaketrower): Initial dash state..???
-      forward = forward / 8
-      right = right / 8
+      forwardVec = forwardVec / 8
+      rightVec = rightVec / 8
     else:
       if dir.length() < 0.2:
-        forward = forward / 8
-        right = right / 8
+        forwardVec = forwardVec / 8
+        rightVec = rightVec / 8
       else:
-        forward = forward / 32
-        right = right / 32
+        forwardVec = forwardVec / 32
+        rightVec = rightVec / 32
   else:
     if is_touching_water:
-      forward = forward / 3
-      right = right / 3
+      forwardVec = forwardVec / 3
+      rightVec = rightVec / 3
     else:
-      forward = forward / 2
-      right = right / 2
+      forwardVec = forwardVec / 2
+      rightVec = rightVec / 2
   # var glitch_floor_jump_walking = (glitch_form == global.GlitchForm.FLOOR and not on_ground and not (aniPlayer != null and \
   #     (aniPlayer.assigned_animation == "jumpSquat" or aniPlayer.assigned_animation == "jumpStart")))
   # elif glitch_floor_jump_walking:
@@ -1136,7 +1151,7 @@ func processHorizontalInputs(delta):
           if mySprite.flip_h != flip_h and on_ground and aniPlayer.assigned_animation != "walkStart" and \
              (aniPlayer.assigned_animation != "turnAround" or (aniPlayer.assigned_animation == "turnAround" and aniPlayer.is_playing())) and \
              (lv.x != 0 or aniPlayer.assigned_animation == "land"):
-            dir += (right/2)*(delta*DNUMHORZ)*multiplier
+            dir += (rightVec/2)*(delta*DNUMHORZ)*multiplier
             if aniPlayer.assigned_animation != "turnAround":
               aniPlayer.stop()
               aniPlayer.clear_queue()
@@ -1144,7 +1159,7 @@ func processHorizontalInputs(delta):
               aniPlayer.queue("walkStart")
               addJumpSmokeCloud(true)
           elif mySprite.flip_h == flip_h or aniPlayer.assigned_animation != "turnAround" or not aniPlayer.is_playing() or lv.x == 0:
-            dir += right*(delta*DNUMHORZ)*multiplier
+            dir += rightVec*(delta*DNUMHORZ)*multiplier
             if mySprite.flip_h != flip_h:
               aniPlayer.stop()
               aniPlayer.clear_queue()
@@ -1155,7 +1170,7 @@ func processHorizontalInputs(delta):
               addJumpSmokeCloud(true)
         # if there's no animation player, there's no animation. just flip
         else:
-          dir += right*(delta*DNUMHORZ)*multiplier
+          dir += rightVec*(delta*DNUMHORZ)*multiplier
           setSpriteFlipH(flip_h)
   
   # TODO(jaketrower): Maybe this? seems complicated
@@ -1271,8 +1286,25 @@ func doWalkAnimation():
     
 
 func normalizeLv(lv_to_normalize):
-  # if not truly_on_ground:
-  #   lv.x = 0
+  if grav.x > 0:
+    var tmp = lv_to_normalize.x
+    lv_to_normalize.x = lv_to_normalize.y
+    lv_to_normalize.y = -tmp
+  elif grav.x < 0:
+    var tmp = lv_to_normalize.x
+    lv_to_normalize.x = lv_to_normalize.y
+    lv_to_normalize.y = tmp
+  return lv_to_normalize
+
+func unnormalizeLv(lv_to_normalize):
+  if grav.x > 0:
+    var tmp = lv_to_normalize.x
+    lv_to_normalize.x = -lv_to_normalize.y
+    lv_to_normalize.y = tmp
+  elif grav.x < 0:
+    var tmp = lv_to_normalize.x
+    lv_to_normalize.x = lv_to_normalize.y
+    lv_to_normalize.y = tmp
   return lv_to_normalize
 
 var is_a_physics_particle = false
@@ -1284,22 +1316,22 @@ func handleCollisionsAndMove(local_lv, delta):
   if delta == 0 or physics_state == PhysicsState.OCCUPIED:
     return local_lv
 
-  if is_turn_based and can_turn_move and pressingJump() and physics_state == PhysicsState.NORMAL:
-    var max_jumps = turn_based_jump_max
-    if isFeatherLike():
-      max_jumps *= 2
-    if isHeavy():
-      max_jumps /= 2
-    if isKindOfOnGround():
-      turn_based_jump_count = 1
-      local_lv.y = 1
-      on_ground = false
-    elif turn_based_jump_count < max_jumps:
-      turn_based_jump_count += 1
-      # print("jump_count++ => " + str(turn_based_jump_count))
-      local_lv.y = 1
-    elif local_lv.y > 0:
-      local_lv.y = 0
+  # if is_turn_based and can_turn_move and pressingJump() and physics_state == PhysicsState.NORMAL:
+  #   var max_jumps = turn_based_jump_max
+  #   if isFeatherLike():
+  #     max_jumps *= 2
+  #   if isHeavy():
+  #     max_jumps /= 2
+  #   if isKindOfOnGround():
+  #     turn_based_jump_count = 1
+  #     local_lv.y = 1
+  #     on_ground = false
+  #   elif turn_based_jump_count < max_jumps:
+  #     turn_based_jump_count += 1
+  #     # print("jump_count++ => " + str(turn_based_jump_count))
+  #     local_lv.y = 1
+  #   elif local_lv.y > 0:
+  #     local_lv.y = 0
 
   if is_a_physics_particle:
     global_transform.origin.x += local_lv.x / velocity_dampener
@@ -1311,17 +1343,29 @@ func handleCollisionsAndMove(local_lv, delta):
   local_lv.x *= delta*DNUM
   local_lv.y *= delta*DNUM
 
-  if should_collide_horizontally:
+  # the order of horizontal or vertical collisions matters depending on if we have vertical or horizontal gravity
+  # unfortunately, in effect, this means I'm copying (with slight modifications) a large block of code twice 
+  if grav.y != 0 or (grav.y == 0 and grav.x == 0):
+    local_lv = handleCollisionsAndMoveNormalGravity(local_lv, delta)
+  elif grav.x != 0 and grav.y == 0:
+    local_lv = handleCollisionsAndMoveHorizontalGravity(local_lv, delta)
+  handleSpikeCollisions(delta) 
+  local_lv.x /= delta*DNUM
+  local_lv.y /= delta*DNUM
+  return local_lv
+
+func handleCollisionsAndMoveNormalGravity(local_lv, _delta):
+  if should_collide_with_walls:
     local_lv = handleHorizontalCollisions(local_lv)
 
   # PROCESS TURN_BASED MOVEMENT
-  if is_turn_based:
-    if can_turn_move and local_lv.x > 0:
-      global_transform.origin.x += 1
-    elif can_turn_move and local_lv.x < 0:
-      global_transform.origin.x -= 1
-  else:
-    global_transform.origin.x += local_lv.x / velocity_dampener
+  # if is_turn_based:
+  #   if can_turn_move and local_lv.x > 0:
+  #     global_transform.origin.x += 1
+  #   elif can_turn_move and local_lv.x < 0:
+  #     global_transform.origin.x -= 1
+  # else:
+  global_transform.origin.x += local_lv.x / velocity_dampener
   
   was_on_ground = on_ground
   was_truly_on_ground = truly_on_ground
@@ -1329,7 +1373,7 @@ func handleCollisionsAndMove(local_lv, delta):
   if glitch_form == global.GlitchForm.LADDER and was_on_ground:
     on_ground = isWalkingIntoWall()
   elif glitch_form != global.GlitchForm.FLOOR and should_collide_floor:
-    var tiles_underfoot = getTilesBelow(getLevelTiles()) # TODO(jakeonaut): LAYERED_TILES
+    var tiles_underfoot = getTilesAbove(getLevelTiles()) if grav.y < 0 else getTilesBelow(getLevelTiles()) # TODO(jakeonaut): LAYERED_TILES
     if not is_turn_based or (tiles_underfoot[0] == null and tiles_underfoot[1] == null and tiles_underfoot[2] == null):
       on_ground = false
   truly_on_ground = false
@@ -1337,9 +1381,8 @@ func handleCollisionsAndMove(local_lv, delta):
   on_ceiling = false
 
   if not was_fallthrough_area_collision_triggered and (should_collide_floor or should_collide_ceil):
-    last_vv = local_lv.y
     local_lv = handleVerticalCollisions(local_lv)
-    if last_vv != 0 and local_lv.y == 0:
+    if lv.y != 0 and local_lv.y == 0:
       self.vertical_collision = true
   elif was_fallthrough_area_collision_triggered:
     var truly_on_ground_memory = truly_on_ground
@@ -1348,59 +1391,91 @@ func handleCollisionsAndMove(local_lv, delta):
     global_transform.origin.y = fallthrough_area_collision_y
 
   # PROCESS TURN_BASED MOVEMENT
-  if is_turn_based:
-    var walking_up_wall = (isWalkingIntoWall() and glitch_form == global.GlitchForm.LADDER)
-    if can_turn_move and (local_lv.y > 0 or walking_up_wall):
-      global_transform.origin.y += 1
-      if walking_up_wall:
-        turn_based_jump_count = 999
-        on_ground = true
-    elif can_turn_move and (local_lv.y < 0 or justPressedDown()):
-      if glitch_form == global.GlitchForm.FEATHER and not pressingDown():
-        global_transform.origin.y -= 0.5
-      else:
-        global_transform.origin.y -= 1
-  else:
-    global_transform.origin.y += local_lv.y / velocity_dampener
+  # if is_turn_based:
+  #   var walking_up_wall = (isWalkingIntoWall() and glitch_form == global.GlitchForm.LADDER)
+  #   if can_turn_move and (local_lv.y > 0 or walking_up_wall):
+  #     global_transform.origin.y += 1
+  #     if walking_up_wall:
+  #       turn_based_jump_count = 999
+  #       on_ground = true
+  #   elif can_turn_move and (local_lv.y < 0 or justPressedDown()):
+  #     if glitch_form == global.GlitchForm.FEATHER and not pressingDown():
+  #       global_transform.origin.y -= 0.5
+  #     else:
+  #       global_transform.origin.y -= 1
+  # else:
+  global_transform.origin.y += local_lv.y / velocity_dampener
+  return local_lv
 
-  handleSpikeCollisions(delta)
+func handleCollisionsAndMoveHorizontalGravity(local_lv, _delta):
+  if should_collide_with_walls:
+    local_lv = handleVerticalCollisions(local_lv)
+  global_transform.origin.y += local_lv.y / velocity_dampener
   
-  local_lv.x /= delta*DNUM
-  local_lv.y /= delta*DNUM
+  was_on_ground = on_ground
+  was_truly_on_ground = truly_on_ground
+  was_on_ceiling = on_ceiling
+  if glitch_form == global.GlitchForm.LADDER and was_on_ground:
+    on_ground = isWalkingIntoWall()
+  elif glitch_form != global.GlitchForm.FLOOR and should_collide_floor:
+    var tiles_underfoot = getTilesRightOf(getLevelTiles(), 0.1) if grav.x < 0 else getTilesLeftOf(getLevelTiles(), 0.1) # TODO(jakeonaut): LAYERED_TILES
+    if not is_turn_based or (tiles_underfoot[0] == null and tiles_underfoot[1] == null and tiles_underfoot[2] == null):
+      on_ground = false
+  truly_on_ground = false
+  half_on_ground = false
+  on_ceiling = false
+
+  if not was_fallthrough_area_collision_triggered and (should_collide_ceil or should_collide_floor):
+    local_lv = handleHorizontalCollisions(local_lv)
+    if lv.y != 0 and local_lv.y == 0:
+      self.vertical_collision = true
+  # TODO(jaketrower): TopsyTurvy
+  # TODO(gravity): 
+  elif was_fallthrough_area_collision_triggered:
+    var truly_on_ground_memory = truly_on_ground
+    local_lv = collideWithFloor(local_lv)
+    truly_on_ground = truly_on_ground_memory
+    global_transform.origin.y = fallthrough_area_collision_y
+
+  global_transform.origin.x += local_lv.x / velocity_dampener
   return local_lv
 
 func handleHorizontalCollisions(local_lv):
   self.horizontal_collision = false
   var TILE_WIDTH = getLevelTiles().cell_size.x
 
+  var buffer = 0.0 if grav.x != 0 else 0.2
+  var lb_to_use = bb if grav.x != 0 else lb
+  var rb_to_use = tb if grav.x != 0 else rb
+
   # check for left collisions
   if shouldCheckForLeftCollisions(local_lv):
     # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
-    local_lv = performCollisionCheck(false, local_lv, lb - 0.2, -1, TILE_WIDTH, grav.x > 0)
-    # TODO(jaketrower): TopsyTurvy 0.2
+    local_lv = performCollisionCheck(false, local_lv, lb_to_use - buffer, -1, TILE_WIDTH, grav.x > 0) #, true)
 
   # check for right collisions
   if shouldCheckForRightCollisions(local_lv):
     # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
-    local_lv = performCollisionCheck(false, local_lv, rb + 0.2, 1, 0, grav.x < 0)
-    # TODO(jaketrower): TopsyTurvy 0.2
+    local_lv = performCollisionCheck(false, local_lv, rb_to_use + buffer, 1, 0, grav.x < 0) #, true)
   return local_lv
   
 func handleVerticalCollisions(local_lv):
   self.vertical_collision = false
   var TILE_HEIGHT = getLevelTiles().cell_size.y
 
+  var buffer = 0.2 if grav.x != 0 else 0.0
+  var tb_to_use = rb if grav.x != 0 else tb
+  var bb_to_use = lb if grav.x != 0 else bb
+
   # check for bottom collisions
   if shouldCheckForBottomCollisions(local_lv):
     # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
-    local_lv = performCollisionCheck(true, local_lv, bb, -1, TILE_HEIGHT, grav.y > 0)
-    # TODO(jaketrower): TopsyTurvy 0.2!!
+    local_lv = performCollisionCheck(true, local_lv, bb_to_use - buffer, -1, TILE_HEIGHT, grav.y > 0) #, true)
 
   # check for top collisions
   if shouldCheckForTopCollisions(local_lv):
     # params are is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug
-    local_lv = performCollisionCheck(true, local_lv, tb, 1, 0, grav.y < 0)
-    # TODO(jaketrower): TopsyTurvy 0.2!!!
+    local_lv = performCollisionCheck(true, local_lv, tb_to_use + buffer, 1, 0, grav.y < 0) #, true)
   return local_lv
 
 func shouldCheckForLeftCollisions(local_lv):
@@ -1481,18 +1556,18 @@ func performCollisionCheck(is_vertical, local_lv, sensor_anchor, sensor_directio
 
       # Compare left and right collision tile distances
       if tile_distance_A <= tile_distance_B and tile_distance_A <= middle_tile_distance:
-        local_lv = reactToPotentialCollisions(tile_type_A, tile_distance_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+        local_lv = reactToPotentialCollisions(tile_type_A, tile_distance_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug)
       elif tile_distance_B < tile_distance_A and tile_distance_B <= middle_tile_distance:
-        local_lv = reactToPotentialCollisions(tile_type_B, tile_distance_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+        local_lv = reactToPotentialCollisions(tile_type_B, tile_distance_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug)
       else:
-        local_lv = reactToPotentialCollisions(middle_tile_type, middle_tile_distance, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+        local_lv = reactToPotentialCollisions(middle_tile_type, middle_tile_distance, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug)
       return local_lv
     else:
       # Compare left and right collision tile distances
       if tile_distance_A <= tile_distance_B:
-        local_lv = reactToPotentialCollisions(tile_type_A, tile_distance_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+        local_lv = reactToPotentialCollisions(tile_type_A, tile_distance_A, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug)
       elif tile_distance_B < tile_distance_A:
-        local_lv = reactToPotentialCollisions(tile_type_B, tile_distance_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+        local_lv = reactToPotentialCollisions(tile_type_B, tile_distance_B, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug)
       return local_lv
   else:
     var middle_sensor = Vector2(x, y+sensor_anchor) if is_vertical else Vector2(x+sensor_anchor, y+cheating_horizontal_offset)
@@ -1500,7 +1575,7 @@ func performCollisionCheck(is_vertical, local_lv, sensor_anchor, sensor_directio
     var middle_tile_distance = tile_pos_and_distance_and_type_middle.y
     var middle_tile_type = tile_pos_and_distance_and_type_middle.z
 
-    local_lv = reactToPotentialCollisions(middle_tile_type, middle_tile_distance, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor)
+    local_lv = reactToPotentialCollisions(middle_tile_type, middle_tile_distance, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor, should_collide_with_floor, debug)
     return local_lv
   
 func probeSensorForTileDistance(sensor, is_vertical, local_lv, sensor_anchor, sensor_direction, tile_anchor):
@@ -1760,7 +1835,8 @@ func landed(was_on_fallthrough_solid = false):
   addJumpSmokeCloud()
   if physics_state == PhysicsState.BEING_TOSSED:
     pauseAnimation = false
-  if not pauseAnimation and aniPlayer != null and not global.pauseGame and last_vv < 1 and aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart":
+  var v_fall = lv.x if grav.x != 0 else lv.y
+  if not pauseAnimation and aniPlayer != null and not global.pauseGame and v_fall < 1 and aniPlayer.assigned_animation != "jumpSquat" and aniPlayer.assigned_animation != "jumpStart":
     aniPlayer.clear_queue()
     if fall_timer > fall_time_max and not glitch_form == global.GlitchForm.FEATHER and not was_on_fallthrough_solid:
       quiet_the_fall_sound = false
@@ -1775,9 +1851,9 @@ func landed(was_on_fallthrough_solid = false):
       if physics_state == PhysicsState.BEING_TOSSED:
         physics_state = PhysicsState.NORMAL
   if bounceAniPlayer:
-    if last_vv < -10:
+    if v_fall < -10:
       playBounce("land")
-    elif last_vv < -6:
+    elif v_fall < -6:
       playBounce("landSoft")
   if fallSound and quiet_the_fall_sound:
     fallSound.stop()

@@ -243,13 +243,13 @@ func getSmacked(broom_origin = null, _silently = false, is_local_broom = false):
     should_move_left = true
 
   if should_move_left:
-    should_collide_horizontally = true
+    should_collide_with_walls = true
     handleCollisionsAndMove(Vector3(-1, 0, 0), 1)
-    should_collide_horizontally = false
+    should_collide_with_walls = false
   elif should_move_right:
-    should_collide_horizontally = true
+    should_collide_with_walls = true
     handleCollisionsAndMove(Vector3(1, 0, 0), 1)
-    should_collide_horizontally = false
+    should_collide_with_walls = false
   # tryApplyMyGlitch()
 
 func passiveActivate(_delta, _is_player, _is_local_broom = false):

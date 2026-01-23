@@ -99,7 +99,7 @@ extents = Vector3( 21, 13, 1 )
 [node name="Furbo" type="Spatial"]
 script = ExtResource( 12 )
 true_terminal_vel = 4
-grav = Vector2(0, 7)
+grav = Vector2( 0, 7 )
 run_speed = 7
 feather_glitch_walk_speed = 7
 invisible_glitch_walk_speed = 5

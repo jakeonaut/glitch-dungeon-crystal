@@ -619,7 +619,6 @@ func _process(delta):
       unglitchTickleSprite(grandmaHandSprite)
       unglitchTickleSprite(grandmaFishHatSprite)
   
-  processPoisonWaterLogic(delta)
   # if pressingJump():
   #   tryClearFallthroughCollisionSolid(self.global_transform.origin)
 
@@ -1082,7 +1081,7 @@ func processGlitchHurtRecovery(delta):
       global.pauseGame = false
       level.tryToRespawn()
       if global.isEnteringRoom: return
-      should_collide_horizontally = true
+      should_collide_with_walls = true
       should_collide_floor = true 
       should_collide_ceil = true
       self.feather_jump_timer = remembered_feather_jump_timer if glitch_form != global.GlitchForm.FLOOR else 0
@@ -1319,7 +1318,7 @@ func getBubbleCured():
   # physics_vars.should_apply_gravity = true
   # should_collide_floor = true
   # should_collide_ceil = true
-  # should_collide_horizontally = true
+  # should_collide_with_walls = true
   # grav = bubble_temp_grav
   # true_terminal_vel = bubble_temp_true_terminal_vel
 
@@ -1385,7 +1384,7 @@ func getFishyInfected():
   pauseAnimation = true
   should_collide_floor = true
   should_collide_ceil = true
-  should_collide_horizontally = true
+  should_collide_with_walls = true
   fish_broom_timer = 0
   has_fish_broom = true
   
@@ -1412,7 +1411,7 @@ func getFishyCured():
   physics_vars.should_apply_gravity = true
   should_collide_floor = true
   should_collide_ceil = true
-  should_collide_horizontally = true
+  should_collide_with_walls = true
 
 func stopTransformationAni():
   pauseAnimation = false
@@ -1458,7 +1457,7 @@ func getChickenInfected():
   pauseAnimation = true
   should_collide_floor = true
   should_collide_ceil = true
-  should_collide_horizontally = true
+  should_collide_with_walls = true
 
 var curse_timer = 0
 var curse_time_limit = 10
@@ -1676,6 +1675,8 @@ func processMoleLogic(delta):
         self.linear_velocity.y = self.vv
         self.was_fallthrough_area_collision_triggered = false
       getMoleCured()
+  # TODO(jaketrower): TopsyTurvy
+  # TODO(gravity):
   elif transformation == TransformationState.UNDERGROUND:
     getCoveredInDirt()
     if returning_to_save_point > 0:
@@ -1708,6 +1709,8 @@ func processMoleLogic(delta):
   else:
     dig_smoke_timer = 0
     # TODO(jaketrower): TODO(jaketrower): TODO(jaketrower): TODO(jaketrower):
+    # TODO(gravity):
+    # TODO(jaketrower): TopsyTurvy
     if dig_direction != null and dig_timer > 0 and transformation != TransformationState.MOLE_DIGGING and (
       (pressingJump() and dig_direction.y >= 0 and on_ceiling and not was_on_ceiling) or
       (pressingDown() and dig_direction.y <= 0 and on_ground) or
@@ -1779,7 +1782,8 @@ func collideWithCeiling(local_lv):
       on_ground = true # needs to be BEFORE tryDieToEnemy to set remembered_on_ground correctly
       bigBump()
   on_ceiling = true
-  var solidTilesAbove = getTilesAbove(getLevelTiles())
+  var lt = getLevelTiles()
+  var solidTilesAbove = getTilesBelow(lt) if grav.y < 0 else getTilesLeftOf(lt) if grav.x < 0 else getTilesRightOf(lt) if grav.x > 0 else getTilesAbove(lt)
   var areAnyTilesAboveMeFragileBrickSolid = false
   var areAnyTilesAboveMeSpikes = false
   for i in range(solidTilesAbove.size()):
@@ -1795,8 +1799,15 @@ func collideWithCeiling(local_lv):
         glitchTickle()
     if not areAnyTilesAboveMeSpikes and getLevelTiles().isTileSpikes(tile_type):
       areAnyTilesAboveMeSpikes = true
+  var which_lv_var_to_use = local_lv.y
+  if grav.y < 0:
+    which_lv_var_to_use = -local_lv.y
+  if grav.x < 0:
+    which_lv_var_to_use = -local_lv.x
+  if grav.x > 0:
+    which_lv_var_to_use = local_lv.x
   if (
-    local_lv.y < 0 or not can_dig_up or
+    which_lv_var_to_use < 0 or not can_dig_up or
     global.memory["mole_cricket"] == 0 or not global.memory["mole_cricket_enabled"] or
     nesting_doll_state == global.NestingDoll.MATRIARCH or
     nesting_doll_state == global.NestingDoll.BABY or
@@ -1806,10 +1817,16 @@ func collideWithCeiling(local_lv):
     (transformation == TransformationState.CHICKEN or transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.BUBBLE)
     or (glitch_form != global.GlitchForm.INVISIBLE and areAnyTilesAboveMeSpikes)
   ):
-    local_lv.y = 0
+    if which_lv_var_to_use == local_lv.x or which_lv_var_to_use == -local_lv.x:
+      local_lv.x = 0
+    else:
+      local_lv.y = 0
     getMoleCured()
     return local_lv
-  local_lv.y = 0
+  if which_lv_var_to_use == local_lv.x or which_lv_var_to_use == -local_lv.x:
+    local_lv.x = 0
+  else:
+    local_lv.y = 0
   processMoleDigTimer(Vector3(0, 2, 0))
   return local_lv
 
@@ -1847,7 +1864,7 @@ func getMoleCured():
     on_ground = false
   should_collide_floor = true
   should_collide_ceil = true
-  should_collide_horizontally = true
+  should_collide_with_walls = true
   dig_timer = 0
   dig_below_timer = 0
   # aniPlayer.stop()
@@ -2564,7 +2581,7 @@ func processMushroomLogic(_delta):
   if is_mushroom_infected:
     glitchTickle()
   # mushroomSpriteVisible.visible = is_mushroom_infected
-  # should_collide_horizontally = not is_mushroom_infected # careful! interacts with processMoleLogic
+  # should_collide_with_walls = not is_mushroom_infected # careful! interacts with processMoleLogic
   # if not is_mushroom_infected:
   #   return
 
@@ -2670,21 +2687,25 @@ func processSpriteRenderLogic(delta):
     uncorruptAllSprites()
 
   if grav.y < 0:
-    if spriteContainer.rotation_degrees.x != 180:
+    if spriteContainer.rotation_degrees.x != 180 or spriteContainer.rotation_degrees.z != 0:
       spriteContainer.get_node("InnerSpriteContainer").translation.z = -1
       spriteContainer.rotation_degrees.x = 180
-  elif grav.x < 0:
-    if spriteContainer.rotation_degrees.z != 270:
-      spriteContainer.get_node("InnerSpriteContainer").translation.z = 0
-      spriteContainer.rotation_degrees.z = 270
+      spriteContainer.rotation_degrees.z = 0
   elif grav.x > 0:
-    if spriteContainer.rotation_degrees.z != 90:
-      spriteContainer.get_node("InnerSpriteContainer").translation.z = 0
-      spriteContainer.rotation_degrees.z = 90
-  else:
-    if spriteContainer.rotation_degrees.x != 0:
+    if spriteContainer.rotation_degrees.x != 0 or spriteContainer.rotation_degrees.z != 270:
       spriteContainer.get_node("InnerSpriteContainer").translation.z = 0
       spriteContainer.rotation_degrees.x = 0
+      spriteContainer.rotation_degrees.z = 270
+  elif grav.x < 0:
+    if spriteContainer.rotation_degrees.x != 0 or spriteContainer.rotation_degrees.z != 90:
+      spriteContainer.get_node("InnerSpriteContainer").translation.z = 0
+      spriteContainer.rotation_degrees.x = 0
+      spriteContainer.rotation_degrees.z = 90
+  else:
+    if spriteContainer.rotation_degrees.x != 0 or spriteContainer.rotation_degrees.z != 0:
+      spriteContainer.get_node("InnerSpriteContainer").translation.z = 0
+      spriteContainer.rotation_degrees.x = 0
+      spriteContainer.rotation_degrees.z = 0
 
 # var broom_flip_h = false
 func processBroomRenderLogic(_delta):
@@ -2749,66 +2770,6 @@ func processBagRenderLogic(_delta):
     enchantedBagSpriteVisible.visible = true
   else:
     enchantedBagSpriteVisible.visible = false
-
-
-func processPoisonWaterLogic(_delta):
-  pass
-#  var is_touching_poison_water = is_touching_water and touched_water_area != null and touched_water_area.get_node("..").is_poison
-
-  # if is_touching_poison_water:
-  #   is_mushroom_infected = true
-  #   grav = Vector2(0, 0)
-
-  # if is_touching_poison_water:
-  #   if glitch_form == global.GlitchForm.INVISIBLE:
-  #     tryDieToEnemy(delta, true, false)
-  #   else:
-  #     if poison_timer == 0 or unpoison_timer > 0:
-  #       poisonWaterSound.play()
-  #     elif reversePoisonWaterSound.is_playing():
-  #       # TODO(jaketrower): Could be put in a function
-  #       var playback_position = reversePoisonWaterSound.get_playback_position()
-  #       var sound_length = reversePoisonWaterSound.stream.get_length()
-  #       poisonWaterSound.play(sound_length - playback_position)
-  #       reversePoisonWaterSound.stop()
-  #     # If trying to jump out of water a lot... poison harder!
-  #     if unpoison_timer > 0:
-  #       poison_timer += (delta * 220)
-  #       unpoison_timer = 0
-  #     poison_timer += (delta*22)
-  #     if poison_timer > 7:
-  #       glitchTickle(0)
-  #     if poison_timer >= poison_time_limit:
-  #       tryDieToEnemy(delta, true, false)
-  #       poison_timer = 0
-  #       poisonWaterSound.stop()
-
-  # if (not is_touching_poison_water or glitch_form == global.GlitchForm.INVISIBLE) and poison_timer > 0:
-  #   if poisonWaterSound.is_playing():
-  #     # TODO(jaketrower): Could be put in a function
-  #     var playback_position = poisonWaterSound.get_playback_position()
-  #     var sound_length = poisonWaterSound.stream.get_length()
-  #     reversePoisonWaterSound.play(sound_length - playback_position)
-  #     poisonWaterSound.stop()
-  #   # decrease more slowly than it increases... toxic
-  #   unpoison_timer += (delta * 22)
-  #   if unpoison_timer >= unpoison_time_limit:
-  #     poison_timer -= (delta * 22)
-  #     if poison_timer <= 0:
-  #       poison_timer = 0
-  #       level.glitchScreenEffect.visible = false
-  #       musicPlayer.changeSongPitch(musicPlayer.default_song_pitch)
-  #       reversePoisonWaterSound.stop()
-
-  # if poison_timer > 0:
-  #   level.glitchScreenEffect.visible = global.userSettings["canGlitchScreen"]
-  #   level.glitchScreenEffect.get_material().set_shader_param("shake_color_rate", (poison_timer*.0005))
-  #   musicPlayer.changeSongPitch(abs(sin(poison_timer*.05)+.02))
-  # if poison_timer < 0:
-  #   poison_timer = 0
-  #   level.glitchScreenEffect.visible = false
-  #   musicPlayer.changeSongPitch(musicPlayer.default_song_pitch)
-  #   reversePoisonWaterSound.stop()
     
 var has_landed_since_recovering = true
 # @override
@@ -2920,7 +2881,7 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
     # if global.memory["magic_lantern"]:
     #   fallenBroom.should_collide_ceil = false
     #   fallenBroom.should_collide_floor = false
-    #   fallenBroom.should_collide_horizontally = false
+    #   fallenBroom.should_collide_with_walls = false
     fallenBroom.global_transform.origin.y -= 1
     # if global.memory["broom_flight"] and not has_broom_flown and not on_ground:
     #   fallenBroom.global_transform.origin.y = self.global_transform.origin.y

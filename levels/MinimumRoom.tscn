@@ -108,11 +108,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1, 0.0999999, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -2, -4 )
 
 [node name="Furbo" parent="Viewport/level" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 12, 0 )
 grav = Vector2( 0, 0 )
 
 [node name="Furbo3" parent="Viewport/level" instance=ExtResource( 6 )]
-transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 10, 12, 0 )
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 6, 1, 0 )
 grav = Vector2( 0, 0 )
 
 [node name="Furbo2" parent="Viewport/level" instance=ExtResource( 6 )]

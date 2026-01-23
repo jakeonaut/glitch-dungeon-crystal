@@ -116,14 +116,14 @@ func playerInhale():
   level.player.gravitySound.pitch_scale = rand_range(0.8, 1.2)
   level.player.gravitySound.play()
   level.player.glitchTickle()
-  if rotation_degrees.z == -90:
-    level.flipGravity(Vector2(-1, 0))
-  elif rotation_degrees.z == 90:
+  if round(rotation_degrees.z) == -90 or round(rotation_degrees.z) == 270:
     level.flipGravity(Vector2(1, 0))
-  elif rotation_degrees.z == 180 or rotation_degrees.z == -180:
+  elif round(rotation_degrees.z) == 90 or round(rotation_degrees.z) == -270:
+    level.flipGravity(Vector2(-1, 0))
+  elif round(rotation_degrees.z) == 180 or round(rotation_degrees.z) == -180:
     level.flipGravity(Vector2(0, -1))
   else:
-    level.flipGravity(-1 * (level.player.grav / level.player.grav.abs()))
+    level.flipGravity(Vector2(0, 1))
   for _i in range(5):
     level.player.spawnASpore(level.player.global_transform.origin, false)
 
@@ -159,7 +159,7 @@ func unsmack():
 func shouldIDoCollisions():
   should_collide_floor = true
   should_collide_ceil = true
-  should_collide_horizontally = true
+  should_collide_with_walls = true
 
 var who_is_standing_on_me = {}
 var move_my_friends_time_limit = 10

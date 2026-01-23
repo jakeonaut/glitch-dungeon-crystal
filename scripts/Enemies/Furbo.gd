@@ -55,7 +55,7 @@ func landed(_was_on_fallthrough_solid = false):
 func shouldIDoCollisions():
     should_collide_floor = true
     should_collide_ceil = true
-    should_collide_horizontally = true
+    should_collide_with_walls = true
 
 # @override
 func getSmacked(broom_origin = null, silently = false, is_local_broom = false):

@@ -15,7 +15,7 @@ func _ready():
   if behavior_jumping:
     grav = Vector2(0, 60)
     jump_force = weak_fish_jump_force
-    should_collide_horizontally = false
+    should_collide_with_walls = false
   else:
     should_collide_floor = false
     should_collide_ceil = false

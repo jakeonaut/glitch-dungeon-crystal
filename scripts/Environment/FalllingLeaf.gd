@@ -20,7 +20,7 @@ func _ready():
         secretAniPlayer.queue("rightToLeft")
         
     should_collide_ceil = false
-    should_collide_horizontally = false
+    should_collide_with_walls = false
     should_only_do_middle_sensor = true
     
     

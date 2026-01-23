@@ -352,7 +352,10 @@ func loadGame(saveGameIndex):
         if global.memory.has("current_glitch") and global.memory.has("spellbookPage") and global.memory["spellbookPage"] != null:
             player.spellCastPauseIndex = 0
             if global.memory["current_glitch"] == 0:
-                player.spellCastPauseIndex = len(global.memory["spellbookPage"])
+                if not global.memory["glitched_grimoire"] and len(global.memory["spellbookPage"]) <= 1 or global.memory["glitched_grimoire"] and len(global.memory["spellbookPage"]) <= 3:
+                    player.spellCastPauseIndex = len(global.memory["spellbookPage"])
+                else:
+                    player.spellCastPauseIndex = 0
             else:
                 var spellCastPauseIndex = global.memory["spellbookPage"].find(global.memory["current_glitch"])
                 if spellCastPauseIndex > -1:

@@ -871,7 +871,7 @@ vframes = 6
 frame = 27
 
 [node name="Mushroom20" parent="Viewport/level" instance=ExtResource( 20 )]
-transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 2.902, 13.0178, -1 )
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 2.902, 12.0178, -1 )
 
 [node name="Sprite3D" parent="Viewport/level/Mushroom20" index="0"]
 material_override = SubResource( 45 )
@@ -912,6 +912,48 @@ material_override = SubResource( 45 )
 [node name="CollisionShape" parent="Viewport/level/Mushroom20/FallthroughSolid" index="0"]
 shape = SubResource( 46 )
 
+[node name="Mushroom21" parent="Viewport/level" instance=ExtResource( 20 )]
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 10.902, 10.0178, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/Mushroom21" index="0"]
+material_override = SubResource( 45 )
+
+[node name="Sprite3D12" parent="Viewport/level/Mushroom21" index="1"]
+material_override = SubResource( 45 )
+
+[node name="Sprite3D2" parent="Viewport/level/Mushroom21" index="2"]
+material_override = SubResource( 45 )
+
+[node name="Sprite3D3" parent="Viewport/level/Mushroom21" index="3"]
+material_override = SubResource( 45 )
+
+[node name="Sprite3D4" parent="Viewport/level/Mushroom21" index="4"]
+material_override = SubResource( 45 )
+
+[node name="Sprite3D5" parent="Viewport/level/Mushroom21" index="5"]
+material_override = SubResource( 45 )
+
+[node name="Sprite3D9" parent="Viewport/level/Mushroom21" index="6"]
+material_override = SubResource( 45 )
+
+[node name="Sprite3D10" parent="Viewport/level/Mushroom21" index="7"]
+material_override = SubResource( 45 )
+
+[node name="Sprite3D11" parent="Viewport/level/Mushroom21" index="8"]
+material_override = SubResource( 45 )
+
+[node name="Sprite3D6" parent="Viewport/level/Mushroom21" index="9"]
+material_override = SubResource( 45 )
+
+[node name="Sprite3D7" parent="Viewport/level/Mushroom21" index="10"]
+material_override = SubResource( 45 )
+
+[node name="Sprite3D8" parent="Viewport/level/Mushroom21" index="11"]
+material_override = SubResource( 45 )
+
+[node name="CollisionShape" parent="Viewport/level/Mushroom21/FallthroughSolid" index="0"]
+shape = SubResource( 46 )
+
 [node name="TimeKeeper" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2, 0 )
 
@@ -939,5 +981,6 @@ flip_v = true
 [editable path="Viewport/level/Door3"]
 [editable path="Viewport/level/Door3/NPC/NPC TextBox"]
 [editable path="Viewport/level/Mushroom20"]
+[editable path="Viewport/level/Mushroom21"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]
