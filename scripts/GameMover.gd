@@ -257,8 +257,18 @@ var spriteYAlignment = 0.25
 func alignMySprite():
   var pixelSize = 0.125
   if mySprite:
-    mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
-    mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + spriteYAlignment
+    if grav.y < 0:
+      mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
+      mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) - spriteYAlignment
+    elif grav.x < 0:
+      mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize) - spriteYAlignment
+      mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize)
+    elif grav.x > 0:
+      mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize) + spriteYAlignment
+      mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize)
+    else:
+      mySprite.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
+      mySprite.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + spriteYAlignment
      
 func isActive(_debug=false):
   return visible

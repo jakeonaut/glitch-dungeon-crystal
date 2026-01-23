@@ -298,9 +298,6 @@ func adjustStuffForNestingDolls():
     interactionShape.shape.extents = Vector3(0.7, 1.2, 3)
     spriteYAlignment = 0.25
     innerSpriteContainer.scale = Vector3(1.0, 1.0, 1.0)
-
-  if grav.y < 0:
-    spriteYAlignment = 0 - spriteYAlignment
   
   tileCollisionShape.shape.extents.x = rb
   tileCollisionShape.shape.extents.y = tb
@@ -520,6 +517,8 @@ func changeOutfit(outfit, should_play_sound = true):
   grandmaFishHatSprite.offset = getOutfitOffset(outfit)
   # spellbookGlitchSprite.visible = getOutfitIsSpellGlitchSpriteVisible(outfit)
   spellbookGlitchSprite.offset = getOutfitIsSpellGlitchSpriteOffset(outfit)
+  if grav.x != 0:
+    spellbookGlitchSprite.offset = Vector2(spellbookGlitchSprite.offset.y, spellbookGlitchSprite.offset.x)
   if should_play_sound:
     playChangeOutfitSound()
 

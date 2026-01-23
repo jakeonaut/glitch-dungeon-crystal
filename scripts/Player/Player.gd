@@ -128,8 +128,18 @@ func processNotWallLadderWalking(delta):
 func alignMySprite():
   var pixelSize = 0.125 # 0.125 if not malware_infected else 1.0
   if spriteContainer:
-    spriteContainer.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
-    spriteContainer.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + spriteYAlignment
+    if grav.y < 0:
+      spriteContainer.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
+      spriteContainer.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) - spriteYAlignment
+    elif grav.x < 0:
+      spriteContainer.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize) - spriteYAlignment
+      spriteContainer.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize)
+    elif grav.x > 0:
+      spriteContainer.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize) + spriteYAlignment
+      spriteContainer.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize)
+    else:
+      spriteContainer.global_transform.origin.x = stepify(self.global_transform.origin.x, pixelSize)
+      spriteContainer.global_transform.origin.y = stepify(self.global_transform.origin.y, pixelSize) + spriteYAlignment
 
 func tryPlayFootstepSound():
   if transformation == TransformationState.MOLE_DIGGING:
@@ -435,10 +445,8 @@ func _process(delta):
   processSpriteRenderLogic(delta)
   processBroomRenderLogic(delta)
   processBagRenderLogic(delta)
+  processSpellbookGlitchSpriteRenderLogic(delta)
   if global.isEnteringRoom:
-    if "nterDoor" in aniPlayer.assigned_animation:
-      spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x
-      spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y + 1.685 if aniPlayer.assigned_animation == "preEnterDoor" else self.global_transform.origin.y + 1.3
     updateGrandmaHatHandSprites()
     return
   if level.pacman_wrapping:
@@ -476,23 +484,6 @@ func _process(delta):
     grandmaHandSprite.get_material_override().set_shader_param("opacity", spriteOpacity)
     grandmaFishHatSprite.get_material_override().set_shader_param("opacity", spriteOpacity)
     broomSpriteVisible.get_material_override().set_shader_param("opacity", spriteOpacity)
-  # TODO(gravity):
-  if "nterDoor" in aniPlayer.assigned_animation:
-    spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x
-    if grav.y > 0:
-      spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y + 1.685 if aniPlayer.assigned_animation == "preEnterDoor" else self.global_transform.origin.y + 1.5
-    else:
-      spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y - 1.685 if aniPlayer.assigned_animation == "preEnterDoor" else self.global_transform.origin.y - 1.5
-  else:
-    if grav.y > 0:
-      spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y + 1.935
-    else:
-      spellbookGlitchSprite.global_transform.origin.y = self.global_transform.origin.y - 1.935
-    if mySprite.flip_h:
-      spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x - 0.25
-    else:
-      spellbookGlitchSprite.global_transform.origin.x = self.global_transform.origin.x + 0.25
-  spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.userSettings["colorblindMode"] and transformation == TransformationState.NORMAL# and getOutfitIsSpellGlitchSpriteVisible(global.memory["currOutfit"])
 
   processSleepyLogic(trueDelta)
   if global.isPauseMenuOpen:
@@ -2628,35 +2619,32 @@ func processHorizontalInputs(delta):
   #     mushroom_turn_timer = 0
 
 func adjustSummonedBroomSpritePosition():
-  var xAddition = 0
-  var yAddition = 0
+  var sOffset = Vector3(0, 0, 1.5)
+  var rOffset = Vector3(0, 0, 0)
   if summonedBroom.aniPlayer.assigned_animation == "broomSmack" or summonedBroom.aniPlayer.assigned_animation == "sweepWall":
-    xAddition = .875
-    yAddition = .625
+    sOffset = Vector3(.875, .625, 1.5)
   elif summonedBroom.aniPlayer.assigned_animation == "broomSmack2":
-    xAddition = .4
-    yAddition = 0
+    sOffset.x = .4
 
   broomSpriteVisible.visible = false
   if mySprite.flip_h:
-    summonedBroom.global_transform.origin.x = self.global_transform.origin.x - xAddition
-    summonedBroom.rotation_degrees = Vector3(0, 180, 0)
-  else:
-    summonedBroom.global_transform.origin.x = self.global_transform.origin.x + xAddition
-    summonedBroom.rotation_degrees = Vector3(0, 0, 0)
+    sOffset.x *= -1
+    rOffset.y = 180
 
   if self.grav.y < 0:
-    summonedBroom.rotation_degrees.x = 180
-    yAddition *= -1
-    # yAddition -= 3.146
-    summonedBroom.global_transform.origin.z = self.global_transform.origin.z - 1.5
-  else:
-    summonedBroom.rotation_degrees.x = 0
-    summonedBroom.global_transform.origin.z = self.global_transform.origin.z + 1.5
-
-  summonedBroom.rotation_degrees.z = spriteContainer.rotation_degrees.z
-
-  summonedBroom.global_transform.origin.y = self.global_transform.origin.y + yAddition
+    sOffset.y *= -1
+    sOffset.z *= -1
+    rOffset.x = 180
+  elif self.grav.x < 0: # rightward gravity
+    sOffset = Vector3(-sOffset.y, sOffset.x, sOffset.z)
+    rOffset.z = -90 if mySprite.flip_h else 90
+  elif self.grav.x > 0: # leftward gravity
+    sOffset = Vector3(sOffset.y, -sOffset.x, sOffset.z)
+    rOffset.z = 90 if mySprite.flip_h else -90
+  
+  summonedBroom.global_transform.origin = self.global_transform.origin + sOffset
+  summonedBroom.rotation_degrees = rOffset
+  
 
 func shouldAirHaveFriction():
   return summonedBroom == null and .shouldAirHaveFriction()
@@ -2706,6 +2694,27 @@ func processSpriteRenderLogic(delta):
       spriteContainer.get_node("InnerSpriteContainer").translation.z = 0
       spriteContainer.rotation_degrees.x = 0
       spriteContainer.rotation_degrees.z = 0
+
+func processSpellbookGlitchSpriteRenderLogic(_delta):
+  var sOffset = Vector2(0, 0)
+  var mySpriteFlipH = mySprite.flip_h
+  if grav.x > 0:
+    mySpriteFlipH = not mySpriteFlipH
+
+  if "nterDoor" in aniPlayer.assigned_animation:
+    sOffset.y = 1.685 if aniPlayer.assigned_animation == "preEnterDoor" else 1.3
+  else:
+    sOffset.x = -0.25 if mySpriteFlipH else 0.25
+    sOffset.y = 1.935
+  if grav.y < 0: 
+    spellbookGlitchSprite.global_transform.origin = self.global_transform.origin + Vector3(sOffset.x, -sOffset.y, -0.625)
+  elif grav.x < 0:
+    spellbookGlitchSprite.global_transform.origin = self.global_transform.origin + Vector3(-sOffset.y, sOffset.x, -0.625)
+  elif grav.x > 0:
+    spellbookGlitchSprite.global_transform.origin = self.global_transform.origin + Vector3(sOffset.y, sOffset.x, -0.625)
+  else:
+    spellbookGlitchSprite.global_transform.origin = self.global_transform.origin + Vector3(sOffset.x, sOffset.y, 0.625)
+  spellbookGlitchSprite.visible = glitch_form != global.GlitchForm.NORMAL and global.userSettings["colorblindMode"] and transformation == TransformationState.NORMAL# and getOutfitIsSpellGlitchSpriteVisible(global.memory["currOutfit"])
 
 # var broom_flip_h = false
 func processBroomRenderLogic(_delta):
@@ -2763,8 +2772,6 @@ func processBagRenderLogic(_delta):
     enchantedBagSpriteVisible.flip_h = true
     enchantedBagSpriteVisible.translation.x *= -1
     
-  # if summonedBroom != null:
-  #   adjustSummonedBroomSpritePosition()
   var shouldShowBag = false
   if shouldShowBag and transformation != TransformationState.UNDERGROUND_RETURNING and transformation != TransformationState.UNDERGROUND:
     enchantedBagSpriteVisible.visible = true
