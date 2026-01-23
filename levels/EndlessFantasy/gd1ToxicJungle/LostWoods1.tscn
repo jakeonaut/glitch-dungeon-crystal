@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=2]
+[gd_scene load_steps=95 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/Enemies/FanPlant.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=6]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=7]
 [ext_resource path="res://assets/palettes/red_palette.png" type="Texture" id=8]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=9]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=10]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=11]
 [ext_resource path="res://assets/palettes/grey_palette.png" type="Texture" id=12]
@@ -1651,7 +1652,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 9, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 0 )
 
 [node name="Furbo" parent="Viewport/level" instance=ExtResource( 32 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4233, 6, 0 )
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 16.4233, 6, 0 )
 grav = Vector2( 0, 0 )
 
 [node name="Furbo3" parent="Viewport/level" instance=ExtResource( 32 )]
@@ -1717,6 +1718,9 @@ texture = ExtResource( 35 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -10 )
 material_override = SubResource( 105 )
 texture = ExtResource( 35 )
+
+[node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.48438, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 17 )]
 

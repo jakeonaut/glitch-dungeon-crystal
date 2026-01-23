@@ -297,6 +297,7 @@ var activeInteractor = null
 var activeThrowableObject = null
 var activeThrowableObjectPath = null
 var activeSavePoint = null
+var has_sneezed = false
 
 var demo_mode = 0
 var display_mode = 0

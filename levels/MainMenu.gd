@@ -345,6 +345,8 @@ func loadGame(saveGameIndex):
     mainMenuState = MainMenuState.NORMAL_GAMEPLAY
     global.has_started_game = true
     if global.loadGame(saveGameIndex):
+        if global.memory["baba_heart"] > 0 or global.memory["baba_yaga_boss"] > 0 or global.memory["mushroom_soul"] > 0:
+            global.has_sneezed = true
         global.has_really_started_game = true
         global.okay_really_really_started_game = true
         global.isRespawning = true

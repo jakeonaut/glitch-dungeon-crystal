@@ -31,7 +31,7 @@ func fallthroughCollisionClear(exFriend, was_it_a_jump = false):
     if exFriend == getPlayer():
       getPlayer().camera_target_y_pos = getPlayer().global_transform.origin.y
       if is_mini:
-          exFriend.short_lived_vv_multiplier = 1.2
+          exFriend.short_lived_vv_multiplier = 1.4
       else:
           exFriend.short_lived_vv_multiplier = 1.75
       exFriend.short_lived_vv_multiplier_timer = 0

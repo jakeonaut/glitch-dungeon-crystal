@@ -2881,6 +2881,14 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
   fallenBroom.walk_direction = Vector2(-1 if mySprite.flip_h else 1, 0)
   if grav.y > 0:
     fallenBroom.global_transform.origin.y += 2
+  if grav.x < 0:
+    fallenBroom.walk_direction = Vector2(fallenBroom.walk_direction.y, fallenBroom.walk_direction.x)
+    fallenBroom.global_transform.origin.y += 1
+    fallenBroom.global_transform.origin.x -= 1
+  elif grav.x > 0:
+    fallenBroom.walk_direction = Vector2(fallenBroom.walk_direction.y, -fallenBroom.walk_direction.x)
+    fallenBroom.global_transform.origin.y += 1
+    fallenBroom.global_transform.origin.x += 1
   if was_thrown:
     global.incrementLevelZoneSweeps()
     fallenBroom.grav = Vector2(0, 1)
@@ -2901,16 +2909,16 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
       x_direction = -1
     elif rawPressingMoveRight():
       x_direction = 1
-    if rawPressingMoveUp():
-      fallenBroom.walk_speed *= .7
+    if rawPressingMoveUp() or (grav.x != 0 and fallenBroom.walk_direction.y > 0):
+      fallenBroom.walk_speed *= 1.0 if (grav.x != 0 and x_direction == 0) else .7
       fallenBroom.walk_direction = Vector2(x_direction, 1)
       fallenBroom.just_pressed_jump = true
       fallenBroom.pressing_jump = true
-      fallenBroom.grav = Vector2(0, 0)
+      fallenBroom.grav = Vector2(0, 1)
       fallenBroom.jump_force = 12.0 if x_direction == 0 else 12 * .7
       fallenBroom.thrown_direction.y = 1
-    elif rawPressingMoveDown():
-      fallenBroom.walk_speed *= .7
+    elif rawPressingMoveDown() or (grav.x != 0 and fallenBroom.walk_direction.y < 0):
+      fallenBroom.walk_speed *= 1.0 if (grav.x != 0 and x_direction == 0) else .7
       fallenBroom.walk_direction = Vector2(x_direction, -1)
       fallenBroom.grav = Vector2(0, 600)
       fallenBroom.true_terminal_vel = 12.0 if x_direction == 0 else 12 * .7

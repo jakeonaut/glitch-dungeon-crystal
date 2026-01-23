@@ -443,6 +443,8 @@ shader_param/target_palette = ExtResource( 4 )
 script = ExtResource( 10 )
 show_crt_effect = true
 tileset_type = 7
+has_spellbook_page = true
+spellbook_spells = [ 1, 4 ]
 pacman_wrapping = true
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 22 )]
@@ -599,7 +601,7 @@ bbText = "NPC.SporeCreature.1"
 
 [node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 5, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 
 [node name="ParallaxBackground2" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -2.55927, 0 )
