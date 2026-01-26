@@ -4643,7 +4643,7 @@ tracks/6/keys = {
 
 [node name="ClaydolBoss" type="Spatial"]
 script = ExtResource( 7 )
-grav = Vector2(0, 15)
+grav = Vector2( 0, 15 )
 jump_force = 12
 only_activate_in_range = false
 

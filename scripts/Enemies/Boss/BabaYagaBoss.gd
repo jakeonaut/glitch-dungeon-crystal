@@ -50,6 +50,7 @@ func _ready():
     if global.memory["babaShortcut"] == 0:
         global.memory["babaShortcut"] = 1
     set_process(true)
+    # should_collide_fallthrough_area = false
     # Wait two frames cuz idk
     yield(TempTimer.idle_frame(self), "timeout")
     yield(TempTimer.idle_frame(self), "timeout")

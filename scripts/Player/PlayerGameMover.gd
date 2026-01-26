@@ -174,7 +174,30 @@ func _process(delta):
     sparkle_timer = sparkle_time_limit - 2
     
   # this is a little weird but fixes the fallthrough area situation:
-  if grav.y < 0:
+  if grav.x != 0:
+    interactionArea.transform.origin.y = 0
+    interactionArea.rotation_degrees.z = 90
+  else:
+    interactionArea.transform.origin.x = 0
+    interactionArea.rotation_degrees.z = 0
+
+  if grav.x < 0:
+    if linear_velocity.y > 0:
+      if nesting_doll_state == global.NestingDoll.BABY:
+        interactionArea.transform.origin.x = 0.5
+      else:
+        interactionArea.transform.origin.x = 2
+    else:
+      interactionArea.transform.origin.x = 0
+  elif grav.x > 0:
+    if linear_velocity.y < 0:
+      if nesting_doll_state == global.NestingDoll.BABY:
+        interactionArea.transform.origin.x = -0.5
+      else:
+        interactionArea.transform.origin.x = -2
+    else:
+      interactionArea.transform.origin.x = -0
+  elif grav.y < 0:
     if linear_velocity.y > 0:
       if nesting_doll_state == global.NestingDoll.BABY:
         interactionArea.transform.origin.y = 0.5

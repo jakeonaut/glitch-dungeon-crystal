@@ -455,6 +455,8 @@ func moveMyFriends(delta):
       continue
     friend.on_ground = true
     friend.linear_velocity.y = 0
+    # TODO(jaketrower): TopsyTurvy
+    # TODO(gravity): 
     friend.fallthrough_area_collision_y = self.global_transform.origin.y - relativePosition.y + (self.linear_velocity.y*delta)
 
     # try to clean up

@@ -909,7 +909,7 @@ radius = 0.8
 [node name="FallenBroom" type="Spatial" groups=["fallen_broom_group"]]
 script = ExtResource( 1 )
 true_terminal_vel = 8
-grav = Vector2(0, 30)
+grav = Vector2( 0, 30 )
 jump_force = 8
 invisible_jump_force = 8
 bbText = "•\"BROOM\" get!!!
@@ -983,6 +983,7 @@ shape = SubResource( 61 )
 [node name="SmallInteractionArea" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 script = ExtResource( 6 )
+should_i_ignore_fallthrough = true
 
 [node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )

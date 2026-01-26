@@ -13,6 +13,7 @@ var was_touching_carcass = false
 onready var parent = get_parent()
 export var handlePlayerInteraction = true
 export var ignore_water = false
+export var should_i_ignore_fallthrough = false
 var prev_fallthrough_collision_area = null
 var prev_prev_fallthrough_collision_area = null
 
@@ -93,7 +94,7 @@ func _process(_delta):
                 is_touching_waterfall = true
         if area.is_in_group("ladder"):
             is_touching_ladder = true
-        if area.is_in_group("fallthrough") and "was_fallthrough_area_collision_triggered" in possible_game_mover:
+        if not should_i_ignore_fallthrough and area.is_in_group("fallthrough") and "was_fallthrough_area_collision_triggered" in possible_game_mover:
             has_done_fallthrough_object_collision = global.doFallthroughObjectCollision(possible_game_mover, area) or has_done_fallthrough_object_collision
         if isActive() and area.is_in_group("corporeal_body") and parent.has_method("touchCorporealBody"):
             parent.touchCorporealBody(area.get_node(".."))

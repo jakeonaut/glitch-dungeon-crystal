@@ -1548,13 +1548,17 @@ func strip_bbcode(source):
 # are the child of a GameMover....
 # anyways this way works even though global is bad :)
 func doFallthroughObjectCollision(gameMover, area, debug = false):
-    var areaShape = area.get_node("CollisionShape")
-    var ax = areaShape.global_transform.origin.x
-    var ay = areaShape.global_transform.origin.y
-    var arb = areaShape.shape.extents.x
-    var alb = -arb
-    var atb = areaShape.shape.extents.y
-    var abb = -atb
+    # hope and pray that only the parent is rotated... oh well!
+    var areaRot = int(round(area.get_node("..").rotation_degrees.z)) % 360
+    if gameMover.grav.x != 0:
+        if (areaRot != 90 and areaRot != 270 and areaRot != -90 and areaRot != -270):
+            print("AREA ROT! bye bye: ", areaRot)
+            return false
+    else:
+        if areaRot == 270 or areaRot == 90 or areaRot == -90 or areaRot == -270:
+            print("AREA ROT! bye bye2: ", areaRot, gameMover.grav)
+            return false
+    
 
     if not gameMover.should_collide_fallthrough_area:
         return false
@@ -1564,8 +1568,31 @@ func doFallthroughObjectCollision(gameMover, area, debug = false):
     if not (ps == PS.NORMAL or ps == PS.GLITCH_HURT or ps == PS.GLITCH_RECOVERY):
         return false
 
+        
+    if gameMover.grav.x == 0:
+        return doVerticalFallthroughObjectCollision(gameMover, area, debug)
+    else:
+        return doHorizontalFallthroughObjectCollision(gameMover, area, debug)
+
+func doVerticalFallthroughObjectCollision(gameMover, area, debug):
     var x = gameMover.global_transform.origin.x
     var y = gameMover.global_transform.origin.y
+    var rb = gameMover.rb
+    var lb = gameMover.lb
+    var tb = gameMover.tb
+    var bb = gameMover.bb
+    var lv = gameMover.linear_velocity.y
+    var tb_diff = 0
+    var bb_diff = -0.12
+
+    var areaShape = area.get_node("CollisionShape")
+    var ax = areaShape.global_transform.origin.x
+    var ay = areaShape.global_transform.origin.y
+    var arb = areaShape.shape.extents.x
+    var alb = -arb
+    var atb = areaShape.shape.extents.y
+    var abb = -atb
+
     if (gameMover.pressingDown() and (gameMover.on_ground or (y - gameMover.tb) < (ay + atb))) or \
        (not "was_fallthrough_area_collision_triggered" in gameMover):
         if "was_fallthrough_area_collision_triggered" in gameMover:
@@ -1574,17 +1601,6 @@ func doFallthroughObjectCollision(gameMover, area, debug = false):
             gameMover.global_transform.origin.y = ay + atb + gameMover.tb + 0.125
         return false
 
-        
-    # check for fallThroughSolid collision while falling
-    var rb = gameMover.rb
-    var lb = gameMover.lb
-    var tb = gameMover.tb
-    var bb = gameMover.bb
-
-    var lv = gameMover.linear_velocity.y
-    var tb_diff = 0
-    var bb_diff = -0.12
-    # TODO(gravity):
     if gameMover.grav.y < 0:
         lv *= -1
         tb_diff = -bb_diff
@@ -1592,16 +1608,17 @@ func doFallthroughObjectCollision(gameMover, area, debug = false):
         var temp = tb
         tb = bb
         bb = temp
-
     var truly_on_ground_memory = gameMover.truly_on_ground
     if debug:
         print("lv: " + str(lv))
         print(str(ay) + ", " + str(abb) + ", " + str(atb) + ", :: " + str(y) + ", " + str(bb) + ", " + str(tb))
+    # check for fallThroughSolid collision while falling
     if gameMover.isRectColliding(
         ax + alb, ay + atb, ax + arb, ay + abb,
         x + lb, y + bb + tb_diff, x + rb, y + bb + bb_diff, debug
     ) and (lv < 0 or (lv == 0 and gameMover.glitch_form == global.GlitchForm.FLOOR)):
         gameMover.was_fallthrough_area_collision_triggered = true
+        gameMover.fallthrough_area_collision_x = null
         gameMover.fallthrough_area_collision_y = ay + atb - bb if gameMover.grav.y >= 0 else ay + abb - bb
         gameMover.linear_velocity = gameMover.collideWithFloor(gameMover.linear_velocity)
         gameMover.truly_on_ground = truly_on_ground_memory
@@ -1621,6 +1638,81 @@ func doFallthroughObjectCollision(gameMover, area, debug = false):
         gameMover.isRectColliding(
             ax + alb, ay + atb, ax + arb, ay + abb,
             x + lb, y + bb + tb_diff, x + rb, y + bb + bb_diff
+        ):
+        gameMover.on_ground = true
+        gameMover.truly_on_ground = true
+        return true
+    return false
+
+func doHorizontalFallthroughObjectCollision(gameMover, area, debug):
+    var x = gameMover.global_transform.origin.x
+    var y = gameMover.global_transform.origin.y
+    var rb = gameMover.rb
+    var lb = gameMover.lb
+    var tb = gameMover.tb
+    var bb = gameMover.bb
+    var lv = gameMover.linear_velocity.y
+    var rb_diff = 0
+    var lb_diff = -0.12
+
+    var areaShape = area.get_node("CollisionShape")
+    var ax = areaShape.global_transform.origin.x
+    var ay = areaShape.global_transform.origin.y
+    var arb = areaShape.shape.extents.y # notice we flipped these!!!
+    var alb = -arb
+    var atb = areaShape.shape.extents.x # notice we flipped these!!!
+    var abb = -atb
+    
+    # TODO(jaketrower): TopsyTurvy
+    # TODO(gravity):
+    # if (gameMover.pressingDown() and (gameMover.on_ground or (y - gameMover.tb) < (ay + atb))) or \
+    #    (not "was_fallthrough_area_collision_triggered" in gameMover):
+    #     if "was_fallthrough_area_collision_triggered" in gameMover:
+    #         gameMover.was_fallthrough_area_collision_triggered = false
+    #     if gameMover.on_ground and gameMover.pressingDown() and (y - gameMover.tb) >= (ay + atb):
+    #         gameMover.global_transform.origin.y = ay + atb + gameMover.tb + 0.125
+    #     return false
+
+    # TODO(gravity):
+    if gameMover.grav.x < 0:
+        lv *= -1
+        rb_diff = -lb_diff
+        lb_diff = 0
+        var temp = rb
+        rb = lb
+        lb = temp
+    var truly_on_ground_memory = gameMover.truly_on_ground
+    if debug:
+        print("lv: " + str(lv))
+        print(str(ax) + ", " + str(alb) + ", " + str(arb) + ", :: " + str(x) + ", " + str(lb) + ", " + str(rb))
+    # check for fallThroughSolid collision while falling
+    if gameMover.isRectColliding(
+        ax + alb, ay + atb, ax + arb, ay + abb,
+        x + lb + lb_diff, y + tb, x + lb + rb_diff, y + bb, debug
+    ) and (lv < 0 or (lv == 0 and gameMover.glitch_form == global.GlitchForm.FLOOR)):
+        gameMover.was_fallthrough_area_collision_triggered = true
+        gameMover.fallthrough_area_collision_y = null
+        gameMover.fallthrough_area_collision_x = ax + arb - lb if gameMover.grav.x >= 0 else ax + alb - lb
+        var tempTopsyTurvyLinearVelocity = gameMover.normalizeLv(gameMover.linear_velocity)
+        tempTopsyTurvyLinearVelocity = gameMover.collideWithFloor(tempTopsyTurvyLinearVelocity)
+        gameMover.linear_velocity = gameMover.unnormalizeLv(tempTopsyTurvyLinearVelocity)
+        gameMover.truly_on_ground = truly_on_ground_memory
+        
+        gameMover.lv = gameMover.linear_velocity
+        gameMover.global_transform.origin.x = gameMover.fallthrough_area_collision_x
+
+        if not gameMover.was_on_ground:
+            gameMover.processLand(true)
+        gameMover.truly_on_ground = true
+        return true
+
+    # the above check counts for falling down onto the fallthroughCollision,
+    # but if we are already on it, we know vel.y is 0ish, and need a more constrained check
+    # to see if we are still on it
+    if gameMover.was_fallthrough_area_collision_triggered and \
+        gameMover.isRectColliding(
+            ax + alb, ay + atb, ax + arb, ay + abb,
+            x + lb + lb_diff, y + tb, x + lb + rb_diff, y + bb
         ):
         gameMover.on_ground = true
         gameMover.truly_on_ground = true

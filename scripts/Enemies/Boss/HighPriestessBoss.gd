@@ -72,6 +72,7 @@ func _ready():
         level.saveTheGame()
     original_pos = global_transform.origin
     randomizeTargetPos()
+    # should_collide_fallthrough_area = false
 
     var landings = get_tree().get_nodes_in_group("priestess_landing_hard")
     for landing in landings:

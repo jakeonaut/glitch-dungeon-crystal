@@ -103,7 +103,7 @@ func performSpawn():
 func activateChild(child):
   bonkSound.play()
   child.visible = true
-  if child.has_method("getSmacked") and not (child.smallInteractionArea != null and child.smallInteractionArea.is_in_group("enemies")):
+  if child.has_method("getSmacked") and not (child.smallInteractionArea != null and (child.smallInteractionArea.is_in_group("enemies") or child.smallInteractionArea.is_in_group("no_question_block"))):
     child.getSmacked()
   elif child.has_method("passiveActivate"):
       child.passiveActivate(33, false)

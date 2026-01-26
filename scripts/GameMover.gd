@@ -77,6 +77,7 @@ var should_do_middle_sensor = false
 var should_only_do_middle_sensor = false
 var should_do_simple_sensor_probe = true
 var was_fallthrough_area_collision_triggered = false
+var fallthrough_area_collision_x = 0
 var fallthrough_area_collision_y = 0
 var should_always_do_jump_smoke_cloud = false
 export var lb = -0.72
@@ -853,7 +854,6 @@ func processLadderInputs(_delta):
           aniPlayer.clear_queue()
           aniPlayer.play("climbStop")
     
-# TODO(jaketrower): TopsyTurvy # TODO(gravity):
 func processJumpInputs(delta):
   if is_climbing_ladder or global.pauseMoveInput: return
 
@@ -1062,7 +1062,6 @@ func isPressingOppositeHorizontalInput():
     pressingMoveRight() and (dir.x < 0 or (flip_h != is_sprite_flipped))
   )
 
-# TODO(jaketrower): TopsyTurvy # TODO(gravity):
 func processHorizontalInputs(delta):
   if is_climbing_ladder: return
   var prevFlipH = mySprite.flip_h
@@ -1087,8 +1086,8 @@ func processHorizontalInputs(delta):
     num_horizontal_input_presses += 1
 
   # Forward as "seen" by the camera (OpenGL convention)
-  var view_forward = -getGameCamera().get_transform().basis.z  # TODO(jaketrower): TopsyTurvy # TODO(gravity):
-  var view_right = -getGameCamera().get_transform().basis.x  # TODO(jaketrower): TopsyTurvy # TODO(gravity):
+  var view_forward = -getGameCamera().get_transform().basis.z
+  var view_right = -getGameCamera().get_transform().basis.x
   # Forward as "seen" by the player
   var forwardVec = Vector3(view_forward.x, 0.0, view_forward.z).normalized()
   var rightVec = view_right # this is (-1, 0, 0) with normal gravity, so....
@@ -1398,7 +1397,10 @@ func handleCollisionsAndMoveNormalGravity(local_lv, _delta):
     var truly_on_ground_memory = truly_on_ground
     local_lv = collideWithFloor(local_lv)
     truly_on_ground = truly_on_ground_memory
-    global_transform.origin.y = fallthrough_area_collision_y
+    if fallthrough_area_collision_x != null:
+      global_transform.origin.x = fallthrough_area_collision_x
+    if fallthrough_area_collision_y != null:
+      global_transform.origin.y = fallthrough_area_collision_y
 
   # PROCESS TURN_BASED MOVEMENT
   # if is_turn_based:
@@ -1439,13 +1441,14 @@ func handleCollisionsAndMoveHorizontalGravity(local_lv, _delta):
     local_lv = handleHorizontalCollisions(local_lv)
     if lv.y != 0 and local_lv.y == 0:
       self.vertical_collision = true
-  # TODO(jaketrower): TopsyTurvy
-  # TODO(gravity): 
   elif was_fallthrough_area_collision_triggered:
     var truly_on_ground_memory = truly_on_ground
     local_lv = collideWithFloor(local_lv)
     truly_on_ground = truly_on_ground_memory
-    global_transform.origin.y = fallthrough_area_collision_y
+    if fallthrough_area_collision_x != null:
+      global_transform.origin.x = fallthrough_area_collision_x
+    if fallthrough_area_collision_y != null:
+      global_transform.origin.y = fallthrough_area_collision_y
 
   global_transform.origin.x += local_lv.x / velocity_dampener
   return local_lv

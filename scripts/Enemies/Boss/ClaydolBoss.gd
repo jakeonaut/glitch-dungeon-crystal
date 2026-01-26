@@ -61,6 +61,7 @@ func _ready():
     if global.memory["claydolShortcut"] == 0:
         global.memory["claydolShortcut"] = 1
     set_process(true)
+    should_collide_fallthrough_area = false
     # sprite_offset_y = 7.5
 
 # be careful cuz both the HurtPlayerArea and the InteractArea will both rely on this one function...

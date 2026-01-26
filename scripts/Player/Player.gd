@@ -2562,6 +2562,10 @@ func spawnSnoreBubble():
     bubble.my_target_pos = bubble.global_transform.origin.y  + rand_range(-1, 1)
   else:
     summonSmokeClouds(1, false, true, 1)
+  
+  if glitch_form == global.GlitchForm.FLOOR and on_ground and not truly_on_ground:
+    sparkle_timer = 0
+    spawnSparkles(0, true)
 
 var spore_spawn_timer = 0
 var spore_spawn_time_limit = 15

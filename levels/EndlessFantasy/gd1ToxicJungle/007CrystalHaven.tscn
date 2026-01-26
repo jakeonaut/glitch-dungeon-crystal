@@ -772,11 +772,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 9, 0 )
 
 [node name="EvilSpore3" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 5, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 
 [node name="EvilSpore5" parent="Viewport/level" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 9, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 
 [node name="FanPlant" parent="Viewport/level" instance=ExtResource( 23 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0 )
@@ -788,18 +788,18 @@ is_fan_spinning = true
 
 [node name="Furbo" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.2866, 16, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 
 [node name="Furbo3" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46.2866, 16, 0 )
 
 [node name="Furbo2" parent="Viewport/level" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.2866, -0.541403, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 
 [node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -5, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 
 [node name="MushroomNPC" parent="Viewport/level" instance=ExtResource( 29 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.1, 0 )
