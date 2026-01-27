@@ -8,10 +8,13 @@ func _ready():
 
 var cloud_timer = 0
 var cloud_time_limit = 5
+var should_spawn_clouds = true
 func _process(delta):
   if not is_active: # or not visible:
     return
 
+  if not should_spawn_clouds:
+    return
   cloud_timer += (delta*22)
   if cloud_timer >= cloud_time_limit:
     cloud_timer = 0
@@ -44,6 +47,8 @@ func isActive(_debug=false):
 func passiveActivate(delta, is_player, _is_local_broom = false):
   if not is_player:
     return
+  if level.player.grav.x != 0 or level.player.grav.y <= 0:
+    return
   if not global.gustSound.is_playing():
     global.gustSound.pitch_scale = rand_range(0.8, 1.1)
     global.gustSound.play()
@@ -57,6 +62,9 @@ func otherPassiveActivate(delta, gameMover):
     var mult = 6
     if abs(gameMover.vv) > 4:
       mult = 2
+    if gameMover != level.player:
+      mult /= 6
+
     if getDirection().y == -1:
       v_sign = -1
     if gameMover == level.player and level.player.nesting_doll_state == global.NestingDoll.BABY:

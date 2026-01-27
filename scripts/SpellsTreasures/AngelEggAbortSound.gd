@@ -26,6 +26,7 @@ func activateScript():
         if numAngelEggs >= global.MAX_ANGEL_EGGS:
             Steam.set_achievement("ANGEL_EGG_ALL")
         else:
+            # warning-ignore:RETURN_VALUE_DISCARDED
             Steam.user_stats.indicate_achievement_progress("ANGEL_EGG_ALL", numAngelEggs, global.MAX_ANGEL_EGGS)
 
 func isActive(_debug=false):

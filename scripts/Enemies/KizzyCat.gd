@@ -40,16 +40,17 @@ func _process(delta):
     teleport_timer += (delta*22)
     if teleport_timer >= teleport_time_limit:
       if not has_teleported:
-        # TODO
-        reassembleSound.play()
-        has_teleported = true
-        for _i in range(1):
-          spawnASpore(self.global_transform.origin, true)
-    if teleport_timer >= teleport_time_limit2:
-      has_ever_been_smacked = false
-      teleporting = false
-      pauseSelf = false
-      visible = true
+        queue_free() # bye bye
+        # # TODO
+        # reassembleSound.play()
+        # has_teleported = true
+        # for _i in range(1):
+        #   spawnASpore(self.global_transform.origin, true)
+    # if teleport_timer >= teleport_time_limit2:
+    #   has_ever_been_smacked = false
+    #   teleporting = false
+    #   pauseSelf = false
+    #   visible = true
 
   # if is_evil and on_ground:
   #   landed()

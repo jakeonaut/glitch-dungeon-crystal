@@ -1102,18 +1102,20 @@ func flipGravity(specific_dir = null):
   elif player.grav.y < 0:
     global.memory["grav_direction"] = Vector2(0, -1)
   elif player.grav.x > 0:
-    global.memory["grav_directin"] = Vector2(1, 0)
-  elif player.grav.x > 0:
-    global.memory["grav_directin"] = Vector2(-1, 0)
+    global.memory["grav_direction"] = Vector2(1, 0)
+  elif player.grav.x < 0:
+    global.memory["grav_direction"] = Vector2(-1, 0)
   else:
     global.memory["grav_direction"] = Vector2(0, 1)
 
   # if prev_grav.y == 0 or player.grav.y == 0:
   # reset to 0 for idk
-  player.linear_velocity = Vector3(0, 0, 0)
-  player.lv = Vector3(0, 0, 0)
-  player.vv = player.up.dot(player.lv)
-  player.hv = player.lv - player.up * player.vv
+  if prev_grav != player.grav:
+    player.linear_velocity = Vector3(0, 0, 0)
+    player.lv = Vector3(0, 0, 0)
+    player.vv = player.up.dot(player.lv)
+    player.hv = player.lv - player.up * player.vv
+    player.fall_timer = 0
 
 func clearOtherGrabbers(gameMover):
   var grabbers = self.get_tree().get_nodes_in_group("grabber")

@@ -128,7 +128,7 @@ func isActive(_debug=false):
   return true
 
 func passiveActivate(_delta, is_player, is_local_broom = false):
-  if didja_get_me or global.pauseGame or (is_player and (level.player.transformation == level.player.TransformationState.BUBBLE or level.player.glitch_form == global.GlitchForm.BUBBLE)):
+  if didja_get_me or global.pauseGame or (is_player and level.player.transformation == level.player.TransformationState.BUBBLE):
     return
   bubbleStartPop()
   if not is_player and not is_local_broom:

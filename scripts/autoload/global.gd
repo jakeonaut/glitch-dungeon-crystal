@@ -93,7 +93,6 @@ enum GlitchForm {
     INVISIBLE,
     LADDER,
     WALK_THROUGH_WALLS,
-    BUBBLE,
 }
 enum TilesetType {
     DUNGEON,
@@ -1552,11 +1551,9 @@ func doFallthroughObjectCollision(gameMover, area, debug = false):
     var areaRot = int(round(area.get_node("..").rotation_degrees.z)) % 360
     if gameMover.grav.x != 0:
         if (areaRot != 90 and areaRot != 270 and areaRot != -90 and areaRot != -270):
-            print("AREA ROT! bye bye: ", areaRot)
             return false
     else:
         if areaRot == 270 or areaRot == 90 or areaRot == -90 or areaRot == -270:
-            print("AREA ROT! bye bye2: ", areaRot, gameMover.grav)
             return false
     
 

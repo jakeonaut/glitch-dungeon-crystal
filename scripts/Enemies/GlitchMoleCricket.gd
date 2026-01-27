@@ -247,7 +247,7 @@ func _process(delta):
         elif flight_anchor != null and flight_anchor.frame == 3: # UP?
             behavior_walking = true
             walk_direction.x = 1
-            grav = -50
+            grav.y = -50
             true_terminal_vel = 5
     elif mole_state == MoleState.RESPAWN:
         global_transform.origin = Vector3(spawn_origin.x, spawn_origin.y, spawn_origin.z)

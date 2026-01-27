@@ -4,7 +4,6 @@ var touchingPlayer = false
 var wasTouchingPlayer = false
 var is_touching_water = false
 var is_touching_waterfall = false
-var is_touching_ladder = false
 var stupid_timer = 0
 var stupid_time_limit = 2
 onready var parent = get_parent()

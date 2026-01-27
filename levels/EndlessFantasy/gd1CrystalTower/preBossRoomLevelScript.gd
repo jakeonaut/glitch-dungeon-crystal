@@ -25,6 +25,8 @@ func setUpRoomInitializationOverride():
 
   if global.memory["has_beat_the_game"] > 0:
     croneTeleportKeyTreasure.visible = true
+  else:
+    croneTeleportKeyTreasure.visible = false
 
   if global.memory["world_of_ruin"] > 0 and babushkaCat.get_ref() != null:
     door2.lockMeUp(999)

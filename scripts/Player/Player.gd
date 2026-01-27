@@ -146,7 +146,7 @@ func tryPlayFootstepSound():
     return
   if transformation == TransformationState.UNDERGROUND_RETURNING or transformation == TransformationState.UNDERGROUND:
     return
-  if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
+  if transformation == TransformationState.BUBBLE:
     return
 
   if global.isPauseMenuOpen or global.pauseGame:
@@ -268,8 +268,6 @@ func applyGlitch(glitch, notPlaySound = false):
   var gimmeABroom = false
   if glitch_form == global.GlitchForm.INVISIBLE and glitch != global.GlitchForm.INVISIBLE:
     gimmeABroom = true
-  if glitch_form == global.GlitchForm.BUBBLE and glitch != global.GlitchForm.BUBBLE:
-    level.flipGravity()
   # mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
   if glitch == global.GlitchForm.NORMAL: self.normalGlitch()
   if glitch == global.GlitchForm.FLOOR: 
@@ -280,8 +278,6 @@ func applyGlitch(glitch, notPlaySound = false):
   if glitch == global.GlitchForm.LADDER: ladderGlitch()
   if glitch == global.GlitchForm.INVISIBLE: invisibleGlitch()
   if glitch == global.GlitchForm.WALK_THROUGH_WALLS: walkThroughWallsGlitch()
-  if glitch == global.GlitchForm.BUBBLE:
-    getBubbleInfected(true)
   if gimmeABroom:
     getABroom()
   return true
@@ -471,7 +467,7 @@ func _process(delta):
   var newSpriteOpacity = spriteOpacity
   if aniPlayer.assigned_animation == "returning":
     newSpriteOpacity = 0.5
-  elif transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
+  elif transformation == TransformationState.BUBBLE:
     newSpriteOpacity = 0.5
   elif glitch_form == global.GlitchForm.INVISIBLE:
     newSpriteOpacity = 1.0
@@ -690,8 +686,8 @@ func properlyApplyTransformation():
 var bubblePopResistanceTimer = 0
 var bubblePopResistanceTimeLimit = 2
 func processBubbleLogic(delta):
-  bubbleSprite.visible = transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE
-  if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
+  bubbleSprite.visible = transformation == TransformationState.BUBBLE
+  if transformation == TransformationState.BUBBLE:
     bubblePopResistanceTimer += (delta*11)
     var just_pressed_jump = false # justPressedJump()
     if (horizontal_collision or on_ground or just_pressed_jump) and physics_state != PhysicsState.GLITCH_DYING and bubblePopResistanceTimer >= bubblePopResistanceTimeLimit:
@@ -854,7 +850,7 @@ func tryDieToOffscreenCamera(_delta):
     global.roomEdgeVector = Vector3(0, 1, 0)
     repositioned_player.y = getGameCamera().topmost_y + ADJUSTMENT_MARGIN
     if next_room == null:
-      if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
+      if transformation == TransformationState.BUBBLE:
         getBubbleCured()
       elif transformation == TransformationState.UNDERGROUND_RETURNING:
         bumpSound.play()
@@ -1257,8 +1253,8 @@ func justPressedJump():
 
 var bubble_temp_grav = Vector2(0, 60)
 var bubble_temp_true_terminal_vel = 14
-func getBubbleInfected(applyViaGlitchForm = false):
-  if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
+func getBubbleInfected():
+  if transformation == TransformationState.BUBBLE:
     if not "tumble" in aniPlayer.assigned_animation:
       aniPlayer.stop()
       aniPlayer.clear_queue()
@@ -1276,18 +1272,14 @@ func getBubbleInfected(applyViaGlitchForm = false):
     # summonFallenBroom(true, false, false)
   # global.memory["broom"] = false
   transformation = TransformationState.BUBBLE
-  if applyViaGlitchForm:
-    glitch_form = global.GlitchForm.BUBBLE
   on_ground = false
   gravitySound.play()
   level.flipGravity(Vector2(0, -1))
 
 func getBubbleCured():
-  if transformation != TransformationState.BUBBLE and glitch_form != global.GlitchForm.BUBBLE:
+  if transformation != TransformationState.BUBBLE:
     return
   transformation = TransformationState.NORMAL
-  if glitch_form == global.GlitchForm.BUBBLE:
-    applyGlitch(global.GlitchForm.NORMAL)
   aniPlayer.stop()
   aniPlayer.clear_queue()
   aniPlayer.queue("land")
@@ -1346,7 +1338,7 @@ func getFishyInfected():
   getABroom()
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
-  if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
+  if transformation == TransformationState.BUBBLE:
     level.flipGravity(Vector2(0, 1))
   elif grav == Vector2(0, 0):
     grav = PLAYER_GRAV
@@ -1436,7 +1428,7 @@ func getChickenInfected():
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
   loseBroom()
-  if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
+  if transformation == TransformationState.BUBBLE:
     level.flipGravity(Vector2(0, 1))
   elif grav == Vector2(0, 0):
     grav = PLAYER_GRAV
@@ -1467,7 +1459,7 @@ func getCurseInfected():
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
   loseBroom()
-  if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
+  if transformation == TransformationState.BUBBLE:
     level.flipGravity(Vector2(0, 1))
   elif grav == Vector2(0, 0):
     grav = PLAYER_GRAV
@@ -2018,7 +2010,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     level.glitchScreenEffect.visible = global.userSettings["canGlitchScreen"]
   else:
     global.memory["hp"] -= 1
-  # if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
+  # if transformation == TransformationState.BUBBLE:
   #   getBubbleCured()
   #   physics_state = PhysicsState.GLITCH_HURT
   #   global.pauseGame = false
@@ -2219,6 +2211,7 @@ func tumbleFall(direction_vector, is_corrupted = false):
   linear_velocity.x = x_val
   lv.x = x_val
 
+  print("tumblr fall")
   linear_velocity.y = jump_val
   lv.y = jump_val
   vv = up.dot(lv)
@@ -2321,6 +2314,9 @@ func processBroomLogic(delta):
     return
 
   var which_broom_attack = 1
+  if not global.memory["broom"] and transformation == TransformationState.BUBBLE:
+    global.memory["broom"] = glitch_form != global.GlitchForm.INVISIBLE
+
   if not global.memory["broom"]:
     # if nesting_doll_state == global.NestingDoll.BABY and Input.is_action_just_pressed("sub_action_button") and Input.is_action_pressed("ui_down"):
     #   summonSporeShroom()
@@ -2434,7 +2430,7 @@ func doBroomAttack(which_broom_attack):
   #   which_broom_attack = 0
   #   summonSporeShroom()
 
-  if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
+  if transformation == TransformationState.BUBBLE:
     getBubbleCured()
 
   var is_turn_around_attack = false # (is_pressing_horizontal_input and ((mySprite.flip_h and lv.x > -1) or (not mySprite.flip_h and lv.x < 1)))
@@ -2755,7 +2751,7 @@ func processBroomRenderLogic(_delta):
         sprite.material_override.set_shader_param("black_offset", 0)
   elif summonedBroom != null:
     adjustSummonedBroomSpritePosition()
-  elif global.memory["broom"] and not isHoldingMultiBroom() and not (transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE):
+  elif global.memory["broom"] and not isHoldingMultiBroom() and transformation != TransformationState.BUBBLE:
     broomSpriteVisible.visible = true
     if nesting_doll_state == global.NestingDoll.GRANDMA:
       mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
@@ -2948,6 +2944,8 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
         bubble.global_transform.origin.y -= 1
         bubble.my_original_pos = bubble.global_transform.origin.x
         bubble.my_target_pos = bubble.global_transform.origin.x  + rand_range(-1, 1)
+  else:
+    fallenBroom.grav = Vector2(0, 28)
 
   global.memory["broom"] = false # global.memory["broomerang"] >= 2
   if global.memory["broomerang"] >= 2 and was_thrown:

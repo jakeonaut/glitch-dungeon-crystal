@@ -379,7 +379,6 @@ func setGlitchSprite(sprite, glitch):
   elif glitch == global.GlitchForm.LADDER: sprite.frame = 2
   elif glitch == global.GlitchForm.INVISIBLE: sprite.frame = 3
   elif glitch == global.GlitchForm.WALK_THROUGH_WALLS: sprite.frame = 5
-  elif glitch == global.GlitchForm.BUBBLE: sprite.frame = 4
 
 onready var cinematicTopRect = get_node("CinematicTopRect")
 onready var cinematicBottomRect = get_node("CinematicBottomRect")

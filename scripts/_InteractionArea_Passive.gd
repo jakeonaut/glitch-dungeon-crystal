@@ -5,7 +5,6 @@ var wasTouchingPlayer = false
 var is_touching_water = false
 var is_touching_waterfall = false
 var touched_water_area = null
-var is_touching_ladder = false
 var is_touching_player_proxy = false
 var was_touching_player_proxy = false
 var is_touching_carcass = false
@@ -79,7 +78,6 @@ func _process(_delta):
     is_touching_water = false
     is_touching_waterfall = false
     touched_water_area = null
-    is_touching_ladder = false
     is_touching_player_proxy = false
     is_touching_carcass = false
     var has_done_fallthrough_object_collision = false
@@ -92,8 +90,6 @@ func _process(_delta):
             touched_water_area = area
             if area.is_in_group("waterfall"):
                 is_touching_waterfall = true
-        if area.is_in_group("ladder"):
-            is_touching_ladder = true
         if not should_i_ignore_fallthrough and area.is_in_group("fallthrough") and "was_fallthrough_area_collision_triggered" in possible_game_mover:
             has_done_fallthrough_object_collision = global.doFallthroughObjectCollision(possible_game_mover, area) or has_done_fallthrough_object_collision
         if isActive() and area.is_in_group("corporeal_body") and parent.has_method("touchCorporealBody"):

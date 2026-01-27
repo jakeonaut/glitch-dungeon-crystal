@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/tidepool_palette.png" type="Texture" id=2]
@@ -11,11 +11,14 @@
 [ext_resource path="res://assets/sounds/assets_sfx_jumpcartoon.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Dog Yelp.wav" type="AudioStream" id=10]
 [ext_resource path="res://scripts/AreaSound.gd" type="Script" id=11]
-[ext_resource path="res://sceneObjects/WindGust.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/sprites/windturbine.png" type="Texture" id=12]
 [ext_resource path="res://assets/sounds/OOT_Steps_Dirt1.wav" type="AudioStream" id=13]
 [ext_resource path="res://assets/sounds/chomp.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/sounds/gust.wav" type="AudioStream" id=15]
 [ext_resource path="res://scripts/Enemies/FanPlant.gd" type="Script" id=16]
+[ext_resource path="res://assets/pokeball0000.png" type="Texture" id=17]
+[ext_resource path="res://sceneObjects/Obelisk.tscn" type="PackedScene" id=18]
+[ext_resource path="res://scripts/WindGust.gd" type="Script" id=19]
 
 [sub_resource type="ShaderMaterial" id=36]
 shader = ExtResource( 7 )
@@ -214,8 +217,12 @@ tracks/0/keys = {
 }
 
 [sub_resource type="BoxShape" id=52]
-resource_local_to_scene = true
-extents = Vector3( 0.5, 0.24, 1 )
+extents = Vector3( 0.5, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=35]
+flags_transparent = true
+flags_unshaded = true
+albedo_texture = ExtResource( 12 )
 
 [node name="FanPlant" type="Spatial"]
 script = ExtResource( 16 )
@@ -288,9 +295,31 @@ anims/slowDown = SubResource( 45 )
 anims/spinny = SubResource( 46 )
 anims/startUp = SubResource( 47 )
 
-[node name="WindGust" parent="." instance=ExtResource( 12 )]
+[node name="WindGust" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1 )
 visible = false
+pixel_size = 0.12
+texture = ExtResource( 17 )
+hframes = 2
+vframes = 2
+frame = 3
+script = ExtResource( 19 )
+
+[node name="Area" type="Area" parent="WindGust"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+script = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="WindGust/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.74215, 0 )
+shape = SubResource( 52 )
+
+[node name="Obelisk" parent="WindGust" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00600671, 0.000831187, -2.76937 )
+visible = false
+material_override = SubResource( 35 )
+pixel_size = 0.125
+texture = ExtResource( 12 )
+max_frames = 3
 
 [node name="GustSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 15 )
@@ -307,9 +336,3 @@ pitch_scale = 0.5
 bus = "Sfx"
 script = ExtResource( 11 )
 repeat = false
-
-[node name="FallthroughSolid" type="Area" parent="." groups=["fallthrough"]]
-
-[node name="CollisionShape" type="CollisionShape" parent="FallthroughSolid"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.935555, 0 )
-shape = SubResource( 52 )

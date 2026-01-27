@@ -53,6 +53,7 @@ func _process(delta):
   # if screamSound.is_playing() and am_i_really_in_range_of_player:
   #   player.getCurseInfected()
 
+  print("zombie state: ", zombie_state)
   if zombie_state == ZombieState.IDLE:
     reenemize()
     windGust.is_active = false
@@ -118,13 +119,13 @@ func _process(delta):
     elif secretAniPlayer.assigned_animation == "lurchAttack" and not secretAniPlayer.is_playing():
       zombie_state = ZombieState.LURCH_END
       return
-    if level.player.glitch_form == global.GlitchForm.LADDER:
-      digTiles(getTilesAbove(getLevelTiles()))
-    else:
-      if walk_direction.x > 0:
-        digTiles(getTilesRightOf(getLevelTiles(), buffer))
-      elif walk_direction.x < 0:
-        digTiles(getTilesLeftOf(getLevelTiles(), buffer))
+    # if level.player.glitch_form == global.GlitchForm.LADDER:
+    #   digTiles(getTilesAbove(getLevelTiles()))
+    # else:
+    if walk_direction.x > 0:
+      digTiles(getTilesRightOf(getLevelTiles(), buffer))
+    elif walk_direction.x < 0:
+      digTiles(getTilesLeftOf(getLevelTiles(), buffer))
   elif zombie_state == ZombieState.LURCH_END:
     windGust.is_active = false
     if secretAniPlayer.assigned_animation != "lurchEnd":

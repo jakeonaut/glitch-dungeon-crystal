@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=2]
+[gd_scene load_steps=87 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://sceneObjects/Enemies/FanPlant.tscn" type="PackedScene" id=2]
@@ -31,7 +31,6 @@
 [ext_resource path="res://assets/palettes/inkpink-1x.png" type="Texture" id=29]
 [ext_resource path="res://assets/sprites/tallestTree.png" type="Texture" id=30]
 [ext_resource path="res://sceneObjects/Environment/WallTorch.tscn" type="PackedScene" id=31]
-[ext_resource path="res://sceneObjects/KizzyCat.tscn" type="PackedScene" id=32]
 [ext_resource path="res://sceneObjects/SpellsTreasureCollectables/AngelEgg.tscn" type="PackedScene" id=33]
 [ext_resource path="res://assets/backgrounds/shroom_layer_0.png" type="Texture" id=34]
 [ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=35]
@@ -646,10 +645,10 @@ tracks/0/keys = {
 
 [sub_resource type="BoxShape" id=107]
 
-[sub_resource type="Animation" id=66]
+[sub_resource type="Animation" id=108]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -658,250 +657,15 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0.8 ) ]
+"values": [ 104 ]
 }
 
-[sub_resource type="Animation" id=67]
-resource_name = "broomSmackGlitch"
-length = 0.4
-step = 0.01
+[sub_resource type="Animation" id=109]
+resource_name = "fall"
+length = 0.2
+loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.06, 0.11, 0.21, 0.25, 0.29, 0.31, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1.5, 0.6, 1 ), Vector3( 1, 1, 1 ), Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.05, 0.06, 0.11, 0.21, 0.25, 0.29, 0.31, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.015, 0.8 ), Vector3( 0, -0.224, 0.8 ), Vector3( 0, -0.489, 0.8 ), Vector3( 0, -0.021, 0.8 ), Vector3( 0, 0.19, 0.8 ), Vector3( 0, -0.021, 0.8 ), Vector3( 0, -0.224, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-
-[sub_resource type="Animation" id=68]
-resource_name = "bumpBotLeft"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( -0.186, -0.12, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=69]
-resource_name = "bumpBotRight"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0.281, -0.12, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=70]
-resource_name = "bumpCeil"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0.086, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-
-[sub_resource type="Animation" id=71]
-resource_name = "bumpLeft"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( -0.25, 0.241, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=72]
-resource_name = "bumpRight"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0.281, 0.241, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=73]
-resource_name = "fallFlat"
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.09, 0.1, 0.15, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1.5, 0.6, 1 ), Vector3( 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.09, 0.1, 0.15, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.015, 0.8 ), Vector3( 0, -0.276, 0.8 ), Vector3( 0, -0.489, 0.8 ), Vector3( 0, -0.021, 0.8 ) ]
-}
-
-[sub_resource type="Animation" id=74]
-length = 0.06
-step = 0.03
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.06 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 1.1, 0.9, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.06 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.127, 0.8 ) ]
-}
-
-[sub_resource type="Animation" id=75]
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -909,109 +673,131 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0.17, 0.8 ), Vector3( 0, 0.021, 0.8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0.9, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
+"update": 1,
+"values": [ 104, 106 ]
 }
 
-[sub_resource type="Animation" id=76]
-length = 0.6
+[sub_resource type="Animation" id=110]
+resource_name = "fallSpinny"
+length = 0.3
+loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, -0.255, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-
-[sub_resource type="Animation" id=77]
-resource_name = "landSoft"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1.1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, -0.153, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-
-[sub_resource type="Animation" id=78]
-resource_name = "wakeup"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, 0.085, 0.8 ), Vector3( 0, 0.159, 0.8 ), Vector3( 0, 0.234, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.6 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 0.9, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
+"update": 1,
+"values": [ 120, 121, 122 ]
 }
 
-[sub_resource type="Animation" id=79]
+[sub_resource type="Animation" id=111]
+resource_name = "idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 104, 105 ]
+}
+
+[sub_resource type="Animation" id=112]
+resource_name = "jump"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 105, 107 ]
+}
+
+[sub_resource type="Animation" id=113]
+resource_name = "jumpSpinny"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 123, 124, 125 ]
+}
+
+[sub_resource type="Animation" id=114]
+resource_name = "slowDown"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 121, 123, 104, 105 ]
+}
+
+[sub_resource type="Animation" id=115]
+resource_name = "spinny"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 120, 122, 120, 121, 123, 124, 123, 125 ]
+}
+
+[sub_resource type="Animation" id=116]
+resource_name = "startUp"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 104, 105, 104, 125 ]
+}
+
+[sub_resource type="Animation" id=117]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1020,250 +806,15 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0.8 ) ]
+"values": [ 104 ]
 }
 
-[sub_resource type="Animation" id=80]
-resource_name = "broomSmackGlitch"
-length = 0.4
-step = 0.01
+[sub_resource type="Animation" id=118]
+resource_name = "fall"
+length = 0.2
+loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.06, 0.11, 0.21, 0.25, 0.29, 0.31, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1.5, 0.6, 1 ), Vector3( 1, 1, 1 ), Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.05, 0.06, 0.11, 0.21, 0.25, 0.29, 0.31, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.015, 0.8 ), Vector3( 0, -0.224, 0.8 ), Vector3( 0, -0.489, 0.8 ), Vector3( 0, -0.021, 0.8 ), Vector3( 0, 0.19, 0.8 ), Vector3( 0, -0.021, 0.8 ), Vector3( 0, -0.224, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-
-[sub_resource type="Animation" id=81]
-resource_name = "bumpBotLeft"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( -0.186, -0.12, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=82]
-resource_name = "bumpBotRight"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0.281, -0.12, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=83]
-resource_name = "bumpCeil"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0.086, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-
-[sub_resource type="Animation" id=84]
-resource_name = "bumpLeft"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( -0.25, 0.241, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=85]
-resource_name = "bumpRight"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0.281, 0.241, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0.8, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=86]
-resource_name = "fallFlat"
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.09, 0.1, 0.15, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.2, 0.8, 1 ), Vector3( 1.5, 0.6, 1 ), Vector3( 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.09, 0.1, 0.15, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.015, 0.8 ), Vector3( 0, -0.276, 0.8 ), Vector3( 0, -0.489, 0.8 ), Vector3( 0, -0.021, 0.8 ) ]
-}
-
-[sub_resource type="Animation" id=87]
-length = 0.06
-step = 0.03
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.06 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 1.1, 0.9, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.06 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, -0.127, 0.8 ) ]
-}
-
-[sub_resource type="Animation" id=88]
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
+tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1271,103 +822,125 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0.17, 0.8 ), Vector3( 0, 0.021, 0.8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0.9, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
+"update": 1,
+"values": [ 104, 106 ]
 }
 
-[sub_resource type="Animation" id=89]
-length = 0.6
+[sub_resource type="Animation" id=119]
+resource_name = "fallSpinny"
+length = 0.3
+loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
+tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1.2, 0.8, 1 ), Vector3( 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, -0.255, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-
-[sub_resource type="Animation" id=90]
-resource_name = "landSoft"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1.1, 0.9, 1 ), Vector3( 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, -0.153, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-
-[sub_resource type="Animation" id=91]
-resource_name = "wakeup"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0.8 ), Vector3( 0, 0.085, 0.8 ), Vector3( 0, 0.159, 0.8 ), Vector3( 0, 0.234, 0.8 ), Vector3( 0, 0, 0.8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.6 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 0.9, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
+"update": 1,
+"values": [ 120, 121, 122 ]
+}
+
+[sub_resource type="Animation" id=120]
+resource_name = "idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 104, 105 ]
+}
+
+[sub_resource type="Animation" id=121]
+resource_name = "jump"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 105, 107 ]
+}
+
+[sub_resource type="Animation" id=122]
+resource_name = "jumpSpinny"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 123, 124, 125 ]
+}
+
+[sub_resource type="Animation" id=123]
+resource_name = "slowDown"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 121, 123, 104, 105 ]
+}
+
+[sub_resource type="Animation" id=124]
+resource_name = "spinny"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 120, 122, 120, 121, 123, 124, 123, 125 ]
+}
+
+[sub_resource type="Animation" id=125]
+resource_name = "startUp"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 104, 105, 104, 125 ]
 }
 
 [sub_resource type="ShaderMaterial" id=105]
@@ -1470,7 +1043,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 7, 0, 1, 8, 0, 1, 9, 0, 1, 10, 0, 1, 11, 0, 1, 12, 0, 1, 13, 0, 1, 14, 0, 1, 15, 0, 1, 16, 0, 1, 17, 0, 1, 18, 0, 1, 25, 0, 1, 26, 0, 1, 65524, 0, 1, 65525, 0, 1, 65543, 0, 1, 65544, 0, 1, 65545, 0, 1, 65546, 0, 1, 65547, 0, 1, 65548, 0, 1, 65549, 0, 1, 65550, 0, 1, 65551, 0, 1, 65552, 0, 1, 65553, 0, 1, 65554, 0, 1, 65561, 0, 1, 131061, 0, 1, 131088, 0, 1, 131090, 0, 1, 131097, 0, 1, 131098, 0, 1, 196596, 0, 1, 196597, 0, 1, 196608, 0, 51, 196624, 0, 1, 196625, 0, 1, 196626, 0, 1, 262142, 0, 51, 262143, 0, 51, 262144, 0, 51, 262162, 0, 1, 262163, 0, 1, 262164, 0, 1, 262165, 0, 1, 262166, 0, 1, 327672, 0, 1, 327673, 0, 1, 327674, 0, 1, 327678, 0, 51, 327680, 0, 51, 327698, 0, 1, 327699, 0, 1, 327700, 0, 1, 327702, 0, 1, 393208, 0, 1, 393210, 0, 1, 393214, 0, 51, 393215, 0, 51, 393234, 0, 1, 393235, 0, 1, 393236, 0, 1, 393237, 0, 1, 393238, 0, 1, 458744, 0, 1, 458745, 0, 1, 458746, 0, 1, 458770, 0, 1, 458771, 0, 1, 458772, 0, 1, 458773, 0, 1, 458774, 0, 1, 458775, 0, 1, 524278, 0, 1, 524279, 0, 1, 524306, 0, 1, 524309, 0, 1, 524311, 0, 1, 589814, 0, 1, 589815, 0, 1, 589842, 0, 1, 589845, 0, 1, 589846, 0, 1, 589847, 0, 1, 655378, 0, 1, 655379, 0, 1, 655380, 0, 1, 655381, 0, 1, 720892, 0, 51, 720893, 0, 51, 720894, 0, 51, 720906, 0, 1, 720907, 0, 1, 720908, 0, 1, 786428, 0, 51, 786430, 0, 51, 786442, 0, 1, 786443, 0, 1, 786444, 0, 1, 851964, 0, 51, 851965, 0, 51, 851966, 0, 51, 851968, 0, 37, 851969, 0, 37, 851970, 0, 37, 851971, 0, 37, 851972, 0, 37, 851973, 0, 37, 851974, 0, 37, 851975, 0, 37, 851976, 0, 37, 851978, 0, 1, 851979, 0, 1, 851980, 0, 1, 917501, 0, 37, 917502, 0, 37, 917503, 0, 37, 917504, 0, 37, 917505, 0, 37, 917506, 0, 37, 917507, 0, 37, 917508, 0, 37, 917509, 0, 37, 917510, 0, 37, 917511, 0, 37, 917512, 0, 37, 917513, 0, 37, 917514, 0, 1, 917516, 0, 1, 917517, 0, 1, 917518, 0, 1, 917519, 0, 1, 917520, 0, 1, 983036, 0, 37, 983037, 0, 37, 983038, 0, 37, 983039, 0, 37, 983040, 0, 37, 983041, 0, 37, 983042, 0, 37, 983043, 0, 37, 983044, 0, 37, 983045, 0, 37, 983046, 0, 37, 983047, 0, 37, 983048, 0, 1, 983049, 0, 37, 983050, 0, 1, 983051, 0, 1, 983052, 0, 1, 983053, 0, 1, 983056, 0, 1, 1048573, 0, 37, 1048574, 0, 37, 1048575, 0, 37, 1048576, 0, 37, 1048577, 0, 37, 1048578, 0, 37, 1048579, 0, 37, 1048580, 0, 37, 1048581, 0, 37, 1048582, 0, 37, 1048583, 0, 37, 1048585, 0, 37, 1048589, 0, 1, 1048592, 0, 1, 1048600, 0, 1, 1048601, 0, 1, 1048602, 0, 1, 1114100, 0, 1, 1114101, 0, 1, 1114102, 0, 1, 1114108, 0, 37, 1114109, 0, 37, 1114110, 0, 37, 1114111, 0, 37, 1114112, 0, 37, 1114113, 0, 37, 1114114, 0, 37, 1114115, 0, 37, 1114116, 0, 37, 1114117, 0, 37, 1114118, 0, 37, 1114119, 0, 37, 1114120, 0, 1, 1114121, 0, 1, 1114125, 0, 1, 1114126, 0, 1, 1114127, 0, 1, 1114128, 0, 1, 1114136, 0, 1, 1114138, 0, 1, 1179636, 0, 1, 1179638, 0, 1, 1179644, 0, 1, 1179645, 0, 37, 1179646, 0, 37, 1179647, 0, 37, 1179648, 0, 37, 1179649, 0, 37, 1179650, 0, 37, 1179651, 0, 37, 1179652, 0, 37, 1179653, 0, 37, 1179654, 0, 37, 1179655, 0, 37, 1179672, 0, 1, 1179673, 0, 1, 1179674, 0, 1, 1245172, 0, 1, 1245173, 0, 1, 1245174, 0, 1, 1245181, 0, 37, 1245182, 0, 37, 1245183, 0, 37, 1245184, 0, 37, 1245185, 0, 37, 1245186, 0, 37, 1245187, 0, 37, 1245188, 0, 37, 1245189, 0, 37, 1310719, 0, 37, 1638408, 0, 1, 1638409, 0, 1, 1638410, 0, 1, -262136, 0, 1, -262135, 0, 1, -262134, 0, 1, -196602, 0, 1, -196601, 0, 1, -196600, 0, 1, -196598, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131062, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65536, 0, 1, -65535, 0, 1, -65534, 0, 1, -65533, 0, 1, -65532, 0, 1, -65531, 0, 1, -65530, 0, 1, -65529, 0, 1, -65528, 0, 1, -65527, 0, 1, -65526, 0, 1, -65525, 0, 1, -65524, 0, 1, -65523, 0, 1, -65522, 0, 1, -65521, 0, 1, -65520, 0, 1, -65519, 0, 1, -65518, 0, 1, -10, 0, 1, -9, 0, 1, -8, 0, 1, -7, 0, 1, -6, 0, 1, -5, 0, 1, -4, 0, 1, -3, 0, 1, -2, 0, 1, -1, 0, 1 )
+"cells": PoolIntArray( 7, 0, 1, 8, 0, 1, 9, 0, 1, 10, 0, 1, 11, 0, 1, 12, 0, 1, 13, 0, 1, 14, 0, 1, 15, 0, 1, 16, 0, 1, 17, 0, 1, 18, 0, 1, 25, 0, 1, 26, 0, 1, 65524, 0, 1, 65525, 0, 1, 65543, 0, 1, 65544, 0, 1, 65545, 0, 1, 65546, 0, 1, 65547, 0, 1, 65548, 0, 1, 65549, 0, 1, 65550, 0, 1, 65551, 0, 1, 65552, 0, 1, 65553, 0, 1, 65554, 0, 1, 65561, 0, 1, 131061, 0, 1, 131088, 0, 1, 131090, 0, 1, 131097, 0, 1, 131098, 0, 1, 196596, 0, 1, 196597, 0, 1, 196608, 0, 51, 196624, 0, 1, 196625, 0, 1, 196626, 0, 1, 262142, 0, 51, 262143, 0, 51, 262144, 0, 51, 262162, 0, 1, 262163, 0, 1, 262164, 0, 1, 262165, 0, 1, 262166, 0, 1, 327672, 0, 1, 327673, 0, 1, 327674, 0, 1, 327678, 0, 51, 327680, 0, 51, 327698, 0, 1, 327699, 0, 1, 327700, 0, 1, 327702, 0, 1, 393208, 0, 1, 393210, 0, 1, 393214, 0, 51, 393215, 0, 51, 393234, 0, 1, 393235, 0, 1, 393236, 0, 1, 393237, 0, 1, 393238, 0, 1, 458744, 0, 1, 458745, 0, 1, 458746, 0, 1, 458770, 0, 1, 458771, 0, 1, 458772, 0, 1, 458773, 0, 1, 458774, 0, 1, 458775, 0, 1, 524278, 0, 1, 524279, 0, 1, 524306, 0, 1, 524309, 0, 1, 524311, 0, 1, 589814, 0, 1, 589815, 0, 1, 589842, 0, 1, 589845, 0, 1, 589846, 0, 1, 589847, 0, 1, 655378, 0, 1, 655379, 0, 1, 655380, 0, 1, 655381, 0, 1, 720892, 0, 51, 720893, 0, 51, 720894, 0, 51, 720906, 0, 1, 720907, 0, 1, 720908, 0, 1, 786428, 0, 51, 786430, 0, 51, 786442, 0, 1, 786443, 0, 1, 786444, 0, 1, 851964, 0, 51, 851965, 0, 51, 851966, 0, 51, 851968, 0, 37, 851969, 0, 37, 851970, 0, 37, 851971, 0, 37, 851972, 0, 37, 851973, 0, 37, 851974, 0, 37, 851975, 0, 37, 851976, 0, 37, 851978, 0, 1, 851979, 0, 1, 851980, 0, 1, 917501, 0, 37, 917502, 0, 37, 917503, 0, 37, 917504, 0, 37, 917505, 0, 37, 917506, 0, 37, 917507, 0, 37, 917508, 0, 37, 917509, 0, 37, 917510, 0, 37, 917511, 0, 37, 917512, 0, 37, 917513, 0, 37, 917514, 0, 1, 917516, 0, 1, 983036, 0, 37, 983037, 0, 37, 983038, 0, 37, 983039, 0, 37, 983040, 0, 37, 983041, 0, 37, 983042, 0, 37, 983043, 0, 37, 983044, 0, 37, 983045, 0, 37, 983046, 0, 37, 983047, 0, 37, 983048, 0, 1, 983049, 0, 37, 983050, 0, 1, 983051, 0, 1, 983052, 0, 1, 983053, 0, 1, 983054, 0, 1, 983055, 0, 1, 983056, 0, 1, 1048573, 0, 37, 1048574, 0, 37, 1048575, 0, 37, 1048576, 0, 37, 1048577, 0, 37, 1048578, 0, 37, 1048579, 0, 37, 1048580, 0, 37, 1048581, 0, 37, 1048582, 0, 37, 1048583, 0, 37, 1048585, 0, 37, 1048589, 0, 1, 1048592, 0, 1, 1048600, 0, 1, 1048601, 0, 1, 1048602, 0, 1, 1114100, 0, 1, 1114101, 0, 1, 1114102, 0, 1, 1114108, 0, 37, 1114109, 0, 37, 1114110, 0, 37, 1114111, 0, 37, 1114112, 0, 37, 1114113, 0, 37, 1114114, 0, 37, 1114115, 0, 37, 1114116, 0, 37, 1114117, 0, 37, 1114118, 0, 37, 1114119, 0, 37, 1114120, 0, 1, 1114121, 0, 1, 1114125, 0, 1, 1114128, 0, 1, 1114136, 0, 1, 1114138, 0, 1, 1179636, 0, 1, 1179638, 0, 1, 1179644, 0, 1, 1179645, 0, 37, 1179646, 0, 37, 1179647, 0, 37, 1179648, 0, 37, 1179649, 0, 37, 1179650, 0, 37, 1179651, 0, 37, 1179652, 0, 37, 1179653, 0, 37, 1179654, 0, 1, 1179655, 0, 1, 1179661, 0, 1, 1179662, 0, 1, 1179663, 0, 1, 1179664, 0, 1, 1179672, 0, 1, 1179673, 0, 1, 1179674, 0, 1, 1245172, 0, 1, 1245173, 0, 1, 1245174, 0, 1, 1245181, 0, 1, 1245182, 0, 1, 1245183, 0, 37, 1245184, 0, 1, 1245185, 0, 1, 1245186, 0, 1, 1245187, 0, 1, 1245188, 0, 1, 1245189, 0, 1, 1310719, 0, 1, 1638408, 0, 1, 1638409, 0, 1, 1638410, 0, 1, -262136, 0, 1, -262135, 0, 1, -262134, 0, 1, -196602, 0, 1, -196601, 0, 1, -196600, 0, 1, -196598, 0, 1, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131062, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65540, 0, 1, -65539, 0, 1, -65538, 0, 1, -65537, 0, 1, -65536, 0, 1, -65535, 0, 1, -65534, 0, 1, -65533, 0, 1, -65532, 0, 1, -65531, 0, 1, -65530, 0, 1, -65529, 0, 1, -65528, 0, 1, -65527, 0, 1, -65526, 0, 1, -65525, 0, 1, -65524, 0, 1, -65523, 0, 1, -65522, 0, 1, -65521, 0, 1, -65520, 0, 1, -65519, 0, 1, -65518, 0, 1, -10, 0, 1, -9, 0, 1, -8, 0, 1, -7, 0, 1, -6, 0, 1, -5, 0, 1, -4, 0, 1, -3, 0, 1, -2, 0, 1, -1, 0, 1 )
 }
 script = ExtResource( 6 )
 __meta__ = {
@@ -1523,7 +1096,7 @@ shape = SubResource( 27 )
 shape = SubResource( 28 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 22 )]
-transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 16, 14, 0 )
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 8, 13, 0 )
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/002InvisRoom.tscn"
 
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
@@ -1620,7 +1193,7 @@ shape = SubResource( 107 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 9, -1 )
 
 [node name="Mushroom2" parent="Viewport/level" instance=ExtResource( 27 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7547, 6, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.7547, 6, -1 )
 
 [node name="Mushroom3" parent="Viewport/level" instance=ExtResource( 27 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 11.8539, -1 )
@@ -1640,50 +1213,47 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 9, 0 )
 [node name="SavePoint2" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 0 )
 
-[node name="Furbo" parent="Viewport/level" instance=ExtResource( 32 )]
-transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 16.4233, 6, 0 )
-grav = Vector2( 0, 0 )
-
-[node name="Furbo3" parent="Viewport/level" instance=ExtResource( 32 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.9881, 19, 0 )
-
-[node name="BounceAnimationPlayer" parent="Viewport/level/Furbo3" index="6"]
-anims/RESET = SubResource( 66 )
-anims/broomSmackGlitch = SubResource( 67 )
-anims/bumpBotLeft = SubResource( 68 )
-anims/bumpBotRight = SubResource( 69 )
-anims/bumpCeil = SubResource( 70 )
-anims/bumpLeft = SubResource( 71 )
-anims/bumpRight = SubResource( 72 )
-anims/fallFlat = SubResource( 73 )
-anims/jumpSquat = SubResource( 74 )
-anims/jumpStart = SubResource( 75 )
-anims/land = SubResource( 76 )
-anims/landSoft = SubResource( 77 )
-anims/wakeup = SubResource( 78 )
-
-[node name="Furbo4" parent="Viewport/level" instance=ExtResource( 32 )]
-transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 4.5731, 24, 0 )
-grav = Vector2( 0, 0 )
-
-[node name="BounceAnimationPlayer" parent="Viewport/level/Furbo4" index="6"]
-anims/RESET = SubResource( 79 )
-anims/broomSmackGlitch = SubResource( 80 )
-anims/bumpBotLeft = SubResource( 81 )
-anims/bumpBotRight = SubResource( 82 )
-anims/bumpCeil = SubResource( 83 )
-anims/bumpLeft = SubResource( 84 )
-anims/bumpRight = SubResource( 85 )
-anims/fallFlat = SubResource( 86 )
-anims/jumpSquat = SubResource( 87 )
-anims/jumpStart = SubResource( 88 )
-anims/land = SubResource( 89 )
-anims/landSoft = SubResource( 90 )
-anims/wakeup = SubResource( 91 )
-
 [node name="FanPlant" parent="Viewport/level" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 12, 0 )
 is_fan_spinning = true
+
+[node name="FanPlant2" parent="Viewport/level" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 3, 0 )
+is_fan_spinning = true
+spore_spawn_dir = Vector2( -1, 0 )
+
+[node name="Sprite3D" parent="Viewport/level/FanPlant2" index="0"]
+flip_h = true
+
+[node name="FanAnimationPlayer" parent="Viewport/level/FanPlant2" index="5"]
+anims/RESET = SubResource( 108 )
+anims/fall = SubResource( 109 )
+anims/fallSpinny = SubResource( 110 )
+anims/idle = SubResource( 111 )
+anims/jump = SubResource( 112 )
+anims/jumpSpinny = SubResource( 113 )
+anims/slowDown = SubResource( 114 )
+anims/spinny = SubResource( 115 )
+anims/startUp = SubResource( 116 )
+
+[node name="FanPlant3" parent="Viewport/level" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 20, 0 )
+is_fan_spinning = true
+spore_spawn_dir = Vector2( 0, -1 )
+
+[node name="Sprite3D" parent="Viewport/level/FanPlant3" index="0"]
+flip_h = true
+
+[node name="FanAnimationPlayer" parent="Viewport/level/FanPlant3" index="5"]
+anims/RESET = SubResource( 117 )
+anims/fall = SubResource( 118 )
+anims/fallSpinny = SubResource( 119 )
+anims/idle = SubResource( 120 )
+anims/jump = SubResource( 121 )
+anims/jumpSpinny = SubResource( 122 )
+anims/slowDown = SubResource( 123 )
+anims/spinny = SubResource( 124 )
+anims/startUp = SubResource( 125 )
 
 [node name="GlitchEnemy" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 18, 0 )
@@ -1737,9 +1307,8 @@ flip_v = true
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/Door3"]
 [editable path="Viewport/level/Door3/NPC/NPC TextBox"]
-[editable path="Viewport/level/Furbo"]
-[editable path="Viewport/level/Furbo3"]
-[editable path="Viewport/level/Furbo4"]
+[editable path="Viewport/level/FanPlant2"]
+[editable path="Viewport/level/FanPlant3"]
 [editable path="Viewport/level/ParallaxBackground2"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

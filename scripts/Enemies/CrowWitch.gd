@@ -181,7 +181,7 @@ func startFlyAway(from_where):
     hatSprite.flip_h = mySprite.flip_h
     behavior_walking = true
     walk_direction = Vector2(-1 if mySprite.flip_h else 1, 0)
-    grav = -20
+    grav.y = -20
     crow_state = CrowState.FLY_AWAY
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()

@@ -184,6 +184,7 @@ func collideWithWall(local_lv):
     return .collideWithWall(local_lv)
 
 func collideWithCeiling(local_lv):
+    if behavior_stick_to_walls: print("collide with ceil!!!")
     handleStickyWallWalkingCeiling()
     return .collideWithCeiling(local_lv)
 
@@ -289,9 +290,12 @@ func alignStickyWallWalkerSprite():
         return
 
     if my_up_vector.y > 0:
+        mySprite.flip_h = false
         mySprite.rotation_degrees = Vector3(0, 0, 0)
         if walk_direction.x > 0:
+            mySprite.flip_h = false
             mySprite.rotation_degrees.y = 180
+        is_sprite_flipped = mySprite.flip_h
         should_collide_ceil = false
         should_collide_with_walls = true
         should_collide_floor = false
@@ -403,6 +407,7 @@ func handleStickyWallWalkingLanded():
         elif my_up_vector.x > 0:
             # print("collide floor with back facing right, rotate right")
             alignStickyWallWalker(Vector2(0, 1), Vector2(1, 0))
+            
 
 onready var glitchSecretAniPlayer = get_node("GlitchSecretAnimationPlayer") if has_node("GlitchSecretAnimationPlayer") else null
 func glitchOut():
@@ -586,6 +591,11 @@ func doSineMovementBehavior(delta):
         linear_velocity.y = temp_vv
         lv.y = temp_vv
         vv = up.dot(lv)
+
+func getRunAdd():
+    if walk_direction.x < 0 and behavior_stick_to_walls:
+        return walk_speed / 2
+    return 0
     
 func doVerticalWalkingBehavior():
     if walk_direction.y == 0:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -6,7 +6,9 @@
 [ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=5]
 [ext_resource path="res://sceneObjects/KizzyCat.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sceneObjects/Enemies/Worm.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=8]
+[ext_resource path="res://sceneObjects/Enemies/BubbleFish.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scripts/CosmeticLevelTiles.gd" type="Script" id=11]
 [ext_resource path="res://levels/common/ScreenEffects.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=15]
@@ -32,10 +34,10 @@ viewport_path = NodePath("Viewport2")
 [node name="level" type="Node" parent="Viewport"]
 script = ExtResource( 3 )
 show_crt_effect = true
-starting_glitch_type = 2
+starting_glitch_type = 1
 tileset_type = 2
 has_spellbook_page = true
-spellbook_spells = [ 2, 1 ]
+spellbook_spells = [ 1, 3 ]
 
 [node name="commonWorldEnvironment" parent="Viewport/level" instance=ExtResource( 17 )]
 
@@ -117,11 +119,11 @@ transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -2, 4, 
 grav = Vector2( 0, 0 )
 
 [node name="Furbo3" parent="Viewport/level" instance=ExtResource( 6 )]
-transform = Transform( 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0, 1, -7, 0, 0 )
+transform = Transform( 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0, 1, -5, 6, 0 )
 grav = Vector2( 0, 0 )
 
 [node name="Furbo5" parent="Viewport/level" instance=ExtResource( 6 )]
-transform = Transform( 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0, 1, 13, 0, 0 )
+transform = Transform( 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0, 1, 11, 6, 0 )
 grav = Vector2( 0, 0 )
 
 [node name="Mushroom3" parent="Viewport/level" instance=ExtResource( 4 )]
@@ -135,6 +137,16 @@ transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 12, 10,
 
 [node name="CollisionShape" parent="Viewport/level/Mushroom4/FallthroughSolid" index="0"]
 shape = SubResource( 24 )
+
+[node name="Worm" parent="Viewport/level" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.599999, 0, 0 )
+
+[node name="Worm2" parent="Viewport/level" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8, 0, 0 )
+walk_direction = Vector2( -1, 0 )
+
+[node name="BubbleFish" parent="Viewport/level" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 1 )]
 

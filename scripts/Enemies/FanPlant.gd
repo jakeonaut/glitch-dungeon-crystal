@@ -20,6 +20,11 @@ var initial_true_terminal_vel = 32
 onready var fanAnimationPlayer = get_node("FanAnimationPlayer")
 onready var windGust = get_node("WindGust")
 onready var chargeSound = get_node("ChargeSound")
+export var spawn_immediately = true
+var kizzyCatRes = preload("res://sceneObjects/KizzyCat.tscn")
+var evilSporeRes = preload("res://sceneObjects/Enemies/EvilSpore.tscn")
+var myKizzySporeRef = null
+export var spore_spawn_dir = Vector2(0, 1)
 
 var opacity = 1.0
 
@@ -35,11 +40,15 @@ func _process(delta):
   delta = delta * global.time_dilation_multiplier
 
   windGust.is_active = is_fan_spinning
+  # windGust.should_spawn_clouds = false
   should_collide_with_walls = true
   if not can_deactivate_fan:
     mySprite.material_override.set_shader_param("target_palette", smacked_palette)
     notDieSound.pitch_scale = 0.5
   # behavior_walking = not is_fan_spinning
+
+  if spawn_immediately and (myKizzySporeRef == null or myKizzySporeRef.get_ref() == null):
+    spawnKizzySpore()
 
   if chicken_state == ChickenState.IDLE:
     if is_fan_spinning:
@@ -91,8 +100,41 @@ func tryToPlayAnimation(aniName):
 
 func isFarFromHome():
   return abs(global_transform.origin.x - spawn_origin.x) > far_from_home_dist
-    
 
+func spawnKizzySpore():
+  if spore_spawn_dir == level.player.grav.normalized():
+    return
+
+  var newKizzySpore = kizzyCatRes.instance()
+  level.add_child(newKizzySpore)
+  newKizzySpore.global_transform.origin = self.global_transform.origin
+  newKizzySpore.global_transform.origin.y += 2
+
+  if spore_spawn_dir.is_equal_approx(Vector2(1, 0)):
+    newKizzySpore.rotation_degrees.z = 270
+  elif spore_spawn_dir.is_equal_approx(Vector2(-1, 0)):
+    newKizzySpore.rotation_degrees.z = 90
+  elif spore_spawn_dir.is_equal_approx(Vector2(0, -1)):
+    newKizzySpore.rotation_degrees.z = 180
+  elif spore_spawn_dir.is_equal_approx(Vector2(0, 1)):
+    newKizzySpore.rotation_degrees.z = 0
+
+  newKizzySpore.reassembleSound.play()
+  # newKizzySpore.grav = Vector2(0, 0)
+  for _i in range(5):
+    newKizzySpore.spawnASpore(newKizzySpore.global_transform.origin, true)
+  myKizzySporeRef = weakref(newKizzySpore)
+  is_fan_spinning = true
+
+# @override
+func unsmack():
+  .unsmack()
+  if spawn_immediately:
+    if myKizzySporeRef == null or myKizzySporeRef.get_ref() == null:
+      spawnKizzySpore()
+    else:
+      is_fan_spinning = true
+    
 # @override
 func landed(_was_on_fallthrough_solid = false):
   .landed()

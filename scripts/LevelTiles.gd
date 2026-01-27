@@ -860,7 +860,7 @@ func properlySetTiles():
 
     # if global.hasGottenLevelGeode or global.memory["priestess"] >= 2:
     if my_tileset_type == global.TilesetType.PRIMORDIAL_OOZE:
-      randomizeTile(cell_index, getPlayer().glitch_form)
+      randomizeTile(cell_index, global.getColorSuffixFromTilesetType(my_tileset_type, player.glitch_form))
 
 func setTileset(tileset_type, properly_set_tiles = true):
   my_tileset_type = tileset_type

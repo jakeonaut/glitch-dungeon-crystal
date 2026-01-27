@@ -1118,7 +1118,7 @@ mesh = SubResource( 17229 )
 script = ExtResource( 30 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 material_override = SubResource( 17211 )
 mesh = SubResource( 17 )
 
@@ -2061,8 +2061,8 @@ rect_clip_content = false
 theme = SubResource( 17228 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "[right]ver-3.2.0.0[/right]"
-text = "ver-3.2.0.0"
+bbcode_text = "[right]ver-3.3.0.0[/right]"
+text = "ver-3.3.0.0"
 
 [editable path="EdgeDistortion"]
 [editable path="PauseMenu"]

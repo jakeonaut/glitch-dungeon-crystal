@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=2]
@@ -27,7 +27,6 @@
 [ext_resource path="res://sceneObjects/Environment/Mushroom.tscn" type="PackedScene" id=25]
 [ext_resource path="res://assets/backgrounds/0City-Layer-2_1.png" type="Texture" id=26]
 [ext_resource path="res://sceneObjects/ParallaxBackground.tscn" type="PackedScene" id=27]
-[ext_resource path="res://sceneObjects/KizzyCat.tscn" type="PackedScene" id=28]
 [ext_resource path="res://sceneObjects/MushroomNPC.tscn" type="PackedScene" id=29]
 [ext_resource path="res://sceneObjects/Enemies/FanPlant.tscn" type="PackedScene" id=30]
 
@@ -553,6 +552,155 @@ shader_param/texture_albedo = ExtResource( 24 )
 shader_param/base_palette = ExtResource( 17 )
 shader_param/target_palette = ExtResource( 13 )
 
+[sub_resource type="Animation" id=68]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 104 ]
+}
+
+[sub_resource type="Animation" id=69]
+resource_name = "fall"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 104, 106 ]
+}
+
+[sub_resource type="Animation" id=70]
+resource_name = "fallSpinny"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 120, 121, 122 ]
+}
+
+[sub_resource type="Animation" id=71]
+resource_name = "idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 104, 105 ]
+}
+
+[sub_resource type="Animation" id=72]
+resource_name = "jump"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 105, 107 ]
+}
+
+[sub_resource type="Animation" id=73]
+resource_name = "jumpSpinny"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 123, 124, 125 ]
+}
+
+[sub_resource type="Animation" id=74]
+resource_name = "slowDown"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 121, 123, 104, 105 ]
+}
+
+[sub_resource type="Animation" id=75]
+resource_name = "spinny"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 120, 122, 120, 121, 123, 124, 123, 125 ]
+}
+
+[sub_resource type="Animation" id=76]
+resource_name = "startUp"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 104, 105, 104, 125 ]
+}
+
 [sub_resource type="BoxShape" id=67]
 resource_local_to_scene = true
 extents = Vector3( 2, 0.24, 1 )
@@ -642,7 +790,7 @@ cell_size = Vector3( 1, 1, 1 )
 cell_octant_size = 4
 cell_center_z = false
 data = {
-"cells": PoolIntArray( 19, 0, 1, 20, 0, 1, 65525, 0, 1, 65526, 0, 1, 131067, 0, 37, 131068, 0, 37, 131069, 0, 37, 131070, 0, 37, 196602, 0, 37, 196603, 0, 37, 196604, 0, 37, 196605, 0, 37, 196606, 0, 37, 196607, 0, 37, 262138, 0, 37, 262139, 0, 37, 262140, 0, 37, 262141, 0, 37, 262142, 0, 37, 262143, 0, 37, 327675, 0, 37, 327676, 0, 37, 327677, 0, 37, 327678, 0, 37, 327684, 0, 1, 327685, 0, 1, 327686, 0, 1, 393220, 0, 1, 393222, 0, 1, 458756, 0, 1, 458757, 0, 1, 458758, 0, 1, 524289, 0, 51, 524290, 0, 51, 524291, 0, 51, 589825, 0, 51, 589827, 0, 51, 655361, 0, 51, 655362, 0, 51, 655363, 0, 51, 655376, 0, 1, 655377, 0, 1, 655378, 0, 1, 655379, 0, 1, 655380, 0, 1, 720885, 0, 1, 720886, 0, 1, 720887, 0, 1, 720888, 0, 1, 720889, 0, 1, 720890, 0, 1, 720891, 0, 1, 720892, 0, 1, 720912, 0, 1, 720913, 0, 1, 720915, 0, 1, 720916, 0, 1, 786421, 0, 1, 786422, 0, 1, 786423, 0, 1, 786424, 0, 1, 786425, 0, 1, 786426, 0, 1, 786427, 0, 1, 786428, 0, 1, 851963, 0, 1, 851964, 0, 1, 917499, 0, 1, 917500, 0, 1, 917512, 0, 1, 917513, 0, 1, 917514, 0, 1, 917515, 0, 1, 983035, 0, 1, 983036, 0, 1, 983048, 0, 1, 983051, 0, 1, 983052, 0, 1, 983053, 0, 1, 983054, 0, 1, 983055, 0, 1, 983056, 0, 1, 983057, 0, 1, 983058, 0, 1, 983059, 0, 1, 983060, 0, 1, 1048565, 0, 1, 1048566, 0, 1, 1048567, 0, 1, 1048571, 0, 1, 1048572, 0, 1, 1048573, 0, 1, 1048584, 0, 1, 1048587, 0, 1, 1048588, 0, 1, 1048589, 0, 1, 1048590, 0, 1, 1048591, 0, 1, 1048592, 0, 1, 1048593, 0, 1, 1048594, 0, 1, 1048596, 0, 1, 1114101, 0, 1, 1114103, 0, 1, 1114107, 0, 1, 1114109, 0, 1, 1114120, 0, 1, 1114121, 0, 1, 1114122, 0, 1, 1114123, 0, 1, 1114130, 0, 1, 1114131, 0, 1, 1114132, 0, 1, 1179637, 0, 1, 1179638, 0, 1, 1179639, 0, 1, 1179643, 0, 1, 1179644, 0, 1, 1179645, 0, 1, -458744, 0, 1, -458743, 0, 1, -458742, 0, 1, -458734, 0, 1, -458733, 0, 1, -458732, 0, 1, -393227, 0, 1, -393226, 0, 1, -393225, 0, 1, -393221, 0, 1, -393220, 0, 1, -393219, 0, 1, -393208, 0, 1, -393206, 0, 1, -393205, 0, 1, -393204, 0, 1, -393203, 0, 1, -393202, 0, 1, -393201, 0, 1, -393200, 0, 1, -393199, 0, 1, -393198, 0, 1, -393196, 0, 1, -327691, 0, 1, -327689, 0, 1, -327685, 0, 1, -327683, 0, 1, -327672, 0, 1, -327671, 0, 1, -327670, 0, 1, -327669, 0, 1, -327668, 0, 1, -327667, 0, 1, -327666, 0, 1, -327665, 0, 1, -327664, 0, 1, -327663, 0, 1, -327662, 0, 1, -327661, 0, 1, -327660, 0, 1, -262155, 0, 1, -262154, 0, 1, -262153, 0, 1, -262149, 0, 1, -262148, 0, 1, -262147, 0, 1, -262139, 0, 1, -262138, 0, 1, -262137, 0, 1, -196612, 0, 1, -196611, 0, 1, -196603, 0, 1, -196601, 0, 1, -131077, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131053, 0, 1, -131052, 0, 1, -65547, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65517, 0, 1, -10, 0, 1, -9, 0, 1, -8, 0, 1, -7, 0, 1, -6, 0, 1, -5, 0, 1 )
+"cells": PoolIntArray( 19, 0, 1, 20, 0, 1, 65525, 0, 1, 65526, 0, 1, 131067, 0, 37, 131068, 0, 37, 131069, 0, 37, 131070, 0, 37, 196602, 0, 37, 196603, 0, 37, 196604, 0, 37, 196605, 0, 37, 196606, 0, 37, 196607, 0, 37, 262138, 0, 37, 262139, 0, 37, 262140, 0, 37, 262141, 0, 37, 262142, 0, 37, 262143, 0, 37, 327675, 0, 37, 327676, 0, 37, 327677, 0, 37, 327678, 0, 37, 327684, 0, 1, 327685, 0, 1, 327686, 0, 1, 393220, 0, 1, 393222, 0, 1, 458756, 0, 1, 458757, 0, 1, 458758, 0, 1, 524289, 0, 51, 524290, 0, 51, 524291, 0, 51, 589825, 0, 51, 589827, 0, 51, 655361, 0, 51, 655362, 0, 51, 655363, 0, 51, 655376, 0, 1, 655377, 0, 1, 655378, 0, 1, 655379, 0, 1, 655380, 0, 1, 720885, 0, 1, 720886, 0, 1, 720887, 0, 1, 720888, 0, 1, 720889, 0, 1, 720890, 0, 1, 720891, 0, 1, 720892, 0, 1, 720912, 0, 1, 720913, 0, 1, 720915, 0, 1, 720916, 0, 1, 786421, 0, 1, 786422, 0, 1, 786423, 0, 1, 786424, 0, 1, 786425, 0, 1, 786426, 0, 1, 786427, 0, 1, 786428, 0, 1, 851963, 0, 1, 851964, 0, 1, 917499, 0, 1, 917500, 0, 1, 917512, 0, 1, 917513, 0, 1, 917514, 0, 1, 917515, 0, 1, 983035, 0, 1, 983036, 0, 1, 983048, 0, 1, 983051, 0, 1, 983052, 0, 1, 983053, 0, 1, 983054, 0, 1, 983055, 0, 1, 983056, 0, 1, 983057, 0, 1, 983058, 0, 1, 983059, 0, 1, 983060, 0, 1, 1048565, 0, 1, 1048566, 0, 1, 1048567, 0, 1, 1048571, 0, 1, 1048572, 0, 1, 1048573, 0, 1, 1048584, 0, 1, 1048587, 0, 1, 1048588, 0, 1, 1048589, 0, 1, 1048590, 0, 1, 1048591, 0, 1, 1048592, 0, 1, 1048593, 0, 1, 1048594, 0, 1, 1048596, 0, 1, 1114101, 0, 1, 1114103, 0, 1, 1114107, 0, 1, 1114109, 0, 1, 1114120, 0, 1, 1114121, 0, 1, 1114122, 0, 1, 1114123, 0, 1, 1114130, 0, 1, 1114131, 0, 1, 1114132, 0, 1, 1179637, 0, 1, 1179638, 0, 1, 1179639, 0, 1, 1179643, 0, 1, 1179644, 0, 1, 1179645, 0, 1, -458744, 0, 1, -458743, 0, 1, -458742, 0, 1, -458734, 0, 1, -458733, 0, 1, -458732, 0, 1, -393227, 0, 1, -393226, 0, 1, -393225, 0, 1, -393221, 0, 1, -393220, 0, 1, -393219, 0, 1, -393208, 0, 1, -393206, 0, 1, -393205, 0, 1, -393204, 0, 1, -393203, 0, 1, -393202, 0, 1, -393201, 0, 1, -393200, 0, 1, -393199, 0, 1, -393198, 0, 1, -393196, 0, 1, -327691, 0, 1, -327689, 0, 1, -327685, 0, 1, -327683, 0, 1, -327672, 0, 1, -327671, 0, 1, -327670, 0, 1, -327669, 0, 1, -327668, 0, 1, -327667, 0, 1, -327666, 0, 1, -327665, 0, 1, -327664, 0, 1, -327663, 0, 1, -327662, 0, 1, -327661, 0, 1, -327660, 0, 1, -262155, 0, 1, -262154, 0, 1, -262153, 0, 1, -262149, 0, 1, -262148, 0, 1, -262147, 0, 1, -262139, 0, 1, -262138, 0, 1, -262137, 0, 1, -262136, 0, 1, -262135, 0, 1, -262134, 0, 1, -196612, 0, 1, -196611, 0, 1, -196603, 0, 1, -196601, 0, 1, -196600, 0, 1, -196598, 0, 1, -131077, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131062, 0, 1, -131061, 0, 1, -131053, 0, 1, -131052, 0, 1, -65547, 0, 1, -65546, 0, 1, -65545, 0, 1, -65544, 0, 1, -65543, 0, 1, -65542, 0, 1, -65541, 0, 1, -65517, 0, 1, -10, 0, 1, -9, 0, 1, -8, 0, 1, -7, 0, 1, -6, 0, 1, -5, 0, 1 )
 }
 script = ExtResource( 7 )
 __meta__ = {
@@ -747,18 +895,32 @@ texture = ExtResource( 26 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 13.2109, 0 )
 
 [node name="MushroomNPC" parent="Viewport/level" instance=ExtResource( 29 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6371, -3, 0 )
-bbText = "NPC.SporeCreature.7"
-
-[node name="Furbo" parent="Viewport/level" instance=ExtResource( 28 )]
-transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 17, 3, 0 )
-
-[node name="Furbo2" parent="Viewport/level" instance=ExtResource( 28 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6371, 0, 0 )
 grav = Vector2( 0, 0 )
+bbText = "NPC.SporeCreature.7"
 
 [node name="FanPlant" parent="Viewport/level" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -3, 0 )
 is_fan_spinning = true
+spore_spawn_dir = Vector2( 0, -1 )
+
+[node name="FanPlant2" parent="Viewport/level" instance=ExtResource( 30 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.39115, 13, 0 )
+is_fan_spinning = true
+
+[node name="Sprite3D" parent="Viewport/level/FanPlant2" index="0"]
+flip_h = true
+
+[node name="FanAnimationPlayer" parent="Viewport/level/FanPlant2" index="5"]
+anims/RESET = SubResource( 68 )
+anims/fall = SubResource( 69 )
+anims/fallSpinny = SubResource( 70 )
+anims/idle = SubResource( 71 )
+anims/jump = SubResource( 72 )
+anims/jumpSpinny = SubResource( 73 )
+anims/slowDown = SubResource( 74 )
+anims/spinny = SubResource( 75 )
+anims/startUp = SubResource( 76 )
 
 [node name="Mushroom4" parent="Viewport/level" instance=ExtResource( 25 )]
 transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 5.5, 17.6327, 0 )
@@ -836,6 +998,7 @@ material = SubResource( 44 )
 [editable path="Viewport/level/Door2"]
 [editable path="Viewport/level/Door2/NPC/NPC TextBox"]
 [editable path="Viewport/level/ParallaxBackground2"]
+[editable path="Viewport/level/FanPlant2"]
 [editable path="Viewport/level/Mushroom4"]
 [editable path="Viewport2/ScreenEffects"]
 [editable path="ScreenEffects"]

@@ -135,7 +135,7 @@ func _process(delta):
   if smokeCloudThrottleTimer < smokeCloudThrottleTimeLimit:
     smokeCloudThrottleTimer += (delta*11)
 
-  if is_touching_water or is_touching_ladder or \
+  if is_touching_water or \
      (grav.y != 0 and (
       (grav.y > 0 and global_transform.origin.y < camera_target_y_pos) or \
       (grav.y < 0 and global_transform.origin.y > camera_target_y_pos))) or \
@@ -214,34 +214,37 @@ func _process(delta):
     else:
       interactionArea.transform.origin.y = 0
       
-  if linear_velocity.x > 0.5:
-    camera_target_origin_x_target = 2
-  elif linear_velocity.x < -0.5:
-    camera_target_origin_x_target = -2
-
-  cameraTarget.transform.origin.x = cameraTarget.transform.origin.x + (camera_target_origin_x_target - cameraTarget.transform.origin.x) * (delta*5)
-  if stepify(cameraTarget.transform.origin.x, 0.1) == stepify(camera_target_origin_x_target, 0.1):
-    cameraTarget.transform.origin.x = camera_target_origin_x_target
-  if override_camera_y == null:
-    cameraTarget.global_transform.origin.y = camera_target_y_pos + camera_y_offset
-    if not global.pauseGame and not global.memory["is_turn_based"] and not global.memory["is_pseudo_turn_based"]:
-      if pressingMoveUp() and on_ground and not (pressingMoveLeft() or pressingMoveRight() or justPressedDown() or justPressedJump() or Input.is_action_just_pressed("sub_action_button")):
-        if holding_up_timer < holding_up_time_limit:
-          holding_up_timer += (delta*11)
-      else:
-        holding_up_timer = 0
-        if pressingDown() and on_ground and not (pressingMoveLeft() or pressingMoveRight() or Input.is_action_just_pressed("ui_up") or justPressedJump() or Input.is_action_just_pressed("sub_action_button")):
-          if holding_down_timer < holding_down_time_limit:
-            holding_down_timer += (delta*11)
-        else:
-          holding_down_timer = 0
-
-      if holding_up_timer >= holding_up_time_limit:
-        cameraTarget.global_transform.origin.y += 15
-      elif holding_down_timer >= holding_down_time_limit:
-        cameraTarget.global_transform.origin.y -= 15
+  if grav.x != 0:
+    cameraTarget.global_transform.origin = self.global_transform.origin
   else:
-    cameraTarget.global_transform.origin.y = override_camera_y
+    if linear_velocity.x > 0.5:
+      camera_target_origin_x_target = 2
+    elif linear_velocity.x < -0.5:
+      camera_target_origin_x_target = -2
+
+    cameraTarget.transform.origin.x = cameraTarget.transform.origin.x + (camera_target_origin_x_target - cameraTarget.transform.origin.x) * (delta*5)
+    if stepify(cameraTarget.transform.origin.x, 0.1) == stepify(camera_target_origin_x_target, 0.1):
+      cameraTarget.transform.origin.x = camera_target_origin_x_target
+    if override_camera_y == null:
+      cameraTarget.global_transform.origin.y = camera_target_y_pos + camera_y_offset
+      if not global.pauseGame and not global.memory["is_turn_based"] and not global.memory["is_pseudo_turn_based"]:
+        if pressingMoveUp() and on_ground and not (pressingMoveLeft() or pressingMoveRight() or justPressedDown() or justPressedJump() or Input.is_action_just_pressed("sub_action_button")):
+          if holding_up_timer < holding_up_time_limit:
+            holding_up_timer += (delta*11)
+        else:
+          holding_up_timer = 0
+          if pressingDown() and on_ground and not (pressingMoveLeft() or pressingMoveRight() or Input.is_action_just_pressed("ui_up") or justPressedJump() or Input.is_action_just_pressed("sub_action_button")):
+            if holding_down_timer < holding_down_time_limit:
+              holding_down_timer += (delta*11)
+          else:
+            holding_down_timer = 0
+
+        if holding_up_timer >= holding_up_time_limit:
+          cameraTarget.global_transform.origin.y += 15
+        elif holding_down_timer >= holding_down_time_limit:
+          cameraTarget.global_transform.origin.y -= 15
+    else:
+      cameraTarget.global_transform.origin.y = override_camera_y
 
   adjustStuffForNestingDolls()
   # if global.memory.has("fishingRod") and on_ground and justPressedDown():
@@ -676,7 +679,7 @@ var just_pacman_flipped_timer = 0
 var just_pacman_flipped_time_limit = 0
 var was_walk_direction_flipped = false
 func shouldFlipWalkingDirection():
-  return grav.x < 0
+  return grav.x > 0
   # if just_pacman_flipped:
   #   return was_walk_direction_flipped
   # return (grav < 0 and not transformation == TransformationState.BUBBLE) or malware_infected
@@ -973,7 +976,7 @@ func pressingJump():
     return should_magic_jump or ((pressingMoveRight() or pressingMoveLeft()) and truly_on_ground) or Input.is_action_pressed("jump_button")
   if transformation == TransformationState.UNDERGROUND or transformation == TransformationState.UNDERGROUND_RETURNING:
     return false
-  if transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE:
+  if transformation == TransformationState.BUBBLE:
     return false
   if physics_state == PhysicsState.BEING_TOSSED or physics_state == PhysicsState.OCCUPIED:
     return false
@@ -1193,7 +1196,7 @@ func getABroom(unpauseAnimation = true):
      transformation == TransformationState.UNDERGROUND_RETURNING or \
      transformation == TransformationState.UNDERGROUND or \
      transformation == TransformationState.MOLE_DIGGING or \
-     (transformation == TransformationState.BUBBLE or glitch_form == global.GlitchForm.BUBBLE) or \
+     transformation == TransformationState.BUBBLE or \
      transformation == TransformationState.CHICKEN or \
      nesting_doll_state == global.NestingDoll.BABY or \
      is_mushroom_infected: # or malware_infected:
@@ -1275,7 +1278,7 @@ func processJumpInputs(delta):
     .processJumpInputs(delta)
     return
 
-  # if not is_touching_ladder and not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
+  # if not is_touching_water and not isKindaSortaOfOnGround() and not on_ground:
     # var triedToDoubleJump = justPressedJump() and not should_magic_jump and not global.pauseMoveInput
     # if triedToDoubleJump and has_used_magic_lantern < MAX_DOUBLE_JUMPS and global.memory["mushroom_soul"] > 0 and global.memory["mushroom_soul_enabled"]:
     #   doubleJump()

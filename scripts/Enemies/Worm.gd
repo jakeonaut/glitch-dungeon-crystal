@@ -27,6 +27,7 @@ func _ready():
   original_material = mySprite.get_material_override().duplicate()
   slime_walk_time_limit = 3
   slime_idle_time_limit = 3
+  # stupid_debug_var = true
 
 func _process(delta):
   if not visible: return

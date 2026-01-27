@@ -49,19 +49,19 @@ func _process(delta):
   mySprite.visible = shouldIBeActive() # getPlayer().transformation != getPlayer().TransformationState.BUBBLE
 
 func shouldIBeActive(can_i_touch_player_debug = false):
-  var my_glitch_form = global.GlitchForm.BUBBLE
+  # var my_glitch_form = global.GlitchForm.BUBBLE
 
-  if getPlayer().glitch_form == my_glitch_form:
-    return false
-  elif global.memory.has("spellbookPage") and global.memory["spellbookPage"].has(my_glitch_form):
-    return false
+  # if getPlayer().glitch_form == my_glitch_form:
+  #   return false
+  # if global.memory.has("spellbookPage") and global.memory["spellbookPage"].has(my_glitch_form):
+  #   return false
   # elif is_in_cooldown:
   #   return false
   # elif not can_i_touch_player_debug and (activePassiveArea.is_touching_player_proxy or was_touching_player_proxy):
   #   return false
   # elif not can_i_touch_player_debug and (activePassiveArea.touchingPlayer or activePassiveArea.wasTouchingPlayer):
   #   return false
-  elif global.memory["mp"] == 0:
+  if global.memory["mp"] == 0:
     return true
   elif level.spellbook_forbidden or not global.memory.has("spellbookPage") or global.memory["spellbookPage"].size() == 0:
     return true

@@ -12,7 +12,6 @@ var is_touching_passive_door = false
 var touched_passive_door = null
 var is_touching_npc = false
 var touched_water_area = null
-var is_touching_ladder = false
 var is_touching_carcass = false
 var is_touching_save_point = false
 var water_y = 0 # what does it do? nothing.y
@@ -38,7 +37,6 @@ func _process(delta):
     touched_passive_door = null
     is_touching_npc = false
     touched_water_area = null
-    is_touching_ladder = false
     is_touching_carcass = false
     is_touching_save_point = false
 
@@ -71,8 +69,6 @@ func _process(delta):
             touched_water_area = area
             if area.is_in_group("waterfall"):
                 is_touching_waterfall = true
-        if area.is_in_group("ladder"):
-            is_touching_ladder = true
         if area.is_in_group("door"):
             var temp = true
             var door = area.get_node("..")

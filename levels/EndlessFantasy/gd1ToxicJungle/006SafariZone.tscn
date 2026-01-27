@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/grey_cosmetic_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scripts/LevelTiles.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scripts/FakeLevelTiles.gd" type="Script" id=5]
 [ext_resource path="res://scripts/levelScript.gd" type="Script" id=6]
 [ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=7]
+[ext_resource path="res://sceneObjects/miniCubeCrystal.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sceneObjects/tiles/grey_tiles.tres" type="MeshLibrary" id=9]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=10]
 [ext_resource path="res://sceneObjects/MushroomNPC.tscn" type="PackedScene" id=11]
@@ -1004,7 +1005,7 @@ shape = SubResource( 48 )
 shape = SubResource( 49 )
 
 [node name="Door2" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 7, 0 )
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 8.65042, 7, 0 )
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/007CrystalHaven.tscn"
 
 [node name="AnimationPlayer" parent="Viewport/level/Door2" index="6"]
@@ -1352,6 +1353,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -2, 0 )
 
 [node name="GlitchSlime2" parent="Viewport/level" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33, -4, 0 )
+
+[node name="miniCubeCrystal" parent="Viewport/level" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.62059, 11.813, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 20 )]
 

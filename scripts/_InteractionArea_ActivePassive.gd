@@ -5,7 +5,6 @@ var wasTouchingPlayer = false
 var is_touching_water = false
 var is_touching_waterfall = false
 var touched_water_area = null
-var is_touching_ladder = false
 var is_touching_player_proxy = false
 var was_touching_player_proxy = false
 var prev_fallthrough_collision_area = null
@@ -71,7 +70,6 @@ func _process(_delta):
     var areas = get_overlapping_areas()
     is_touching_water = false
     is_touching_waterfall = false
-    is_touching_ladder = false
     is_touching_player_proxy = false
     var has_done_fallthrough_object_collision = false
     var possible_game_mover = get_node("..")
@@ -80,8 +78,6 @@ func _process(_delta):
             is_touching_water = true
             if area.is_in_group("waterfall"):
                 is_touching_waterfall = true
-        if area.is_in_group("ladder"):
-            is_touching_ladder = true
         if area.is_in_group("fallthrough") and "was_fallthrough_area_collision_triggered" in possible_game_mover:
             has_done_fallthrough_object_collision = global.doFallthroughObjectCollision(possible_game_mover, area) or has_done_fallthrough_object_collision
         if area.is_in_group("player_proxy"):
