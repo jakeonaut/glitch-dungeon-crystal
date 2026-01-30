@@ -9,7 +9,7 @@
 [ext_resource path="res://levels/common/UILayer.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=9]
-[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FloorSpell.tscn" type="PackedScene" id=10]
+[ext_resource path="res://sceneObjects/SpellsTreasureCollectables/FeatherSpell.tscn" type="PackedScene" id=10]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=11]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=12]
 [ext_resource path="res://sceneObjects/GameCamera.tscn" type="PackedScene" id=13]
@@ -317,11 +317,7 @@ visible = false
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3, 0 )
 
 [node name="Furbo" parent="Viewport/level/QuestionBlock" instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0 )
-
-[node name="Furbo" parent="Viewport/level" instance=ExtResource( 20 )]
-transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -2, 14, 0 )
-grav = Vector2( 0, 0 )
+transform = Transform( -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 9.53674e-07, 6, 0 )
 
 [node name="ParallaxBackground2" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -2.55927, 0 )
@@ -336,8 +332,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 8.3, -10 )
 material_override = SubResource( 46 )
 texture = ExtResource( 25 )
 
-[node name="FloorSpell" parent="Viewport/level" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3.4854, 0 )
+[node name="FeatherSpell" parent="Viewport/level" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3.422, 0 )
 
 [node name="Viewport2" parent="." instance=ExtResource( 11 )]
 

@@ -28,6 +28,7 @@ enum BossPhase {
     WAKEUP
     IDLE,
     SINGING,
+    STRETCH_UP,
     RUN_AROUND,
     RUN_BACKWARDS,
     GOT_HURT,
@@ -82,7 +83,8 @@ func getHurt():
             cubeCrystal.get_ref().getHitSound2.play()
         elif num_hits == 3:
             cubeCrystal.get_ref().getHitSound3.play()
-    RUN_COUNT_MAX += 1
+    if num_hits >= 2:
+        RUN_COUNT_MAX += 1
     if num_hits >= MAX_NUM_HITS:
         yaBeatMe()
         return
@@ -91,6 +93,7 @@ func getHurt():
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("gotHurt")
+    # secretAniPlayer.queue("flipLeftToRight")
     secretAniPlayer.queue("idle")
     # secretAniPlayer.queue("hibernate")
     prev_boss_phase = boss_phase
@@ -233,11 +236,15 @@ func _process(delta):
             # secretAniPlayer.queue("idleWalk")
             # secretAniPlayer.queue("idle")
             # secretAniPlayer.queue("flipRightToLeft")
-            boss_phase = BossPhase.RUN_AROUND
+            boss_phase = BossPhase.STRETCH_UP
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
-            secretAniPlayer.play("run")
-            run_counter = 0
+            secretAniPlayer.play("stretchLegs")
+            # boss_phase = BossPhase.RUN_AROUND
+            # secretAniPlayer.stop()
+            # secretAniPlayer.clear_queue()
+            # secretAniPlayer.play("run")
+            # run_counter = 0
             am_i_hurt = false
             global.pauseGame = false
             global.shouldRenderAsCinematic = false
@@ -266,20 +273,24 @@ func _process(delta):
         if not secretAniPlayer.is_playing():
             run_counter = 0
             prev_boss_phase = boss_phase
-            boss_phase = BossPhase.SINGING
+            boss_phase = BossPhase.STRETCH_UP
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
-            singing_counter = 0
-            secretAniPlayer.queue("idle")
-            secretAniPlayer.queue("idleWalk")
-            secretAniPlayer.queue("idleWalk")
-            secretAniPlayer.queue("idle")
-            secretAniPlayer.queue("flipLeftToRight")
-            secretAniPlayer.queue("idle")
-            secretAniPlayer.queue("idleWalk")
-            secretAniPlayer.queue("idleWalk")
-            secretAniPlayer.queue("idle")
-            secretAniPlayer.queue("flipRightToLeft")
+            secretAniPlayer.play("stretchLegs")
+            # boss_phase = BossPhase.SINGING
+            # secretAniPlayer.stop()
+            # secretAniPlayer.clear_queue()
+            # singing_counter = 0
+            # secretAniPlayer.queue("idle")
+            # secretAniPlayer.queue("idleWalk")
+            # secretAniPlayer.queue("idleWalk")
+            # secretAniPlayer.queue("idle")
+            # secretAniPlayer.queue("flipLeftToRight")
+            # secretAniPlayer.queue("idle")
+            # secretAniPlayer.queue("idleWalk")
+            # secretAniPlayer.queue("idleWalk")
+            # secretAniPlayer.queue("idle")
+            # secretAniPlayer.queue("flipRightToLeft")
             # else:
             #     run_counter = 0
             #     secretAniPlayer.queue("flipLeftToRight")
@@ -312,9 +323,40 @@ func _process(delta):
                 #     secretAniPlayer.clear_queue()
                 #     secretAniPlayer.queue("idleWalk")
                 #     secretAniPlayer.queue("run")
+    elif boss_phase == BossPhase.STRETCH_UP:
+        if weakEyeRef != null and weakEyeRef.get_ref() != null:
+            weakEyeRef.get_ref().global_transform.origin = eyeSpawner.global_transform.origin
+            weakEyeRef.get_ref().global_transform.origin.z = 0
+        # if secretAniPlayer.assigned_animation == "tallWobble":
+        # elif secretAniPlayer.assigned_animation == "tallWobbleRight":
+        if not secretAniPlayer.is_playing():
+            secretAniPlayer.stop()
+            secretAniPlayer.clear_queue()
+            spawnWeakEye()
+            if num_hits == 0:
+                secretAniPlayer.play("tallWobbleEasy")
+                secretAniPlayer.queue("tallWobbleEasy")
+                secretAniPlayer.queue("tallWobbleEasy")
+            elif num_hits == 1:
+                secretAniPlayer.play("tallWobble")
+                secretAniPlayer.queue("tallWobble")
+                secretAniPlayer.queue("tallWobble")
+            elif num_hits == 2:
+                secretAniPlayer.play("tallWobbleHard")
+                secretAniPlayer.queue("tallWobble")
+                secretAniPlayer.queue("tallWobbleHard")
+            secretAniPlayer.queue("flipLeftToRight")
+            if num_hits >= 1:
+                secretAniPlayer.queue("tallWobbleRightEasy")
+            secretAniPlayer.queue("tallWobbleRightBaby")
+            secretAniPlayer.queue("tallWobbleRightBaby")
+            secretAniPlayer.queue("tallWobbleRightBaby")
+            if num_hits >= 1:
+                secretAniPlayer.queue("tallWobbleRightBaby")
+            secretAniPlayer.queue("flipRightToLeft")
     elif boss_phase == BossPhase.RUN_AROUND:
         tryPlayBawkSound()
-        tryToSpawnEyeSpore(delta)
+        # tryToSpawnEyeSpore(delta)
         if secretAniPlayer.assigned_animation == "run" or secretAniPlayer.assigned_animation == "suddenlyBrake":
             run_speed = -0.5 if secretAniPlayer.assigned_animation == "suddenlyBrake" else 3.0
             processRunLogic(delta)
@@ -330,7 +372,7 @@ func _process(delta):
             boss_phase = BossPhase.RUN_BACKWARDS
     elif boss_phase == BossPhase.RUN_BACKWARDS:
         tryPlayBawkSound()
-        tryToSpawnEyeSpore(delta)
+        # tryToSpawnEyeSpore(delta)
         if secretAniPlayer.assigned_animation == "run" or secretAniPlayer.assigned_animation == "suddenlyBrake":
             run_speed = -0.5 if secretAniPlayer.assigned_animation == "suddenlyBrake" else 3.0
             processRunBackwardsLogic(delta)
@@ -455,11 +497,39 @@ func trySpawnAGlitchNote():
         newNote.global_transform.origin.z = 0
         noteRefArray.push_back(weakref(newNote))
 
+var weakEyeRef = null
 func spawnWeakEye():
     var newEye = weakEyeRes.instance()
     level.add_child(newEye)
     newEye.global_transform.origin = eyeSpawner.global_transform.origin
     newEye.global_transform.origin.z = 0
+    weakEyeRef = weakref(newEye)
+
+onready var attackBawkSound = get_node("Sounds/AttackBawkSound")
+var BULLET_SPEED = 10
+var glitchEnemyRes = preload("res://sceneObjects/Enemies/GlitchEnemy.tscn")
+func spawnGlitchBullet():
+    attackBawkSound.play()
+    var bullet = glitchEnemyRes.instance()
+    bullet.is_static_in_level = false
+    bullet.visible = true
+    bullet.behavior_directional_bullet = true
+    bullet.behavior_phase_through_walls = true
+    bullet.behavior_phase_through_bodies = true
+
+    var player_pos = level.player.global_transform.origin
+    var spawn_pos = eyeSpawner.global_transform.origin
+    var bullet_direction_vector = Vector3(
+        player_pos.x - spawn_pos.x,
+        player_pos.y - spawn_pos.y,
+        0
+    ).normalized() * BULLET_SPEED
+    bullet.bullet_direction_vector = bullet_direction_vector
+    level.add_child(bullet)
+
+    bullet.global_transform.origin = spawn_pos
+    bullet.global_transform.origin.z = 0
+
 
 func spawnBabaWitch():
     return
@@ -478,7 +548,7 @@ func getLevelTiles():
   return levelTiles
 
 var run_counter = 0
-var RUN_COUNT_MAX = 2
+var RUN_COUNT_MAX = 1
 var run_speed = 3
 func processRunLogic(delta):
     var currLanding = landingArray[landingIndex]

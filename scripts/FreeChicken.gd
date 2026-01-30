@@ -2,6 +2,8 @@ extends "Enemies/GlitchEnemy.gd"
 
 onready var playerActivationAreaCollisionShape = get_node("PlayerActivationArea/CollisionShape")
 
+onready var scoochSound1 = get_node("Sounds/ScoochSound1")
+onready var scoochSound2 = get_node("Sounds/ScoochSound2")
 enum ChickenState {
     IDLE,
     PREPARE_JUMP,
@@ -68,6 +70,7 @@ func _process(delta):
                             walk_direction.x = 1
                     behavior_jumping = true
                     chicken_state = ChickenState.JUMP
+                    scoochSound1.play()
     elif chicken_state == ChickenState.PREPARE_JUMP:
         # run away from player
         walk_direction.x = 1 if getPlayer().global_transform.origin.x < global_transform.origin.x else -1
@@ -90,6 +93,7 @@ func isFarFromHome():
 # @override
 func landed(_was_on_fallthrough_solid = false):
     .landed()
+    scoochSound2.play()
     if chicken_state == ChickenState.AFRAID:
         return
     behavior_jumping = false

@@ -470,7 +470,8 @@ func _process(delta):
         bulletTryDieToSolids()
         if is_smacked:
             return
-        global_transform.origin += bullet_direction_vector * delta
+        var multiplier = global.SLOW_BOSS_MULTIPLIER if global.memory["secret_bauble"] and global.memory["secret_bauble_enabled"] else 1.0
+        global_transform.origin += bullet_direction_vector * delta * multiplier
 
     if behavior_evolve:
         evolution_timer += (delta*22)

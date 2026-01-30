@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=2]
+[gd_scene load_steps=94 format=2]
 
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
 [ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=2]
@@ -36,8 +36,9 @@
 [ext_resource path="res://materials/CrystalGeode2.tres" type="Material" id=34]
 [ext_resource path="res://assets/mini_mushroom.png" type="Texture" id=35]
 [ext_resource path="res://assets/DELETEME/horn.wav" type="AudioStream" id=36]
+[ext_resource path="res://assets/sounds/ghostVoices/vox_Pain6.wav" type="AudioStream" id=37]
 
-[sub_resource type="ArrayMesh" id=96]
+[sub_resource type="ArrayMesh" id=104]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -50,7 +51,7 @@ surfaces/0 = {
 "vertex_count": 8
 }
 
-[sub_resource type="ArrayMesh" id=97]
+[sub_resource type="ArrayMesh" id=105]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -2178,6 +2179,30 @@ tracks/62/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/63/type = "value"
+tracks/63/path = NodePath("SpriteContainer:scale")
+tracks/63/interp = 1
+tracks/63/loop_wrap = true
+tracks/63/imported = false
+tracks/63/enabled = true
+tracks/63/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+tracks/64/type = "value"
+tracks/64/path = NodePath("SpriteContainer:rotation_degrees")
+tracks/64/interp = 1
+tracks/64/loop_wrap = true
+tracks/64/imported = false
+tracks/64/enabled = true
+tracks/64/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
 
 [sub_resource type="Animation" id=20]
 resource_name = "dieMove"
@@ -2559,112 +2584,64 @@ tracks/3/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 180, 0 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("PassiveInteractionArea/CollisionShape:shape:extents")
+tracks/4/path = NodePath("SpriteContainer/LegsSprite3D:rotation_degrees")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 1 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 180, 0 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("SpriteContainer/Sprite3D:translation")
+tracks/5/path = NodePath("SpriteContainer/EyeSprite3D:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 5.79911, -4 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 180, 0 ) ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("SpriteContainer/LegsSprite3D:rotation_degrees")
+tracks/6/path = NodePath("SpriteContainer/LegsSprite3D:material_override:shader_param/enable_glitch")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 180, 0 ) ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("SpriteContainer/EyeSprite3D:rotation_degrees")
+tracks/7/path = NodePath("SpriteContainer/LegsSprite3D:material_override:shader_param/enable_palette_cycle")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 180, 0 ) ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("SpriteContainer/LegsSprite3D:material_override:shader_param/enable_glitch")
+tracks/8/path = NodePath("SpriteContainer/BodySprite:rotation_degrees")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/9/type = "value"
-tracks/9/path = NodePath("SpriteContainer/LegsSprite3D:material_override:shader_param/enable_palette_cycle")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/10/type = "value"
-tracks/10/path = NodePath("PassiveInteractionArea/CollisionShape:translation")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( -0.528, 1, -11 ) ]
-}
-tracks/11/type = "value"
-tracks/11/path = NodePath("SpriteContainer/BodySprite:rotation_degrees")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 180, 0 ) ]
-}
-tracks/12/type = "value"
-tracks/12/path = NodePath("SpriteContainer/BodySprite:translation")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0.5, 6.197, -4.457 ), Vector3( -0.5, 6.197, -4.457 ) ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -2719,108 +2696,60 @@ tracks/3/keys = {
 "values": [ Vector3( 0, 180, 0 ), Vector3( 0, 0, 0 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("PassiveInteractionArea/CollisionShape:shape:extents")
+tracks/4/path = NodePath("SpriteContainer/LegsSprite3D:rotation_degrees")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 1 ) ]
+"values": [ Vector3( 0, 180, 0 ), Vector3( 0, 0, 0 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("SpriteContainer/Sprite3D:translation")
+tracks/5/path = NodePath("SpriteContainer/EyeSprite3D:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 5.79911, -4 ) ]
+"values": [ Vector3( 0, 180, 0 ), Vector3( 0, 0, 0 ) ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("SpriteContainer/LegsSprite3D:rotation_degrees")
+tracks/6/path = NodePath("SpriteContainer/LegsSprite3D:material_override:shader_param/enable_glitch")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 180, 0 ), Vector3( 0, 0, 0 ) ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("SpriteContainer/EyeSprite3D:rotation_degrees")
+tracks/7/path = NodePath("SpriteContainer/LegsSprite3D:material_override:shader_param/enable_palette_cycle")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 180, 0 ), Vector3( 0, 0, 0 ) ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("SpriteContainer/LegsSprite3D:material_override:shader_param/enable_glitch")
+tracks/8/path = NodePath("SpriteContainer/BodySprite:rotation_degrees")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/9/type = "value"
-tracks/9/path = NodePath("SpriteContainer/LegsSprite3D:material_override:shader_param/enable_palette_cycle")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/10/type = "value"
-tracks/10/path = NodePath("PassiveInteractionArea/CollisionShape:translation")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( -0.528, 1, -11 ) ]
-}
-tracks/11/type = "value"
-tracks/11/path = NodePath("SpriteContainer/BodySprite:translation")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( -0.5, 6.197, -4.457 ), Vector3( 0.5, 6.197, -4.457 ) ]
-}
-tracks/12/type = "value"
-tracks/12/path = NodePath("SpriteContainer/BodySprite:rotation_degrees")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
@@ -2843,91 +2772,91 @@ tracks/0/keys = {
 "values": [ 4, 3, 4, 3 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("CrowPerch:translation")
+tracks/1/path = NodePath("SpriteContainer/HouseSprite:translation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ Vector3( 2, 11.0216, 0 ), Vector3( 2, 10.8212, 0 ), Vector3( 2, 11.0216, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("SpriteContainer/HouseSprite:translation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 0, 8.83015, -4.45667 ), Vector3( 0, 9.37572, -4.45667 ), Vector3( 0, 8.58183, -4.45667 ) ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("SpriteContainer/HouseSprite:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/HouseSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
 "times": PoolRealArray( 0, 0.2, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 1, 1, 1 ), Vector3( 1.1, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("PassiveInteractionArea/CollisionShape:shape:extents")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/path = NodePath("PassiveInteractionArea/CollisionShape:shape:extents")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 1 ) ]
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("WeakEyeInteractionArea/CollisionShape:translation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeakEyeInteractionArea/CollisionShape:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ Vector3( -2.52767, 7.23699, 0 ), Vector3( -2.52767, 7, 0 ), Vector3( -2.52767, 7.23699, 0 ) ]
 }
-tracks/6/type = "value"
-tracks/6/path = NodePath("WeakEyeInteractionArea/CollisionShape:shape:extents")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
+tracks/5/type = "value"
+tracks/5/path = NodePath("WeakEyeInteractionArea/CollisionShape:shape:extents")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
 "times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ Vector3( 1, 1, 1 ) ]
 }
-tracks/7/type = "value"
-tracks/7/path = NodePath("SpriteContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
+tracks/6/type = "value"
+tracks/6/path = NodePath("SpriteContainer/Sprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
 "times": PoolRealArray( 0, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, false ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath("SpriteContainer/Sprite3D:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1.1, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
+}
 tracks/8/type = "value"
-tracks/8/path = NodePath("SpriteContainer/Sprite3D:scale")
+tracks/8/path = NodePath("SpriteContainer/Sprite3D:translation")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -2936,22 +2865,22 @@ tracks/8/keys = {
 "times": PoolRealArray( 0, 0.1, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 1, 1, 1 ), Vector3( 1.1, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
+"values": [ Vector3( 0, 5.799, -4 ), Vector3( 0, 6.33623, -4 ), Vector3( 0, 5.799, -4 ) ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("SpriteContainer/Sprite3D:translation")
+tracks/9/path = NodePath("SpriteContainer/HouseSprite:material_override:shader_param/enable_glitch")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( 0, 0.1, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 5.799, -4 ), Vector3( 0, 6.33623, -4 ), Vector3( 0, 5.799, -4 ) ]
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("SpriteContainer/HouseSprite:material_override:shader_param/enable_glitch")
+tracks/10/path = NodePath("SpriteContainer/Sprite3D:material_override:shader_param/normal_offset")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
@@ -2959,11 +2888,11 @@ tracks/10/enabled = true
 tracks/10/keys = {
 "times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
+"update": 0,
+"values": [ 0.06, 0.02 ]
 }
 tracks/11/type = "value"
-tracks/11/path = NodePath("SpriteContainer/Sprite3D:material_override:shader_param/normal_offset")
+tracks/11/path = NodePath("SpriteContainer/Sprite3D:material_override:shader_param/time_influence")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/imported = false
@@ -2972,10 +2901,10 @@ tracks/11/keys = {
 "times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.06, 0.02 ]
+"values": [ 20.0, 1.0 ]
 }
 tracks/12/type = "value"
-tracks/12/path = NodePath("SpriteContainer/Sprite3D:material_override:shader_param/time_influence")
+tracks/12/path = NodePath("SpriteContainer/Sprite3D:material_override:shader_param/y_div")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/imported = false
@@ -2984,10 +2913,10 @@ tracks/12/keys = {
 "times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 20.0, 1.0 ]
+"values": [ 7.0, 2.87 ]
 }
 tracks/13/type = "value"
-tracks/13/path = NodePath("SpriteContainer/Sprite3D:material_override:shader_param/y_div")
+tracks/13/path = NodePath("SpriteContainer/HouseSprite:material_override:shader_param/y_div")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/imported = false
@@ -2996,10 +2925,10 @@ tracks/13/keys = {
 "times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 7.0, 2.87 ]
+"values": [ 10.0, 2.87 ]
 }
 tracks/14/type = "value"
-tracks/14/path = NodePath("SpriteContainer/HouseSprite:material_override:shader_param/y_div")
+tracks/14/path = NodePath("SpriteContainer/HouseSprite:material_override:shader_param/time_influence")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/imported = false
@@ -3008,10 +2937,10 @@ tracks/14/keys = {
 "times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 10.0, 2.87 ]
+"values": [ 10.0, 1.0 ]
 }
 tracks/15/type = "value"
-tracks/15/path = NodePath("SpriteContainer/HouseSprite:material_override:shader_param/time_influence")
+tracks/15/path = NodePath("SpriteContainer/HouseSprite:material_override:shader_param/normal_offset")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/imported = false
@@ -3020,58 +2949,58 @@ tracks/15/keys = {
 "times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 10.0, 1.0 ]
+"values": [ 1.0, 0.02 ]
 }
 tracks/16/type = "value"
-tracks/16/path = NodePath("SpriteContainer/HouseSprite:material_override:shader_param/normal_offset")
+tracks/16/path = NodePath("SpriteContainer/EyeSprite3D:material_override:shader_param/enable_palette_cycle")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/imported = false
 tracks/16/enabled = true
 tracks/16/keys = {
-"times": PoolRealArray( 0, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 1.0, 0.02 ]
-}
-tracks/17/type = "value"
-tracks/17/path = NodePath("SpriteContainer/EyeSprite3D:material_override:shader_param/enable_palette_cycle")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/keys = {
 "times": PoolRealArray( 0, 0.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
-tracks/18/type = "value"
-tracks/18/path = NodePath("SpriteContainer/EyeSprite3D:translation")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/keys = {
+tracks/17/type = "value"
+tracks/17/path = NodePath("SpriteContainer/EyeSprite3D:translation")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0, 5.79911, -4 ) ]
 }
-tracks/19/type = "value"
-tracks/19/path = NodePath("SpriteContainer/EyeSprite3D:scale")
-tracks/19/interp = 1
-tracks/19/loop_wrap = true
-tracks/19/imported = false
-tracks/19/enabled = true
-tracks/19/keys = {
+tracks/18/type = "value"
+tracks/18/path = NodePath("SpriteContainer/EyeSprite3D:scale")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
 "times": PoolRealArray( 0, 0.1, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 1, 1, 1 ), Vector3( 1.5, 1.5, 1 ), Vector3( 1, 1, 1 ) ]
 }
+tracks/19/type = "value"
+tracks/19/path = NodePath("SpriteContainer/Sprite3D:material_override:shader_param/enable_glitch")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 tracks/20/type = "value"
-tracks/20/path = NodePath("SpriteContainer/Sprite3D:material_override:shader_param/enable_glitch")
+tracks/20/path = NodePath("SpriteContainer/Sprite3D:material_override:shader_param/enable_dither")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/imported = false
@@ -3083,7 +3012,7 @@ tracks/20/keys = {
 "values": [ true, false ]
 }
 tracks/21/type = "value"
-tracks/21/path = NodePath("SpriteContainer/Sprite3D:material_override:shader_param/enable_dither")
+tracks/21/path = NodePath("SpriteContainer/LegsSprite3D:material_override:shader_param/enable_glitch")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/imported = false
@@ -3095,19 +3024,19 @@ tracks/21/keys = {
 "values": [ true, false ]
 }
 tracks/22/type = "value"
-tracks/22/path = NodePath("SpriteContainer/LegsSprite3D:material_override:shader_param/enable_glitch")
+tracks/22/path = NodePath("PassiveInteractionArea/CollisionShape:translation")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/imported = false
 tracks/22/enabled = true
 tracks/22/keys = {
-"times": PoolRealArray( 0, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -0.528, 1, -11 ) ]
 }
 tracks/23/type = "value"
-tracks/23/path = NodePath("PassiveInteractionArea/CollisionShape:translation")
+tracks/23/path = NodePath("SpriteContainer/EyeSprite3D:frame")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/imported = false
@@ -3115,11 +3044,11 @@ tracks/23/enabled = true
 tracks/23/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( -0.528, 1, -11 ) ]
+"update": 1,
+"values": [ 4 ]
 }
 tracks/24/type = "value"
-tracks/24/path = NodePath("SpriteContainer/EyeSprite3D:frame")
+tracks/24/path = NodePath("SpriteContainer/LegsSprite3D:frame")
 tracks/24/interp = 1
 tracks/24/loop_wrap = true
 tracks/24/imported = false
@@ -3131,7 +3060,7 @@ tracks/24/keys = {
 "values": [ 4 ]
 }
 tracks/25/type = "value"
-tracks/25/path = NodePath("SpriteContainer/LegsSprite3D:frame")
+tracks/25/path = NodePath("SpriteContainer/LegsSprite3D:material_override:shader_param/enable_palette_cycle")
 tracks/25/interp = 1
 tracks/25/loop_wrap = true
 tracks/25/imported = false
@@ -3140,31 +3069,115 @@ tracks/25/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 4 ]
+"values": [ false ]
 }
 tracks/26/type = "value"
-tracks/26/path = NodePath("SpriteContainer/LegsSprite3D:material_override:shader_param/enable_palette_cycle")
+tracks/26/path = NodePath("SpriteContainer/EyeSprite3D:visible")
 tracks/26/interp = 1
 tracks/26/loop_wrap = true
 tracks/26/imported = false
 tracks/26/enabled = true
 tracks/26/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ true, true ]
 }
 tracks/27/type = "value"
-tracks/27/path = NodePath("SpriteContainer/EyeSprite3D:visible")
+tracks/27/path = NodePath("SpriteContainer:scale")
 tracks/27/interp = 1
 tracks/27/loop_wrap = true
 tracks/27/imported = false
 tracks/27/enabled = true
 tracks/27/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1.6, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("SpriteContainer/Sprite3D:rotation_degrees")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
 "times": PoolRealArray( 0, 0.8 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, true ]
+"update": 0,
+"values": [ Vector3( 0, 180, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("SpriteContainer/EyeSprite3D:rotation_degrees")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 180, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("SpriteContainer/LegsSprite3D:rotation_degrees")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 180, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/31/type = "value"
+tracks/31/path = NodePath("SpriteContainer/HouseSprite:rotation_degrees")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 180, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/32/type = "value"
+tracks/32/path = NodePath("PassiveInteractionArea:rotation_degrees")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/33/type = "value"
+tracks/33/path = NodePath("WeakEyeInteractionArea:rotation_degrees")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/34/type = "value"
+tracks/34/path = NodePath("CubeCrystal:translation")
+tracks/34/interp = 2
+tracks/34/loop_wrap = true
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 18.8277, -2.13 ), Vector3( 0, 12, -2.13 ) ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -3901,7 +3914,7 @@ tracks/14/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=40]
@@ -4428,6 +4441,178 @@ tracks/42/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="Animation" id=98]
+resource_name = "stretchLegs"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 0.7, 0.9, 1.1, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 3, 4, 3, 4, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/HouseSprite:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 8.58183, -4.45667 ), Vector3( 0, 8, -4.457 ), Vector3( 0, 9.5, -4.457 ), Vector3( 0, 10.5, -4.457 ), Vector3( 0, 11.5, -4.457 ), Vector3( 0, 13.5, -4.457 ), Vector3( 0, 14, -4.457 ), Vector3( 0, 14.5, -4.457 ), Vector3( 0, 14, -4.457 ), Vector3( 0, 14, -4.457 ), Vector3( 0, 14, -4.457 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/HouseSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0.9, 1.1, 1 ), Vector3( 1.1, 0.9, 1 ), Vector3( 1, 1, 1 ), Vector3( 0.9, 1.1, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/Sprite3D:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 5.79911, -4 ), Vector3( 0, 5, -4 ), Vector3( 0, 7, -4 ), Vector3( 0, 8, -4 ), Vector3( 0, 9, -4 ), Vector3( 0, 11, -4 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SpriteContainer/EyeSprite3D:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/LegsSprite3D:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 2, 8, 9, 10, 11 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SpriteContainer/EyeSprite3D:material_override:shader_param/offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SpriteContainer/EyeSprite3D:material_override:shader_param/black_offset")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("CubeCrystal:translation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 12.1621, -2.13 ), Vector3( 0, 14, -2.13 ), Vector3( 0, 16, -2.13 ), Vector3( 0, 17, -2.13 ), Vector3( 0, 21, -2.13 ), Vector3( 0, 22, -2.13 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SpriteContainer/HouseSprite:material_override:shader_param/enable_glitch")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("SpriteContainer/HouseSprite:material_override:shader_param/enable_glitch_3d")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("SpriteContainer/EyeSprite3D:translation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 5.79911, -4 ), Vector3( 0, 5, -4 ), Vector3( 0, 7, -4 ), Vector3( 0, 8, -4 ), Vector3( 0, 9, -4 ), Vector3( 0, 11, -4 ), Vector3( 0, 11.5, -4 ), Vector3( 0, 12, -4 ), Vector3( 0, 11.5, -4 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("SpriteContainer:scale")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1.3, 1 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("SpriteContainer:translation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
 [sub_resource type="Animation" id=41]
 resource_name = "suddenlyBrake"
 length = 0.8
@@ -4633,7 +4818,880 @@ tracks/16/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=99]
+resource_name = "tallWobble"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/LegsSprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 11, 13, 11, 12 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/LegsSprite3D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 3.542 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, -5.729 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/HouseSprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 5.073 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, -7.973 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/HouseSprite:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 14, -4.457 ), Vector3( -0.343826, 14, -4.457 ), Vector3( 0, 14, -4.457 ), Vector3( 0.344, 14, -4.457 ), Vector3( 0, 14, -4.457 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SpriteContainer/EyeSprite3D:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 11.5, -4 ), Vector3( -0.344, 11.5, -4 ), Vector3( 0, 11.5, -4 ), Vector3( 0.344, 11.5, -4 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/Sprite3D:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 11, -4 ), Vector3( -0.344, 11, -4 ), Vector3( 0, 11, -4 ), Vector3( 0.344, 11, -4 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SpriteContainer/Sprite3D:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 3, 4, 3 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SpriteContainer/EyeSprite3D:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 5, 3, 4, 3 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SpriteContainer/EyeSprite3D:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SpriteContainer/Sprite3D:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/10/type = "method"
+tracks/10/path = NodePath(".")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0.2, 0.4, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "spawnGlitchBullet"
+}, {
+"args": [  ],
+"method": "stepInIdleDir"
+}, {
+"args": [  ],
+"method": "spawnGlitchBullet"
+}, {
+"args": [  ],
+"method": "stepInIdleDir"
+} ]
+}
+
+[sub_resource type="Animation" id=101]
+resource_name = "tallWobbleEasy"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/LegsSprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 11, 13, 11, 12 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/LegsSprite3D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 3.542 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, -5.729 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/HouseSprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 5.073 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, -7.973 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/HouseSprite:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 14, -4.457 ), Vector3( -0.343826, 14, -4.457 ), Vector3( 0, 14, -4.457 ), Vector3( 0.344, 14, -4.457 ), Vector3( 0, 14, -4.457 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SpriteContainer/EyeSprite3D:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 11.5, -4 ), Vector3( -0.344, 11.5, -4 ), Vector3( 0, 11.5, -4 ), Vector3( 0.344, 11.5, -4 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/Sprite3D:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 11, -4 ), Vector3( -0.344, 11, -4 ), Vector3( 0, 11, -4 ), Vector3( 0.344, 11, -4 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SpriteContainer/Sprite3D:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 3, 3, 3 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SpriteContainer/EyeSprite3D:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 5, 3, 4, 3 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SpriteContainer/EyeSprite3D:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SpriteContainer/Sprite3D:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/10/type = "method"
+tracks/10/path = NodePath(".")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0.2, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "spawnGlitchBullet"
+}, {
+"args": [  ],
+"method": "stepInIdleDir"
+}, {
+"args": [  ],
+"method": "stepInIdleDir"
+} ]
+}
+
+[sub_resource type="Animation" id=106]
+resource_name = "tallWobbleHard"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/LegsSprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 11, 13, 11, 12 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/LegsSprite3D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 3.542 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, -5.729 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/HouseSprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 5.073 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, -7.973 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/HouseSprite:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 14, -4.457 ), Vector3( -0.343826, 14, -4.457 ), Vector3( 0, 14, -4.457 ), Vector3( 0.344, 14, -4.457 ), Vector3( 0, 14, -4.457 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SpriteContainer/EyeSprite3D:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 11.5, -4 ), Vector3( -0.344, 11.5, -4 ), Vector3( 0, 11.5, -4 ), Vector3( 0.344, 11.5, -4 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/Sprite3D:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 11, -4 ), Vector3( -0.344, 11, -4 ), Vector3( 0, 11, -4 ), Vector3( 0.344, 11, -4 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SpriteContainer/Sprite3D:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.5, 0.6, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 3, 4, 3, 4, 3 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SpriteContainer/EyeSprite3D:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 5, 3, 4, 3 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SpriteContainer/EyeSprite3D:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SpriteContainer/Sprite3D:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/10/type = "method"
+tracks/10/path = NodePath(".")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0.2, 0.4, 0.5, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "spawnGlitchBullet"
+}, {
+"args": [  ],
+"method": "stepInIdleDir"
+}, {
+"args": [  ],
+"method": "spawnGlitchBullet"
+}, {
+"args": [  ],
+"method": "spawnGlitchBullet"
+}, {
+"args": [  ],
+"method": "stepInIdleDir"
+} ]
+}
+
+[sub_resource type="Animation" id=100]
+resource_name = "tallWobbleRight"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/LegsSprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 11, 13, 11, 12 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/LegsSprite3D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 180, 0 ), Vector3( 0, 180, 3.542 ), Vector3( 0, 180, 0 ), Vector3( 0, 180, -5.729 ), Vector3( 0, 180, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/HouseSprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 180, 0 ), Vector3( 0, 180, 5.073 ), Vector3( 0, 180, 0 ), Vector3( 0, 180, -7.973 ), Vector3( 0, 180, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/HouseSprite:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 14, -4.457 ), Vector3( -0.343826, 14, -4.457 ), Vector3( 0, 14, -4.457 ), Vector3( 0.344, 14, -4.457 ), Vector3( 0, 14, -4.457 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SpriteContainer/EyeSprite3D:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 11.5, -4 ), Vector3( -0.344, 11.5, -4 ), Vector3( 0, 11.5, -4 ), Vector3( 0.344, 11.5, -4 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/Sprite3D:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 11, -4 ), Vector3( -0.344, 11, -4 ), Vector3( 0, 11, -4 ), Vector3( 0.344, 11, -4 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SpriteContainer/Sprite3D:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 3, 4, 3 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SpriteContainer/EyeSprite3D:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 5, 3, 4, 3 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SpriteContainer/Sprite3D:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 180, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SpriteContainer/EyeSprite3D:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 180, 0 ) ]
+}
+tracks/10/type = "method"
+tracks/10/path = NodePath(".")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0.2, 0.4, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "spawnGlitchBullet"
+}, {
+"args": [  ],
+"method": "stepInIdleDir"
+}, {
+"args": [  ],
+"method": "spawnGlitchBullet"
+}, {
+"args": [  ],
+"method": "stepInIdleDir"
+} ]
+}
+
+[sub_resource type="Animation" id=103]
+resource_name = "tallWobbleRightBaby"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/LegsSprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 11, 13, 11, 12 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/LegsSprite3D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 180, 0 ), Vector3( 0, 180, 3.542 ), Vector3( 0, 180, 0 ), Vector3( 0, 180, -5.729 ), Vector3( 0, 180, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/HouseSprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 180, 0 ), Vector3( 0, 180, 5.073 ), Vector3( 0, 180, 0 ), Vector3( 0, 180, -7.973 ), Vector3( 0, 180, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/HouseSprite:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 14, -4.457 ), Vector3( -0.343826, 14, -4.457 ), Vector3( 0, 14, -4.457 ), Vector3( 0.344, 14, -4.457 ), Vector3( 0, 14, -4.457 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SpriteContainer/EyeSprite3D:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 11.5, -4 ), Vector3( -0.344, 11.5, -4 ), Vector3( 0, 11.5, -4 ), Vector3( 0.344, 11.5, -4 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/Sprite3D:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 11, -4 ), Vector3( -0.344, 11, -4 ), Vector3( 0, 11, -4 ), Vector3( 0.344, 11, -4 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SpriteContainer/Sprite3D:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 3, 3, 3, 3, 3 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SpriteContainer/EyeSprite3D:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 5, 3, 4, 3 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SpriteContainer/Sprite3D:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 180, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SpriteContainer/EyeSprite3D:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 180, 0 ) ]
+}
+tracks/10/type = "method"
+tracks/10/path = NodePath(".")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "stepInIdleDir"
+}, {
+"args": [  ],
+"method": "stepInIdleDir"
+} ]
+}
+
+[sub_resource type="Animation" id=102]
+resource_name = "tallWobbleRightEasy"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/LegsSprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 11, 13, 11, 12 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteContainer/LegsSprite3D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 180, 0 ), Vector3( 0, 180, 3.542 ), Vector3( 0, 180, 0 ), Vector3( 0, 180, -5.729 ), Vector3( 0, 180, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteContainer/HouseSprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 180, 0 ), Vector3( 0, 180, 5.073 ), Vector3( 0, 180, 0 ), Vector3( 0, 180, -7.973 ), Vector3( 0, 180, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteContainer/HouseSprite:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 14, -4.457 ), Vector3( -0.343826, 14, -4.457 ), Vector3( 0, 14, -4.457 ), Vector3( 0.344, 14, -4.457 ), Vector3( 0, 14, -4.457 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SpriteContainer/EyeSprite3D:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 11.5, -4 ), Vector3( -0.344, 11.5, -4 ), Vector3( 0, 11.5, -4 ), Vector3( 0.344, 11.5, -4 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteContainer/Sprite3D:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 11, -4 ), Vector3( -0.344, 11, -4 ), Vector3( 0, 11, -4 ), Vector3( 0.344, 11, -4 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SpriteContainer/Sprite3D:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 3, 3, 3, 4, 3 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SpriteContainer/EyeSprite3D:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 5, 3, 4, 3 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SpriteContainer/Sprite3D:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 180, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SpriteContainer/EyeSprite3D:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 180, 0 ) ]
+}
+tracks/10/type = "method"
+tracks/10/path = NodePath(".")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0.4, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "stepInIdleDir"
+}, {
+"args": [  ],
+"method": "spawnGlitchBullet"
+}, {
+"args": [  ],
+"method": "stepInIdleDir"
+} ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -5424,6 +6482,12 @@ volume_db = -15.0
 pitch_scale = 0.9
 bus = "Sfx"
 
+[node name="AttackBawkSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 37 )
+volume_db = -5.0
+pitch_scale = 0.9
+bus = "Sfx"
+
 [node name="RunBawkSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 29 )
 volume_db = -10.0
@@ -5460,11 +6524,11 @@ transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, 0 )
 
 [node name="MeshInstance" parent="CubeCrystal/CubeContainer" index="0"]
 transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
-mesh = SubResource( 96 )
+mesh = SubResource( 104 )
 
 [node name="MeshInstance3" parent="CubeCrystal/CubeContainer" index="1"]
 transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
-mesh = SubResource( 97 )
+mesh = SubResource( 105 )
 
 [node name="MeshInstance2" parent="CubeCrystal/CubeContainer" index="2"]
 transform = Transform( 1, 0, 0, 0, 0.7, 2.12874e-08, 0, -1.49012e-08, 1, 0, 0.241481, -0.0808809 )
@@ -5534,7 +6598,7 @@ max_frames = 1
 overwritten_green_palette_path = "res://assets/palettes/green_palette_town.png"
 overwritten_yellow_palette_path = "res://assets/palettes/yellow_palette_town.png"
 
-[node name="FallthroughSolid" type="Area" parent="SpriteContainer/HouseSprite" groups=["fallthrough"]]
+[node name="FallthroughSolid" type="Area" parent="SpriteContainer/HouseSprite"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.05951, 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="SpriteContainer/HouseSprite/FallthroughSolid"]
@@ -5576,7 +6640,14 @@ anims/idleSleepy = SubResource( 95 )
 anims/idleWalk = SubResource( 15 )
 anims/run = SubResource( 7 )
 anims/shellExplode = SubResource( 40 )
+anims/stretchLegs = SubResource( 98 )
 anims/suddenlyBrake = SubResource( 41 )
+anims/tallWobble = SubResource( 99 )
+anims/tallWobbleEasy = SubResource( 101 )
+anims/tallWobbleHard = SubResource( 106 )
+anims/tallWobbleRight = SubResource( 100 )
+anims/tallWobbleRightBaby = SubResource( 103 )
+anims/tallWobbleRightEasy = SubResource( 102 )
 anims/wakeup = SubResource( 6 )
 
 [node name="CrowPerch" type="Spatial" parent="."]

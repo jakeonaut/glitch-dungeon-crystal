@@ -752,7 +752,7 @@ can_nav_down = false
 kill_after_glitch = true
 
 [node name="SafariZone" parent="ToxicJungle" instance=ExtResource( 3 )]
-transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, -4, -8, 0 )
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, -4, -7, 0 )
 material_override = null
 frame = 38
 path = "res://levels/EndlessFantasy/gd1ToxicJungle/006SafariZone.tscn"

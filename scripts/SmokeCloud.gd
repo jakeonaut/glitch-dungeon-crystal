@@ -32,14 +32,15 @@ func _ready():
     if should_randomize:
         randomizeFrame()
 
+var step = 2
 func _process(delta):
     # delta = delta * global.time_dilation_multiplier # i'm exempt!
     
     # if global.pauseGame: return
     if target_x != -9999:
-        global_transform.origin.x = global_transform.origin.x + (target_x - global_transform.origin.x) * delta * 2
+        global_transform.origin.x = global_transform.origin.x + (target_x - global_transform.origin.x) * delta * step
     if target_y != -9999:
-        global_transform.origin.y = global_transform.origin.y + (target_y - global_transform.origin.y) * delta * 2
+        global_transform.origin.y = global_transform.origin.y + (target_y - global_transform.origin.y) * delta * step
     if fade_out_opacity:
         curr_opacity = curr_opacity + (0 - curr_opacity) * delta * opacity_fade_rate
         var material = get_material_override()

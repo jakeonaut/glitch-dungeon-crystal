@@ -33,7 +33,7 @@ onready var label3D = get_node("Label3D")
 export var canPlayDoorSound = true
 
 var spawn_timer = 0
-var spawn_time_limit = 3
+var spawn_time_limit = 6
 
 onready var mySprite = get_node("Sprite3D")
 onready var mySprite2 = get_node("Sprite3D2")
@@ -228,8 +228,8 @@ func _process(delta):
   
   if global.pauseGame: return
 
-  # if is_passive:
-  #   spawnParticles(delta)
+  if is_passive:
+    spawnParticles(delta)
 
   if is_unlocking and not keySound.playing:
     if unlocking_key_array.size() == 0:
@@ -254,6 +254,7 @@ func tryProcessGlitchedPath():
 
 
 func spawnParticles(delta):
+  sparkleSprite.visible = false
   spawn_timer += (delta*22)
   if spawn_timer >= spawn_time_limit:
     var x_y_min_max = calculateXYMinMax()
@@ -269,26 +270,27 @@ func spawnParticles(delta):
     for i in children:
       num_children += 1
 
-    if num_children < 20:
+    if num_children < 25:
       var newSprite = sparkleSprite.duplicate()
       newSprite.should_fizzle_out = true
       newSprite.visible = true
-      newSprite.transform.origin = Vector3(
+      add_child(newSprite)
+      newSprite.global_transform.origin = self.global_transform.origin + Vector3(
         stepify(rand_range(x_min, x_max), 0.12),
         stepify(rand_range(y_min, y_max), 0.12),
         0
       )
       newSprite.updateBaseFrame(0, 0)
       newSprite.max_frames = 2
-      add_child(newSprite)
       newSprite.target_x = newSprite.global_transform.origin.x + target_x_add
       newSprite.target_y = newSprite.global_transform.origin.y + target_y_add
       newSprite.fade_out_opacity = true
-      newSprite.curr_opacity = 0.6
+      newSprite.curr_opacity = 1.0
       newSprite.start_frame = randi() % (newSprite.hframes * newSprite.vframes)
       newSprite.restart()
       newSprite.opacity_fade_rate = 5
-      spawn_timer = 0
+      newSprite.step = rand_range(1, 1.5)
+    spawn_timer = 0
       
 func calculateXYMinMax():
   var x_min = -1.0
@@ -299,23 +301,21 @@ func calculateXYMinMax():
   var target_y_add = 0
   if not is_vertical and not is_level_door:
     if landing.global_transform.origin.x < self.global_transform.origin.x:
-      x_min = -3
-      x_max = -2
+      x_min = -2.5
+      x_max = -1.5
       target_x_add = rand_range(-3, -1.5)
     else:
-      x_min = 2
-      x_max = 3
+      x_min = 1.5
+      x_max = 2.5
       target_x_add = rand_range(1.5, 3)
   else:
-    x_min = -1.0
-    x_max = 1.0
     if landing.global_transform.origin.y < self.global_transform.origin.y and not is_level_door:
-      y_min = -2
-      y_max = -0.5
+      y_min = -1.5
+      y_max = -0.0
       target_y_add = rand_range(-3, -1.5)
     else:
-      y_min = 2.5
-      y_max = 4.0
+      y_min = 2.0
+      y_max = 3.5
       target_y_add = rand_range(1.5, 3)
   # okay.... I wish godot allowed multiple return values like javascript
   return [x_min, x_max, y_min, y_max, target_x_add, target_y_add] 
@@ -545,18 +545,18 @@ func goThroughDoor(start_of_game = false, really_long_fade = false, really_reall
       getPlayer().pauseSelf = false
       getPlayer().pauseAnimation = false
       getPlayer().pauseInput = false
-      if gravity_flip and not has_gravity_flipped:
-        has_gravity_flipped = true
-        getPlayer().gravitySound.pitch_scale = rand_range(0.8, 1.2)
-        getPlayer().gravitySound.play()
-        getPlayer().glitchTickle()
-        level.flipGravity(-1 * (getPlayer().grav / getPlayer().grav.abs()))
-        if getPlayer().glitch_form == global.GlitchForm.FEATHER:
-          getPlayer().lv.y *= 2
-          getPlayer().vv *= 2
-          getPlayer().linear_velocity.y *= 2
-        yield(get_tree().create_timer(0.2), "timeout")
-        has_gravity_flipped = false
+      # if gravity_flip and not has_gravity_flipped:
+      #   has_gravity_flipped = true
+      #   getPlayer().gravitySound.pitch_scale = rand_range(0.8, 1.2)
+      #   getPlayer().gravitySound.play()
+      #   getPlayer().glitchTickle()
+      #   level.flipGravity(-1 * (getPlayer().grav / getPlayer().grav.abs()))
+      #   if getPlayer().glitch_form == global.GlitchForm.FEATHER:
+      #     getPlayer().lv.y *= 2
+      #     getPlayer().vv *= 2
+      #     getPlayer().linear_velocity.y *= 2
+      #   yield(get_tree().create_timer(0.2), "timeout")
+      #   has_gravity_flipped = false
     return
 
   global.prepareForTransition(level, self)

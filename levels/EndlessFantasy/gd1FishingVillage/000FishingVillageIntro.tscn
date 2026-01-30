@@ -940,7 +940,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20.9, 0 )
 
 [node name="NPC2" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4, 0, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 bbText = "NPC.Fisherman.1"
 can_move = false
 can_camera_zoom = false
@@ -1049,7 +1049,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -4, 0 )
 
 [node name="AngelEgg" parent="Viewport/level" instance=ExtResource( 37 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, -5, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 
 [node name="BabushkaCatCrystalSniffer" parent="Viewport/level" instance=ExtResource( 38 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9649, 8.04138, 0 )
@@ -1102,7 +1102,7 @@ shape = SubResource( 93 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 26 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 62.9356, 20.0676, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 can_move = false
 can_camera_zoom = false
 is_a_body = false
@@ -1171,7 +1171,7 @@ shape = SubResource( 108 )
 
 [node name="BigFishNPC" parent="Viewport/level" instance=ExtResource( 32 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 11, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 bbText = "NPC.Fisherman.2"
 
 [node name="CollisionShape" parent="Viewport/level/BigFishNPC/SmallInteractionArea" index="0"]

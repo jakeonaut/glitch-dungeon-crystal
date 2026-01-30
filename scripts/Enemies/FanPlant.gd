@@ -13,6 +13,10 @@ var chicken_state_dig_time_limit = 6
 var chicken_state_reset_dig_time_limit = 8
 var far_from_home_dist = 5
 export var is_fan_spinning = false
+export var is_evil = false
+export var is_evil_but_likes_normalcy = false
+export var can_do_it_on_beginning = false
+var should_reset_gravity = false
 
 export var can_hop = false
 var initial_grav = Vector2(0, 60)
@@ -25,14 +29,26 @@ var kizzyCatRes = preload("res://sceneObjects/KizzyCat.tscn")
 var evilSporeRes = preload("res://sceneObjects/Enemies/EvilSpore.tscn")
 var myKizzySporeRef = null
 export var spore_spawn_dir = Vector2(0, 1)
+var spawn_cooldown_timer = 30
+var spawn_cooldown_time_limit = 30
 
 var opacity = 1.0
 
 func _ready():
-    set_process(true)
-    initial_grav = grav
-    initial_true_terminal_vel = true_terminal_vel
-    should_smack_pause_me = false
+  set_process(true)
+  initial_grav = grav
+  initial_true_terminal_vel = true_terminal_vel
+  should_smack_pause_me = false
+  if is_evil:
+    spawn_cooldown_timer = 0
+
+  if is_evil_but_likes_normalcy and global.memory.has("grav_direction") and can_do_it_on_beginning:
+    var grav_direction = global.memory["grav_direction"]
+    if typeof(grav_direction) == TYPE_INT or typeof(grav_direction) == TYPE_REAL:
+      grav_direction = Vector2(0, grav_direction)
+    if grav_direction.y <= 0:
+      should_reset_gravity = true
+      behavior_jumping = true
 
 func _process(delta):
   # ._process(delta) implicit
@@ -47,8 +63,18 @@ func _process(delta):
     notDieSound.pitch_scale = 0.5
   # behavior_walking = not is_fan_spinning
 
-  if spawn_immediately and (myKizzySporeRef == null or myKizzySporeRef.get_ref() == null):
-    spawnKizzySpore()
+  if is_evil:
+    if not behavior_jumping and not is_evil_but_likes_normalcy:
+      spawn_cooldown_timer += (delta*22)
+      if spawn_cooldown_timer >= spawn_cooldown_time_limit:
+        spawn_cooldown_timer = 0
+        behavior_jumping = true
+  else:
+    if spawn_immediately and (myKizzySporeRef == null or myKizzySporeRef.get_ref() == null):
+      spawn_cooldown_timer += (delta*22)
+      if spawn_cooldown_timer >= spawn_cooldown_time_limit:
+        spawn_cooldown_timer = 0
+        spawnKizzySpore()
 
   if chicken_state == ChickenState.IDLE:
     if is_fan_spinning:
@@ -105,7 +131,7 @@ func spawnKizzySpore():
   if spore_spawn_dir == level.player.grav.normalized():
     return
 
-  var newKizzySpore = kizzyCatRes.instance()
+  var newKizzySpore = evilSporeRes.instance() if is_evil else kizzyCatRes.instance()
   level.add_child(newKizzySpore)
   newKizzySpore.global_transform.origin = self.global_transform.origin
   newKizzySpore.global_transform.origin.y += 2
@@ -119,6 +145,8 @@ func spawnKizzySpore():
   elif spore_spawn_dir.is_equal_approx(Vector2(0, 1)):
     newKizzySpore.rotation_degrees.z = 0
 
+  newKizzySpore.is_evil = is_evil
+  newKizzySpore.grav = self.grav / 7.5
   newKizzySpore.reassembleSound.play()
   # newKizzySpore.grav = Vector2(0, 0)
   for _i in range(5):
@@ -129,15 +157,35 @@ func spawnKizzySpore():
 # @override
 func unsmack():
   .unsmack()
-  if spawn_immediately:
+  if spawn_immediately and not is_evil:
     if myKizzySporeRef == null or myKizzySporeRef.get_ref() == null:
       spawnKizzySpore()
     else:
       is_fan_spinning = true
+  elif is_evil:
+    is_fan_spinning = not is_evil_but_likes_normalcy
     
 # @override
 func landed(_was_on_fallthrough_solid = false):
   .landed()
+  if is_evil:
+    level.gameCamera.miniShakeScreen()
+    if is_evil_but_likes_normalcy:
+      if should_reset_gravity:
+        level.flipGravity(Vector2(0, 1))
+      else:
+        level.flipGravity(-1 * (getPlayer().grav / getPlayer().grav.abs()))
+    elif level.player.grav.y > 0:
+      level.flipGravity(Vector2(-1, 0))
+    elif level.player.grav.x < 0:
+      level.flipGravity(Vector2(0, -1))
+    elif level.player.grav.y < 0:
+      level.flipGravity(Vector2(1, 0))
+    elif level.player.grav.x > 0:
+      level.flipGravity(Vector2(0, 1))
+    spawn_cooldown_timer = 0
+    should_reset_gravity = false
+    
   behavior_jumping = false
       
   if chicken_state != ChickenState.IDLE:
@@ -149,6 +197,8 @@ func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
   if is_smacked or am_i_dying:
     return false
   .getSmacked(broom_origin, silently, is_local_broom)
+  if is_evil:
+    spawn_cooldown_timer = 0
 
   if not can_deactivate_fan:
     return

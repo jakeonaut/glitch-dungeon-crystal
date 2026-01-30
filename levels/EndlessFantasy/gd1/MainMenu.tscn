@@ -1,10 +1,10 @@
-[gd_scene load_steps=231 format=2]
+[gd_scene load_steps=233 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/player_base_palette.png" type="Texture" id=2]
 [ext_resource path="res://assets/palettes/NES_base_palette.png" type="Texture" id=3]
 [ext_resource path="res://assets/palettes/NES_base_broom_palette.png" type="Texture" id=4]
-[ext_resource path="res://assets/sounds/MM_OldLady_Sigh.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/exhale3.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/tower.png" type="Texture" id=6]
 [ext_resource path="res://assets/sounds/cowMoo.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/palettes/green_palette_town2.png" type="Texture" id=8]
@@ -27,7 +27,7 @@
 [ext_resource path="res://sceneObjects/Enemies/GlitchEnemy.tscn" type="PackedScene" id=25]
 [ext_resource path="res://sceneObjects/Door.tscn" type="PackedScene" id=26]
 [ext_resource path="res://assets/sounds/eba_earthquake1.wav" type="AudioStream" id=27]
-[ext_resource path="res://assets/sounds/eba_speech_old_women.wav" type="AudioStream" id=28]
+[ext_resource path="res://assets/sounds/public_sfx_fishreel.wav" type="AudioStream" id=28]
 [ext_resource path="res://scripts/ParallaxBackground.gd" type="Script" id=29]
 [ext_resource path="res://assets/sounds/hurtglitch2.wav" type="AudioStream" id=30]
 [ext_resource path="res://assets/sounds/broom.wav" type="AudioStream" id=31]
@@ -67,6 +67,8 @@
 [ext_resource path="res://assets/palettes/inkpink-1x.png" type="Texture" id=65]
 [ext_resource path="res://assets/palettes/kirokaze-gameboy-1x.png" type="Texture" id=66]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Dragon.wav" type="AudioStream" id=67]
+[ext_resource path="res://assets/sounds/chord004_innerpeace_reverse.wav" type="AudioStream" id=68]
+[ext_resource path="res://assets/sounds/castStart.wav" type="AudioStream" id=69]
 [ext_resource path="res://petsclub2.png" type="Texture" id=72]
 [ext_resource path="res://assets/palettes/johto-redrawn-modernised-gbc-1x.png" type="Texture" id=73]
 [ext_resource path="res://titlecard.ogv" type="VideoStream" id=75]
@@ -3018,6 +3020,7 @@ can_camera_zoom = false
 dont_recolor_me = true
 is_a_body = false
 tiny_textbox = true
+randomlyMoo = true
 
 [node name="CollisionShape" parent="Viewport/level/NPC2/SmallInteractionArea" index="0"]
 shape = SubResource( 253 )
@@ -3060,6 +3063,7 @@ shape = SubResource( 87 )
 [node name="DialogStartSound" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox" index="10"]
 stream = ExtResource( 28 )
 volume_db = -15.0
+pitch_scale = 0.5
 script = ExtResource( 59 )
 
 [node name="DialogSound" parent="Viewport/level/BabushkaCat/NPC TextBox/TextBox" index="11"]
@@ -3350,7 +3354,8 @@ bus = "Sfx"
 
 [node name="ReliefSound" type="AudioStreamPlayer" parent="Viewport/level"]
 stream = ExtResource( 5 )
-volume_db = -10.0
+volume_db = -20.0
+pitch_scale = 0.8
 bus = "Sfx"
 
 [node name="StartDeleteSound" type="AudioStreamPlayer" parent="Viewport/level"]
@@ -3367,6 +3372,18 @@ bus = "Sfx"
 stream = ExtResource( 35 )
 volume_db = -28.0
 pitch_scale = 1.6
+bus = "Sfx"
+
+[node name="ReverseChordSound" type="AudioStreamPlayer" parent="Viewport/level"]
+stream = ExtResource( 68 )
+volume_db = -18.0
+pitch_scale = 1.4
+bus = "Sfx"
+
+[node name="GlitchSound" type="AudioStreamPlayer" parent="Viewport/level"]
+stream = ExtResource( 69 )
+volume_db = -15.0
+pitch_scale = 0.7
 bus = "Sfx"
 
 [node name="DialogPosition" type="Sprite3D" parent="Viewport/level"]
@@ -4066,21 +4083,21 @@ margin_right = 640.0
 margin_bottom = 512.0
 color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 
-[node name="TitlecardVideoPlayer" type="VideoPlayer" parent="Viewport2/UILayer"]
-visible = false
-margin_left = -140.0
-margin_right = 720.0
-margin_bottom = 512.0
-stream = ExtResource( 75 )
-volume_db = 18.0
-bus = "Sfx"
-
 [node name="FadeOutVideoPlayer" type="VideoPlayer" parent="Viewport2/UILayer"]
 visible = false
 margin_left = -140.0
 margin_right = 720.0
 margin_bottom = 512.0
 stream = ExtResource( 57 )
+volume_db = 18.0
+bus = "Sfx"
+
+[node name="TitlecardVideoPlayer" type="VideoPlayer" parent="Viewport2/UILayer"]
+visible = false
+margin_left = -140.0
+margin_right = 720.0
+margin_bottom = 512.0
+stream = ExtResource( 75 )
 volume_db = 18.0
 bus = "Sfx"
 

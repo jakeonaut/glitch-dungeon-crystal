@@ -101,6 +101,8 @@ func _ready():
   yield(TempTimer.idle_frame(self), "timeout")
   yield(TempTimer.idle_frame(self), "timeout")
   tryMoveToUiLayer()
+  originalDialogStartSoundPitch = dialogStartSound.pitch_scale
+  originalDialogStartSoundVolume = dialogStartSound.volume_db
 
 func tryMoveToUiLayer():
   if not floating_text and not am_i_in_ui_layer and level.uiLayer != null:
@@ -369,10 +371,14 @@ var tindex = -1
 var smackedBbText = null
 var needs_to_talk_normal_first = false
 var has_talked_normal = false
+var originalDialogStartSoundPitch = 1.0
+var originalDialogStartSoundVolume = -15
 func showTextbox(wasSmacked = false):
   selectedYesNoOption = false
   # TODO(jaketrower): DialogStartSound play nice with smackedBbText?
   dialogStartSound.activateScript()
+  dialogStartSound.pitch_scale = originalDialogStartSoundPitch
+  dialogStartSound.volume_db = originalDialogStartSoundVolume
   dialogStartSound.play()
 
   # if text_final.find("•") == -1 and not text_final == "":

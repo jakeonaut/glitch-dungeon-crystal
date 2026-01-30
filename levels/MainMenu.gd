@@ -10,6 +10,8 @@ onready var deleteSound = get_node("DeleteSound")
 onready var deleteSound2 = get_node("DeleteSound2")
 onready var reliefSound = get_node("ReliefSound")
 onready var bellSound = get_node("BellSound")
+onready var reverseChordSound = get_node("ReverseChordSound")
+onready var glitchSound = get_node("GlitchSound")
 # onready var towerSprite1 = get_node("TowerSprite1")
 # onready var towerSprite2 = get_node("TowerSprite2")
 var epilepsy_fade_timer = 0
@@ -60,7 +62,7 @@ func setUpRoomInitializationOverride():
             global.has_ever_seen_intro = true
             titleCardVideoPlayer.visible = true
             titleCardVideoPlayer.play()
-            fadeOutVideoPlayer.visible = false
+            fadeOutVideoPlayer.visible = true
             epilepsyWarning.visible = false
             uiLayer.visible = true
         else:
@@ -407,7 +409,7 @@ func _process(delta):
     global.isEndOfGame = false
     if mainMenuState == MainMenuState.PLAYING_INTRO_VIDEO:
         titleCardVideoPlayer.visible = true
-        fadeOutVideoPlayer.visible = false
+        fadeOutVideoPlayer.visible = true
         uiLayer.visible = true
         player.sleepy_timer = 0
         basicCrtEffectRect2.visible = true
@@ -424,11 +426,12 @@ func _process(delta):
                 Input.is_action_just_pressed("ui_start") or \
                 (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen"))
             ):
-                titleCardVideoPlayer.visible = false
-                titleCardVideoPlayer.stop()
                 fadeOutVideoPlayer.visible = true
                 fadeOutVideoPlayer.play()
                 mainMenuState = MainMenuState.HIDING_INTRO_VIDEO
+                yield(get_tree().create_timer(0.1), "timeout")
+                titleCardVideoPlayer.visible = false
+                titleCardVideoPlayer.stop()
                 return
         return
     elif mainMenuState == MainMenuState.HIDING_INTRO_VIDEO:
@@ -504,6 +507,8 @@ func _process(delta):
                 ):
                     mainMenuState = MainMenuState.HIDING_PETSCLUB2_SPLASH
                     petsClub2Splash.mesh = null
+                    musicPlayer.stopAll()
+                    glitchSound.play()
                     if global.userSettings["canGlitchScreen"]:
                         petsClub2SplashSprite.material_override.set_shader_param("enable_glitch", true)
                         petsClub2SplashSprite.material_override.set_shader_param("enable_glitch_3d", true)
@@ -519,6 +524,8 @@ func _process(delta):
                 petsClub2Splash.visible = false
                 uiLayer.visible = true
                 mainMenuState = MainMenuState.MAIN_MENU
+                if global.userSettings["stopAllMusic"]:
+                    reverseChordSound.play()
                 musicPlayer.conductFromScenePath(getLevelName())
                 logoSprite.visible = true
                 player.aniPlayer.stop()
@@ -542,7 +549,6 @@ func _process(delta):
             updateMenuText = true
         elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start"):
             reliefSound.play()
-            broomSound.play()
             yield(get_tree().create_timer(0.15), "timeout")
             mainMenuState = MainMenuState.MAIN_MENU
         elif Input.is_action_just_pressed("menu_delete"):
@@ -593,14 +599,6 @@ func _process(delta):
         gameCamera.size = camera_size
         mainMenuUi.visible = true
 
-        var secondPartTemp = tr("UI.MainMenu.4") % global.getInputText("menu_delete")
-        var second_part = secondPartTemp if global.doesSaveGameExist(global.mainMenuPromptIndex) else ("[color=grey]" + secondPartTemp + "[/color]")
-        pressCText.bbcode_text = "[right]" + (tr("UI.MainMenu.3") % global.getInputText("menu_confirm")) + "    " + second_part + "[/right]"
-        # TODO(MAIN MENU IMPROVEMENTS): Delete above, comment out below.
-        # pressCText.bbcode_text = tr("UI.MainMenu.3") % global.getInputText("menu_confirm")
-        optionsMenuPrompt.bbcode_text = (tr("UI.MainMenu.1") % global.getInputText("ui_start"))
-        selectTextPrompt.bbcode_text = global.getInputText("menu_confirm")
-
         if player.justPressedMenuDown():
             jostlePlayer()
             uiLayer.pauseMenu.menuMoveSound.play()
@@ -615,41 +613,22 @@ func _process(delta):
             updateMenuText = true
             if logo_timer < logo_time_limit:
                 logo_timer = 0
-        else:
-            pass
-            # logo_timer += (delta*11)
-            # if logo_timer >= logo_time_limit:
-            #     logoSprite.position += logo_dir
-            #     var should_toggle_color = false
-            #     if logoSprite.position.x >= logo_max_pos.x:
-            #         logoSprite.position.x = logo_max_pos.x
-            #         logo_dir.x *= -1
-            #         should_toggle_color = true
-            #     elif logoSprite.position.x <= logo_min_pos.x:
-            #         logoSprite.position.x = logo_min_pos.x
-            #         logo_dir.x *= -1
-            #         should_toggle_color = true
-            #     if logoSprite.position.y >= logo_max_pos.y:
-            #         logoSprite.position.y = logo_max_pos.y
-            #         logo_dir.y *= -1
-            #         should_toggle_color = true
-            #     if logoSprite.position.y <= logo_min_pos.y:
-            #         logoSprite.position.y = logo_min_pos.y
-            #         logo_dir.y *= -1
-            #         should_toggle_color = true
-            #     if should_toggle_color:
-            #         if logoSprite.texture == logoTex2:
-            #             logoSprite.texture = logoTex3
-            #         else:
-            #             logoSprite.texture = logoTex2
-        
-        var selectedSaveGameMemory = getAndCacheSavedGames()[global.mainMenuPromptIndex]
-        player.changeOutfit(selectedSaveGameMemory["currOutfit"] if selectedSaveGameMemory.has("currOutfit") else global.GrandmaOutfit.BABUSHKA, false)
-        global.memory["currBroom"] = selectedSaveGameMemory["currBroom"] if selectedSaveGameMemory.has("currBroom") else global.GrandmaBroom.NORMAL
-        player.applyGlitch(selectedSaveGameMemory["current_glitch"] if selectedSaveGameMemory.has("current_glitch") else global.GlitchForm.NORMAL, true)
 
-        selectPrompt.rect_position.y = 300.5 + (global.mainMenuPromptIndex*55)
         if updateMenuText:
+            var secondPartTemp = tr("UI.MainMenu.4") % global.getInputText("menu_delete")
+            var second_part = secondPartTemp if global.doesSaveGameExist(global.mainMenuPromptIndex) else ("[color=grey]" + secondPartTemp + "[/color]")
+            pressCText.bbcode_text = "[right]" + (tr("UI.MainMenu.3") % global.getInputText("menu_confirm")) + "    " + second_part + "[/right]"
+            # TODO(MAIN MENU IMPROVEMENTS): Delete above, comment out below.
+            # pressCText.bbcode_text = tr("UI.MainMenu.3") % global.getInputText("menu_confirm")
+            optionsMenuPrompt.bbcode_text = (tr("UI.MainMenu.1") % global.getInputText("ui_start"))
+            selectTextPrompt.bbcode_text = global.getInputText("menu_confirm")
+
+            var selectedSaveGameMemory = getAndCacheSavedGames()[global.mainMenuPromptIndex]
+            player.changeOutfit(selectedSaveGameMemory["currOutfit"] if selectedSaveGameMemory.has("currOutfit") else global.GrandmaOutfit.BABUSHKA, false)
+            global.memory["currBroom"] = selectedSaveGameMemory["currBroom"] if selectedSaveGameMemory.has("currBroom") else global.GrandmaBroom.NORMAL
+            # player.applyGlitch(selectedSaveGameMemory["current_glitch"] if selectedSaveGameMemory.has("current_glitch") else global.GlitchForm.NORMAL, true)
+            
+            selectPrompt.rect_position.y = 300.5 + (global.mainMenuPromptIndex*55)
             menuText.bbcode_text = ""
             for i in range(global.save_game_files.size()):
                 if i != 0: menuText.bbcode_text += "\n"
@@ -659,7 +638,7 @@ func _process(delta):
                     menuText.bbcode_text += "[wave]" + fileText + "[/wave]"
                 else:
                     menuText.bbcode_text += fileText
-        updateMenuText = false
+            updateMenuText = false
 
         if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
             if global.doesSaveGameExist(global.mainMenuPromptIndex):
@@ -702,6 +681,9 @@ func _process(delta):
 #     pass
 
 func jostlePlayer():
+    if not player.snoring:
+        player.sleepy_timer = 0
+        return
     # player.global_transform.origin.y = 0.5
     # player.on_ground = false
     var tempY = player.global_transform.origin.y
@@ -802,4 +784,5 @@ func playMenuMusic():
     
 # @override
 func restartMusic():
+    updateMenuText = true
     musicPlayer.conductFromScenePath(getLevelName())

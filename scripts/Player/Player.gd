@@ -2905,9 +2905,9 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
     fallenBroom.walk_speed *= (2.0 if pressingRun() else 1.5)
     fallenBroom.get_node("BroomSound").play()
     var x_direction = 0
-    if rawPressingMoveLeft():
+    if rawPressingMoveLeft() and grav.x == 0:
       x_direction = -1
-    elif rawPressingMoveRight():
+    elif rawPressingMoveRight() and grav.x == 0:
       x_direction = 1
     if rawPressingMoveUp() or (grav.x != 0 and fallenBroom.walk_direction.y > 0):
       fallenBroom.walk_speed *= 1.0 if (grav.x != 0 and x_direction == 0) else .7

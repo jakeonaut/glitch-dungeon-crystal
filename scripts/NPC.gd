@@ -46,6 +46,11 @@ export var showYesNoOptions = false
 export var tiny_textbox = false
 export var is_static_in_level = true
 
+# String is a path to a file.
+export var randomlyMoo = false
+var randomMooTimer = 0
+var randomMooTimeLimit = 30
+
 export var is_wiggling_fast = false
 export var can_be_smacked = false
 export var is_sprite_not_flipped = false
@@ -128,6 +133,17 @@ func _process(delta):
   var trueDelta = delta
   if should_process_respect_time_dilation:
     delta = delta * global.time_dilation_multiplier
+
+  if randomlyMoo:
+    randomMooTimer += (delta*22)
+    if randomMooTimer >= randomMooTimeLimit:
+      randomMooTimer = 0
+      randomMooTimeLimit = rand_range(60, 120)
+      if randi() % 8 <= 0:
+        textBox.dialogStartSound.volume_db = textBox.originalDialogStartSoundVolume - 10
+        textBox.dialogStartSound.pitch_scale = rand_range(textBox.originalDialogStartSoundPitch - 0.5, textBox.originalDialogStartSoundPitch - 0.2)
+        textBox.dialogStartSound.play()
+        randomMooTimeLimit += 60
 
   if global.pauseGame:
     tryHideActiveInteractPrompt()

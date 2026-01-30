@@ -1,7 +1,7 @@
 extends GridMap
 
 # resources is loaded at compile time with preload
-var test_all_cosmetic_tiles = preload("res://sceneObjects/tiles/test_all_cosmetic_tiles.tres")
+# var test_all_cosmetic_tiles = preload("res://sceneObjects/tiles/test_all_cosmetic_tiles.tres")
 var grey_cosmetic_tiles = preload("res://sceneObjects/tiles/grey_cosmetic_tiles.tres")
 var green_cosmetic_tiles = preload("res://sceneObjects/tiles/green_cosmetic_tiles.tres")
 var red_cosmetic_tiles = preload("res://sceneObjects/tiles/red_cosmetic_tiles.tres")
@@ -22,7 +22,8 @@ func setTileNameNum(newName, cell_index):
     tile_name_dict[cell_index] = newName
 
 func setTileset(_tileset_type, properly_set_tiles = true):
-    set_mesh_library(test_all_cosmetic_tiles)
+    set_mesh_library(grey_cosmetic_tiles)
+    # set_mesh_library(test_all_cosmetic_tiles)
     # if tileset_type == global.TilesetType.HOUSE or tileset_type == global.TilesetType.POISON_HOUSE:
     #     set_mesh_library(red_cosmetic_tiles)
     # elif tileset_type == global.TilesetType.FOREST or tileset_type == global.TilesetType.POISON_FOREST or tileset_type == global.TilesetType.AUTUMN_FOREST:
@@ -62,6 +63,14 @@ func buildTilesFromScratch(color_suffix_glitch):
             setTileNameNum("ChandelierBot" + color_suffix_glitch, Vector3(cell_index.x, cell_index.y-2, cell_index.z))
             setTileNameNum("ChandelierBotLeft" + color_suffix_glitch, Vector3(cell_index.x-1, cell_index.y-2, cell_index.z))
             setTileNameNum("ChandelierBotRight" + color_suffix_glitch, Vector3(cell_index.x+1, cell_index.y-2, cell_index.z))
+
+        if tile_name == "Chandelier2":
+            setTileNameNum("Chandelier2" + color_suffix_glitch, cell_index)
+            setTileNameNum("ChandelierMid2" + color_suffix_glitch, Vector3(cell_index.x, cell_index.y-1, cell_index.z))
+            setTileNameNum("ChandelierMidRight2" + color_suffix_glitch, Vector3(cell_index.x+1, cell_index.y-1, cell_index.z))
+            setTileNameNum("ChandelierBot2" + color_suffix_glitch, Vector3(cell_index.x, cell_index.y-2, cell_index.z))
+            setTileNameNum("ChandelierBotLeft2" + color_suffix_glitch, Vector3(cell_index.x-1, cell_index.y-2, cell_index.z))
+            setTileNameNum("ChandelierBotRight2" + color_suffix_glitch, Vector3(cell_index.x+1, cell_index.y-2, cell_index.z))
             
         if tile_name == "FloorDecor":
             setTileNameNum("FloorDecor" + color_suffix_glitch, cell_index)

@@ -26,7 +26,7 @@
 [ext_resource path="res://assets/sounds/hurtglitch2.wav" type="AudioStream" id=24]
 [ext_resource path="res://assets/MRMOTEXTEX.png" type="Texture" id=25]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Dog Bark.wav" type="AudioStream" id=26]
-[ext_resource path="res://assets/sounds/MM_OldLady_Oh.wav" type="AudioStream" id=27]
+[ext_resource path="res://assets/sounds/land_granny.wav" type="AudioStream" id=27]
 [ext_resource path="res://assets/sounds/Link - Bomb Deploy.wav" type="AudioStream" id=28]
 [ext_resource path="res://assets/sounds/MinishCap_Link_Run.wav" type="AudioStream" id=29]
 [ext_resource path="res://assets/player_sheet_old.png" type="Texture" id=30]
@@ -5761,7 +5761,6 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=24]
 resource_name = "wakeup"
-length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/InnerSpriteContainer/Sprite3D:frame")
 tracks/0/interp = 1

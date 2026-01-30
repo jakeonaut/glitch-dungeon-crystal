@@ -721,7 +721,6 @@ func processWallLadderWalking(delta):
   # if pauseAnimation and not pressingJump() and aniPlayer.assigned_animation != "sinkInSand":
   #   vv = 0
   vv = getWalkSpeed(delta) * 1.1
-  print("vv?? ", vv)
   if not pauseAnimation and aniPlayer != null and not "walk" in aniPlayer.assigned_animation:
     aniPlayer.stop()
     # aniPlayer.queue("walkBump")

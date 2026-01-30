@@ -52,8 +52,11 @@ func _process(delta):
     #   pauseSelf = false
     #   visible = true
 
-  # if is_evil and on_ground:
-  #   landed()
+  if is_evil and not teleporting:
+    rotation_timer += (delta*22)
+    if rotation_timer >= rotation_time_limit:
+      rotation_timer = 0
+      rotateClockwise()
 
 
   # if not is_smacked:
@@ -112,6 +115,19 @@ func passiveActivate(_delta, is_player, is_local_broom = false):
       #   level.player.malwareCured()
       # else:
       #   level.player.malwareCorruptMe()
+
+var rotation_timer = 0
+var rotation_time_limit = 20
+func rotateClockwise():
+  var rotZ = round(rotation_degrees.z)
+  if rotZ == 0 or rotZ == 360:
+    rotation_degrees.z = 270
+  elif rotZ == 270 or rotZ == -90:
+    rotation_degrees.z = 180
+  elif rotZ == 180 or rotZ == -180:
+    rotation_degrees.z = 90
+  elif rotZ == 90 or rotZ == -270:
+    rotation_degrees.z = 0
     
 func playerInhale():
   level.player.gravitySound.pitch_scale = rand_range(0.8, 1.2)
@@ -137,8 +153,6 @@ func unsmack():
     spawnASpore(self.global_transform.origin, false)
   teleport_timer = 0
   has_teleported = false
-  if is_evil:
-    queue_free()
   
   
 
