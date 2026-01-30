@@ -1115,7 +1115,7 @@ func flipGravity(specific_dir = null):
     player.lv = Vector3(0, 0, 0)
     player.vv = player.up.dot(player.lv)
     player.hv = player.lv - player.up * player.vv
-    player.fall_timer = 0
+    player.fall_timer = -40
 
 func clearOtherGrabbers(gameMover):
   var grabbers = self.get_tree().get_nodes_in_group("grabber")

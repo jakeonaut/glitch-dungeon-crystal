@@ -88,16 +88,21 @@ func getHurt():
     if num_hits >= MAX_NUM_HITS:
         yaBeatMe()
         return
-    if num_hits >= 2 and boss_phase_should_crash == 0 and not has_crashed:
-        boss_phase_should_crash = 1
+    # if num_hits >= 2 and boss_phase_should_crash == 0 and not has_crashed:
+    #     boss_phase_should_crash = 1
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("gotHurt")
     # secretAniPlayer.queue("flipLeftToRight")
     secretAniPlayer.queue("idle")
+    secretAniPlayer.queue("jumpAndFall")
     # secretAniPlayer.queue("hibernate")
     prev_boss_phase = boss_phase
     boss_phase = BossPhase.GOT_HURT
+
+func flipGravity():
+    level.gameCamera.miniShakeScreen()
+    level.flipGravity(-1 * (getPlayer().grav / getPlayer().grav.abs()))
 
 func yaBeatMe():
     level.saveTheGame()
@@ -188,6 +193,7 @@ func tryToDeleteCautionWarning():
         cautionWarning.get_ref().aniPlayer.play("byebye")
         cautionWarning = null
     
+var just_spawned_kizzy = false
 # var sprite3d_noglitchShader = preload("res://shaders/Sprite3D_noglitch.shader")
 # var sprite3dShader = preload("res://shaders/Sprite3D_noglitch.shader")
 var delta_time_dilation = 1.0
@@ -332,7 +338,6 @@ func _process(delta):
         if not secretAniPlayer.is_playing():
             secretAniPlayer.stop()
             secretAniPlayer.clear_queue()
-            spawnWeakEye()
             if num_hits == 0:
                 secretAniPlayer.play("tallWobbleEasy")
                 secretAniPlayer.queue("tallWobbleEasy")
@@ -341,12 +346,17 @@ func _process(delta):
                 secretAniPlayer.play("tallWobble")
                 secretAniPlayer.queue("tallWobble")
                 secretAniPlayer.queue("tallWobble")
+                secretAniPlayer.queue("tallWobble")
             elif num_hits == 2:
                 secretAniPlayer.play("tallWobbleHard")
                 secretAniPlayer.queue("tallWobble")
                 secretAniPlayer.queue("tallWobbleHard")
+                secretAniPlayer.queue("tallWobble")
+                secretAniPlayer.queue("tallWobbleHard")
             secretAniPlayer.queue("flipLeftToRight")
             if num_hits >= 1:
+                secretAniPlayer.queue("tallWobbleRightEasy")
+            if num_hits >= 2:
                 secretAniPlayer.queue("tallWobbleRightEasy")
             secretAniPlayer.queue("tallWobbleRightBaby")
             secretAniPlayer.queue("tallWobbleRightBaby")
@@ -354,6 +364,8 @@ func _process(delta):
             if num_hits >= 1:
                 secretAniPlayer.queue("tallWobbleRightBaby")
             secretAniPlayer.queue("flipRightToLeft")
+            yield(get_tree().create_timer(3.6 if num_hits == 0 else 6.0), "timeout")
+            spawnWeakEye()
     elif boss_phase == BossPhase.RUN_AROUND:
         tryPlayBawkSound()
         # tryToSpawnEyeSpore(delta)
@@ -366,6 +378,7 @@ func _process(delta):
             secretAniPlayer.clear_queue()
             wakeUpSound.play()
             secretAniPlayer.play("suddenlyBrake")
+            secretAniPlayer.queue("jumpAndFall")
             secretAniPlayer.queue("flipLeftToRight")
             secretAniPlayer.queue("run")
             prev_boss_phase = boss_phase
@@ -384,6 +397,7 @@ func _process(delta):
             secretAniPlayer.clear_queue()
             wakeUpSound.play()
             secretAniPlayer.play("suddenlyBrake")
+            secretAniPlayer.queue("jumpAndFall")
             secretAniPlayer.queue("flipRightToLeft")
             secretAniPlayer.queue("idle")
             # secretAniPlayer.queue("idleWalk")
@@ -508,9 +522,17 @@ func spawnWeakEye():
 onready var attackBawkSound = get_node("Sounds/AttackBawkSound")
 var BULLET_SPEED = 10
 var glitchEnemyRes = preload("res://sceneObjects/Enemies/GlitchEnemy.tscn")
-func spawnGlitchBullet():
+var kizzyCatRes = preload("res://sceneObjects/KizzyCat.tscn")
+func spawnGlitchBullet(spawn_kizzy = false):
+    if num_hits < 2 or just_spawned_kizzy:
+        spawn_kizzy = false
+        just_spawned_kizzy = false
+    just_spawned_kizzy = spawn_kizzy
+
     attackBawkSound.play()
-    var bullet = glitchEnemyRes.instance()
+    var bullet = (kizzyCatRes if spawn_kizzy else glitchEnemyRes).instance()
+    if spawn_kizzy:
+        bullet.rotation_degrees.z = 180 if level.player.grav.y >= 0 else 0
     bullet.is_static_in_level = false
     bullet.visible = true
     bullet.behavior_directional_bullet = true
@@ -524,6 +546,7 @@ func spawnGlitchBullet():
         player_pos.y - spawn_pos.y,
         0
     ).normalized() * BULLET_SPEED
+    bullet.grav = Vector2(0, 0)
     bullet.bullet_direction_vector = bullet_direction_vector
     level.add_child(bullet)
 

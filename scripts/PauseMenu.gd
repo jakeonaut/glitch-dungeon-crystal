@@ -1866,6 +1866,8 @@ func processPopupRenderLogic(delta):
     return
 
   if pauseMenuState == PauseMenuState.KEYBOARD_INPUT and Input.is_action_pressed("ui_cancel") and canResetBindings:
+    popupYesButton.visible = false
+    popupNoButton.visible = false
     popupRect.visible = true
     popupTimer += (delta*11)
     if global.isPauseMenuOpen:
