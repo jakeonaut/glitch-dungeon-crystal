@@ -75,8 +75,10 @@ func _ready():
   if smallInteractionShape.shape is BoxShape and smallInteractionShape.shape.extents.x == 2 and round(smallInteractionShape.shape.extents.y) == 1:
     smallInteractionShape.shape.extents = Vector3(4, 2, 1.3)
 
-func setupTextBoxStuff():
-  if bbText != "" and textBoxContainer.bbText == "":
+func setupTextBoxStuff(override_text = ""):
+  if override_text != "":
+    textBoxContainer.bbText = override_text
+  elif bbText != "" and textBoxContainer.bbText == "":
     textBoxContainer.bbText = bbText
   if smackedBbText != "":
     textBoxContainer.smackedBbText = smackedBbText
@@ -126,7 +128,12 @@ func setupTextBoxStuff():
   if interactPrompt != null:
     interactPrompt.offset.y = -interact_prompt_offset
     interactPrompt.max_frames = 1
-  tryShowInteractPrompt()
+  
+  yield(get_tree().create_timer(0.1), "timeout")
+  tryShowInteractPrompt(true)
+  tryHideActiveInteractPrompt()
+  # yield(get_tree().create_timer(0.1), "timeout")
+  # stopPassiveActivate()
 
 func _process(delta):
   # super._process(delta) implicit

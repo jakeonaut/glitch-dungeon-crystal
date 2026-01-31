@@ -195,10 +195,10 @@ func _ready_impl():
   for sprite in [player.mySprite, player.grandmaHatSprite, player.grandmaHandSprite, player.grandmaFishHatSprite]:
     sprite.get_material_override().set_shader_param("enable_glitch", false)
     sprite.get_material_override().set_shader_param("enable_remove_skin_tone", false)
-  if global.memory["mushroom_soul"] > 0 and global.memory["mushroom_soul_ver"] == 0:
-    global.memory["mushroom_soul_ver"] = 1
-    player.sayThis(tr("NPC.Secret.2") + "\n" + tr("NPC.Treasure.9"))
-  elif player_message != "???":
+  # if global.memory["mushroom_soul"] > 0 and global.memory["mushroom_soul_ver"] == 0:
+  #   global.memory["mushroom_soul_ver"] = 1
+  #   player.sayThis(tr("NPC.Secret.2") + "\n" + tr("NPC.Treasure.9"))
+  if player_message != "???":
     player.sayThis(player_message)
 
   player.transformation = global.memory["transformation"] if global.memory.has("transformation") else player.TransformationState.NORMAL
@@ -285,10 +285,20 @@ func tryInitializeFromDebug():
   else:
     global.memory["initialized_from_debug"] = true
     global.memory["priestess"] = 0
-    if is_turn_based: 
-      # global.memory["is_turn_based"] = true
-      global.memory["is_pseudo_turn_based"] = true
-    if (has_spellbook_page or has_glitched_grimoire) and not global.memory.has("spellbookPage"):
+    # if is_turn_based: 
+    #   # global.memory["is_turn_based"] = true
+    #   global.memory["is_pseudo_turn_based"] = true
+    if global.dlc_mode:
+      global.memory["can_force_respawn"] = true
+      global.memory["has_map_item"] = true
+      global.memory["broomerang"] = 2
+      global.memory["mushroom_soul"] = 1
+      global.memory["zora_flippers"] = 1
+      global.memory["mole_cricket"] = 1
+      global.memory["spellbookPage"] = []
+      global.memory["glitched_grimoire"] = true
+      global.memory["spellbookPage"] = [global.GlitchForm.FEATHER, global.GlitchForm.LADDER, global.GlitchForm.FLOOR, global.GlitchForm.INVISIBLE]
+    elif (has_spellbook_page or has_glitched_grimoire) and not global.memory.has("spellbookPage"):
       global.memory["broomerang"] = 1
       # global.memory["secret_bauble"] = 1
       global.memory["can_force_respawn"] = true
@@ -1140,6 +1150,7 @@ var num_visible_boss_lives = 0
 var kill_cheat_code_timer = 0
 var kill_cheat_code_time_limit = 30
 var kill_cheat_code_counter = 0
+var showInstructions = false
 func processBossHealth(delta):
   var whichBoss = getBoss()
   if whichBoss == null or whichBoss.getMyVariable() == 0:

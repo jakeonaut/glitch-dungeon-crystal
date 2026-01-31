@@ -326,7 +326,7 @@ func landed(_was_on_fallthrough_solid = false):
   
 # var sporeRes = preload("res://sceneObjects/Environment/Spore.tscn")
 var glitchParticleBurstRes = preload("res://sceneObjects/GlitchParticleBurst.tscn")
-var poisonWaterCubeRes = preload("res://sceneObjects/WaterCubes/PoisonWaterCube.tscn")
+var glitchedFrogBarrelRes = preload("res://sceneObjects/WaterCubes/GlitchedFrogBarrel.tscn")
 func spawnAGlitchParticle():
   var particle = glitchParticleBurstRes.instance()
   level.add_child(particle)
@@ -425,7 +425,7 @@ func corruptMyself():
   level.player.visible = true
   is_smacked = true
   am_i_dying = true
-  var newCorruptedFrog = poisonWaterCubeRes.instance()
+  var newCorruptedFrog = glitchedFrogBarrelRes.instance()
   level.add_child(newCorruptedFrog)
   if not mySprite.flip_h:
     newCorruptedFrog.rotation_degrees.z = -180

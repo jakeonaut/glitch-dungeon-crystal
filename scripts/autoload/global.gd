@@ -300,7 +300,7 @@ var has_sneezed = false
 
 var demo_mode = 0
 var display_mode = 0
-var dlc_mode = 0
+var dlc_mode = 1
 
 var isEndOfGame = false
 var isRespawning = false
@@ -606,6 +606,9 @@ func updateBroomSpriteTexture(sprite, useAniSheet):
 
 func isDlcEnabled():
     return dlc_mode > 0 and allLocales[userSettings["locale"]]["dlc_enabled"]
+
+func isSecretEndingEnabled():
+    return isDlcEnabled() and global.memory["mushroom_soul"] > 0 and global.memory["zora_flippers"] > 0 and global.memory["mole_cricket"] > 0
 
 var allLocales = {
     "en": { "code": "en", "supported": true, "label": "English", "dlc_enabled": true },

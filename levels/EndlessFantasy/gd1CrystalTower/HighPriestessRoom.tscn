@@ -2658,7 +2658,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6087, 4, 0 )
 [node name="CroneNPC" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.11999, 5.0454, 0 )
 visible = false
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 bbText = "NPC.HighPriestess.1"
 smackedBbText = "•agh!!
 what do you care?
@@ -2696,7 +2696,7 @@ shape = SubResource( 58 )
 
 [node name="CroneNPCDefeated" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.11999, 37.0454, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 bbText = "NPC.HighPrietess.2"
 is_really_important = true
 can_activate = false
@@ -2760,7 +2760,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 7, 0 )
 
 [node name="GrandmaStatue4" parent="Viewport/level" instance=ExtResource( 28 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6, 10.4493, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 is_extra_life = true
 max_dist_to_player = 999
 
@@ -2954,7 +2954,7 @@ should_randomize_frame_delay = true
 
 [node name="SecretGoddessNPC" parent="Viewport/level" instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 25, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 bbText = "NPC.Goddess.1"
 can_move = false
 can_camera_zoom = false
@@ -3025,7 +3025,7 @@ visible = false
 [node name="GruesomeChildNPC" parent="Viewport/level" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 2.5, 0 )
 visible = false
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 
 [node name="GlitchedGeode" parent="Viewport/level" instance=ExtResource( 58 )]
 transform = Transform( 0.4, 0, 0, 0, 0.5, 0, 0, 0, 0.4, 6.89768, -1.9, 0 )

@@ -44,7 +44,7 @@ func setUpRoomInitializationOverride():
     debug_start_boss_immediately = true
 
   var croneAbortSound = croneNPC.textBox.get_node("AbortSound")
-  if debug_start_boss_immediately and global.memory["priestess"] < 2:
+  if debug_start_boss_immediately and global.memory["priestess"] < 2 and not global.memory["world_of_ruin"]:
     goop3.visible = true
     crystalsContainer.queue_free()
     gameCamera.initial_size = camera_size
@@ -68,7 +68,7 @@ func setUpRoomInitializationOverride():
     highPriestessBoss.get_ref().visible = false
     highPriestessBoss.get_ref().am_i_hidden = true
     highPriestessBoss.get_ref().mySprite.visible = false
-    if global.memory["priestess"] >= 2:
+    if global.memory["priestess"] >= 2 or global.memory["world_of_ruin"]:
       goop3.visible = true
       crystalsContainer.queue_free()
       grandmaStatues.queue_free()

@@ -1158,7 +1158,7 @@ path = "res://levels/EndlessFantasy/gd1DreamMemories/DreamOutskirts.tscn"
 can_nav_left = false
 
 [node name="TowerEdge" parent="DreamCity" instance=ExtResource( 3 )]
-transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.778, 4, 10, 0 )
+transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.778, -2, 10, 0 )
 material_override = SubResource( 1 )
 pixel_size = 0.07
 path = "res://levels/EndlessFantasy/gd1DreamMemories/DreamOutskirts.tscn"

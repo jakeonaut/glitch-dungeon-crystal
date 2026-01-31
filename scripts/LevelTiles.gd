@@ -123,7 +123,7 @@ func queueSausageDreamFadeAwayDifference(newLevelTiles, should_fade_away = true,
 
 func buildRandomTiles():
   var color_suffix_glitch = global.getColorSuffixFromTilesetType(my_tileset_type, getPlayer().glitch_form)
-  if cosmeticLevelTiles: cosmeticLevelTiles.buildTilesFromScratch(color_suffix_glitch)
+  if cosmeticLevelTiles: cosmeticLevelTiles.buildTilesFromScratch(color_suffix_glitch if my_tileset_type != global.TilesetType.PRIMORDIAL_OOZE else "_green")
 
   var cell_indices = get_used_cells()
   for i in range(len(cell_indices)):
@@ -856,6 +856,9 @@ func properlySetTiles():
     var cell_index = keys[i]
     var tile_name = tile_dict[cell_index][0]
     var tile_orientation = tile_dict[cell_index][1]
+    if "TransientTile" in tile_name:
+      continue
+
     set_cell_item(cell_index.x, cell_index.y, cell_index.z, mesh_library.find_item_by_name(tile_name), tile_orientation)
 
     # if global.hasGottenLevelGeode or global.memory["priestess"] >= 2:

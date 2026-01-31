@@ -31,7 +31,6 @@ func setUpRoomInitializationOverride():
   #   towerSprite1.visible = true
   has_decided = true
   
-var showInstructions = false
 onready var pressCText = get_node("../../Viewport2/UILayer/PressC")
 onready var optionsMenuPrompt = get_node("../../Viewport2/UILayer/OptionsMenuPrompt")
 var has_played_sound = false

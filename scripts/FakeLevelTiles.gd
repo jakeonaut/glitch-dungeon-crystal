@@ -11,7 +11,7 @@ func buildRandomTiles():
 # @override
 func ready_impl():
   is_fake_tiles = true
-  setTileset(tileset_type)
+  setTileset(tileset_type, true)
   buildRandomTiles()
 
 # @override

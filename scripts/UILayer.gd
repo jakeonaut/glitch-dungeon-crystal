@@ -534,7 +534,13 @@ func processHiscoreRenderLogic(delta):
       global.hasLevelGeodeBeenSmacked = false
       if global.isEndOfGame:
         var endOfGameNPC = level.get_node("PrimordialOozeBoss/EndOfGameNPC") if level.has_node("PrimordialOozeBoss/EndOfGameNPC") else null
-        if endOfGameNPC: endOfGameNPC.activate(true)
+        if endOfGameNPC:
+          if global.isDlcEnabled():
+            if global.isSecretEndingEnabled():
+              endOfGameNPC.setupTextBoxStuff("NPC.Crone.8")
+            else:
+              endOfGameNPC.setupTextBoxStuff("Dialog.Player.5")
+          endOfGameNPC.activate(true)
       else:
         global.pauseMoveInput = false
         global.pauseGame = false

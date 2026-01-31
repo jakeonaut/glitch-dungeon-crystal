@@ -20,7 +20,7 @@
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=20]
 [ext_resource path="res://sceneObjects/WaterCubes/WaterCube.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sceneObjects/Player.tscn" type="PackedScene" id=24]
-[ext_resource path="res://sceneObjects/WaterCubes/PoisonWaterCube.tscn" type="PackedScene" id=25]
+[ext_resource path="res://sceneObjects/WaterCubes/GlitchedFrogBarrel.tscn" type="PackedScene" id=25]
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=36]
 [ext_resource path="res://sceneObjects/Enemies/GlitchHermitCrabManager.tscn" type="PackedScene" id=37]
 

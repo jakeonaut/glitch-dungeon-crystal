@@ -1,13 +1,53 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
-[ext_resource path="res://scripts/PoisonCorruptionCube.gd" type="Script" id=2]
+[ext_resource path="res://scripts/WaterCube.gd" type="Script" id=2]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=4]
 [ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=5]
-[ext_resource path="res://assets/sprites/Toad_Dude_smaller.png" type="Texture" id=6]
-[ext_resource path="res://assets/sounds/croak.wav" type="AudioStream" id=7]
-[ext_resource path="res://scripts/_InteractionArea_ActivePassive.gd" type="Script" id=8]
+[ext_resource path="res://assets/sounds/splish1.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/fakewater.png" type="Texture" id=7]
+[ext_resource path="res://assets/palettes/swamp_water_palette.png" type="Texture" id=8]
+[ext_resource path="res://shaders/PoisonWaterCube.gdshader" type="Shader" id=9]
+[ext_resource path="res://assets/sprites/water_splash0000.png" type="Texture" id=10]
+[ext_resource path="res://assets/sounds/splish2.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/sounds/assets_sfx_splashy.wav" type="AudioStream" id=12]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 4 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 7 )
+shader_param/base_palette = ExtResource( 3 )
+shader_param/target_palette = ExtResource( 8 )
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 4 )
@@ -20,115 +60,99 @@ shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
 shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
-shader_param/enable_dither = true
+shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
 shader_param/enable_black_unknown = false
-shader_param/palettesize = 16
+shader_param/palettesize = 8
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
-shader_param/time_influence = 1.0
+shader_param/time_influence = 3.0
 shader_param/y_div = 2.87
-shader_param/texture_albedo = ExtResource( 6 )
+shader_param/texture_albedo = ExtResource( 7 )
 shader_param/base_palette = ExtResource( 3 )
-shader_param/target_palette = ExtResource( 3 )
-
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.9, 0.9, 1 )
+shader_param/target_palette = ExtResource( 8 )
 
 [sub_resource type="BoxShape" id=3]
-extents = Vector3( 0.8, 0.8, 0.8 )
+extents = Vector3( 1.8, 1.8, 1.8 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 9 )
 
 [node name="PoisonWaterCube" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2, -4 )
 script = ExtResource( 2 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, -0.2 )
-material_override = SubResource( 2 )
-offset = Vector2( 0, 1 )
-flip_h = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00272, -0.0020349, 0 )
+material_override = SubResource( 1 )
 pixel_size = 0.125
-texture = ExtResource( 6 )
-hframes = 14
+texture = ExtResource( 7 )
+hframes = 8
 vframes = 8
 script = ExtResource( 1 )
-should_randomize_frame_delay = true
-automatically_change_color = false
+max_frames = 4
 
 [node name="Sprite3D2" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.5, -0.2 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00272, -0.0020349, 9 )
 material_override = SubResource( 2 )
-offset = Vector2( 0, 1 )
-flip_h = true
 pixel_size = 0.125
-texture = ExtResource( 6 )
-hframes = 14
-vframes = 8
-frame = 16
-script = ExtResource( 1 )
-should_randomize_frame_delay = true
-automatically_change_color = false
-
-[node name="Sprite3D3" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0.8 )
-material_override = SubResource( 2 )
-offset = Vector2( 0, 1 )
-flip_h = true
-pixel_size = 0.125
-texture = ExtResource( 6 )
-hframes = 14
-vframes = 8
-frame = 1
-script = ExtResource( 1 )
-should_randomize_frame_delay = true
-automatically_change_color = false
-
-[node name="Sprite3D4" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, -0.2 )
-material_override = SubResource( 2 )
-offset = Vector2( 0, 1 )
-flip_h = true
-pixel_size = 0.125
-texture = ExtResource( 6 )
-hframes = 14
-vframes = 8
-frame = 15
-script = ExtResource( 1 )
-should_randomize_frame_delay = true
-automatically_change_color = false
-
-[node name="TongueDirSprite" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -0.2 )
-material_override = SubResource( 2 )
-offset = Vector2( 0, 1 )
-flip_h = true
-pixel_size = 0.125
-texture = ExtResource( 6 )
-hframes = 14
+texture = ExtResource( 7 )
+hframes = 8
 vframes = 8
 frame = 12
 script = ExtResource( 1 )
-frame_delay = 0.2
-automatically_change_color = false
+max_frames = 4
 
-[node name="NotDieSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
-stream = ExtResource( 7 )
-volume_db = -5.0
-
-[node name="Area" type="Area" parent="."]
+[node name="Area" type="Area" parent="." groups=["water"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2, 0 )
 script = ExtResource( 5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
-shape = SubResource( 1 )
-
-[node name="SmallInteractionArea" type="Area" parent="." groups=["bug", "malware"]]
-script = ExtResource( 8 )
-
-[node name="CollisionShape" type="CollisionShape" parent="SmallInteractionArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2 )
 shape = SubResource( 3 )
+
+[node name="SplashSprite" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.498, 2.4251, 5 )
+visible = false
+pixel_size = 0.125
+texture = ExtResource( 10 )
+hframes = 7
+script = ExtResource( 1 )
+frame_delay = 0.05
+max_frames = 5
+should_fizzle_out = true
+
+[node name="SplashSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = -25.0
+pitch_scale = 2.0
+bus = "Sfx"
+
+[node name="MiniSplashSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -6.0
+pitch_scale = 1.5
+bus = "Sfx"
+
+[node name="MiniSplashSound2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -6.0
+bus = "Sfx"
+
+[node name="WaterFilter" type="Control" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="WaterFilter"]
+material = SubResource( 4 )

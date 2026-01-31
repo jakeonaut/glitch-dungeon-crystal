@@ -15,13 +15,14 @@
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 9 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -29,11 +30,18 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 8
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 3.0
 shader_param/y_div = 2.87
@@ -92,21 +100,21 @@ max_frames = 5
 should_fizzle_out = true
 
 [node name="SplashSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 6 )
 volume_db = -25.0
 pitch_scale = 2.0
+bus = "Sfx"
 
 [node name="MiniSplashSound" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -6.0
 pitch_scale = 1.5
+bus = "Sfx"
 
 [node name="MiniSplashSound2" type="AudioStreamPlayer" parent="."]
-bus="Sfx"
 stream = ExtResource( 8 )
 volume_db = -6.0
+bus = "Sfx"
 
 [node name="WaterFilter" type="Control" parent="."]
 

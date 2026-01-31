@@ -8,7 +8,11 @@ func activateScript():
     if has_activated:
         return
     has_activated = true
-    transition.long_fade_to("res://levels/EndlessFantasy/gd1/EndCredits.tscn")
+    if global.isSecretEndingEnabled():
+        global.memory["world_of_ruin"] = true
+        transition.long_fade_to("res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom.tscn")
+    else:
+        transition.long_fade_to("res://levels/EndlessFantasy/gd1/EndCredits.tscn")
 
 func preActivateScript(): #DEFUNCT FOR START AND DIALOG SOUND, ONLY FOR ABORT SOUND
     # OVERRIDE ME
