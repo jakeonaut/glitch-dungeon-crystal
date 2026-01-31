@@ -16,9 +16,9 @@ func activateScript():
   #   textBox.textNode.bbcode_text = text
   #   textBox.showYesNoOptions = true
   elif (global.memory["hard_mode"] == 0 and global.memory["broomerang"] < 2) or (global.memory["hard_mode"] > 0 and global.memory["broomerang"] == 0):
-    var text = tr("NPC.Crone.4") % [str(global.NUM_GEMS_FOR_BROOMERANG), tr("NPC.Crone.4_broomerang")]
+    var text = tr("NPC.Crone.4_1") % str(global.NUM_GEMS_FOR_BROOMERANG)
     if global.memory["broomerang"] == 1:
-      text = tr("NPC.Crone.4") % [str(global.NUM_GEMS_FOR_BROOMERANG_WARP), tr("NPC.Crone.4_broomerang2")]
+      text = tr("NPC.Crone.4_2") % str(global.NUM_GEMS_FOR_BROOMERANG_WARP)
     textBox.text_final = text
     textBox.textNode.bbcode_text = text
     textBox.showYesNoOptions = true

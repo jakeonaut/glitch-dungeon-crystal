@@ -19,11 +19,14 @@ func activateScript():
     initial_text = tr("NPC.TreasureMimic.2")
     textBox.showYesNoOptions = false
   else:
-    var locale = TranslationServer.get_locale()
-    var should_reverse = (locale == "zh_CN")
-    initial_text = tr("NPC.TreasureMimic.1") % (
-      [str(mimic.num_gems_needed), tr(mimic.trade_item)] if should_reverse else [tr(mimic.trade_item), str(mimic.num_gems_needed)]
-    )
+    if mimic.trade_item == "NPC.MimicTreasure.1":
+      initial_text = tr("NPC.TreasureMimic.1_1") % str(mimic.num_gems_needed)
+    elif mimic.trade_item == "NPC.MimicTreasure.2":
+      initial_text = tr("NPC.TreasureMimic.1_2") % str(mimic.num_gems_needed)
+    elif mimic.trade_item == "NPC.MimicTreasure.3":
+      initial_text = tr("NPC.TreasureMimic.1_3") % str(mimic.num_gems_needed)
+    elif mimic.trade_item == "NPC.MimicTreasure.4":
+      initial_text = tr("NPC.TreasureMimic.1_4") % str(mimic.num_gems_needed)
     textBox.showYesNoOptions = true
 
   var finalText = initial_text
