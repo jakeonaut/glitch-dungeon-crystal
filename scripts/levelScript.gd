@@ -297,7 +297,7 @@ func tryInitializeFromDebug():
       global.memory["mole_cricket"] = 1
       global.memory["spellbookPage"] = []
       global.memory["glitched_grimoire"] = true
-      global.memory["spellbookPage"] = [global.GlitchForm.FEATHER, global.GlitchForm.LADDER, global.GlitchForm.FLOOR, global.GlitchForm.INVISIBLE]
+      global.memory["spellbookPage"] = []
     elif (has_spellbook_page or has_glitched_grimoire) and not global.memory.has("spellbookPage"):
       global.memory["broomerang"] = 1
       # global.memory["secret_bauble"] = 1
@@ -308,7 +308,7 @@ func tryInitializeFromDebug():
       player.applyGlitch(global.memory["spellbookPage"][0] if global.memory["spellbookPage"].size() > 0 else global.GlitchForm.NORMAL)
     else:
       player.applyGlitch(starting_glitch_type)
-    if has_glitched_grimoire or global.memory["glitched_grimoire"]:
+    if (has_glitched_grimoire or global.memory["glitched_grimoire"]) and not global.dlc_mode:
       global.memory["glitched_grimoire"] = true
       global.memory["spellbookPage"] = [global.GlitchForm.FEATHER, global.GlitchForm.LADDER, global.GlitchForm.FLOOR, global.GlitchForm.INVISIBLE]
 
@@ -1030,6 +1030,16 @@ func spawnAngelEggFollower(starting_position):
   var target = followers[-1] if followers.size() > 0 else null
   angelEggFollower.gameMoverTarget = target if target != null else weakref(player)
   followers.push_back(weakref(angelEggFollower))
+
+func spawnAnyFollower(starting_position, followerRes):
+  var follower = followerRes.instance()
+  self.add_child(follower)
+  follower.global_transform.origin = starting_position
+
+  var target = followers[-1] if followers.size() > 0 else null
+  follower.gameMoverTarget = target if target != null else weakref(player)
+  followers.push_back(weakref(follower))
+  return follower
 
 var petChickenFollowerRes = preload("res://sceneObjects/PetChickenFollower.tscn")
 var petBabushkaCatFollowerRes = preload("res://sceneObjects/BabushkaCatFollower.tscn")

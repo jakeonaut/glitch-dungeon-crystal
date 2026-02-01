@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://assets/DELETEME/horn.wav" type="AudioStream" id=1]
+[ext_resource path="res://assets/sounds/MM_OldLady_Oh.wav" type="AudioStream" id=1]
 [ext_resource path="res://assets/sounds/151RetroMonsters/Dog Yelp.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=3]
 [ext_resource path="res://assets/player_sheet_old_baby.png" type="Texture" id=4]
@@ -55,6 +55,7 @@ is_static_in_level = false
 [node name="Sprite3D" type="Sprite3D" parent="." groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
 material_override = SubResource( 1 )
+offset = Vector2( 0, 2 )
 pixel_size = 0.125
 texture = ExtResource( 4 )
 hframes = 8
@@ -67,7 +68,8 @@ automatically_change_color = false
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 1 )
-volume_db = -30.0
+volume_db = -20.0
+pitch_scale = 3.0
 bus = "Sfx"
 
 [node name="NotDieSound" type="AudioStreamPlayer" parent="Sounds"]

@@ -53,7 +53,6 @@ func _process(delta):
   # if screamSound.is_playing() and am_i_really_in_range_of_player:
   #   player.getCurseInfected()
 
-  print("zombie state: ", zombie_state)
   if zombie_state == ZombieState.IDLE:
     reenemize()
     windGust.is_active = false

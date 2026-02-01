@@ -4,11 +4,12 @@ var has_decided = false
 
 # @override
 func setUpRoomInitializationOverride():
-  global.pauseMoveInput = true
-  global.shouldRenderAsCinematic = true
-  player.fall_timer = 999
-  has_decided = true
-  player.normalGlitch()
+  if not global.memory.has("roomPath") or not "gd1SacredPlace" in global.memory["roomPath"]:
+    global.pauseMoveInput = true
+    global.shouldRenderAsCinematic = true
+    player.fall_timer = 999
+    has_decided = true
+    player.normalGlitch()
 
 func _process(_delta):
   # ._process(delta) implicit

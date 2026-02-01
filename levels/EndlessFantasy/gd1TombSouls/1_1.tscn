@@ -189,7 +189,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1, 0, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -1, 0 )
-path = "res://levels/FantasyDungeon/0_1.tscn"
 is_passive = true
 
 [node name="landing" parent="Viewport/level/Door" index="5"]

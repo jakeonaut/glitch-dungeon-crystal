@@ -464,7 +464,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 24.4317, 0 )
 
 [node name="Door" parent="Viewport/level" instance=ExtResource( 24 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22, -1 )
-path = "res://levels/EndlessFantasy/002PathToSacredDoors/0_1.tscn"
 
 [node name="ParallaxBackground" parent="Viewport/level" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0 )

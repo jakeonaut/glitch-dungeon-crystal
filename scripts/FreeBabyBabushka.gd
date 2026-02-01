@@ -1,0 +1,150 @@
+extends "Enemies/GlitchEnemy.gd"
+
+onready var playerActivationAreaCollisionShape = get_node("PlayerActivationArea/CollisionShape")
+
+onready var scoochSound1 = get_node("Sounds/ScoochSound1")
+onready var scoochSound2 = get_node("Sounds/ScoochSound2")
+enum ChickenState {
+    IDLE,
+    PREPARE_JUMP,
+    LAND,
+    JUMP,
+    AFRAID,
+    ANGRY,
+}
+var chicken_state = ChickenState.IDLE
+var chicken_state_timer = 0
+var chicken_state_idle_time_limit = 10
+var chicken_state_dig_time_limit = 6
+var chicken_state_reset_dig_time_limit = 8
+var afraid_timer = 0
+var afraid_time_limit = 10
+var far_from_home_dist = 5
+export var how_many_times_did_u_hit_me = 0
+
+export var can_hop = true
+var initial_grav = Vector2(0, 60)
+var initial_true_terminal_vel = 32
+
+var opacity = 1.0
+
+func _ready():
+    set_process(true)
+    initial_grav = grav
+    initial_true_terminal_vel = true_terminal_vel
+    should_smack_pause_me = false
+
+func _process(delta):
+    # ._process(delta) implicit
+    
+    delta = delta * global.time_dilation_multiplier
+    should_collide_with_walls = true
+    if chicken_state == ChickenState.AFRAID:
+        behavior_jumping = true
+        behavior_walking = true
+        mySprite.frame_delay = 0.2
+        afraid_timer += (delta*11)
+        if afraid_timer >= afraid_time_limit:
+            afraid_timer = 0
+            chicken_state = ChickenState.IDLE if on_ground else ChickenState.JUMP
+            mySprite.updateBaseFrame(2, 0)
+            walk_speed = 2
+            jump_force = 4
+    elif chicken_state == ChickenState.IDLE:
+        mySprite.frame_delay = 1
+        if can_hop:
+            chicken_state_timer += (delta*22)
+            if chicken_state_timer >= chicken_state_idle_time_limit:
+                chicken_state_timer = 0
+                var i = randi() % 4
+                if i == 0:
+                    pass # stay idle
+                elif can_hop and (i == 1 or i == 2):
+                    walk_direction.x = 1 if i == 1 else -1
+                    if isFarFromHome():
+                        if global_transform.origin.x > spawn_origin.x:
+                            walk_direction.x = -1
+                        else:
+                            walk_direction.x = 1
+                    behavior_jumping = true
+                    chicken_state = ChickenState.JUMP
+                    scoochSound1.play()
+    elif chicken_state == ChickenState.PREPARE_JUMP:
+        # run away from player
+        walk_direction.x = 1 if getPlayer().global_transform.origin.x < global_transform.origin.x else -1
+        behavior_jumping = true
+        chicken_state = ChickenState.JUMP
+    elif chicken_state == ChickenState.JUMP:
+        mySprite.frame_delay = 0.4
+        behavior_walking = not on_ground
+    elif chicken_state == ChickenState.LAND:
+        mySprite.frame_delay = 1
+        chicken_state = ChickenState.IDLE
+    if am_i_dying:
+        return
+
+func isFarFromHome():
+    return abs(global_transform.origin.x - spawn_origin.x) > far_from_home_dist
+
+
+var babyBabushkaFollowerRes = preload("res://sceneObjects/BabyBabushkaFollower.tscn")
+func passiveActivate(_delta, is_player, is_local_broom = false):
+  if is_player and not is_local_broom:
+    var newFollower = level.spawnAnyFollower(self.global_transform.origin, babyBabushkaFollowerRes)
+    newFollower.dieSound.play()
+    queue_free()
+    
+    
+
+var spawn_point = null
+# @override
+func landed(_was_on_fallthrough_solid = false):
+    .landed()
+    if spawn_point == null:
+      spawn_point = self.global_transform.origin
+    scoochSound2.play()
+    if chicken_state == ChickenState.AFRAID:
+        return
+    behavior_jumping = false
+    behavior_walking = false
+        
+    if chicken_state != ChickenState.IDLE:
+        chicken_state = ChickenState.LAND
+
+# @override
+func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
+  if is_smacked or am_i_dying:
+    return false
+  .getSmacked(broom_origin, silently, is_local_broom)
+  how_many_times_did_u_hit_me += 1
+  if dieSound:
+    dieSound.pitch_scale = rand_range(0.8, 1.2)
+    dieSound.play()
+  if notDieSound:
+    notDieSound.pitch_scale = rand_range(0.8, 1.2)
+    notDieSound.play()
+  mySprite.updateBaseFrame(5, 0)
+
+  behavior_jumping = true
+  behavior_walking = true
+  walk_direction.x = 1
+  if level.player.mySprite.flip_h:
+    walk_direction.x = -1
+    
+  # pauseSelf = true
+  on_ground = true
+  walk_speed = 8
+  jump_force = 8
+  afraid_timer = 0
+  if afraid_time_limit < 60:
+    afraid_time_limit *= 2
+  chicken_state = ChickenState.AFRAID
+
+func actuallyDieToOffscreenCamera(_delta):
+  if spawn_point != null:
+    self.global_transform.origin = spawn_point
+    vv = 0
+    lv = Vector3(0, 0, 0)
+    linear_velocity = Vector3(0, 0, 0)
+  else:
+    queue_free()

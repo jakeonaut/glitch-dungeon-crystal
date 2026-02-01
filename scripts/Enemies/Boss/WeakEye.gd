@@ -6,6 +6,7 @@ onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 onready var sparkleSprite = get_node("SparkleSprite3D")
 export var is_permanent = false
 var is_fast = false
+export var should_reenemizeMyself = false
 
 onready var spikes3 = get_node("TileSpikes/Spikes3")
 onready var spikes4 = get_node("TileSpikes/Spikes4")
@@ -30,6 +31,9 @@ func _ready():
       else:
         secretAniPlayer.queue("blinkIdle")
     secretAniPlayer.queue("blinkClose")
+
+  if should_reenemizeMyself:
+    reenemize(true)
 
 
 var spawn_timer = 0

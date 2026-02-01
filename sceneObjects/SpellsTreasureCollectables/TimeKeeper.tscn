@@ -552,7 +552,7 @@ script = ExtResource( 21 )
 [node name="Sprite3D" parent="MimicNPC" index="3"]
 material_override = SubResource( 122 )
 texture = ExtResource( 24 )
-frame = 4
+frame = 0
 
 [node name="CollisionShape" parent="MimicNPC/FallthroughSolid" index="0"]
 shape = SubResource( 21 )
@@ -560,7 +560,7 @@ shape = SubResource( 21 )
 [node name="TreasureSpellCollectable" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.25 )
 script = ExtResource( 19 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 bbText = "NPC.Treasure.11"
 is_important = true
 can_activate = false
