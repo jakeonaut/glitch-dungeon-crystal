@@ -56,6 +56,8 @@ func landed(_was_on_fallthrough_solid = false):
     get_node("SecretAnimationPlayer").play("land")
     landSound.play()
     jump_force /= 2
+    if jump_force <= 2:
+        landSound.volume_db = -80
     land_count += 1
     if land_count >= land_count_limit:
         behavior_was_thrown = false
