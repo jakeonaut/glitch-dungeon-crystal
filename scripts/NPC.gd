@@ -131,7 +131,6 @@ func setupTextBoxStuff(override_text = ""):
   
   yield(get_tree().create_timer(0.1), "timeout")
   tryShowInteractPrompt(true)
-  tryHideActiveInteractPrompt()
   # yield(get_tree().create_timer(0.1), "timeout")
   # stopPassiveActivate()
 

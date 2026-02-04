@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/babycry.mp3-3c687634dcc02c81dcaccaebfe2e455c.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/babycry.mp3"
+dest_files=[ "res://.import/babycry.mp3-3c687634dcc02c81dcaccaebfe2e455c.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

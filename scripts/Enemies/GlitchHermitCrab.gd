@@ -166,7 +166,7 @@ func updateMyHermitCrabShellPos():
 #     var hermitCrabShell = myHermitCrabShell.get_ref()
 #     hermitCrabShell.global_transform.origin.y -= 1
 #     global.activeInteractor = hermitCrabShell
-#     global.memory["broom"] = false
+#     level.player.has_broom = false
 #     level.player.inventorySound.play()
 #     if level.player.summonedBroom:
 #       level.player.broomStop()

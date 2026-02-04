@@ -165,7 +165,7 @@ hframes = 8
 vframes = 8
 frame = 49
 script = ExtResource( 5 )
-frame_delay = 0.1
+max_frames = 1
 
 [node name="Sprite2" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Neck" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35552, 0.055299, 0 )
@@ -176,7 +176,7 @@ hframes = 8
 vframes = 8
 frame = 49
 script = ExtResource( 5 )
-frame_delay = 0.1
+max_frames = 1
 
 [node name="Sprite3" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Neck" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.93329, -0.167012, 0 )
@@ -187,7 +187,7 @@ hframes = 8
 vframes = 8
 frame = 49
 script = ExtResource( 5 )
-frame_delay = 0.1
+max_frames = 1
 
 [node name="Sprite4" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Neck" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44007, -0.189068, 0 )
@@ -198,7 +198,7 @@ hframes = 8
 vframes = 8
 frame = 49
 script = ExtResource( 5 )
-frame_delay = 0.1
+max_frames = 1
 
 [node name="Tail" type="Spatial" parent="SpriteContainer/InnerSpriteContainer/Limbs"]
 visible = false
@@ -316,7 +316,7 @@ hframes = 8
 vframes = 8
 frame = 49
 script = ExtResource( 5 )
-frame_delay = 0.1
+max_frames = 1
 
 [node name="Sprite2" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg1" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.54459, -2.34649, 0 )
@@ -327,7 +327,7 @@ hframes = 8
 vframes = 8
 frame = 49
 script = ExtResource( 5 )
-frame_delay = 0.1
+max_frames = 1
 
 [node name="Sprite3" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg1" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.680738, -1.91082, 0 )
@@ -338,7 +338,7 @@ hframes = 8
 vframes = 8
 frame = 49
 script = ExtResource( 5 )
-frame_delay = 0.1
+max_frames = 1
 
 [node name="Sprite4" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg1" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.54459, -1.47515, 0 )
@@ -349,7 +349,7 @@ hframes = 8
 vframes = 8
 frame = 49
 script = ExtResource( 5 )
-frame_delay = 0.1
+max_frames = 1
 
 [node name="Leg2" type="Spatial" parent="SpriteContainer/InnerSpriteContainer/Limbs"]
 
@@ -373,7 +373,7 @@ hframes = 8
 vframes = 8
 frame = 49
 script = ExtResource( 5 )
-frame_delay = 0.1
+max_frames = 1
 
 [node name="Sprite2" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg2" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.762426, -2.23757, 0 )
@@ -384,7 +384,7 @@ hframes = 8
 vframes = 8
 frame = 49
 script = ExtResource( 5 )
-frame_delay = 0.1
+max_frames = 1
 
 [node name="Sprite3" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg2" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.62628, -1.8019, 0 )
@@ -395,7 +395,7 @@ hframes = 8
 vframes = 8
 frame = 49
 script = ExtResource( 5 )
-frame_delay = 0.1
+max_frames = 1
 
 [node name="Sprite4" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg2" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.762426, -1.36623, 0 )
@@ -406,7 +406,7 @@ hframes = 8
 vframes = 8
 frame = 49
 script = ExtResource( 5 )
-frame_delay = 0.1
+max_frames = 1
 
 [node name="Leg3" type="Spatial" parent="SpriteContainer/InnerSpriteContainer/Limbs"]
 
@@ -430,7 +430,7 @@ hframes = 8
 vframes = 8
 frame = 49
 script = ExtResource( 5 )
-frame_delay = 0.1
+max_frames = 1
 
 [node name="Sprite2" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg3" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.84105, -2.0872, 0 )
@@ -441,7 +441,7 @@ hframes = 8
 vframes = 8
 frame = 49
 script = ExtResource( 5 )
-frame_delay = 0.1
+max_frames = 1
 
 [node name="Sprite3" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg3" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7179, -1.52188, 0 )
@@ -452,7 +452,7 @@ hframes = 8
 vframes = 8
 frame = 49
 script = ExtResource( 5 )
-frame_delay = 0.1
+max_frames = 1
 
 [node name="Sprite4" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg3" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.32246, -1.06028, 0 )
@@ -463,7 +463,7 @@ hframes = 8
 vframes = 8
 frame = 49
 script = ExtResource( 5 )
-frame_delay = 0.1
+max_frames = 1
 
 [node name="Leg4" type="Spatial" parent="SpriteContainer/InnerSpriteContainer/Limbs"]
 
@@ -487,7 +487,7 @@ hframes = 8
 vframes = 8
 frame = 49
 script = ExtResource( 5 )
-frame_delay = 0.1
+max_frames = 1
 
 [node name="Sprite2" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg4" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.87738, -2.15979, 0 )
@@ -498,7 +498,7 @@ hframes = 8
 vframes = 8
 frame = 49
 script = ExtResource( 5 )
-frame_delay = 0.1
+max_frames = 1
 
 [node name="Sprite3" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg4" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5338, -1.59447, 0 )
@@ -509,7 +509,7 @@ hframes = 8
 vframes = 8
 frame = 49
 script = ExtResource( 5 )
-frame_delay = 0.1
+max_frames = 1
 
 [node name="Sprite4" type="Sprite3D" parent="SpriteContainer/InnerSpriteContainer/Limbs/Leg4" groups=["sprite"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3588, -1.08101, 0 )
@@ -520,7 +520,7 @@ hframes = 8
 vframes = 8
 frame = 49
 script = ExtResource( 5 )
-frame_delay = 0.1
+max_frames = 1
 
 [node name="InteractionArea" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )

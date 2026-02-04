@@ -46,13 +46,14 @@ var doing_a_final_hit = false
 var can_return_via_input = false
 var can_return_via_input_timer = 0
 var can_return_via_input_time_limit = 3
+var my_broom_owner = null
 func _process(delta):
     # delta = delta * global.time_dilation_multiplier # i'm exempt!
     # secretAniPlayer.playback_speed = global.time_dilation_multiplier # i'm exempt!
 
     global.updateBroomSpriteTexture(mySpriteReal, true)
     if global.shouldRenderAsCinematic:
-        global.memory["broom"] = true
+        my_broom_owner.has_broom = true
         queue_free()
         return
     if global.pauseGame:
@@ -227,8 +228,8 @@ func die():
     is_dying = true
     if self.is_in_group("fallen_broom_group"):
         self.remove_from_group("fallen_broom_group")
-    if not global.memory["broom"] and returning and not level.player.should_respawn_broom:
-        global.memory["broom"] = true
+    if not my_broom_owner.has_broom and returning and not level.player.should_respawn_broom:
+        my_broom_owner.has_broom = true
     
 func tryReturnIfTooFarFromPlayer():
     if is_static_in_level:
@@ -335,7 +336,6 @@ func canActivate(area):
 func hitStuff(_delta):
     if not visible or (not projectile and not was_projectile) or should_die_on_land: return
         
-    var my_broom_owner = level.player
     var has_hit_something = false
     var areas = get_node("Area").get_overlapping_areas()
     for area in areas:

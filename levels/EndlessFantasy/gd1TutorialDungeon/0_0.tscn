@@ -837,7 +837,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 8, 0 )
 spawned_object_path = ""
 
 [node name="NPC3" parent="Viewport/level/GlitchTileSpawner" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300001, -0.985172, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300001, -0.88781, 0 )
 grav = Vector2( 0, 0 )
 bbText = "NPC.Crone.1"
 needs_to_talk_normal_first = true
@@ -907,7 +907,7 @@ flip_v = true
 mesh = SubResource( 212 )
 
 [node name="MeshInstance2" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="PressC" type="RichTextLabel" parent="Viewport2/UILayer"]
 visible = false

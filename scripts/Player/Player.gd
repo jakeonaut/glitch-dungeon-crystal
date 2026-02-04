@@ -1,5 +1,6 @@
 extends "PlayerGameMover.gd"
 
+export var whichPlayer = 1
 onready var pauseMenu = get_node("PauseMenu/MenuBox") if has_node("PauseMenu/MenuBox") else null
 onready var screenShakeSound = get_node("Sounds/ScreenShakeSound")
 onready var hurtSound = get_node("Sounds/HurtSound")
@@ -436,8 +437,8 @@ func _process(delta):
   # if nesting_doll_state == global.NestingDoll.BABY and not Input.is_action_pressed("jump_button") and not has_used_magic_lantern:
   #   tryToRevertFromBaby()
 
-  if glitch_form == global.GlitchForm.INVISIBLE and global.memory["broom"]:
-    global.memory["broom"] = false
+  if glitch_form == global.GlitchForm.INVISIBLE and self.has_broom:
+    self.has_broom = false
   processSpriteRenderLogic(delta)
   processBroomRenderLogic(delta)
   processBagRenderLogic(delta)
@@ -524,6 +525,10 @@ func _process(delta):
   if physics_state == PhysicsState.GLITCH_DYING or physics_state == PhysicsState.GLITCH_HURT or physics_state == PhysicsState.IGNORE_PHYSICS:
     updateGrandmaHatHandSprites()
     return
+  if physics_state == PhysicsState.BEING_TOSSED and grav.is_equal_approx(Vector2(0, 0)):
+    ladderUpdateTargetLastGroundedY()
+  elif nesting_doll_state == global.NestingDoll.MATRIARCH and linear_velocity.y > 0:
+    ladderUpdateTargetLastGroundedY()
   processBubbleLogic(delta)
   processBeingTossedLogic(delta)
   processTeleportationLogic(delta)
@@ -1173,7 +1178,7 @@ func firstAdjustmentForNestingDolls():
 func loseBroom():
   if summonedBroom:
     broomStop()
-  if global.memory["broom"]:
+  if self.has_broom:
     mySprite.flip_h = not mySprite.flip_h
     summonFallenBroom(false, true, false)
     mySprite.flip_h = not mySprite.flip_h
@@ -1269,8 +1274,6 @@ func getBubbleInfected():
   miniUpwardGust(false)
   if summonedBroom:
     broomStop()
-    # summonFallenBroom(true, false, false)
-  # global.memory["broom"] = false
   transformation = TransformationState.BUBBLE
   on_ground = false
   gravitySound.play()
@@ -1304,6 +1307,10 @@ func getBubbleCured():
   # should_collide_with_walls = true
   # grav = bubble_temp_grav
   # true_terminal_vel = bubble_temp_true_terminal_vel
+  if physics_state == PhysicsState.BEING_TOSSED:
+    bigBump()
+    pauseAnimation = false
+    physics_state = PhysicsState.NORMAL
 
 func restartMusic(): # maybe an animation uses this idk, dont delete it
   level.restartMusic()
@@ -1334,7 +1341,7 @@ func getFishyInfected():
   # if summonedBroom:
   #   broomStop()
   #   summonFallenBroom(true, false, false)
-  # global.memory["broom"] = false
+  # self.has_broom = false
   getABroom()
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
@@ -1708,7 +1715,7 @@ func processMoleLogic(delta):
       # if summonedBroom:
       #   broomStop()
       #   summonFallenBroom(true, false, false)
-      # global.memory["broom"] = false
+      # self.has_broom = false
     else:
       dig_timer = 0
     if not pressingJump() and on_ground:
@@ -1736,6 +1743,8 @@ func cleanUpDirtCoverage():
   # glitchTickle()
   if what_was_my_last_palette != null:
     changeSpriteColorPalette(what_was_my_last_palette)
+  else:
+    changeSpriteColorPalette(global.player_base_palette)
 
 func applyGravity(delta):
   if dig_timer > 0 and (pressingJump() or glitch_form == global.GlitchForm.LADDER and isWalkingIntoWall()) and can_dig_up and (on_ceiling or was_on_ceiling):
@@ -1761,9 +1770,9 @@ func collideWithCeiling(local_lv):
   if physics_state == PhysicsState.BEING_TOSSED:
     physics_state = PhysicsState.NORMAL
     pauseAnimation = false
-    if physics_state == PhysicsState.BEING_TOSSED:
-      on_ground = true # needs to be BEFORE tryDieToEnemy to set remembered_on_ground correctly
-      bigBump()
+    on_ground = true # needs to be BEFORE tryDieToEnemy to set remembered_on_ground correctly
+    bigBump()
+    getABroom()
   on_ceiling = true
   var lt = getLevelTiles()
   var solidTilesAbove = getTilesBelow(lt) if grav.y < 0 else getTilesLeftOf(lt) if grav.x < 0 else getTilesRightOf(lt) if grav.x > 0 else getTilesAbove(lt)
@@ -2037,6 +2046,7 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
     nesting_doll_state = global.NestingDoll.GRANDMA
     updateNestingDoll(nesting_doll_state)
     global.pauseMoveInput = false
+    getABroom()
   # elif nesting_doll_state == global.NestingDoll.GRANDMA and global.memory["mushroom_soul"] >= 1 and global.memory["mushroom_soul_enabled"] and not should_immediately_die and whichBoss == null:
   #   global.memory["hp"] += 1
   #   physics_state = PhysicsState.GLITCH_HURT
@@ -2159,7 +2169,7 @@ func malwareCured():
   infectReverseSound.play()
   # getABroom()
 
-func tumbleFall(direction_vector, is_corrupted = false):
+func tumbleFall(direction_vector, is_corrupted = false, bubble_spit = false):
   if physics_state == PhysicsState.GLITCH_DYING:
     return
 
@@ -2170,19 +2180,19 @@ func tumbleFall(direction_vector, is_corrupted = false):
   var jump_val = 5 if not is_corrupted else 0
   if direction_vector.x < 0:
     aniPlayer.queue("tumbleLeft")
-    x_val = -10
+    x_val = -3 if bubble_spit else -10 if direction_vector.y == 0 else -5
     on_ground = true
   elif direction_vector.x > 0:
     aniPlayer.queue("tumbleRight")
-    x_val = 10
+    x_val = 3 if bubble_spit else 10 if direction_vector.y == 0 else 5
     on_ground = true
-  elif direction_vector.y > 0:
+  if direction_vector.y > 0:
     if mySprite.flip_h:
       aniPlayer.queue("tumbleLeft")
     else:
       aniPlayer.queue("tumbleRight")
-    jump_val = 10
-    should_free_when_falling = true
+    jump_val = 20 if direction_vector.x == 0 else 15
+    # should_free_when_falling = true
     on_ground = false
     # grav = Vector2(0, 0)
   elif direction_vector.y < 0:
@@ -2195,29 +2205,32 @@ func tumbleFall(direction_vector, is_corrupted = false):
 
   if is_corrupted:
     grav = Vector2(0, 0)
+    jump_val /= 2
     # on_ground = false
     should_big_bump = true
   else:
     # on_ground = true
     grav = PLAYER_GRAV
   physics_state = PhysicsState.BEING_TOSSED
+  playBounce("grow")
   global.pauseGame = false
   global.pauseMoveInput = false
   pauseAnimation = true
   should_collide_floor = true
   can_collide_with_floor = true
+
+  linear_velocity.y = jump_val
+  lv.y = jump_val
+  vv = up.dot(lv)
+  if bubble_spit:
+    getBubbleInfected()
   hv = Vector3(x_val, 0, 0)
   dir = Vector3(x_val, 0.0, 0.0)
   linear_velocity.x = x_val
   lv.x = x_val
-
-  print("tumblr fall")
-  linear_velocity.y = jump_val
-  lv.y = jump_val
-  vv = up.dot(lv)
-
-  yield(TempTimer.idle_frame(self), "timeout")
-  fall_timer = fall_time_max - 5
+  if bubble_spit:
+    yield(get_tree().create_timer(0.2), "timeout")
+    physics_state = PhysicsState.NORMAL
 
 # @override
 func isFeatherLike():
@@ -2225,7 +2238,7 @@ func isFeatherLike():
 
 var is_covered_in_dirt = false
 var is_covered_in_dirt_timer = 0
-var is_covered_in_dirt_time_limit = 5
+var is_covered_in_dirt_time_limit = 3
 func isHeavy():
   return glitch_form == global.GlitchForm.LADDER or is_covered_in_dirt
 
@@ -2288,13 +2301,13 @@ func processBroomLogic(delta):
   if should_respawn_broom:
     if glitch_form != global.GlitchForm.INVISIBLE and (
           physics_state == PhysicsState.NORMAL or physics_state == PhysicsState.GLITCH_RECOVERY or physics_state == PhysicsState.GLITCH_HURT
-    ) and not global.memory["broom"]:
+    ) and not self.has_broom:
       respawn_broom_timer += (delta*11)
       if respawn_broom_timer >= respawn_broom_time_limit:
         respawn_broom_timer = 0
         should_respawn_broom = false
         level.summonSmokeClouds(self.global_transform.origin, 1, false, true)
-        global.memory["broom"] = true
+        self.has_broom = true
     else:
       should_respawn_broom = false
 
@@ -2314,13 +2327,13 @@ func processBroomLogic(delta):
     return
 
   var which_broom_attack = 1
-  if not global.memory["broom"] and transformation == TransformationState.BUBBLE:
-    global.memory["broom"] = glitch_form != global.GlitchForm.INVISIBLE
+  if not self.has_broom and transformation == TransformationState.BUBBLE:
+    self.has_broom = glitch_form != global.GlitchForm.INVISIBLE
 
-  if not global.memory["broom"]:
+  if not self.has_broom:
     # if nesting_doll_state == global.NestingDoll.BABY and Input.is_action_just_pressed("sub_action_button") and Input.is_action_pressed("ui_down"):
     #   summonSporeShroom()
-    if global.memory["has_gotten_broom"] > 0 and Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing() and global.memory["broomerang"] >= 1 and not isItWeird():
+    if Input.is_action_just_pressed("sub_action_button") and not noBroomSound.is_playing() and global.memory["broomerang"] >= 1 and not isItWeird():
       # if fallenBroomRef.get_ref() and not fallenBroomRef.get_ref().returning:
       #   var distance = global_transform.origin.distance_to(fallenBroomRef.get_ref().global_transform.origin)
       #   if distance >= 2:
@@ -2751,7 +2764,7 @@ func processBroomRenderLogic(_delta):
         sprite.material_override.set_shader_param("black_offset", 0)
   elif summonedBroom != null:
     adjustSummonedBroomSpritePosition()
-  elif global.memory["broom"] and not isHoldingMultiBroom() and transformation != TransformationState.BUBBLE:
+  elif self.has_broom and not isHoldingMultiBroom() and transformation != TransformationState.BUBBLE:
     broomSpriteVisible.visible = true
     if nesting_doll_state == global.NestingDoll.GRANDMA:
       mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
@@ -2786,7 +2799,7 @@ func landed(_was_on_fallthrough_solid = false):
   .landed()
   if not (is_mushroom_infected or is_mushroom_prefected):
     has_landed_since_recovering = true
-  has_broom_flown = not global.memory["broom"]
+  has_broom_flown = not self.has_broom
   if has_broom_flown:
     has_landed_since_last_flight = true
   num_spell_casts_used = 0
@@ -2865,11 +2878,12 @@ var respawn_broom_timer = 0
 var respawn_broom_time_limit = 3
 var should_respawn_broom = false
 func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = true):
-  if not global.memory["broom"] or not broomSpriteVisible.visible or isTextboxPausingMe():
+  if not self.has_broom or not broomSpriteVisible.visible or isTextboxPausingMe():
     return null
   broomSpriteVisible.visible = false
   summonSmokeClouds(3, false, false)
   var fallenBroom = fallenBroomRes.instance()
+  fallenBroom.my_broom_owner = self
   level.add_child(fallenBroom)
   if smacked_npc != null:
     fallenBroom.smacked_npc = smacked_npc
@@ -2947,13 +2961,13 @@ func summonFallenBroom(was_thrown, should_die_on_land = false, should_return = t
   else:
     fallenBroom.grav = Vector2(0, 28)
 
-  global.memory["broom"] = false # global.memory["broomerang"] >= 2
+  self.has_broom = false # global.memory["broomerang"] >= 2
   if global.memory["broomerang"] >= 2 and was_thrown:
     should_respawn_broom = true
     respawn_broom_timer = 0
   # var fallenBroomArray = self.get_tree().get_nodes_in_group("fallen_broom_group")
   # if was_thrown and fallenBroomArray.size() < global.memory["broomerang"]:
-  #   global.memory["broom"] = true
+  #   self.has_broom = true
 
   if (fallenBroom.walk_direction.x < 0 or mySprite.flip_h) and was_thrown:
     if grav.y > 0:

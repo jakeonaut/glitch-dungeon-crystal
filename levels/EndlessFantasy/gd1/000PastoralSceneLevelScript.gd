@@ -83,7 +83,7 @@ func _process(_delta):
   #   if NPC7 != null:
   #     NPC7.textBox.hideTextbox()
   #   has_updated = true
-  # elif global.memory["broom"] and not has_updated:
+  # elif self.player.has_broom and not has_updated:
   #   if fallenBroom.get_ref():
   #     fallenBroom.get_ref().visible = false
   #   if NPC5 != null:

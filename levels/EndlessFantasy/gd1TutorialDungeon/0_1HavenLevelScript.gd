@@ -49,9 +49,11 @@ func setUpRoomInitializationOverride():
 
   if global.memory["broomerang"] >= 2:
     broomUpgradeCrone.is_merchant = false
+    broomUpgradeCrone.tryShowInteractPrompt()
 
   if global.userSettings["allMyBrooms"].find(global.GrandmaBroom.FRYING_PAN) >= 0:
     fryingPanNPC.is_merchant = false
+    fryingPanNPC.tryShowInteractPrompt()
     
   if global.memory["clean_crystals"] >= 4:
     broomUpgradeCrone.queue_free()

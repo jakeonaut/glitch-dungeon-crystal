@@ -303,6 +303,7 @@ func summonFallenBroom(_broom_origin):
   has_broom = false
   broomSpriteVisible.visible = false
   var fallenBroom = fallenBroomRes.instance()
+  fallenBroom.my_broom_owner = self
   level.add_child(fallenBroom)
   fallenBroom.should_die_on_land = true
   fallenBroom.should_return = false

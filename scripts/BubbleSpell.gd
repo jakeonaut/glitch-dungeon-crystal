@@ -149,7 +149,7 @@ func passiveActivate(_delta, is_player, is_local_broom = false):
   popSound3.play()
   if getPlayer().physics_state == getPlayer().PhysicsState.BEING_TOSSED and getPlayer().glitch_form == global.GlitchForm.FLOOR:
     return
-  if not getPlayer().pressingDown() and (getPlayer().linear_velocity.y <= 0 or getPlayer().on_ground):
+  if not getPlayer().pressingDown() and not getPlayer().nesting_doll_state == global.NestingDoll.MATRIARCH and (getPlayer().linear_velocity.y <= 0 or getPlayer().on_ground):
     getPlayer().camera_target_y_pos = getPlayer().global_transform.origin.y
     getPlayer().was_just_on_ground_timer = -8
     getPlayer().magicJump()

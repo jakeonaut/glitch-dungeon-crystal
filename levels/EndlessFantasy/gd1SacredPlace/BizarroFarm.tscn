@@ -1,4 +1,4 @@
-[gd_scene load_steps=204 format=2]
+[gd_scene load_steps=205 format=2]
 
 [ext_resource path="res://sceneObjects/tiles/test_all_tiles.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://assets/sounds/cowMoo.wav" type="AudioStream" id=2]
@@ -63,6 +63,7 @@
 [ext_resource path="res://sceneObjects/SavePoint.tscn" type="PackedScene" id=61]
 [ext_resource path="res://levels/common/commonWorldEnvironment.tscn" type="PackedScene" id=62]
 [ext_resource path="res://levels/common/Viewport.tscn" type="PackedScene" id=63]
+[ext_resource path="res://assets/sounds/babycry.wav" type="AudioStream" id=64]
 [ext_resource path="res://titlecard_fade.ogv" type="VideoStream" id=65]
 [ext_resource path="res://uiTutorialFont.tres" type="Theme" id=66]
 [ext_resource path="res://levels/common/UITheme_real_spaced.tres" type="Theme" id=67]
@@ -2846,101 +2847,11 @@ bbText = "Lore.Grandma.3"
 [node name="CollisionShape" parent="Viewport/level/NPC/SmallInteractionArea" index="0"]
 shape = SubResource( 352 )
 
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Container/ScrollContainer/Text" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
+[node name="DialogStartSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="10"]
+stream = ExtResource( 64 )
 
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Container/ScrollContainer/Text" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Container/ScrollContainer/Text" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Container/ScrollContainer/Text" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Container/YesButton/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Container/YesButton/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Container/YesButton/TextPrompt" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Container/YesButton/TextPrompt" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Container/NoButton/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Container/NoButton/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Container/NoButton/TextPrompt" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Container/NoButton/TextPrompt" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar2" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Container/TextPrompt" index="0"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar3" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Container/TextPrompt" index="1"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar4" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Container/TextPrompt" index="2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
-
-[node name="VScrollBar5" type="VScrollBar" parent="Viewport/level/NPC/NPC TextBox/TextBox/Container/TextPrompt" index="3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-step = 1.0
+[node name="DialogSound" parent="Viewport/level/NPC/NPC TextBox/TextBox" index="11"]
+pitch_scale = 1.0
 
 [node name="Sprite3D" parent="Viewport/level/NPC" index="3"]
 material_override = SubResource( 353 )
@@ -3001,7 +2912,7 @@ texture = SubResource( 235 )
 mesh = SubResource( 365 )
 
 [node name="MeshInstance2" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
-transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
+transform = Transform( 0.534633, -0.525684, 0.0180075, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )
 
 [node name="Camera" parent="Viewport2/UILayer/GlitchStatusRect/Viewport" index="1"]
 current = true

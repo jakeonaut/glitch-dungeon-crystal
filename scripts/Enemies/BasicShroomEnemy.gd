@@ -105,6 +105,7 @@ func passiveActivate(_delta, is_player, _is_local_broom = false):
     level.player.shroomAniPlayer.queue("adjust")
     level.player.nesting_doll_state = global.NestingDoll.MATRIARCH
     global.memory["nesting_doll"] = global.NestingDoll.MATRIARCH
+    level.player.loseBroom()
     # level.player.updateNestingDoll(global.NestingDoll.BABY)
     # if is_local_broom or level.player.fallenBroomRef:
     #   if level.player.fallenBroomRef and level.player.fallenBroomRef.get_ref():

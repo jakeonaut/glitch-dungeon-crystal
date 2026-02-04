@@ -322,6 +322,10 @@ func processPhysics(delta):
       jump_squat_jump_input_timer = 0
       feather_jump_timer = 0
       should_magic_jump = false
+  elif physics_state == PhysicsState.BEING_TOSSED and self == level.player and level.player.transformation == level.player.TransformationState.BUBBLE:
+    applyDirFriction(delta, false)
+    var curr_walk_speed = getWalkSpeed(delta)
+    hv = dir * curr_walk_speed
     
   lv = hv + (up * vv)
   linear_velocity = unnormalizeLv(handleCollisionsAndMove(normalizeLv(lv), delta))
@@ -514,7 +518,7 @@ func applyTerminalVelocity(_delta):
     else:
       terminal_vel = 0
   elif isFeatherLike():
-    if pressingJump() or pressingMoveUp():
+    if pressingJump() or pressingMoveUp() or physics_state == PhysicsState.BEING_TOSSED:
       terminal_vel = true_terminal_feather_vel
     elif pressingDown():
       terminal_vel = true_terminal_vel * .75
@@ -1149,38 +1153,9 @@ func processHorizontalInputs(delta):
         aniPlayer.queue("stand")
   setSpriteFlipH(flip_h)
 
-  var DNUMSKID = DNUMSKID_BASE
-  if is_turn_based:
-    DNUMSKID = 999.0
-  elif self.isFeatherLike():
-    DNUMSKID = DNUMSKID_BASE/2.8
-    if not on_ground:
-      DNUMSKID = DNUMSKID_BASE/7
-  elif not on_ground:
-    DNUMSKID = DNUMSKID_BASE/2
-  # if glitch_form == global.GlitchForm.FLOOR and not on_ground:
-  #   DNUMSKID = DNUMSKID_BASE + (DNUMSKID_BASE/9)
-    # TODO(jaketrower): RocketJumpBoots # DNUMSKID *= 2
-
   # TODO(Engine.time_scale suspect)
-  if physics_state != PhysicsState.BEING_TOSSED:
-    if dir.length() > 1:
-      dir = dir.normalized()
-    if (on_ground and not self.is_pressing_horizontal_input and shouldGroundHaveFriction()) or \
-      (not on_ground and not self.is_pressing_horizontal_input and shouldAirHaveFriction()):
-      if dir.x > 0:
-        dir.x -= (delta*DNUMSKID)
-        if dir.x <= 0:
-          dir = Vector3(0, 0, 0)
-      elif dir.x < 0:
-        dir.x += (delta*DNUMSKID)
-        if dir.x >= 0:
-          dir.x = 0
-    
-  # elif glitch_form == global.GlitchForm.FLOOR and not on_ground:
-  #     dir = dir * 0.97*(delta*DNUMSKID)
-  #     if dir.length() < 0.1:
-  #         dir = Vector3(0, 0, 0)
+  if physics_state != PhysicsState.BEING_TOSSED or (level.player == self and level.player.transformation == level.player.TransformationState.BUBBLE):
+    applyDirFriction(delta)
 
   if walk_speed == null:
     walk_speed = 8
@@ -1194,7 +1169,6 @@ func processHorizontalInputs(delta):
     swimming_walk_speed = 6
 
   var curr_walk_speed = getWalkSpeed(delta)
-
   # update x and z
   if not is_touching_water or horizontal_input:
     hv = dir * curr_walk_speed
@@ -1204,15 +1178,40 @@ func processHorizontalInputs(delta):
     if abs(hv.length()) < delta*22:
       hv = Vector3()
       dir = Vector3(0.0, 0.0, 0.0)
-
   if global.pauseMoveInput:
     hv = Vector3(0, 0, 0)
     is_walking = false
   else:
     updateFacing(dir)
-
   if aniPlayer != null and aniPlayer.assigned_animation == "sweepFloor":
     setSpriteFlipH(prevFlipH)
+
+func applyDirFriction(delta, should_normalize = true):
+  var DNUMSKID = DNUMSKID_BASE
+  if is_turn_based:
+    DNUMSKID = 999.0
+  elif self.isFeatherLike():
+    DNUMSKID = DNUMSKID_BASE/2.8
+    if not on_ground:
+      DNUMSKID = DNUMSKID_BASE/7
+  elif not on_ground:
+    DNUMSKID = DNUMSKID_BASE/2
+  # if glitch_form == global.GlitchForm.FLOOR and not on_ground:
+  #   DNUMSKID = DNUMSKID_BASE + (DNUMSKID_BASE/9)
+    # TODO(jaketrower): RocketJumpBoots # DNUMSKID *= 2
+
+  if dir.length() > 1 and should_normalize:
+    dir = dir.normalized()
+  if (on_ground and not self.is_pressing_horizontal_input and shouldGroundHaveFriction()) or \
+    (not on_ground and not self.is_pressing_horizontal_input and shouldAirHaveFriction()):
+    if dir.x > 0:
+      dir.x -= (delta*DNUMSKID)
+      if dir.x <= 0:
+        dir = Vector3(0, 0, 0)
+    elif dir.x < 0:
+      dir.x += (delta*DNUMSKID)
+      if dir.x >= 0:
+        dir.x = 0
 
 func setSpriteFlipH(flip_h):
   mySprite.flip_h = flip_h
@@ -1399,7 +1398,6 @@ func handleCollisionsAndMoveHorizontalGravity(local_lv, _delta):
       global_transform.origin.x = fallthrough_area_collision_x
     if fallthrough_area_collision_y != null:
       global_transform.origin.y = fallthrough_area_collision_y
-
   global_transform.origin.x += local_lv.x / velocity_dampener
   return local_lv
 

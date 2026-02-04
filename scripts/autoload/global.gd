@@ -433,8 +433,6 @@ func resetMemory():
     memory["initialized_from_debug"] = false
     memory["tutorial_gem"] = 0
     memory["hammer"] = 0
-    memory["broom"] = true
-    memory["has_gotten_broom"] = 0
     memory["nesting_doll"] = NestingDoll.GRANDMA
     memory["transformation"] = 0 # Player.TransformationState.NORMAL
     
@@ -541,7 +539,6 @@ func newGamePlusMemoryReset():
     memory["world_of_ruin"] = 0
     memory["babushka_cat_story_hook"] = 0
     memory["fishing_rod_shortcut"] = 0
-    memory["broom"] = 1
     memory.erase("savePoint")
     memory.erase("savedRoomPath")
     memory.erase("roomPath")

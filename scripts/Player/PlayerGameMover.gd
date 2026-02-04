@@ -22,6 +22,7 @@ var jump_press_broom_time_limit = 30
 var camera_target_y_pos = 0
 var pauseInput = false
 
+var has_broom = true
 var has_played_fall_sound = false
 
 var has_sweeped_glitch = false
@@ -115,7 +116,7 @@ func _process(delta):
       just_pacman_flipped_timer = 0
       just_pacman_flipped = false
 
-  if global.memory["broom"] and nesting_doll_state == global.NestingDoll.BABY:
+  if self.has_broom and nesting_doll_state == global.NestingDoll.BABY:
     level.player.loseBroom()
 
   if should_big_bump and not physics_state == PhysicsState.BEING_TOSSED:
@@ -128,9 +129,10 @@ func _process(delta):
     aniPlayer.queue("fall")
     fall_timer = 0
   if physics_state == PhysicsState.BEING_TOSSED and should_free_when_falling:
-    physics_state = PhysicsState.NORMAL
-    should_free_when_falling = false
-    pauseAnimation = false
+    if level.player.linear_velocity.y < 0:
+      physics_state = PhysicsState.NORMAL
+      should_free_when_falling = false
+      pauseAnimation = false
   processPauseAnimation()
   if smokeCloudThrottleTimer < smokeCloudThrottleTimeLimit:
     smokeCloudThrottleTimer += (delta*11)
@@ -897,7 +899,7 @@ func processMoleDigTimer(digDirection):
     tryClearFallthroughCollisionSolid(self.global_transform.origin)
     transformation = TransformationState.UNDERGROUND_RETURNING
     mySprite.visible = false
-    global.memory["broom"] = false
+    self.has_broom = false
     moleSprite.visible = false
     summonSmokeClouds(3, true, true, 0)
     global_transform.origin += digDirection / 2
@@ -1016,6 +1018,7 @@ func magicJump():
     getABroom()
   should_magic_jump = true
   actuallyApplyJump(false)
+  print(nesting_doll_state, ", ", vv)
   tryClearFallthroughCollisionSolid(self.global_transform.origin)
 
 onready var dollOpenSound = get_node("Sounds/DollOpenSound")
@@ -1029,7 +1032,7 @@ func updateNestingDoll(prevNestingDollState, shouldSpawnCarcass = true):
         emptyDoll.mySprite.material_override.set_shader_param("texture_albedo", spriteSheetSmall)
         emptyDoll.fallthroughSolidCollisionShape.translation.y = 0.6
       # elif nesting_doll_state == global.NestingDoll.MOM:
-      #   emptyDoll.broomSprite.visible = global.memory["broom"]
+      #   emptyDoll.broomSprite.visible = self.has_broom
       # if randi() % 4 == 1:
       #   emptyDoll.mySprite.flip_h = not emptyDoll.mySprite.flip_h
       nesting_doll_array.push_back(emptyDoll)
@@ -1037,8 +1040,8 @@ func updateNestingDoll(prevNestingDollState, shouldSpawnCarcass = true):
       dollOpenSound.pitch_scale = 1.2
     elif nesting_doll_state == global.NestingDoll.MOM:
       dollOpenSound.pitch_scale = 0.95
-      # global.memory["had_broom"] = global.memory["broom"]
-      # global.memory["broom"] = false
+      # global.memory["had_broom"] = self.has_broom
+      # self.has_broom = false
     dollOpenSound.play()
   elif nesting_doll_state > prevNestingDollState and nesting_doll_array.size() > 0:
     var emptyDoll = nesting_doll_array.pop_back()
@@ -1047,7 +1050,7 @@ func updateNestingDoll(prevNestingDollState, shouldSpawnCarcass = true):
       dollCloseSound.pitch_scale = 1.1
     elif nesting_doll_state == global.NestingDoll.GRANDMA:
       dollCloseSound.pitch_scale = 0.9
-      # global.memory["broom"] = global.memory["had_broom"] or global.memory["broom"]
+      # self.has_broom = global.memory["had_broom"] or self.has_broom
     dollCloseSound.play()
 
   if nesting_doll_state == global.NestingDoll.MATRIARCH:
@@ -1199,11 +1202,11 @@ func getABroom(unpauseAnimation = true):
      transformation == TransformationState.BUBBLE or \
      transformation == TransformationState.CHICKEN or \
      nesting_doll_state == global.NestingDoll.BABY or \
+     nesting_doll_state == global.NestingDoll.MATRIARCH or \
      is_mushroom_infected: # or malware_infected:
     return
   pauseAnimation = not unpauseAnimation
-  global.memory["broom"] = true
-  global.memory["has_gotten_broom"] = 2
+  self.has_broom = true
   if nesting_doll_state == global.NestingDoll.GRANDMA:
     mySprite.material_override.set_shader_param("texture_albedo", spriteSheet)
   smacked_npc = null

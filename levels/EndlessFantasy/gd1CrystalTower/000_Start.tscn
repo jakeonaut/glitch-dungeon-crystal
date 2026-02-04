@@ -323,7 +323,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 12.4127, 0 )
 
 [node name="NPC" parent="Viewport/level" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50485, 2, 0 )
-grav = Vector2(0, 0)
+grav = Vector2( 0, 0 )
 bbText = "NPC.TowerGuard.1"
 
 [node name="Viewport2" parent="." instance=ExtResource( 14 )]

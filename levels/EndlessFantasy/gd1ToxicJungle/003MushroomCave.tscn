@@ -215,7 +215,7 @@ path = "res://levels/EndlessFantasy/gd1ToxicJungle/006SafariZone.tscn"
 num_keys_unlock = 4
 
 [node name="SmallKey" parent="Viewport/level" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 23, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.765, 20.5619, 0 )
 grav = Vector2( 0, 0 )
 
 [node name="SmallKey2" parent="Viewport/level" instance=ExtResource( 2 )]

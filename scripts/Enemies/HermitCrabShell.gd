@@ -313,7 +313,7 @@ func activate(_is_player, _is_local_broom = false):
     behavior_jumping = false
     rotation_degrees.z = 0
     global.activeInteractor = self
-    global.memory["broom"] = false
+    level.player.has_broom = false
     level.player.inventorySound.play()
     if level.player.summonedBroom:
       level.player.broomStop()

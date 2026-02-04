@@ -77,6 +77,15 @@ func _process(delta):
     lickedGameMover.visible = false
     if lickedGameMover == level.player:
       level.player.processCastingLogic(delta)
+      if level.player.justPressedMoveLeft():
+        mySprite.flip_h = true
+      elif level.player.justPressedMoveRight():
+        mySprite.flip_h = false
+      mySprite.material_override.set_shader_param("black_offset", 7)
+      if level.player.pressingMoveUp():
+        mySprite.region_enabled = true
+      else:
+        mySprite.region_enabled = false
     if tongueAniPlayer != null and tongueAniPlayer.assigned_animation != "spitOut":
       # tongueAniPlayer.playback_speed = global.time_dilation_multiplier
       # if Input.is_action_pressed("ui_left"):
@@ -95,6 +104,9 @@ func _process(delta):
     # if tongueAniPlayer.assigned_animation == "gulpIdle" and not tongueAniPlayer.is_playing():
     #   tongueAniPlayer.play("gulpIdle")
     return
+  else:
+    mySprite.region_enabled = false
+    mySprite.material_override.set_shader_param("black_offset", 0)
 
   if am_i_in_range_of_player:
     override_am_i_in_range_of_player = true
@@ -226,9 +238,13 @@ onready var tongueController = get_node("TongueController") if has_node("TongueC
 var SPIT_OFFSET = Vector2(0.2, 0.2)
 func spitOut():
   var lickedGameMover = tongueController.hookTarget.get_ref() if tongueController and tongueController.hookTarget else null
+  var should_spit_upwards = false
   if lickedGameMover != null:
     lickedGameMover.global_transform.origin = self.global_transform.origin
     lickedGameMover.global_transform.origin.y += SPIT_OFFSET.y
+    if lickedGameMover == level.player and level.player.pressingMoveUp():
+      lickedGameMover.global_transform.origin.y += SPIT_OFFSET.y
+      should_spit_upwards = true
     if mySprite.flip_h: # left
       lickedGameMover.global_transform.origin.x -= SPIT_OFFSET.x
       if is_bubble_spitter and lickedGameMover.pressingMoveLeft():
@@ -239,8 +255,10 @@ func spitOut():
         lickedGameMover.global_transform.origin.x += SPIT_OFFSET.x * 2
   notDieSound.play()
   gulpin = false
-  if lickedGameMover == level.player and glitch_form != global.GlitchForm.NORMAL:
-    level.player.applyObeliskGlitch(self.glitch_form)
+  if lickedGameMover == level.player:
+    level.player.getABroom()
+    if glitch_form != global.GlitchForm.NORMAL:
+      level.player.applyObeliskGlitch(self.glitch_form)
   if lickedGameMover != null:
     lickedGameMover.visible = true
     lickedGameMover.on_ground = true
@@ -249,14 +267,15 @@ func spitOut():
     tongueController.hookTarget = null
   if lickedGameMover != null:
     if lickedGameMover.has_method("glitchTickle"): lickedGameMover.glitchTickle()
-    if lickedGameMover.has_method("tumbleFall"): lickedGameMover.tumbleFall(Vector2(-1 if mySprite.flip_h else 1, 0))
-    if lickedGameMover == level.player:
-      if level.player.physics_state == level.player.PhysicsState.BEING_TOSSED:
-        level.player.playBounce("grow")
-    if is_bubble_spitter and lickedGameMover.has_method("getBubbleInfected"):
-      lickedGameMover.getBubbleInfected()
-      yield(get_tree().create_timer(0.2), "timeout")
-      lickedGameMover.physics_state = lickedGameMover.PhysicsState.NORMAL
+    if lickedGameMover.has_method("tumbleFall"):
+      lickedGameMover.tumbleFall(
+        Vector2(
+          0 if should_spit_upwards and level.player.glitch_form == global.GlitchForm.FLOOR else -1 if mySprite.flip_h else 1, 
+          1 if should_spit_upwards else 0
+        ),
+        should_spit_upwards and level.player.glitch_form == global.GlitchForm.FLOOR and not is_bubble_spitter,
+        is_bubble_spitter
+      )
     yield(get_tree().create_timer(0.1), "timeout")
     lickedGameMover.visible = true
 

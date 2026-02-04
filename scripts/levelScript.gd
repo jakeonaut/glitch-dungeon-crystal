@@ -40,7 +40,6 @@ export var is_turn_based = false
 export(Array, int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var spellbook_spells = []
 
 export var display_title = "???"
-export var doesnt_have_broom = false
 var has_room_initialized = false
 export var pacman_wrapping = false
 export var horizontal_pacman_wrapping = false
@@ -127,24 +126,17 @@ func _ready_impl():
   global.memory["tutorial_spellbookPage"] = false
   tryInitializeFromDebug()
     
-  if global.memory["has_gotten_broom"] > 0:
-    if global.malware_infected:
-      player.malware_infected = true
-      var newMalwareDragonfly = malwareDragonflyRes.instance()
-      newMalwareDragonfly.original_pos = player.global_transform.origin
-      newMalwareDragonfly.target_pos = newMalwareDragonfly.original_pos
-      self.add_child(newMalwareDragonfly)
-      newMalwareDragonfly.global_transform.origin = player.global_transform.origin
-      newMalwareDragonfly.do_i_belong_here = false
-      newMalwareDragonfly.is_following_player = true
-      newMalwareDragonfly.smallInteractionArea.remove_from_group("bug")
-    player.getABroom()
-  if doesnt_have_broom and global.memory["has_gotten_broom"] < 2:
-    global.memory["broom"] = false
-    global.memory["has_gotten_broom"] = 0
-  # elif not doesnt_have_broom:
-  #   player.getABroom()
-  #   global.memory["has_gotten_broom"] = 2
+  if global.malware_infected:
+    player.malware_infected = true
+    var newMalwareDragonfly = malwareDragonflyRes.instance()
+    newMalwareDragonfly.original_pos = player.global_transform.origin
+    newMalwareDragonfly.target_pos = newMalwareDragonfly.original_pos
+    self.add_child(newMalwareDragonfly)
+    newMalwareDragonfly.global_transform.origin = player.global_transform.origin
+    newMalwareDragonfly.do_i_belong_here = false
+    newMalwareDragonfly.is_following_player = true
+    newMalwareDragonfly.smallInteractionArea.remove_from_group("bug")
+  player.getABroom()
 
   displayMessageText("")
 
@@ -468,6 +460,7 @@ func processPauseMenu():
     global.is_reading_controller_input = false
     if global.isPauseMenuOpen:
       global.isPauseMenuOpen = false
+      self.glitchScreenEffect.visible = false
       player.unpauseSound.play()
       restartMusic()
   else:
@@ -1102,7 +1095,7 @@ func summonSmokeClouds(pos, num_clouds, play_sound = false, is_glitchy = false, 
     smokeClouds.push_back(newSmokeCloud)
   return smokeClouds
 
-func flipGravity(specific_dir = null):
+func flipGravity(specific_dir = null, should_reset_velocity = true):
   var prev_grav = player.grav
   if specific_dir.y == 1:
     player.grav = player.PLAYER_GRAV
@@ -1130,7 +1123,7 @@ func flipGravity(specific_dir = null):
 
   # if prev_grav.y == 0 or player.grav.y == 0:
   # reset to 0 for idk
-  if prev_grav != player.grav:
+  if prev_grav != player.grav and should_reset_velocity:
     player.linear_velocity = Vector3(0, 0, 0)
     player.lv = Vector3(0, 0, 0)
     player.vv = player.up.dot(player.lv)

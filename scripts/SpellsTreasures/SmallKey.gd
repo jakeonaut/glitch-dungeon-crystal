@@ -54,7 +54,8 @@ func alignMySprite():
 
 func landed(_was_on_fallthrough_solid = false):
     get_node("SecretAnimationPlayer").play("land")
-    landSound.play()
+    if jump_force >= 4:
+        landSound.play()
     jump_force /= 2
     land_count += 1
     if land_count >= land_count_limit:

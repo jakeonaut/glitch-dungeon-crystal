@@ -380,7 +380,7 @@ func unhideHighPriestess():
   levelTiles.randomize_num = 1
   # global.memory.erase("spellbookPage")
   # player.nullify()
-  # global.memory["broom"] = false
+  # level.player.has_broom = false
   # generateEyeTiles()
 
 # var climbToEyeLevel = preload("res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom_001climbToEye.tscn")
