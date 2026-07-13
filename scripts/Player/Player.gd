@@ -52,7 +52,7 @@ onready var textBox = get_node("TextContainer/TextBox")
 var sprite_reset_timer = 0
 var sprite_reset_limit = 3
 var cameraRotationCounter = 0
-var should_turn_on_glitch_screen_effects = true
+var should_turn_on_glitch_screen_effects = false
 var glitch_tickle_time_limit = 10
 var can_cast_spell_timer = 0
 var can_cast_spell_time_limit = 10
@@ -861,6 +861,7 @@ func tryDieToOffscreenCamera(_delta):
         bumpSound.play()
         fastStepSound.stop()
         getSmacked()
+        grav = PLAYER_GRAV
         transformation = TransformationState.UNDERGROUND
       # elif grav.y < 0:
       #   level.flipGravity(Vector2(0, 1))
@@ -1649,6 +1650,7 @@ func processMoleLogic(delta):
       getSmacked()
       smack_timer = -4
       transformation = TransformationState.UNDERGROUND
+      grav = PLAYER_GRAV
       global_transform.origin -= dig_direction / 2.0
     elif checkSolidTilesOnMe():
       global_transform.origin += (dig_direction * delta*11.0)

@@ -1,12 +1,13 @@
 extends "../GlitchEnemy.gd"
 
+var is_weird_glitched = false
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 onready var secretBounceAniPlayer = get_node("SecretBounceAnimationPlayer")
 onready var noseSprite = get_node("SpriteContainer/InnerSpriteContainer/NoseSprite")
 onready var spriteContainer = get_node("SpriteContainer")
 onready var thudSound = get_node("Sounds/ThudSound")
 onready var digSound = get_node("Sounds/DigSound")
-onready var cubeCrystal = weakref(get_node("CubeCrystal"))
+onready var cubeCrystal = weakref(get_node("CubeCrystal")) if has_node("CubeCrystal") else null
 
 var num_hits = 0
 var MAX_NUM_HITS = 3
@@ -115,7 +116,7 @@ func _process(delta):
     # need to be before global.pauseGame check so we can unpause
     if boss_phase == BossPhase.ASLEEP:
         unenemize()
-        if cubeCrystal.get_ref() != null and cubeCrystal.get_ref().meshInstance1.visible:
+        if cubeCrystal and cubeCrystal.get_ref() != null and cubeCrystal.get_ref().meshInstance1.visible:
             cubeCrystal.get_ref().meshInstance1.visible = false
             cubeCrystal.get_ref().ok_byebye = true
             global.memory["dogu_matryoshka_boss"] = -2
@@ -139,7 +140,7 @@ func _process(delta):
             level.gameCamera.zoomed_size = 30
             return
         if global.memory["dogu_matryoshka_boss"] == 1:
-            cubeCrystal.get_ref().ok_byebye = true
+            if cubeCrystal: cubeCrystal.get_ref().ok_byebye = true
             global_transform.origin.y += 10.5
             boss_phase = BossPhase.WAKEUP
             level.gameCamera.initial_size = 35
@@ -160,7 +161,7 @@ func _process(delta):
                 level.gameCamera.zoomed_size = 35
             return
 
-    if cubeCrystal.get_ref() != null:
+    if cubeCrystal and cubeCrystal.get_ref() != null:
         cubeCrystal.get_ref().meshInstance1.visible = false
     if global.pauseGame:
         return
@@ -335,7 +336,7 @@ func _process(delta):
             boss_phase = BossPhase.IDLE
 
     noseSprite.flip_h = mySprite.flip_h
-    if cubeCrystal.get_ref() != null:
+    if cubeCrystal and cubeCrystal.get_ref() != null:
         cubeCrystal.get_ref().meshInstance1.visible = false
 
 func queueUpAJump():
@@ -477,6 +478,8 @@ func doHorizontalWalkingBehavior():
         digTiles(solidTiles, true)
 
 func digTiles(solidTiles, should_summon_clouds):
+    if is_weird_glitched: return
+
     var tiles_dug = 0
     if solidTiles[0] != null:
         var coords_a = solidTiles[0]
@@ -550,12 +553,13 @@ func tryGetStunnedByWalls(margin = 0.25):
 func spawnFallingRock(specific_x = null):
     var fallingRock = fallingRockRes.instance()
     fallingRock.true_terminal_vel = 12
+    fallingRock.is_weird_glitched = is_weird_glitched
     level.add_child(fallingRock)
     if specific_x != null:
         fallingRock.global_transform.origin.x = specific_x
     else:
-        fallingRock.global_transform.origin.x = randi() % 34 - 7 # -7 to 24
-    fallingRock.global_transform.origin.y = 16
+        fallingRock.global_transform.origin.x = (randi() % 41 + 28) if is_weird_glitched else (randi() % 34 - 7) # -7 to 24
+    fallingRock.global_transform.origin.y = -4 if is_weird_glitched else 16
     fallingRock.get_node("CautionWarning").scale = Vector3(0.7, 0.7, 1)
     return fallingRock
 
@@ -602,7 +606,7 @@ func getHurt():
     secretAniPlayer.play("gotHurt")
     fallingRockTimeLimit /= 2
     num_hits += 1
-    if cubeCrystal.get_ref() != null:
+    if cubeCrystal and cubeCrystal.get_ref() != null:
         if num_hits == 1:
             cubeCrystal.get_ref().getHitSound.play()
         elif num_hits == 2:
@@ -624,10 +628,11 @@ func yaBeatMe():
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("gotHurt")
-    secretAniPlayer.queue("defeated")
-    global.pauseGame = true
-    global.shouldRenderAsCinematic = true
-    if global.demo_mode <= 0: Steam.set_achievement("CLAYDOL_BOSS")
+    if not is_weird_glitched:
+        secretAniPlayer.queue("defeated")
+        global.pauseGame = true
+        global.shouldRenderAsCinematic = true
+        if global.demo_mode <= 0: Steam.set_achievement("CLAYDOL_BOSS")
 
 var crystalGeodeRes = preload("res://sceneObjects/CrystalGeode2.tscn")
 func okayImDead():
@@ -660,3 +665,10 @@ func updateFallthroughSolids():
                 fallthroughSolid.remove_from_group("fallthrough")
         elif not fallthroughSolid.is_in_group("fallthrough"):
             fallthroughSolid.add_to_group("fallthrough")
+
+# @override
+func actuallyDieToOffscreenCamera(delta):
+    if is_weird_glitched:
+        yaBeatMe()
+    else:
+        .actuallyDieToOffscreenCamera(delta)

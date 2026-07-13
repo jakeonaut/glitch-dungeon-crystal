@@ -11,7 +11,7 @@ onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 onready var hurtSound = get_node("Sounds/HurtSound")
 
 var untouchableSprite = preload("res://assets/glitches/untouchable.png")
-var vulnerableSprite = preload("res://assets/glitches/dither3.png")
+var vulnerableSprite = preload("res://assets/glitches/glitch_sheet.png")
 export var metamorphosis_on_range = false
 
 var idle_timer = 0

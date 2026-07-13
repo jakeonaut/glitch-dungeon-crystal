@@ -3,7 +3,8 @@ extends "../GlitchEnemy.gd"
 
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 
-onready var cubeCrystal = weakref(get_node("CubeCrystal"))
+var is_weird_glitched = false
+onready var cubeCrystal = weakref(get_node("CubeCrystal")) if has_node("CubeCrystal") else null
 onready var weakPointContainer = get_node("WeakPointContainer")
 onready var weakPointAniPlayer = get_node("WeakPointContainer/WeakPointAnimationPlayer")
 onready var weakEyeAniPlayer = get_node("WeakPointContainer/WeakEye/SecretAnimationPlayer")
@@ -137,13 +138,14 @@ func _process(delta):
     # need to be before global.pauseGame check so we can unpause
     if boss_phase == BossPhase.LYING_IN_WAIT:
         unenemize()
-        if cubeCrystal.get_ref() != null and cubeCrystal.get_ref().meshInstance1.visible:
+        if cubeCrystal and cubeCrystal.get_ref() != null and cubeCrystal.get_ref().meshInstance1.visible:
             cubeCrystal.get_ref().meshInstance1.visible = false
             cubeCrystal.get_ref().ok_byebye = true
             startBossFight()
         if global.memory["angler_seaman_boss"] == 1:
             startBossFight()
-            cubeCrystal.get_ref().ok_byebye = true
+            if cubeCrystal:
+                cubeCrystal.get_ref().ok_byebye = true
         return
     elif boss_phase == BossPhase.WAKING_UP:
         if not secretAniPlayer.is_playing():
@@ -163,12 +165,13 @@ func _process(delta):
                 level.uiLayer.setDisplayTitle(tr("UI.BossName.1"))
         return
     elif boss_phase == BossPhase.DEFEATED:
-        moveToSpecificPosition(delta, Vector3(52.134, -19.847, 0), 1, false)
-        idle_timer += (delta*11)
-        if idle_timer >= 5:
-            idle_timer = 0
-            var random_pos = global_transform.origin + Vector3(rand_range(-2, 2), rand_range(-2, 2), 0)
-            level.summonSmokeClouds(random_pos, 1, true, true, false)
+        if not is_weird_glitched:
+            moveToSpecificPosition(delta, Vector3(52.134, -19.847, 0), 1, false)
+            idle_timer += (delta*11)
+            if idle_timer >= 5:
+                idle_timer = 0
+                var random_pos = global_transform.origin + Vector3(rand_range(-2, 2), rand_range(-2, 2), 0)
+                level.summonSmokeClouds(random_pos, 1, true, true, false)
         # if secretAniPlayer.assigned_animation == "defeated" and not secretAniPlayer.is_playing():
         #     pass
         # self.rotation_degrees.y += delta*22
@@ -408,7 +411,7 @@ func _process(delta):
                 weakPointAniPlayer.clear_queue()
                 weakPointAniPlayer.play("idle")
     
-    if cubeCrystal.get_ref() != null:
+    if cubeCrystal and cubeCrystal.get_ref() != null:
         cubeCrystal.get_ref().meshInstance1.visible = false
 
 
@@ -578,14 +581,15 @@ func detachWeakPoint():
 func yaBeatMe():
     idle_timer = 0
     unenemize()
-    boss_phase = BossPhase.DEFEATED
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
     secretAniPlayer.play("ouchies")
-    secretAniPlayer.queue("defeated")
-    global.pauseGame = true
-    global.shouldRenderAsCinematic = true
-    if global.demo_mode <= 0: Steam.set_achievement("ANGLER_BOSS")
+    boss_phase = BossPhase.DEFEATED
+    if not is_weird_glitched:
+        secretAniPlayer.queue("defeated")
+        global.pauseGame = true
+        global.shouldRenderAsCinematic = true
+        if global.demo_mode <= 0: Steam.set_achievement("ANGLER_BOSS")
 
 func okayImDead():
     if global.memory["angler_seaman_boss"] < 2:

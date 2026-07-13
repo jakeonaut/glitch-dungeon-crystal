@@ -772,7 +772,6 @@ can_nav_right = false
 can_nav_up = false
 can_nav_down = false
 hide_me_from_map = true
-has_angel_egg = 1
 
 [node name="CrystalHaven" parent="ToxicJungle" instance=ExtResource( 3 )]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, -5, -7, 0 )
@@ -964,7 +963,6 @@ can_nav_left = false
 can_nav_right = false
 can_nav_up = false
 can_nav_down = false
-has_angel_egg = 1
 
 [node name="DoguBossRoom" parent="CricketCaves" instance=ExtResource( 3 )]
 transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1.5, 5, -2, -1 )
@@ -1063,8 +1061,18 @@ can_nav_up = false
 can_nav_down = false
 has_angel_statue = true
 
+[node name="preBossRoom2" parent="CrystalTower" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 11, 0 )
+material_override = null
+frame = 26
+path = "res://levels/EndlessFantasy/gd1CrystalTower/EggRoom.tscn"
+can_nav_left = false
+can_nav_up = false
+can_nav_down = false
+has_angel_statue = true
+
 [node name="BossLevel" parent="CrystalTower" instance=ExtResource( 3 )]
-transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1, 6, 11, -1 )
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1, 7, 11, -1 )
 material_override = null
 offset = Vector2( -10, -20 )
 texture = ExtResource( 16 )

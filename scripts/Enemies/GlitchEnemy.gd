@@ -184,7 +184,7 @@ func collideWithWall(local_lv):
     return .collideWithWall(local_lv)
 
 func collideWithCeiling(local_lv):
-    if behavior_stick_to_walls: print("collide with ceil!!!")
+    # if behavior_stick_to_walls: print("collide with ceil!!!")
     handleStickyWallWalkingCeiling()
     return .collideWithCeiling(local_lv)
 

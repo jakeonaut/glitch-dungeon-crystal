@@ -36,7 +36,7 @@ func getSmacked(broom_origin = null, silently = false, is_local_broom = false):
     if anglerFish.num_hits > 0:
       anglerFish.weakPointAniPlayer.queue("swim")
     anglerFish.num_hits += 1
-    if anglerFish.cubeCrystal.get_ref() != null:
+    if anglerFish.cubeCrystal and anglerFish.cubeCrystal.get_ref() != null:
       if anglerFish.num_hits == 1:
           anglerFish.cubeCrystal.get_ref().getHitSound.play()
       elif anglerFish.num_hits == 2:

@@ -1,5 +1,6 @@
 extends Spatial
 
+var is_weird_glitched = false
 onready var secretAniPlayer = get_node("SecretAnimationPlayer")
 onready var mySprite = get_node("SpriteContainer/Sprite3D")
 onready var eyeSprite = get_node("SpriteContainer/EyeSprite3D")
@@ -17,7 +18,7 @@ var noteRefArray = []
 var singing_counter = 0
 var singing_count_max = 1
 var crystalGeodeRes = preload("res://sceneObjects/CrystalGeode2.tscn")
-onready var cubeCrystal = weakref(get_node("CubeCrystal"))
+onready var cubeCrystal = weakref(get_node("CubeCrystal")) if has_node("CubeCrystal") else null
 
 var num_hits = 0
 var MAX_NUM_HITS = 3
@@ -76,7 +77,7 @@ func getHurt():
     noteRefArray = []
     am_i_hurt = true
     num_hits += 1
-    if cubeCrystal.get_ref() != null:
+    if cubeCrystal and cubeCrystal.get_ref() != null:
         if num_hits == 1:
             cubeCrystal.get_ref().getHitSound.play()
         elif num_hits == 2:
@@ -105,18 +106,19 @@ func flipGravity():
     level.flipGravity(-1 * (getPlayer().grav / getPlayer().grav.abs()))
 
 func yaBeatMe():
-    level.saveTheGame()
+    # level.saveTheGame()
     secretAniPlayer.stop()
     secretAniPlayer.clear_queue()
-    secretAniPlayer.play("dieMove")
-    prev_boss_phase = boss_phase
     boss_phase = BossPhase.DEFEATED
-    musicPlayer.stopAll()
-    level.player.pauseInput = true
-    global.pauseMoveInput = true
-    global.pauseGame = true
-    global.shouldRenderAsCinematic = true
-    if global.demo_mode <= 0: Steam.set_achievement("BABA_BOSS")
+    if not is_weird_glitched:
+        secretAniPlayer.play("dieMove")
+        prev_boss_phase = boss_phase
+        musicPlayer.stopAll()
+        level.player.pauseInput = true
+        global.pauseMoveInput = true
+        global.pauseGame = true
+        global.shouldRenderAsCinematic = true
+        if global.demo_mode <= 0: Steam.set_achievement("BABA_BOSS")
 
 var am_i_hurt = false
 var kill_invis = false
@@ -197,8 +199,22 @@ var just_spawned_kizzy = false
 # var sprite3d_noglitchShader = preload("res://shaders/Sprite3D_noglitch.shader")
 # var sprite3dShader = preload("res://shaders/Sprite3D_noglitch.shader")
 var delta_time_dilation = 1.0
+var has_landed = false
+var grav = 60
+var linear_velocity_y = 0
+var true_terminal_vel = 32
 func _process(delta):
     if not visible or boss_phase == BossPhase.NULL: return
+
+    if is_weird_glitched and not has_landed:
+        linear_velocity_y += -grav * delta
+        if linear_velocity_y <= -true_terminal_vel:
+            linear_velocity_y = -true_terminal_vel
+        global_transform.origin.y += linear_velocity_y * delta
+
+        if global_transform.origin.y <= -32:
+            global_transform.origin.y = -32
+            has_landed = true
 
     delta_time_dilation = global.SLOW_BOSS_MULTIPLIER if global.memory["secret_bauble"] and global.memory["secret_bauble_enabled"] else 1.0
     if boss_phase != BossPhase.WAKEUP and boss_phase != BossPhase.GOT_HURT and boss_phase != BossPhase.DEFEATED:
@@ -220,12 +236,12 @@ func _process(delta):
 
     # need to be before global.pauseGame check so we can unpause
     if boss_phase == BossPhase.ASLEEP:
-        if cubeCrystal.get_ref() != null and cubeCrystal.get_ref().meshInstance1.visible:
+        if cubeCrystal and cubeCrystal.get_ref() != null and cubeCrystal.get_ref().meshInstance1.visible:
             cubeCrystal.get_ref().meshInstance1.visible = false
             cubeCrystal.get_ref().ok_byebye = true
             wakeMeUp()
         if level.player.transformation == level.player.TransformationState.CHICKEN or global.memory["baba_yaga_boss"] == 1:
-            cubeCrystal.get_ref().ok_byebye = true
+            if cubeCrystal: cubeCrystal.get_ref().ok_byebye = true
             wakeMeUp()
     elif boss_phase == BossPhase.WAKEUP:
         if not secretAniPlayer.is_playing():
@@ -260,10 +276,10 @@ func _process(delta):
                 level.uiLayer.setDisplayTitle(tr("UI.BossName.3"))
         return
     elif boss_phase == BossPhase.DEFEATED:
-        if not secretAniPlayer.is_playing():
+        if not secretAniPlayer.is_playing() and not is_weird_glitched:
             okayImDead()
 
-    if cubeCrystal.get_ref() != null:
+    if cubeCrystal and cubeCrystal.get_ref() != null:
         cubeCrystal.get_ref().meshInstance1.visible = false
     if global.pauseGame:
         return
@@ -438,7 +454,7 @@ func _process(delta):
             secretAniPlayer.clear_queue()
             secretAniPlayer.play("run")
             wakeUpSound.play()
-    if cubeCrystal.get_ref() != null:
+    if cubeCrystal and cubeCrystal.get_ref() != null:
         cubeCrystal.get_ref().meshInstance1.visible = false
 
 func getMushroomInfected(_shroom_pos, _ignore_ancestor = false):

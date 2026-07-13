@@ -1,0 +1,518 @@
+[gd_scene load_steps=39 format=2]
+
+[ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=1]
+[ext_resource path="res://scripts/CrystalEgg.gd" type="Script" id=2]
+[ext_resource path="res://assets/palettes/white_palette.png" type="Texture" id=3]
+[ext_resource path="res://assets/palettes/base_palette.png" type="Texture" id=4]
+[ext_resource path="res://assets/palettes/3bitrgb_palette.png" type="Texture" id=5]
+[ext_resource path="res://assets/models/smoothegg.tres" type="ArrayMesh" id=6]
+[ext_resource path="res://scripts/Sprite.gd" type="Script" id=7]
+[ext_resource path="res://assets/frogblocks.png" type="Texture" id=8]
+[ext_resource path="res://scripts/_InteractionArea_Passive.gd" type="Script" id=9]
+[ext_resource path="res://scripts/CubeCrystalMesh.gd" type="Script" id=10]
+[ext_resource path="res://shaders/PaletteWorldDither.shader" type="Shader" id=11]
+[ext_resource path="res://assets/water_normal_4.png" type="Texture" id=12]
+[ext_resource path="res://assets/gruesome_child.png" type="Texture" id=13]
+[ext_resource path="res://assets/sounds/151RetroMonsters/glitchEvolve.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/sounds/sfx004_meteors.wav" type="AudioStream" id=15]
+[ext_resource path="res://assets/sounds/OOT_Pot_Shatter.wav" type="AudioStream" id=16]
+[ext_resource path="res://assets/sounds/eba_darkness2.wav" type="AudioStream" id=17]
+[ext_resource path="res://scripts/GlitchAuraColorRect.gd" type="Script" id=20]
+[ext_resource path="res://assets/sounds/sfx010_weirdmetalchord.wav" type="AudioStream" id=21]
+[ext_resource path="res://scripts/StreetlightGlitchAuraControl.gd" type="Script" id=22]
+[ext_resource path="res://assets/palettes/dream-haze-mini.png" type="Texture" id=23]
+[ext_resource path="res://assets/palettes/white_glitch_palette.png" type="Texture" id=24]
+[ext_resource path="res://sceneObjects/GlitchAura.tscn" type="PackedScene" id=25]
+[ext_resource path="res://assets/lightAnimatedTexture.tres" type="Texture" id=26]
+
+[sub_resource type="ArrayMesh" id=93]
+surfaces/0 = {
+"aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
+"array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0 ),
+"blend_shape_data": [  ],
+"format": 2194689,
+"index_count": 24,
+"primitive": 1,
+"skeleton_aabb": [  ],
+"vertex_count": 8
+}
+
+[sub_resource type="SpatialMaterial" id=48]
+flags_transparent = true
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="ArrayMesh" id=94]
+surfaces/0 = {
+"aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
+"array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 4, 0, 0, 0, 4, 0, 1, 0, 5, 0, 2, 0, 6, 0, 3, 0, 7, 0 ),
+"blend_shape_data": [  ],
+"format": 2194689,
+"index_count": 24,
+"primitive": 1,
+"skeleton_aabb": [  ],
+"vertex_count": 8
+}
+
+[sub_resource type="Shader" id=78]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx;
+
+uniform float HowShiny = 2;
+uniform float Roughness = 0.2;
+uniform float alpha2 = 0.5;
+uniform bool should_use_vertex_color = true;
+uniform sampler2D texture_albedo : hint_albedo;
+
+varying smooth vec3 our_color;
+
+void vertex() {
+// Output:0
+  our_color = VERTEX;
+}
+
+void fragment() {
+// ColorUniform:4;
+	vec3 n_out4p0 = our_color;
+
+// ScalarUniform:2
+	float n_out2p0 = HowShiny;
+
+// ScalarUniform:3
+	float n_out3p0 = Roughness;
+
+  if (should_use_vertex_color) {
+	 ALBEDO = our_color;
+  } else {
+    ALBEDO = texture(texture_albedo, UV).rgb;
+  }
+	METALLIC = n_out2p0;
+	ROUGHNESS = n_out3p0;
+  ALPHA = alpha2;
+
+}
+
+void light() {
+// Output:0
+
+}"
+
+[sub_resource type="ShaderMaterial" id=89]
+shader = SubResource( 78 )
+shader_param/HowShiny = 2.0
+shader_param/Roughness = 0.5
+shader_param/alpha2 = 0.8
+shader_param/should_use_vertex_color = false
+shader_param/texture_albedo = ExtResource( 12 )
+
+[sub_resource type="ArrayMesh" id=90]
+resource_name = "smoothegg_Cylinder"
+surfaces/0 = {
+"aabb": AABB( -0.974928, -0.220896, -1, 1.94986, 2.24365, 1.90097 ),
+"array_data": PoolByteArray( 138, 37, 96, 177, 112, 176, 209, 61, 148, 239, 29, 191, 75, 129, 165, 53, 0, 0, 0, 56, 138, 37, 96, 177, 112, 176, 209, 61, 148, 239, 29, 191, 75, 129, 150, 81, 0, 60, 0, 56, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 128, 191, 111, 129, 138, 59, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 128, 191, 111, 129, 137, 67, 0, 60, 0, 0, 92, 245, 246, 62, 112, 176, 209, 61, 93, 241, 196, 190, 85, 177, 130, 98, 219, 58, 0, 56, 27, 38, 72, 63, 0, 0, 128, 63, 8, 157, 31, 191, 115, 194, 130, 28, 219, 58, 0, 0, 224, 249, 25, 63, 112, 176, 209, 61, 126, 147, 12, 62, 65, 210, 126, 115, 182, 57, 0, 56, 224, 148, 121, 63, 0, 0, 128, 63, 136, 220, 99, 62, 92, 244, 126, 11, 182, 57, 0, 0, 54, 13, 137, 62, 112, 176, 209, 61, 152, 75, 14, 63, 27, 213, 126, 42, 146, 56, 0, 56, 3, 38, 222, 62, 0, 0, 128, 63, 229, 165, 102, 63, 37, 245, 126, 42, 146, 56, 0, 0, 54, 13, 137, 190, 112, 176, 209, 61, 152, 75, 14, 63, 229, 213, 85, 63, 219, 54, 0, 56, 3, 38, 222, 190, 0, 0, 128, 63, 229, 165, 102, 63, 219, 245, 85, 63, 219, 54, 0, 0, 224, 249, 25, 191, 112, 176, 209, 61, 126, 147, 12, 62, 191, 210, 23, 63, 146, 52, 0, 56, 224, 148, 121, 191, 0, 0, 128, 63, 136, 220, 99, 62, 164, 244, 23, 63, 146, 52, 0, 0, 92, 245, 246, 190, 112, 176, 209, 61, 93, 241, 196, 190, 171, 177, 200, 63, 146, 48, 0, 56, 27, 38, 72, 191, 0, 0, 128, 63, 8, 157, 31, 191, 141, 194, 200, 63, 146, 48, 0, 0, 124, 195, 70, 178, 119, 50, 98, 190, 244, 33, 103, 190, 40, 129, 127, 63, 0, 0, 0, 56, 124, 195, 70, 178, 119, 50, 98, 190, 244, 33, 103, 190, 40, 129, 127, 193, 0, 58, 20, 56, 124, 195, 70, 178, 119, 50, 98, 190, 244, 33, 103, 190, 40, 129, 127, 63, 0, 60, 0, 56, 238, 180, 52, 62, 119, 50, 98, 190, 224, 27, 16, 190, 49, 157, 127, 63, 219, 58, 0, 56, 238, 180, 52, 62, 119, 50, 98, 190, 224, 27, 16, 190, 49, 157, 88, 178, 128, 59, 205, 56, 112, 86, 97, 62, 119, 50, 98, 190, 56, 186, 77, 61, 36, 175, 127, 193, 182, 57, 0, 56, 112, 86, 97, 62, 119, 50, 98, 190, 56, 186, 77, 61, 36, 175, 89, 172, 223, 59, 109, 58, 196, 145, 200, 61, 119, 50, 98, 190, 72, 62, 80, 62, 15, 178, 127, 193, 146, 56, 0, 56, 196, 145, 200, 61, 119, 50, 98, 190, 72, 62, 80, 62, 15, 178, 109, 181, 213, 58, 186, 59, 196, 145, 200, 189, 119, 50, 98, 190, 72, 62, 80, 62, 241, 178, 127, 193, 219, 54, 0, 56, 196, 145, 200, 189, 119, 50, 98, 190, 72, 62, 80, 62, 241, 178, 102, 202, 42, 57, 186, 59, 114, 86, 97, 190, 119, 50, 98, 190, 56, 186, 77, 61, 220, 175, 127, 193, 146, 52, 0, 56, 114, 86, 97, 190, 119, 50, 98, 190, 56, 186, 77, 61, 220, 175, 85, 212, 32, 56, 109, 58, 238, 180, 52, 190, 119, 50, 98, 190, 224, 27, 16, 190, 207, 157, 127, 63, 146, 48, 0, 56, 238, 180, 52, 190, 119, 50, 98, 190, 224, 27, 16, 190, 207, 157, 97, 212, 127, 56, 205, 56, 80, 249, 21, 176, 212, 153, 199, 63, 187, 152, 111, 191, 88, 127, 127, 63, 0, 0, 0, 0, 80, 249, 21, 176, 212, 153, 199, 63, 187, 152, 111, 191, 88, 127, 127, 63, 0, 60, 0, 0, 252, 82, 59, 63, 212, 153, 199, 63, 212, 98, 21, 191, 96, 73, 127, 63, 219, 58, 0, 0, 228, 150, 105, 63, 212, 153, 199, 63, 212, 66, 85, 62, 75, 33, 127, 193, 182, 57, 0, 0, 6, 234, 207, 62, 212, 153, 199, 63, 124, 222, 87, 63, 31, 31, 127, 193, 146, 56, 0, 0, 6, 234, 207, 190, 212, 153, 199, 63, 124, 222, 87, 63, 225, 31, 127, 193, 219, 54, 0, 0, 228, 150, 105, 191, 212, 153, 199, 63, 212, 66, 85, 62, 181, 33, 127, 193, 146, 52, 0, 0, 252, 82, 59, 191, 212, 153, 199, 63, 212, 98, 21, 191, 160, 73, 127, 63, 146, 48, 0, 0, 2, 96, 170, 50, 208, 116, 1, 64, 99, 177, 245, 190, 44, 127, 127, 63, 0, 0, 0, 0, 2, 96, 170, 50, 208, 116, 1, 64, 99, 177, 245, 190, 44, 127, 127, 63, 0, 52, 20, 56, 2, 96, 170, 50, 208, 116, 1, 64, 99, 177, 245, 190, 44, 127, 127, 63, 0, 60, 0, 0, 40, 23, 192, 62, 208, 116, 1, 64, 226, 47, 153, 190, 54, 96, 84, 47, 0, 55, 205, 56, 40, 23, 192, 62, 208, 116, 1, 64, 226, 47, 153, 190, 54, 96, 127, 63, 219, 58, 0, 0, 107, 136, 239, 62, 208, 116, 1, 64, 240, 175, 218, 61, 40, 77, 85, 40, 190, 55, 109, 58, 107, 136, 239, 62, 208, 116, 1, 64, 240, 175, 218, 61, 40, 77, 127, 193, 182, 57, 0, 0, 80, 52, 85, 62, 208, 116, 1, 64, 149, 92, 221, 62, 17, 74, 108, 49, 170, 53, 186, 59, 80, 52, 85, 62, 208, 116, 1, 64, 149, 92, 221, 62, 17, 74, 127, 193, 146, 56, 0, 0, 78, 52, 85, 190, 208, 116, 1, 64, 149, 92, 221, 62, 239, 74, 99, 72, 170, 48, 186, 59, 78, 52, 85, 190, 208, 116, 1, 64, 149, 92, 221, 62, 239, 74, 127, 193, 219, 54, 0, 0, 105, 136, 239, 190, 208, 116, 1, 64, 240, 175, 218, 61, 216, 77, 80, 84, 25, 36, 109, 58, 105, 136, 239, 190, 208, 116, 1, 64, 240, 175, 218, 61, 216, 77, 127, 193, 146, 52, 0, 0, 38, 23, 192, 190, 208, 116, 1, 64, 226, 47, 153, 190, 202, 96, 95, 84, 251, 43, 205, 56, 38, 23, 192, 190, 208, 116, 1, 64, 226, 47, 153, 190, 202, 96, 127, 63, 146, 48, 0, 0 ),
+"array_index_data": PoolByteArray( 1, 0, 5, 0, 3, 0, 1, 0, 4, 0, 5, 0, 4, 0, 7, 0, 5, 0, 4, 0, 6, 0, 7, 0, 6, 0, 9, 0, 7, 0, 6, 0, 8, 0, 9, 0, 8, 0, 11, 0, 9, 0, 8, 0, 10, 0, 11, 0, 10, 0, 13, 0, 11, 0, 10, 0, 12, 0, 13, 0, 2, 0, 38, 0, 15, 0, 2, 0, 31, 0, 38, 0, 12, 0, 15, 0, 13, 0, 12, 0, 14, 0, 15, 0, 14, 0, 2, 0, 15, 0, 14, 0, 0, 0, 2, 0, 6, 0, 23, 0, 8, 0, 6, 0, 21, 0, 23, 0, 30, 0, 20, 0, 17, 0, 20, 0, 24, 0, 22, 0, 24, 0, 28, 0, 26, 0, 28, 0, 20, 0, 30, 0, 20, 0, 28, 0, 24, 0, 12, 0, 29, 0, 14, 0, 12, 0, 27, 0, 29, 0, 8, 0, 25, 0, 10, 0, 8, 0, 23, 0, 25, 0, 14, 0, 16, 0, 0, 0, 14, 0, 29, 0, 16, 0, 4, 0, 21, 0, 6, 0, 4, 0, 19, 0, 21, 0, 10, 0, 27, 0, 12, 0, 10, 0, 25, 0, 27, 0, 1, 0, 19, 0, 4, 0, 1, 0, 18, 0, 19, 0, 38, 0, 51, 0, 37, 0, 38, 0, 53, 0, 51, 0, 7, 0, 33, 0, 5, 0, 7, 0, 34, 0, 33, 0, 13, 0, 36, 0, 11, 0, 13, 0, 37, 0, 36, 0, 5, 0, 32, 0, 3, 0, 5, 0, 33, 0, 32, 0, 9, 0, 34, 0, 7, 0, 9, 0, 35, 0, 34, 0, 15, 0, 37, 0, 13, 0, 15, 0, 38, 0, 37, 0, 11, 0, 35, 0, 9, 0, 11, 0, 36, 0, 35, 0, 44, 0, 40, 0, 42, 0, 40, 0, 50, 0, 52, 0, 50, 0, 46, 0, 48, 0, 46, 0, 40, 0, 44, 0, 40, 0, 46, 0, 50, 0, 36, 0, 47, 0, 35, 0, 36, 0, 49, 0, 47, 0, 34, 0, 43, 0, 33, 0, 34, 0, 45, 0, 43, 0, 31, 0, 53, 0, 38, 0, 31, 0, 39, 0, 53, 0, 37, 0, 49, 0, 36, 0, 37, 0, 51, 0, 49, 0, 35, 0, 45, 0, 34, 0, 35, 0, 47, 0, 45, 0, 33, 0, 41, 0, 32, 0, 33, 0, 43, 0, 41, 0 ),
+"blend_shape_data": [  ],
+"format": 2194711,
+"index_count": 198,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 54
+}
+
+[sub_resource type="ShaderMaterial" id=91]
+shader = SubResource( 78 )
+shader_param/HowShiny = 2.0
+shader_param/Roughness = 0.2
+shader_param/alpha2 = 0.8
+shader_param/should_use_vertex_color = false
+shader_param/texture_albedo = ExtResource( 12 )
+
+[sub_resource type="BoxShape" id=22]
+extents = Vector3( 2, 2.5, 2 )
+
+[sub_resource type="BoxShape" id=39]
+extents = Vector3( 2.5, 2, 2 )
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = ExtResource( 1 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 1.0
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.03
+shader_param/shake_block_size = 30.5
+shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = true
+shader_param/enable_black_unknown = false
+shader_param/palettesize = 16
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = false
+shader_param/enable_color_glitch = false
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = false
+shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 1.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 8 )
+shader_param/base_palette = ExtResource( 4 )
+shader_param/target_palette = ExtResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=92]
+shader = ExtResource( 1 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/opacity = 0.05
+shader_param/outline_color = null
+shader_param/outline_width = 1.0
+shader_param/shake_power = 0.005
+shader_param/shake_block_size = 10.0
+shader_param/shake_color_rate = 0.0
+shader_param/no_palette_swap = false
+shader_param/enable_remove_skin_tone = false
+shader_param/enable_dither = false
+shader_param/enable_no_transparency = false
+shader_param/enable_black_unknown = true
+shader_param/palettesize = 8
+shader_param/resolution_scale = 1
+shader_param/offset = 0
+shader_param/black_offset = 0
+shader_param/enable_glitch = true
+shader_param/enable_color_glitch = true
+shader_param/disable_glitch_dither = false
+shader_param/enable_palette_cycle = true
+shader_param/palette_cycle_speed = 1.0
+shader_param/enable_glitch_3d = true
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
+shader_param/normal_offset = 0.02
+shader_param/time_influence = 3.0
+shader_param/y_div = 2.87
+shader_param/texture_albedo = ExtResource( 13 )
+shader_param/base_palette = ExtResource( 4 )
+shader_param/target_palette = ExtResource( 5 )
+
+[sub_resource type="Shader" id=12]
+code = "shader_type canvas_item;
+
+uniform sampler2D target_palette : hint_albedo;
+uniform int palettesize = 16;
+uniform float resolution_scale = 4;
+uniform float canvas_width = 1280.0;
+uniform float canvas_height = 1024.0;
+uniform float r_mult = 0.0;
+uniform float g_mult = 1.0;
+uniform float b_mult = -1.0;
+// uniform int color_depth : hint_range(1, 8) = 8;
+
+// const int bayer[] = {
+//  0,32, 8,40, 2,34,10,42,
+// 48,16,56,24,50,18,58,26, 
+// 12,44, 4,36,14,46, 6,38, 
+// 60,28,52,20,62,30,54,22, 
+//  3,35,11,43, 1,33, 9,41, 
+// 51,19,59,27,49,17,57,25,
+// 15,47, 7,39,13,45, 5,37,
+// 63,31,55,23,61,29,53,21
+// }; 
+// const float bayerSize = 8.0;
+// const float bayerDivider = bayerSize * bayerSize;
+
+float myDistance(ivec3 A, ivec3 B) {
+    return sqrt(
+        pow(float(A.r - B.r), 2.0) +
+        pow(float(A.g - B.g), 2.0) +
+        pow(float(A.b - B.b), 2.0)
+    );
+}
+
+vec3 getClosestMatchingFromPalette(ivec3 color) {
+    float closest_distance = 9990.0;
+    vec3 closest_color = vec3(0, 1.0, 0);
+    for (int x=0; x<palettesize; x++) {
+        ivec2 coord = ivec2(x,0);
+        vec3 pixelcolor = texelFetch(target_palette, coord, 0).rgb;
+        ivec3 ipixelcolor = ivec3(round(pixelcolor * 255.0));
+        float dist = myDistance(color, ipixelcolor);
+        if (dist < closest_distance) {
+            closest_distance = dist;
+            closest_color = pixelcolor;
+        }
+    }
+    return closest_color;
+}
+
+// https://unlimited3d.wordpress.com/2020/01/08/srgb-color-space-in-opengl/
+float Convert_sRGB_FromLinear (float theLinearValue) {
+  return theLinearValue <= 0.0031308
+       ? theLinearValue * 12.92
+       : pow (theLinearValue, 1.0/2.4) * 1.055 - 0.055;
+}
+
+float Convert_sRGB_ToLinear (float thesRGBValue) {
+  return thesRGBValue <= 0.04045f
+       ? thesRGBValue / 12.92f
+       : pow ((thesRGBValue + 0.055) / 1.055, 2.4);
+}
+
+const float matrixSize = 8.0;
+const float tile_size = 32.0;
+void fragment() {
+    int m[] = {
+        0,32, 8,40, 2,34,10,42,
+        48,16,56,24,50,18,58,26, 
+        12,44, 4,36,14,46, 6,38, 
+        60,28,52,20,62,30,54,22, 
+        3,35,11,43, 1,33, 9,41, 
+        51,19,59,27,49,17,57,25,
+        15,47, 7,39,13,45, 5,37,
+        63,31,55,23,61,29,53,21
+    };
+
+    float incolor_r = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*r_mult)).r;
+    float incolor_g = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*g_mult)).g;
+    float incolor_b = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x*b_mult)).b;
+	float alpha = texture(TEXTURE, UV).a;
+    vec3 incolor = vec3(incolor_r, incolor_g, incolor_b);
+    vec2 uv = SCREEN_UV * vec2(canvas_width, canvas_height) / vec2(float(resolution_scale));
+
+    float x = uv.x;
+    float y = uv.y;
+    int tile_x = int(floor(x / tile_size));
+    int tile_y = int(floor(y / tile_size));
+
+    ////////////////////////////////////////////////
+    // TODO(jaketrower): Select sub-palette is more work...
+    ////////////////////////////////////////////////
+
+    int m_x = int(mod(x, matrixSize));
+    int m_y = int(mod(y, matrixSize));
+    int ratio = m[m_x + (m_y*int(matrixSize))];
+
+    // Convert from [0.0, 1.0] range to [0, 255] range
+    ivec3 pixel_color = ivec3(round(incolor * 255.0));
+    int r = pixel_color.r + ratio;
+    int g = pixel_color.g + ratio;
+    int b = pixel_color.b + ratio;
+    // Note: don't have to convert back to [0.0, 1.0] range because
+    // getClosestMatchingFromPalette uses [0.0, 1.0] value of the palette
+    vec3 closest_color = getClosestMatchingFromPalette(ivec3(r, g, b));
+    
+    COLOR.rgb = vec3(
+        Convert_sRGB_FromLinear(closest_color.r),
+        Convert_sRGB_FromLinear(closest_color.g),
+        Convert_sRGB_FromLinear(closest_color.b)
+    );
+	COLOR.a = alpha;
+    // COLOR.rgb = incolor;
+    // COLOR.rgb = vec3(float(r) / 255.0, float(g) / 255.0, float(b) / 255.0);
+}"
+
+[sub_resource type="ShaderMaterial" id=54]
+shader = SubResource( 12 )
+shader_param/palettesize = 6
+shader_param/resolution_scale = 1.0
+shader_param/canvas_width = 1280.0
+shader_param/canvas_height = 1024.0
+shader_param/r_mult = 0.0
+shader_param/g_mult = 1.0
+shader_param/b_mult = -1.0
+shader_param/target_palette = ExtResource( 23 )
+
+[sub_resource type="ShaderMaterial" id=61]
+shader = ExtResource( 11 )
+shader_param/palettesize = 8
+shader_param/resolution_scale = 4
+shader_param/canvas_width = 1280.0
+shader_param/canvas_height = 1024.0
+shader_param/r_mult = 0.0
+shader_param/g_mult = 1.0
+shader_param/b_mult = -1.0
+shader_param/target_palette = ExtResource( 24 )
+
+[node name="CrystalEgg" type="Spatial"]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 0, 0, 0 )
+script = ExtResource( 2 )
+
+[node name="CubeContainer" type="Spatial" parent="."]
+transform = Transform( 4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0, -3.75 )
+
+[node name="MeshInstance" type="MeshInstance" parent="CubeContainer"]
+transform = Transform( 0.5, 0.5, 0.707107, 0.5, 0.5, -0.707107, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0 )
+visible = false
+extra_cull_margin = 16384.0
+mesh = SubResource( 93 )
+material/0 = SubResource( 48 )
+script = ExtResource( 10 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="CubeContainer"]
+transform = Transform( 0.812422, -0.553603, 0.183013, 0.5, 0.5, -0.707107, 0.29995, 0.665975, 0.683013, 0, 9.31318e-09, -0.3125 )
+visible = false
+extra_cull_margin = 16384.0
+mesh = SubResource( 94 )
+material/0 = SubResource( 48 )
+script = ExtResource( 10 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="CubeContainer"]
+transform = Transform( 1, 0, 0, 0, -0.7, 1.50996e-07, 0, -1.05697e-07, -1, 0, 0.241481, -0.0808809 )
+visible = false
+material_override = SubResource( 89 )
+mesh = ExtResource( 6 )
+
+[node name="Cylinder" type="MeshInstance" parent="CubeContainer"]
+transform = Transform( 2, 0, 0, 0, -1.5, 3.01992e-07, 0, -2.26494e-07, -2, 0, 1.25, 5.96046e-08 )
+mesh = SubResource( 90 )
+material/0 = SubResource( 91 )
+
+[node name="InteractionArea" type="Area" parent="." groups=["corporeal_body"]]
+transform = Transform( 1, 0, 0, 0, 1.01867, 0, 0, 0, 0.987869, 0, 0, 0 )
+script = ExtResource( 9 )
+
+[node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
+transform = Transform( 2.5, 0, 0, 0, 2, 0, 0, 0, 2.5, 0, 0, 0 )
+shape = SubResource( 22 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="InteractionArea"]
+transform = Transform( 2.5, 0, 0, 0, 2, 0, 0, 0, 2.5, 0, 0, 0 )
+shape = SubResource( 39 )
+
+[node name="shatterSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+volume_db = -20.0
+pitch_scale = 0.7
+bus = "Sfx"
+
+[node name="cubeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 21 )
+volume_db = -10.0
+bus = "Sfx"
+
+[node name="cubeSound2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+volume_db = -10.0
+pitch_scale = 0.63
+bus = "Sfx"
+
+[node name="cubeSound3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+volume_db = -15.0
+bus = "Sfx"
+
+[node name="FryingPanSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -18.0
+pitch_scale = 2.0
+bus = "Sfx"
+
+[node name="GetHitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -18.0
+pitch_scale = 2.0
+bus = "Sfx"
+
+[node name="GetHitSound2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -15.0
+pitch_scale = 0.5
+bus = "Sfx"
+
+[node name="GetHitSound3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -10.0
+pitch_scale = 0.3
+bus = "Sfx"
+
+[node name="PlusSpriteContainer" type="Spatial" parent="."]
+visible = false
+
+[node name="PlusSprite" type="Sprite3D" parent="PlusSpriteContainer" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.317175, 0, -1 )
+material_override = SubResource( 13 )
+cast_shadow = 0
+pixel_size = 0.08
+texture = ExtResource( 8 )
+hframes = 16
+vframes = 16
+frame = 43
+
+[node name="PlusSprite2" type="Sprite3D" parent="PlusSpriteContainer" groups=["sprite"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, -1 )
+material_override = SubResource( 13 )
+cast_shadow = 0
+pixel_size = 0.08
+texture = ExtResource( 8 )
+hframes = 16
+vframes = 16
+frame = 49
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1.25, 0, 0, 0, -0.484146, 0.874987, 0, -1.09373, -0.605183, 0, 8, 7.33333 )
+visible = false
+light_indirect_energy = 0.0
+
+[node name="DirectionalLight2" type="DirectionalLight" parent="."]
+transform = Transform( 1.25, 0, 0, 0, 0.999896, 0.0144483, 0, -0.0180608, 1.24987, 0, 4.77646, 10.9556 )
+visible = false
+light_indirect_energy = 0.0
+light_negative = true
+
+[node name="NPC" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.332667, 0 )
+
+[node name="Sprite3D" type="Sprite3D" parent="NPC"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
+material_override = SubResource( 92 )
+pixel_size = 0.125
+transparent = false
+double_sided = false
+alpha_cut = 2
+texture = ExtResource( 13 )
+hframes = 3
+vframes = 6
+frame = 5
+script = ExtResource( 7 )
+
+[node name="StreetlightGlitchAura" type="Control" parent="."]
+visible = false
+script = ExtResource( 22 )
+
+[node name="TextureRect" type="TextureRect" parent="StreetlightGlitchAura"]
+visible = false
+material = SubResource( 54 )
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 26 )
+expand = true
+script = ExtResource( 20 )
+minSize = 150
+maxSize = 250
+
+[node name="GlitchAura" parent="." instance=ExtResource( 25 )]
+visible = false
+target_path = NodePath("..")
+
+[node name="ColorRect" parent="GlitchAura" index="0"]
+visible = false
+material = SubResource( 61 )
+
+[node name="DirectionalLight3" type="DirectionalLight" parent="."]
+transform = Transform( -4.37114e-08, 0.866025, 0.5, 0, 0.5, -0.866025, -1, -3.78552e-08, -2.18557e-08, 15, -2, 7 )
+directional_shadow_mode = 0
+
+[editable path="GlitchAura"]

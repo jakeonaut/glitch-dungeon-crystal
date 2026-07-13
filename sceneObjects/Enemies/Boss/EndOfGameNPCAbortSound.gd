@@ -8,6 +8,7 @@ func activateScript():
     if has_activated:
         return
     has_activated = true
+    # TODO(jaketrower): DLC
     if global.isSecretEndingEnabled():
         global.memory["world_of_ruin"] = true
         transition.long_fade_to("res://levels/EndlessFantasy/gd1CrystalTower/HighPriestessRoom.tscn")

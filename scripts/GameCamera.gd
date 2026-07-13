@@ -9,6 +9,7 @@ onready var level = get_tree().get_root().get_node("Game/Viewport/level")
 
 # onready var playerLight = get_node("CSGCombiner/PlayerLight") if has_node("CSGCombiner/PlayerLight") else null
 
+var override_target = null
 var leftmost_x = 999
 var rightmost_x = -999
 var topmost_y = -999
@@ -153,6 +154,12 @@ func _process(delta):
         self.size = zoomed_size
       set_speed(2)
       set_interpolation_enabled(true)
+    elif override_target != null:
+      actual_target = weakref(override_target)
+      set_target(actual_target.get_ref())      
+      self.size = self.size + (initial_size - self.size) * (delta*5)
+      if stepify(self.size, 0.1) == stepify(initial_size, 0.1):
+        self.size = initial_size
     else:
       actual_target = weakref(initial_target)
       set_target(actual_target.get_ref())      

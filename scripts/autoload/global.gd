@@ -300,7 +300,8 @@ var has_sneezed = false
 
 var demo_mode = 0
 var display_mode = 0
-var dlc_mode = 0
+var dlc_mode = 1
+var dlc_mode_debug = 1
 
 var isEndOfGame = false
 var isRespawning = false
@@ -835,7 +836,7 @@ func getDisplayTitle(levelZoneName, path = null):
         "gd1GrandmaVillage":
             return tr("Question.Mark")
         "gd1PrimordialOoze":
-            return tr("LevelName.6")
+            return "? ? ?？？？"
         "gd1DreamMemories":
             return tr("LevelName.7")
         _:
@@ -1977,8 +1978,10 @@ func saveMySpot(savePoint, position, level, is_weird_soul_spore_save):
 
 func broomSmackSound():
     if global.memory["currBroom"] == global.GrandmaBroom.FRYING_PAN:
+        global.panSmackSound.pitch_scale = rand_range(0.95, 1.05)
         global.panSmackSound.play()
     if global.memory["currBroom"] == global.GrandmaBroom.CRONE_STAFF:
+        global.croneStaffSmackSound.pitch_scale = rand_range(0.95, 1.05)
         global.croneStaffSmackSound.play()
 
 func broomSmackStuff(areas, is_active, global_transform, my_broom_owner, level, smacked_npc):

@@ -147,7 +147,6 @@ Steam="*res://addons/steam_api/steam.gd"
 [debug]
 
 settings/crash_handler/message="Whoops! Please include error message when reporting the bug to jakeonaut@gmail.com"
-settings/fps/force_fps=60
 
 [display]
 
@@ -493,9 +492,12 @@ translation_remaps={
 }
 locale_filter=[ 0, [ "de_DE", "en", "es", "fr", "it", "ja", "ko_KR", "pl", "pt_BR", "ru", "tr_TR", "uk_UA", "zh_CN" ] ]
 
+[mono]
+
+project/assembly_name="Babushka's Glitch Dungeon"
+
 [physics]
 
-common/physics_fps=64
 3d/active_soft_world=false
 
 [physics_2d]

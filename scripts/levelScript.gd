@@ -6,11 +6,11 @@ onready var levelTiles = get_node("LevelTiles")
 onready var fakeLevelTiles = get_node("FakeLevelTiles") if has_node("FakeLevelTiles") else null
 onready var gameCamera = get_node("GameCamera")
 # onready var ditherPaletteEffectRect = get_node("../../ScreenEffects/DitherPaletteEffectRect")
-onready var screenEffectsContainer = get_node("../../ScreenEffects")
-onready var glitchScreenEffect = get_node("../../ScreenEffects/GlitchEffectRect")
-onready var ditherPaletteEffectRect2 = get_node("../../Viewport2/ScreenEffects/DitherPaletteEffectRect")
-onready var paletteSwapColorBlindEffectRect2 = get_node("../../Viewport2/ScreenEffects/PaletteSwapEffectRect") 
-onready var basicCrtEffectRect2 = get_node("../../Viewport2/ScreenEffects/BasicCrtEffectRect")
+onready var screenEffectsContainer = get_node("../../ScreenEffects") if has_node("../../ScreenEffects") else null
+onready var glitchScreenEffect = get_node("../../ScreenEffects/GlitchEffectRect") if has_node("../../ScreenEffects") else null
+onready var ditherPaletteEffectRect2 = get_node("../../Viewport2/ScreenEffects/DitherPaletteEffectRect") if has_node("../../ScreenEffects") else null
+onready var paletteSwapColorBlindEffectRect2 = get_node("../../Viewport2/ScreenEffects/PaletteSwapEffectRect") if has_node("../../ScreenEffects") else null
+onready var basicCrtEffectRect2 = get_node("../../Viewport2/ScreenEffects/BasicCrtEffectRect") if has_node("../../ScreenEffects") else null
 onready var viewportTexture = get_node("../../ViewportTexture")
 onready var viewport2Texture = get_node("../../Viewport2/ViewportTexture")
 onready var viewport2or3 = get_node("../../Viewport3") if has_node("../../Viewport3") else get_node("../../Viewport2")
@@ -21,7 +21,7 @@ export var is_chicken_room = false
 export var dont_glitch_tiles = false
 export var show_crt_effect = false
 export var show_dither_effect = false
-var ditherPaletteEffectRectMaterial = preload("res://materials/DitherPaletteEffectRect.tres")
+# var ditherPaletteEffectRectMaterial = preload("res://materials/DitherPaletteEffectRect.tres")
 
 export(int, "NORMAL", "FLOOR", "FEATHER", "INVISIBLE", "LADDER", "WALK_THROUGH_WALLS") var starting_glitch_type
 # will always activate regardless of this variable at start of game, but if this value is true, will activate an override the existing player glitch type
@@ -109,7 +109,7 @@ func _ready_impl():
   uiLayer.betaBuildLabel.rect_position.x = 510
   uiLayer.edgeDistortion.offset = Vector2(0, 0)
   uiLayer.textBoxes.rect_position = Vector2(0, 0)
-  screenEffectsContainer.offset = Vector2(global.OFFSET_X, global.OFFSET_Y)
+  if screenEffectsContainer: screenEffectsContainer.offset = Vector2(global.OFFSET_X, global.OFFSET_Y)
   
   tryToAddGameFrameBackground()
   adjustAndCenterViewportsFrameAndOverlayRects()
@@ -239,17 +239,18 @@ func adjustAndCenterViewportsFrameAndOverlayRects():
   viewportTexture.margin_right = 0
   viewportTexture.margin_bottom = 0
   # glitchScreenEffect
-  glitchScreenEffect.grow_horizontal = 2
-  glitchScreenEffect.grow_vertical = 2
-  glitchScreenEffect.anchor_left = 0.5
-  glitchScreenEffect.anchor_top = 0.5
-  glitchScreenEffect.anchor_bottom = 0.5
-  glitchScreenEffect.anchor_right = 0.5
-  glitchScreenEffect.margin_left = -global.INTERNAL_VIEWPORT_WIDTH
-  glitchScreenEffect.margin_top = -global.INTERNAL_VIEWPORT_HEIGHT
-  glitchScreenEffect.margin_right = 0
-  glitchScreenEffect.margin_bottom = 0
-  glitchScreenEffect.rect_size = Vector2(global.INTERNAL_VIEWPORT_WIDTH*2, global.INTERNAL_VIEWPORT_HEIGHT*2)
+  if glitchScreenEffect:
+    glitchScreenEffect.grow_horizontal = 2
+    glitchScreenEffect.grow_vertical = 2
+    glitchScreenEffect.anchor_left = 0.5
+    glitchScreenEffect.anchor_top = 0.5
+    glitchScreenEffect.anchor_bottom = 0.5
+    glitchScreenEffect.anchor_right = 0.5
+    glitchScreenEffect.margin_left = -global.INTERNAL_VIEWPORT_WIDTH
+    glitchScreenEffect.margin_top = -global.INTERNAL_VIEWPORT_HEIGHT
+    glitchScreenEffect.margin_right = 0
+    glitchScreenEffect.margin_bottom = 0
+    glitchScreenEffect.rect_size = Vector2(global.INTERNAL_VIEWPORT_WIDTH*2, global.INTERNAL_VIEWPORT_HEIGHT*2)
   # transition.colorRect
   transition.colorRect.grow_horizontal = 2
   transition.colorRect.grow_vertical = 2
@@ -280,7 +281,7 @@ func tryInitializeFromDebug():
     # if is_turn_based: 
     #   # global.memory["is_turn_based"] = true
     #   global.memory["is_pseudo_turn_based"] = true
-    if global.dlc_mode:
+    if global.dlc_mode_debug:
       global.memory["can_force_respawn"] = true
       global.memory["has_map_item"] = true
       global.memory["broomerang"] = 2
@@ -366,9 +367,9 @@ func tryInitializeFromDebug():
 #   sprite.material_override.shader = gles3Shader
 
 func adjustViewportShaderVisibility():
-  ditherPaletteEffectRect2.visible = global.userSettings["show_crt_effect"] and show_dither_effect
-  basicCrtEffectRect2.visible = global.userSettings["show_crt_effect"] and show_crt_effect
-  paletteSwapColorBlindEffectRect2.visible = global.userSettings["show_palette_swap_color_blind_filter"]
+  if ditherPaletteEffectRect2: ditherPaletteEffectRect2.visible = global.userSettings["show_crt_effect"] and show_dither_effect
+  if basicCrtEffectRect2: basicCrtEffectRect2.visible = global.userSettings["show_crt_effect"] and show_crt_effect
+  if paletteSwapColorBlindEffectRect2: paletteSwapColorBlindEffectRect2.visible = global.userSettings["show_palette_swap_color_blind_filter"]
 
 var can_turn_move = false
 var can_pseudo_turn_move = false
@@ -460,14 +461,14 @@ func processPauseMenu():
     global.is_reading_controller_input = false
     if global.isPauseMenuOpen:
       global.isPauseMenuOpen = false
-      self.glitchScreenEffect.visible = false
+      if glitchScreenEffect: glitchScreenEffect.visible = false
       player.unpauseSound.play()
       restartMusic()
   else:
     if not global.isPauseMenuOpen and global.activeInteractor == null and canOpenPauseMenu():
       if Input.is_action_just_pressed("ui_start"):
         yield(get_tree().create_timer(0.1), "timeout")
-        glitchScreenEffect.visible = false
+        if glitchScreenEffect: glitchScreenEffect.visible = false
         uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.NORMAL
         uiLayer.pauseMenu.normalOptionIndex = 0
         uiLayer.pauseMenu.shouldUpdateMenuText = true
@@ -478,7 +479,7 @@ func processPauseMenu():
       elif (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")) and not global.isOnMainMenu:
         yield(get_tree().create_timer(0.1), "timeout")
         if global.has_really_started_game:
-          glitchScreenEffect.visible = false
+          if glitchScreenEffect: glitchScreenEffect.visible = false
           uiLayer.pauseMenu.pauseMenuState = uiLayer.pauseMenu.PauseMenuState.INVENTORY
           uiLayer.pauseMenu.selectedGlitchSprite = -1
           uiLayer.pauseMenu.inventoryOptionIndex = 4 if Input.is_action_pressed("open_map") and global.memory["has_map_item"] else 0
@@ -1137,7 +1138,9 @@ func clearOtherGrabbers(gameMover):
       grabber.hookTarget = null
 
 func getBoss():
-  if self.has_node("HighPriestessBoss"):
+  if self.has_node("HighPriestessPhase2Manager"):
+    return get_node("HighPriestessPhase2Manager")
+  elif self.has_node("HighPriestessBoss"):
     return get_node("HighPriestessBoss")
   elif has_node("ClaydolBoss"):
     return get_node("ClaydolBoss")

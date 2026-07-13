@@ -9,6 +9,7 @@ onready var cautionWarning = weakref(get_node("CautionWarning"))
 var caution_timer = 0
 var caution_time_limit = 5
 var is_big = false
+var is_weird_glitched = false
 
 func _ready():
   can_spawn_mini_crystal = false
@@ -24,6 +25,7 @@ func _ready():
   behavior_walk_flip = false
 
 func _process(delta):
+  should_collide_fallthrough_area = false
   # ._process(delta) implicit
   if not visible: return
   
@@ -77,10 +79,11 @@ func landed(_was_on_fallthrough_solid = false):
     lv.y = -true_terminal_vel
     vv = up.dot(lv)
 
+  if is_weird_glitched and not is_big: return
   var tiles_underfoot = getTilesBelow(getLevelTiles())
   for tile_coords in tiles_underfoot:
     if tile_coords != null:
-      var tile_type = getLevelTiles().get_cell_item(tile_coords.x, tile_coords.y, tile_coords.z)
+      # var tile_type = getLevelTiles().get_cell_item(tile_coords.x, tile_coords.y, tile_coords.z)
       getLevelTiles().set_cell_item(tile_coords.x, tile_coords.y, tile_coords.z, GridMap.INVALID_CELL_ITEM)
 
 
@@ -106,6 +109,8 @@ func byeBye():
   queue_free()
 
 func collideWithWall(local_lv):
+  if is_weird_glitched and not is_big: return
+
   if walk_direction.x > 0:
     var tiles = getTilesRightOf(getLevelTiles())
     for tile_coords in tiles:

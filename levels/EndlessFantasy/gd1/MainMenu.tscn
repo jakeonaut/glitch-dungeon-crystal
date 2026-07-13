@@ -1,4 +1,4 @@
-[gd_scene load_steps=233 format=2]
+[gd_scene load_steps=237 format=2]
 
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=1]
 [ext_resource path="res://assets/palettes/player_base_palette.png" type="Texture" id=2]
@@ -109,15 +109,46 @@ shader_param/texture_albedo = ExtResource( 72 )
 shader_param/base_palette = ExtResource( 73 )
 shader_param/target_palette = ExtResource( 73 )
 
+[sub_resource type="Animation" id=369]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=370]
+resource_name = "idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
 [sub_resource type="SpatialMaterial" id=347]
 flags_unshaded = true
-albedo_color = Color( 0.678431, 0.678431, 0.678431, 1 )
+albedo_color = Color( 0.870588, 1, 0.870588, 1 )
 
 [sub_resource type="QuadMesh" id=348]
 
 [sub_resource type="ShaderMaterial" id=349]
 shader = ExtResource( 15 )
-shader_param/albedo = Color( 0.8, 0.8, 0.8, 1 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
@@ -138,7 +169,7 @@ shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 2.0
-shader_param/enable_glitch_3d = false
+shader_param/enable_glitch_3d = true
 shader_param/shake_power_3d = 0.5
 shader_param/shake_rate = 0.5
 shader_param/shake_speed = 5.0
@@ -150,6 +181,37 @@ shader_param/y_div = 1.3
 shader_param/texture_albedo = ExtResource( 72 )
 shader_param/base_palette = ExtResource( 73 )
 shader_param/target_palette = ExtResource( 73 )
+
+[sub_resource type="Animation" id=371]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=372]
+resource_name = "idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
 
 [sub_resource type="ShaderMaterial" id=36]
 shader = ExtResource( 15 )
@@ -2851,7 +2913,7 @@ tracks/1/keys = {
 [sub_resource type="ViewportTexture" id=235]
 viewport_path = NodePath("UILayer/GlitchStatusRect/Viewport")
 
-[sub_resource type="ArrayMesh" id=368]
+[sub_resource type="ArrayMesh" id=373]
 surfaces/0 = {
 "aabb": AABB( -0.5, -0.5, -0.5, 1, 1, 1 ),
 "array_data": PoolByteArray( 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 63, 0, 0, 0, 191, 0, 0, 0, 63, 0, 0, 0, 63 ),
@@ -2935,6 +2997,12 @@ transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 1, 14.7515, -7.22767, 12 )
 visible = false
 material_override = SubResource( 345 )
 texture = ExtResource( 72 )
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Viewport/level/LogoSprite"]
+autoplay = "idle"
+anims/RESET = SubResource( 369 )
+anims/idle = SubResource( 370 )
 
 [node name="LevelTiles" type="GridMap" parent="Viewport/level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
@@ -2978,6 +3046,12 @@ mesh = SubResource( 348 )
 transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 1, 0.00283235, -0.0245534, 4 )
 material_override = SubResource( 349 )
 texture = ExtResource( 72 )
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Viewport/level/PetsClub2Splash/Sprite3D"]
+autoplay = "idle"
+anims/RESET = SubResource( 371 )
+anims/idle = SubResource( 372 )
 
 [node name="Player" parent="Viewport/level" instance=ExtResource( 50 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.1354, 0, 0 )
@@ -3763,7 +3837,7 @@ __meta__ = {
 texture = SubResource( 235 )
 
 [node name="MeshInstance" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="0"]
-mesh = SubResource( 368 )
+mesh = SubResource( 373 )
 
 [node name="MeshInstance2" parent="Viewport2/UILayer/GlitchStatusRect/Viewport/miniCubeCrystal/CubeContainer" index="1"]
 transform = Transform( 0.534633, -0.525684, 0.0180074, 0.385063, 0.373668, -0.524022, 0.358321, 0.382791, 0.536262, 0, 0, 0 )

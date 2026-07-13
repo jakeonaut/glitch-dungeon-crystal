@@ -11,7 +11,7 @@
 [ext_resource path="res://shaders/Sprite3D.shader" type="Shader" id=9]
 [ext_resource path="res://assets/sprites/small_critters.png" type="Texture" id=10]
 [ext_resource path="res://assets/sounds/bump.wav" type="AudioStream" id=11]
-[ext_resource path="res://assets/glitches/dither3.png" type="Texture" id=12]
+[ext_resource path="res://assets/glitch_sheet.png" type="Texture" id=12]
 [ext_resource path="res://scripts/_InteractionArea_Active.gd" type="Script" id=13]
 [ext_resource path="res://assets/sounds/Octopus.wav" type="AudioStream" id=14]
 [ext_resource path="res://scripts/_InteractionArea_PlayerPassive.gd" type="Script" id=15]
@@ -27,13 +27,14 @@
 
 [sub_resource type="ShaderMaterial" id=35]
 shader = ExtResource( 9 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
 shader_param/shake_power = 0.01
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.117
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -41,11 +42,18 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 3.0
 shader_param/y_div = 2.87
@@ -53,7 +61,7 @@ shader_param/texture_albedo = ExtResource( 24 )
 shader_param/base_palette = ExtResource( 8 )
 shader_param/target_palette = ExtResource( 8 )
 
-[sub_resource type="ShaderMaterial" id=21]
+[sub_resource type="ShaderMaterial" id=36]
 shader = ExtResource( 9 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 0.8
@@ -62,6 +70,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -69,11 +78,18 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = true
 shader_param/palette_cycle_speed = 4.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 3.0
 shader_param/y_div = 2.87
@@ -83,13 +99,14 @@ shader_param/target_palette = ExtResource( 6 )
 
 [sub_resource type="ShaderMaterial" id=14]
 shader = ExtResource( 9 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 1.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
 shader_param/shake_power = 0.01
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.117
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -97,11 +114,18 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 3.0
 shader_param/y_div = 2.87
@@ -111,13 +135,14 @@ shader_param/target_palette = ExtResource( 4 )
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 9 )
-shader_param/albedo = null
+shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/opacity = 0.0
 shader_param/outline_color = null
 shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -125,11 +150,18 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 16
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = false
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 3.0
 shader_param/y_div = 2.87
@@ -220,6 +252,7 @@ shader_param/outline_width = 1.0
 shader_param/shake_power = 0.03
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
+shader_param/no_palette_swap = false
 shader_param/enable_remove_skin_tone = false
 shader_param/enable_dither = false
 shader_param/enable_no_transparency = false
@@ -227,11 +260,18 @@ shader_param/enable_black_unknown = false
 shader_param/palettesize = 8
 shader_param/resolution_scale = 1
 shader_param/offset = 0
+shader_param/black_offset = 0
 shader_param/enable_glitch = true
 shader_param/enable_color_glitch = true
 shader_param/disable_glitch_dither = false
 shader_param/enable_palette_cycle = false
 shader_param/palette_cycle_speed = 10.0
+shader_param/enable_glitch_3d = false
+shader_param/shake_power_3d = 0.5
+shader_param/shake_rate = 0.5
+shader_param/shake_speed = 5.0
+shader_param/shake_block_size_3d = 30.5
+shader_param/shake_color_rate_3d = 0.5
 shader_param/normal_offset = 0.02
 shader_param/time_influence = 0.847
 shader_param/y_div = 2.87
@@ -272,93 +312,15 @@ should_randomize_frame_delay = true
 [node name="FleshSprites" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -1.1, 0 )
 
-[node name="Sprite3D8" type="Sprite3D" parent="FleshSprites"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 1.5, 0.210556 )
-material_override = SubResource( 21 )
+[node name="Sprite3D" type="Sprite3D" parent="FleshSprites"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 1.73617, 0.210556 )
+material_override = SubResource( 36 )
 pixel_size = 0.125
 shaded = true
 alpha_cut = 2
 texture = ExtResource( 12 )
-hframes = 58
-vframes = 35
-script = ExtResource( 2 )
-should_randomize_frame_delay = true
-max_frames = 8
-
-[node name="Sprite3D11" type="Sprite3D" parent="FleshSprites"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 3, 0.210556 )
-material_override = SubResource( 21 )
-pixel_size = 0.125
-shaded = true
-alpha_cut = 2
-texture = ExtResource( 12 )
-hframes = 58
-vframes = 35
-script = ExtResource( 2 )
-should_randomize_frame_delay = true
-max_frames = 8
-
-[node name="Sprite3D12" type="Sprite3D" parent="FleshSprites"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.5, 0.210556 )
-material_override = SubResource( 21 )
-pixel_size = 0.125
-shaded = true
-alpha_cut = 2
-texture = ExtResource( 12 )
-hframes = 58
-vframes = 80
-script = ExtResource( 2 )
-should_randomize_frame_delay = true
-max_frames = 8
-
-[node name="Sprite3D9" type="Sprite3D" parent="FleshSprites"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 1, 0.210556 )
-material_override = SubResource( 21 )
-pixel_size = 0.125
-shaded = true
-alpha_cut = 2
-texture = ExtResource( 12 )
-hframes = 80
-vframes = 35
-script = ExtResource( 2 )
-should_randomize_frame_delay = true
-max_frames = 8
-
-[node name="Sprite3D10" type="Sprite3D" parent="FleshSprites"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 2.5, 0.210556 )
-material_override = SubResource( 21 )
-pixel_size = 0.125
-shaded = true
-alpha_cut = 2
-texture = ExtResource( 12 )
-hframes = 80
-vframes = 35
-script = ExtResource( 2 )
-should_randomize_frame_delay = true
-max_frames = 8
-
-[node name="Sprite3D5" type="Sprite3D" parent="FleshSprites"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.2, 0.210556 )
-material_override = SubResource( 21 )
-pixel_size = 0.125
-shaded = true
-alpha_cut = 2
-texture = ExtResource( 12 )
-hframes = 80
-vframes = 35
-script = ExtResource( 2 )
-should_randomize_frame_delay = true
-max_frames = 8
-
-[node name="Sprite3D7" type="Sprite3D" parent="FleshSprites"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2.7, 0.210556 )
-material_override = SubResource( 21 )
-pixel_size = 0.125
-shaded = true
-alpha_cut = 2
-texture = ExtResource( 12 )
-hframes = 80
-vframes = 35
+hframes = 6
+vframes = 4
 script = ExtResource( 2 )
 should_randomize_frame_delay = true
 max_frames = 8
@@ -452,38 +414,38 @@ shape = SubResource( 32 )
 [node name="Sounds" type="Spatial" parent="."]
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 7 )
 volume_db = -5.0
+bus = "Sfx"
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 22 )
 volume_db = -10.0
 pitch_scale = 2.0
+bus = "Sfx"
 
 [node name="EvolveSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 14 )
 volume_db = -15.0
+bus = "Sfx"
 
 [node name="FlapWingSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 18 )
 volume_db = -30.0
 pitch_scale = 2.0
+bus = "Sfx"
 
 [node name="ThudSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 11 )
 volume_db = -30.0
 pitch_scale = 1.25
+bus = "Sfx"
 
 [node name="StartEvolveSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 16 )
 volume_db = -10.0
 pitch_scale = 0.5
+bus = "Sfx"
 
 [node name="ScoochSound1" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = ExtResource( 21 )
@@ -504,10 +466,10 @@ out_of_range_mode = 1
 bus = "Sfx"
 
 [node name="HeartSound" type="AudioStreamPlayer" parent="Sounds"]
-bus="Sfx"
 stream = ExtResource( 20 )
 volume_db = -34.0
 pitch_scale = 1.2
+bus = "Sfx"
 
 [node name="PlayerActivationArea" type="Area" parent="." groups=["playerActivation"]]
 script = ExtResource( 15 )

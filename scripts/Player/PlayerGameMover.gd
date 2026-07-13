@@ -908,6 +908,7 @@ func processMoleDigTimer(digDirection):
     should_collide_floor = false
     should_collide_ceil = false
     should_collide_with_walls = false
+    grav = PLAYER_GRAV
 
 var glitch_death_timer = 0
 func bigBump():
@@ -1018,7 +1019,7 @@ func magicJump():
     getABroom()
   should_magic_jump = true
   actuallyApplyJump(false)
-  print(nesting_doll_state, ", ", vv)
+  # print(nesting_doll_state, ", ", vv)
   tryClearFallthroughCollisionSolid(self.global_transform.origin)
 
 onready var dollOpenSound = get_node("Sounds/DollOpenSound")

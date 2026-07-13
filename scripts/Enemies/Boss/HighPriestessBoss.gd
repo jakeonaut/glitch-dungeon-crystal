@@ -1,5 +1,6 @@
 extends Spatial
 
+var is_weird_glitched = false
 var weakEyeRes = preload("res://sceneObjects/Enemies/WeakEye.tscn")
 var spawnGlitchEffectRes = preload("res://sceneObjects/SpawnGlitchEffect.tscn")
 var spawnPriestessGlitchEffectRes = preload("res://sceneObjects/SpawnPriestessGlitchEffect.tscn")
