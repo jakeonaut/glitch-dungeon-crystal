@@ -2137,7 +2137,7 @@ shader_param/g_mult = 1.0
 shader_param/b_mult = -1.0
 shader_param/target_palette = ExtResource( 20 )
 
-[sub_resource type="ShaderMaterial" id=27]
+[sub_resource type="ShaderMaterial" id=38]
 shader = ExtResource( 21 )
 shader_param/resolution = Vector2( 320, 180 )
 shader_param/scan_line_amount = 1.0
@@ -2386,7 +2386,8 @@ flip_v = true
 material = SubResource( 26 )
 
 [node name="BasicCrtEffectRect" parent="Viewport2/ScreenEffects" index="1"]
-material = SubResource( 27 )
+visible = true
+material = SubResource( 38 )
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 1280.0

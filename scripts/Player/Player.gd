@@ -2094,6 +2094,10 @@ func tryDieToEnemy(delta, should_glitch, should_kill_invis, should_immediately_d
       mySporeSavePoint.global_transform.origin = Vector3(999, 999, 999)
       mushroomClone()
       on_ground = false
+  # weird fail-safe for dying when digging under ground ???
+  if not mySprite.visible:
+    grav = PLAYER_GRAV
+    allSpritesBackToNormal([mySprite, grandmaHatSprite, grandmaHandSprite, grandmaFishHatSprite])
   remembered_feather_jump_timer = self.feather_jump_timer
   remembered_y_vel = lv.y
   remembered_on_ground = on_ground
