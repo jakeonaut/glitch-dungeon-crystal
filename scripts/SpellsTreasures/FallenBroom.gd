@@ -22,6 +22,7 @@ var is_dying = false
 var should_return = true
 var have_i_smacked_an_npc = false
 var taking_the_player_with_me = false
+var is_evil = false
 
 # helper vars for just knowing which direction I was thrown. only relevant if projectile = true
 # doesn't actually control physics (see walk_direction, grav, and jump_force for that... weird)
@@ -51,7 +52,7 @@ func _process(delta):
     # delta = delta * global.time_dilation_multiplier # i'm exempt!
     # secretAniPlayer.playback_speed = global.time_dilation_multiplier # i'm exempt!
 
-    global.updateBroomSpriteTexture(mySpriteReal, true)
+    global.updateBroomSpriteTexture(mySpriteReal, true, global.GrandmaBroom.NORMAL if is_evil else null)
     if global.shouldRenderAsCinematic:
         my_broom_owner.has_broom = true
         queue_free()

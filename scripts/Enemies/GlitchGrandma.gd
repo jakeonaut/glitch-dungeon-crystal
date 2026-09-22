@@ -309,6 +309,7 @@ func summonFallenBroom(_broom_origin):
   fallenBroom.should_return = false
   fallenBroom.global_transform.origin = self.global_transform.origin
   fallenBroom.global_transform.origin.x += -1 if mySprite.flip_h else 1
+  fallenBroom.is_evil = true
 
   var which_direction = 1
   if level.player.global_transform.origin.x > global_transform.origin.x:

@@ -612,7 +612,7 @@ func landed(_was_on_fallthrough_solid = false):
   if whichBoss == null or whichBoss.num_granny_hits > 0:
     #  not self.was_fallthrough_area_collision_triggered and \
     if global.memory["mushroom_soul"] >= 1 and global.memory["mushroom_soul_enabled"] and \
-      not self.isOnSavePoint() and \
+      not self.isOnSavePoint() and not self.isOnWeirdSavePoint() and \
       physics_state == PhysicsState.NORMAL and \
       transformation != TransformationState.CHICKEN and \
       transformation != TransformationState.MOLE_DIGGING and \
@@ -633,6 +633,12 @@ func isOnSavePoint(forced_respawn = false):
     return false
     
   return smallInteractionArea.is_touching_save_point
+
+func isOnWeirdSavePoint():
+  if not global.memory.has("weird_active_save_point_x"):
+    return false
+    
+  return smallInteractionArea.is_touching_weird_save_point
 
 func isTextboxPausingMe():
   return global.activeInteractor != null and (global.activeInteractor.showYesNoOptions or (

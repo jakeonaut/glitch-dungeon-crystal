@@ -580,23 +580,24 @@ var fryingPanSheetAni = preload("res://assets/sprites/frying_pan_ani.png")
 var croneStaffSheet = preload("res://assets/outfits/player_sheet_staff.png")
 var croneStaffSheetAni = preload("res://assets/outfits/staff_ani.png")
 var pumpkinBagSheet = preload("res://assets/outfits/player_sheet_pumpkin.png")
-func updateBroomSpriteTexture(sprite, useAniSheet):
-  if global.memory["currBroom"] == global.GrandmaBroom.NORMAL:
+func updateBroomSpriteTexture(sprite, useAniSheet, override_broom_to_use = null):
+  var broom_to_use = global.memory["currBroom"] if override_broom_to_use == null else override_broom_to_use
+  if broom_to_use == global.GrandmaBroom.NORMAL:
     if useAniSheet:
         sprite.material_override.set_shader_param("texture_albedo", broomSheetAni)
     else:
         sprite.material_override.set_shader_param("texture_albedo", broomSheet)
-  if global.memory["currBroom"] == global.GrandmaBroom.FRYING_PAN:
+  if broom_to_use == global.GrandmaBroom.FRYING_PAN:
     if useAniSheet:
         sprite.material_override.set_shader_param("texture_albedo", fryingPanSheetAni)
     else:
         sprite.material_override.set_shader_param("texture_albedo", fryingPanSheet)
-  if global.memory["currBroom"] == global.GrandmaBroom.CRONE_STAFF:
+  if broom_to_use == global.GrandmaBroom.CRONE_STAFF:
     if useAniSheet:
         sprite.material_override.set_shader_param("texture_albedo", croneStaffSheetAni)
     else:
         sprite.material_override.set_shader_param("texture_albedo", croneStaffSheet)
-  if global.memory["currBroom"] == global.GrandmaBroom.PUMPKIN_BAG:
+  if broom_to_use == global.GrandmaBroom.PUMPKIN_BAG:
     if useAniSheet:
         sprite.material_override.set_shader_param("texture_albedo", broomSheetAni)
     else:
@@ -606,7 +607,11 @@ func isDlcEnabled():
     return dlc_mode > 0 and allLocales[userSettings["locale"]]["dlc_enabled"]
 
 func isSecretEndingEnabled():
-    return isDlcEnabled() and global.memory["mushroom_soul"] > 0 and global.memory["zora_flippers"] > 0 and global.memory["mole_cricket"] > 0
+    return isDlcEnabled() and \
+        global.memory["mushroom_soul"] > 0 and \
+        global.memory["zora_flippers"] > 0 and \
+        global.memory["mole_cricket"] > 0 and \
+        global.userSettings["allMyBrooms"].find(global.GrandmaBroom.FRYING_PAN) >= 0
 
 var allLocales = {
     "en": { "code": "en", "supported": true, "label": "English", "dlc_enabled": true },

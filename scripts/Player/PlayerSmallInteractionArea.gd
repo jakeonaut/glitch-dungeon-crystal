@@ -14,6 +14,7 @@ var is_touching_npc = false
 var touched_water_area = null
 var is_touching_carcass = false
 var is_touching_save_point = false
+var is_touching_weird_save_point = false
 var water_y = 0 # what does it do? nothing.y
 
 func _ready():
@@ -39,13 +40,17 @@ func _process(delta):
     touched_water_area = null
     is_touching_carcass = false
     is_touching_save_point = false
+    is_touching_weird_save_point = false
 
     var areas = get_overlapping_areas()
     var non_malware_areas = []
 
     for area in areas:
         if area.is_in_group("save_point"):
-            is_touching_save_point = true
+            if area.get_node("..").is_weird_soul_spore_save:
+                is_touching_weird_save_point = true
+            else:
+                is_touching_save_point = true 
 
         if not area.is_in_group("malware") and not area.get_node("..") == parent:
             non_malware_areas.push_back(area)

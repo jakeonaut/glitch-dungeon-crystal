@@ -39,7 +39,7 @@ func _process(delta):
   if is_evil:
     aniPlayer.playback_speed = 4.0
 
-  global.updateBroomSpriteTexture(mySprite, true)
+  global.updateBroomSpriteTexture(mySprite, true, global.GrandmaBroom.NORMAL if is_evil else null)
   
   # if global.pauseGame: return
   hitStuff(delta)

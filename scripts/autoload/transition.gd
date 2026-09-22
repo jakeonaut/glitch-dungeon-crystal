@@ -6,7 +6,7 @@ extends CanvasLayer
 var path = ""
 var was_i_interrupted = false
 var mapManagerRes = preload("res://sceneObjects/_autoload/globalMap.tscn")
-var glitchedMapManagerRes = preload("res://sceneObjects/_autoload/globalMap_glitched.tscn")
+var remixMapManagerRes = preload("res://sceneObjects/_autoload/remixMap.tscn")
 var mapManager = null
 var is_using_world_of_ruin_map = false
 onready var colorRect = get_node("ColorRect")
@@ -28,7 +28,7 @@ func _ready():
   set_process(false) # no need to process when not background loading adjacent scenes...
   
   if global.memory["world_of_ruin"] > 0:
-    mapManager = glitchedMapManagerRes.instance()
+    mapManager = remixMapManagerRes.instance()
     is_using_world_of_ruin_map = true
   else:
     mapManager = mapManagerRes.instance()
@@ -58,7 +58,7 @@ func tryUpdateMapManagerToGlitchedMap():
   # if global.memory["world_of_ruin"] > 0 and not is_using_world_of_ruin_map:
   #   self.remove_child(mapManager)
   #   mapManager.queue_free()
-  #   mapManager = glitchedMapManagerRes.instance()
+  #   mapManager = remixMapManagerRes.instance()
   #   mapManager.visible = false
   #   self.add_child(mapManager)
   #   is_using_world_of_ruin_map = true

@@ -699,7 +699,7 @@ extents = Vector3( 1, 0.8, 1.3 )
 resource_local_to_scene = true
 extents = Vector3( 1.5, 0.24, 1 )
 
-[sub_resource type="Shader" id=78]
+[sub_resource type="Shader" id=85]
 code = "shader_type spatial;
 render_mode specular_schlick_ggx;
 
@@ -743,7 +743,7 @@ void light() {
 }"
 
 [sub_resource type="ShaderMaterial" id=79]
-shader = SubResource( 78 )
+shader = SubResource( 85 )
 shader_param/HowShiny = 2.0
 shader_param/Roughness = 0.2
 shader_param/alpha2 = 0.5

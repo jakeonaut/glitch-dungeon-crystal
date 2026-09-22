@@ -152,6 +152,7 @@ func getSmacked(_broom_origin = null, _silently = false, _is_local_broom = false
             getPurified()
             level.player.glitch_death_timer = 1
             getHitSound3.play()
+            global.memory["world_of_ruin"] = true
             level.get_node("GramdmaMemory").goThroughDoor()
     return true
 

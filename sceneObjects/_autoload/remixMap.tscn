@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://sceneObjects/_autoload/globalMap.gd" type="Script" id=7]
+[ext_resource path="res://sceneObjects/LevelManagerSprite.tscn" type="PackedScene" id=11]
+
+[node name="globalMap" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+script = ExtResource( 7 )
+
+[node name="FishingVillage" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 0 )
+
+[node name="RemixHub" parent="." instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 0 )
+material_override = null
+frame = 54
+path = "res://levels/EndlessFantasy/gd1Remix/RemixHubZone.tscn"
+can_nav_left = false
+can_nav_right = false
+can_nav_down = false
+
+[node name="0_0Remix" parent="." instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 6, 0 )
+material_override = null
+frame = 10
+path = "res://levels/EndlessFantasy/gd1Remix/0_0Remix.tscn"
+can_nav_right = false
+can_nav_up = false
+can_nav_down = false
+
+[node name="FishingVillageEntrance" parent="." instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, 0 )
+material_override = null
+frame = 20
+path = "res://levels/EndlessFantasy/gd1Remix/EntranceFishingRemix.tscn"
+can_nav_down = false
+has_angel_egg = 1
+
+[node name="RemixCrypts" parent="." instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 6, 0 )
+material_override = null
+frame = 48
+path = "res://levels/EndlessFantasy/gd1Remix/RemixCrypts.tscn"
+can_nav_up = false
+can_nav_down = false
+has_angel_egg = 1
+
+[node name="FishingVillageIntro" parent="." instance=ExtResource( 11 )]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 7, 4, 0 )
+material_override = null
+frame = 20
+path = "res://levels/EndlessFantasy/gd1Remix/FishingIntroRemix.tscn"
+can_nav_down = false
+has_angel_egg = 1

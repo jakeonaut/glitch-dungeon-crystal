@@ -179,7 +179,8 @@ func conductFromScenePath(path):
     elif path.find("preBossRoom") > 0 or \
        (path.find("HighPriestessRoom") > 0 and global.memory["priestess"] >= 2) or \
        path.find("MiniRestZone") > 0 or \
-       path.find("LongGlitchyHallway") > 0:
+       path.find("LongGlitchyHallway") > 0 or \
+       path.find("EggRoom") > 0:
         tryToPlay(windPlayer)
     elif path.find("HighPriestessRoom") > 0 and global.memory["priestess"] <= 2:
         if global.memory["priestess"] == 0:
@@ -190,6 +191,8 @@ func conductFromScenePath(path):
             tryToPlay(windPlayer)
     elif path.find("BossRoom") > 0:
         tryToPlay(bossThemePlayer)
+    elif path.find("gd1Remix") > 0:
+        tryToPlay(debugThemePlayer)
     elif path.find("TheDoorBefore") > 0:
         tryToPlay(crystalThemePlayer)
     elif path.find("StoryHook") > 0 or path.find("NullificationPurgatory") > 0 or path.find("NullifyIntro") > 0 or path.find("LadderIntro") > 0 or path.find("GhostIntro") > 0:
