@@ -6,7 +6,7 @@ func _ready():
   pass
 
 func activateScript():
-  var text = tr("NPC.MapTeleport.Hint") % global.getLargeInputText("popup_menu")
+  var text = tr("NPC.MapTeleport.Hint") % global.getLargeInputText("open_inventory")
   textBox.text_final = text
   textBox.textNode.bbcode_text = text
     

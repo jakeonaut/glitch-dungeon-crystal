@@ -476,7 +476,7 @@ func processPauseMenu():
         global.pauseGame = true
         player.pauseSound.play()
         playMenuMusic()
-      elif (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")) and not global.isOnMainMenu:
+      elif (Input.is_action_just_pressed("open_inventory") and not Input.is_action_pressed("toggle_fullscreen")) and not global.isOnMainMenu:
         yield(get_tree().create_timer(0.1), "timeout")
         if global.has_really_started_game:
           if glitchScreenEffect: glitchScreenEffect.visible = false

@@ -1890,6 +1890,81 @@ rect_scale = Vector2( 1.25, 1.25 )
 
 [node name="PauseMenu" parent="." instance=ExtResource( 9 )]
 
+[node name="ScrollContainer" parent="PauseMenu/InputMenu" index="0"]
+margin_bottom = 385.0
+
+[node name="InputLabels" parent="PauseMenu/InputMenu/ScrollContainer" index="0"]
+bbcode_text = "•[wave]move left:[/wave]
+•move right:
+•up:
+•down:    
+•sweep:      
+•jump:       
+•die move:      
+•inventory:
+•next spell:  
+•prev spell:
+•open map  
+•spell 1:
+•spell 2:
+•spell 3:
+•spell 4:"
+text = "•move left:
+•move right:
+•up:
+•down:    
+•sweep:      
+•jump:       
+•die move:      
+•inventory:
+•next spell:  
+•prev spell:
+•open map  
+•spell 1:
+•spell 2:
+•spell 3:
+•spell 4:"
+
+[node name="ButtonInputs" parent="PauseMenu/InputMenu/ScrollContainer" index="1"]
+margin_left = 304.0
+margin_right = 612.0
+bbcode_text = "[center][font=res://DarkInputFont_smallCondensed.tres]V[/font] 
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]Q[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]F[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]G[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]z[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]x[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]r[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]E[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]Z[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]S[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]c[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]1[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]2[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]3[/font][/color]
+[color=gray][font=res://DarkInputFont_smallCondensed.tres]4[/font][/color]
+[/center]"
+text = "V 
+Q
+F
+G
+z
+x
+r
+E
+Z
+S
+c
+1
+2
+3
+4
+"
+
+[node name="PauseTitleRect" parent="PauseMenu" index="9"]
+margin_top = 420.0
+margin_bottom = 504.0
+
 [node name="EndOfLevel" type="Control" parent="."]
 visible = false
 margin_right = 640.0
@@ -2061,8 +2136,8 @@ rect_clip_content = false
 theme = SubResource( 17228 )
 custom_colors/default_color = Color( 0.862745, 0.862745, 0.862745, 1 )
 bbcode_enabled = true
-bbcode_text = "[right]ver-3.3.0.1[/right]"
-text = "ver-3.3.0.1"
+bbcode_text = "[right]ver-3.3.0.2[/right]"
+text = "ver-3.3.0.2"
 
 [editable path="EdgeDistortion"]
 [editable path="PauseMenu"]

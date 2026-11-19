@@ -1256,7 +1256,7 @@ func getKeyCodeStr(keycode, useSpecialChar = true):
 var hasInitializedControlsConfig = false
 var controlsConfig = []
 func resetControlsConfigLabels():
-    # good luck! hope this never gets out of sync with global.controlsConfig!
+    # good luck! hope this never gets out of sync with global.controlsConfig (below)!
     var controlConfigLabels = [
         { "label_str": tr("UI.InputMenu.Action.1") },
         { "label_str": tr("UI.InputMenu.Action.2") },
@@ -1267,13 +1267,14 @@ func resetControlsConfigLabels():
         { "label_str": tr("UI.InputMenu.Action.6") },
         { "label_str": tr("UI.InputMenu.Action.6_0") },
         { "label_str": tr("UI.InputMenu.Action.7") },
+        { "label_str": tr("UI.Inventory.1") },
+        { "label_str": tr("UI.InputMenu.Action.10") },
         { "label_str": tr("UI.InputMenu.Action.8") },
         { "label_str": tr("UI.InputMenu.Action.9") },
         { "label_str": tr("UI.InputMenu.Action.9_0") % "1" },
         { "label_str": tr("UI.InputMenu.Action.9_0") % "2" },
         { "label_str": tr("UI.InputMenu.Action.9_0") % "3" },
-        { "label_str": tr("UI.InputMenu.Action.9_0") % "4" },
-        { "label_str": tr("UI.InputMenu.Action.10") }
+        { "label_str": tr("UI.InputMenu.Action.9_0") % "4" }
     ]
     for i in range(len(controlConfigLabels)):
         global.controlsConfig[i]["label_str"] = controlConfigLabels[i]["label_str"]
@@ -1291,13 +1292,14 @@ func initializeControlsConfig():
     { "input_action": "sub_action_button" },
     { "input_action": "talk_button" },
     { "input_action": "restart_key" },
+    { "input_action": "open_inventory" },
+    { "input_action": "open_map" },
     { "input_action": "alt_action_button" },
     { "input_action": "left_button" },
     { "input_action": "spell_1" },
     { "input_action": "spell_2" },
     { "input_action": "spell_3" },
-    { "input_action": "spell_4" },
-    { "input_action": "open_map" }
+    { "input_action": "spell_4" }
   ]
   resetControlsConfigLabels()
   if global.userSettings.has("controls_config"):

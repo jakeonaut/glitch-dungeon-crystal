@@ -177,7 +177,10 @@ func _process(delta):
     if player.justPressedMenuDown() or player.justPressedMenuUp():
       menuMoveSound.play()
     elif player.justPressedMenuLeft() or player.justPressedMenuRight():
-      player.noBroomSound.play()
+      if pauseMenuState == PauseMenuState.CONTROLLER_INPUT or pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
+        menuMoveSound.play()
+      else:
+        player.noBroomSound.play()
   if Input.is_action_just_pressed("menu_confirm") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
     menuConfirmSound.play()
   elif (Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start")) and ((pauseMenuState == PauseMenuState.INVENTORY and popupRect.visible) or (pauseMenuState != PauseMenuState.INVENTORY and pauseMenuState != PauseMenuState.NORMAL)):
@@ -309,7 +312,7 @@ func _process(delta):
     global.currLevelZone = null
     transition.long_fade_to("res://levels/EndlessFantasy/gd1TutorialDungeon/0_0.tscn")
 
-  pauseTitleRect.rect_position = Vector2(164, 440) if pauseMenuState == PauseMenuState.KEYBOARD_INPUT or pauseMenuState == PauseMenuState.CONTROLLER_INPUT else Vector2(164, 420)
+  pauseTitleRect.rect_position = Vector2(164, 420)
 
 func repositionCursorSprite(index):
   cursorSprite.position.x = 110
@@ -319,11 +322,12 @@ func repositionCursorSprite(index):
   # else:
   #   cursorSprite.scale = Vector2(3, 3)
 
+var SCROLL_OFFSET = 5
 func repositionInputCursorSprite(index, _showCondensedMenu):
   cursorSprite.scale = Vector2(3, 3)
   cursorSprite.position.x = 100
   #if showCondensedMenu:
-  cursorSprite.position.y = 15 + (29*index)
+  cursorSprite.position.y = 25 + (29*index) - (index * SCROLL_OFFSET)
   #else:
   #  cursorSprite.position.y = 114 + (44*index)
 
@@ -944,7 +948,7 @@ func processInventoryLogic(_delta):
         elif "primordial" in levelZoneName:
           localizedLevelZoneName = tr("LevelName.6")
         popupText.bbcode_text = tr("NPC.AngelStatue.1") + " " + localizedLevelZoneName + " " + tr("UI.MainMenu.TeleportConfirm") % [global.getInputText("menu_confirm"), global.getInputText("menu_cancel")]
-  elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start") or (Input.is_action_just_pressed("popup_menu") and not Input.is_action_pressed("toggle_fullscreen")):
+  elif Input.is_action_just_pressed("menu_cancel") or Input.is_action_just_pressed("ui_start") or (Input.is_action_just_pressed("open_inventory") and not Input.is_action_pressed("toggle_fullscreen")):
     angelStatueToTeleportTo = null
     if popupRect.visible:
       popupRect.visible = false
@@ -1504,10 +1508,10 @@ func tryDrawMap():
         if global.memory[levelZoneName][levelName].has("AngelEgg2"):
           numAngelEggs -= 1
       if numAngelEggs > 0 and global.memory["has_eggs_marked"]:
-        if haveIBeenToThisLevel:
-          sprite.material.set_shader_param("offset", 9)
-        else:
-          sprite.material.set_shader_param("offset", 10)
+        # if haveIBeenToThisLevel:
+        sprite.material.set_shader_param("offset", 9)
+        # else:
+        #   sprite.material.set_shader_param("offset", 10)
         if numAngelEggs == 1:
           sprite.frame = 207
         elif numAngelEggs == 2:
@@ -1728,6 +1732,7 @@ func processControllerOptionsLogic(_delta):
 
 func getVisibleControlsConfig():
   var visibleControlsConfig = []
+  # var glitchedGrimoireSpellsControlsConfig = []
   for controlConfig in global.controlsConfig:
     var ia = controlConfig["input_action"]
     if ia == "restart_key" and not global.memory["can_force_respawn"]:
@@ -1738,9 +1743,13 @@ func getVisibleControlsConfig():
       continue
     if ia == "enter_door":
       continue
-    if (ia == "spell_1" or ia == "spell_2" or ia == "spell_3" or ia == "spell_4") and (pauseMenuState == PauseMenuState.CONTROLLER_INPUT or not global.memory["glitched_grimoire"]):
-      continue
+    if ia == "spell_1" or ia == "spell_2" or ia == "spell_3" or ia == "spell_4":
+      # if not (pauseMenuState == PauseMenuState.CONTROLLER_INPUT or not global.memory["glitched_grimoire"]):
+        # glitchedGrimoireSpellsControlsConfig.push_back(controlConfig)
+      if pauseMenuState == PauseMenuState.CONTROLLER_INPUT or not global.memory["glitched_grimoire"]:
+        continue
     visibleControlsConfig.push_back(controlConfig)
+  # visibleControlsConfig.push_back(glitchedGrimoireSpellsControlsConfig)
   return visibleControlsConfig
 
 onready var inputLabelTextLabel = get_node("InputMenu/ScrollContainer/InputLabels")
@@ -1763,7 +1772,7 @@ func processControlsLogic(_delta):
     if global.last_read_input != null:
       if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
         var keyCodeString = OS.get_scancode_string(global.last_read_input)
-        if keyCodeString != "Enter" and keyCodeString != "Escape" and keyCodeString != "BackSpace":
+        if keyCodeString != "Escape" and keyCodeString != "BackSpace":
           tempControlsConfig[control_index].key_code = global.last_read_input
           global.setKeyCode(tempControlsConfig[control_index].input_action, global.last_read_input)
           global.userSettings["controls_config"] = tempControlsConfig
@@ -1803,9 +1812,9 @@ func processControlsLogic(_delta):
       level.saveUserSettings()
     return
   else:
-    if player.justPressedMenuDown():
+    if player.justPressedMenuDown() or player.justPressedMenuRight():
       control_index += 1
-    elif player.justPressedMenuUp():
+    elif player.justPressedMenuUp() or player.justPressedMenuLeft():
       control_index -= 1
     if (Input.is_action_just_pressed("menu_confirm") or Input.is_action_just_pressed("popup_menu")) and not Input.is_action_pressed("ui_cancel") and not Input.is_action_pressed("toggle_fullscreen"):
       global.is_reading_input = true
@@ -1840,9 +1849,9 @@ func processControlsLogic(_delta):
     if control_index == i:
       var buttonTextAdd = ""
       if pauseMenuState == PauseMenuState.KEYBOARD_INPUT:
-        buttonTextAdd = (tr("UI.InputMenu.14") % (tr("UI.PauseMenu.2").to_lower()))  if global.is_reading_input else global.getInputText(controlConfig.input_action, 2, true, showCondensedMenu)
+        buttonTextAdd = " " + tr("NPC.AngelStatue.0") if global.is_reading_input else global.getInputText(controlConfig.input_action, 2, true, showCondensedMenu)
       elif pauseMenuState == PauseMenuState.CONTROLLER_INPUT:
-        buttonTextAdd = "[/font]" + (tr("UI.InputMenu.14_2") % (tr("UI.PauseMenu.2").to_lower())) + "[font=res://DarkInputExtraFont_small.tres]" if global.is_reading_input else global.getInputText(controlConfig.input_action, 1, false)
+        buttonTextAdd = "[/font] " + tr("NPC.AngelStatue.0") + "[font=res://DarkInputExtraFont_small.tres]" if global.is_reading_input else global.getInputText(controlConfig.input_action, 1, false)
       buttonInputText += buttonTextAdd + " \n"
       inputLabelText += "[wave]" + controlConfig.label_str + "[/wave]\n"
     else:
@@ -1856,6 +1865,8 @@ func processControlsLogic(_delta):
   if last_control_index != control_index or shouldUpdateMenuText:
     inputLabelTextLabel.bbcode_text = inputLabelText
     buttonInputTextLabel.bbcode_text = buttonInputText
+    inputLabelTextLabel.rect_position.y = -34 - (control_index * SCROLL_OFFSET)
+    buttonInputTextLabel.rect_position.y = -43 - (control_index * SCROLL_OFFSET)
 
   last_control_index = control_index
 
@@ -1863,6 +1874,7 @@ func processPopupRenderLogic(delta):
   if global.is_reading_input and (Input.is_action_just_pressed("ui_start") or Input.is_action_just_pressed("ui_cancel")):
     getPlayer().noBroomSound.play()
     global.is_reading_input = false
+    shouldUpdateMenuText = true
     return
 
   if pauseMenuState == PauseMenuState.KEYBOARD_INPUT and Input.is_action_pressed("ui_cancel") and canResetBindings:

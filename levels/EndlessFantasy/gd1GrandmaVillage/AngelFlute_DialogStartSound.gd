@@ -5,7 +5,7 @@ func _ready():
 
 
 func activateScript():
-    var text = "•You got \"Little Bird\". It can \nfly you to angel statues.\npress " + global.getLargeInputText("popup_menu") + " to select from map"
+    var text = "•You got \"Little Bird\". It can \nfly you to angel statues.\npress " + global.getLargeInputText("open_inventory") + " to select from map"
     var textBox = get_node("..")
     textBox.text_final = text
     textBox.textNode.bbcode_text = text
